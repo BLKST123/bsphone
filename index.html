@@ -983,7 +983,7 @@ input::placeholder,textarea::placeholder{color:#b3afb8}
 .hcw-week{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;text-align:center;margin-top:7px}
 .hcw-week span{font-size:7.5px;line-height:1;color:var(--fg2);padding:4px 0;border-radius:7px;background:rgba(255,252,253,.38)}
 .hcw-week span.on{background:var(--theme-rose-deep);color:#fff}
-.hw-bubble{height:100%;display:flex;align-items:center;gap:7px;padding:7px 9px;border-radius:inherit;background:rgba(255,250,252,.48)}
+.hw-bubble{height:100%;display:flex;align-items:center;gap:7px;padding:7px 9px;background:rgba(255,250,252,.48)}
 .hw-bubble .bcat{width:26px;height:26px;object-fit:contain;filter:saturate(.68);flex:none;animation:catFloat 4.2s ease-in-out infinite}
 .bubble-wing{position:absolute;right:-8px;top:-9px;width:38px;height:32px;transform:scaleX(-1) rotate(7deg);opacity:.34;pointer-events:none;z-index:1}
 .bubble-wing img{width:100%;height:100%;object-fit:contain;filter:saturate(.34) brightness(1.24);animation:wingPulse 4.8s ease-in-out infinite}
@@ -1013,8 +1013,11 @@ input::placeholder,textarea::placeholder{color:#b3afb8}
 .home-books-widget{height:100%;padding:11px;border-radius:18px;background:rgba(255,250,252,.52);border:1px solid rgba(255,255,255,.68);display:flex;flex-direction:column;overflow:hidden}
 .hbooks-title{font-size:11px;font-weight:650;color:var(--fg);margin-bottom:7px}
 .hbooks-row{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;flex:1;min-height:0}
-.hbook{position:relative;border-radius:7px 4px 4px 7px;background:linear-gradient(155deg,var(--theme-rose-soft),var(--theme-icon));padding:6px 5px;color:#fff;font-size:8px;line-height:1.35;overflow:hidden;box-shadow:2px 2px 8px rgba(76,60,69,.14)}
+.hbook{position:relative;border-radius:7px 4px 4px 7px;background:linear-gradient(155deg,var(--theme-rose-soft),var(--theme-icon));padding:6px 5px;color:#fff;font-size:8px;line-height:1.35;overflow:hidden;box-shadow:2px 2px 8px rgba(76,60,69,.14);background-size:cover;background-position:center}
 .hbook::before{content:'';position:absolute;left:3px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.35)}
+.hbook-cover{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.hbook.has-cover::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(25,18,23,.62));z-index:1}
+.hbook-name{position:relative;z-index:2;display:block;text-shadow:0 1px 4px rgba(0,0,0,.45)}
 .hstats-widget{height:100%;display:flex;align-items:center;justify-content:space-around;padding:6px 10px;border-radius:16px;background:rgba(255,250,252,.5);border:1px solid rgba(255,255,255,.64)}
 .hstat{text-align:center;font-size:8px;color:var(--fg2)}.hstat b{display:block;font-size:12px;color:var(--fg);margin-bottom:2px}
 @keyframes vinylSpin{to{transform:rotate(360deg)}}
@@ -2059,7 +2062,7 @@ function fixAll(){
     if(!w.id) w.id=uid(); if(w.x===undefined) w.x=0; if(w.y===undefined) w.y=0;
     if(w.w===undefined) w.w=2; if(w.h===undefined) w.h=2;
     if(w.shape===undefined) w.shape='rounded'; if(w.pattern===undefined) w.pattern='none';
-    if(w.bgImage===undefined) w.bgImage=''; if(!Array.isArray(w.images)) w.images=[];
+    if(w.bgImage===undefined) w.bgImage=''; if(!Array.isArray(w.images)) w.images=[]; if(!Array.isArray(w.bookImages)) w.bookImages=[];
   }); });
   DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).slice(0,16); });
   if(!DB.ui.homePages.length) DB.ui.homePages=defaultHomePages();
@@ -2097,7 +2100,7 @@ function defaultDesktopWidgetPages(){
       {id:'final_p2_photo',type:'image',title:'午后',image:photos[1],x:0,y:6,w:4,h:3,shape:'frame',pattern:'none'}
     ],
     [
-      {id:'final_p3_books',type:'books',title:'桌面书架',text:'雨停之前|长夜来信|旧城手记',x:0,y:0,w:4,h:2,shape:'rounded',pattern:'none'},
+      {id:'final_p3_books',type:'books',title:'桌面书架',text:'雨停之前|长夜来信|旧城手记',bookImages:['','',''],x:0,y:0,w:4,h:2,shape:'rounded',pattern:'none'},
       {id:'final_p3_apps',type:'appgroup',appKeys:['forum','world','regex','settings'],appCols:2,x:0,y:2,w:2,h:2,shape:'rounded',pattern:'none'},
       {id:'final_p3_todo',type:'list',title:'阅读任务',text:'读完这一章\n记下三句摘录\n给角色回信',x:2,y:2,w:2,h:2,shape:'rounded',pattern:'none'},
       {id:'final_p3_quote',type:'quote',title:'摘录',text:'你只需要把灯留着，回来的人会看见。',x:0,y:4,w:4,h:4,shape:'rounded',pattern:'none'}
@@ -3009,7 +3012,7 @@ function homeClockWidgetHTML(w,wi,extra){
 function homeBubbleWidgetHTML(w,wi,extra){
   const data=wi>=0?' data-homewidget="'+wi+'"':'';
   const shape='shape-'+String(w.shape||'bubble'),pattern='pattern-'+String(w.pattern||'none');
-  return '<div class="home-widget '+shape+' hw-bubble"'+data+' style="'+(extra||'')+'"><span class="bubble-wing"><img src="'+ASSET_WING_W1+'" alt=""></span><img class="bcat" src="'+ASSET_CAT_B+'" alt=""><div class="grow"><div class="bt">'+esc(w.title===undefined?'今天也要':w.title)+'</div><div class="bd">'+esc(w.text===undefined?'慢一点，也没关系。':w.text)+'</div></div></div>';
+  return '<div class="home-widget '+shape+' '+pattern+' hw-bubble"'+data+' style="'+(extra||'')+'"><span class="bubble-wing"><img src="'+ASSET_WING_W1+'" alt=""></span><img class="bcat" src="'+ASSET_CAT_B+'" alt=""><div class="grow"><div class="bt">'+esc(w.title===undefined?'今天也要':w.title)+'</div><div class="bd">'+esc(w.text===undefined?'慢一点，也没关系。':w.text)+'</div></div></div>';
 }
 function homeCollageWidgetHTML(w,wi,extra){
   const imgs=Array.isArray(w.images)?w.images:[];
@@ -3042,8 +3045,13 @@ function homeQuoteWidgetHTML(w,wi,extra){
 }
 function homeBooksWidgetHTML(w,wi,extra){
   const names=String(w.text||'雨停之前|长夜来信|旧城手记').split('|').filter(Boolean).slice(0,3);
+  const covers=Array.isArray(w.bookImages)?w.bookImages:[];
   const data=wi>=0?' data-homewidget="'+wi+'"':''; const shape='shape-'+String(w.shape||'rounded'),pattern='pattern-'+String(w.pattern||'none');
-  return '<div class="home-widget home-books-widget '+shape+' '+pattern+'"'+data+' style="'+(extra||'')+'"><div class="hbooks-title">'+esc(w.title||'书架')+'</div><div class="hbooks-row">'+names.map(function(n){ return '<div class="hbook">'+esc(n)+'</div>'; }).join('')+'</div></div>';
+  return '<div class="home-widget home-books-widget '+shape+' '+pattern+'"'+data+' style="'+(extra||'')+'"><div class="hbooks-title">'+esc(w.title||'书架')+'</div><div class="hbooks-row">'+names.map(function(n,i){
+    const cover=String(covers[i]||'');
+    const click=wi>=0?' data-bookslot="'+wi+'|'+i+'"':'';
+    return '<div class="hbook'+(cover?' has-cover':'')+'"'+click+'>'+(cover?'<img class="hbook-cover" src="'+esc(cover)+'" alt="">':'')+'<span class="hbook-name">'+esc(n)+'</span></div>';
+  }).join('')+'</div></div>';
 }
 function homeStatsWidgetHTML(w,wi,extra){
   const parts=String(w.text||'12|4.2|78').split('|');
@@ -3111,16 +3119,23 @@ function sheetWidgetEdit(idx,type){
   const ws=homeWidgets();
   const old=idx>=0? ws[idx] : null;
   const nextY=ws.reduce(function(m,w){ return Math.max(m,(Number(w.y)||0)+(Number(w.h)||2)); },0);
-  const w=Object.assign({id:uid(),type:type||'text',title:'',text:'',image:'',images:[],bgImage:'',shape:'rounded',pattern:'none',x:0,y:Math.min(8,nextY),w:2,h:2},old||{});
+  const w=Object.assign({id:uid(),type:type||'text',title:'',text:'',image:'',images:[],bookImages:[],bgImage:'',shape:'rounded',pattern:'none',x:0,y:Math.min(8,nextY),w:2,h:2},old||{});
   w.x=Math.max(0,Math.min(3,Number(w.x)||0)); w.y=Math.max(0,Math.min(8,Number(w.y)||0)); w.w=Math.max(1,Math.min(4,Number(w.w)||2)); w.h=Math.max(1,Math.min(3,Number(w.h)||2));
   let imgs=(Array.isArray(w.images)?w.images:[]).slice(0,3);
+  let bookImgs=(Array.isArray(w.bookImages)?w.bookImages:[]).slice(0,3);
   const slotField=function(i){
     const u=String(imgs[i]||'');
     return '<div class="np-card"><div class="row"><b class="grow">图片 '+(i+1)+'</b><span class="mini">'+(i===1?'横向长方形':'正方形')+'</span></div><input id="wSlot'+i+'" placeholder="图片 URL" value="'+esc(u.indexOf('data:')===0?'':u)+'" style="margin-top:7px"><div class="row" style="margin-top:7px"><button class="btn grow" data-wslotup="'+i+'">上传本地图片</button><button class="btn grow" data-wslotclear="'+i+'">清除</button></div></div>';
   };
-  const fields=w.type==='collage'
-    ? '<div class="muted" style="margin-bottom:6px">三个槽位依次是方形、横向长方形、方形，点击桌面上的图片也能直接更换。</div>'+slotField(0)+slotField(1)+slotField(2)
-    : '<input id="wTitle" placeholder="标题" value="'+esc(w.title||'')+'"><textarea id="wText" placeholder="文字内容" style="margin-top:8px;min-height:90px">'+esc(w.text||'')+'</textarea>'
+  const bookSlotField=function(i){
+    const u=String(bookImgs[i]||'');
+    return '<div class="np-card"><div class="row"><b class="grow">第 '+(i+1)+' 本书封面</b><span class="mini">可留空</span></div><input id="wBookSlot'+i+'" placeholder="封面图片 URL" value="'+esc(u.indexOf('data:')===0?'':u)+'" style="margin-top:7px"><div class="row" style="margin-top:7px"><button class="btn grow" data-wbookup="'+i+'">上传封面</button><button class="btn grow" data-wbookclear="'+i+'">清除</button></div></div>';
+  };
+  const fields=w.type==='books'
+    ? '<input id="wTitle" placeholder="书架标题" value="'+esc(w.title||'')+'"><input id="wText" placeholder="三本书名，用 | 分隔" value="'+esc(w.text||'')+'" style="margin-top:8px"><div class="muted" style="margin:9px 0 6px">三本书可以分别换封面或背景图；点击桌面上的书脊也能直接更换。</div>'+bookSlotField(0)+bookSlotField(1)+bookSlotField(2)
+    : w.type==='collage'
+      ? '<div class="muted" style="margin-bottom:6px">三个槽位依次是方形、横向长方形、方形，点击桌面上的图片也能直接更换。</div>'+slotField(0)+slotField(1)+slotField(2)
+      : '<input id="wTitle" placeholder="标题" value="'+esc(w.title||'')+'"><textarea id="wText" placeholder="文字内容" style="margin-top:8px;min-height:90px">'+esc(w.text||'')+'</textarea>'
       +(w.type==='image'?'<input id="wImageUrl" placeholder="图片 URL" value="'+esc(String(w.image||'').startsWith('data:')?'':w.image)+'" style="margin-top:8px"><div class="row" style="margin-top:8px"><button class="btn grow" id="wUpload">上传本地图片</button><button class="btn grow" id="wGallery">从相册选择</button></div>':'');
   sheet('<h3>'+(idx>=0?'编辑':'新建')+widgetTypeName(w)+'组件</h3>'
     +'<div class="sechead" style="padding:0 0 5px">实时预览</div><div id="wPreview">'+npWidgetPreview(w)+'</div><div class="widget-pos-preview" id="wPosPreview"></div>'
@@ -3139,13 +3154,15 @@ function sheetWidgetEdit(idx,type){
   const update=function(){
     const t=$('#wTitle'),x=$('#wText'); if(t) w.title=String(t.value||''); if(x) w.text=String(x.value||'');
     const u=$('#wImageUrl'); if(u) w.image=String(u.value||'').trim()||w.image;
-    for(let i=0;i<3;i++){ const s=$('#wSlot'+i); if(s) imgs[i]=String(s.value||'').trim(); }
-    w.images=imgs.slice(0,3); w.shape=$('#wShape').value||'rounded'; w.pattern=$('#wPattern').value||'none'; $('#wPreview').innerHTML=npWidgetPreview(w); updatePos();
+    for(let i=0;i<3;i++){ const s=$('#wSlot'+i); if(s) imgs[i]=String(s.value||'').trim(); const bs=$('#wBookSlot'+i); if(bs) bookImgs[i]=String(bs.value||'').trim(); }
+    w.images=imgs.slice(0,3); w.bookImages=bookImgs.slice(0,3); w.shape=$('#wShape').value||'rounded'; w.pattern=$('#wPattern').value||'none'; $('#wPreview').innerHTML=npWidgetPreview(w); updatePos();
   };
   const wt=$('#wTitle'),wx=$('#wText'); if(wt) wt.oninput=update; if(wx) wx.oninput=update; const wi=$('#wImageUrl'); if(wi) wi.oninput=update;
-  for(let si=0;si<3;si++){ const el=$('#wSlot'+si); if(el) el.oninput=update; }
+  for(let si=0;si<3;si++){ const el=$('#wSlot'+si); if(el) el.oninput=update; const bel=$('#wBookSlot'+si); if(bel) bel.oninput=update; }
   $$('#sheetBox [data-wslotup]').forEach(function(el){ el.onclick=function(){ const i=Number(el.dataset.wslotup); const pick=document.createElement('input'); pick.type='file'; pick.accept='image/*'; pick.onchange=function(){ if(!pick.files[0]) return; nextRatio=i===1?16/9:1; readImage(pick.files[0],1600,function(url){ imgs[i]=url; update(); }); }; pick.click(); }; });
   $$('#sheetBox [data-wslotclear]').forEach(function(el){ el.onclick=function(){ imgs[Number(el.dataset.wslotclear)]=''; const inp=$('#wSlot'+el.dataset.wslotclear); if(inp) inp.value=''; update(); }; });
+  $$('#sheetBox [data-wbookup]').forEach(function(el){ el.onclick=function(){ const i=Number(el.dataset.wbookup); const pick=document.createElement('input'); pick.type='file'; pick.accept='image/*'; pick.onchange=function(){ if(!pick.files[0]) return; nextRatio=3/4; readImage(pick.files[0],1200,function(url){ bookImgs[i]=url; const inp=$('#wBookSlot'+i); if(inp) inp.value=''; update(); }); }; pick.click(); }; });
+  $$('#sheetBox [data-wbookclear]').forEach(function(el){ el.onclick=function(){ bookImgs[Number(el.dataset.wbookclear)]=''; const inp=$('#wBookSlot'+el.dataset.wbookclear); if(inp) inp.value=''; update(); }; });
   const up=$('#wUpload'); if(up) up.onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; nextRatio=16/9; readImage(i.files[0],1600,function(url){ w.image=url; if(wi) wi.value=''; update(); }); }; i.click(); };
   const gal=$('#wGallery'); if(gal) gal.onclick=function(){ update(); if(!(DB.pics||[]).length){ toast('相册里还没有图片'); return; } sheetFull('<h3>从相册选</h3><div class="stkgrid">'+DB.pics.map(function(u,i){ return '<img data-wpick="'+i+'" src="'+esc(u)+'">'; }).join('')+'</div><button class="btn full" id="wPickBack">返回</button>'); $$('#sheetBox [data-wpick]').forEach(function(el){ el.onclick=function(){ w.image=DB.pics[Number(el.dataset.wpick)]; sheetWidgetEdit(idx,w.type); }; }); $('#wPickBack').onclick=function(){ sheetWidgetEdit(idx,w.type); }; };
   ['#wShape','#wPattern'].forEach(function(sel){ const el=$(sel); if(el){ el.onchange=update; el.oninput=update; } });
@@ -3165,6 +3182,16 @@ function sheetWidgetSlotEdit(wi,si){
   $('#wsUrlOk').onclick=function(){ const u=String($('#wsUrl').value||'').trim(); if(!u){ toast('先填图片 URL'); return; } w.images=imgs.slice(0,3); w.images[si]=u; save(); closeSheet(); render(); toast('图片已更换'); };
   $('#wsClear').onclick=function(){ w.images=imgs.slice(0,3); w.images[si]=''; save(); closeSheet(); render(); toast('图片已清除'); };
   $('#wsUpload').onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; nextRatio=si===1?16/9:1; readImage(i.files[0],1600,function(url){ w.images=imgs.slice(0,3); w.images[si]=url; save(); closeSheet(); render(); toast('图片已更换'); }); }; i.click(); };
+}
+function sheetBookSlotEdit(wi,si){
+  const w=homeWidgets()[wi];
+  if(!w||w.type!=='books') return;
+  const imgs=Array.isArray(w.bookImages)?w.bookImages:[];
+  sheetSmall('<h3>更换第 '+(si+1)+' 本书封面</h3><div class="muted" style="margin:5px 0 10px">上传封面或填图片网址，留空就恢复默认书脊。</div><input id="wbsUrl" placeholder="封面图片 URL" value="'+esc(String(imgs[si]||'').startsWith('data:')?'':(imgs[si]||''))+'"><button class="btn primary full" id="wbsUrlOk">应用网址</button><button class="btn full" id="wbsUpload">上传封面</button><button class="btn full danger" id="wbsClear">清除封面</button><button class="btn full" id="wbsCancel">取消</button>');
+  $('#wbsCancel').onclick=closeSheet;
+  $('#wbsUrlOk').onclick=function(){ const u=String($('#wbsUrl').value||'').trim(); if(!u){ toast('先填封面图片网址'); return; } w.bookImages=imgs.slice(0,3); w.bookImages[si]=u; save(); closeSheet(); render(); toast('封面已更换'); };
+  $('#wbsClear').onclick=function(){ w.bookImages=imgs.slice(0,3); w.bookImages[si]=''; save(); closeSheet(); render(); toast('封面已清除'); };
+  $('#wbsUpload').onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; nextRatio=3/4; readImage(i.files[0],1200,function(url){ w.bookImages=imgs.slice(0,3); w.bookImages[si]=url; save(); closeSheet(); render(); toast('封面已更换'); }); }; i.click(); };
 }
 function sheetSystem(){
   const draw=function(){
@@ -6926,6 +6953,7 @@ function bindScreenInner(){
       },{passive:true});
     }
     $$('[data-wslot]',s).forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); if(Date.now()<suppressGoUntil) return; const p=String(el.dataset.wslot||'').split('|'); sheetWidgetSlotEdit(Number(p[0]),Number(p[1])); }; });
+    $$('[data-bookslot]',s).forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); if(Date.now()<suppressGoUntil) return; const p=String(el.dataset.bookslot||'').split('|'); sheetBookSlotEdit(Number(p[0]),Number(p[1])); }; });
     $$('[data-homewidget]',s).forEach(function(el){ el.onclick=function(ev){ if(ev.target.closest&&ev.target.closest('.app')) return; ev.stopPropagation(); if(Date.now()<suppressGoUntil) return; const i=Number(el.dataset.homewidget), w=homeWidgets()[i]; if(w) sheetWidgetEdit(i,w.type); }; });
   }
   $$('[data-openreading]',s).forEach(el=>el.onclick=()=>go('read',el.dataset.openreading));
@@ -7655,7 +7683,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 32 轮';
+const BUILD='2026-10-20 · 第 33 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
