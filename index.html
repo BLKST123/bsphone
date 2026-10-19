@@ -584,8 +584,8 @@ input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) 
 .hm-x{position:absolute;right:1px;top:1px;width:16px;height:16px;border:0;background:none;color:var(--fg2);font-size:13px;line-height:14px;padding:0;cursor:pointer}
 .hm-ic{width:34px;height:34px;border-radius:9px;display:flex;align-items:center;justify-content:center;color:#fff}
 .hm-nm{font-size:9.5px;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.hm-move{display:flex;gap:1px}
-.hm-move button{width:16px;height:16px;padding:0;border:1px solid var(--line);border-radius:4px;background:rgba(0,0,0,.03);color:var(--fg2);font-size:9px;line-height:14px;cursor:pointer}
+.hm-move{display:flex;gap:2px}
+.hm-move button{width:22px;height:22px;padding:0;border:1px solid var(--line);border-radius:5px;background:rgba(0,0,0,.03);color:var(--fg2);font-size:12px;line-height:20px;cursor:pointer}
 .home-hidden{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
 .hh{display:flex;flex-direction:column;align-items:center;gap:3px;padding:7px 3px;border:1px dashed var(--line);border-radius:10px;cursor:pointer;color:var(--fg2)}
 .hh .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#fff;opacity:.72}
@@ -1757,23 +1757,24 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 #phone[data-style] .settings-bubble{overflow-wrap:break-word}
 .card b,.card small,.card p,.settings-body b,.settings-body small,.settings-body p{overflow-wrap:break-word}
 .home-mosaic{--home-gap:16px}
-.home-app-group{--desk-icon-size:36px}
+.home-app-group{transform:none!important}
+.home-app-group{--desk-icon-size:40px}
 .home-app-group .app{gap:1px}
-.home-app-group .app .nm{font-size:8px;line-height:1.1}
+.home-app-group .app .nm{font-size:8.5px;line-height:1.1}
 .home-mosaic .hw-text{padding:6px 9px}
 .home-mosaic .hw-title{font-size:10.5px;line-height:1.2}
 .home-mosaic .hw-body{font-size:9px;line-height:1.25;margin-top:1px}
 @media (max-height:700px){
   .home-mosaic{--home-gap:10px}
-  .home-app-group{--desk-icon-size:31px}
-  .home-app-group .app .nm{font-size:7.5px}
+  .home-app-group{--desk-icon-size:34px}
+  .home-app-group .app .nm{font-size:8px}
   .home-mosaic .hw-title{font-size:9.5px}
   .home-mosaic .hw-body{font-size:8px;line-height:1.2}
 }
 @media (max-height:620px){
   .home-mosaic{--home-gap:8px}
-  .home-app-group{--desk-icon-size:27px}
-  .home-app-group .app .nm{font-size:7px}
+  .home-app-group{--desk-icon-size:29px}
+  .home-app-group .app .nm{font-size:7.5px}
   .home-mosaic .hw-text{padding:5px 7px}
   .home-mosaic .hw-title{font-size:9px}
   .home-mosaic .hw-body{font-size:7.5px;line-height:1.15}
@@ -1790,6 +1791,7 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
   .np-me-tabs{flex-wrap:wrap;overflow-x:visible}
   .np-chips{flex-wrap:wrap;overflow-x:visible}
   .wbuserTabs{flex-wrap:wrap;overflow-x:visible}
+  .home-manage{grid-template-columns:repeat(2,minmax(0,1fr))}
   .style-grid{grid-template-columns:1fr}
   .theme-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .style-copy b{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.35}
@@ -2938,7 +2940,7 @@ function sheetHomeApps(){
     const manage='<div class="home-manage">'+cur.map(function(k){
       const a=APPS.find(function(x){ return x.k===k; });
       return '<div class="hm"><button class="hm-x" data-hrm="'+k+'" title="移除">×</button><div class="hm-ic" style="background:'+a.c+'">'+appIconHTML(a,18)+'</div><div class="hm-nm">'+esc(a.n)+'</div>'
-        +'<div class="hm-move"><button data-hmove="left" data-hkey="'+k+'">←</button><button data-hmove="up" data-hkey="'+k+'">↑</button><button data-hmove="down" data-hkey="'+k+'">↓</button><button data-hmove="right" data-hkey="'+k+'">→</button></div></div>';
+        +'<div class="hm-move"><button data-hmove="left" data-hkey="'+k+'" title="向左移动">←</button><button data-hmove="up" data-hkey="'+k+'" title="向上移动">↑</button><button data-hmove="down" data-hkey="'+k+'" title="向下移动">↓</button><button data-hmove="right" data-hkey="'+k+'" title="向右移动">→</button></div></div>';
     }).join('')+'</div>';
     const hidden=APPS.filter(function(a){ return cur.indexOf(a.k)<0; }).map(function(a){ return '<div class="hh" data-hadd="'+a.k+'"><div class="ic" style="background:'+a.c+'">'+appIconHTML(a,18)+'</div><div class="nm">'+esc(a.n)+'</div></div>'; }).join('');
     sheetBig('<h3>桌面图标</h3><div class="muted" style="margin-bottom:10px;line-height:1.7">可设置多页桌面。当前第 '+(page+1)+' 页，每页最多 16 个图标。</div>'+pageBar
@@ -2962,6 +2964,7 @@ function sheetAppIcons(){
   const draw=function(){
     const wall=DB.ui.customWall?(cssUrl(DB.ui.customWall)+' center/cover no-repeat'):(WALLS[DB.ui.wall]||WALLS.w1);
     sheetFull('<h3>桌面图标美化</h3><div class="muted" style="margin-bottom:8px;line-height:1.7">支持本地图片和图片 URL，改完立即在下面的桌面预览里更新。</div>'
+      +'<button class="btn primary full" id="iconArrange" style="margin-bottom:10px">调整图标位置（上下左右）</button>'
       +'<div class="ap-live-frame compact" id="iconLiveFrame"><div class="ap-live-desktop" id="iconLiveDesktop" style="background:'+wall+'">'+screenHome()+'</div></div>'
       +'<div class="app-icon-grid">'
       +APPS.map(function(a){ const custom=(DB.ui.appIcons||{})[a.k]; return '<div class="app-icon-cell"><div class="big" style="background:'+a.c+'">'+appIconHTML(a,24)+'</div><div class="nm">'+esc(a.n)+'</div><div class="mini">'+(custom?'已自定义':'默认')+'</div><div class="acts"><button class="btn" data-iconurl="'+a.k+'">URL</button><button class="btn primary" data-iconupload="'+a.k+'">上传</button>'+(custom?'<button class="btn danger" data-iconclear="'+a.k+'">恢复</button>':'')+'</div></div>'; }).join('')
@@ -2969,6 +2972,7 @@ function sheetAppIcons(){
       +'<button class="btn full" id="iconDone">完成</button>');
     setTimeout(function(){ const f=$('#iconLiveFrame'),d=$('#iconLiveDesktop'); if(f&&d) d.style.transform='scale('+(f.clientWidth/390)+')'; },0);
     $('#iconDone').onclick=function(){ closeSheet(); render(); };
+    const arrange=$('#iconArrange'); if(arrange) arrange.onclick=function(){ sheetHomeApps(); };
     $$('#sheetBox [data-iconupload]').forEach(function(el){ el.onclick=function(){ const k=el.dataset.iconupload; const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; nextRatio=1; readImage(i.files[0],400,function(url){ DB.ui.appIcons[k]=url; save(); applyTheme(); draw(); toast('图标已更新'); }); }; i.click(); }; });
     $$('#sheetBox [data-iconurl]').forEach(function(el){ el.onclick=function(){ const k=el.dataset.iconurl; sheetSmall('<h3>图标图片 URL</h3><input id="iconUrl" placeholder="https://..."><button class="btn primary full" id="iconUrlOk">应用</button><button class="btn full" id="iconUrlNo">取消</button>'); $('#iconUrlNo').onclick=sheetAppIcons; $('#iconUrlOk').onclick=function(){ const url=String($('#iconUrl').value||'').trim(); if(!url){ toast('先填 URL'); return; } DB.ui.appIcons[k]=url; save(); sheetAppIcons(); toast('图标已更新'); }; }; });
     $$('#sheetBox [data-iconclear]').forEach(function(el){ el.onclick=function(){ delete DB.ui.appIcons[el.dataset.iconclear]; save(); applyTheme(); draw(); }; });
@@ -4602,7 +4606,7 @@ function wxMine(){
   const me=DB.me||{}, w=meWallet();
   return wxTop('我的',clearBtn('wxMine'))+'<div class="mecard">'+avBox(me,'av')+'<div class="grow"><div style="font-size:19px;font-weight:600">'+esc(me.name||'我')+'</div>'
     +'<div class="muted">'+esc(activePersona()? '已启用一个人设':'还没有写自己的人设')+'</div></div>'
-    +'<button class="btn" id="meEdit">改名字</button></div>'
+    +'<button class="btn" id="meEdit">编辑资料</button></div>'
     +'<div class="pad"><div class="mgrid">'
     +mi('persona','用户人设库',(me.personas||[]).length+' 个')
     +mi('wallet','钱包','¥ '+Number(w.balance||0).toFixed(2))
@@ -5068,7 +5072,7 @@ function screenSettings(){
   +'<input id="uiScale" type="range" min="0.65" max="1.25" step="0.05" value="'+esc(DB.ui.fontScale)+'"></div>'
   +'<div class="card"><div class="lrow" data-go="appearance" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">外观与美化</div><div class="t2">壁纸、页面背景、图标、组件、全局 CSS 和主题包</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="row"><div class="grow"><b>低性能模式</b><div class="muted">关闭动画、阴影和模糊，老手机更顺</div></div><button class="btn" id="perfToggle">'+(DB.ui.lowPerf?'已开启':'关闭')+'</button></div></div>'
-  +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">隐藏浏览器地址栏，按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreen?'恢复全屏':'进入全屏'))+'</button></div></div>'
+  +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">只隐藏浏览器地址栏，保持竖屏；按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreen?'恢复全屏':'进入全屏'))+'</button></div></div>'
   +'<div class="card"><b>消息提示音</b><div class="muted" style="margin:5px 0 9px">内置合成音与 Kenney CC0 提示音，可商用；也可以导入自己的音频。</div>'
   +'<div class="sound-grid">'+SOUND_PRESETS.map(function(p){ return '<button class="sound-chip'+(DB.ui.soundPreset===p.k&&!DB.ui.soundCustom?' on':'')+'" data-soundpreset="'+p.k+'">'+esc(p.n)+'</button>'; }).join('')+'</div>'
   +'<div class="row" style="margin-top:9px"><button class="btn grow" id="soundImport">导入自己的提示音</button>'+(DB.ui.soundCustom?'<button class="btn danger" id="soundClear">删除自定义</button>':'')+'</div>'
@@ -5120,10 +5124,13 @@ function sheetDisclaimer(){
     +'</div><button class="btn full" id="discClose">返回设置</button>');
   $('#discClose').onclick=closeSheet;
 }
+async function lockPortrait(){
+  try{ if(screen.orientation&&screen.orientation.lock) await screen.orientation.lock('portrait'); }catch(e){}
+}
 async function toggleFullscreenMode(){
   try{
-    if(!document.fullscreenElement){ DB.ui.fullscreen=true; await document.documentElement.requestFullscreen(); DB.ui.fullscreenActive=true; }
-    else { DB.ui.fullscreen=false; DB.ui.fullscreenActive=false; await document.exitFullscreen(); }
+    if(!document.fullscreenElement){ DB.ui.fullscreen=true; await document.documentElement.requestFullscreen(); await lockPortrait(); DB.ui.fullscreenActive=true; }
+    else { DB.ui.fullscreen=false; DB.ui.fullscreenActive=false; try{ if(screen.orientation&&screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} await document.exitFullscreen(); }
   }catch(e){ toast('当前浏览器不允许进入全屏'); }
   save(); render();
 }
@@ -5131,12 +5138,12 @@ function restoreFullscreenIntent(){
   if(!DB.ui||!DB.ui.fullscreen||document.fullscreenElement) return;
   const el=document.documentElement;
   if(!el||!el.requestFullscreen) return;
-  try{ el.requestFullscreen().catch(function(){}); }catch(e){}
+  try{ el.requestFullscreen().then(lockPortrait).catch(function(){}); }catch(e){}
 }
 document.addEventListener('fullscreenchange',function(){
   if(typeof DB==='undefined') return;
   DB.ui.fullscreenActive=!!document.fullscreenElement;
-  if(document.fullscreenElement) DB.ui.fullscreen=true;
+  if(document.fullscreenElement){ DB.ui.fullscreen=true; lockPortrait(); }
   save(); if(route.name==='settings') render();
 });
 async function togglePushNotifications(){
@@ -7648,7 +7655,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 31 轮';
+const BUILD='2026-10-20 · 第 32 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
