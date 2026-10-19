@@ -911,6 +911,12 @@ html,body{background:var(--wall);color:var(--fg)}
 .home-ambient{position:absolute;inset:-18px;z-index:0;overflow:hidden;pointer-events:none}
 .home-petal{position:absolute;display:block;width:12px;height:18px;border-radius:70% 30% 70% 30%;background:linear-gradient(145deg,rgba(255,255,255,.68),rgba(200,143,163,.2));box-shadow:0 0 12px rgba(255,255,255,.26);opacity:.42;animation:petalDrift 13s ease-in-out infinite}
 @keyframes petalDrift{0%,100%{transform:translate3d(0,0,0) rotate(8deg)}50%{transform:translate3d(15px,-24px,0) rotate(82deg)}}
+.global-float{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;display:none}
+.global-float.on{display:block}
+.global-petal{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.92),rgba(232,196,207,.42));box-shadow:0 0 14px rgba(255,255,255,.42);opacity:.28;animation:globalFloat 16s ease-in-out infinite;will-change:transform,opacity}
+.global-petal:nth-child(3n){width:6px;height:6px;opacity:.2}
+.global-petal:nth-child(4n){width:11px;height:11px;opacity:.2}
+@keyframes globalFloat{0%,100%{transform:translate3d(0,0,0) scale(.82) rotate(0deg);opacity:.16}50%{transform:translate3d(12px,-28px,0) scale(1.14) rotate(24deg);opacity:.44}}
 .nav,.wxtop,.np-top,.wbtop{background:rgba(249,238,242,.94);border-bottom-color:rgba(157,154,162,.16)}
 .nav,.wxtop,.np-top,.wbtop{min-height:54px;flex:none}
 .nav .ttl,.wxtop .h,.np-top .h,.wbtitle,.wbd-title{font-size:17px!important;font-weight:650!important;line-height:1.25!important;letter-spacing:0!important;color:var(--fg)}
@@ -1055,7 +1061,7 @@ input::placeholder,textarea::placeholder{color:#b3afb8}
   .deco-cat{width:58px;height:50px}
 }
 @media (prefers-reduced-motion:reduce){
-  .home-petal,.deco-vinyl,.deco-vinyl img,.deco-wings img,.deco-cat img,.bubble-wing img,.hw-bubble .bcat{animation:none!important}
+  .home-petal,.global-petal,.deco-vinyl,.deco-vinyl img,.deco-wings img,.deco-cat img,.bubble-wing img,.hw-bubble .bcat{animation:none!important}
 }
 .dock{background:rgba(255,249,251,.68);border:1px solid rgba(157,154,162,.12);border-radius:23px}
 .home-dot{background:rgba(157,154,162,.28)}
@@ -1726,9 +1732,13 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 .settings-body input,.settings-body select,.settings-body textarea{min-width:0;max-width:100%}
 .settings-body input[type=range],.sheet .box input[type=range]{margin-left:0;margin-right:0}
 .settings-body .lrow,.settings-body .lrow .mi{min-width:0}
+.settings-body .lrow .t2{white-space:normal;overflow:visible;text-overflow:clip;line-height:1.45}
 .settings-body .muted,.settings-body .lrow .t2{overflow-wrap:anywhere;word-break:break-word}
 .settings-head .sg{min-width:0}
 .settings-head b,.settings-head small{min-width:0;overflow-wrap:anywhere}
+.settings-head small{white-space:normal;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;line-height:1.35}
+.kv{flex-wrap:wrap;gap:4px 12px}
+.kv>*{min-width:0;overflow-wrap:anywhere}
 .sheet .box,.sheet .box.full,.bigedit-box{max-width:100%;box-sizing:border-box}
 .sheet .box .row{flex-wrap:wrap}
 .sheet .box button.btn{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35}
@@ -1785,6 +1795,9 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
   .shape-vinyl .hw-title{font-size:8px;line-height:1.1}
   .shape-vinyl .hw-body{font-size:7px;line-height:1.1;margin-top:1px}
 }
+.home-app-group.count-4{--desk-icon-size:58px}
+@media (max-height:700px){.home-app-group.count-4{--desk-icon-size:50px}}
+@media (max-height:620px){.home-app-group.count-4{--desk-icon-size:42px}}
 @media (max-width:430px){
   .tabs{flex-wrap:wrap;overflow-x:visible;padding:9px 8px 2px;gap:5px}
   .tab{font-size:12px;padding:5px 9px}
@@ -1807,6 +1820,7 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 <body>
 <div id="phone">
   <div id="pageBg"></div>
+  <div class="global-float" id="globalFloat" aria-hidden="true"></div>
   <div class="screen" id="screen"></div>
 </div>
 <div class="toast" id="toast"></div>
@@ -1863,7 +1877,7 @@ const DEF={
   api:{base:'https://api.deepseek.com',endpoint:'',key:'',model:'deepseek-chat',temp:0.9,modelList:[],listMsg:''},
   apiLib:[],
   audio:{provider:'minimax',endpoint:'https://api.minimax.chat/v1/t2a_v2',key:'',model:'speech-01-turbo',voiceId:'',groupId:''},
-  ui:{theme:'sakura',themeStyle:'standard',themeWall:true,wall:'w1',dark:false,customWall:'',appOrder:[],homePages:[],homePage:0,appIcons:{},widgets:[],widgetPages:[],customCss:'',rxOpen:{def:true},open:{},demoSeeded:false,demoVersion:0,wifi:true,silent:false,dnd:false,brightness:1,globalPageWall:'',pageWalls:{},fontFamily:'',fontData:'',fontScale:.85,lowPerf:false,pushEnabled:false,soundEnabled:true,soundVolume:.35,soundPreset:'ding',soundCustom:'',soundCustomName:'',clickSound:'none',clickVolume:.28,fullscreen:false,desktopThemeV:0},
+  ui:{theme:'sakura',themeStyle:'standard',themeWall:true,wall:'w1',dark:false,customWall:'',appOrder:[],homePages:[],homePage:0,appIcons:{},widgets:[],widgetPages:[],customCss:'',rxOpen:{def:true},open:{},demoSeeded:false,demoVersion:0,wifi:true,silent:false,dnd:false,brightness:1,globalPageWall:'',pageWalls:{},fontFamily:'',fontData:'',fontScale:.85,lowPerf:false,pushEnabled:false,soundEnabled:true,soundVolume:.35,soundPreset:'ding',soundCustom:'',soundCustomName:'',clickSound:'none',clickVolume:.28,fullscreen:false,globalFloat:false,desktopFloat:true,desktopThemeV:0},
   me:{name:'我',avatar:'',personas:[],personaId:null,wallet:{balance:0,cards:[]}},
   hang:{phone:{},doing:{}}, hangCid:null, hangTab:'phone', checkCid:null,
   checkins:[], shopItems:{}, mallCid:null, mallTier:'mid', mallMode:'solo',
@@ -2011,6 +2025,8 @@ function fixAll(){
   DB.ui.clickVolume=DB.ui.clickVolume===undefined?.28:Math.max(0,Math.min(1,Number(DB.ui.clickVolume)||0));
   DB.ui.settingsOpen=DB.ui.settingsOpen||'';
   if(DB.ui.fullscreen===undefined) DB.ui.fullscreen=false;
+  if(DB.ui.globalFloat===undefined) DB.ui.globalFloat=false;
+  if(DB.ui.desktopFloat===undefined) DB.ui.desktopFloat=true;
   if(DB.ui.desktopThemeV===undefined) DB.ui.desktopThemeV=0;
   DB.logs=Array.isArray(DB.logs)?DB.logs:[];
   const defaultKeys=((DB.ui.appOrder&&DB.ui.appOrder.length)?DB.ui.appOrder.slice():APPS.map(function(a){ return a.k; })).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); });
@@ -2216,6 +2232,13 @@ const SOUND_PRESETS=[
   {k:'drop',n:'水滴',freqs:[680,460],dur:.13},
   {k:'tap',n:'轻叩',freqs:[320],dur:.06},
   {k:'soft',n:'柔响',freqs:[520,660],dur:.16},
+  {k:'didi',n:'滴滴',freqs:[1046,1046],dur:.07,gap:.04,type:'sine',gain:.09},
+  {k:'didong',n:'滴咚',freqs:[988,523],dur:.10,gap:.07,type:'sine',gain:.11},
+  {k:'dingdong',n:'叮咚',freqs:[1319,784],dur:.14,gap:.09,type:'sine',gain:.12},
+  {k:'dudu',n:'嘟嘟',freqs:[392,392],dur:.10,gap:.08,type:'triangle',gain:.10},
+  {k:'diduu',n:'滴嘟',freqs:[880,587],dur:.09,gap:.06,type:'sine',gain:.10},
+  {k:'dada',n:'哒哒',freqs:[1568,1568],dur:.035,gap:.055,type:'square',gain:.045},
+  {k:'pata',n:'啪嗒',freqs:[220,180],dur:.05,gap:.055,type:'triangle',gain:.07},
   {k:'paper',n:'纸页',src:AUDIO_SWITCH_1},
   {k:'wood',n:'木音',src:AUDIO_SWITCH_8},
   {k:'glass',n:'玻璃',src:AUDIO_SWITCH_15},
@@ -2229,7 +2252,14 @@ const CLICK_PRESETS=[
   {k:'click3',n:'玻璃',src:AUDIO_CLICK_3},
   {k:'click4',n:'软键',src:AUDIO_CLICK_4},
   {k:'click5',n:'短促',src:AUDIO_CLICK_5},
-  {k:'mouse',n:'鼠标',src:AUDIO_CLICK_6}
+  {k:'mouse',n:'鼠标',src:AUDIO_CLICK_6},
+  {k:'cdidi',n:'滴滴',freqs:[1046,1046],dur:.05,gap:.035,type:'sine',gain:.06},
+  {k:'cdidong',n:'滴咚',freqs:[988,523],dur:.07,gap:.05,type:'sine',gain:.07},
+  {k:'cdingdong',n:'叮咚',freqs:[1319,784],dur:.10,gap:.07,type:'sine',gain:.075},
+  {k:'cdudu',n:'嘟嘟',freqs:[392,392],dur:.07,gap:.06,type:'triangle',gain:.06},
+  {k:'cdiduu',n:'滴嘟',freqs:[880,587],dur:.06,gap:.045,type:'sine',gain:.065},
+  {k:'cdada',n:'哒哒',freqs:[1568,1568],dur:.03,gap:.04,type:'square',gain:.035},
+  {k:'cpata',n:'啪嗒',freqs:[220,180],dur:.04,gap:.04,type:'triangle',gain:.05}
 ];
 const rnd=n=>Math.floor(Math.random()*n);
 const pick=a=>a[rnd(a.length)];
@@ -2400,12 +2430,22 @@ function npPageWallKey(name){
   if(['settings','appearance','world','regex','checkup'].indexOf(name)>=0) return 'settings';
   return 'other';
 }
+function syncFloatLayers(){
+  const layer=$('#globalFloat'); if(!layer) return;
+  if(!layer.dataset.ready){
+    const dots=[[7,16,0,17,.8],[19,34,2.4,20,1.15],[31,8,4.1,15,.7],[44,52,1.2,22,.9],[57,24,3.2,18,1.2],[69,68,.6,16,.75],[81,14,5.1,21,1.05],[92,44,2.1,19,.8],[12,76,3.7,23,.9],[37,88,1.7,17,1.1],[63,92,4.4,20,.7],[86,80,.9,18,1.2]];
+    layer.innerHTML=dots.map(function(d){ return '<i class="global-petal" style="left:'+d[0]+'%;top:'+d[1]+'%;animation-delay:'+d[2]+'s;animation-duration:'+d[3]+'s;transform:scale('+d[4]+')"></i>'; }).join('');
+    layer.dataset.ready='1';
+  }
+  layer.classList.toggle('on',!!DB.ui.globalFloat&&!DB.ui.lowPerf);
+}
 function applyTheme(){ const p=$('#phone'); const dark=!!DB.ui.dark;
   const style=STYLES[DB.ui.themeStyle]?DB.ui.themeStyle:'standard';
   const th=THEMES[DB.ui.theme]||THEMES.sakura;
   const ins=style==='ins';
   p.classList.toggle('dark', dark);
   p.classList.toggle('low-perf', !!DB.ui.lowPerf);
+  syncFloatLayers();
   document.body.classList.toggle('dark', dark);
   p.dataset.theme=DB.ui.theme||'sakura';
   p.dataset.style=style;
@@ -3020,7 +3060,7 @@ function homeCollageWidgetHTML(w,wi,extra){
   const shape='shape-'+String(w.shape||'rounded'),pattern='pattern-'+String(w.pattern||'none');
   const slot=function(i,kind){
     const click=wi>=0?' data-wslot="'+wi+'|'+i+'"':'';
-    return '<div class="hcollage-slot '+kind+'"'+click+'>'+(imgs[i]?'<img src="'+esc(imgs[i])+'" alt="">':'')+'<span class="slot-edit">'+ic('image',11)+'</span></div>';
+    return '<div class="hcollage-slot '+kind+'"'+click+'>'+(imgs[i]?'<img src="'+esc(imgs[i])+'" alt="">':'')+'</div>';
   };
   return '<div class="home-widget home-collage '+shape+' '+pattern+'"'+data+' style="'+(extra||'')+'">'+slot(0,'sq')+slot(1,'wide')+slot(2,'sq')+'</div>';
 }
@@ -3063,7 +3103,7 @@ function homeAppGroupHTML(w,wi,extra){
   const keys=Array.isArray(w.appKeys)?w.appKeys:[];
   const apps=keys.map(function(k){ return APPS.find(function(a){ return a.k===k; }); }).filter(Boolean);
   const data=wi>=0?' data-homewidget="'+wi+'"':'';
-  return '<div class="home-widget home-app-group '+(Number(w.appCols)===4?'cols-4':'')+'"'+data+' style="'+(extra||'')+'">'+apps.map(appHTML).join('')+'</div>';
+  return '<div class="home-widget home-app-group count-'+apps.length+' '+(Number(w.appCols)===4?'cols-4':'')+'"'+data+' style="'+(extra||'')+'">'+apps.map(appHTML).join('')+'</div>';
 }
 function npWidgetPreview(w){
   const bgStyle=w.bgImage?('background-image:linear-gradient(rgba(255,250,252,.45),rgba(255,250,252,.45)),'+cssUrl(w.bgImage)+';background-size:cover;background-position:center;'):'';
@@ -3269,7 +3309,7 @@ function screenHome(){
   const dock=DOCK.map(k=>appHTML(APPS.find(a=>a.k===k))).join('');
   const pages=DB.ui.homePages||[];
   const dots=pages.length>1? '<div class="home-dots">'+pages.map(function(_,i){ return '<span class="home-dot'+(i===(DB.ui.homePage||0)?' on':'')+'" data-homepage="'+i+'"></span>'; }).join('')+'</div>':'';
-  return '<div class="home-wrap">'+homeAmbientHTML()+homeMosaicHTML() + dots+'<div class="dock">'+dock+'</div></div>';
+  return '<div class="home-wrap">'+(DB.ui.desktopFloat===false||DB.ui.lowPerf?'':homeAmbientHTML())+homeMosaicHTML() + dots+'<div class="dock">'+dock+'</div></div>';
 }
 
 function appIconHTML(a,size){
@@ -3390,7 +3430,7 @@ function wxContacts(){
   const gs=DB.groups||[];
   DB.ui.open=DB.ui.open||{def:true};
   const open=DB.ui.open;
-  return wxTop('通讯录',clearBtn('wxContacts')+'<button class="ic2" data-act="newcontact">＋</button>')
+  return wxTop('通讯录',clearBtn('wxContacts')+'<button class="ic2" data-act="newgroup" title="新建好友分组">'+ic('userplus',19)+'</button><button class="ic2" data-act="newcontact" title="新建联系人">＋</button>')
     + gs.map(g=>{
         const list=(DB.contacts||[]).filter(c=>c.groupId===g.id);
         const isOpen=!!open[g.id];
@@ -3399,8 +3439,7 @@ function wxContacts(){
           +'<div class="rt"><span class="chev" style="display:inline-block;transition:.2s;transform:rotate('+(isOpen?90:0)+'deg)">›</span></div></div>'
           +(isOpen? (list.length? list.map(ctRow).join('') : '<div class="muted" style="padding:2px 16px 12px">这一组还是空的</div>')
             +'<div class="lrow" data-groupedit="'+g.id+'" style="padding-left:50px"><div class="mi"><div class="t2">编辑这个分组</div></div></div>' : '');
-      }).join('')
-    +'<div class="lrow" data-act="newgroup">'+avBox({icon:'plus'})+'<div class="mi"><div class="t1">新建好友分组</div><div class="t2">把联系人分门别类</div></div><div class="rt"><span class="chev">›</span></div></div>';
+      }).join('');
 }
 function ctRow(c){
   return '<div class="lrow" data-openct="'+c.id+'">'+avBox(c)
@@ -4051,33 +4090,43 @@ function labelOf(m){
 }
 function scrollChatBottom(){ const box=$('.chatlist')||$('#msgs')||$('#dmsgs')||$('#omsgs'); if(box) box.scrollTop=box.scrollHeight; }
 let uiAudioCtx=null;
+function playTonePreset(preset,vol,kind){
+  try{
+    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
+    uiAudioCtx=uiAudioCtx||new AC();
+    if(uiAudioCtx.state==='suspended') uiAudioCtx.resume().catch(function(){});
+    const now=uiAudioCtx.currentTime;
+    const gap=Number(preset.gap)||.055, type=preset.type||'sine', gain=Number(preset.gain)||.12;
+    (preset.freqs||[]).forEach(function(freq,i){
+      const o=uiAudioCtx.createOscillator(), g=uiAudioCtx.createGain();
+      const t=now+i*gap, shift=kind==='send'?80:(kind==='receive'?-35:0);
+      o.type=type;
+      o.frequency.setValueAtTime(Math.max(80,freq+shift),t);
+      if(preset.bend) o.frequency.exponentialRampToValueAtTime(Math.max(80,preset.bend),t+preset.dur);
+      g.gain.setValueAtTime(.0001,t);
+      g.gain.exponentialRampToValueAtTime(Math.max(.001,vol*gain),t+.01);
+      g.gain.exponentialRampToValueAtTime(.0001,t+preset.dur);
+      o.connect(g); g.connect(uiAudioCtx.destination); o.start(t); o.stop(t+preset.dur+.02);
+    });
+  }catch(e){}
+}
 function playUiSound(kind){
   if(!DB.ui||DB.ui.soundEnabled===false) return;
   const vol=Math.max(0,Math.min(1,Number(DB.ui.soundVolume)||0));
   if(DB.ui.soundCustom){
     try{ const a=new Audio(DB.ui.soundCustom); a.volume=vol; a.play().catch(function(){}); return; }catch(e){}
   }
-  try{
-    const AC=window.AudioContext||window.webkitAudioContext; if(!AC) return;
-    uiAudioCtx=uiAudioCtx||new AC();
-    if(uiAudioCtx.state==='suspended') uiAudioCtx.resume().catch(function(){});
-    const preset=SOUND_PRESETS.find(function(x){ return x.k===DB.ui.soundPreset; })||SOUND_PRESETS[0];
-    if(preset.src){ const a=new Audio(preset.src); a.volume=vol; a.play().catch(function(){}); return; }
-    const now=uiAudioCtx.currentTime;
-    preset.freqs.forEach(function(freq,i){
-      const o=uiAudioCtx.createOscillator(), g=uiAudioCtx.createGain();
-      const t=now+i*.055, shift=kind==='send'?80:(kind==='receive'?-35:0);
-      o.type='sine'; o.frequency.setValueAtTime(Math.max(120,freq+shift),t);
-      g.gain.setValueAtTime(.0001,t); g.gain.exponentialRampToValueAtTime(Math.max(.001,vol*.12),t+.012); g.gain.exponentialRampToValueAtTime(.0001,t+preset.dur);
-      o.connect(g); g.connect(uiAudioCtx.destination); o.start(t); o.stop(t+preset.dur+.02);
-    });
-  }catch(e){}
+  const preset=SOUND_PRESETS.find(function(x){ return x.k===DB.ui.soundPreset; })||SOUND_PRESETS[0];
+  if(preset.src){ try{ const a=new Audio(preset.src); a.volume=vol; a.play().catch(function(){}); }catch(e){} return; }
+  playTonePreset(preset,vol,kind);
 }
 function playClickSound(){
   if(!DB.ui||!DB.ui.clickSound||DB.ui.clickSound==='none') return;
   const p=CLICK_PRESETS.find(function(x){ return x.k===DB.ui.clickSound; });
-  if(!p||!p.src) return;
-  try{ const a=new Audio(p.src); a.volume=Math.max(0,Math.min(1,Number(DB.ui.clickVolume)||0)); a.play().catch(function(){}); }catch(e){}
+  if(!p) return;
+  const vol=Math.max(0,Math.min(1,Number(DB.ui.clickVolume)||0));
+  if(p.src){ try{ const a=new Audio(p.src); a.volume=vol; a.play().catch(function(){}); }catch(e){} return; }
+  playTonePreset(p,vol,'click');
 }
 function notifyBackground(title,body){
   if(!DB.ui||!DB.ui.pushEnabled||!document.hidden) return;
@@ -5049,7 +5098,7 @@ function decorateSettingsBubbles(root){
     const bubble=document.createElement('section');
     bubble.className='settings-bubble';
     bubble.dataset.setkey='settings_'+idx;
-    bubble.innerHTML='<button type="button" class="settings-head"><span class="si">'+ic(iconMap[title]||'gear',18)+'</span><span class="sg"><b>'+esc(title)+'</b><small>'+esc(desc.slice(0,46))+'</small></span><span class="chev">›</span></button><div class="settings-body"></div>';
+    bubble.innerHTML='<button type="button" class="settings-head"><span class="si">'+ic(iconMap[title]||'gear',18)+'</span><span class="sg"><b>'+esc(title)+'</b></span><span class="chev">›</span></button><div class="settings-body"></div>';
     card.parentNode.insertBefore(bubble,card);
     bubble.querySelector('.settings-body').appendChild(card);
     if(direct&&direct.parentNode===card) direct.classList.add('settings-title-dup');
@@ -5100,12 +5149,15 @@ function screenSettings(){
   +'<div class="card"><div class="lrow" data-go="appearance" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">外观与美化</div><div class="t2">壁纸、页面背景、图标、组件、全局 CSS 和主题包</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="row"><div class="grow"><b>低性能模式</b><div class="muted">关闭动画、阴影和模糊，老手机更顺</div></div><button class="btn" id="perfToggle">'+(DB.ui.lowPerf?'已开启':'关闭')+'</button></div></div>'
   +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">只隐藏浏览器地址栏，保持竖屏；按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreen?'恢复全屏':'进入全屏'))+'</button></div></div>'
-  +'<div class="card"><b>消息提示音</b><div class="muted" style="margin:5px 0 9px">内置合成音与 Kenney CC0 提示音，可商用；也可以导入自己的音频。</div>'
+  +'<div class="card"><b>漂浮动画</b><div class="muted" style="margin:5px 0 9px">轻量粒子漂浮，低性能模式下自动停止。</div>'
+  +'<div class="lrow" data-float="global" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">全局漂浮动画</div><div class="t2">所有页面都会显示柔和的漂浮粒子</div></div><div class="rt"><span class="mini">'+(DB.ui.globalFloat?'已开启':'已关闭')+'</span></div></div>'
+  +'<div class="lrow" data-float="desktop" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">桌面漂浮动画</div><div class="t2">只在桌面显示花瓣漂浮</div></div><div class="rt"><span class="mini">'+(DB.ui.desktopFloat!==false?'已开启':'已关闭')+'</span></div></div></div>'
+  +'<div class="card"><b>消息提示音</b><div class="muted" style="margin:5px 0 9px">内置合成音与免费开源提示音；也可以导入自己的音频。</div>'
   +'<div class="sound-grid">'+SOUND_PRESETS.map(function(p){ return '<button class="sound-chip'+(DB.ui.soundPreset===p.k&&!DB.ui.soundCustom?' on':'')+'" data-soundpreset="'+p.k+'">'+esc(p.n)+'</button>'; }).join('')+'</div>'
   +'<div class="row" style="margin-top:9px"><button class="btn grow" id="soundImport">导入自己的提示音</button>'+(DB.ui.soundCustom?'<button class="btn danger" id="soundClear">删除自定义</button>':'')+'</div>'
   +(DB.ui.soundCustom?'<div class="mini" style="margin-top:5px">当前：'+esc(DB.ui.soundCustomName||'自定义提示音')+'</div>':'')
   +'<div class="row" style="margin-top:9px"><span class="mini">音量</span><input id="soundVol" type="range" min="0" max="1" step="0.05" value="'+esc(DB.ui.soundVolume)+'" class="grow"><button class="btn" id="soundTest">试听</button><button class="btn" id="soundToggle">'+(DB.ui.soundEnabled?'开':'关')+'</button></div></div>'
-  +'<div class="card"><b>点击音效</b><div class="muted" style="margin:5px 0 9px">六种 Kenney CC0 短音，可商用；选「无」即关闭。</div>'
+  +'<div class="card"><b>点击音效</b><div class="muted" style="margin:5px 0 9px">内置短音效；选「无」即关闭。</div>'
   +'<div class="sound-grid">'+CLICK_PRESETS.map(function(p){ return '<button class="sound-chip'+(DB.ui.clickSound===p.k?' on':'')+'" data-clickpreset="'+p.k+'">'+esc(p.n)+'</button>'; }).join('')+'</div>'
   +'<div class="row" style="margin-top:9px"><span class="mini">音量</span><input id="clickVol" type="range" min="0" max="1" step="0.05" value="'+esc(DB.ui.clickVolume)+'" class="grow"><button class="btn" id="clickTest">试听</button></div></div>'
   +'<div class="card"><b>后台与通知</b><div class="row" style="margin-top:8px"><div class="grow"><b>后台消息推送</b><div class="muted">页面在后台时，用浏览器系统通知提醒。需要浏览器允许通知。</div></div><button class="btn" id="pushToggle">'+(DB.ui.pushEnabled?'开':'关')+'</button></div>'
@@ -5138,6 +5190,7 @@ function sheetAboutPhone(){
   const net=navigator.onLine?'在线':'离线';
   sheet('<h3>关于手机</h3>'
     +'<div class="card" style="box-shadow:none"><div class="kv"><span>版本</span><b>'+esc(BUILD)+'</b></div><div class="kv"><span>运行方式</span><b>'+esc(location.protocol==='file:'?'本地文件':location.host)+'</b></div><div class="kv"><span>设备</span><b>'+esc((navigator.platform||'').slice(0,28)||'未知')+'</b></div><div class="kv"><span>屏幕</span><b>'+screen.width+' × '+screen.height+'</b></div><div class="kv"><span>网络</span><b>'+esc(net)+'</b></div><div class="kv"><span>存储</span><b>'+esc(IDB.ok?'本地数据库':'浏览器小仓库')+'</b></div><div class="kv"><span>数据量</span><b>'+fmtSize(dataSize())+'</b></div><div class="kv"><span>联系人 / 书</span><b>'+(DB.contacts||[]).length+' / '+(DB.books||[]).length+'</b></div><div class="kv"><span>对话接口</span><b>'+(DB.api.key?'已配置':'未配置')+'</b></div><div class="kv"><span>语音接口</span><b>'+(DB.audio.key&&DB.audio.voiceId?'已配置':'未配置')+'</b></div></div>'
+    +'<div class="muted" style="margin:10px 0 4px;line-height:1.75">本网页使用的图标、音效、字体与部分视觉素材来自网络免费开源资源或程序合成；第三方素材版权归原作者所有。素材仅随本网页界面使用，不可单独提取、转售或用于其他产品。</div>'
     +'<button class="btn full" id="aboutCheck">打开自检</button><button class="btn full" id="aboutClose">关闭</button>');
   $('#aboutClose').onclick=closeSheet;
   $('#aboutCheck').onclick=function(){ closeSheet(); go('checkup'); };
@@ -7447,6 +7500,14 @@ function bindScreenInner(){
     const us=$('#uiScale'); if(us) us.oninput=function(){ DB.ui.fontScale=Math.max(.65,Math.min(1.25,Number(us.value)||.85)); const v=$('#uiScaleV'); if(v) v.textContent=Math.round(DB.ui.fontScale*100)+'%'; save(); applyTheme(); };
     const pt=$('#perfToggle'); if(pt) pt.onclick=function(){ DB.ui.lowPerf=!DB.ui.lowPerf; save(); applyTheme(); render(); toast(DB.ui.lowPerf?'低性能模式已开启':'低性能模式已关闭'); };
     const ft=$('#fullToggle'); if(ft) ft.onclick=toggleFullscreenMode;
+    $$('#screen [data-float]').forEach(function(el){ el.onclick=function(ev){
+      ev.stopPropagation();
+      const k=el.dataset.float;
+      if(k==='global') DB.ui.globalFloat=!DB.ui.globalFloat;
+      else DB.ui.desktopFloat=DB.ui.desktopFloat===false;
+      save(); applyTheme(); render();
+      toast(k==='global'?(DB.ui.globalFloat?'全局漂浮动画已开启':'全局漂浮动画已关闭'):(DB.ui.desktopFloat!==false?'桌面漂浮动画已开启':'桌面漂浮动画已关闭'));
+    }; });
     const pu=$('#pushToggle'); if(pu) pu.onclick=togglePushNotifications;
     $$('#screen [data-settingsview]').forEach(function(el){
       el.onclick=function(){
@@ -7683,7 +7744,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 33 轮';
+const BUILD='2026-10-20 · 第 34 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
