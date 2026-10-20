@@ -3488,13 +3488,17 @@ function layout7WidgetHTML(w,wi,appKeys){
 function layout7PageHTML(ws){
   const visible=ws.filter(function(w){ return Number(w.y)<13.5; });
   const managed=homeApps().map(function(a){ return a.k; });
-  let cursor=0;
+  const managedSet=Object.create(null); managed.forEach(function(k){ managedSet[k]=true; });
+  const builtIn=[]; visible.forEach(function(w){ if(w.type==='appgroup'&&Array.isArray(w.appKeys)) builtIn.push.apply(builtIn,w.appKeys); });
+  const extras=managed.filter(function(k){ return builtIn.indexOf(k)<0; });
   const groups={};
   visible.forEach(function(w){
     if(w.type!=='appgroup') return;
     const capacity=Array.isArray(w.appKeys)&&w.appKeys.length?w.appKeys.length:2;
-    groups[w.id]=managed.slice(cursor,cursor+capacity);
-    cursor+=capacity;
+    const keys=(Array.isArray(w.appKeys)?w.appKeys:[]).filter(function(k){ return managedSet[k]; });
+    keys.sort(function(a,b){ return managed.indexOf(a)-managed.indexOf(b); });
+    while(keys.length<capacity&&extras.length) keys.push(extras.shift());
+    groups[w.id]=keys;
   });
   return visible.map(function(w,wi){ return layout7WidgetHTML(w,wi,groups[w.id]); }).join('');
 }
