@@ -4401,7 +4401,7 @@ function pushMsg(chatId,m,quiet){
   if(!quiet) playUiSound(mm.role==='me'?'send':'receive');
   if(!quiet&&mm.role==='ta') notifyBackground(chatName(ch),labelOf(mm));
   save();
-  if(route.name==='chatroom'&&route.arg===chatId) render();
+  if((route.name==='chatroom'&&route.arg===chatId)||(!quiet&&(route.name==='home'||route.name==='wechat'))) render();
   return mm;
 }
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));/* ---- AI 回合 ---- */
@@ -4457,7 +4457,7 @@ async function aiTurn(opt){
 }
 async function sendText(){
   const inp=$('#say'); if(!inp) return;
-  const raw=(inp.value||'').trim(); if(!raw) return;
+  const raw=String(inp.value||'').replace(/\r\n/g,'\n'); if(!raw.trim()) return;
   const t=parenToQuote(raw);
   inp.value=''; hidePanel();
   pushMsg(curChatId,{role:'me',type:'text',text:t});
@@ -8120,7 +8120,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 39 轮';
+const BUILD='2026-10-20 · 第 40 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
