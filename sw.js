@@ -1,5 +1,5 @@
 /* BS小手机 · 离线兜底：网络优先，打不开时用上一次成功加载的版本 */
-var C='bsphone-v21';
+var C='bsphone-v37';
 self.addEventListener('install',function(e){ self.skipWaiting(); });
 self.addEventListener('activate',function(e){
   e.waitUntil(
