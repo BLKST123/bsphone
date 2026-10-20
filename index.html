@@ -1848,6 +1848,11 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 .l7-stage .shape-vinyl .hw-title{width:58%!important;font-size:11px!important;line-height:1.2!important}
 .l7-stage .shape-vinyl .hw-body{width:58%!important;font-size:9px!important;line-height:1.28!important}
 .l7-stage .l7-mini{min-height:18px}
+html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
+@media (orientation:landscape){
+  html.portrait-fullscreen,html.portrait-fullscreen body{width:100%;height:100%;overflow:hidden!important;background:#161316}
+  html.portrait-fullscreen #phone{position:fixed;left:50%;top:50%;width:min(100dvh,520px);height:100vw;max-width:none;margin:0;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center center}
+}
 </style>
 <style id="userCustomCss"></style>
 <style id="uiFontStyle"></style>
@@ -2158,6 +2163,20 @@ function fixAll(){
     if(w.shape===undefined) w.shape='rounded'; if(w.pattern===undefined) w.pattern='none';
     if(w.bgImage===undefined) w.bgImage=''; if(!Array.isArray(w.images)) w.images=[]; if(!Array.isArray(w.bookImages)) w.bookImages=[];
   }); });
+  if(!DB.ui.layout7PositionRepairV1){
+    const defaults=defaultLayout7WidgetPages();
+    const original=defaults[0].find(function(w){ return w.id==='l7_p1_vinyl'; });
+    if(original){
+      DB.ui.widgetPages.forEach(function(page){
+        page.forEach(function(w){
+          if(w.id==='l7_p1_vinyl'&&(Number(w.y)<1||Number(w.w)<1.5||Number(w.h)<2.3)){
+            w.x=original.x;w.y=original.y;w.w=original.w;w.h=original.h;
+          }
+        });
+      });
+    }
+    DB.ui.layout7PositionRepairV1=true;
+  }
   DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).slice(0,16); });
   if(!DB.ui.homePages.length) DB.ui.homePages=defaultHomePages();
   DB.ui.homePage=Math.max(0,Math.min(Number(DB.ui.homePage)||0,DB.ui.homePages.length-1));
@@ -3328,6 +3347,7 @@ function sheetWidgetEdit(idx,type){
     return colors.map(function(color){ return '<button type="button" class="vinyl-swatch'+(current.toLowerCase()===color?' on':'')+'" data-'+attr+'="'+color+'" style="background:'+color+'" aria-label="颜色 '+color+'"></button>'; }).join('');
   };
   const vinylPicker=w.type==='text'?'<div class="sechead">唱片颜色</div><div id="wVinylColors" class="vinyl-picker'+(w.shape==='vinyl'?' show':'')+'"><div class="vp-line"><span class="vp-name">唱片本体</span><div class="vinyl-swatches">'+vinylSwatches('vmain',vinylMainColors,vinylMain)+'</div><input id="wVinylColor" type="color" value="'+vinylMain+'" style="width:44px;padding:3px;flex:none" aria-label="自定义唱片颜色"></div><div class="vp-line"><span class="vp-name">中间圆标</span><div class="vinyl-swatches">'+vinylSwatches('vlabel',vinylLabelColors,vinylLabel)+'</div><input id="wVinylLabel" type="color" value="'+vinylLabel+'" style="width:44px;padding:3px;flex:none" aria-label="自定义中间圆标颜色"></div></div>':'';
+  const originalWidget=defaultLayout7WidgetPages().map(function(page){ return page.find(function(item){ return item.id===w.id; }); }).filter(Boolean)[0];
   const fields=w.type==='books'
     ? '<input id="wTitle" placeholder="书架标题" value="'+esc(w.title||'')+'"><input id="wText" placeholder="三本书名，用 | 分隔" value="'+esc(w.text||'')+'" style="margin-top:8px"><div class="muted" style="margin:9px 0 6px">三本书可以分别换封面或背景图；点击桌面上的书脊也能直接更换。</div>'+bookSlotField(0)+bookSlotField(1)+bookSlotField(2)
     : w.type==='collage'
@@ -3341,6 +3361,7 @@ function sheetWidgetEdit(idx,type){
     +vinylPicker
     +'<div class="row" style="margin-top:8px"><input id="wBgUrl" class="grow" placeholder="组件背景图片 URL" value="'+esc(String(w.bgImage||'').startsWith('data:')?'':w.bgImage)+'"><button class="btn" id="wBgApply">应用</button></div><div class="row" style="margin-top:7px"><button class="btn grow" id="wBgUpload">上传背景</button><button class="btn grow" id="wBgClear">清除背景</button></div>'
     +'<div class="muted" style="margin-top:10px">位置与大小</div><div class="row" style="margin-top:6px"><label class="mini grow">横向位置<input id="wX" type="number" min="0" max="3.5" step=".25" value="'+esc(w.x)+'"></label><label class="mini grow">纵向位置<input id="wY" type="number" min="0" max="20" step=".25" value="'+esc(w.y)+'"></label></div><div class="row" style="margin-top:6px"><label class="mini grow">宽度<input id="wW" type="number" min=".5" max="4" step=".25" value="'+esc(w.w)+'"></label><label class="mini grow">高度<input id="wH" type="number" min=".5" max="4" step=".25" value="'+esc(w.h)+'"></label></div>'
+    +(originalWidget?'<button class="btn full" id="wResetPos">恢复此组件初始位置和大小</button>':'')
     +'<button class="btn primary full" id="wSave">保存组件</button><button class="btn full" id="wCancel">取消</button>');
   $('#sheetBox').classList.add('widget-editor-pop');
   const updatePos=function(){
@@ -3381,6 +3402,12 @@ function sheetWidgetEdit(idx,type){
   $('#wBgApply').onclick=function(){ const u=String($('#wBgUrl').value||'').trim(); if(!u){ toast('先填背景图片 URL'); return; } w.bgImage=u; update(); };
   $('#wBgUpload').onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; nextRatio=16/9; readImage(i.files[0],1500,function(url){ w.bgImage=url; $('#wBgUrl').value=''; update(); }); }; i.click(); };
   $('#wBgClear').onclick=function(){ w.bgImage=''; const u=$('#wBgUrl'); if(u) u.value=''; update(); };
+  const resetPos=$('#wResetPos');
+  if(resetPos) resetPos.onclick=function(){
+    w.x=originalWidget.x;w.y=originalWidget.y;w.w=originalWidget.w;w.h=originalWidget.h;
+    $('#wX').value=w.x;$('#wY').value=w.y;$('#wW').value=w.w;$('#wH').value=w.h;
+    update(); toast('已恢复初始位置和大小，点保存生效');
+  };
   $('#wCancel').onclick=sheetWidgets;
   $('#wSave').onclick=function(){ update(); if(w.type==='image'&&!w.image){ toast('图片组件需要一张图'); return; } const arr=homeWidgets(); if(idx>=0) arr[idx]=w; else arr.push(w); setHomeWidgets(arr); save(); render(); sheetWidgets(); toast('组件已保存'); };
 }
@@ -5436,11 +5463,11 @@ async function lockPortrait(){
   try{ await screen.orientation.lock('portrait'); return true; }catch(e){ return false; }
 }
 function applyImmersivePortrait(){
-  document.documentElement.classList.add('immersive-portrait');
+  document.documentElement.classList.add('immersive-portrait','portrait-fullscreen');
   setTimeout(function(){ try{ window.scrollTo(0,1); }catch(e){} },50);
 }
 function clearImmersivePortrait(){
-  document.documentElement.classList.remove('immersive-portrait');
+  document.documentElement.classList.remove('immersive-portrait','portrait-fullscreen');
 }
 function enterImmersivePortrait(message){
   clearImmersivePortrait();
@@ -5463,13 +5490,9 @@ async function toggleFullscreenMode(){
         enterImmersivePortrait('此浏览器不能锁定竖屏，已使用不旋转的沉浸显示');
       }else{
         await document.documentElement.requestFullscreen();
-        const locked=await lockPortrait();
-        if(!locked){
-          try{ await document.exitFullscreen(); }catch(e){}
-          enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏');
-        }else{
-          DB.ui.fullscreenActive=true;
-        }
+        await lockPortrait();
+        DB.ui.fullscreenMode='native';DB.ui.fullscreenActive=true;
+        document.documentElement.classList.add('portrait-fullscreen');
       }
     }else{
       DB.ui.fullscreen=false; DB.ui.fullscreenMode=''; DB.ui.fullscreenActive=false;
@@ -5488,19 +5511,17 @@ function restoreFullscreenIntent(){
   if(document.fullscreenElement) return;
   const el=document.documentElement;
   if(!el||!el.requestFullscreen) return;
-  try{ el.requestFullscreen().then(async function(){ const ok=await lockPortrait(); if(!ok){ try{await document.exitFullscreen();}catch(e){} enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏'); save(); } }).catch(function(){}); }catch(e){}
+  try{ el.requestFullscreen().then(async function(){ await lockPortrait(); DB.ui.fullscreenMode='native';DB.ui.fullscreenActive=true;document.documentElement.classList.add('portrait-fullscreen'); save(); }).catch(function(){}); }catch(e){}
 }
 document.addEventListener('fullscreenchange',async function(){
   if(typeof DB==='undefined') return;
   if(document.fullscreenElement){
     DB.ui.fullscreen=true; DB.ui.fullscreenMode='native'; DB.ui.fullscreenActive=true;
-    const ok=await lockPortrait();
-    if(!ok){
-      try{ await document.exitFullscreen(); }catch(e){}
-      enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏');
-    }
+    document.documentElement.classList.add('portrait-fullscreen');
+    await lockPortrait();
   }else if(DB.ui.fullscreenMode==='native'){
-    DB.ui.fullscreenActive=false;
+    DB.ui.fullscreen=false;DB.ui.fullscreenMode='';DB.ui.fullscreenActive=false;
+    document.documentElement.classList.remove('portrait-fullscreen');
   }
   save(); if(route.name==='settings') render();
 });
@@ -8099,7 +8120,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 38 轮';
+const BUILD='2026-10-20 · 第 39 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
