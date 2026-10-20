@@ -3310,7 +3310,7 @@ function sheetWidgetEdit(idx,type){
   const old=idx>=0? ws[idx] : null;
   const nextY=ws.reduce(function(m,w){ return Math.max(m,(Number(w.y)||0)+(Number(w.h)||2)); },0);
   const w=Object.assign({id:uid(),type:type||'text',title:'',text:'',image:'',images:[],bookImages:[],bgImage:'',shape:'rounded',pattern:'none',x:0,y:Math.min(8,nextY),w:2,h:2},old||{});
-  w.x=Math.max(0,Math.min(3,Number(w.x)||0)); w.y=Math.max(0,Math.min(8,Number(w.y)||0)); w.w=Math.max(1,Math.min(4,Number(w.w)||2)); w.h=Math.max(1,Math.min(3,Number(w.h)||2));
+  w.x=Math.max(0,Math.min(3.5,Number(w.x)||0)); w.y=Math.max(0,Math.min(20,Number(w.y)||0)); w.w=Math.max(.5,Math.min(4,Number(w.w)||2)); w.h=Math.max(.5,Math.min(4,Number(w.h)||2));
   let imgs=(Array.isArray(w.images)?w.images:[]).slice(0,3);
   let bookImgs=(Array.isArray(w.bookImages)?w.bookImages:[]).slice(0,3);
   const slotField=function(i){
@@ -3340,11 +3340,14 @@ function sheetWidgetEdit(idx,type){
     +'<div class="sechead">形状与背景</div><div class="row"><label class="mini grow">形状<select id="wShape">'+[['rounded','圆角'],['square','方形'],['bubble','气泡'],['pill','胶囊'],['arch','拱形'],['ticket','票据'],['frame','相框'],['vinyl','黑胶唱片'],['wings','翅膀'],['cat','小猫']].map(function(x){ return '<option value="'+x[0]+'"'+(w.shape===x[0]?' selected':'')+'>'+x[1]+'</option>'; }).join('')+'</select></label><label class="mini grow">图案<select id="wPattern">'+[['none','无'],['dots','圆点'],['grid','格纹'],['lines','斜线'],['stars','星点']].map(function(x){ return '<option value="'+x[0]+'"'+(w.pattern===x[0]?' selected':'')+'>'+x[1]+'</option>'; }).join('')+'</select></label></div>'
     +vinylPicker
     +'<div class="row" style="margin-top:8px"><input id="wBgUrl" class="grow" placeholder="组件背景图片 URL" value="'+esc(String(w.bgImage||'').startsWith('data:')?'':w.bgImage)+'"><button class="btn" id="wBgApply">应用</button></div><div class="row" style="margin-top:7px"><button class="btn grow" id="wBgUpload">上传背景</button><button class="btn grow" id="wBgClear">清除背景</button></div>'
-    +'<div class="muted" style="margin-top:10px">位置与大小</div><div class="row" style="margin-top:6px"><label class="mini grow">横向位置<select id="wX">'+[0,1,2,3].map(function(n){ return '<option value="'+n+'"'+(Number(w.x)===n?' selected':'')+'>'+(n+1)+'</option>'; }).join('')+'</select></label><label class="mini grow">纵向位置<select id="wY">'+[0,1,2,3,4,5,6,7,8].map(function(n){ return '<option value="'+n+'"'+(Number(w.y)===n?' selected':'')+'>'+(n+1)+'</option>'; }).join('')+'</select></label></div><div class="row" style="margin-top:6px"><label class="mini grow">宽度<select id="wW">'+[1,2,3,4].map(function(n){ return '<option value="'+n+'"'+(Number(w.w)===n?' selected':'')+'>'+n+' 格</option>'; }).join('')+'</select></label><label class="mini grow">高度<select id="wH">'+[1,2,3].map(function(n){ return '<option value="'+n+'"'+(Number(w.h)===n?' selected':'')+'>'+n+' 格</option>'; }).join('')+'</select></label></div>'
+    +'<div class="muted" style="margin-top:10px">位置与大小</div><div class="row" style="margin-top:6px"><label class="mini grow">横向位置<input id="wX" type="number" min="0" max="3.5" step=".25" value="'+esc(w.x)+'"></label><label class="mini grow">纵向位置<input id="wY" type="number" min="0" max="20" step=".25" value="'+esc(w.y)+'"></label></div><div class="row" style="margin-top:6px"><label class="mini grow">宽度<input id="wW" type="number" min=".5" max="4" step=".25" value="'+esc(w.w)+'"></label><label class="mini grow">高度<input id="wH" type="number" min=".5" max="4" step=".25" value="'+esc(w.h)+'"></label></div>'
     +'<button class="btn primary full" id="wSave">保存组件</button><button class="btn full" id="wCancel">取消</button>');
   $('#sheetBox').classList.add('widget-editor-pop');
   const updatePos=function(){
-    w.x=Number($('#wX').value)||0; w.y=Number($('#wY').value)||0; w.w=Number($('#wW').value)||1; w.h=Number($('#wH').value)||1;
+    w.x=Math.max(0,Math.min(3.5,Number($('#wX').value)||0));
+    w.y=Math.max(0,Math.min(20,Number($('#wY').value)||0));
+    w.w=Math.max(.5,Math.min(4,Number($('#wW').value)||2));
+    w.h=Math.max(.5,Math.min(4,Number($('#wH').value)||2));
     const box=$('#wPosPreview'); if(box) box.innerHTML='<div class="wpos-item" style="grid-column:'+(w.x+1)+' / span '+w.w+';grid-row:'+(w.y+1)+' / span '+w.h+'">'+npWidgetPreview(w)+'</div>';
   };
   ['#wX','#wY','#wW','#wH'].forEach(function(sel){ const el=$(sel); if(el) el.onchange=updatePos; });
@@ -5369,7 +5372,7 @@ function screenSettings(){
   +'<input id="uiScale" type="range" min="0.65" max="1.25" step="0.05" value="'+esc(DB.ui.fontScale)+'"></div>'
   +'<div class="card"><div class="lrow" data-go="appearance" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">外观与美化</div><div class="t2">壁纸、页面背景、图标、组件、全局 CSS 和主题包</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="row"><div class="grow"><b>低性能模式</b><div class="muted">关闭动画、阴影和模糊，老手机更顺</div></div><button class="btn" id="perfToggle">'+(DB.ui.lowPerf?'已开启':'关闭')+'</button></div></div>'
-  +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">只隐藏浏览器地址栏，保持竖屏；按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreen?'恢复全屏':'进入全屏'))+'</button></div></div>'
+  +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">只隐藏浏览器地址栏，保持竖屏；按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreenMode==='immersive'?'退出沉浸':(DB.ui.fullscreen?'恢复全屏':'进入全屏')))+'</button></div></div>'
   +'<div class="card"><b>漂浮动画</b><div class="muted" style="margin:5px 0 9px">轻量粒子漂浮，低性能模式下自动停止。</div>'
   +'<div class="row" style="margin-bottom:7px"><span class="mini grow">漂浮样式</span><select id="floatStyle" style="width:132px;flex:none">'+FLOAT_STYLES.concat(DB.ui.customFloatImage?[{k:'custom',n:'自定义'}]:[]).map(function(x){ return '<option value="'+x.k+'"'+(DB.ui.floatStyle===x.k?' selected':'')+'>'+x.n+'</option>'; }).join('')+'</select></div>'
   +'<div class="row" style="margin-bottom:4px"><span class="mini grow">本地漂浮素材</span><button class="btn" id="floatImport">本地导入</button>'+(DB.ui.customFloatImage?'<button class="btn danger" id="floatClear">清除</button>':'')+'</div>'
@@ -5429,25 +5432,76 @@ function sheetDisclaimer(){
   $('#discClose').onclick=closeSheet;
 }
 async function lockPortrait(){
-  try{ if(screen.orientation&&screen.orientation.lock) await screen.orientation.lock('portrait'); }catch(e){}
+  if(!(screen.orientation&&screen.orientation.lock)) return false;
+  try{ await screen.orientation.lock('portrait'); return true; }catch(e){ return false; }
+}
+function applyImmersivePortrait(){
+  document.documentElement.classList.add('immersive-portrait');
+  setTimeout(function(){ try{ window.scrollTo(0,1); }catch(e){} },50);
+}
+function clearImmersivePortrait(){
+  document.documentElement.classList.remove('immersive-portrait');
+}
+function enterImmersivePortrait(message){
+  clearImmersivePortrait();
+  DB.ui.fullscreen=true; DB.ui.fullscreenMode='immersive'; DB.ui.fullscreenActive=false;
+  applyImmersivePortrait();
+  if(message) toast(message);
+}
+function exitImmersivePortrait(){
+  DB.ui.fullscreen=false; DB.ui.fullscreenMode=''; DB.ui.fullscreenActive=false;
+  clearImmersivePortrait();
 }
 async function toggleFullscreenMode(){
+  if(DB.ui.fullscreen&&DB.ui.fullscreenMode==='immersive'){
+    exitImmersivePortrait(); save(); render(); toast('已退出沉浸显示'); return;
+  }
   try{
-    if(!document.fullscreenElement){ DB.ui.fullscreen=true; await document.documentElement.requestFullscreen(); await lockPortrait(); DB.ui.fullscreenActive=true; }
-    else { DB.ui.fullscreen=false; DB.ui.fullscreenActive=false; try{ if(screen.orientation&&screen.orientation.unlock) screen.orientation.unlock(); }catch(e){} await document.exitFullscreen(); }
-  }catch(e){ toast('当前浏览器不允许进入全屏'); }
+    if(!document.fullscreenElement){
+      DB.ui.fullscreen=true; DB.ui.fullscreenMode='native';
+      if(!(screen.orientation&&screen.orientation.lock)){
+        enterImmersivePortrait('此浏览器不能锁定竖屏，已使用不旋转的沉浸显示');
+      }else{
+        await document.documentElement.requestFullscreen();
+        const locked=await lockPortrait();
+        if(!locked){
+          try{ await document.exitFullscreen(); }catch(e){}
+          enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏');
+        }else{
+          DB.ui.fullscreenActive=true;
+        }
+      }
+    }else{
+      DB.ui.fullscreen=false; DB.ui.fullscreenMode=''; DB.ui.fullscreenActive=false;
+      try{ if(screen.orientation&&screen.orientation.unlock) screen.orientation.unlock(); }catch(e){}
+      await document.exitFullscreen();
+    }
+  }catch(e){
+    DB.ui.fullscreen=false; DB.ui.fullscreenMode=''; DB.ui.fullscreenActive=false;
+    toast('当前浏览器不允许进入全屏');
+  }
   save(); render();
 }
 function restoreFullscreenIntent(){
-  if(!DB.ui||!DB.ui.fullscreen||document.fullscreenElement) return;
+  if(!DB.ui||!DB.ui.fullscreen) return;
+  if(DB.ui.fullscreenMode==='immersive'){ applyImmersivePortrait(); return; }
+  if(document.fullscreenElement) return;
   const el=document.documentElement;
   if(!el||!el.requestFullscreen) return;
-  try{ el.requestFullscreen().then(lockPortrait).catch(function(){}); }catch(e){}
+  try{ el.requestFullscreen().then(async function(){ const ok=await lockPortrait(); if(!ok){ try{await document.exitFullscreen();}catch(e){} enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏'); save(); } }).catch(function(){}); }catch(e){}
 }
-document.addEventListener('fullscreenchange',function(){
+document.addEventListener('fullscreenchange',async function(){
   if(typeof DB==='undefined') return;
-  DB.ui.fullscreenActive=!!document.fullscreenElement;
-  if(document.fullscreenElement){ DB.ui.fullscreen=true; lockPortrait(); }
+  if(document.fullscreenElement){
+    DB.ui.fullscreen=true; DB.ui.fullscreenMode='native'; DB.ui.fullscreenActive=true;
+    const ok=await lockPortrait();
+    if(!ok){
+      try{ await document.exitFullscreen(); }catch(e){}
+      enterImmersivePortrait('此浏览器不能锁定竖屏，已退出可能横屏的全屏');
+    }
+  }else if(DB.ui.fullscreenMode==='native'){
+    DB.ui.fullscreenActive=false;
+  }
   save(); if(route.name==='settings') render();
 });
 async function togglePushNotifications(){
@@ -8045,7 +8099,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 37 轮';
+const BUILD='2026-10-20 · 第 38 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);

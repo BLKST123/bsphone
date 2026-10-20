@@ -3,6 +3,7 @@
   "short_name": "BS小手机",
   "start_url": "./",
   "display": "standalone",
+  "orientation": "portrait-primary",
   "background_color": "#1c1c1e",
   "theme_color": "#0a84ff",
   "icons": [
