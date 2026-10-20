@@ -3473,19 +3473,30 @@ function layout7Box(w){
     height:Math.max(1,hh*L7.row+(hh-1)*L7.gap)
   };
 }
-function layout7GroupHTML(w,wi){
+function layout7GroupHTML(w,wi,appKeys){
   const box=layout7Box(w),cols=Math.max(1,Number(w.cols)||2);
-  const apps=(Array.isArray(w.appKeys)?w.appKeys:[]).map(function(k){ return APPS.find(function(a){ return a.k===k; }); }).filter(Boolean);
+  const keys=Array.isArray(appKeys)?appKeys:w.appKeys;
+  const apps=(Array.isArray(keys)?keys:[]).map(function(k){ return APPS.find(function(a){ return a.k===k; }); }).filter(Boolean);
   return '<div class="l7-group" data-layout-id="'+esc(w.id||'')+'" data-homewidget="'+wi+'" style="left:'+box.left+'px;top:'+box.top+'px;width:'+box.width+'px;height:'+box.height+'px;grid-template-columns:repeat('+cols+',minmax(0,1fr))">'+apps.map(appHTML).join('')+'</div>';
 }
-function layout7WidgetHTML(w,wi){
-  if(w.type==='appgroup') return layout7GroupHTML(w,wi);
+function layout7WidgetHTML(w,wi,appKeys){
+  if(w.type==='appgroup') return layout7GroupHTML(w,wi,appKeys);
   const box=layout7Box(w);
   const boxStyle='left:'+box.left+'px;top:'+box.top+'px;width:'+box.width+'px;height:'+box.height+'px;min-height:'+Math.max(18,box.height)+'px;';
   return '<div class="l7-item" data-layout-id="'+esc(w.id||'')+'" style="'+boxStyle+'">'+widgetTileHTML(w,wi,'position:relative;width:100%;height:100%;')+'</div>';
 }
 function layout7PageHTML(ws){
-  return ws.filter(function(w){ return Number(w.y)<13.5; }).map(layout7WidgetHTML).join('');
+  const visible=ws.filter(function(w){ return Number(w.y)<13.5; });
+  const managed=homeApps().map(function(a){ return a.k; });
+  let cursor=0;
+  const groups={};
+  visible.forEach(function(w){
+    if(w.type!=='appgroup') return;
+    const capacity=Array.isArray(w.appKeys)&&w.appKeys.length?w.appKeys.length:2;
+    groups[w.id]=managed.slice(cursor,cursor+capacity);
+    cursor+=capacity;
+  });
+  return visible.map(function(w,wi){ return layout7WidgetHTML(w,wi,groups[w.id]); }).join('');
 }
 function fitLayout7Homes(scope){
   requestAnimationFrame(function(){
