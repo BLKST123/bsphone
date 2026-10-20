@@ -639,6 +639,10 @@ input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) 
 .np-top .h{font-weight:700;font-size:21px;flex:1}
 .np-top .ic2{background:none;border:0;color:var(--fg);font-size:18px;padding:3px;cursor:pointer}
 .np-chips{display:flex;gap:7px;overflow-x:auto;padding:10px 14px 8px;scrollbar-width:none}
+.np-filter{margin:0 0 6px;border-bottom:1px solid var(--line)}
+.np-filter-head{width:100%;display:flex;align-items:center;justify-content:space-between;border:0;background:transparent;color:var(--fg);font:inherit;font-size:12px;font-weight:600;padding:7px 16px;cursor:pointer}
+.np-filter-head .chev{color:var(--fg2);font-size:14px}
+.np-filter-body .np-chips{padding-top:2px;padding-bottom:9px}
 .np-chips::-webkit-scrollbar{display:none}
 .np-chip{flex:none;border:1px solid rgba(143,77,99,.16);background:rgba(255,244,247,.8);color:var(--fg2);border-radius:999px;padding:6px 13px;font-size:12.5px;cursor:pointer}
 .np-chip.on{background:#2b2227;border-color:#2b2227;color:#fff}
@@ -908,10 +912,10 @@ html,body{background:var(--wall);color:var(--fg)}
 .home-mosaic .hw-text{padding:8px 9px}
 .home-mosaic .hw-title{font-size:11px}
 .home-mosaic .hw-body{font-size:9.5px;line-height:1.4;margin-top:2px}
-.home-ambient{position:absolute;inset:-18px;z-index:0;overflow:hidden;pointer-events:none}
+.home-ambient{position:absolute;inset:-18px;z-index:6;overflow:hidden;pointer-events:none}
 .home-petal{position:absolute;display:block;width:12px;height:18px;border-radius:70% 30% 70% 30%;background:linear-gradient(145deg,rgba(255,255,255,.68),rgba(200,143,163,.2));box-shadow:0 0 12px rgba(255,255,255,.26);opacity:.42;animation:petalDrift 13s ease-in-out infinite}
 @keyframes petalDrift{0%,100%{transform:translate3d(0,0,0) rotate(8deg)}50%{transform:translate3d(15px,-24px,0) rotate(82deg)}}
-.global-float{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;display:none}
+.global-float{position:absolute;inset:0;z-index:8;pointer-events:none;overflow:hidden;display:none}
 .global-float.on{display:block}
 .global-petal{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,rgba(255,255,255,.92),rgba(232,196,207,.42));box-shadow:0 0 14px rgba(255,255,255,.42);opacity:.28;animation:globalFloat 16s ease-in-out infinite;will-change:transform,opacity}
 .global-petal:nth-child(3n){width:6px;height:6px;opacity:.2}
@@ -1580,7 +1584,7 @@ body.dark[data-style="crystal"] .sheet .box button.btn,body.dark[data-style="cry
 /* INS 极简黑白灰 */
 #phone[data-style="ins"]{--radius:8px}
 #phone[data-style="ins"]::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;background:rgba(247,247,247,.88);opacity:.94}
-#phone[data-style="ins"] .home-ambient{display:none}
+#phone[data-style="ins"] .home-ambient{display:block}
 #phone[data-style="ins"] .card,
 #phone[data-style="ins"] .settings-bubble,
 #phone[data-style="ins"] .np-card,
@@ -1867,6 +1871,20 @@ const FLOAT_BUBBLE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My
 const FLOAT_RAIN='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iIzVEQURFQyIgZD0iTTI4LjM0NCAxNy43NjhMMTguMTQ4IDEuMDkgOC43IDE3LjY1NGMtMi4yIDMuNTEtMi4zOTIgOC4wNzQtLjA4MSAxMS44NTQgMy4yODUgNS4zNzMgMTAuMzYzIDcuMDk4IDE1LjgxMSAzLjg1NyA1LjQ0Ni0zLjI0IDcuMTk5LTEwLjIyIDMuOTE0LTE1LjU5N3oiLz48L3N2Zz4=';
 const FLOAT_CATKIN='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmYWYxIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii43OCI+CiAgICA8cGF0aCBkPSJNMzMgNTljLTItMTUgMS0yNyA1LTM4IiBzdHJva2Utd2lkdGg9IjIuNCIvPgogICAgPHBhdGggZD0iTTMyIDM5Yy03LTUtMTEtMTItMTItMTlNMzQgMzJjNy00IDExLTExIDEyLTE4TTMzIDQ3Yy05LTMtMTQtOS0xNy0xNU0zNSA0NGM5LTIgMTUtOCAxOC0xNCIgc3Ryb2tlLXdpZHRoPSIxLjgiLz4KICA8L2c+CiAgPGcgZmlsbD0iI2ZmZmFmMiI+CiAgICA8ZWxsaXBzZSBjeD0iMzciIGN5PSIxOSIgcng9IjEwIiByeT0iMTUiIG9wYWNpdHk9Ii45Ii8+CiAgICA8Y2lyY2xlIGN4PSIyNyIgY3k9IjE1IiByPSI1LjUiIG9wYWNpdHk9Ii44MiIvPgogICAgPGNpcmNsZSBjeD0iNDgiIGN5PSIxNyIgcj0iNSIgb3BhY2l0eT0iLjgiLz4KICAgIDxjaXJjbGUgY3g9IjE3IiBjeT0iMjIiIHI9IjMuOCIgb3BhY2l0eT0iLjciLz4KICAgIDxjaXJjbGUgY3g9IjU0IiBjeT0iMjYiIHI9IjMuMiIgb3BhY2l0eT0iLjY0Ii8+CiAgICA8Y2lyY2xlIGN4PSIyOSIgY3k9IjgiIHI9IjMiIG9wYWNpdHk9Ii42OCIvPgogICAgPGNpcmNsZSBjeD0iNDMiIGN5PSI3IiByPSIyLjYiIG9wYWNpdHk9Ii42MiIvPgogIDwvZz4KPC9zdmc+Cg==';
 const FLOAT_PETAL='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzNiAzNiI+PHBhdGggZmlsbD0iI0Y0QUJCQSIgZD0iTTMxLjI5OCAyMC44MDdjNC4xOTctMS4zNjMgNS4wMjctMy4xODIgNC4xOTEtNi40MTYtLjk1Mi4zMDgtMi4xMDUtLjAwMS0yLjI3Mi0uNTE4LS4xNjgtLjUxMy41ODEtMS40NDMgMS41MzMtMS43NTMtMS4yMjMtMy4xMDctMi45NjQtNC4wODktNy4xNjEtMi43MjctMS42MDYuNTIyLTMuMjM4IDEuNDkyLTQuNjU1IDIuNjM1QzIzLjU4MiAxMC4zMjcgMjQgOC40NzUgMjQgNi43ODZjMC00LjQxMi0xLjQ3My01Ljc2NS00LjgwNy01Ljk2OCAwIDEtLjY1MiAyLTEuMTkzIDJzLTEuMTk0LTEtMS4xOTQtMkMxMy40NzIgMS4wMjEgMTIgMi4zNzQgMTIgNi43ODZjMCAxLjY4OS40MTcgMy41NDEgMS4wNjYgNS4yNDEtMS40MTYtMS4xNDItMy4wNDktMi4xMTEtNC42NTUtMi42MzMtNC4xOTctMS4zNjQtNS45MzgtLjM4MS03LjE2MiAyLjcyNy45NTEuMzEgMS43MDEgMS4yMzggMS41MzQgMS43NTMtLjE2Ny41MTUtMS4zMi44MjYtMi4yNzEuNTE4LS44MzcgMy4yMzMtLjAwNSA1LjA1MiA0LjE5IDYuNDE1IDEuNjA2LjUyMSAzLjQ5Ny42OTcgNS4zMTQuNjA1LTEuNTI0Ljk5NC0yLjk1IDIuMjQ3LTMuOTQzIDMuNjEzLTIuNTk0IDMuNTctMi4xOTcgNS41My4zODEgNy42NTQuNTg4LS44MDkgMS43MDMtMS4yMzUgMi4xNDItLjkxNy40MzguMzE3LjM3OCAxLjUxMS0uMjEgMi4zMiAyLjgxNiAxLjc5NSA0LjgwMyAxLjU2NSA3LjM5Ni0yLjAwMy45OTMtMS4zNjYgMS43NDMtMy4xMTEgMi4yMTgtNC44NjcuNDc1IDEuNzU3IDEuMjI2IDMuNTAxIDIuMjE4IDQuODY3IDIuNTk0IDMuNTcgNC41OCAzLjc5OCA3LjM5NyAyLjAwMy0uNTg3LS44MS0uNjQ5LTIuMDAyLS4yMS0yLjMyMS40MzctLjMxNyAxLjU1My4xMDcgMi4xNDIuOTE3IDIuNTc3LTIuMTIzIDIuOTczLTQuMDgzLjM4MS03LjY1My0uOTkzLTEuMzY2LTIuNDItMi42MTktMy45NDMtMy42MTMgMS44MTYuMDkyIDMuNzA2LS4wODQgNS4zMTMtLjYwNXpNMTggMjAuMzM3Yy0uMTYyLS4yOTItLjM1My0uNTM4LS41ODgtLjcwOS0uMjM0LS4xNzEtLjUyOC0uMjc2LS44NTYtLjM0MS4yMjgtLjI0NC40MDMtLjUwMi40OTMtLjc3OC4wOS0uMjc1LjEtLjU4Ny4wNTktLjkxOS4zMDIuMTQxLjYwMi4yMjguODkyLjIyOHMuNTktLjA4Ny44OTQtLjIyOWMtLjA0MS4zMzItLjAzMS42NDQuMDU5LjkxOS4wOS4yNzYuMjY1LjUzNC40OTIuNzc4LS4zMjcuMDY1LS42MjEuMTctLjg1NS4zNDEtLjIzNi4xNzItLjQyOC40MTgtLjU5LjcxeiIvPjxnIGZpbGw9IiNGRkYiPjxwYXRoIGQ9Ik0xNi43OTUgMTguNjg1Yy0uMTIuNTQtLjY1My44OC0xLjE5My43NmwtNS44NTgtMS4zMDJjLS41MzktLjEyLS44NzktLjY1My0uNzU5LTEuMTkzLjEyLS41MzkuNjU0LS44NzkgMS4xOTMtLjc1OWw1Ljg1NyAxLjMwMmMuNTQuMTIuODguNjUzLjc2IDEuMTkyem0uOTc2LjIxOGMuMTItLjU0LjY1NC0uODggMS4xOTMtLjc2bDUuODU3IDEuMzAyYy41NC4xMi44NzkuNjUzLjc2IDEuMTkzLS4xMi41MzgtLjY1NC44NzktMS4xOTMuNzU5bC01Ljg1Ny0xLjMwMmMtLjU0LS4xMTgtLjg4LS42NTQtLjc2LTEuMTkyeiIvPjxwYXRoIGQ9Ik0xNy43NzEgMTguOTAzYy0uNDY2LjI5Ni0xLjA4My4xNTktMS4zOC0uMzA4bC0zLjIyMS01LjA2MWMtLjI5Ni0uNDY2LS4xNi0xLjA4NC4zMDctMS4zOC40NjYtLjI5NyAxLjA4NC0uMTU5IDEuMzguMzA3bDMuMjIyIDUuMDYyYy4yOTUuNDY2LjE1OCAxLjA4My0uMzA4IDEuMzh6bS43OTcgMS4yNTJjLjQ2Ni0uMjk2IDEuMDg0LS4xNTkgMS4zOC4zMDdsMy4yMjMgNS4wNjJjLjI5Ni40NjcuMTU5IDEuMDgzLS4zMDggMS4zODEtLjQ2Ni4yOTYtMS4wODQuMTU5LTEuMzgxLS4zMDdsLTMuMjIxLTUuMDYyYy0uMjk2LS40NjYtLjE1Ny0xLjA4NC4zMDctMS4zODF6Ii8+PHBhdGggZD0iTTE3Ljk4OCAxNy45MjdjLS41MzktLjEyLS44NzktLjY1NC0uNzU5LTEuMTkzbDEuMzAyLTUuODU3Yy4xMTktLjUzOS42NTItLjg3OSAxLjE5Mi0uNzU5LjU0LjEyLjg3OS42NTQuNzU5IDEuMTkzbC0xLjMwMSA1Ljg1N2MtLjExOS41MzgtLjY1NC44NzktMS4xOTMuNzU5em0tLjIxNy45NzZjLjUzOS4xMTkuODc5LjY1My43NTkgMS4xOTJsLTEuMyA1Ljg1N2MtLjEyMS41NC0uNjU0Ljg4LTEuMTk0Ljc2LS41MzgtLjEyLS44NzgtLjY1NC0uNzYtMS4xOTNsMS4zMDMtNS44NTdjLjExOS0uNTM5LjY1My0uODc5IDEuMTkyLS43NTl6Ii8+PHBhdGggZD0iTTE3Ljc3MSAxOC45MDJjLS4yOTctLjQ2Ni0uMTU5LTEuMDgzLjMwNy0xLjM4bDUuMDYyLTMuMjIxYy40NjYtLjI5NiAxLjA4NC0uMTYgMS4zOC4zMDcuMjk3LjQ2Ni4xNTkgMS4wODMtLjMwNyAxLjM4bC01LjA2MiAzLjIyMWMtLjQ2Ni4yOTctMS4wODQuMTYtMS4zOC0uMzA3eiIvPjxwYXRoIGQ9Ik0xNy43NzEgMTguOTAyYy4yOTYuNDY3LjE1OSAxLjA4NC0uMzA3IDEuMzgxbC01LjA2MiAzLjIyMmMtLjQ2Ni4yOTYtMS4wODMuMTYtMS4zODEtLjMwOC0uMjk2LS40NjUtLjE1OS0xLjA4My4zMDctMS4zOGw1LjA2Mi0zLjIyMmMuNDY3LS4yOTYgMS4wODUtLjE1OCAxLjM4MS4zMDd6Ii8+PC9nPjxwYXRoIGQ9Ik0yMi4wMTIgMjUuNTY2Yy45MzItLjU5MiAyLjE2OC0uMzE3IDIuNzYyLjYxNC41OTMuOTMyLjMxOCAyLjE2OC0uNjE0IDIuNzYyLS45MzIuNTkzLTIuMTY4LjMxOC0yLjc2Mi0uNjE0LS41OTItLjkzMi0uMzE4LTIuMTY4LjYxNC0yLjc2MnpNMTQuNTUgMTMuODQxYy0uOTMyLjU5My0yLjE2OC4zMTktMi43NjEtLjYxMy0uNTkzLS45MzItLjMxOC0yLjE2OC42MTQtMi43NjEuOTMyLS41OTMgMi4xNjgtLjMxOCAyLjc2MS42MTMuNTkzLjkzMi4zMTggMi4xNjgtLjYxNCAyLjc2MXptMS45MiAxMC45MThjMS4wNzguMjQxIDEuNzU4IDEuMzEgMS41MiAyLjM4OC0uMjQgMS4wNzgtMS4zMDggMS43NTgtMi4zODcgMS41MTktMS4wNzktLjI0LTEuNzU4LTEuMzA5LTEuNTE5LTIuMzg3LjIzOS0xLjA3OSAxLjMwOC0xLjc1OCAyLjM4Ni0xLjUyem0zLjAzNy0xMy42NjVjLTEuMDc4LS4yMzktMS43NTgtMS4zMDgtMS41MTgtMi4zODYuMjM5LTEuMDc4IDEuMzA4LTEuNzU4IDIuMzg2LTEuNTE5IDEuMDc4LjI0IDEuNzU5IDEuMzA4IDEuNTE5IDIuMzg2LS4yNDEgMS4wNzktMS4zMDkgMS43NTgtMi4zODcgMS41MTl6bS02LjAxMyAxMC41M2MuNTkyLjkzMy4zMTcgMi4xNjktLjYxNCAyLjc2My0uOTMyLjU5My0yLjE2OC4zMTgtMi43NjItLjYxNS0uNTkzLS45MzEtLjMxOC0yLjE2Ny42MTMtMi43NjEuOTMzLS41OTIgMi4xNjktLjMxOCAyLjc2My42MTN6bTkuMzM5LTUuOTQzYy0uNTkzLS45MzItLjMxNy0yLjE2OC42MTQtMi43NjEuOTMyLS41OTMgMi4xNjgtLjMxOCAyLjc2MS42MTRzLjMxNyAyLjE2OC0uNjEzIDIuNzYxYy0uOTMzLjU5My0yLjE2OS4zMTgtMi43NjItLjYxNHptLjc5NSA0LjUyNGMuMjQtMS4wNzkgMS4zMDktMS43NTkgMi4zODctMS41MiAxLjA3OC4yNCAxLjc1OCAxLjMwOSAxLjUxOSAyLjM4Ny0uMjQgMS4wNzgtMS4zMDkgMS43NTgtMi4zODcgMS41MTgtMS4wNzktLjIzOC0xLjc1OC0xLjMwNy0xLjUxOS0yLjM4NXptLTEyLjY5LTIuODIxYy0uMjQgMS4wNzktMS4zMDggMS43NTgtMi4zODYgMS41MTktMS4wNzgtLjI0LTEuNzU4LTEuMzA5LTEuNTE5LTIuMzg3LjIzOS0xLjA3OCAxLjMwOC0xLjc1OCAyLjM4Ni0xLjUxOSAxLjA3OS4yNDEgMS43NTggMS4zMDkgMS41MTkgMi4zODd6IiBmaWxsPSIjRUE1OTZFIi8+PGNpcmNsZSBmaWxsPSIjRkZDQzREIiBjeD0iMTgiIGN5PSIxOC44MTgiIHI9IjQiLz48L3N2Zz4=';
+const FLOAT_R_SNOW='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii45NSIvPjxzdG9wIG9mZnNldD0iLjQ1IiBzdG9wLWNvbG9yPSIjZGNlY2ZmIiBzdG9wLW9wYWNpdHk9Ii43MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzljYzhmZiIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48ZmlsdGVyIGlkPSJiIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIuNiIvPjwvZmlsdGVyPjwvZGVmcz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIzMCIgZmlsbD0idXJsKCNnKSIgb3BhY2l0eT0iLjI1Ii8+CiAgPGcgc3Ryb2tlPSIjZjdmYmZmIiBzdHJva2Utd2lkdGg9IjEuNyIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBmaWx0ZXI9InVybCgjYikiIG9wYWNpdHk9Ii44OCI+CiAgICA8cGF0aCBkPSJNMzIgN3Y1ME0xMCAxOWw0NCAyNk01NCAxOUwxMCA0NSIvPgogICAgPHBhdGggZD0iTTMyIDEzbC00LTRNMzIgMTNsNC00TTMyIDUxbC00IDRNMzIgNTFsNCA0TTE1IDIybC02IDFNMTUgMjJsLTIgNU00OSA0Mmw2LTFNNDkgNDJsMi01TTQ5IDIybDYgMU00OSAyMmwyIDVNMTUgNDJsLTYtMU0xNSA0MmwtMi01IiBzdHJva2Utd2lkdGg9IjEuMiIvPgogICAgPGNpcmNsZSBjeD0iMzIiIGN5PSIzMiIgcj0iMyIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSJub25lIi8+CiAgPC9nPgo8L3N2Zz4K';
+const FLOAT_R_FEATHER='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA4MCI+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuOTUiLz48c3RvcCBvZmZzZXQ9Ii40NSIgc3RvcC1jb2xvcj0iI2U4ZWRmMiIgc3RvcC1vcGFjaXR5PSIuODgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNhZWI5YzUiIHN0b3Atb3BhY2l0eT0iLjUiLz48L2xpbmVhckdyYWRpZW50PjxmaWx0ZXIgaWQ9InMiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249Ii4zNSIvPjwvZmlsdGVyPjwvZGVmcz4KICA8ZyBmaWx0ZXI9InVybCgjcykiPgogICAgPHBhdGggZD0iTTMxIDc0QzM4IDU4IDQ4IDM5IDUxIDE2Yy05IDItMTkgOC0yNSAxOC01IDktNCAxOSA1IDQwWiIgZmlsbD0idXJsKCNnKSIvPgogICAgPHBhdGggZD0iTTMxIDc0QzI1IDU4IDE2IDQwIDEzIDE4YzkgMSAxOSA4IDI1IDE4IDUgOSA0IDE4LTcgMzhaIiBmaWxsPSJ1cmwoI2cpIiBvcGFjaXR5PSIuNzIiLz4KICAgIDxwYXRoIGQ9Ik0zMSA3NkMzMyA1NSAzNSAzNiAzOSAxNSIgc3Ryb2tlPSIjZjhmYWZjIiBzdHJva2Utd2lkdGg9IjEuMzUiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgZmlsbD0ibm9uZSIvPgogICAgPGcgc3Ryb2tlPSIjYzhkMWRiIiBzdHJva2Utd2lkdGg9Ii42NSIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNzUiPgogICAgICA8cGF0aCBkPSJNMzggMjBMNTMgMTZNMzYgMjVMNTUgMjBNMzQgMzBMNTcgMjZNMzIgMzVMNTcgMzJNMzAgNDBMNTUgMzlNMjggNDVMNTEgNDZNMjYgNTBMNDYgNTJNMjQgNTVMNDEgNThNMjIgNjBMMzYgNjRNMjAgNjVMMzEgNjkiLz4KICAgICAgPHBhdGggZD0iTTM2IDIzTDIxIDE4TTM0IDI4TDE3IDI0TTMyIDMzTDE0IDMwTTMwIDM4TDEyIDM3TTI4IDQzTDEzIDQ0TTI2IDQ4TDE1IDUwTTI0IDUzTDE5IDU2TTIyIDU4TDIzIDYyIi8+CiAgICA8L2c+CiAgPC9nPgo8L3N2Zz4K';
+const FLOAT_R_BUBBLE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIiBjeD0iLjM1IiBjeT0iLjI4IiByPSIuNzUiPjxzdG9wIHN0b3AtY29sb3I9IiNmZmYiIHN0b3Atb3BhY2l0eT0iLjE4Ii8+PHN0b3Agb2Zmc2V0PSIuNTUiIHN0b3AtY29sb3I9IiNkOWYzZmYiIHN0b3Atb3BhY2l0eT0iLjA4Ii8+PHN0b3Agb2Zmc2V0PSIuODgiIHN0b3AtY29sb3I9IiM5ZWQ3ZjMiIHN0b3Atb3BhY2l0eT0iLjE1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii41Ii8+PC9yYWRpYWxHcmFkaWVudD48ZmlsdGVyIGlkPSJiIj48ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIuNCIvPjwvZmlsdGVyPjwvZGVmcz4KICA8Y2lyY2xlIGN4PSIzMiIgY3k9IjMyIiByPSIyOCIgZmlsbD0idXJsKCNnKSIgc3Ryb2tlPSIjZWFmYWZmIiBzdHJva2Utb3BhY2l0eT0iLjcyIiBzdHJva2Utd2lkdGg9IjEiLz4KICA8cGF0aCBkPSJNMTQgMjdjNS05IDE1LTE0IDI1LTEyIiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMi40IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii42NSIgZmlsdGVyPSJ1cmwoI2IpIi8+CiAgPGNpcmNsZSBjeD0iNDYiIGN5PSI0MSIgcj0iNCIgZmlsbD0iI2U3ZmJmZiIgb3BhY2l0eT0iLjE4Ii8+CiAgPHBhdGggZD0iTTE5IDQ3YzMgNCA4IDYgMTMgNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZDdmNWZmIiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBvcGFjaXR5PSIuNDUiLz4KPC9zdmc+Cg==';
+const FLOAT_R_RAIN='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA0MCA2NCI+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIuNiIgeTI9IjEiPjxzdG9wIHN0b3AtY29sb3I9IiNlYWY4ZmYiIHN0b3Atb3BhY2l0eT0iLjgiLz48c3RvcCBvZmZzZXQ9Ii40NSIgc3RvcC1jb2xvcj0iIzlmZDFmNCIgc3RvcC1vcGFjaXR5PSIuNTUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiM1ZmE0ZDgiIHN0b3Atb3BhY2l0eT0iLjI1Ii8+PC9saW5lYXJHcmFkaWVudD48L2RlZnM+CiAgPHBhdGggZD0iTTIwIDNDMTQgMTggNyAyOCA3IDQwYTEzIDEzIDAgMCAwIDI2IDBDMzMgMjggMjYgMTggMjAgM1oiIGZpbGw9InVybCgjZykiIHN0cm9rZT0iI2RmZjZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii41NSIvPgogIDxwYXRoIGQ9Ik0xNSAzM2MwIDcgMiAxMiA2IDE2IiBmaWxsPSJub25lIiBzdHJva2U9IiNmZmYiIHN0cm9rZS13aWR0aD0iMS44IiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii41NSIvPgogIDxlbGxpcHNlIGN4PSIxNCIgY3k9IjI5IiByeD0iMi41IiByeT0iNCIgZmlsbD0iI2ZmZiIgb3BhY2l0eT0iLjUiIHRyYW5zZm9ybT0icm90YXRlKC0yOCAxNCAyOSkiLz4KPC9zdmc+Cg==';
+const FLOAT_R_CATKIN='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIiBzdG9wLW9wYWNpdHk9Ii45NSIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2U4ZTJkMyIgc3RvcC1vcGFjaXR5PSIuMiIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPgogIDxnIGZpbGw9Im5vbmUiIHN0cm9rZT0iI2Y3ZjNlOCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik0zMyA2MWMtMi0xNCAxLTI2IDUtMzgiIHN0cm9rZS13aWR0aD0iMS44IiBvcGFjaXR5PSIuNjUiLz4KICAgIDxwYXRoIGQ9Ik0zMiA0MmMtOC0zLTEzLTktMTYtMTZNMzQgMzZjOC0zIDE0LTkgMTctMTZNMzMgNDljLTktMi0xNS03LTE5LTEzTTM1IDQ2YzktMiAxNi03IDIwLTEzIiBzdHJva2Utd2lkdGg9IjEuMSIgb3BhY2l0eT0iLjUiLz4KICAgIDxwYXRoIGQ9Ik0zMyAyNGMtNC01LTQtMTAtMS0xNE0zNSAyNGM0LTUgNS0xMCAzLTE0TTM0IDI0YzAtNiAxLTExIDMtMTUiIHN0cm9rZS13aWR0aD0iLjgiIG9wYWNpdHk9Ii40NSIvPgogIDwvZz4KICA8ZyBmaWxsPSIjZmZmYWYwIj4KICAgIDxjaXJjbGUgY3g9IjM0IiBjeT0iMjEiIHI9IjYiIG9wYWNpdHk9Ii45Ii8+PGNpcmNsZSBjeD0iMjciIGN5PSIxOCIgcj0iMy41IiBvcGFjaXR5PSIuNzUiLz48Y2lyY2xlIGN4PSI0MSIgY3k9IjE3IiByPSIzLjIiIG9wYWNpdHk9Ii43MiIvPjxjaXJjbGUgY3g9IjIzIiBjeT0iMjQiIHI9IjIuNCIgb3BhY2l0eT0iLjU1Ii8+PGNpcmNsZSBjeD0iNDUiIGN5PSIyMyIgcj0iMi4yIiBvcGFjaXR5PSIuNSIvPjxjaXJjbGUgY3g9IjMxIiBjeT0iMTMiIHI9IjIiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iMzgiIGN5PSIxMiIgcj0iMS43IiBvcGFjaXR5PSIuNSIvPgogIDwvZz4KPC9zdmc+Cg==';
+const FLOAT_R_PETAL='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuOSIvPjxzdG9wIG9mZnNldD0iLjQ1IiBzdG9wLWNvbG9yPSIjZjRjN2QyIiBzdG9wLW9wYWNpdHk9Ii44MiIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Q5OGZhNSIgc3RvcC1vcGFjaXR5PSIuNCIvPjwvbGluZWFyR3JhZGllbnQ+PC9kZWZzPgogIDxwYXRoIGQ9Ik0zMiA2MEMxMiA0OCA2IDMwIDE1IDEzYzggMSAxNSA4IDE3IDE3IDItOSA5LTE2IDE3LTE3IDkgMTcgMyAzNS0xNyA0N1oiIGZpbGw9InVybCgjZykiIHN0cm9rZT0iI2ZmZiIgc3Ryb2tlLW9wYWNpdHk9Ii41Ii8+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmIiBzdHJva2Utd2lkdGg9Ii42NSIgb3BhY2l0eT0iLjUiPjxwYXRoIGQ9Ik0zMiA1NVYyM00zMiA0NGMtNS00LTktOC0xMS0xNE0zMiA0NGM1LTQgOS04IDExLTE0TTMyIDM1Yy00LTMtNy02LTktMTBNMzIgMzVjNC0zIDctNiA5LTEwIi8+PC9nPgo8L3N2Zz4K';
+const FLOAT_R_STAR_SILVER='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNlZWYzZjgiIHN0b3Atb3BhY2l0eT0iLjkiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNjN2QwZGEiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PGZpbHRlciBpZD0iYiI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iLjgiLz48L2ZpbHRlcj48L2RlZnM+CiAgPHBhdGggZD0iTTMyIDNjMiAxOCAxMSAyNyAyOSAyOS0xOCAyLTI3IDExLTI5IDI5LTItMTgtMTEtMjctMjktMjkgMTgtMiAyNy0xMSAyOS0yOVoiIGZpbGw9InVybCgjZykiIGZpbHRlcj0idXJsKCNiKSIvPgogIDxwYXRoIGQ9Ik0zMiAxMmMxIDEyIDggMTkgMjAgMjAtMTIgMS0xOSA4LTIwIDIwLTEtMTItOC0xOS0yMC0yMCAxMi0xIDE5LTggMjAtMjBaIiBmaWxsPSIjZmZmIiBvcGFjaXR5PSIuNzgiLz4KPC9zdmc+Cg==';
+const FLOAT_R_STAR_PURPLE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNkOGNhZmYiIHN0b3Atb3BhY2l0eT0iLjk1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjOGY2Y2ZmIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjxmaWx0ZXIgaWQ9ImIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249Ii44Ii8+PC9maWx0ZXI+PC9kZWZzPgogIDxwYXRoIGQ9Ik0zMiAzYzIgMTggMTEgMjcgMjkgMjktMTggMi0yNyAxMS0yOSAyOS0yLTE4LTExLTI3LTI5LTI5IDE4LTIgMjctMTEgMjktMjlaIiBmaWxsPSJ1cmwoI2cpIiBmaWx0ZXI9InVybCgjYikiLz4KICA8cGF0aCBkPSJNMzIgMTJjMSAxMiA4IDE5IDIwIDIwLTEyIDEtMTkgOC0yMCAyMC0xLTEyLTgtMTktMjAtMjAgMTItMSAxOS04IDIwLTIwWiIgZmlsbD0iI2YxZWFmZiIgb3BhY2l0eT0iLjg1Ii8+Cjwvc3ZnPgo=';
+const FLOAT_R_STAR_BLUE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNjZmU4ZmYiIHN0b3Atb3BhY2l0eT0iLjk1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjNWFhOGZmIiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjxmaWx0ZXIgaWQ9ImIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249Ii44Ii8+PC9maWx0ZXI+PC9kZWZzPgogIDxwYXRoIGQ9Ik0zMiAzYzIgMTggMTEgMjcgMjkgMjktMTggMi0yNyAxMS0yOSAyOS0yLTE4LTExLTI3LTI5LTI5IDE4LTIgMjctMTEgMjktMjlaIiBmaWxsPSJ1cmwoI2cpIiBmaWx0ZXI9InVybCgjYikiLz4KICA8cGF0aCBkPSJNMzIgMTJjMSAxMiA4IDE5IDIwIDIwLTEyIDEtMTkgOC0yMCAyMC0xLTEyLTgtMTktMjAtMjAgMTItMSAxOS04IDIwLTIwWiIgZmlsbD0iI2VhZjVmZiIgb3BhY2l0eT0iLjg1Ii8+Cjwvc3ZnPgo=';
+const FLOAT_R_STAR_TEAL='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNjOWZmZjQiIHN0b3Atb3BhY2l0eT0iLjk1Ii8+PHN0b3Agb2Zmc2V0PSIxIiBzdG9wLWNvbG9yPSIjMzVjOWI0IiBzdG9wLW9wYWNpdHk9IjAiLz48L3JhZGlhbEdyYWRpZW50PjxmaWx0ZXIgaWQ9ImIiPjxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249Ii44Ii8+PC9maWx0ZXI+PC9kZWZzPgogIDxwYXRoIGQ9Ik0zMiAzYzIgMTggMTEgMjcgMjkgMjktMTggMi0yNyAxMS0yOSAyOS0yLTE4LTExLTI3LTI5LTI5IDE4LTIgMjctMTEgMjktMjlaIiBmaWxsPSJ1cmwoI2cpIiBmaWx0ZXI9InVybCgjYikiLz4KICA8cGF0aCBkPSJNMzIgMTJjMSAxMiA4IDE5IDIwIDIwLTEyIDEtMTkgOC0yMCAyMC0xLTEyLTgtMTktMjAtMjAgMTItMSAxOS04IDIwLTIwWiIgZmlsbD0iI2U5ZmZmYiIgb3BhY2l0eT0iLjg1Ii8+Cjwvc3ZnPgo=';
+const FLOAT_R_DANDELION='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGcgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZjlmNmVkIiBzdHJva2UtbGluZWNhcD0icm91bmQiIG9wYWNpdHk9Ii43MiI+CiAgICA8cGF0aCBkPSJNMzIgNThjMC0xMiAyLTIyIDYtMzEiIHN0cm9rZS13aWR0aD0iMS42Ii8+CiAgICA8cGF0aCBkPSJNMzYgMjdDMjQgMTggMTggOSAyMCAyTTM3IDI2YzEyLTggMTktMTYgMTgtMjNNMzcgMjdDMjggMTQgMjUgNiAyNyAxTTM3IDI3YzktMTIgMTItMjAgMTAtMjVNMzYgMjdDMjIgMjUgMTMgMjAgOSAxNE0zOCAyN2MxMi0yIDIwLTcgMjMtMTMiIHN0cm9rZS13aWR0aD0iLjgiLz4KICA8L2c+CiAgPGNpcmNsZSBjeD0iMzYiIGN5PSIyNyIgcj0iMy4yIiBmaWxsPSIjZmZmYWYxIiBvcGFjaXR5PSIuOSIvPgogIDxnIGZpbGw9IiNmZmZhZjEiPjxjaXJjbGUgY3g9IjIwIiBjeT0iMiIgcj0iMS44IiBvcGFjaXR5PSIuNjUiLz48Y2lyY2xlIGN4PSI1NSIgY3k9IjMiIHI9IjEuMyIgb3BhY2l0eT0iLjU1Ii8+PGNpcmNsZSBjeD0iMjciIGN5PSIxIiByPSIxLjUiIG9wYWNpdHk9Ii42Ii8+PGNpcmNsZSBjeD0iNDciIGN5PSIyIiByPSIxLjIiIG9wYWNpdHk9Ii41Ii8+PGNpcmNsZSBjeD0iOSIgY3k9IjE0IiByPSIxLjMiIG9wYWNpdHk9Ii41NSIvPjxjaXJjbGUgY3g9IjYxIiBjeT0iMTQiIHI9IjEuMSIgb3BhY2l0eT0iLjUiLz48L2c+Cjwvc3ZnPgo=';
+const FLOAT_R_GINKGO='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PGxpbmVhckdyYWRpZW50IGlkPSJnIiB4MT0iMCIgeTE9IjAiIHgyPSIxIiB5Mj0iMSI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZjRjOSIgc3RvcC1vcGFjaXR5PSIuOTUiLz48c3RvcCBvZmZzZXQ9Ii41NSIgc3RvcC1jb2xvcj0iI2VhYzM2YSIgc3RvcC1vcGFjaXR5PSIuODUiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNiNzdiMmQiIHN0b3Atb3BhY2l0eT0iLjUiLz48L2xpbmVhckdyYWRpZW50PjwvZGVmcz4KICA8cGF0aCBkPSJNMzEgNThjLTEtMTQgMi0yNSA4LTM2IDEwIDQgMTggMTMgMjAgMjQtNyA5LTE3IDE0LTI4IDEyWiIgZmlsbD0idXJsKCNnKSIgc3Ryb2tlPSIjZmZmMmMyIiBzdHJva2Utb3BhY2l0eT0iLjQ1Ii8+CiAgPHBhdGggZD0iTTMyIDU4YzAtMTMgMi0yNSA3LTM2TTM1IDQyYy01LTItOS02LTExLTExTTM3IDM4YzUtNCA5LTggMTItMTRNMzggMzRjLTQtMS04LTQtMTAtOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjYTg3MTJmIiBzdHJva2Utd2lkdGg9Ii43IiBvcGFjaXR5PSIuNSIvPgogIDxwYXRoIGQ9Ik0zMiA1OGMwIDItMSA0LTMgNiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjOGI2YTNkIiBzdHJva2Utd2lkdGg9IjEuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIi8+Cjwvc3ZnPgo=';
+const FLOAT_R_MOTE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzMiAzMiI+CiAgPGRlZnM+PHJhZGlhbEdyYWRpZW50IGlkPSJnIj48c3RvcCBzdG9wLWNvbG9yPSIjZmZmIi8+PHN0b3Agb2Zmc2V0PSIuMzUiIHN0b3AtY29sb3I9IiNmZmY4ZTgiIHN0b3Atb3BhY2l0eT0iLjgiLz48c3RvcCBvZmZzZXQ9IjEiIHN0b3AtY29sb3I9IiNmZmRjYTgiIHN0b3Atb3BhY2l0eT0iMCIvPjwvcmFkaWFsR3JhZGllbnQ+PC9kZWZzPgogIDxjaXJjbGUgY3g9IjE2IiBjeT0iMTYiIHI9IjE1IiBmaWxsPSJ1cmwoI2cpIi8+Cjwvc3ZnPgo=';
+const FLOAT_R_SMOKE='data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+PGZpbHRlciBpZD0iYiI+PGZlR2F1c3NpYW5CbHVyIHN0ZERldmlhdGlvbj0iNyIvPjwvZmlsdGVyPjxyYWRpYWxHcmFkaWVudCBpZD0iZyI+PHN0b3Agc3RvcC1jb2xvcj0iI2ZmZiIgc3RvcC1vcGFjaXR5PSIuMzQiLz48c3RvcCBvZmZzZXQ9Ii42IiBzdG9wLWNvbG9yPSIjZTllZGYyIiBzdG9wLW9wYWNpdHk9Ii4xOCIvPjxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iI2Q3ZGRlNSIgc3RvcC1vcGFjaXR5PSIwIi8+PC9yYWRpYWxHcmFkaWVudD48L2RlZnM+CiAgPGcgZmlsdGVyPSJ1cmwoI2IpIj48ZWxsaXBzZSBjeD0iMjgiIGN5PSIzNiIgcng9IjIwIiByeT0iMTYiIGZpbGw9InVybCgjZykiLz48ZWxsaXBzZSBjeD0iNDAiIGN5PSIyOCIgcng9IjE0IiByeT0iMTIiIGZpbGw9InVybCgjZykiLz48ZWxsaXBzZSBjeD0iMzQiIGN5PSI0NSIgcng9IjE4IiByeT0iMTAiIGZpbGw9InVybCgjZykiLz48L2c+Cjwvc3ZnPgo=';
 const THEMES={
   sakura:{name:'淡樱粉',wall:'linear-gradient(160deg,#FAEEF2 0%,#F3E2E8 55%,#F1EAED 100%)',fg:'#6f6c73',fg2:'#9d9aa2',accent:'#c88fa3',deep:'#b57c90',soft:'#f7e9ed',card:'rgba(255,250,252,.82)',line:'rgba(157,154,162,.17)',icon:'#C8B3BC',icon2:'#B7A0AA',bubble:'#e8c4cf'},
   yanwu:{name:'砚雾',wall:'linear-gradient(165deg,#404D62 0%,#737989 45%,#DDBECA 100%)',fg:'#5b5961',fg2:'#8e8992',accent:'#9d7e8f',deep:'#846579',soft:'#e9dfe5',card:'rgba(249,247,250,.84)',line:'rgba(91,89,97,.15)',icon:'#9FA3AD',icon2:'#878D9A',bubble:'#b9a7b2'},
@@ -1891,7 +1909,7 @@ const DEF={
   api:{base:'https://api.deepseek.com',endpoint:'',key:'',model:'deepseek-chat',temp:0.9,modelList:[],listMsg:''},
   apiLib:[],
   audio:{provider:'minimax',endpoint:'https://api.minimax.chat/v1/t2a_v2',key:'',model:'speech-01-turbo',voiceId:'',groupId:''},
-  ui:{theme:'sakura',themeStyle:'standard',themeWall:true,wall:'w1',dark:false,customWall:'',appOrder:[],homePages:[],homePage:0,appIcons:{},widgets:[],widgetPages:[],customCss:'',rxOpen:{def:true},open:{},demoSeeded:false,demoVersion:0,wifi:true,silent:false,dnd:false,brightness:1,globalPageWall:'',pageWalls:{},fontFamily:'',fontData:'',fontScale:.85,lowPerf:false,pushEnabled:false,soundEnabled:true,soundVolume:.35,soundPreset:'ding',soundCustom:'',soundCustomName:'',clickSound:'none',clickVolume:.28,fullscreen:false,globalFloat:false,desktopFloat:true,floatStyle:'mix',appearanceSaves:[],desktopThemeV:0},
+  ui:{theme:'sakura',themeStyle:'standard',themeWall:true,wall:'w1',dark:false,customWall:'',appOrder:[],homePages:[],homePage:0,appIcons:{},widgets:[],widgetPages:[],customCss:'',rxOpen:{def:true},open:{},demoSeeded:false,demoVersion:0,wifi:true,silent:false,dnd:false,brightness:1,globalPageWall:'',pageWalls:{},fontFamily:'',fontData:'',fontScale:.85,lowPerf:false,pushEnabled:false,soundEnabled:true,soundVolume:.35,soundPreset:'ding',soundCustom:'',soundCustomName:'',clickSound:'none',clickVolume:.28,fullscreen:false,globalFloat:false,desktopFloat:true,floatStyle:'mix',customFloatImage:'',customFloatName:'',appearanceSaves:[],desktopThemeV:0},
   me:{name:'我',avatar:'',personas:[],personaId:null,wallet:{balance:0,cards:[]}},
   hang:{phone:{},doing:{}}, hangCid:null, hangTab:'phone', checkCid:null,
   checkins:[], shopItems:{}, mallCid:null, mallTier:'mid', mallMode:'solo',
@@ -1969,6 +1987,7 @@ function fixAll(){
   if(!Array.isArray(DB.np.readers)) DB.np.readers=[];
   if(!Array.isArray(DB.np.messages)) DB.np.messages=[];
   if(!Array.isArray(DB.np.square)) DB.np.square=[];
+  if(!Array.isArray(DB.np.squareHistory)) DB.np.squareHistory=[];
   if(!Array.isArray(DB.np.readerGroup)) DB.np.readerGroup=[];
   if(!DB.np.rankTab) DB.np.rankTab='hot';
   DB.np.groupName=DB.np.groupName||'白夜烬云的读者群';
@@ -2041,7 +2060,8 @@ function fixAll(){
   if(DB.ui.fullscreen===undefined) DB.ui.fullscreen=false;
   if(DB.ui.globalFloat===undefined) DB.ui.globalFloat=false;
   if(DB.ui.desktopFloat===undefined) DB.ui.desktopFloat=true;
-  DB.ui.floatStyle=FLOAT_STYLES.some(function(x){ return x.k===DB.ui.floatStyle; })?DB.ui.floatStyle:'mix';
+  DB.ui.customFloatImage=DB.ui.customFloatImage||''; DB.ui.customFloatName=DB.ui.customFloatName||'';
+  DB.ui.floatStyle=((DB.ui.floatStyle==='custom'&&DB.ui.customFloatImage)||FLOAT_STYLES.some(function(x){ return x.k===DB.ui.floatStyle; }))?DB.ui.floatStyle:'mix';
   DB.ui.appearanceSaves=Array.isArray(DB.ui.appearanceSaves)?DB.ui.appearanceSaves.filter(function(x){ return x&&x.id&&x.data; }).slice(0,30):[];
   if(DB.ui.desktopThemeV===undefined) DB.ui.desktopThemeV=0;
   DB.logs=Array.isArray(DB.logs)?DB.logs:[];
@@ -2273,11 +2293,22 @@ const CLICK_PRESETS=[
   {k:'softtick',n:'钝叩',src:AUDIO_SOFT_6,rate:.90}
 ];
 const FLOAT_STYLES=[
-  {k:'mix',n:'混合'},{k:'snow',n:'雪花',src:FLOAT_SNOW},
-  {k:'feather',n:'羽毛',src:FLOAT_FEATHER},{k:'bubble',n:'泡泡',src:FLOAT_BUBBLE},
-  {k:'rain',n:'雨滴',src:FLOAT_RAIN},{k:'catkin',n:'柳絮',src:FLOAT_CATKIN},
-  {k:'petal',n:'花瓣',src:FLOAT_PETAL}
+  {k:'mix',n:'混合'},{k:'snow',n:'雪花',src:FLOAT_R_SNOW},
+  {k:'feather',n:'羽毛',src:FLOAT_R_FEATHER},{k:'bubble',n:'泡泡',src:FLOAT_R_BUBBLE},
+  {k:'rain',n:'雨滴',src:FLOAT_R_RAIN},{k:'catkin',n:'柳絮',src:FLOAT_R_CATKIN},
+  {k:'petal',n:'花瓣',src:FLOAT_R_PETAL},
+  {k:'star',n:'四色星星',stars:true},
+  {k:'star_silver',n:'银色星',src:FLOAT_R_STAR_SILVER},
+  {k:'star_purple',n:'紫色星',src:FLOAT_R_STAR_PURPLE},
+  {k:'star_blue',n:'蓝色星',src:FLOAT_R_STAR_BLUE},
+  {k:'star_teal',n:'蓝绿星',src:FLOAT_R_STAR_TEAL},
+  {k:'dandelion',n:'蒲公英',src:FLOAT_R_DANDELION},
+  {k:'ginkgo',n:'银杏叶',src:FLOAT_R_GINKGO},
+  {k:'mote',n:'光尘',src:FLOAT_R_MOTE},
+  {k:'smoke',n:'烟雾',src:FLOAT_R_SMOKE}
 ];
+const FLOAT_STARS=[FLOAT_R_STAR_SILVER,FLOAT_R_STAR_PURPLE,FLOAT_R_STAR_BLUE,FLOAT_R_STAR_TEAL];
+const FLOAT_MIX=[FLOAT_R_SNOW,FLOAT_R_FEATHER,FLOAT_R_BUBBLE,FLOAT_R_RAIN,FLOAT_R_CATKIN,FLOAT_R_PETAL].concat(FLOAT_STARS).concat([FLOAT_R_DANDELION,FLOAT_R_GINKGO,FLOAT_R_MOTE,FLOAT_R_SMOKE]);
 const rnd=n=>Math.floor(Math.random()*n);
 const pick=a=>a[rnd(a.length)];
 let toastTimer=null;
@@ -2448,9 +2479,12 @@ function npPageWallKey(name){
   return 'other';
 }
 function floatAssetSrc(style,index){
-  const list=FLOAT_STYLES.filter(function(x){ return !!x.src; });
-  if(style&&style!=='mix'){ const s=FLOAT_STYLES.find(function(x){ return x.k===style; }); if(s&&s.src) return s.src; }
-  return list[index%list.length].src;
+  if(style==='custom'&&DB.ui.customFloatImage) return DB.ui.customFloatImage;
+  if(style==='star') return FLOAT_STARS[index%FLOAT_STARS.length];
+  if(style==='mix') return FLOAT_MIX[index%FLOAT_MIX.length];
+  const s=FLOAT_STYLES.find(function(x){ return x.k===style; });
+  if(s&&s.src) return s.src;
+  return FLOAT_MIX[index%FLOAT_MIX.length];
 }
 function syncFloatLayers(){
   const layer=$('#globalFloat'); if(!layer) return;
@@ -5173,7 +5207,9 @@ function screenSettings(){
   +'<div class="card"><div class="row"><div class="grow"><b>低性能模式</b><div class="muted">关闭动画、阴影和模糊，老手机更顺</div></div><button class="btn" id="perfToggle">'+(DB.ui.lowPerf?'已开启':'关闭')+'</button></div></div>'
   +'<div class="card"><div class="row"><div class="grow"><b>全屏模式</b><div class="muted">只隐藏浏览器地址栏，保持竖屏；按 Esc 或再点一次退出</div></div><button class="btn" id="fullToggle">'+(document.fullscreenElement?'退出全屏':(DB.ui.fullscreen?'恢复全屏':'进入全屏'))+'</button></div></div>'
   +'<div class="card"><b>漂浮动画</b><div class="muted" style="margin:5px 0 9px">轻量粒子漂浮，低性能模式下自动停止。</div>'
-  +'<div class="row" style="margin-bottom:7px"><span class="mini grow">漂浮样式</span><select id="floatStyle" style="width:132px;flex:none">'+FLOAT_STYLES.map(function(x){ return '<option value="'+x.k+'"'+(DB.ui.floatStyle===x.k?' selected':'')+'>'+x.n+'</option>'; }).join('')+'</select></div>'
+  +'<div class="row" style="margin-bottom:7px"><span class="mini grow">漂浮样式</span><select id="floatStyle" style="width:132px;flex:none">'+FLOAT_STYLES.concat(DB.ui.customFloatImage?[{k:'custom',n:'自定义'}]:[]).map(function(x){ return '<option value="'+x.k+'"'+(DB.ui.floatStyle===x.k?' selected':'')+'>'+x.n+'</option>'; }).join('')+'</select></div>'
+  +'<div class="row" style="margin-bottom:4px"><span class="mini grow">本地漂浮素材</span><button class="btn" id="floatImport">本地导入</button>'+(DB.ui.customFloatImage?'<button class="btn danger" id="floatClear">清除</button>':'')+'</div>'
+  +'<div class="mini" style="margin-bottom:7px;line-height:1.5">'+(DB.ui.customFloatImage?('当前：'+esc(DB.ui.customFloatName||'自定义素材')):'支持 PNG / WebP / GIF，建议透明背景')+'</div>'
   +'<div class="lrow" data-float="global" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">全局漂浮动画</div><div class="t2">所有页面都会显示柔和的漂浮粒子</div></div><div class="rt"><span class="mini">'+(DB.ui.globalFloat?'已开启':'已关闭')+'</span></div></div>'
   +'<div class="lrow" data-float="desktop" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">桌面漂浮动画</div><div class="t2">只在桌面显示花瓣漂浮</div></div><div class="rt"><span class="mini">'+(DB.ui.desktopFloat!==false?'已开启':'已关闭')+'</span></div></div></div>'
   +'<div class="card"><b>消息提示音</b><div class="muted" style="margin:5px 0 9px">内置合成音与免费开源提示音；也可以导入自己的音频。</div>'
@@ -5379,7 +5415,7 @@ function importAll(file){
   fr.readAsText(file);
 }
 /* ================= 外观 / 相册 ================= */
-const APPEARANCE_KEYS=['theme','themeStyle','themeWall','wall','customWall','dark','globalPageWall','pageWalls','appIcons','customCss','fontFamily','fontData','fontScale','homePages','widgetPages','widgets','globalFloat','desktopFloat','floatStyle','brightness'];
+const APPEARANCE_KEYS=['theme','themeStyle','themeWall','wall','customWall','dark','globalPageWall','pageWalls','appIcons','customCss','fontFamily','fontData','fontScale','homePages','widgetPages','widgets','globalFloat','desktopFloat','floatStyle','customFloatImage','customFloatName','brightness'];
 function appearanceSnapshot(){
   const out={};
   APPEARANCE_KEYS.forEach(function(k){
@@ -5745,6 +5781,10 @@ function npGenreChips(){
   return '<div class="np-chips">'+all.map(function(g){ return '<div class="np-chip'+(DB.np.genre===g?' on':'')+'" data-npgenre="'+esc(g)+'">'+esc(g)+'</div>'; }).join('')
     +'<div class="np-chip" data-npaddgenre="1">＋ 题材</div></div>';
 }
+function npFilterBlock(title,body,key){
+  const open=DB.np[key]!==false;
+  return '<div class="np-filter"><button type="button" class="np-filter-head" data-npfilter="'+key+'"><span>'+title+'</span><span class="chev">'+(open?'⌃':'⌄')+'</span></button>'+(open?'<div class="np-filter-body">'+body+'</div>':'')+'</div>';
+}
 function npTagChips(){
   const all=DB.np.customTags||[];
   return '<div class="np-chips" style="padding-top:0">'+all.map(function(t){ return '<div class="np-chip tag'+(DB.np.tags.indexOf(t)>=0?' on':'')+'" data-nptag="'+esc(t)+'">'+esc(t)+'</div>'; }).join('')
@@ -5755,7 +5795,7 @@ function screenNovelHome(){
   const featured=books[0], latest=books.slice(1,7);
   const reads=(DB.readings||[]).slice().sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); }).map(function(r){ return npBook(r.bookId); }).filter(Boolean);
   return '<div class="np-top"><button class="ic2" data-go="home" title="回桌面">‹</button><div class="h">小说</div><button class="ic2" data-npnovelregex="1" title="小说正则">'+ic('braces',19)+'</button><button class="ic2" data-npstyleprompt="1" title="文风指令">'+ic('pen',19)+'</button><button class="ic2" data-nptab="stats" title="阅读统计">'+ic('bell',19)+'</button><button class="ic2" data-nprank="1" title="榜单">'+ic('star',19)+'</button><button class="ic2" data-nprefresh="1" title="生成新书">'+ic('refresh',19)+'</button><button class="ic2" data-npsettings="1" title="小说设置">'+ic('gear',19)+'</button></div>'
-    +npGenreChips()+npTagChips()
+    +npFilterBlock('题材',npGenreChips(),'genreOpen')+npFilterBlock('标签',npTagChips(),'tagOpen')
     +(featured? '<div class="np-feature" data-npbook="'+featured.id+'"><div class="cover">'+npCoverHTML(featured)+'</div><div class="grow"><div class="kicker">今日精选</div><div class="title">'+esc(featured.title)+'</div><div class="mini" style="margin-top:3px">'+esc(featured.authorName||'佚名')+' · '+esc(featured.genre||'')+' · 热度 '+npHeat(featured)+'</div><div class="desc">'+esc(featured.synopsis||'')+'</div><div class="tg">'+(featured.tags||[]).slice(0,3).map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div></div></div>' : '')
     +(reads.length? '<div class="np-section-head"><h3>继续阅读</h3><span class="more">'+reads.length+' 本</span></div><div class="np-rail">'+reads.slice(0,8).map(function(b){ return '<div class="np-book" data-npbook="'+b.id+'"><div class="np-cover">'+npCoverHTML(b)+'</div><div class="t">'+esc(b.title)+'</div></div>'; }).join('')+'</div>' : '')
     +(latest.length? '<div class="np-section-head"><h3>新书速递</h3><span class="more">按你的标签</span></div><div class="np-rail">'+latest.map(npBookCard).join('')+'</div>' : '')
@@ -5764,13 +5804,27 @@ function screenNovelHome(){
 }
 function screenNovelSquare(){
   const posts=DB.np.square||[];
-  return npTop('书荒广场','<button class="ic2" data-npsquarerefresh="1" title="刷新">'+ic('refresh',19)+'</button>')
+  return npTop('书荒广场','<button class="ic2" data-npsquarehistory="1" title="曾经浏览">'+ic('clock',19)+'</button><button class="ic2" data-npsquarerefresh="1" title="刷新">'+ic('refresh',19)+'</button>')
     +'<div class="np-section">'+posts.map(function(p){
       return '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(p.name)+'</b><div class="mini">'+esc(p.type||'读者')+' · '+shortTime(p.ts)+'</div></div></div>'
         +'<div class="np-synopsis" style="margin-top:8px">'+esc(p.text)+'</div>'
         +'<div class="np-tip-row"><button data-npsqlike="'+p.id+'">'+(p.liked?'已赞':'赞')+' '+(p.likes||0)+'</button><button data-npsqcomments="'+p.id+'">评论 '+((p.comments||[]).length)+'</button></div>'
         +(p.bookId&&npBook(p.bookId)? '<button class="btn full" data-npbook="'+p.bookId+'">看看这本书</button>':'')+'</div>';
     }).join('')+'</div>';
+}
+function sheetSquareHistory(){
+  const hs=DB.np.squareHistory||[];
+  const body=hs.length?hs.map(function(b,bi){
+    const posts=Array.isArray(b.posts)?b.posts:[];
+    return '<div class="np-card"><div class="row"><div class="grow"><b>第 '+(hs.length-bi)+' 次刷新</b><div class="mini">'+new Date(b.ts||Date.now()).toLocaleString('zh-CN')+' · '+posts.length+' 条</div></div><button class="btn danger" data-sqhistdelbatch="'+b.id+'">删除这一批</button></div>'
+      +posts.map(function(p){ return '<div class="lrow" style="padding-left:0;padding-right:0;align-items:flex-start;flex-wrap:wrap"><div class="mi"><div class="t1">'+esc(p.name||'读者')+' · '+esc(p.type||'帖子')+'</div><div class="t2" style="white-space:normal;overflow:visible;text-overflow:clip;line-height:1.5">'+esc(p.text||'')+'</div></div><button class="btn danger" data-sqhistdelpost="'+b.id+'|'+p.id+'">删除</button></div>'; }).join('')
+      +'</div>';
+  }).join(''):'<div class="np-empty">还没有曾经浏览。刷新一次书荒广场后，之前的帖子会留在这里。</div>';
+  sheetFull('<h3>曾经浏览</h3><div class="muted" style="margin-bottom:10px;line-height:1.7">按刷新次数分组保存。可以删除单条、删除整批，或一键清空。</div>'+body+(hs.length?'<button class="btn danger full" id="sqHistClear">清空所有曾经浏览</button>':'')+'<button class="btn full" id="sqHistClose">关闭</button>');
+  $('#sqHistClose').onclick=closeSheet;
+  $$('#sheetBox [data-sqhistdelbatch]').forEach(function(el){ el.onclick=function(){ DB.np.squareHistory=(DB.np.squareHistory||[]).filter(function(b){ return b.id!==el.dataset.sqhistdelbatch; }); save(); sheetSquareHistory(); toast('这一批已删除'); }; });
+  $$('#sheetBox [data-sqhistdelpost]').forEach(function(el){ el.onclick=function(){ const p=String(el.dataset.sqhistdelpost||'').split('|'); const b=(DB.np.squareHistory||[]).find(function(x){ return x.id===p[0]; }); if(!b) return; b.posts=(b.posts||[]).filter(function(x){ return x.id!==p[1]; }); if(!b.posts.length) DB.np.squareHistory=(DB.np.squareHistory||[]).filter(function(x){ return x.id!==b.id; }); save(); sheetSquareHistory(); toast('帖子已删除'); }; });
+  const cl=$('#sqHistClear'); if(cl) cl.onclick=function(){ if(!confirm('清空所有曾经浏览？这个操作不能撤销。')) return; DB.np.squareHistory=[]; save(); sheetSquareHistory(); toast('曾经浏览已清空'); };
 }
 function npReadMinutes(){ return Math.floor((Number(DB.np.readingSeconds)||0)/60); }
 function screenNovelStats(){
@@ -6721,8 +6775,15 @@ function npRefreshBooks(opts){
     busyDone(); toast('生成了 '+arr.length+' 本新书');
   }).catch(function(e){ busyDone(); toast('生成失败：'+e.message); });
 }
+function npPushSquareHistory(){
+  const posts=DB.np.square||[]; if(!posts.length) return;
+  DB.np.squareHistory=Array.isArray(DB.np.squareHistory)?DB.np.squareHistory:[];
+  DB.np.squareHistory.unshift({id:uid(),ts:Date.now(),posts:JSON.parse(JSON.stringify(posts))});
+  DB.np.squareHistory=DB.np.squareHistory.slice(0,20);
+}
 function npRefreshSquare(){
   const names=(typeof WB_NAMES!=='undefined'?WB_NAMES:['香香睡不着','抓你大胯一把','AAA建材王姐']);
+  npPushSquareHistory();
   if(DB.api.key){
     busy('正在刷书荒广场，请稍后');
     const books=npPublished().slice(0,8).map(function(b){ return b.title; }).join('、');
@@ -7015,11 +7076,13 @@ function bindScreenInner(){
   $$('[data-npchaptercomments]',s).forEach(el=>el.onclick=function(){ const p=String(el.dataset.npchaptercomments||'').split('|'); if(p[0]&&p[1]) sheetNpChapterComments(p[0],p[1]); });
   $$('[data-nppara]',s).forEach(el=>el.onclick=function(){ if(Date.now()<suppressGoUntil) return; npToggleReaderUi(); });
   $$('[data-npcomment]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); if(Date.now()<suppressGoUntil) return; const p=String(el.dataset.npcomment||'').split('|'); if(p.length===3) sheetNpComments(p[0],p[1],Number(p[2])); });
+  $$('[data-npfilter]',s).forEach(el=>el.onclick=function(){ const k=el.dataset.npfilter; DB.np[k]=DB.np[k]===false; save(); render(); });
   $$('[data-npgenre]',s).forEach(el=>el.onclick=function(){ DB.np.genre=el.dataset.npgenre; save(); render(); });
   $$('[data-nptag]',s).forEach(el=>el.onclick=function(){ const t=el.dataset.nptag, i=DB.np.tags.indexOf(t); if(i>=0) DB.np.tags.splice(i,1); else DB.np.tags.push(t); save(); render(); });
   $$('[data-npaddgenre]',s).forEach(el=>el.onclick=function(){ sheetNpAddFilter('genre'); });
   $$('[data-npaddtag]',s).forEach(el=>el.onclick=function(){ sheetNpAddFilter('tag'); });
   $$('[data-nprefresh]',s).forEach(el=>el.onclick=sheetNpGenerateBook);
+  $$('[data-npsquarehistory]',s).forEach(el=>el.onclick=sheetSquareHistory);
   $$('[data-npsquarerefresh]',s).forEach(el=>el.onclick=npRefreshSquare);
   $$('[data-npsqlike]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); npLikeSquare(el.dataset.npsqlike); });
   $$('[data-npsqcomments]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); sheetNpSquareComments(el.dataset.npsqcomments); });
@@ -7568,6 +7631,8 @@ function bindScreenInner(){
     const pt=$('#perfToggle'); if(pt) pt.onclick=function(){ DB.ui.lowPerf=!DB.ui.lowPerf; save(); applyTheme(); render(); toast(DB.ui.lowPerf?'低性能模式已开启':'低性能模式已关闭'); };
     const ft=$('#fullToggle'); if(ft) ft.onclick=toggleFullscreenMode;
     const fs=$('#floatStyle'); if(fs) fs.onchange=function(){ DB.ui.floatStyle=fs.value||'mix'; save(); applyTheme(); render(); };
+    const fi=$('#floatImport'); if(fi) fi.onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/png,image/webp,image/gif,image/*'; i.onchange=function(){ const f=i.files[0]; if(!f) return; if(f.size>3*1024*1024){ toast('图片请控制在 3MB 内'); return; } const fr=new FileReader(); fr.onload=function(){ DB.ui.customFloatImage=String(fr.result||''); DB.ui.customFloatName=f.name||'自定义素材'; DB.ui.floatStyle='custom'; save(); applyTheme(); render(); toast('漂浮素材已导入'); }; fr.readAsDataURL(f); }; i.click(); };
+    const fc=$('#floatClear'); if(fc) fc.onclick=function(){ DB.ui.customFloatImage=''; DB.ui.customFloatName=''; if(DB.ui.floatStyle==='custom') DB.ui.floatStyle='mix'; save(); applyTheme(); render(); toast('自定义漂浮素材已清除'); };
     $$('#screen [data-float]').forEach(function(el){ el.onclick=function(ev){
       ev.stopPropagation();
       const k=el.dataset.float;
@@ -7816,7 +7881,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-20 · 第 35 轮';
+const BUILD='2026-10-20 · 第 36 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
