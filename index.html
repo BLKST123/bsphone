@@ -36,7 +36,7 @@ html,body{margin:0;height:100%;overflow:hidden;font:calc(16px * var(--ui-font-sc
 .screen.has-page-wall .wx,
 .screen.has-page-wall .wxbody,
 .screen.has-page-wall .chatwrap{background:transparent}
-.screen.has-page-wall .np-me-bottom{background:rgba(247,244,236,.88)}
+.screen.has-page-wall .np-me-bottom{background:linear-gradient(180deg,color-mix(in srgb,var(--card) 68%,transparent),color-mix(in srgb,var(--card) 22%,transparent) 20%,transparent 42%)!important}
 #phone.dark{--fg:#fff;--fg2:#a8a8ae;--card:rgba(28,28,30,.82);--line:rgba(255,255,255,.12);--wall:linear-gradient(160deg,#0b1020 0%,#141a2e 45%,#2a1b2a 100%);
   --bub-me:#39572c; --bub-me-fg:#eaf7e1; --bub-ta:#2c2c2e; --bub-ta-fg:#f2f2f7}
 /* 状态栏 */
@@ -179,11 +179,18 @@ textarea{min-height:90px;resize:vertical;line-height:1.55}
 .plus .it .ic{width:52px;height:52px;border-radius:14px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:calc(24px * var(--ui-font-scale,1));box-shadow:0 2px 8px rgba(0,0,0,.06)}
 .stkpick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:12px 4px 4px}
 .stkpick img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:10px;cursor:pointer;background:#f2f2f4}
+.gallery-albums{display:flex;gap:7px;overflow-x:auto;padding:10px 0 2px;scrollbar-width:none}
+.gallery-albums::-webkit-scrollbar{display:none}
+.gallery-album{flex:none;border:1px solid var(--line);border-radius:10px;background:rgba(255,255,255,.3);color:var(--fg);padding:7px 10px;font:inherit;font-size:calc(12px * var(--ui-font-scale,1));cursor:pointer}
+.gallery-album span{font-size:calc(10px * var(--ui-font-scale,1));opacity:.62;margin-left:3px}
+.gallery-album.on{background:var(--theme-rose-soft);border-color:var(--theme-rose-deep);color:var(--theme-rose-deep);font-weight:600}
+.gallery-grid{grid-template-columns:repeat(3,1fr);padding:14px 0 0}
 /* ======== 朋友圈 ======== */
 .mcover{height:158px;background:linear-gradient(135deg,#8ab4f8,#a6a1e8 55%,#c3a1d8);background-size:cover;background-position:center;background-repeat:no-repeat;position:relative;flex:none}
 .mcover .chg{position:absolute;right:10px;bottom:10px;font-size:calc(11.5px * var(--ui-font-scale,1));background:rgba(0,0,0,.42);color:#fff;padding:4px 9px;border-radius:10px;cursor:pointer}
 .mcover .mein{position:absolute;right:14px;bottom:-20px;display:flex;align-items:flex-end;gap:8px}
 .mcover .mein .av{width:56px;height:56px;border-radius:12px;border:3px solid #fff;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:calc(26px * var(--ui-font-scale,1));overflow:hidden}
+.mcover .mein .av:has(img),.mpost .av:has(img){background:transparent}
 .mcover .mein .av img{width:100%;height:100%;object-fit:cover}
 .mcover .mein .nm{position:absolute;right:64px;bottom:26px;color:#fff;font-size:calc(14.5px * var(--ui-font-scale,1));font-weight:600;text-shadow:0 1px 4px rgba(0,0,0,.55);white-space:nowrap;padding:0}
 .mpost{display:flex;gap:10px;padding:14px 16px;border-bottom:1px solid var(--line)}
@@ -572,6 +579,7 @@ input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) 
 .wbd-bottom>button:not(.wbic){border:0;background:none;color:var(--fg2);display:flex;align-items:center;justify-content:center;cursor:pointer;padding:6px 2px}
 .wbd-bottom>button.on{color:#e6162d}
 .wbd-bottom input{flex:1;min-width:0;margin:0;max-width:none}
+#sheetBox.wbd-detail .wbd-top,#sheetBox.wbd-detail .wbd-bottom{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
 #phone.dark .wbd-top,#phone.dark .wbd-bottom{background:#1c1c1e}
 #phone.dark .wbd-author .wav,#phone.dark .wbd-c .wav{background:#2c2c30;color:#a1a1a6}
 .desk-preview{border-radius:18px;padding:14px 8px 10px;background:var(--wall);border:1px solid rgba(0,0,0,.06);box-shadow:inset 0 0 0 1px rgba(255,255,255,.3)}
@@ -801,10 +809,14 @@ input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) 
 #npSelHint{display:none}
 .np-reader-wrap.co-open{padding-bottom:calc(48dvh + 28px)}
 .npg-wrap{display:flex;flex-direction:column;height:100%;min-height:0}
-.npg-msgs{flex:1;min-height:0;overflow-y:auto;padding:10px 12px;background:#f4f0e7;display:flex;flex-direction:column;gap:10px}
+.npg-msgs{flex:1;min-height:0;overflow-y:auto;padding:10px 12px;background:transparent;display:flex;flex-direction:column;gap:10px}
 .npg-line{display:flex;gap:7px;align-items:flex-start}
 .npg-line.me{flex-direction:row-reverse}
-.npg-av{width:32px;height:32px;border-radius:9px;background:#6f8879;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:calc(12px * var(--ui-font-scale,1))}
+.npg-av{width:32px;height:32px;border-radius:9px;background:#6f8879;color:#fff;display:flex;align-items:center;justify-content:center;flex:none;font-size:calc(12px * var(--ui-font-scale,1));overflow:hidden}
+.npg-av img{width:100%;height:100%;object-fit:cover;display:block}
+.npg-wrap>.row,.npg-composer{background:color-mix(in srgb,var(--card) 78%,transparent);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+#sheetBox.npg-sheet,#sheetBox.wbd-detail{background:transparent!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#sheetBox.npg-sheet .np-empty{background:color-mix(in srgb,var(--card) 72%,transparent);backdrop-filter:blur(16px)}
 .npg-main{max-width:76%;min-width:0}
 .npg-name{font-size:calc(10.5px * var(--ui-font-scale,1));color:#7a7168;margin:0 2px 3px}
 .npg-bub{padding:8px 10px;border-radius:12px;background:#fff;border:1px solid #e0d9cd;font-size:calc(13.5px * var(--ui-font-scale,1));line-height:1.55;white-space:pre-wrap;word-break:break-word}
@@ -833,13 +845,13 @@ input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) 
 .np-me-bio{font-size:calc(12px * var(--ui-font-scale,1));line-height:1.65;color:rgba(255,255,255,.9);margin-top:7px;max-width:300px;text-shadow:0 2px 8px rgba(0,0,0,.45)}
 .np-me-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:14px;text-align:center;font-size:calc(10px * var(--ui-font-scale,1));color:rgba(255,255,255,.82);text-shadow:0 2px 7px rgba(0,0,0,.45)}
 .np-me-stats b{display:block;font-size:calc(17px * var(--ui-font-scale,1));color:#fff;margin-bottom:2px}
-.np-me-bottom{flex:1;min-height:0;overflow-y:auto;background:#f7f4ec;border-radius:18px 18px 0 0;margin-top:-10px;position:relative;z-index:2}
+.np-me-bottom{flex:1;min-height:0;overflow-y:auto;background:color-mix(in srgb,var(--card) 72%,transparent);border-radius:18px 18px 0 0;margin-top:-10px;position:relative;z-index:2}
 .np-me-quick{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:12px 13px 5px}
-.np-quick-card{display:flex;align-items:center;gap:9px;padding:11px;border-radius:12px;background:#fffdf8;border:1px solid #ded6c7;cursor:pointer}
+.np-quick-card{display:flex;align-items:center;gap:9px;padding:11px;border-radius:12px;background:var(--card);border:1px solid var(--line);cursor:pointer}
 .np-quick-card .qi{width:38px;height:38px;border-radius:11px;background:#6f8879;color:#fff;display:flex;align-items:center;justify-content:center;flex:none}
 .np-quick-card .qt{font-size:calc(13px * var(--ui-font-scale,1));font-weight:650}
 .np-quick-card .qd{font-size:calc(10px * var(--ui-font-scale,1));color:#81776d;margin-top:2px}
-.np-me-tabs{display:flex;gap:4px;padding:8px 12px 4px;overflow-x:auto;border-bottom:1px solid #e3ddd2;position:sticky;top:0;background:#f7f4ec;z-index:3;scrollbar-width:none}
+.np-me-tabs{display:flex;gap:4px;padding:8px 12px 4px;overflow-x:auto;border-bottom:1px solid var(--line);position:sticky;top:0;background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);z-index:3;scrollbar-width:none}
 .np-me-tabs::-webkit-scrollbar{display:none}
 .np-me-tabs button{flex:none;border:0;background:none;color:#7d7369;font:inherit;font-size:calc(12.5px * var(--ui-font-scale,1));padding:8px 9px;border-bottom:2px solid transparent}
 .np-me-tabs button.on{color:#9a4d38;border-bottom-color:#9a4d38;font-weight:650}
@@ -1127,7 +1139,7 @@ input::placeholder,textarea::placeholder{color:#b3afb8}
 .np-me-bottom{background:rgba(255,249,251,.9)}
 .np-co-panel{background:#fffafb;border-top-color:var(--line)}
 .np-co-bub{background:rgba(255,252,253,.94);border-color:var(--line)}
-.npg-msgs{background:#f7ebef}
+.npg-msgs{background:transparent}
 .npg-tools button{background:rgba(255,250,252,.78);border-color:var(--line);color:var(--fg)}
 .np-feature .cover,.np-author-book .cover,.np-detail-cover{position:relative;overflow:hidden}
 .np-auto-cover{position:absolute;inset:0;z-index:1;display:flex;flex-direction:column;justify-content:space-between;padding:11px 10px 10px;color:#fff;background:var(--wall);background-size:cover;background-position:center;text-shadow:0 2px 8px rgba(72,55,64,.42);overflow:hidden}
@@ -1988,7 +2000,7 @@ const DEF={
   outContacts:[], outPersona:null, outState:null, outings:[],
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
   moments:[], momentCover:'', momentSeen:0,
-  stickers:[], favorites:[], pics:[], diary:[], novels:[], forum:[], books:[], readings:[],
+  stickers:[], favorites:[], pics:[], galleryAlbums:[{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}], galleryPics:[], galleryActive:'avatar', galleryMigrated:false, diary:[], novels:[], forum:[], books:[], readings:[],
   np:{tab:'home',genre:'推荐',tags:[],customGenres:['悬疑','幻想','都市','仙侠','校园','娱乐圈'],customTags:['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'],shelf:[],readers:[],messages:[],square:[],readerGroup:[],groupName:'白夜烬云的读者群',coReadPanel:{readingId:null,open:false},novelRegexes:[],stylePrompt:'',readingSeconds:0,todayKey:'',todaySeconds:0,demoSeeded:false,readerPrefs:{fontSize:17,lineHeight:2,theme:'paper'},author:{penName:'白夜烬云',bio:'写想看的，也写不敢看的。',avatar:'夜',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,tips:0,awards:[],titles:['新人作者'],level:1,xp:0}},
   logs:[], auto:true, lastRoute:null, ver:3
 };
@@ -2000,7 +2012,7 @@ function migrate(raw){
   o.api=Object.assign(o.api,raw.api||{}); o.ui=Object.assign(o.ui,raw.ui||{});
   o.diary=raw.diary||[]; o.novels=raw.novels||[]; o.forum=raw.forum||[]; o.pics=raw.pics||[];
   o.chats=[]; o.contacts=(raw.chars||[]).map(c=>({
-    id:c.id||uid(), name:c.name||'无名', avatar:c.avatar||'', age:'', gender:'', identity:'',
+    id:c.id||uid(), name:c.name||'无名', remark:'', avatar:c.avatar||'', age:'', gender:'', identity:'',
     callMe:c.nick||'', desc:c.desc||'', persona:c.persona||'', style:c.style||'',
     opener:c.opener||'', examples:c.examples||'', memories:c.memories||[],
     groupId:'', regexIds:[], worldIds:[], freq:{post:2,like:2,comment:2,reply:2}, meetFreq:0, created:c.created||Date.now()
@@ -2039,7 +2051,18 @@ function fixAll(){
   if((!DB.outings.length)&&Array.isArray(DB.outs)&&DB.outs.length) DB.outings=DB.outs;
   delete DB.outs;
   DB.notifs=DB.notifs||[];
-  (DB.contacts||[]).forEach(function(c){ if(c.autoOn===undefined) c.autoOn=true; if(c.voiceFreq===undefined) c.voiceFreq=0; });
+  (DB.contacts||[]).forEach(function(c){ if(c.remark===undefined) c.remark=''; if(c.autoOn===undefined) c.autoOn=true; if(c.voiceFreq===undefined) c.voiceFreq=0; });
+  DB.galleryAlbums=Array.isArray(DB.galleryAlbums)?DB.galleryAlbums:[];
+  [{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}].forEach(function(a){
+    if(!DB.galleryAlbums.some(function(x){ return x.id===a.id; })) DB.galleryAlbums.unshift(a);
+  });
+  DB.galleryPics=Array.isArray(DB.galleryPics)?DB.galleryPics:[];
+  if(!DB.galleryMigrated){
+    DB.galleryPics=(DB.pics||[]).map(function(url,i){ return {id:'gpic_migrate_'+i,albumId:'wallpaper',url:url,ts:Date.now()+i}; });
+    DB.galleryMigrated=true;
+  }
+  DB.pics=DB.galleryPics.map(function(x){ return x.url; });
+  if(!DB.galleryAlbums.some(function(x){ return x.id===DB.galleryActive; })) DB.galleryActive='avatar';
   DB.apiLib=DB.apiLib||[];
   DB.stickers=DB.stickers||[];
   DB.favorites=DB.favorites||[];
@@ -2055,6 +2078,7 @@ function fixAll(){
   if(!Array.isArray(DB.np.customTags)) DB.np.customTags=['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'];
   if(!Array.isArray(DB.np.shelf)) DB.np.shelf=[];
   if(!Array.isArray(DB.np.readers)) DB.np.readers=[];
+  DB.np.readers.forEach(function(r){ if(!r.id) r.id=uid(); if(r.avatar===undefined) r.avatar=''; if(r.avatarMode===undefined) r.avatarMode=r.avatar?'custom':'auto'; });
   if(!Array.isArray(DB.np.messages)) DB.np.messages=[];
   if(!Array.isArray(DB.np.square)) DB.np.square=[];
   if(!Array.isArray(DB.np.squareHistory)) DB.np.squareHistory=[];
@@ -2327,12 +2351,14 @@ function idbOpen(){
 function idbGet(k){ return new Promise(function(res,rej){ const t=IDB.db.transaction('kv','readonly').objectStore('kv').get(k); t.onsuccess=function(){ res(t.result); }; t.onerror=function(){ rej(t.error); }; }); }
 function idbSet(k,v){ return new Promise(function(res,rej){ const tx=IDB.db.transaction('kv','readwrite'); tx.objectStore('kv').put(v,k); tx.oncomplete=function(){ res(true); }; tx.onerror=function(){ rej(tx.error); }; tx.onabort=function(){ rej(tx.error); }; }); }
 let saveTimer=null, pendingSave=false;
+function storedDbSnapshot(){ return Object.assign({},DB,{pics:[]}); }
 function saveNow(){
+  const data=storedDbSnapshot();
   if(IDB.ok){
-    idbSet('db',DB).catch(function(e){ toast('保存失败：'+((e&&e.message)||e)); });
+    idbSet('db',data).catch(function(e){ toast('保存失败：'+((e&&e.message)||e)); });
     return;
   }
-  try{ localStorage.setItem(KEY, JSON.stringify(DB)); }
+  try{ localStorage.setItem(KEY, JSON.stringify(data)); }
   catch(e){ toast('空间不够了，去「设置 → 备份」导出一次，或删掉一些图片'); }
 }
 function save(){
@@ -2344,7 +2370,7 @@ function save(){
 function flushSave(){ if(pendingSave){ clearTimeout(saveTimer); pendingSave=false; saveNow(); } }
 document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') flushSave(); });
 window.addEventListener('pagehide',flushSave);
-function dataSize(){ try{ return JSON.stringify(DB).length; }catch(e){ return 0; } }
+function dataSize(){ try{ return JSON.stringify(storedDbSnapshot()).length; }catch(e){ return 0; } }
 function fmtSize(n){ n=Number(n)||0; return n>=1048576? ((n/1048576).toFixed(2)+' MB') : (Math.max(1,Math.round(n/1024))+' KB'); }
 const $=(s,el)=>(el||document).querySelector(s), $$=(s,el)=>[...(el||document).querySelectorAll(s)];
 const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -2590,10 +2616,22 @@ function enhanceEditors(root){
     };
   });
 }
-function sheet(html){ const b=$('#sheetBox'); b.classList.remove('sm','full','fixed','wbuser-full'); $('#sheet').classList.remove('fullsheet'); b.innerHTML=html; $('#sheet').classList.add('on'); enhanceEditors(b); bindRegen(b); syncGlobalBack(); }
+function sheet(html){ const b=$('#sheetBox'); const sh=$('#sheet'); b.classList.remove('sm','full','fixed','wbuser-full','wbd-detail','npg-sheet'); sh.classList.remove('fullsheet','wbd-detail-sheet'); sh.style.background=''; sh.style.backgroundImage=''; sh.style.backgroundColor=''; sh.style.backgroundSize=''; sh.style.backgroundPosition=''; sh.style.backgroundRepeat=''; b.innerHTML=html; sh.classList.add('on'); enhanceEditors(b); bindRegen(b); syncGlobalBack(); }
 function sheetFull(html){ sheet(html); $('#sheetBox').classList.add('full'); $('#sheet').classList.add('fullsheet'); }
 function sheetFixed(html){ sheet(html); $('#sheetBox').classList.add('full','fixed'); }
 function sheetSmall(html){ sheet(html); $('#sheetBox').classList.add('sm'); }
+function sheetPageBackground(key){
+  const wall=(DB.ui.pageWalls||{})[key]||DB.ui.globalPageWall||DB.ui.customWall||'';
+  const sh=$('#sheet');
+  if(!wall){ sh.style.background='var(--wall)'; return true; }
+  const veil=DB.ui.dark?'rgba(15,18,20,.28)':'rgba(248,246,240,.14)';
+  sh.style.backgroundImage='linear-gradient('+veil+','+veil+'),url("'+String(wall).replace(/"/g,'%22')+'")';
+  sh.style.backgroundColor=DB.ui.dark?'#1c2026':'#f7f4ec';
+  sh.style.backgroundSize='cover';
+  sh.style.backgroundPosition='center';
+  sh.style.backgroundRepeat='no-repeat';
+  return true;
+}
 function closeSheet(){ $('#sheet').classList.remove('on','fullsheet'); syncGlobalBack(); }
 $('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
 document.addEventListener('click',function(e){
@@ -2781,6 +2819,10 @@ function shortTime(ts){
 }
 /* ---- 人物 / 会话 ---- */
 function ct(id){ return DB.contacts.find(c=>c.id===id)||null; }
+function contactDisplayName(c){
+  if(!c) return '（已删除）';
+  return String(c.remark||'').trim() || String(c.name||'').trim() || '未命名';
+}
 function chat(id){ return DB.chats.find(c=>c.id===id)||null; }
 function chatOfContact(id){
   let ch=DB.chats.find(c=>c.type==='private'&&c.memberIds[0]===id);
@@ -2789,8 +2831,8 @@ function chatOfContact(id){
 }
 function chatName(ch){
   if(!ch) return '';
-  if(ch.type==='group') return ch.name||(ch.memberIds.map(i=>{const c=ct(i);return c?c.name:'?';}).join('、'));
-  const c=ct(ch.memberIds[0]); return c?c.name:'（已删除）';
+  if(ch.type==='group') return ch.name||(ch.memberIds.map(i=>{const c=ct(i);return c?contactDisplayName(c):'?';}).join('、'));
+  const c=ct(ch.memberIds[0]); return c?contactDisplayName(c):'（已删除）';
 }
 function personaFullText(p){
   if(!p) return '';
@@ -3034,7 +3076,7 @@ function render(){
   const noNav=(route.name==='home'||route.name==='wechat'||route.name==='chatroom'
     ||['hang','checkin','mall','shop','date','dateroom','out','outnew','outroom','world','regex','weibo','novel','novelbook','novelchapter'].indexOf(route.name)>=0);
   s.innerHTML=(noNav?'':navBar(route.name))+R();
-  if(route.name==='contactview'){ const tt=$('.nav .ttl',s); const cc=ct(route.arg); if(tt&&cc) tt.textContent=cc.name; }
+  if(route.name==='contactview'){ const tt=$('.nav .ttl',s); const cc=ct(route.arg); if(tt&&cc) tt.textContent=contactDisplayName(cc); }
   s.classList.toggle('lock', route.name==='wechat'||route.name==='chatroom');
   if(route.name!=='home'&&route.name!=='wechat'){ const b=$('.nav .back',s); if(b) b.onclick=back; }
   bindScreen(); enhanceEditors(s); bindRegen(s); applyTheme(); syncGlobalBack();
@@ -3655,11 +3697,11 @@ const CLEAR_META={
   wxMsgs:{title:'所有聊天消息',desc:'所有会话里的消息会清空，联系人和会话框还留着。',run:function(){ (DB.chats||[]).forEach(function(ch){ ch.msgs=[]; ch.lastTs=Date.now(); ch.unread=0; }); }},
   wxContacts:{title:'所有联系人数据',desc:'联系人、聊天、朋友圈、约会、出门、打卡、查岗和绑定关系都会清空。这个不能撤销。',run:function(){ DB.contacts=[]; DB.groups=[{id:'def',name:'我的好友'}]; DB.chats=[]; DB.moments=[]; DB.momentSeen=0; DB.checkins=[]; DB.dates=[]; DB.curDate=null; DB.outings=[]; DB.outState=null; DB.outContacts=[]; DB.hang={phone:{},doing:{}}; DB.hangCid=null; DB.checkCid=null; DB.mallCid=null; DB.tbCid=null; DB.tbItems={}; DB.shopItems={}; DB.cartMe=[]; DB.cartTa={}; DB.orders=[]; }},
   wxMoments:{title:'所有朋友圈',desc:'所有联系人和你发过的朋友圈都会清空，联系人和聊天不受影响。',run:function(){ DB.moments=[]; DB.momentSeen=0; }},
-  wxMine:{title:'我的资料和收藏',desc:'用户人设、头像、收藏、表情包、相册会清空；钱包和资产会保留。',run:function(){ DB.me.personas=[]; DB.me.personaId=null; DB.me.avatar=''; DB.me.name='我'; DB.favorites=[]; DB.stickers=[]; DB.pics=[]; }},
+  wxMine:{title:'我的资料和收藏',desc:'用户人设、头像、收藏、表情包、相册会清空；钱包和资产会保留。',run:function(){ DB.me.personas=[]; DB.me.personaId=null; DB.me.avatar=''; DB.me.name='我'; DB.favorites=[]; DB.stickers=[]; DB.galleryPics=[]; gallerySyncPics(); }},
   diary:{title:'所有日记',desc:'所有日记正文会清空，联系人和聊天记录不受影响。',run:function(){ DB.diary=[]; }},
   novel:{title:'所有小说记录',desc:'所有生成过的小说片段会清空。',run:function(){ DB.novels=[]; }},
   forum:{title:'所有论坛帖子',desc:'论坛里生成过的帖子会清空。',run:function(){ DB.forum=[]; }},
-  gallery:{title:'所有相册图片',desc:'相册图片、朋友圈封面和自定义壁纸会清空。',run:function(){ DB.pics=[]; DB.momentCover=''; DB.ui.customWall=''; applyTheme(); }},
+  gallery:{title:'所有相册图片',desc:'相册图片、朋友圈封面和自定义壁纸会清空。',run:function(){ DB.galleryPics=[]; gallerySyncPics(); DB.momentCover=''; DB.ui.customWall=''; applyTheme(); }},
   hang:{title:'所有查岗记录',desc:'所有角色的查手机结果和此刻状态会清空。',run:function(){ DB.hang={phone:{},doing:{}}; }},
   checkin:{title:'所有打卡记录',desc:'所有角色的打卡和火花天数会清空。',run:function(){ DB.checkins=[]; }},
   date:{title:'所有约会记录',desc:'所有约会会话会清空，联系人和微信聊天不受影响。',run:function(){ DB.dates=[]; DB.curDate=null; }},
@@ -3730,7 +3772,7 @@ function sheetPick(title,max,ok,withName){
   let sel=[];
   const draw=()=>{
     const rows=(DB.contacts||[]).map(c=>'<div class="lrow" data-pick="'+c.id+'">'+avBox(c)
-      +'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">'+esc(c.desc||c.identity||'')+'</div></div>'
+      +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+esc(c.identity||'')+'</div></div>'
       +'<div class="rt"><span class="chev">'+(sel.includes(c.id)?'✓':'')+'</span></div></div>').join('');
     sheet('<h3>'+esc(title)+'</h3>'+(withName?'<input id="gname" placeholder="群名称（可以不填）" style="margin-bottom:10px">':'')
       +(rows||'<div class="muted" style="padding:6px 0 14px">还没有联系人，先去「联系人」新建一位。</div>')
@@ -3763,7 +3805,7 @@ function wxContacts(){
 }
 function ctRow(c){
   return '<div class="lrow" data-openct="'+c.id+'">'+avBox(c)
-    +'<div class="mi"><div class="t1">'+esc(c.name)+(c.demo?'<span class="demo-note">示例</span>':'')+'</div><div class="t2">'+esc(c.desc||c.identity||'')+'</div></div>'
+    +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div><div class="t2">'+esc(c.identity||'')+'</div></div>'
     +'<div class="rt"><span class="chev">›</span></div></div>';
 }
 function screenContactView(){
@@ -3771,7 +3813,7 @@ function screenContactView(){
   if(!c) return emptyState('找不到这位联系人','可能已经被删掉了。','回微信','backwx');
   const f=c.freq||{}, nB=(c.regexIds||[]).length, nW=(c.worldIds||[]).length;
   const grp=(DB.groups||[]).find(g=>g.id===c.groupId);
-  return '<div class="mecard">'+avBox(c,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(c.name)+(c.demo?'<span class="demo-note">示例</span>':'')+'</div>'
+  return '<div class="mecard">'+avBox(c,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div>'
     +'<div class="muted">'+esc([c.gender,c.age?c.age+'岁':'',c.identity].filter(Boolean).join(' · ')||'没有填基本资料')+'</div></div></div>'
     +'<div class="pad">'
     +'<div class="card" style="margin-top:12px">'
@@ -3823,7 +3865,7 @@ function screenContactEdit(){
   if(editBuf && editBuf.__key===(id||'new')){ v=editBuf; }
   else{
     v= c? JSON.parse(JSON.stringify(c)) : {
-      name:'',avatar:'',age:'',gender:'',identity:'',callMe:'',desc:'',persona:'',style:'',
+      name:'',remark:'',avatar:'',age:'',gender:'',identity:'',callMe:'',desc:'',persona:'',style:'',
       opener:'',examples:'',memories:[],groupId:'def',regexIds:[],worldIds:[],
       freq:{post:2,like:2,comment:2,reply:2},meetFreq:0,autoFreq:2,autoOn:true,voiceFreq:0,created:Date.now(),metAt:''
     };
@@ -3840,6 +3882,7 @@ function screenContactEdit(){
   return '<div class="pad"><div class="card frm">'
     +'<div class="row">'+avBox(v,'avatar')+'<input id="c_avatar" class="grow" value="'+esc(String(v.avatar||'').startsWith('data:')?'':v.avatar)+'" placeholder="头像（填一个 emoji，或点右边上传）"><button class="btn" id="c_avUp">上传</button></div>'
     +'<input id="c_name" value="'+esc(v.name)+'" placeholder="姓名">'
+    +'<input id="c_remark" value="'+esc(v.remark||'')+'" placeholder="备注昵称（仅你可见，角色不会知道）">'
     +'<input id="c_age" value="'+esc(v.age)+'" placeholder="年龄">'
     +'<select id="c_gender"><option value="">性别</option>'
       +['男','女','其他'].map(g=>'<option'+(v.gender===g?' selected':'')+'>'+g+'</option>').join('')+'</select>'
@@ -3876,6 +3919,7 @@ function readContactForm(){
   const mem=$$('#memList .row').map(r=>({id:r.dataset.mem||uid(),text:($('.mem-in',r).value||'').trim()})).filter(m=>m.text);
   return Object.assign({},v,{
     name:($('#c_name').value||'').trim(),
+    remark:($('#c_remark').value||'').trim(),
     avatar:av,
     age:($('#c_age').value||'').trim(),
     gender:$('#c_gender').value||'',
@@ -4735,7 +4779,7 @@ async function testVoiceConfig(){
 /* ---- 群成员 ---- */
 function sheetMembers(ch){
   const inner=ch.memberIds.map(id=>{ const c=ct(id); if(!c) return '';
-    return '<div class="lrow" data-ct2="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">'+esc(c.desc||c.identity||'')+'</div></div></div>'; }).join('');
+    return '<div class="lrow" data-ct2="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+esc(c.identity||'')+'</div></div></div>'; }).join('');
   sheet('<h3>群成员</h3>'+inner+'<button class="btn full" id="gAdd">加人</button><button class="btn full danger" id="gDel">解散这个群</button>');
   $$('#sheetBox [data-ct2]').forEach(el=>el.onclick=()=>{ closeSheet(); go('contactview',el.dataset.ct2); });
   $('#gAdd').onclick=()=>sheetPick('加进群里',9,(ids)=>{ ids.forEach(id=>{ if(!ch.memberIds.includes(id)) ch.memberIds.push(id); }); save(); closeSheet(); render(); toast('已加人'); });
@@ -4785,20 +4829,20 @@ function mHTML(p){
   const cmts=p.comments||[];
   const box=[];
   if((p.likes||[]).length){
-    box.push('<div class="mlike">'+ic('heart',12)+' '+p.likes.map(l=>esc(l.by==='me'?'我':((ct(l.by)||{}).name||'?'))).join('，')+'</div>');
+    box.push('<div class="mlike">'+ic('heart',12)+' '+p.likes.map(l=>esc(l.by==='me'?'我':contactDisplayName(ct(l.by)))).join('，')+'</div>');
   }
   cmts.forEach(cm=>{
-    const cn=cm.by==='me'?'我':((ct(cm.by)||{}).name||'?');
+    const cn=cm.by==='me'?'我':contactDisplayName(ct(cm.by));
     box.push('<div class="mcmt"><b>'+esc(cn)+'</b>：'+esc(cm.text)
       +'<span class="rebtn" data-reply="'+p.id+'" data-cid="'+cm.id+'" data-to="'+esc(cn)+'">回复</span></div>');
     (cm.replies||[]).forEach(r=>{
-      const rn=r.by==='me'?'我':((ct(r.by)||{}).name||'?');
+      const rn=r.by==='me'?'我':contactDisplayName(ct(r.by));
       box.push('<div class="mre"><b>'+esc(rn)+'</b>'+(r.to? ' 回复 '+esc(r.to):'')+'：'+esc(r.text)
         +'<span class="rebtn" data-reply="'+p.id+'" data-cid="'+cm.id+'" data-to="'+esc(rn)+'">回复</span></div>');
     });
   });
   return '<div class="mpost" data-post="'+p.id+'" data-regen="moment:'+p.id+'">'+avBox(author)
-    +'<div class="grow"><div class="nm">'+esc(author.name||'')+'</div>'
+    +'<div class="grow"><div class="nm">'+esc(p.by==='me'?(DB.me.name||'我'):contactDisplayName(author))+'</div>'
     +(p.text? '<div class="mtext">'+esc(p.text)+'</div>':'')
     +((p.images||[]).length? '<div class="mimgs">'+p.images.map(u=>'<img src="'+esc(u)+'" data-img="'+esc(u)+'">').join('')+'</div>':'')
     +(p.place? '<div class="mloc">'+ic('pin',12)+' '+esc(p.place)+'</div>':'')
@@ -4856,7 +4900,7 @@ function sheetWho(v,after){
     }
     if(t==='ids'){
       v.who={type:'ids',ids:[]};
-      sheet('<h3>选择联系人</h3>'+(DB.contacts||[]).map(c=>'<div class="lrow" data-isel="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(c.name)+'</div></div><div class="rt"><span class="chev">'+((v.who.ids||[]).includes(c.id)?'✓':'')+'</span></div></div>').join('')+'<button class="btn primary full" id="isOk">完成</button>');
+      sheet('<h3>选择联系人</h3>'+(DB.contacts||[]).map(c=>'<div class="lrow" data-isel="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div></div><div class="rt"><span class="chev">'+((v.who.ids||[]).includes(c.id)?'✓':'')+'</span></div></div>').join('')+'<button class="btn primary full" id="isOk">完成</button>');
       $$('#sheetBox [data-isel]').forEach(x=>x.onclick=()=>{ const id=x.dataset.isel; const arr=v.who.ids||[];
         const i=arr.indexOf(id); if(i>=0) arr.splice(i,1); else arr.push(id); save();
         x.querySelector('.chev').textContent=arr.includes(id)?'✓':''; });
@@ -5747,7 +5791,7 @@ function openCropper(img,ratio,max,cb,fmt){
   requestAnimationFrame(fit);
 }
 function exportAll(){
-  saveTextFile('BS小手机备份_'+fileDateStamp()+'.json','application/json',JSON.stringify(DB,null,2));
+  saveTextFile('BS小手机备份_'+fileDateStamp()+'.json','application/json',JSON.stringify(storedDbSnapshot(),null,2));
 }
 function fileDateStamp(){
   const d=new Date();
@@ -5867,15 +5911,44 @@ function npPickPageWall(key){
   }); };
   i.click();
 }
+function galleryAlbums(){ return DB.galleryAlbums||[]; }
+function galleryItems(albumId){ return (DB.galleryPics||[]).filter(function(x){ return x.albumId===albumId; }); }
+function gallerySyncPics(){ DB.pics=(DB.galleryPics||[]).map(function(x){ return x.url; }); }
+function galleryAddPic(albumId,url){
+  DB.galleryPics=DB.galleryPics||[];
+  const item={id:uid(),albumId:albumId||'wallpaper',url:url,ts:Date.now()};
+  DB.galleryPics.unshift(item); gallerySyncPics(); save(); return item;
+}
+function galleryRemovePic(id){
+  DB.galleryPics=(DB.galleryPics||[]).filter(function(x){ return x.id!==id; });
+  gallerySyncPics(); save();
+}
+function galleryAvatarPool(){ return galleryItems('avatar').map(function(x){ return x.url; }).filter(Boolean); }
+function galleryAvatarFor(seed){
+  const pool=galleryAvatarPool();
+  return pool.length?pool[wbHash(seed)%pool.length]:'';
+}
+function readerAvatarOf(r){
+  if(!r) return '';
+  if(r.avatarMode==='none') return '';
+  if(r.avatar&&(r.avatarMode==='custom'||r.avatarMode===undefined)) return r.avatar;
+  if(r.avatarMode==='custom') return '';
+  return galleryAvatarFor('reader:'+(r.id||'')+':'+(r.name||''));
+}
 function screenGallery(){
-  return '<div class="pad"><div class="card"><div class="row"><b>相册</b>'+clearBtn('gallery')+'</div><div class="muted" style="margin-top:6px">放你的壁纸、头像、朋友圈封面。</div>'
-  +'<div class="row" style="margin-top:12px"><button class="btn primary grow" id="picUp">上传图片</button></div>'
-  +'<div class="grid" style="grid-template-columns:repeat(3,1fr);padding:14px 0 0">'+(DB.pics||[]).map((p,i)=>'<div class="app" data-pic="'+i+'"><div class="ic" style="background:#ddd;overflow:hidden">'+(p?'<img src="'+p+'" style="width:100%;height:100%;object-fit:cover">':'')+'</div></div>').join('')+'</div></div></div>';
+  const albums=galleryAlbums();
+  const active=albums.some(function(x){ return x.id===DB.galleryActive; })?DB.galleryActive:'avatar';
+  const items=galleryItems(active);
+  return '<div class="pad"><div class="card"><div class="row"><b class="grow">相册</b>'+clearBtn('gallery')+'<button class="btn" id="galAdd">＋ 图集</button></div><div class="muted" style="margin-top:6px">按图集整理头像、壁纸和朋友圈背景。</div>'
+  +'<div class="gallery-albums">'+albums.map(function(a){ const n=galleryItems(a.id).length; return '<button class="gallery-album'+(active===a.id?' on':'')+'" data-galbum="'+a.id+'">'+esc(a.name)+' <span>'+n+'</span></button>'; }).join('')+'</div>'
+  +'<div class="row" style="margin-top:12px"><button class="btn primary grow" id="picUp">上传到「'+esc((albums.find(function(x){ return x.id===active; })||{}).name||'相册')+'」</button></div>'
+  +(items.length?'<div class="grid gallery-grid">'+items.map(function(x){ return '<div class="app" data-gpic="'+x.id+'"><div class="ic" style="background:#ddd;overflow:hidden"><img src="'+esc(x.url)+'" style="width:100%;height:100%;object-fit:cover"></div></div>'; }).join('')+'</div>':'<div class="empty" style="padding:28px 10px">这个图集还没有图片。</div>')
+  +'</div></div>';
 }
 /* ================= 日记 / 小说 / 论坛 ================= */
 function screenDiary(){
   return '<div class="pad"><div class="card"><div class="row"><b>今天的日记</b>'+clearBtn('diary')+'</div><div class="muted" style="margin-top:6px">让联系人以第一人称写一篇，写进你们的相处。</div>'
-  +'<select id="dy_who" style="margin-top:10px">'+DB.contacts.map(c=>'<option value="'+c.id+'">'+esc(c.name)+'</option>').join('')+'</select>'
+  +'<select id="dy_who" style="margin-top:10px">'+DB.contacts.map(c=>'<option value="'+c.id+'">'+esc(contactDisplayName(c))+'</option>').join('')+'</select>'
   +'<button class="btn primary full" id="genDiary">生成今天这一篇</button></div>'
   +(DB.diary||[]).map((d,i)=>'<div class="card" data-regen="diary:'+i+'"><div class="muted">'+esc(d.date)+' · '+esc(d.who)+'</div><div style="margin-top:8px;white-space:pre-wrap">'+esc(d.text)+'</div><button class="btn full danger" data-dydel="'+i+'">删除这篇日记</button></div>').join('')+'</div>';
 }
@@ -5997,7 +6070,8 @@ function npEnsureReaders(force){
   if(!force&&DB.ui&&DB.ui.commercialMode&&!hasMine) return DB.np.readers;
   if(force) DB.np.readers=[];
   for(let i=0;i<10;i++){
-    DB.np.readers.push({id:'reader_'+i,name:npReaderName(i+3),type:NP_READER_TYPES[i%NP_READER_TYPES.length],fan:i%5+1,loyalty:40+((npHash('reader'+i)%55)),joined:Date.now()-i*86400000});
+    const name=npReaderName(i+3);
+    DB.np.readers.push({id:'reader_'+i,name:name,avatar:'',avatarMode:'auto',type:NP_READER_TYPES[i%NP_READER_TYPES.length],fan:i%5+1,loyalty:40+((npHash('reader'+i)%55)),joined:Date.now()-i*86400000});
   }
   save(); return DB.np.readers;
 }
@@ -6191,7 +6265,7 @@ function screenNovelStats(){
   return '<div class="np-top"><button class="ic2" data-nptab="home">‹</button><div class="h">阅读统计</div><button class="ic2" data-npsettings="1">'+ic('gear',19)+'</button></div>'
     +'<div class="np-stats"><div class="np-stat"><div class="muted">累计阅读时长</div><b>'+npReadMinutes()+' 分钟</b></div><div class="np-stat"><div class="muted">今日阅读</div><b>'+Math.floor((DB.np.todaySeconds||0)/60)+' 分钟</b></div>'
     +'<div class="np-stat"><div class="muted">书架藏书</div><b>'+((DB.np.shelf||[]).length)+' 本</b></div><div class="np-stat"><div class="muted">作者等级</div><b>Lv.'+(DB.np.author.level||1)+'</b></div></div>'
-    +'<div class="np-section"><h3>继续阅读</h3>'+(reads.length? reads.map(function(r){ const b=npBook(r.bookId), c=ct(r.cid); return b? '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(b.title)+'</b><div class="mini">'+(c?('和 '+esc(c.name)+' 一起读'):'阅读记录')+'</div></div><button class="btn" data-npbook="'+b.id+'">继续</button></div></div>':''; }).join('') : '<div class="np-empty">还没有阅读记录。去首页挑一本书。</div>')+'</div>';
+    +'<div class="np-section"><h3>继续阅读</h3>'+(reads.length? reads.map(function(r){ const b=npBook(r.bookId), c=ct(r.cid); return b? '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(b.title)+'</b><div class="mini">'+(c?('和 '+esc(contactDisplayName(c))+' 一起读'):'阅读记录')+'</div></div><button class="btn" data-npbook="'+b.id+'">继续</button></div></div>':''; }).join('') : '<div class="np-empty">还没有阅读记录。去首页挑一本书。</div>')+'</div>';
 }
 function screenNovelRankPage(){
   const kinds=[['hot','综合热榜'],['new','新书榜'],['fav','收藏榜'],['tip','打赏榜']];
@@ -6389,7 +6463,7 @@ function npCoPanelHTML(r,c){
   const msgs=(r.chat||[]).slice(-60);
   return '<div class="np-co-panel" id="npCoPanel"><div class="np-co-head"><div class="h">和 '+esc(label)+' 一起读</div><button id="npCoPrompt">先说</button><button id="npCoClose">收起</button></div>'
     +'<div class="np-co-msgs" id="npCoMsgs">'+(msgs.length? msgs.map(function(m){ const mine=m.role==='me'; return '<div class="np-co-line'+(mine?' me':'')+'"><div class="np-co-av" style="background:'+(mine?'#8b5f4d':'#506f62')+'">'+esc(mine?(DB.me.name||'我').slice(0,1):c.name.slice(0,1))+'</div><div class="np-co-bub">'+esc(m.text)+'</div></div>'; }).join('') : '<div class="np-empty" style="padding:24px 10px">长按选中一段，或者直接和 Ta 聊。</div>')+'</div>'
-    +'<div class="np-co-composer"><textarea id="npCoInput" placeholder="和 '+esc(c.name)+' 聊这一章"></textarea><button id="npCoSend">'+ic('arrow',18)+'</button></div></div>';
+    +'<div class="np-co-composer"><textarea id="npCoInput" placeholder="和 '+esc(contactDisplayName(c))+' 聊这一章"></textarea><button id="npCoSend">'+ic('arrow',18)+'</button></div></div>';
 }
 function sheetNpChapterMenu(bookId,chapterId){
   const b=npBook(bookId), ch=npChapter(b,chapterId); if(!b||!ch) return;
@@ -6873,7 +6947,7 @@ function sheetNpMessages(){
   DB.np.messages.forEach(function(m){ m.read=true; }); save(); render();
   const draw=function(){
     sheetFull('<h3>消息</h3><div class="muted" style="margin-bottom:8px">'+(DB.np.messages.length?('共 '+DB.np.messages.length+' 条 · 可以直接回复和点赞'):'还没有消息')+'</div>'
-      +(DB.np.messages.length? DB.np.messages.map(function(m){ return '<div class="np-card"><div class="row"><div class="av" style="width:38px;height:38px;border-radius:50%;background:#8f5f4d;color:#fff;display:flex;align-items:center;justify-content:center">'+esc((m.reader||'书').slice(0,1))+'</div><div class="grow"><b>'+esc(m.reader||'系统')+'</b><div class="mini">'+shortTime(m.ts)+'</div></div></div><div class="np-synopsis" style="margin-top:8px">'+esc(m.text)+'</div>'
+      +(DB.np.messages.length? DB.np.messages.map(function(m){ const rr=npReaderByName(m.reader)||{name:m.reader||'书'}; return '<div class="np-card"><div class="row"><div class="av" style="width:38px;height:38px;border-radius:50%;background:#8f5f4d;color:#fff;display:flex;align-items:center;justify-content:center;overflow:hidden">'+avatarOf({name:rr.name,avatar:readerAvatarOf(rr)})+'</div><div class="grow"><b>'+esc(m.reader||'系统')+'</b><div class="mini">'+shortTime(m.ts)+'</div></div></div><div class="np-synopsis" style="margin-top:8px">'+esc(m.text)+'</div>'
         +((m.replies||[]).length? '<div class="reader-comments" style="margin-top:8px">'+m.replies.map(function(r){ return '<div class="reader-cmt"><b>'+esc(r.name||'')+'</b>'+esc(r.text)+'</div>'; }).join('')+'</div>':'')
         +'<div class="np-tip-row"><button data-npmsglike="'+m.id+'">'+(m.liked?'已赞':'赞')+' '+(m.likes||0)+'</button><button data-npmsgreply="'+m.id+'">回复</button>'+(m.bookId?'<button data-npmsgbook="'+m.bookId+'">看作品</button>':'')+'</div></div>'; }).join('') : '<div class="np-empty">发布作品后，这里会出现收藏、评论和打赏消息。</div>')
       +'<button class="btn full" id="npMsgReadAll">全部已读</button><button class="btn full" id="npMsgClose">关闭</button>');
@@ -6901,9 +6975,11 @@ function sheetNpReaderGroup(){
   npEnsureReaders(false);
   const draw=function(){
     const msgs=(DB.np.readerGroup||[]).slice().sort(function(a,b){ return (a.ts||0)-(b.ts||0); });
-    sheetFixed('<div class="npg-wrap"><div class="row" style="padding:12px 12px 9px;border-bottom:1px solid #e3ddd2;flex:none"><div class="grow"><h3 style="margin:0">'+esc(DB.np.groupName||'读者群')+'</h3><div class="mini">'+DB.np.readers.length+' 位读者 · 本机模拟</div></div><div class="npg-head-actions"><button id="npGroupRefresh" title="让读者聊起来">'+ic('refresh',19)+'</button><button id="npGroupNewReader" title="拉一批读者">'+ic('userplus',19)+'</button><button id="npGroupManage" title="管理读者群">'+ic('users',19)+'</button><button id="npGroupClose" title="返回">‹</button></div></div>'
-      +'<div class="npg-msgs" id="npgMsgs">'+(msgs.length? msgs.map(function(m){ const mine=m.role==='me'; const r=npReaderByName(m.name)||{}; return '<div class="npg-line'+(mine?' me':'')+'"><div class="npg-av" style="background:'+(mine?'var(--theme-rose-deep)':'var(--theme-gray)')+'">'+esc(m.name.slice(0,1))+'</div><div class="npg-main"><div class="npg-name">'+esc(m.name)+(mine?'':' · '+esc(r.type||m.type||'读者'))+'</div><div class="npg-bub">'+esc(m.text)+'</div></div></div>'; }).join('') : '<div class="np-empty">读者群还安静。先发一句，或者让读者们聊起来。</div>')+'</div>'
+    sheetFixed('<div class="npg-wrap"><div class="row" style="padding:12px 12px 9px;border-bottom:1px solid #e3ddd2;flex:none"><div class="grow"><h3 style="margin:0">'+esc(DB.np.groupName||'读者群')+'</h3><div class="mini">'+DB.np.readers.length+' 位读者</div></div><div class="npg-head-actions"><button id="npGroupRefresh" title="让读者聊起来">'+ic('refresh',19)+'</button><button id="npGroupNewReader" title="拉一批读者">'+ic('userplus',19)+'</button><button id="npGroupManage" title="管理读者群">'+ic('users',19)+'</button><button id="npGroupClose" title="返回">‹</button></div></div>'
+      +'<div class="npg-msgs" id="npgMsgs">'+(msgs.length? msgs.map(function(m){ const mine=m.role==='me'; const r=npReaderByName(m.name)||{name:m.name}; return '<div class="npg-line'+(mine?' me':'')+'"><div class="npg-av" style="background:'+(mine?'var(--theme-rose-deep)':'var(--theme-gray)')+'">'+avatarOf(mine?DB.me:{name:r.name,avatar:readerAvatarOf(r)})+'</div><div class="npg-main"><div class="npg-name">'+esc(m.name)+(mine?'':' · '+esc(r.type||m.type||'读者'))+'</div><div class="npg-bub">'+esc(m.text)+'</div></div></div>'; }).join('') : '<div class="np-empty">读者群还安静。先发一句，或者让读者们聊起来。</div>')+'</div>'
       +'<div class="npg-composer"><textarea id="npGroupInput" placeholder="以作者身份发消息"></textarea><button id="npGroupSend">'+ic('arrow',18)+'</button></div></div>');
+    $('#sheetBox').classList.add('npg-sheet');
+    sheetPageBackground('novel');
     const box=$('#npgMsgs'); if(box) box.scrollTop=box.scrollHeight;
     $('#npGroupClose').onclick=closeSheet;
     $('#npGroupManage').onclick=sheetNpGroupManage;
@@ -6918,13 +6994,35 @@ function sheetNpGroupManage(){
   const draw=function(){
     sheetFull('<div class="row"><button class="ic2" id="npGroupBackTop" style="font-size:calc(22px * var(--ui-font-scale,1))">‹</button><h3 style="margin:0;flex:1">读者群管理</h3></div><input id="npGroupName" value="'+esc(DB.np.groupName||'读者群')+'" placeholder="群名称" style="margin-top:10px"><button class="btn primary full" id="npGroupNameSave">保存群名称</button>'
       +'<div class="sechead">群成员 · '+DB.np.readers.length+' 人</div>'
-      +DB.np.readers.map(function(r,i){ return '<div class="npg-member" data-reader="'+i+'"><div class="npg-av">'+esc(r.name.slice(0,1))+'</div><div class="grow"><div class="t1">'+esc(r.name)+'</div><div class="t2">'+esc(r.type)+' · 粉丝值 '+(r.fan||1)+' · 忠诚 '+(r.loyalty||0)+'</div></div><button class="btn danger" data-kickreader="'+i+'">移出</button></div>'; }).join('')
+      +DB.np.readers.map(function(r,i){ return '<div class="npg-member" data-reader="'+i+'"><div class="npg-av">'+avatarOf({name:r.name,avatar:readerAvatarOf(r)})+'</div><div class="grow"><div class="t1">'+esc(r.name)+'</div><div class="t2">'+esc(r.type)+' · 粉丝值 '+(r.fan||1)+' · 忠诚 '+(r.loyalty||0)+'</div></div><button class="btn" data-readeravatar="'+i+'">头像</button><button class="btn danger" data-kickreader="'+i+'">移出</button></div>'; }).join('')
       +'<button class="btn primary full" id="npGroupAddReader">拉一个新读者</button><button class="btn full" id="npGroupBack">返回读者群</button>');
     $('#npGroupNameSave').onclick=function(){ DB.np.groupName=String($('#npGroupName').value||'').trim()||'读者群'; save(); toast('群名称已保存'); };
     $('#npGroupAddReader').onclick=function(){ npAddGroupReader(1); draw(); };
     $('#npGroupBack').onclick=sheetNpReaderGroup;
     $('#npGroupBackTop').onclick=sheetNpReaderGroup;
+    $$('#sheetBox [data-readeravatar]').forEach(function(el){ el.onclick=function(){ sheetReaderAvatar(Number(el.dataset.readeravatar)); }; });
     $$('#sheetBox [data-kickreader]').forEach(function(el){ el.onclick=function(){ const i=Number(el.dataset.kickreader); DB.np.readers.splice(i,1); save(); draw(); }; });
+  };
+  draw();
+}
+function sheetReaderAvatar(index){
+  const r=(DB.np.readers||[])[index]; if(!r) return;
+  const draw=function(){
+    const pool=galleryItems('avatar');
+    sheetFull('<div class="row"><button class="ic2" id="readerAvatarBack" style="font-size:calc(22px * var(--ui-font-scale,1))">‹</button><h3 style="margin:0;flex:1">'+esc(r.name)+' 的头像</h3></div>'
+      +'<div style="display:flex;justify-content:center;margin:18px 0"><div class="npg-av" style="width:72px;height:72px;border-radius:20px">'+avatarOf({name:r.name,avatar:readerAvatarOf(r)})+'</div></div>'
+      +'<button class="btn primary full" id="readerAvatarUpload">从头像图集上传</button>'
+      +(pool.length?'<div class="sechead">头像图集</div><div class="stkgrid">'+pool.map(function(item){ return '<img data-ravatar="'+item.id+'" src="'+esc(item.url)+'">'; }).join('')+'</div>':'<div class="np-empty">头像图集还没有图片。上传一张后会出现在这里。</div>')
+      +'<button class="btn full danger" id="readerAvatarClear">删除头像，使用默认简笔画</button><button class="btn full" id="readerAvatarClose">返回读者群</button>');
+    $('#readerAvatarBack').onclick=function(){ sheetNpGroupManage(); };
+    $('#readerAvatarClose').onclick=function(){ sheetNpGroupManage(); };
+    $('#readerAvatarClear').onclick=function(){ r.avatar=''; r.avatarMode='none'; save(); draw(); toast('已使用默认头像'); };
+    $('#readerAvatarUpload').onclick=function(){
+      const input=document.createElement('input'); input.type='file'; input.accept='image/*';
+      input.onchange=function(){ if(!input.files[0]) return; readImage(input.files[0],900,function(url){ const item=galleryAddPic('avatar',url); r.avatar=item.url; r.avatarMode='custom'; save(); draw(); toast('头像已更新'); }); };
+      input.click();
+    };
+    $$('#sheetBox [data-ravatar]').forEach(function(el){ el.onclick=function(){ const item=(DB.galleryPics||[]).find(function(x){ return x.id===el.dataset.ravatar; }); if(!item) return; r.avatar=item.url; r.avatarMode='custom'; save(); draw(); toast('头像已更新'); }; });
   };
   draw();
 }
@@ -6935,7 +7033,7 @@ function npAddGroupReader(count){
     const used=DB.np.readers.map(function(r){ return r.name; });
     const name=names.find(function(n){ return used.indexOf(n)<0; })||('新读者'+(DB.np.readers.length+1));
     const type=NP_READER_TYPES[Math.floor(Math.random()*NP_READER_TYPES.length)];
-    DB.np.readers.push({id:uid(),name:name,type:type,fan:1,loyalty:45,joined:Date.now()}); added++;
+    DB.np.readers.push({id:uid(),name:name,avatar:'',avatarMode:'auto',type:type,fan:1,loyalty:45,joined:Date.now()}); added++;
   }
   save(); toast('已拉入 '+added+' 位读者');
 }
@@ -7267,7 +7365,7 @@ function screenReadShelf(){
     const b=bookById(r.bookId), c=ct(r.cid); if(!b||!c) return '';
     npNormalizeReading(r,b);
     return '<div class="lrow" data-openreading="'+r.id+'">'+avBox(c)
-      +'<div class="mi"><div class="t1">'+esc(b.title)+'</div><div class="t2">和 '+esc(c.name)+' 一起读 · 第 '+((r.chapterIndex||0)+1)+' 章 · 第 '+((r.paraIndex||0)+1)+' 段</div></div>'
+      +'<div class="mi"><div class="t1">'+esc(b.title)+'</div><div class="t2">和 '+esc(contactDisplayName(c))+' 一起读 · 第 '+((r.chapterIndex||0)+1)+' 章 · 第 '+((r.paraIndex||0)+1)+' 段</div></div>'
       +'<div class="rt"><span class="chev">›</span></div></div>';
   }).filter(Boolean).join('');
   const books=(DB.books||[]).filter(function(b){ return (b.chapters||[]).length; }).slice(0,8).map(function(b){
@@ -7292,10 +7390,10 @@ function screenReadRoom(rid){
   const total=(r.endChapter-r.startChapter)+1, pct=Math.round((r.chapterIndex-r.startChapter+1)*100/total);
   const chat=(r.chat||[]).slice(-10);
   return '<div class="pad" data-reading-room="'+r.id+'">'
-    +'<div class="reader-hero"><div class="kicker">和 '+esc(c.name)+' 一起读</div><h2>'+esc(b.title)+'</h2><div class="muted">第 '+(r.chapterIndex+1)+' 章 · 第 '+(r.paraIndex+1)+'/'+ps.length+' 段 · 区间 '+(r.startChapter+1)+'-'+(r.endChapter+1)+' 章</div><div class="reader-progress"><i style="width:'+pct+'%"></i></div></div>'
+    +'<div class="reader-hero"><div class="kicker">和 '+esc(contactDisplayName(c))+' 一起读</div><h2>'+esc(b.title)+'</h2><div class="muted">第 '+(r.chapterIndex+1)+' 章 · 第 '+(r.paraIndex+1)+'/'+ps.length+' 段 · 区间 '+(r.startChapter+1)+'-'+(r.endChapter+1)+' 章</div><div class="reader-progress"><i style="width:'+pct+'%"></i></div></div>'
     +'<div class="card"><div class="muted" style="font-size:calc(11.5px * var(--ui-font-scale,1));margin-bottom:6px">'+esc(chapter.title)+'</div><div class="reader-page">'+esc(ps[r.paraIndex])+'</div>'
     +'<div class="reader-actions"><button class="btn" id="rdPrev">上一段</button><button class="btn primary" id="rdNext">下一段</button></div></div>'
-    +'<div class="card"><div class="row"><div class="grow"><b>和 '+esc(c.name)+' 聊聊</b><div class="muted">Ta 知道前文章节摘要和当前段</div></div><button class="btn" id="rdAi">让 Ta 先说</button></div>'
+    +'<div class="card"><div class="row"><div class="grow"><b>和 '+esc(contactDisplayName(c))+' 聊聊</b><div class="muted">Ta 知道前文章节摘要和当前段</div></div><button class="btn" id="rdAi">让 Ta 先说</button></div>'
     +'<div class="reader-comments" id="rdChat">'+(chat.length? chat.map(function(m){ return '<div class="reader-cmt"><b>'+esc(m.role==='me'?(DB.me.name||'我'):c.name)+'</b>'+esc(m.text)+'</div>'; }).join('') : '<div class="reader-empty">你们还没说话。可以问 Ta 对这一段怎么看。</div>')+'</div>'
     +'<div class="reader-bar"><textarea id="rdInput" placeholder="说说你看到这里的想法"></textarea><button class="cbtn pri" id="rdSend" title="发送">'+ic('arrow',18)+'</button></div></div>'
     +'<button class="btn full" id="rdEnd">结束共读并保存</button><button class="btn full" data-go="read">回共读列表</button></div>';
@@ -7304,7 +7402,7 @@ function screenRead(){ return route.arg? screenReadRoom(route.arg):screenReadShe
 function sheetNpCoRead(bookId,startChapter){
   const b=npBook(bookId); if(!b) return;
   if(!(b.chapters||[]).length){ sheetNpGenerateNeed(bookId); return; }
-  const people=(DB.contacts||[]).map(function(c){ return '<option value="c:'+c.id+'">角色 · '+esc(c.name)+'</option>'; }).join('');
+  const people=(DB.contacts||[]).map(function(c){ return '<option value="c:'+c.id+'">角色 · '+esc(contactDisplayName(c))+'</option>'; }).join('');
   const sessions=(DB.chats||[]).map(function(ch){ return '<option value="ch:'+ch.id+'">会话 · '+esc(chatName(ch))+'</option>'; }).join('');
   const opts=people+sessions;
   if(!opts){ toast('先在微信里建一位联系人或会话'); return; }
@@ -7578,7 +7676,7 @@ function bindScreenInner(){
   $$('[data-meet]',s).forEach(el=>el.onclick=()=>{ preFlush(); sheetMeet(); });
   $$('[data-delct]',s).forEach(el=>el.onclick=()=>{
     const c=ct(el.dataset.delct); if(!c) return;
-    sheetSmall('<h3>删除「'+esc(c.name)+'」？</h3><div class="muted" style="margin:8px 0 14px">Ta 的聊天记录、朋友圈都会一起删掉。</div><button class="btn danger full" id="dcYes">确认删除</button><button class="btn full" id="dcNo">算了</button>');
+    sheetSmall('<h3>删除「'+esc(contactDisplayName(c))+'」？</h3><div class="muted" style="margin:8px 0 14px">Ta 的聊天记录、朋友圈都会一起删掉。</div><button class="btn danger full" id="dcYes">确认删除</button><button class="btn full" id="dcNo">算了</button>');
     $('#dcYes').onclick=()=>{ DB.contacts=DB.contacts.filter(x=>x.id!==c.id); DB.chats=DB.chats.filter(ch=>!(ch.type==='private'&&ch.memberIds[0]===c.id));
       DB.chats.forEach(ch=>{ ch.memberIds=ch.memberIds.filter(i=>i!==c.id); }); DB.chats=DB.chats.filter(ch=>ch.memberIds.length);
       DB.moments=DB.moments.filter(m=>m.by!==c.id); save(); closeSheet(); go('wechat',null,'contacts'); toast('已删除'); };
@@ -8058,13 +8156,29 @@ function bindScreenInner(){
     const apc=$('#apClear'); if(apc) apc.onclick=sheetClearAppearanceSaves;
   }
   if(route.name==='gallery'){
+    $$('[data-galbum]',s).forEach(el=>el.onclick=()=>{ DB.galleryActive=el.dataset.galbum; save(); render(); });
+    const addAlbum=$('#galAdd'); if(addAlbum) addAlbum.onclick=function(){
+      sheetBig('<h3>新建图集</h3><input id="galName" placeholder="图集名称，比如：猫猫头像"><button class="btn primary full" id="galSave">创建</button><button class="btn full" id="galCancel">取消</button>');
+      $('#galCancel').onclick=closeSheet;
+      $('#galSave').onclick=function(){
+        const name=String($('#galName').value||'').trim();
+        if(!name){ toast('先填写图集名称'); return; }
+        if(galleryAlbums().some(function(a){ return a.name===name; })){ toast('已经有同名图集'); return; }
+        const id='gal_'+uid();
+        DB.galleryAlbums.push({id:id,name:name.slice(0,20),builtin:false});
+        DB.galleryActive=id; save(); closeSheet(); render(); toast('图集已创建');
+      };
+    };
     $('#picUp').onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='image/*';
-      i.onchange=()=>{ if(i.files[0]) readImage(i.files[0],1600,url=>{ DB.pics=DB.pics||[]; DB.pics.unshift(url); save(); render(); }); }; i.click(); };
-    $$('[data-pic]',s).forEach(el=>el.onclick=()=>{ const p=DB.pics[Number(el.dataset.pic)]; if(!p) return;
-      sheet('<img src="'+p+'" style="width:100%;border-radius:14px"><button class="btn full" id="useWall">设为壁纸</button><button class="btn full" id="useCover">设为朋友圈封面</button><button class="btn full danger" id="delPic">删掉这张</button>');
+      i.onchange=()=>{ if(i.files[0]) readImage(i.files[0],1600,url=>{ galleryAddPic(DB.galleryActive||'wallpaper',url); render(); }); }; i.click(); };
+    $$('[data-gpic]',s).forEach(el=>el.onclick=()=>{ const item=(DB.galleryPics||[]).find(function(x){ return x.id===el.dataset.gpic; }); if(!item) return; const p=item.url;
+      const activeId=DB.galleryActive||'wallpaper'; const activeAlbum=(DB.galleryAlbums||[]).find(function(x){ return x.id===activeId; })||{name:'当前图集'};
+      sheet('<img src="'+esc(p)+'" style="width:100%;border-radius:14px">'+(item.albumId!==activeId?'<button class="btn full" id="movePic">移到「'+esc(activeAlbum.name)+'」</button>':'')+'<button class="btn full" id="useAvatar">设为我的头像</button><button class="btn full" id="useWall">设为壁纸</button><button class="btn full" id="useCover">设为朋友圈封面</button><button class="btn full danger" id="delPic">删掉这张</button>');
+      const move=$('#movePic'); if(move) move.onclick=()=>{ item.albumId=activeId; save(); closeSheet(); render(); toast('已移到「'+activeAlbum.name+'」'); };
+      $('#useAvatar').onclick=()=>{ DB.me.avatar=p; save(); closeSheet(); render(); toast('已设为我的头像'); };
       $('#useWall').onclick=()=>{ DB.ui.customWall=p; save(); applyTheme(); closeSheet(); toast('已设为壁纸'); };
       $('#useCover').onclick=()=>{ DB.momentCover=p; save(); closeSheet(); toast('已设为朋友圈封面'); };
-      $('#delPic').onclick=()=>{ DB.pics.splice(Number(el.dataset.pic),1); save(); closeSheet(); render(); }; });
+      $('#delPic').onclick=()=>{ galleryRemovePic(item.id); closeSheet(); render(); toast('已删除这张图片'); }; });
   }
   $$('[data-dydel]',s).forEach(function(el){ el.onclick=function(){ DB.diary.splice(Number(el.dataset.dydel),1); save(); render(); toast('已删除'); }; });
   $$('[data-forumdel]',s).forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); DB.forum.splice(Number(el.dataset.forumdel),1); save(); render(); toast('帖子已删除'); }; });
@@ -8240,7 +8354,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-21 · 第 45 轮';
+const BUILD='2026-10-21 · 第 46 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
@@ -8611,7 +8725,7 @@ async function dateTurn(d,nudge){
   const c=ct(d.cid); if(!c) return;
   if(!needKey()) return;
   const box=$('#dmsgs');
-  if(box){ box.insertAdjacentHTML('beforeend','<div class="chatty" id="dtyping">'+esc(c.name)+' 正在…</div>'); box.scrollTop=box.scrollHeight; }
+  if(box){ box.insertAdjacentHTML('beforeend','<div class="chatty" id="dtyping">'+esc(contactDisplayName(c))+' 正在…</div>'); box.scrollTop=box.scrollHeight; }
   try{
     const history=(d.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-24).map(function(m){ return {role:m.role==='me'?'user':'assistant',content:labelOf(m)}; });
     let sys=promptOf(c,null,(d.msgs||[]).slice(-6),{offline:true,scene:sceneName(d)})+'\n【日期】'+(d.day||'')+'\n'+memoryBlockForDate(d)
@@ -8941,15 +9055,15 @@ function wbHash(s){
   return h;
 }
 function wbSrcFor(name){ return WB_SRC[wbHash(name)%WB_SRC.length]; }
-function wbDisplayName(c){ return (c&&(c.wbName||c.name))||'某人'; }
+function wbDisplayName(c){ return (c&&(c.wbName||contactDisplayName(c)))||'某人'; }
 function wbAcct(cid){
   const w=wbDB();
   if(!w.accounts[cid]){
     const c=ct(cid)||{name:'某人'};
-    const n=wbDisplayName(c);
+    const n=c.wbName||c.name||'某人';
     const tag=wbHash(cid).toString(36).slice(-2)||'01';
     w.accounts[cid]={name:n,handle:wbHandle(n),fans:200+wbHash(cid+'f')%80000,
-      verified:wbHash(cid+'v')%10<3?'V':'',bio:c.desc||'',level:2+wbHash(cid+'l')%6,source:wbSrcFor(c.name||cid)};
+      verified:wbHash(cid+'v')%10<3?'V':'',bio:c.wbBio||'',level:2+wbHash(cid+'l')%6,source:wbSrcFor(c.name||cid)};
   }
   return w.accounts[cid];
 }
@@ -8962,10 +9076,10 @@ function wbAuthor(key){
   }
   if(key.indexOf('s:')===0){
     const n=key.slice(2)||'路人';
-    return {key:key,name:n,handle:wbHandle(n),verified:'',level:2,source:wbSrcFor(n)};
+    return {key:key,name:n,handle:wbHandle(n),verified:'',level:2,source:wbSrcFor(n),avatar:galleryAvatarFor(key)};
   }
   const c=ct(key), a=wbAcct(key);
-  const n=(c?wbDisplayName(c):'')||a.name||'某人';
+  const n=(c?(c.wbName||c.name):'')||a.name||'某人';
   return {key:key,name:n,handle:a.handle||wbHandle(n),verified:a.verified||'',level:a.level||3,source:a.source||wbSrcFor(n)};
 }
 function wbJSON(txt){
@@ -9225,9 +9339,10 @@ function wbToggleLike(pid){
 }
 function wbPostHTML(p){
   const a=p.author||{name:'某人',key:''};
+  const aName=(a.key!=='me'&&ct(a.key))?contactDisplayName(ct(a.key)):(a.name||'某人');
   const cm=(p.comments||[]);
   const hot=cm.slice().sort(function(x,y){ return (Number(y.likes)||0)-(Number(x.likes)||0); })[0];
-  const avKey=a.key==='me'? DB.me : (ct(a.key)||{name:a.name,icon:'me'});
+  const avKey=a.key==='me'? DB.me : (ct(a.key)||{name:a.name,avatar:a.avatar||galleryAvatarFor(a.key||a.name)});
   const avHTML=a.key==='me'? avBox(avKey,'wav') : '<span data-wbopenuser="'+esc(a.key)+'" style="cursor:pointer">'+avBox(avKey,'wav')+'</span>';
   const imgs=Number(p.img)>0? '<div class="wbimgs">'+Array.from({length:Math.min(3,Number(p.img))}).map(function(_,i){
       return '<div class="ph p'+(i%3)+'">'+ic('image',18)+'</div>';
@@ -9237,7 +9352,7 @@ function wbPostHTML(p){
   const hotHTML=hot? '<div class="wbhot" data-wbcmt="'+p.id+'"><span class="hlabel">热评</span><span class="hname">'+esc(hot.name)+'</span><span class="htext">：'+esc(hot.text)+'</span><span class="hlike">'+ic('heart',12)+' '+fmtNum(hot.likes)+'</span></div>' : '';
   return '<div class="wbpost" data-wbpost="'+p.id+'" data-regen="wbpost:'+p.id+'">'
     +'<div class="wbhead">'+avHTML+'<div class="wbinfo">'
-    +'<div class="wbname"><span class="wname">'+esc(a.name||'某人')+'</span>'+(a.verified? '<span class="vbadge">V</span>':'')+'<span class="lvl">Lv.'+(a.level||3)+'</span><span class="wbmore" data-wbmore="'+p.id+'">'+ic('more',18)+'</span></div>'
+    +'<div class="wbname"><span class="wname">'+esc(aName)+'</span>'+(a.verified? '<span class="vbadge">V</span>':'')+'<span class="lvl">Lv.'+(a.level||3)+'</span><span class="wbmore" data-wbmore="'+p.id+'">'+ic('more',18)+'</span></div>'
     +'<div class="wbmeta">'+shortTime(p.ts)+' · '+esc(p.source||a.source||'来自 微博网页版')+'</div>'
     +'</div></div>'
     +(p.text? '<div class="wbtext">'+wbRich(p.text)+'</div>':'')
@@ -9326,12 +9441,12 @@ function wbSearchResults(q){
   const posts=w.posts.filter(function(p){
     return String(p.text||'').indexOf(q)>=0 || String(p.topic||'').indexOf(q)>=0 || String((p.author||{}).name||'').indexOf(q)>=0;
   }).slice(0,6);
-  const cs=(DB.contacts||[]).filter(function(c){ return String(c.name||'').indexOf(q)>=0 || String(c.desc||'').indexOf(q)>=0; }).slice(0,5);
+  const cs=(DB.contacts||[]).filter(function(c){ return String(c.name||'').indexOf(q)>=0 || String(c.remark||'').indexOf(q)>=0 || String(c.wbName||'').indexOf(q)>=0; }).slice(0,5);
   return '<div class="sechead">微博</div>'
     +(posts.length? posts.map(wbPostHTML).join('') : '<div class="muted" style="padding:4px 16px 12px">没有找到相关微博。</div>')
     +'<div class="sechead">用户</div>'
     +(cs.length? cs.map(function(c){
-      return '<div class="lrow" data-wbopenuser="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(c))+'</div><div class="t2 ell">'+esc(c.desc||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>';
+      return '<div class="lrow" data-wbopenuser="'+c.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(c))+'</div><div class="t2 ell">'+esc(c.wbBio||c.identity||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>';
     }).join('') : '<div class="muted" style="padding:4px 16px 12px">没有找到相关用户。</div>');
 }
 function wbDiscoverHTML(){
@@ -9532,7 +9647,7 @@ function sheetWbCast(){
       +(cs.length? cs.map(function(c){
         const on=all || (w.cast||[]).indexOf(c.id)>=0;
         return '<div class="lrow" data-wbcastid="'+c.id+'">'+avBox(c)
-          +'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2 ell">'+esc(c.desc||c.identity||'')+'</div></div>'
+          +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2 ell">'+esc(c.identity||'')+'</div></div>'
           +'<div class="rt">'+(on?'<span class="wbcheck">✓</span>':'')+'</div></div>';
       }).join('') : '<div class="muted" style="padding:8px 0 14px">还没有联系人。</div>')
       +'<button class="btn primary full" id="wbcastOk">完成</button>');
@@ -9567,7 +9682,7 @@ function sheetWbFollows(){
     sheetBig('<h3>关注的人</h3>'+(cs.length? cs.map(function(c){
       const on=w.following.indexOf(c.id)>=0;
       return '<div class="lrow" data-wfol="'+c.id+'"><span data-wbopenuser="'+c.id+'" style="cursor:pointer">'+avBox(c)+'</span>'
-        +'<div class="mi"><div class="t1">'+esc(wbDisplayName(c))+'</div><div class="t2 ell">'+esc(c.desc||'')+'</div></div>'
+        +'<div class="mi"><div class="t1">'+esc(wbDisplayName(c))+'</div><div class="t2 ell">'+esc(c.wbBio||c.identity||'')+'</div></div>'
         +'<div class="rt"><span class="wbfollow'+(on?' on':'')+'">'+(on?'已关注':'关注')+'</span></div></div>';
     }).join('') : '<div class="muted">还没有联系人。</div>')
       +'<button class="btn full" id="folClose">关闭</button>');
@@ -9705,7 +9820,7 @@ function sheetWbSocial(kind){
   sheetBig('<h3>'+title+'</h3><div class="muted" style="margin:6px 0 10px">这里展示已绑定角色；更细的粉丝数据等有真实播放数据后再接。</div>'
     +(list.length? list.map(function(c,i){
       return '<div class="lrow" data-wbopenuser="'+c.id+'">'+avBox(c)
-        +'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">'+(kind==='fans'?'关注了你':'最近来访 · '+shortTime(Date.now()-(i+1)*3600e3))+'</div></div>'
+        +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+(kind==='fans'?'关注了你':'最近来访 · '+shortTime(Date.now()-(i+1)*3600e3))+'</div></div>'
         +'<div class="rt"><span class="chev">›</span></div></div>';
     }).join('') : '<div class="empty">还没有可展示的角色。</div>')
     +'<button class="btn full" id="wbsClose">关闭</button>');
@@ -9735,7 +9850,7 @@ function sheetWbUserEdit(cid){
 }
 function sheetWbUser(cid,initTab){
   const isStranger=String(cid).indexOf('s:')===0;
-  const c=isStranger? {id:cid,name:String(cid).slice(2),desc:'路人主页',icon:'me'} : ct(cid);
+  const c=isStranger? {id:cid,name:String(cid).slice(2),desc:'路人主页',avatar:galleryAvatarFor(cid)} : ct(cid);
   if(!c) return;
   const w=wbDB();
   let tab=initTab||(w.userTab&&w.userTab[cid])||'dynamic';
@@ -9756,13 +9871,13 @@ function sheetWbUser(cid,initTab){
       const arts=(DB.novels||[]).filter(function(n){ return n.who===c.name; });
       body=arts.length? arts.slice(0,6).map(function(n){ return '<div class="card"><div class="muted">'+esc(String(n.outline||'').slice(0,50))+'</div><div style="margin-top:8px;white-space:pre-wrap">'+esc(String(n.text||'').slice(0,180))+'</div></div>'; }).join('') : '<div class="empty">还没有文章。</div>';
     }else if(tab==='dm'){
-      body='<div class="card"><div class="muted" style="line-height:1.8">和 '+esc(c.name)+' 的私信。</div><button class="btn primary full" id="wbUserDm">打开私信</button></div>';
+      body='<div class="card"><div class="muted" style="line-height:1.8">和 '+esc(contactDisplayName(c))+' 的私信。</div><button class="btn primary full" id="wbUserDm">打开私信</button></div>';
     }else if(tab==='following'){
       const list=wbCast().filter(function(x){ return x.id!==cid; }).slice(0,10);
-      body=list.length? list.map(function(x){ return '<div class="lrow" data-wbopenuser="'+x.id+'">'+avBox(x)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(x))+'</div><div class="t2 ell">'+esc(x.desc||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join('') : '<div class="empty">还没有关注的人。</div>';
+      body=list.length? list.map(function(x){ return '<div class="lrow" data-wbopenuser="'+x.id+'">'+avBox(x)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(x))+'</div><div class="t2 ell">'+esc(x.wbBio||x.identity||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join('') : '<div class="empty">还没有关注的人。</div>';
     }else if(tab==='fans'){
       const list=wbCast();
-      body=list.length? list.map(function(x){ return '<div class="lrow" data-wbopenuser="'+x.id+'">'+avBox(x)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(x))+'</div><div class="t2 ell">'+esc(x.desc||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join('') : '<div class="empty">还没有粉丝。</div>';
+      body=list.length? list.map(function(x){ return '<div class="lrow" data-wbopenuser="'+x.id+'">'+avBox(x)+'<div class="mi"><div class="t1">'+esc(wbDisplayName(x))+'</div><div class="t2 ell">'+esc(x.wbBio||x.identity||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join('') : '<div class="empty">还没有粉丝。</div>';
     }else{
       const rep=posts.reduce(function(a,p){ return a+(Number(p.reposts)||0); },0);
       const cm=posts.reduce(function(a,p){ return a+(p.comments||[]).length; },0);
@@ -9804,34 +9919,40 @@ function sheetWbDetail(pid){
   if(!p) return;
   if(w.viewed.indexOf(pid)<0){ w.viewed.unshift(pid); w.viewed=w.viewed.slice(0,60); save(); }
   const a=p.author||{name:'某人',key:''};
+  const aDisplay=(a.key!=='me'&&ct(a.key))?contactDisplayName(ct(a.key)):(a.name||'某人');
   const all=p.comments||(p.comments=[]);
   let replyTo='';
   const draw=function(){
     const cm=all.slice(-40);
     const list=cm.map(function(c){
       const idx=all.indexOf(c);
-      const who=c.cid? (ct(c.cid)||{name:c.name,icon:'me'}) : {name:c.name,icon:'me'};
+      const isMine=c.by==='me'||c.name===wbMeName();
+      const who=isMine?DB.me:(c.cid? (ct(c.cid)||{name:c.name,avatar:c.avatar||galleryAvatarFor('wbcmt:'+c.name)}) : {name:c.name,avatar:c.avatar||galleryAvatarFor('wbcmt:'+c.name)});
+      const whoName=contactDisplayName(who);
       const av='<span data-wbopenuser="'+esc(c.cid||('s:'+c.name))+'" style="cursor:pointer">'+avBox(who,'wav sm')+'</span>';
       return '<div class="wbd-c" data-regen="wbcmt:'+pid+':'+idx+'"><div class="wbcava">'+av+'</div><div class="grow">'
-        +'<div class="wbd-cname">'+esc(c.name)+'</div><div class="wbd-ctext">'+(c.replyTo?'回复 <span class="wbat">@'+esc(c.replyTo)+'</span>：':'')+esc(c.text)+'</div>'
+        +'<div class="wbd-cname">'+esc(whoName)+'</div><div class="wbd-ctext">'+(c.replyTo?'回复 <span class="wbat">@'+esc(c.replyTo)+'</span>：':'')+esc(c.text)+'</div>'
         +'<div class="wbd-cmeta">'+shortTime(c.ts||Date.now())+' · <span data-wbd-reply="'+idx+'">回复</span> · <span data-wbd-del="'+idx+'">删除</span></div></div>'
         +'<div class="wbd-clike" data-wbd-like="'+idx+'">'+ic('heart',12)+' '+(c.likes||0)+'</div></div>';
     }).join('');
     const hot=cm.slice().sort(function(x,y){ return (Number(y.likes)||0)-(Number(x.likes)||0); })[0];
-    const avKey=a.key==='me'? DB.me : (ct(a.key)||{name:a.name,icon:'me'});
+    const avKey=a.key==='me'? DB.me : (ct(a.key)||{name:a.name,avatar:a.avatar||galleryAvatarFor(a.key||a.name)});
     const av='<span data-wbopenuser="'+esc(a.key)+'" style="cursor:pointer">'+avBox(avKey,'wav')+'</span>';
     const rep=p.repostOf? '<div class="wbrepost"><b>@'+esc(p.repostOf.name)+'</b>：'+esc(p.repostOf.text)+'</div>':'';
     const topic=p.topic? '<div class="wbtopicline"><span class="wbtopic" data-trend="'+esc(p.topic)+'">#'+esc(p.topic)+'#</span></div>':'';
     const follow=a.key!=='me'&&String(a.key).indexOf('s:')!==0? '<button class="wbfollow'+(w.following.indexOf(a.key)>=0?' on':'')+'" id="wbdFollow">'+(w.following.indexOf(a.key)>=0?'已关注':'关注')+'</button>':'';
     sheetFixed('<div class="wbd-top"><button class="wbd-back" id="wbdBack">‹</button><div class="wbd-title">微博正文</div><button class="wbd-more" id="wbdMore">'+ic('more',20)+'</button></div>'
       +'<div class="wbd-scroll">'
-      +'<div class="wbd-author">'+av+'<div class="grow"><div class="wbd-name">'+esc(a.name||'某人')+'</div><div class="wbd-meta">'+shortTime(p.ts)+' 来自 '+esc(p.source||a.source||'微博网页版')+'</div></div>'+follow+'</div>'
+      +'<div class="wbd-author">'+av+'<div class="grow"><div class="wbd-name">'+esc(aDisplay)+'</div><div class="wbd-meta">'+shortTime(p.ts)+' 来自 '+esc(p.source||a.source||'微博网页版')+'</div></div>'+follow+'</div>'
       +'<div class="wbd-text">'+wbRich(p.text||'')+'</div>'+rep+topic
       +'<div class="wbd-stats"><span><b>'+fmtNum(p.reposts)+'</b> 转发</span><span><b>'+fmtNum(all.length)+'</b> 评论</span><span><b>'+fmtNum(p.likes)+'</b> 赞</span></div>'
       +'<div class="wbd-chead"><b>评论 '+all.length+'</b><span class="muted">按热度</span></div>'
       +'<div class="wbd-comments">'+(list||'<div class="muted" style="padding:12px 0">还没有评论。</div>')+'</div></div>'
       +'<div class="wbd-bottom"><button data-wbdact="repost" title="转发">'+ic('arrow',20)+'</button><button data-wbdact="cmt" title="评论">'+ic('chat',20)+'</button><button data-wbdact="like" title="赞" class="'+(p.liked?'on':'')+'">'+ic('heart',20)+'</button>'
       +'<input id="wbd_input" placeholder="'+(replyTo?'回复 @'+esc(replyTo):'写评论…')+'"><button class="wbic pri" id="wbd_go">'+ic('arrow',18)+'</button></div>');
+    $('#sheetBox').classList.add('wbd-detail');
+    $('#sheet').classList.add('wbd-detail-sheet');
+    sheetPageBackground('weibo');
     $('#wbdBack').onclick=closeSheet;
     $('#wbdMore').onclick=function(){ sheetWbMore(pid); };
     const fu=$('#wbdFollow'); if(fu) fu.onclick=function(){ const i=w.following.indexOf(a.key); if(i>=0) w.following.splice(i,1); else w.following.push(a.key); save(); draw(); };
@@ -9864,10 +9985,12 @@ function sheetWbComment(pid,withPost){
     const cm=all.slice(-40);
     const list=cm.map(function(c){
       const idx=all.indexOf(c);
-      const who=c.cid? (ct(c.cid)||{name:c.name,icon:'me'}) : {name:c.name,icon:'me'};
+      const isMine=c.by==='me'||c.name===wbMeName();
+      const who=isMine?DB.me:(c.cid? (ct(c.cid)||{name:c.name,avatar:c.avatar||galleryAvatarFor('wbcmt:'+c.name)}) : {name:c.name,avatar:c.avatar||galleryAvatarFor('wbcmt:'+c.name)});
+      const whoName=contactDisplayName(who);
       const av=c.cid? '<span data-wbopenuser="'+esc(c.cid)+'" style="cursor:pointer">'+avBox(who,'wav sm')+'</span>' : avBox(who,'wav sm');
       return '<div class="wbc"><div class="wbcava">'+av+'</div>'
-        +'<div class="grow"><div class="wbcname">'+esc(c.name)+'</div><div class="wbctext">'
+        +'<div class="grow"><div class="wbcname">'+esc(whoName)+'</div><div class="wbctext">'
         +(c.replyTo?'回复 <span class="wbat">@'+esc(c.replyTo)+'</span>：':'')+esc(c.text)+'</div>'
         +'<div class="wbcmeta">'+shortTime(c.ts||Date.now())+' · <span data-wbc-reply="'+esc(c.name)+'">回复</span> · <span data-wbc-del="'+idx+'">删除</span></div></div>'
         +'<div class="wbclike" data-wbc-like="'+idx+'">'+ic('heart',13)+' '+(c.likes||0)+'</div></div>';
@@ -9990,7 +10113,7 @@ function sheetTrend(title){
   const people=(t.people||[]).map(function(id){ return ct(id); }).filter(Boolean);
   const hit=w.posts.filter(function(p){ return (p.topic&&p.topic===title)||String(p.text||'').indexOf(title)>=0; });
   sheetBig('<h3>#'+esc(title)+'#</h3><div class="muted" style="margin-bottom:10px">相关微博 '+hit.length+' 条</div>'
-    +(people.length? '<div class="wbtips">'+people.map(function(c){ return '<span class="wbtip" data-wbopenuser="'+c.id+'">'+esc(c.name)+'</span>'; }).join('')+'</div>':'')
+    +(people.length? '<div class="wbtips">'+people.map(function(c){ return '<span class="wbtip" data-wbopenuser="'+c.id+'">'+esc(contactDisplayName(c))+'</span>'; }).join('')+'</div>':'')
     +'<div class="wbsheetlist">'+(hit.length? hit.slice(0,6).map(wbPostHTML).join('') : '<div class="muted">这个话题还没有人发。</div>')+'</div>'
     +'<div class="row"><button class="btn grow" id="trPost">参与讨论</button><button class="btn primary grow" id="trGen">刷这个话题</button></div>');
   bindWbSheetPosts();
@@ -10273,7 +10396,7 @@ function polaroidHTML(p){
   const c=ct(p.cid);
   return '<div class="polaroid"><div class="ptxt">'+esc(p.text||'').replace(/\n/g,'<br>')+'</div>'
     +(p.memory? '<div class="pmem">'+esc(p.memory).replace(/\n/g,'<br>')+'</div>':'')
-    +'<div class="pcap">'+esc(p.day? (p.day+' · '):'')+esc(shortTime(p.ts))+' · '+esc(p.place||'')+(c? ' · '+esc(c.name):'')+'</div></div>';
+    +'<div class="pcap">'+esc(p.day? (p.day+' · '):'')+esc(shortTime(p.ts))+' · '+esc(p.place||'')+(c? ' · '+esc(contactDisplayName(c)):'')+'</div></div>';
 }
 function screenOut(){
   const list=outings().slice().sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); });
@@ -10506,6 +10629,8 @@ function removeDemoData(){
   DB.forum=(DB.forum||[]).filter(function(x){ return !isDemo(x); });
   const demoPics=(DB.ui&&DB.ui.demoPics)||[];
   DB.pics=(DB.pics||[]).filter(function(x){ return !isDemo(x)&&demoPics.indexOf(x)<0; });
+  DB.galleryPics=(DB.galleryPics||[]).filter(function(x){ return !isDemo(x)&&demoPics.indexOf(x.url)<0; });
+  gallerySyncPics();
   if(demoPics.indexOf(DB.momentCover)>=0) DB.momentCover='';
   if(demoPics.indexOf(DB.ui.customWall)>=0) DB.ui.customWall='';
   DB.books=(DB.books||[]).filter(function(x){ return !isDemo(x); });
@@ -10582,6 +10707,9 @@ function installDemoPhone(force){
   DB.momentSeen=0;
   const oldDemoPics=(DB.ui&&DB.ui.demoPics)||[];
   DB.pics=(DB.pics||[]).filter(function(x){ return oldDemoPics.indexOf(x)<0; }).concat(photos);
+  DB.galleryPics=(DB.galleryPics||[]).filter(function(x){ return oldDemoPics.indexOf(x.url)<0; });
+  photos.forEach(function(url,i){ if(!DB.galleryPics.some(function(x){ return x.url===url; })) DB.galleryPics.push({id:'demo_gpic_'+i,albumId:i===0?'avatar':(i===1?'moments':'wallpaper'),url:url,ts:Date.now()+i,demo:1}); });
+  gallerySyncPics();
   DB.ui.demoPics=photos.slice();
   DB.diary=(DB.diary||[]).concat([{id:'demo_d1',date:todayStr(),who:'沈砚',text:'雨下到傍晚才停。工作室里一直有木头和热茶的味道。\n\n他把修好的灯放到桌上，没有立刻开，只问我：这样是不是和原来一样。\n\n我说，不一样。原来那盏灯没有等你。',demo:1}]);
   DB.novels=(DB.novels||[]).concat([{id:'demo_n1',outline:'雨停之后，两个人留在修复室里',who:'沈砚',text:'雨声退到窗外，屋里只剩螺丝刀落在木桌上的轻响。\n\n他低头擦着灯罩，我坐在旁边看，没催。\n\n灯亮起来的时候，他先说了一句：这下能用了。',demo:1}]);
@@ -10696,7 +10824,7 @@ function sheetPickChats(title,max,ok){
     }).join('')
     +bare.map(function(c){
       const id='ct:'+c.id;
-      return '<div class="lrow" data-pickc="'+id+'"><div class="av" style="background:#07c160">'+ic('chat',18)+'</div><div class="mi"><div class="t1">'+esc(c.name)+'</div>'
+      return '<div class="lrow" data-pickc="'+id+'"><div class="av" style="background:#07c160">'+ic('chat',18)+'</div><div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div>'
         +'<div class="t2">联系人 · 还没聊过，选中会自动建会话</div></div>'
         +'<div class="rt"><span class="chev">'+(sel.indexOf(id)>=0?'✓':'')+'</span></div></div>';
     }).join('');
@@ -10782,7 +10910,7 @@ function screenHang(){
   const tab=DB.hangTab||'phone';
   const head=wxTop('查岗',clearBtn('hang')+'<button class="ic2" data-pickhang="1">换人</button>')
     +'<div class="lrow" data-pickhang="1">'+avBox(c)
-      +'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">'+esc(tab==='phone'?'正在查看 Ta 的手机':'看看 Ta 此刻在做什么')+'</div></div>'
+      +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+esc(tab==='phone'?'正在查看 Ta 的手机':'看看 Ta 此刻在做什么')+'</div></div>'
       +'<div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="tabs"><div class="tab'+(tab==='phone'?' on':'')+'" data-hangtab="phone">查手机</div>'
     +'<div class="tab'+(tab==='doing'?' on':'')+'" data-hangtab="doing">此刻动态</div></div>';
@@ -10795,7 +10923,7 @@ function hangPhone(c){
     +'<div class="muted" style="margin:8px 0 12px;line-height:1.7">会翻到 Ta 的最近聊天、通话记录、相册、备忘录和消费记录。每次查都是一次新的偷看。</div>'
     +'<button class="btn primary full" data-run="hangGo" id="hangGo">开始查手机</button>'
     +'<div class="muted" style="margin-top:10px">内容是角色按人设即兴编的，属于虚构，不是真实数据。</div></div>';
-  return '<div class="card" style="margin-top:12px"><div class="row"><b class="grow">'+esc(c.name)+' 的手机</b><span class="muted">'+shortTime(d.ts)+'</span><button class="btn danger" data-hangclear="phone">清空</button></div></div>'
+  return '<div class="card" style="margin-top:12px"><div class="row"><b class="grow">'+esc(contactDisplayName(c))+' 的手机</b><span class="muted">'+shortTime(d.ts)+'</span><button class="btn danger" data-hangclear="phone">清空</button></div></div>'
     + d.sections.map(s=>'<div class="card"><b>'+esc(s.t)+'</b>'
       +'<div class="muted" style="margin-top:8px;line-height:1.9">'+(s.lines.length? s.lines.map(x=>esc(x)).join('<br>'):'（空的）')+'</div></div>').join('')
     + '<button class="btn full" data-run="hangGo" id="hangGo">再翻一次</button>';
@@ -10880,9 +11008,9 @@ function screenCheckin(){
   const metDays=daysSince(metAt);
   return '<div class="pad" style="padding-top:0">'
    +wxTop('打卡',clearBtn('checkin')+'<button class="ic2" data-pickcheck="1">换人</button>')
-   +'<div class="lrow" data-pickcheck="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">和 Ta 每天见一面</div></div><div class="rt"><span class="chev">›</span></div></div>'
+   +'<div class="lrow" data-pickcheck="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">和 Ta 每天见一面</div></div><div class="rt"><span class="chev">›</span></div></div>'
    +'<div class="row" style="gap:10px;margin-top:12px;align-items:stretch">'
-   +'<div class="card grow" style="margin:0;text-align:center"><div style="font-size:calc(13px * var(--ui-font-scale,1));color:var(--fg2)">和 '+esc(c.name)+' 认识</div>'
+   +'<div class="card grow" style="margin:0;text-align:center"><div style="font-size:calc(13px * var(--ui-font-scale,1));color:var(--fg2)">和 '+esc(contactDisplayName(c))+' 认识</div>'
    +'<div style="font-size:calc(40px * var(--ui-font-scale,1));font-weight:200;line-height:1.2">'+metDays+'<span style="font-size:calc(15px * var(--ui-font-scale,1))"> 天</span></div>'
    +'<button class="btn full" data-metdate="'+c.id+'">设置认识日期</button></div>'
    +'<div class="card grow" style="margin:0;text-align:center"><div style="font-size:calc(13px * var(--ui-font-scale,1));color:var(--fg2)">火花</div>'
@@ -10894,7 +11022,7 @@ function screenCheckin(){
    +(done? '<div class="muted" style="margin-top:4px">已经打过卡了，'+hhmm(done.ts)+'</div>':'<div class="muted" style="margin-top:4px">还没打卡</div>')
    +(done? '':'<button class="btn primary full" data-run="ciGo" id="ciGo" style="margin-top:14px">今天打卡</button>')
    +'</div>'
-   +(done? '<div class="card" data-regen="checkin:'+ (DB.checkins||[]).indexOf(done) +'"><div class="row">'+avBox(c)+'<div class="grow"><div><b>'+esc(c.name)+'</b></div><div style="margin-top:6px;line-height:1.7">'+esc(done.text||'（Ta 没说话）')+'</div></div></div></div>':'')
+   +(done? '<div class="card" data-regen="checkin:'+ (DB.checkins||[]).indexOf(done) +'"><div class="row">'+avBox(c)+'<div class="grow"><div><b>'+esc(contactDisplayName(c))+'</b></div><div style="margin-top:6px;line-height:1.7">'+esc(done.text||'（Ta 没说话）')+'</div></div></div></div>':'')
    +((DB.checkins||[]).filter(function(x){ return x.cid===c.id; }).length>1? '<div class="card"><b>以前的打卡</b><div class="muted" style="margin-top:8px;line-height:1.9">'
       +(DB.checkins||[]).filter(function(x){ return x.cid===c.id; }).slice(1,11).map(function(x){ return esc(x.day)+'　'+esc((x.text||'').slice(0,26)); }).join('<br>')+'</div></div>':'')
    +'</div>';
@@ -10937,15 +11065,15 @@ function screenMall(){
   const pick=data&&data.pick;
   return '<div class="pad" style="padding-top:0">'
    +'<div class="wxtop"><button class="wxback" data-mallback="1">‹</button><div class="h">商场</div><span class="muted" style="font-size:calc(13px * var(--ui-font-scale,1))">余额 '+money(w.balance)+'</span></div>'
-   +'<div class="lrow" data-pickmall="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">绑定中</div></div><div class="rt"><span class="chev">›</span></div></div>'
+   +'<div class="lrow" data-pickmall="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">绑定中</div></div><div class="rt"><span class="chev">›</span></div></div>'
    +'<div class="tabs"><div class="tab'+(withTa?'':' on')+'" data-mallmode="solo">独自逛街</div>'
-     +'<div class="tab'+(withTa?' on':'')+'" data-mallmode="with">和 '+esc(c.name)+' 一起逛</div></div>'
+     +'<div class="tab'+(withTa?' on':'')+'" data-mallmode="with">和 '+esc(contactDisplayName(c))+' 一起逛</div></div>'
    +'<div class="tabs">'+TIERS.map(t=>'<div class="tab'+(DB.mallTier===t.k?' on':'')+'" data-malltier="'+t.k+'">'+t.n+'</div>').join('')+'</div>'
    +'<div class="card"><div class="row"><div class="grow"><b>'+tierName(DB.mallTier)+'</b><div class="muted">'+(withTa? '你和 Ta 一起逛':'你自己逛')+'</div></div>'
      +'<button class="btn primary" data-run="mallGo" id="mallGo">'+(items.length?'重新走一遍':'进场')+'</button></div>'
    +(withTa? '<button class="btn full" data-run="mallPick" id="mallPick"'+(items.length?'':' disabled style="opacity:.5"')+'>让 Ta 帮你挑一件</button>':'')
    +'</div>'
-   +(pick? '<div class="card"><b>'+esc(c.name)+' 想让你买这个</b><div class="muted" style="margin-top:8px;line-height:1.8">'+esc(pick.name)+'<br>'+esc(pick.say)+'</div>'
+   +(pick? '<div class="card"><b>'+esc(contactDisplayName(c))+' 想让你买这个</b><div class="muted" style="margin-top:8px;line-height:1.8">'+esc(pick.name)+'<br>'+esc(pick.say)+'</div>'
       +'<button class="btn full" id="mallBuyPick">就买这个</button></div>':'')
    +(items.length? items.map((x,i)=>'<div class="card"><div class="row"><div class="grow"><div><b>'+esc(x.name)+'</b></div>'
       +'<div class="muted" style="margin-top:4px">'+esc(x.desc||'')+'</div></div><div class="rt"><div><b>'+money(x.price)+'</b></div>'
@@ -10984,7 +11112,7 @@ function sheetOrder(o){
   sheet('<h3>'+esc(o.name)+'</h3>'
     +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">'+esc(o.src||'')+' · ¥'+money(o.price)+' · 已收货'+(last? (' · 上次'+esc(last)):'')+'</div>'
     +'<button class="btn full" id="odUse">使用</button>'
-    +'<button class="btn full" id="odGift">赠送'+(c? ('给 '+esc(c.name)):'')+'</button>'
+    +'<button class="btn full" id="odGift">赠送'+(c? ('给 '+esc(contactDisplayName(c))):'')+'</button>'
     +'<button class="btn full" id="odOpen">拆开</button>'
     +(o.sold? '' : '<button class="btn full" id="odSell">转卖（七折）</button>')
     +'<button class="btn full" id="odClose">关闭</button>');
@@ -11076,14 +11204,14 @@ function sheetTaPick(c,d,pk){
     return it? Object.assign({},it,{why:p.why}) : null;
   }).filter(Boolean);
   const total=items.reduce(function(s,x){ return s+Number(x.price||0); },0);
-  sheet('<h3>'+esc(c.name)+' 挑的</h3>'
+  sheet('<h3>'+esc(contactDisplayName(c))+' 挑的</h3>'
     +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">'+esc(pk.say||'')+'</div>'
     +(items.length? items.map(function(x){
         return '<div class="kv"><span>'+esc(x.name)+'<div class="muted" style="font-size:calc(12px * var(--ui-font-scale,1));margin-top:2px">'+esc(x.why||'')+'</div></span><b>'+money(x.price)+'</b></div>';
       }).join('') : '<div class="muted">Ta 这次没挑到合适的。</div>')
     +'<div class="kv"><span>合计</span><b>'+money(total)+'</b></div>'
     +'<button class="btn primary full" id="tpMe">我付钱</button>'
-    +'<button class="btn full" id="tpTa">让 '+esc(c.name)+' 付</button>'
+    +'<button class="btn full" id="tpTa">让 '+esc(contactDisplayName(c))+' 付</button>'
     +'<button class="btn full" id="tpNo">算了</button>');
   const finish=function(payer){
     if(!items.length){ closeSheet(); return; }
@@ -11161,21 +11289,21 @@ function screenTaobao(){
             +'<button class="btn grow" data-addta="'+i+'" data-run="addTa:'+i+'">加 Ta 的</button><button class="btn primary" data-tbbuy="'+i+'" data-run="tbBuy:'+i+'">直接买</button></div></div>';
         }).join('');
     }).join('');
-    body='<div class="card"><div class="row"><div class="grow"><b>'+esc(name)+'</b><div class="muted">绑定中：'+esc(c.name)+' · 用户人设：'+esc(per?per.name:'未绑定')+'</div></div>'
+    body='<div class="card"><div class="row"><div class="grow"><b>'+esc(name)+'</b><div class="muted">绑定中：'+esc(contactDisplayName(c))+' · 用户人设：'+esc(per?per.name:'未绑定')+'</div></div>'
       +'<button class="btn primary" data-run="tbGo" id="tbGo">'+(items.length? '刷新':'刷一刷')+'</button></div></div>'
       +(per? '' : '<div class="card"><div class="muted">刷新商品前要先绑定用户人设。</div><button class="btn full" data-tbpersona="1">选择用户人设</button></div>')
       +'<div class="tabs" style="overflow-x:auto">'+TB_PRICES.map(function(x){ return '<div class="tab'+(price===x[0]?' on':'')+'" data-tbprice="'+x[0]+'">'+x[1]+'</div>'; }).join('')+'</div>'
       +'<div class="tabs" style="overflow-x:auto"><div class="tab'+(cat==='all'?' on':'')+'" data-tbcat="all">全部品类</div>'
       +cats.slice(1).map(function(x){ return '<div class="tab'+(cat===x?' on':'')+'" data-tbcat="'+esc(x)+'">'+esc(x)+'</div>'; }).join('')+'</div>'
       +(items.length? (filtered.length? itemHTML : '<div class="card"><div class="muted">这个价位和品类下还没有商品，换一个筛选看看。</div></div>') : '<div class="card"><div class="muted">还没有商品，点上面的「刷一刷」。</div></div>')
-      +(items.length? '<button class="btn full" data-run="taPick" id="taPick">让 '+esc(c.name)+' 挑几件</button>':'')
-      +(data&&data.pick? '<div class="card"><b>'+esc(c.name)+' 挑的这几件</b><div class="muted" style="margin-top:8px;line-height:1.8">'
+      +(items.length? '<button class="btn full" data-run="taPick" id="taPick">让 '+esc(contactDisplayName(c))+' 挑几件</button>':'')
+      +(data&&data.pick? '<div class="card"><b>'+esc(contactDisplayName(c))+' 挑的这几件</b><div class="muted" style="margin-top:8px;line-height:1.8">'
         +(data.pick.picks||[]).map(function(p){ return esc(p.name)+'　'+esc(p.why); }).join('<br>')+(data.pick.say? '<br><br>'+esc(data.pick.say):'')+'</div>'
         +'<button class="btn full" id="taPickBuy">这几件一起买</button></div>':'');
   }else if(tab==='mine'){
     body=cartHTML(mine, 'me', '我的购物车');
   }else if(tab==='ta'){
-    body=cartHTML(ta, 'ta', '和 '+c.name+' 的购物车');
+    body=cartHTML(ta, 'ta', '和 '+contactDisplayName(c)+' 的购物车');
   }else{
     const os=DB.orders||[];
     body=os.length? os.map(function(o){ return '<div class="card" data-order="'+o.id+'"><div class="row"><div class="grow"><div><b>'+esc(o.name)+'</b></div>'
@@ -11187,7 +11315,7 @@ function screenTaobao(){
   return '<div class="pad" style="padding-top:0">'
     +wxTop(name,clearBtn('shop')+'<span class="muted" style="font-size:calc(13px * var(--ui-font-scale,1))">余额 '+money(w.balance)+'</span>')
     +tabsHtml
-    +'<div class="lrow" data-picktb="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(c.name)+'</div><div class="t2">绑定中，点一下换人</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" data-picktb="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">绑定中，点一下换人</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-tbpersona="1"><div class="av" style="background:#8e8e93">人</div><div class="mi"><div class="t1">用户人设</div><div class="t2">'+esc(per?per.name:'未绑定，点这里选择')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +body+'</div>';
 }
