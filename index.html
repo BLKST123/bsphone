@@ -508,8 +508,10 @@ body.app-dragging{user-select:none;-webkit-user-select:none}
 #phone.dark .home-preview{background:linear-gradient(160deg,#1c2430,#2a2028);border-color:rgba(255,255,255,.08)}
 body.keyboard #phone{height:var(--app-h,100dvh)}
 body.keyboard .sheet{height:var(--app-h,100dvh);bottom:auto}
-body.keyboard .sheet .box{max-height:calc(var(--app-h,100dvh) - 10px);padding-bottom:12px}
-body.keyboard .sheet .box.full,body.keyboard .sheet .box.full.fixed{height:var(--app-h,100dvh);max-height:var(--app-h,100dvh)}
+body.keyboard .sheet .box{min-height:0!important;max-height:calc(var(--app-h,100dvh) - 10px);padding-bottom:12px}
+body.keyboard .sheet .box.full,body.keyboard .sheet .box.full.fixed{height:var(--app-h,100dvh);min-height:0!important;max-height:var(--app-h,100dvh)}
+body.keyboard .bigedit-ov{height:var(--app-h,100dvh);bottom:auto}
+body.keyboard .bigedit-box{min-height:0!important;max-height:calc(var(--app-h,100dvh) - 12px)}
 #screen{scroll-padding-top:72px;scroll-padding-bottom:calc(var(--kb-h,0px) + 24px)}
 .sheet .box{scroll-padding-top:60px;scroll-padding-bottom:calc(var(--kb-h,0px) + 24px)}
 input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) + 26px)}
@@ -1310,6 +1312,8 @@ body[data-style="liquidclear"] .sheet{background:rgba(20,28,40,.18);backdrop-fil
 body[data-style="liquidclear"] .sheet .box,body[data-style="liquidclear"] .bigedit-box{background-color:rgba(255,255,255,.02)!important;border:1px solid rgba(255,255,255,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 18px 42px rgba(27,37,52,.2);backdrop-filter:blur(24px) saturate(160%);-webkit-backdrop-filter:blur(24px) saturate(160%);color:var(--fg)}
 #phone.dark[data-style="liquidclear"] :is(.card,.settings-bubble,.np-card,.home-widget,.home-clock-widget,.home-calendar-widget,.home-list-widget,.home-quote-widget,.home-books-widget,.hstats-widget){border-color:rgba(255,255,255,.22)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.06),0 12px 30px rgba(0,0,0,.3)!important}
 #phone.dark[data-style="liquidclear"] .app .ic{border-color:rgba(255,255,255,.34)!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.52),0 10px 24px rgba(0,0,0,.34)!important}
+#phone[data-style="liquidclear"] .home-widget{border:0!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.72),inset 0 1px 0 rgba(255,255,255,.9)!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important}
+#phone.dark[data-style="liquidclear"] .home-widget{box-shadow:inset 0 0 0 1px rgba(255,255,255,.26),inset 0 1px 0 rgba(255,255,255,.38)!important}
 
 /* 拟物化：纸张、压纹、缝线与实体按键 */
 #phone[data-style="skeuo"]{--radius:18px}
@@ -2714,17 +2718,36 @@ function applyTheme(){ const p=$('#phone'); const dark=!!DB.ui.dark;
   if(screen) screen.classList.toggle('has-page-wall',!!wall);
   const css=$('#userCustomCss'); if(css) css.textContent=String(DB.ui.customCss||'').replace(/<\/style/gi,'<\\/style');
 }
-function syncAppHeight(){
-  if(!window.visualViewport) return;
-  const vv=window.visualViewport, h=Math.max(1,Math.round(vv.height));
-  const kb=Math.max(0,Math.round(window.innerHeight-h-vv.offsetTop));
-  document.documentElement.style.setProperty('--app-h',h+'px');
-  document.documentElement.style.setProperty('--kb-h',kb+'px');
-  document.body.classList.toggle('keyboard',kb>120);
+let nativeKeyboardHeight=0;
+function nativeKbHeight(){
+  try{
+    if(window.NativeDisplay&&typeof window.NativeDisplay.getKeyboardHeight==='function'){
+      const n=Number(window.NativeDisplay.getKeyboardHeight());
+      if(Number.isFinite(n)) nativeKeyboardHeight=Math.max(0,Math.round(n));
+    }
+  }catch(e){}
+  return nativeKeyboardHeight;
 }
+function syncAppHeight(){
+  const vv=window.visualViewport;
+  const fullH=Math.max(1,Math.round(window.innerHeight||document.documentElement.clientHeight||1));
+  const vvH=vv?Math.max(1,Math.round(vv.height)):fullH;
+  const vvOffset=vv?Math.max(0,Math.round(vv.offsetTop||0)):0;
+  const visualKb=Math.max(0,fullH-vvH-vvOffset);
+  const keyboard=Math.max(visualKb,nativeKbHeight());
+  const h=keyboard>120?Math.max(1,fullH-keyboard):vvH;
+  document.documentElement.style.setProperty('--app-h',h+'px');
+  document.documentElement.style.setProperty('--kb-h',keyboard+'px');
+  document.body.classList.toggle('keyboard',keyboard>120);
+}
+window.addEventListener('nativekeyboardchange',function(e){
+  nativeKeyboardHeight=Math.max(0,Number(e.detail)||0);
+  syncAppHeight();
+});
 function bringInputAboveKeyboard(el){
   if(!el||!el.matches||!el.matches('input,textarea')) return;
-  const vv=window.visualViewport, vh=vv?vv.height:window.innerHeight;
+  const kb=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kb-h'))||0;
+  const vh=Math.max(1,window.innerHeight-kb);
   const r=el.getBoundingClientRect();
   const safeBottom=vh-18, safeTop=10;
   if(r.bottom<=safeBottom&&r.top>=safeTop) return;
@@ -2739,7 +2762,7 @@ function bringInputAboveKeyboard(el){
 document.addEventListener('focusin',function(e){
   const el=e.target;
   if(!el||!el.matches||!el.matches('input,textarea')) return;
-  [180,420,720].forEach(function(ms){ setTimeout(function(){ syncAppHeight(); bringInputAboveKeyboard(el); },ms); });
+  [0,60,160,300,480,720,980].forEach(function(ms){ setTimeout(function(){ syncAppHeight(); bringInputAboveKeyboard(el); },ms); });
 });
 document.addEventListener('focusout',function(e){ if(e.target&&e.target.matches&&e.target.matches('input,textarea')) setTimeout(syncAppHeight,180); });
 function tickStatus(){ const t=$('#stTime'); if(!t) return; const d=new Date(); t.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
@@ -8216,7 +8239,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-21 · 第 43 轮';
+const BUILD='2026-10-21 · 第 44 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
