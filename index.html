@@ -2714,7 +2714,8 @@ function applyTheme(){ const p=$('#phone'); const dark=!!DB.ui.dark;
   const key=npPageWallKey(route.name);
   const wall=key==='home'?'':((DB.ui.pageWalls||{})[key]||DB.ui.globalPageWall||'');
   const bg=$('#pageBg'), screen=$('#screen');
-  if(bg){ bg.style.backgroundImage=wall?('linear-gradient('+(DB.ui.dark?'rgba(15,18,20,.66)':'rgba(248,246,240,.76)')+','+(DB.ui.dark?'rgba(15,18,20,.66)':'rgba(248,246,240,.76)')+'), url("'+wall+'")'):''; bg.classList.toggle('on',!!wall); }
+  const pageWallVeil=DB.ui.dark?'rgba(15,18,20,.28)':'rgba(248,246,240,.14)';
+  if(bg){ bg.style.backgroundImage=wall?('linear-gradient('+pageWallVeil+','+pageWallVeil+'), url("'+wall+'")'):''; bg.classList.toggle('on',!!wall); }
   if(screen) screen.classList.toggle('has-page-wall',!!wall);
   const css=$('#userCustomCss'); if(css) css.textContent=String(DB.ui.customCss||'').replace(/<\/style/gi,'<\\/style');
 }
@@ -8239,7 +8240,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-21 · 第 44 轮';
+const BUILD='2026-10-21 · 第 45 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
