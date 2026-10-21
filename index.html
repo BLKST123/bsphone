@@ -2083,7 +2083,7 @@ function fixAll(){
   if(!Array.isArray(DB.np.customTags)) DB.np.customTags=['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'];
   if(!Array.isArray(DB.np.shelf)) DB.np.shelf=[];
   if(!Array.isArray(DB.np.readers)) DB.np.readers=[];
-  DB.np.readers.forEach(function(r){ if(!r.id) r.id=uid(); if(r.avatar===undefined) r.avatar=''; if(r.avatarMode===undefined) r.avatarMode=r.avatar?'custom':'auto'; });
+  DB.np.readers.forEach(function(r){ if(!r.id) r.id=uid(); if(r.avatar===undefined) r.avatar=''; if(r.avatarMode===undefined) r.avatarMode=r.avatar?'custom':'auto'; if(!r.voiceId) r.voiceId=NP_READER_VOICES[npHash(r.name||r.id)%NP_READER_VOICES.length].id; });
   if(!Array.isArray(DB.np.messages)) DB.np.messages=[];
   if(!Array.isArray(DB.np.square)) DB.np.square=[];
   if(!Array.isArray(DB.np.squareHistory)) DB.np.squareHistory=[];
@@ -5235,6 +5235,8 @@ const NP_READER_GROUP_SAFETY_RULE=`【读者群事实边界｜必须严格遵守
 - 禁止把用户书籍中没有明确写出的人物、关系、事件、地点、物品说成“书里已经有”。
 - 禁止替作者扩写剧情，禁止臆测后续设定并当成事实。
 - 严禁指责作者写错、记错、吃书、前后矛盾或搞错设定；作者纠正时必须立刻接受，不能继续抬杠或编造证据。
+- 不同读者必须有明显不同的性格、语气、用词和标点习惯，不能所有人都像同一个模板。
+- 同一个读者跨多条消息禁止反复使用同一种句式、同一个开场词或同样的标点节奏；再次发言时要主动换一种说法。
 - 如果无法严格依据书籍原文，就完全不谈具体剧情，只聊作者本人和更新状态。`;
 const NP_GROUP_SAFE_LINES=[
   '作者今天还更吗？我先把刀片放这儿。',
@@ -5245,6 +5247,16 @@ const NP_GROUP_SAFE_LINES=[
   '作者最近是不是又在熬夜码字，记得吃饭。',
   '开坑了就别想跑，我住下了。',
   '我先递刀片，再给作者递杯热水。'
+];
+const NP_READER_VOICES=[
+  {id:'blunt',name:'短句直球',style:'短句、少标点、直接催更，不撒娇',lines:['更新呢？','刀片已递。','别断更。','我蹲。','下一章。']},
+  {id:'soft',name:'软萌哭包',style:'语气软、爱用叠词和语气词，容易哭',lines:['呜呜今天还有吗，我在坑底等。','作者快回来嘛，我真的要哭了。','没有下一章我要闹了。','我先抱紧自己等更新。']},
+  {id:'scream',name:'夸张尖叫',style:'情绪高、感叹号多、反应夸张',lines:['啊啊啊我看到了，下一章快来！','我直接拍桌，作者快更！','尖叫！这个等待太长了！','我人已经在更新按钮下面了！']},
+  {id:'calm',name:'冷静克制',style:'礼貌、简洁、像认真留言',lines:['想问一下下一章的更新时间。','作者今天有存稿吗？','收到，会继续等更新。','辛苦了，期待下一篇。']},
+  {id:'tease',name:'欠欠玩笑',style:'损友式玩笑，有梗但不恶意',lines:['行，作者又准备让我们等到天亮是吧。','刀片放这儿了，更新就撤回。','大大，笔自己动了吗？','别装死，下一章交出来。']},
+  {id:'literary',name:'文艺慢句',style:'慢一点、有画面、句子偏文学',lines:['先留一盏灯，等下一章。','今天的等待也记下了。','风都停了，作者还没更。','我把耐心折好，放在这里等。']},
+  {id:'chatty',name:'话痨热心',style:'句子长、信息多、爱关心作者',lines:['作者今天吃饭了吗，存稿还够不够，不够就慢慢写但别消失。','我刚看完更新就来蹲下一章了，大大记得喝水。','不催太狠，但下一章真的可以安排一下了。','今天也在等更新，作者别熬夜太晚。']},
+  {id:'deadpan',name:'冷淡吐槽',style:'短、平、冷幽默，不夸张',lines:['看到了。更新呢。','行，我又来了。','等。','作者，进度条动一下。']}
 ];
 const NP_PARA_REACTIONS=[
   '我看到这里先尖叫一下，作者下一章呢？',
@@ -6128,11 +6140,25 @@ function npEnsureReaders(force){
   if(force) DB.np.readers=[];
   for(let i=0;i<10;i++){
     const name=npReaderName(i+3);
-    DB.np.readers.push({id:'reader_'+i,name:name,avatar:'',avatarMode:'auto',type:NP_READER_TYPES[i%NP_READER_TYPES.length],fan:i%5+1,loyalty:40+((npHash('reader'+i)%55)),joined:Date.now()-i*86400000});
+    DB.np.readers.push({id:'reader_'+i,name:name,avatar:'',avatarMode:'auto',type:NP_READER_TYPES[i%NP_READER_TYPES.length],voiceId:NP_READER_VOICES[i%NP_READER_VOICES.length].id,fan:i%5+1,loyalty:40+((npHash('reader'+i)%55)),joined:Date.now()-i*86400000});
   }
   save(); return DB.np.readers;
 }
 function npReaderByName(name){ return (DB.np.readers||[]).find(function(r){ return r.name===name; }); }
+function npReaderVoice(reader){
+  const id=reader&&reader.voiceId;
+  return NP_READER_VOICES.find(function(voice){ return voice.id===id; })||
+    NP_READER_VOICES[npHash((reader&&reader.name)||(reader&&reader.id)||'reader')%NP_READER_VOICES.length];
+}
+function npReaderRecentLines(reader,limit){
+  const name=reader&&reader.name;
+  return (DB.np.readerGroup||[]).filter(function(message){ return message.role==='reader'&&message.name===name; })
+    .slice(-(Number(limit)||2)).map(function(message){ return String(message.text||'').slice(0,60); });
+}
+function npReaderPromptProfile(reader){
+  const voice=npReaderVoice(reader), recent=npReaderRecentLines(reader,2);
+  return reader.name+'｜语气：'+voice.name+'；风格：'+voice.style+'；最近说过：'+(recent.length?recent.join(' / '):'无');
+}
 function npNextReaderName(){
   const used=(DB.np.readers||[]).map(function(r){ return r.name; });
   const pool=NP_READER_NAMES.filter(function(name){ return used.indexOf(name)<0; });
@@ -6186,7 +6212,8 @@ function npCreateReader(name,type,announce){
     fan:1,
     loyalty:45,
     joined:Date.now(),
-    aiNamed:true
+    aiNamed:true,
+    voiceId:NP_READER_VOICES[Math.floor(Math.random()*NP_READER_VOICES.length)].id
   };
   DB.np.readers.push(reader);
   if(announce) npAddGroup('系统','系统',reader.name+'加入'+String(DB.np.groupName||'读者群'),'system');
@@ -6220,13 +6247,13 @@ function npCommitReaderLines(output,readers,allowNewNames){
     const text=parts.slice(1).join(' ').trim();
     if(!parts[0]||!text) return;
     const reader=take(parts[0]);
-    if(reader){ npAddGroup(reader.name,reader.type,npSanitizeReaderGroupText(text),'reader'); emitted++; }
+    if(reader){ npAddGroup(reader.name,reader.type,npSanitizeReaderGroupText(text,reader),'reader'); emitted++; }
   });
   while(emitted<target){
     const reader=picks.find(function(item){ return !used[item.id]; });
     if(!reader) break;
     used[reader.id]=true;
-    npAddGroup(reader.name,reader.type,npLocalReaderText(),'reader');
+    npAddGroup(reader.name,reader.type,npLocalReaderText(reader),'reader');
     emitted++;
   }
   return emitted;
@@ -6307,6 +6334,7 @@ function npNormalizeBook(b){
     ch.authorNote=ch.authorNote||'今天也写到这里。谢谢还在看的你。';
     ch.volumeId=ch.volumeId||'';
   });
+  if(b.authorId==='me'&&b.chapters.length) b.published=true;
   b.stats=Object.assign({reads:0,favorites:0,comments:0,tips:0,words:0,heat:0},b.stats||{});
   b.stats.words=npBookWords(b);
   b.stats.comments=(b.chapters||[]).reduce(function(s,c){ return s+Object.keys(c.comments||{}).reduce(function(n,k){ return n+(c.comments[k]||[]).length; },0); },0);
@@ -6569,7 +6597,7 @@ function screenNovelBook(){
     +'<div class="np-section"><div class="np-actions"><button class="btn'+(inShelf?' primary':'')+'" data-npshelf="'+b.id+'">'+(inShelf?'已在书架':'加入书架')+'</button>'
     +'<button class="btn primary" data-npreadbook="'+b.id+'">开始阅读</button><button class="btn" data-npco-read="'+b.id+'">一起读</button></div>'
     +(chs.length<3? '<button class="btn full" data-npgenchapters="'+b.id+'">生成前三章</button>':'')
-    +(mine? '<div class="np-actions"><button class="btn" data-npnewchapter="'+b.id+'">新增章节</button><button class="btn" data-npvolumes="'+b.id+'">分卷管理</button><button class="btn" data-npeditbook="'+b.id+'">编辑资料</button><button class="btn'+(b.published!==false?'':' primary')+'" data-nppublish="'+b.id+'">'+(b.published!==false?'已发布':'发布作品')+'</button></div>':'')
+    +(mine? '<div class="np-actions"><button class="btn" data-npnewchapter="'+b.id+'">发布新章节</button><button class="btn" data-npvolumes="'+b.id+'">分卷管理</button><button class="btn" data-npeditbook="'+b.id+'">编辑资料</button>'+(b.published!==false?'':'<button class="btn" data-nppublish="'+b.id+'">发布作品</button>')+'<button class="btn primary" data-nprefreshbook="'+b.id+'">刷新互动</button></div>':'')
     +'<div class="np-notice"><b>简介</b><div class="np-synopsis" style="margin-top:6px">'+esc(b.synopsis||'这本书还没有简介。')+'</div></div>'
     +(b.announcement? '<div class="np-notice"><b>作者公告</b><div style="margin-top:5px">'+esc(b.announcement)+'</div></div>':'')
     +(persona? '<div class="np-persona"><small>人设标签</small>'+esc(persona)+'</div>':'')
@@ -7010,23 +7038,26 @@ function sheetNpChapterEditor(bookId,chapterId){
   const ch=old?JSON.parse(JSON.stringify(old)):{id:uid(),title:'',content:'',authorNote:'',volumeId:''};
   const volOpts='<option value="">正文（不分卷）</option>'+(b.volumes||[]).map(function(v){ return '<option value="'+v.id+'"'+(ch.volumeId===v.id?' selected':'')+'>'+esc(v.title)+'</option>'; }).join('');
   sheetFull('<h3>'+(old?'编辑章节':'新增章节')+'</h3><input id="npceTitle" placeholder="章节标题" value="'+esc(ch.title)+'"><select id="npceVolume" style="margin-top:8px">'+volOpts+'</select><textarea id="npceContent" placeholder="章节正文，空行分段" style="margin-top:8px;min-height:260px">'+esc(ch.content||'')+'</textarea><textarea id="npceNote" placeholder="作者有话说" style="margin-top:8px;min-height:80px">'+esc(ch.authorNote||'')+'</textarea>'
-    +'<button class="btn primary full" id="npceSave">保存章节</button>'+(old?'<button class="btn danger full" id="npceDelete">删除章节</button>':'')+'<button class="btn full" id="npceBack">返回</button>');
+    +'<button class="btn primary full" id="npceSave">'+(old?'保存章节':'发布本章')+'</button>'+(old?'<button class="btn danger full" id="npceDelete">删除章节</button>':'')+'<button class="btn full" id="npceBack">返回</button>');
   $('#npceBack').onclick=function(){ closeSheet(); go('novelbook',b.id); };
   $('#npceSave').onclick=function(){
     const content=String($('#npceContent').value||'').trim(); if(!content){ toast('章节正文不能为空'); return; }
     const title=String($('#npceTitle').value||'').trim()||('第'+((old?old.index:b.chapters.length)+1)+'章');
+    const wasPublished=b.published!==false, hadChapters=(b.chapters||[]).length>0;
     const next={id:ch.id,title:title,content:content,paras:content.split(/\n+/).map(function(x){return x.trim()}).filter(Boolean),authorNote:String($('#npceNote').value||'').trim(),volumeId:$('#npceVolume').value||'',summary:content.replace(/\s+/g,' ').slice(0,110),words:npWords(content),comments:old?(old.comments||{}):{},reviewComments:old?(old.reviewComments||[]):[],tips:old?(old.tips||[]):[],created:old?old.created:Date.now()};
     let target=old?npChapter(b,old.id):null;
     if(target) Object.assign(target,next); else { next.index=b.chapters.length; b.chapters.push(next); }
     b.updatedAt=Date.now(); npNormalizeBook(b);
     let joined=[],summary=null;
-    if(!old&&b.published!==false){
+    if(!old){
+      const firstPublish=!wasPublished||!hadChapters;
+      b.published=true;
       npEnsureReaders(false);
-      joined=npJoinReaders(20+(npHash(b.id+next.id)%4));
-      summary=npSeedPublishedChapterReactions(b,next,{readers:joined});
-      npAddMessage('system','《'+b.title+'》更新了：'+title,{bookId:b.id,chapterId:next.id});
+      joined=npJoinReaders(firstPublish?(24+(npHash(b.id+next.id)%5)):(20+(npHash(b.id+next.id)%4)));
+      summary=npSeedPublishedChapterReactions(b,next,{initial:firstPublish,readers:joined});
+      npAddMessage('system',firstPublish?('《'+b.title+'》已发布，读者开始涌入。'):('《'+b.title+'》更新了：'+title),{bookId:b.id,chapterId:next.id});
     }
-    save(); closeSheet(); go('novelbook',b.id); toast(old?'章节已保存':'章节已新增');
+    save(); closeSheet(); go('novelbook',b.id); toast(old?'章节已保存':'章节已发布');
     if(summary) setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
   };
   const del=$('#npceDelete'); if(del) del.onclick=function(){
@@ -7242,8 +7273,8 @@ function npGroupSend(){
   if(!picks.length) return;
   setTimeout(function(){
     if(DB.api.key){
-      const names=picks.map(function(r){ return r.name; }).join('、');
-      callModel([{role:'system',content:'你在模拟一个中文网文读者群，读者会回应作者刚发的消息，语气要像 QQ 群群友，短、自然、有梗。只围绕作者和更新聊天，禁止编造剧情。\n'+NP_READER_NAMING_RULE+'\n'+NP_READER_GROUP_SAFETY_RULE},{role:'user',content:'本轮已有读者：'+names+'\n其中一条可以保留已有读者，另一条可以自行取一个更像真实网友的新网名；两条网名不要重复。只能催更、递刀片、夸作者、问作者本人或回应作者这句话，不能把没有写明的内容当成书里的事实。\n作者说：'+text+'\n每行格式：网名|内容。'}]).then(function(out){
+      const names=picks.map(npReaderPromptProfile).join('\n');
+      callModel([{role:'system',content:'你在模拟一个中文网文读者群，读者会回应作者刚发的消息，语气要像 QQ 群群友，短、自然、有梗。只围绕作者和更新聊天，禁止编造剧情。\n'+NP_READER_NAMING_RULE+'\n'+NP_READER_GROUP_SAFETY_RULE+'\n每位读者必须保持自己的语气档案；不同读者不能同腔调；同一个读者禁止重复最近用过的开场词和句式。'},{role:'user',content:'本轮已有读者档案：\n'+names+'\n其中一条可以保留已有读者，另一条可以自行取一个更像真实网友的新网名；两条网名不要重复。只能催更、递刀片、夸作者、问作者本人或回应作者这句话，不能把没有写明的内容当成书里的事实。\n作者说：'+text+'\n每行格式：网名|内容。'}]).then(function(out){
         npCommitReaderLines(out,picks,true);
         save(); if(document.querySelector('#sheet').classList.contains('on')) sheetNpReaderGroup();
       }).catch(function(){});
@@ -7253,8 +7284,9 @@ function npGroupSend(){
     }
   },300);
 }
-function npLocalReaderText(){
-  return pick(NP_GROUP_SAFE_LINES);
+function npLocalReaderText(reader){
+  const voice=npReaderVoice(reader);
+  return pick((voice&&voice.lines&&voice.lines.length)?voice.lines:NP_GROUP_SAFE_LINES);
 }
 function npReaderGroupFacts(){
   return npAllBooks().filter(function(b){ return b.authorId==='me'&&b.published!==false; }).slice(0,5).map(function(b){
@@ -7262,10 +7294,15 @@ function npReaderGroupFacts(){
     return '《'+b.title+'》 · 已发布 '+chapters.length+' 章'+(latest?(' · 最新章节：'+latest.title):'');
   }).join('\n');
 }
-function npSanitizeReaderGroupText(text){
+function npSanitizeReaderGroupText(text,reader){
   const clean=String(text||'').trim().slice(0,160);
-  if(!clean) return npLocalReaderText();
-  if(/作者(你)?(写|记|搞|设)错|书(里|中)?(根本|明明)?(没有|没写)|文(里|中)?(根本|明明)?(没有|没写)|你(自己)?(忘|写错|记错)|吃书|前后(矛盾|对不上)|设定(错|崩|乱)|明明(书|文)(里|中)?(有|没有)/.test(clean)) return pick(NP_GROUP_SAFE_LINES);
+  if(!clean) return npLocalReaderText(reader);
+  if(/作者(你)?(写|记|搞|设)错|书(里|中)?(根本|明明)?(没有|没写)|文(里|中)?(根本|明明)?(没有|没写)|你(自己)?(忘|写错|记错)|吃书|前后(矛盾|对不上)|设定(错|崩|乱)|明明(书|文)(里|中)?(有|没有)/.test(clean)) return npLocalReaderText(reader);
+  const opening=clean.replace(/[^\u4e00-\u9fa5A-Za-z0-9]/g,'').slice(0,3);
+  const repeats=npReaderRecentLines(reader,3).some(function(previous){
+    return opening&&previous.replace(/[^\u4e00-\u9fa5A-Za-z0-9]/g,'').slice(0,3)===opening;
+  });
+  if(repeats) return npLocalReaderText(reader);
   return clean;
 }
 function npReplyText(text){
@@ -7288,9 +7325,9 @@ function npRefreshReaderGroup(){
   if(!picks.length){ toast('还没有读者'); return; }
   if(DB.api.key){
     busy('正在让读者群聊天，请稍后');
-    const names=picks.map(function(r){ return r.name; }).join('、');
+    const names=picks.map(npReaderPromptProfile).join('\n');
     const facts=npReaderGroupFacts()||'没有可用的作品事实。';
-    callModel([{role:'system',content:'你在模拟一个中文网文读者群。读者只围绕作者本人聊天：催更、递刀片、哭、尖叫、夸夸、问作息、问灵感、问下一章。禁止讨论具体剧情，禁止编造书里没有的人物、关系和事件，禁止说作者写错或与作者抬杠。\n'+NP_READER_NAMING_RULE+'\n'+NP_READER_GROUP_SAFETY_RULE},{role:'user',content:'本轮已有读者：'+names+'\n生成 5 条群聊，其中至少 2 条由你按当前作品气氛自行取一个真实网友网名，其余可以从已有读者里选；5 个网名都不能重复。\n只能使用下面这些公开事实确认书名和章节名，不能扩写剧情：\n'+facts+'\n话题只能围绕作者本人和更新状态。每行格式：网名|内容。只输出五行。'}]).then(function(out){
+    callModel([{role:'system',content:'你在模拟一个中文网文读者群。读者只围绕作者本人聊天：催更、递刀片、哭、尖叫、夸夸、问作息、问灵感、问下一章。禁止讨论具体剧情，禁止编造书里没有的人物、关系和事件，禁止说作者写错或与作者抬杠。\n'+NP_READER_NAMING_RULE+'\n'+NP_READER_GROUP_SAFETY_RULE+'\n每位读者必须保持自己的语气档案；不同读者不能同腔调；同一个读者禁止重复最近用过的开场词和句式。'},{role:'user',content:'本轮已有读者档案：\n'+names+'\n生成 5 条群聊，其中至少 2 条由你按当前作品气氛自行取一个真实网友网名，其余可以从已有读者里选；5 个网名都不能重复。\n只能使用下面这些公开事实确认书名和章节名，不能扩写剧情：\n'+facts+'\n话题只能围绕作者本人和更新状态。每行格式：网名|内容。只输出五行。'}]).then(function(out){
       npCommitReaderLines(out,picks,true);
       save(); busyDone(); if(document.querySelector('#sheet').classList.contains('on')) sheetNpReaderGroup();
     }).catch(function(e){ busyDone(); toast('出错：'+e.message); });
@@ -7607,6 +7644,20 @@ function npPublishBook(bookId){
   npNormalizeBook(b); npRecalcAuthor(); save(); render(); toast('作品已发布');
   setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
 }
+function npRefreshBookInteractions(bookId){
+  const b=npBook(bookId); if(!b) return;
+  if(!(b.chapters||[]).length){ toast('先发布至少一章'); return; }
+  const firstPublish=b.published===false;
+  b.published=true;
+  npEnsureReaders(false);
+  const joined=npJoinReaders(firstPublish?(24+(npHash(b.id+Date.now())%5)):(2+(npHash(b.id+Date.now())%4)));
+  const ch=b.chapters[b.chapters.length-1];
+  const summary=npSeedPublishedChapterReactions(b,ch,{initial:firstPublish,readers:joined});
+  npAddMessage('system',firstPublish?('《'+b.title+'》已发布，读者开始涌入。'):('《'+b.title+'》又收到一批新的读者互动。'),{bookId:b.id,chapterId:ch.id});
+  npNormalizeBook(b); npRecalcAuthor(); save(); render();
+  toast(firstPublish?'作品已发布并生成互动':'互动已刷新');
+  setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
+}
 function bookById(id){ return (DB.books||[]).find(function(x){ return x.id===id; })||null; }
 function readingById(id){ return (DB.readings||[]).find(function(x){ return x.id===id; })||null; }
 function bookParas(book){
@@ -7837,6 +7888,7 @@ function bindScreenInner(){
   $$('[data-npnewchapter]',s).forEach(el=>el.onclick=function(){ sheetNpChapterEditor(el.dataset.npnewchapter); });
   $$('[data-npvolumes]',s).forEach(el=>el.onclick=function(){ sheetNpVolumes(el.dataset.npvolumes); });
   $$('[data-nppublish]',s).forEach(el=>el.onclick=function(){ npPublishBook(el.dataset.nppublish); });
+  $$('[data-nprefreshbook]',s).forEach(el=>el.onclick=function(){ npRefreshBookInteractions(el.dataset.nprefreshbook); });
   $$('[data-npbookmenu]',s).forEach(el=>el.onclick=function(){ sheetNpBookMenu(el.dataset.npbookmenu); });
   $$('[data-nptip]',s).forEach(el=>el.onclick=function(){ const p=String(el.dataset.nptip||'').split('|'); if(p.length===2) sheetNpTip(p[0],p[1]); });
   $$('[data-npchapters]',s).forEach(el=>el.onclick=function(){ sheetNpChapters(el.dataset.npchapters); });
@@ -8628,7 +8680,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-21 · 第 49 轮';
+const BUILD='2026-10-21 · 第 50 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
