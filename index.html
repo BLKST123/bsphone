@@ -2006,7 +2006,7 @@ const DEF={
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
   moments:[], momentCover:'', momentSeen:0,
   stickers:[], favorites:[], pics:[], galleryAlbums:[{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}], galleryPics:[], galleryActive:'avatar', galleryMigrated:false, diary:[], novels:[], forum:[], books:[], readings:[],
-  np:{tab:'home',genre:'推荐',tags:[],customGenres:['悬疑','幻想','都市','仙侠','校园','娱乐圈'],customTags:['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'],shelf:[],readers:[],messages:[],square:[],readerGroup:[],groupName:'白夜烬云的读者群',coReadPanel:{readingId:null,open:false},novelRegexes:[],stylePrompt:'',readingSeconds:0,todayKey:'',todaySeconds:0,demoSeeded:false,readerPrefs:{fontSize:17,lineHeight:2,theme:'paper'},author:{penName:'白夜烬云',bio:'写想看的，也写不敢看的。',avatar:'夜',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,tips:0,revenue:0,awards:[],titles:['新人作者'],level:1,xp:0}},
+  np:{tab:'home',genre:'推荐',tags:[],customGenres:['悬疑','幻想','都市','仙侠','校园','娱乐圈'],customTags:['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'],shelf:[],readers:[],messages:[],square:[],readerGroup:[],groupName:'白夜烬云的读者群',coReadPanel:{readingId:null,open:false},novelRegexes:[],stylePrompt:'',readingSeconds:0,todayKey:'',todaySeconds:0,demoSeeded:false,readerPrefs:{fontSize:17,lineHeight:2,theme:'paper'},author:{penName:'白夜烬云',bio:'写想看的，也写不敢看的。',avatar:'夜',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,tips:0,revenue:0,awards:[],awardPool:[],awardHistory:[],awardXp:0,achievementHistory:[],titles:['新人作者'],level:1,xp:0}},
   logs:[], auto:true, lastRoute:null, ver:3
 };
 let DB=load();
@@ -2110,7 +2110,7 @@ function fixAll(){
     rp._v=1;
   }
   if(DB.np.readerUiVisible===undefined) DB.np.readerUiVisible=false;
-  DB.np.author=Object.assign({penName:'白夜烬云',bio:'写想看的，也写不敢看的。',avatar:'夜',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,comments:0,tips:0,revenue:0,awards:[],titles:['新人作者'],level:1,xp:0},DB.np.author||{});
+  DB.np.author=Object.assign({penName:'白夜烬云',bio:'写想看的，也写不敢看的。',avatar:'夜',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,comments:0,tips:0,revenue:0,awards:[],awardPool:[],awardHistory:[],awardXp:0,achievementHistory:[],titles:['新人作者'],level:1,xp:0},DB.np.author||{});
   DB.np.author.bgGray=Math.max(0,Math.min(100,Number(DB.np.author.bgGray)||0));
   DB.np.author.bgVeil=DB.np.author.bgVeil===undefined?35:Math.max(0,Math.min(100,Number(DB.np.author.bgVeil)||0));
   if(!DB.np.author._veilV2){ if(Number(DB.np.author.bgVeil)===35) DB.np.author.bgVeil=55; DB.np.author._veilV2=true; }
@@ -6465,7 +6465,7 @@ function npRecalcAuthor(){
   const chapters=mine.reduce(function(s,b){ return s+(b.chapters||[]).length; },0);
   a.collections=fav; a.comments=cm; a.tips=tips;
   a.revenue=Number((tips*NP_TIP_RATE).toFixed(2));
-  a.xp=Math.round(fav*10+(Number(a.fans)||0)*3+cm+Math.round(tips/10)+(a.awards||[]).length*180+chapters*5);
+  a.xp=Math.round(fav*10+(Number(a.fans)||0)*3+cm+Math.round(tips/10)+(a.awards||[]).length*180+chapters*5+(Number(a.awardXp)||0));
   let lv=NP_LEVELS[0];
   NP_LEVELS.forEach(function(x){ if(a.xp>=x.xp) lv=x; });
   a.level=lv.n; a.levelName=lv.t;
@@ -6671,6 +6671,26 @@ function npAchievementData(){
     {k:'award',n:'奖项加身',d:'获得至少一个作者奖项',icon:'star',on:(a.awards||[]).length>0}
   ];
 }
+function npSyncAchievementHistory(){
+  const a=DB.np.author=DB.np.author||{};
+  a.achievementHistory=Array.isArray(a.achievementHistory)?a.achievementHistory:[];
+  npAchievementData().filter(function(item){ return item.on; }).forEach(function(item){
+    if(!a.achievementHistory.some(function(saved){ return saved.key===item.k; })){
+      a.achievementHistory.push({key:item.k,name:item.n,description:item.d,obtainedAt:Date.now()});
+    }
+  });
+  return a.achievementHistory;
+}
+function npRefreshAchievements(){
+  npSyncAchievementHistory();
+  DB.np.author.achievementRefreshAt=Date.now();
+  save(); render(); toast('成就已刷新');
+}
+function sheetAchievementHistory(){
+  const list=(DB.np.author.achievementHistory||[]).slice().sort(function(a,b){ return (b.obtainedAt||0)-(a.obtainedAt||0); });
+  sheetFull('<h3>已获成就</h3>'+(list.length?list.map(function(item){ return '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(item.name)+'</b><div class="mini">'+esc(item.description||'')+'</div></div><span class="np-chip on">已获得</span></div><div class="mini" style="margin-top:6px">'+shortTime(item.obtainedAt)+'</div></div>'; }).join(''):'<div class="np-empty">还没有获得成就。</div>')+'<button class="btn full" id="achHistClose">关闭</button>');
+  $('#achHistClose').onclick=closeSheet;
+}
 function npAwardData(){
   const a=DB.np.author, mine=npAllBooks().filter(function(b){ return b.authorId==='me'; });
   const chapters=mine.reduce(function(s,b){ return s+(b.chapters||[]).length; },0);
@@ -6687,12 +6707,66 @@ function npAwardData(){
     {id:'best_persona',n:'最佳人设奖',req:'有标签化人设且作品收藏达到 100',ok:mine.some(function(b){ return b.cpLine&&Number((b.stats||{}).favorites||0)>=100; })},
     {id:'annual',n:'年度作者大奖',req:'作者等级达到 Lv.6',ok:Number(a.level||1)>=6}
   ];
-  return cats.map(function(c){ return Object.assign(c,{awarded:(a.awards||[]).indexOf(c.id)>=0}); });
+  const metrics={chapters:chapters,favorites:fav,comments:comments,fans:Number(a.fans||0),tips:Number(a.tips||0)};
+  const dynamic=(Array.isArray(a.awardPool)?a.awardPool:[]).map(function(item){
+    return Object.assign({},item,{ok:Number(metrics[item.metric]||0)>=Number(item.target||0),dynamic:true});
+  });
+  return cats.concat(dynamic).map(function(c){ return Object.assign(c,{awarded:(a.awards||[]).indexOf(c.id)>=0}); });
 }
 function npClaimAward(id){
   const item=npAwardData().find(function(x){ return x.id===id; });
   if(!item||!item.ok||item.awarded) return;
-  DB.np.author.awards=DB.np.author.awards||[]; DB.np.author.awards.push(id); save(); render(); toast('已获得 '+item.n);
+  const a=DB.np.author;
+  a.awards=a.awards||[]; a.awards.push(id);
+  a.awardHistory=Array.isArray(a.awardHistory)?a.awardHistory:[];
+  if(!a.awardHistory.some(function(saved){ return saved.id===id; })){
+    a.awardHistory.unshift({id:id,name:item.n,requirement:item.req,season:item.season||'2026 秋赛季',claimedAt:Date.now()});
+  }
+  a.awardXp=Number(a.awardXp||0)+50;
+  save(); render(); toast('已获得 '+item.n+'，经验 +50');
+}
+function npRefreshAwards(){
+  const a=DB.np.author=DB.np.author||{};
+  const mine=npAllBooks().filter(function(b){ return b.authorId==='me'; });
+  const metrics={
+    chapters:mine.reduce(function(sum,b){ return sum+(b.chapters||[]).length; },0),
+    favorites:mine.reduce(function(sum,b){ return sum+Number((b.stats||{}).favorites||0); },0),
+    comments:mine.reduce(function(sum,b){ return sum+Number((b.stats||{}).comments||0); },0),
+    fans:Number(a.fans||0),
+    tips:Number(a.tips||0)
+  };
+  const templates=[
+    {n:'本季勤更星',metric:'chapters',unit:'章',step:2,desc:function(t){ return '累计更新达到 '+t+' 章'; }},
+    {n:'读者缘增长奖',metric:'fans',unit:'位粉丝',step:8,desc:function(t){ return '作者粉丝达到 '+t+' 位'; }},
+    {n:'收藏增长奖',metric:'favorites',unit:'个收藏',step:20,desc:function(t){ return '作品收藏达到 '+t+' 个'; }},
+    {n:'评论热度奖',metric:'comments',unit:'条评论',step:30,desc:function(t){ return '作品评论达到 '+t+' 条'; }},
+    {n:'打赏回响奖',metric:'tips',unit:'币',step:20,desc:function(t){ return '累计打赏达到 '+t+' 币'; }},
+    {n:'深夜码字奖',metric:'chapters',unit:'章',step:4,desc:function(t){ return '累计更新达到 '+t+' 章'; }},
+    {n:'读者常驻奖',metric:'fans',unit:'位粉丝',step:15,desc:function(t){ return '作者粉丝达到 '+t+' 位'; }},
+    {n:'本季口碑奖',metric:'favorites',unit:'个收藏',step:35,desc:function(t){ return '作品收藏达到 '+t+' 个'; }}
+  ];
+  const picked=templates.slice().sort(function(){ return Math.random()-.5; }).slice(0,4);
+  a.awardPool=picked.map(function(item,index){
+    const target=Math.max(1,Number(metrics[item.metric]||0)+item.step+Math.floor(Math.random()*4));
+    return {id:'dyn_'+Date.now()+'_'+index,n:item.n,metric:item.metric,target:target,req:item.desc(target),season:'2026 秋赛季',createdAt:Date.now()};
+  });
+  a.awardRefreshAt=Date.now();
+  save(); render(); toast('已刷新出 4 个新奖项');
+}
+function npEnsureAwardHistory(){
+  const a=DB.np.author=DB.np.author||{};
+  a.awardHistory=Array.isArray(a.awardHistory)?a.awardHistory:[];
+  npAwardData().filter(function(item){ return item.awarded; }).forEach(function(item){
+    if(!a.awardHistory.some(function(saved){ return saved.id===item.id; })){
+      a.awardHistory.push({id:item.id,name:item.n,requirement:item.req,season:item.season||'2026 秋赛季',claimedAt:Date.now()});
+    }
+  });
+}
+function sheetAwardHistory(){
+  npEnsureAwardHistory();
+  const list=(DB.np.author.awardHistory||[]).slice().sort(function(a,b){ return (b.claimedAt||0)-(a.claimedAt||0); });
+  sheetFull('<h3>过去获奖</h3>'+(list.length?list.map(function(item){ return '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(item.name)+'</b><div class="mini">'+esc(item.season||'')+' · '+esc(item.requirement||'')+'</div></div><span class="np-chip on">已领取</span></div><div class="mini" style="margin-top:6px">'+shortTime(item.claimedAt)+'</div></div>'; }).join(''):'<div class="np-empty">还没有过去获奖记录。</div>')+'<button class="btn full" id="awardHistClose">关闭</button>');
+  $('#awardHistClose').onclick=closeSheet;
 }
 function screenNovelMe(){
   npRecalcAuthor();
@@ -6707,9 +6781,11 @@ function screenNovelMe(){
   const avatar=String(a.avatar||'').startsWith('data:')? '<img src="'+esc(a.avatar)+'">':esc(a.avatar||String(a.penName||'作').slice(0,1));
   let panel='';
   if(tab==='achievements'){
-    panel='<div class="np-achievement-grid">'+npAchievementData().map(function(x){ return '<div class="np-achievement'+(x.on?'':' lock')+'"><div class="ai">'+ic(x.icon,18)+'</div><b>'+esc(x.n)+'</b><div class="mini">'+esc(x.d)+'</div></div>'; }).join('')+'</div>';
+    npSyncAchievementHistory();
+    panel='<div class="row" style="padding:4px 0 10px"><button class="btn" data-npachrefresh="1">'+ic('refresh',16)+' 刷新</button><button class="btn" data-npachhistory="1">已获成就</button></div><div class="np-achievement-grid">'+npAchievementData().map(function(x){ return '<div class="np-achievement'+(x.on?'':' lock')+'"><div class="ai">'+ic(x.icon,18)+'</div><b>'+esc(x.n)+'</b><div class="mini">'+esc(x.d)+'</div></div>'; }).join('')+'</div>';
   }else if(tab==='awards'){
-    panel='<div class="np-award"><div class="season">2026 秋赛季 · 作者奖项</div><h3>作者荣誉</h3><div class="mini">满足条件后可获得相应奖项，领取经验值。</div></div>'
+    npEnsureAwardHistory();
+    panel='<div class="row" style="padding:4px 0 10px"><button class="btn" data-npawardrefresh="1">'+ic('refresh',16)+' 刷新</button><button class="btn" data-npawardhistory="1">过去获奖</button></div><div class="np-award"><div class="season">2026 秋赛季 · 作者奖项</div><h3>作者荣誉</h3><div class="mini">满足条件后可获得相应奖项，领取经验值。</div></div>'
       +npAwardData().map(function(x){ return '<div class="np-award"><div class="season">2026 秋赛季</div><h3>'+esc(x.n)+'</h3><div class="mini">'+esc(x.req)+'</div><div class="row" style="margin-top:7px"><div class="grow mini">'+(x.awarded?'已获得':(x.ok?'条件已达成，可领取':'尚未达成'))+'</div>'+(x.awarded?'<span class="np-chip on">已获得</span>':(x.ok?'<button class="btn primary" data-npawardclaim="'+x.id+'">领取</button>':''))+'</div></div>'; }).join('');
   }else if(tab==='activity'){
     const notes=[];
@@ -6721,7 +6797,7 @@ function screenNovelMe(){
       +mine.map(function(b){ return '<div class="np-author-book" data-npbook="'+b.id+'"><div class="cover">'+npCoverHTML(b)+'</div><div class="title">'+esc(b.title)+'</div><div class="meta">'+esc(npStatus(b))+' · '+(b.chapters||[]).length+' 章 · '+(b.published!==false?'已发布':'草稿')+'</div></div>'; }).join('')
       +'<div class="np-newbook-card" data-npnewbook="1"><div class="plus">＋</div><div>新建书籍</div></div></div>';
   }
-  return '<div class="np-me-page"><div class="np-top"><button class="ic2" data-nptab="home" title="返回小说首页">‹</button><div class="h">主页</div><button class="ic2" data-npeditauthor="1" title="编辑资料">'+ic('pen',18)+'</button></div><div class="np-me-top"><div class="bg" style="background-image:url('+esc(bg)+');filter:grayscale('+Math.max(0,Math.min(100,Number(a.bgGray)||0))+'%)"></div><div class="veil" style="opacity:'+Math.max(0,Math.min(100,Number(a.bgVeil)===undefined?35:Number(a.bgVeil)))/100+'"></div><div class="inner">'
+  return '<div class="np-me-page"><div class="np-top"><button class="ic2" data-nptab="home" title="返回小说首页">‹</button><div class="h">主页</div><button class="ic2" data-nprefreshauthor="1" title="刷新互动">'+ic('refresh',19)+'</button><button class="ic2" data-npeditauthor="1" title="编辑资料">'+ic('pen',18)+'</button></div><div class="np-me-top"><div class="bg" style="background-image:url('+esc(bg)+');filter:grayscale('+Math.max(0,Math.min(100,Number(a.bgGray)||0))+'%)"></div><div class="veil" style="opacity:'+Math.max(0,Math.min(100,Number(a.bgVeil)===undefined?35:Number(a.bgVeil)))/100+'"></div><div class="inner">'
     +'<div class="row" style="align-items:flex-start"><div class="np-me-avatar">'+avatar+'</div><div class="grow"><div class="np-me-name">'+esc(a.penName||'未命名作者')+'<span class="np-me-level">Lv.'+a.level+' '+esc(a.levelName||'新人作者')+'</span></div><div class="np-me-bio">'+esc(a.bio||'')+'</div><div class="row" style="margin-top:8px"><button class="btn" data-npeditauthor="1">编辑资料</button></div></div></div>'
     +'<div class="np-me-stats"><div><b>'+a.fans+'</b>粉丝</div><div><b>'+a.collections+'</b>收藏</div><div><b>'+a.comments+'</b>评论</div><div><b>'+a.tips+'</b>打赏</div></div>'
     +'<div class="np-levelbar"><i style="width:'+pct+'%"></i></div><div class="mini" style="margin-top:4px;color:rgba(255,255,255,.75)">'+(next?('距离 '+next.t+' 还差 '+(next.xp-a.xp)+' 经验'):'已达最高等级')+'</div>'
@@ -6765,7 +6841,7 @@ function screenNovelBook(){
     +'<div class="np-section"><div class="np-actions"><button class="btn'+(inShelf?' primary':'')+'" data-npshelf="'+b.id+'">'+(inShelf?'已在书架':'加入书架')+'</button>'
     +'<button class="btn primary" data-npreadbook="'+b.id+'">开始阅读</button><button class="btn" data-npco-read="'+b.id+'">一起读</button></div>'
     +(chs.length<3? '<button class="btn full" data-npgenchapters="'+b.id+'">生成前三章</button>':'')
-    +(mine? '<div class="np-actions"><button class="btn" data-npnewchapter="'+b.id+'">发布新章节</button><button class="btn" data-npvolumes="'+b.id+'">分卷管理</button><button class="btn" data-npeditbook="'+b.id+'">编辑资料</button>'+(b.published!==false?'':'<button class="btn" data-nppublish="'+b.id+'">发布作品</button>')+'<button class="btn primary" data-nprefreshbook="'+b.id+'">刷新互动</button></div>':'')
+    +(mine? '<div class="np-actions"><button class="btn" data-npnewchapter="'+b.id+'">发布新章节</button><button class="btn" data-npvolumes="'+b.id+'">分卷管理</button><button class="btn" data-npeditbook="'+b.id+'">编辑资料</button>'+(b.published!==false?'':'<button class="btn" data-nppublish="'+b.id+'">发布作品</button>')+'</div>':'')
     +'<div class="np-notice"><b>简介</b><div class="np-synopsis" style="margin-top:6px">'+esc(b.synopsis||'这本书还没有简介。')+'</div></div>'
     +(b.announcement? '<div class="np-notice"><b>作者公告</b><div style="margin-top:5px">'+esc(b.announcement)+'</div></div>':'')
     +(persona? '<div class="np-persona"><small>人设标签</small>'+esc(persona)+'</div>':'')
@@ -7216,7 +7292,7 @@ function sheetNpChapterEditor(bookId,chapterId){
     let target=old?npChapter(b,old.id):null;
     if(target) Object.assign(target,next); else { next.index=b.chapters.length; b.chapters.push(next); }
     b.updatedAt=Date.now(); npNormalizeBook(b);
-    let joined=[],summary=null,commentSummary=null;
+    let joined=[],summary=null,commentSummary=null,groupAdded=0;
     if(!old){
       const firstPublish=!wasPublished||!hadChapters;
       b.published=true;
@@ -7224,10 +7300,11 @@ function sheetNpChapterEditor(bookId,chapterId){
       joined=npJoinReaders(firstPublish?(24+(npHash(b.id+next.id)%5)):(20+(npHash(b.id+next.id)%4)));
       summary=npSeedPublishedChapterReactions(b,next,{initial:firstPublish,readers:joined});
       commentSummary=await npGenerateReaderCommentBatch(b,next,{count:20+(npHash(b.id+next.id+Date.now())%11)});
+      groupAdded=await npGenerateReaderGroupBurst(20+(npHash(b.id+next.id+Date.now()+'group')%11));
       npAddMessage('system',firstPublish?('《'+b.title+'》已发布，读者开始涌入。'):('《'+b.title+'》更新了：'+title),{bookId:b.id,chapterId:next.id});
     }
     save(); closeSheet(); go('novelbook',b.id); toast(old?'章节已保存':'章节已发布');
-    if(summary) setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+(commentSummary?commentSummary.total:0)+' 条评论 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
+    if(summary) setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+(commentSummary?commentSummary.total:0)+' 条评论 · '+groupAdded+' 条群聊 · '+summary.favorites+' 个收藏'); },500);
   };
   const del=$('#npceDelete'); if(del) del.onclick=function(){
     sheetSmall('<h3>删除这一章？</h3><div class="muted" style="margin:8px 0 14px">章节正文、段评和章评都会删除。</div><button class="btn danger full" id="npceDelYes">删除</button><button class="btn full" id="npceDelNo">取消</button>');
@@ -7774,6 +7851,7 @@ function npGenerateBookChapters(bookId){
         npEnsureReaders(false);
         const joined=npJoinReaders(20+(npHash(b.id+(latest&&latest.id||''))%4));
         (joined||[]).slice(0,3).forEach(function(r,i){ npAddGroup(r.name,r.type,NP_GROUP_SAFE_LINES[i%NP_GROUP_SAFE_LINES.length],'reader'); });
+        await npGenerateReaderGroupBurst(20+(npHash(b.id+(latest&&latest.id||'')+'group')%11));
         npAddMessage('system','《'+b.title+'》更新了：'+(latest&&latest.title||'新章节'),{bookId:b.id,chapterId:latest&&latest.id||null});
         npRecalcAuthor();
         save();
@@ -7896,15 +7974,15 @@ async function npGenerateReaderCommentBatch(b,ch,opt){
     if(item.kind==='paragraph'&&paras.length){
       const pi=Math.max(0,Math.min(paras.length-1,Number(item.paragraphIndex)||0));
       (ch.comments[String(pi)]=ch.comments[String(pi)]||[]).push({id:uid(),readerName:readerName,readerType:readerType,text:String(item.text).trim().slice(0,180),likes:Number(item.likes)||0,replies:replies,ts:Date.now()+index});
+      npAddMessage('comment',readerName+' 在《'+b.title+'》第 '+(pi+1)+' 段留了段评：'+String(item.text).trim().slice(0,180),{bookId:b.id,chapterId:ch.id,reader:readerName});
       paragraphAdded++;
     }else{
       ch.reviewComments.push({id:uid(),readerName:readerName,readerType:readerType,text:String(item.text).trim().slice(0,180),likes:Number(item.likes)||0,replies:replies,ts:Date.now()+index});
+      npAddMessage('chapter-review',readerName+' 写了《'+b.title+'》的章评：'+String(item.text).trim().slice(0,180),{bookId:b.id,chapterId:ch.id,reader:readerName});
       reviewAdded++;
     }
   });
   npNormalizeBook(b);
-  if(paragraphAdded) npAddMessage('comment','新增 '+paragraphAdded+' 条段评',{bookId:b.id,chapterId:ch.id});
-  if(reviewAdded) npAddMessage('chapter-review','新增 '+reviewAdded+' 条章评',{bookId:b.id,chapterId:ch.id});
   save();
   return {paragraphs:paragraphAdded,reviews:reviewAdded,total:paragraphAdded+reviewAdded,readers:items.length};
 }
@@ -7932,11 +8010,6 @@ function npSeedPublishedChapterReactions(b,ch,opt){
   b.stats.reads=Number(b.stats.reads||0)+Math.floor(40+Math.random()*180);
   b.stats.favorites=Number(b.stats.favorites||0)+favoriteAdd;
   npAddMessage('favorite',favoriteAdd+' 位读者收藏了《'+b.title+'》',{bookId:b.id,chapterId:ch.id});
-  const groupCount=opt.initial?4:3;
-  for(let i=0;i<groupCount;i++){
-    const reader=readerAt(i+tipCount);
-    npAddGroup(reader.name,reader.type,NP_GROUP_SAFE_LINES[(i+npHash(ch.id+'g'))%NP_GROUP_SAFE_LINES.length],'reader');
-  }
   npNormalizeBook(b);
   npRecalcAuthor();
   return {favorites:favoriteAdd,tips:tipTotal,paragraphs:0,reviews:0,readers:pool.length};
@@ -7951,9 +8024,10 @@ async function npPublishBook(bookId){
   const ch=b.chapters[0];
   const summary=npSeedPublishedChapterReactions(b,ch,{initial:true,readers:joined});
   const comments=await npGenerateReaderCommentBatch(b,ch,{count:20+(npHash(b.id+Date.now())%11)});
+  const groupAdded=await npGenerateReaderGroupBurst(20+(npHash(b.id+Date.now()+'group')%11));
   npAddMessage('system','《'+b.title+'》已发布，读者开始涌入。',{bookId:b.id});
   npNormalizeBook(b); npRecalcAuthor(); save(); render(); toast('作品已发布');
-  setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+comments.total+' 条评论 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
+  setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+comments.total+' 条评论 · '+groupAdded+' 条群聊 · '+summary.favorites+' 个收藏'); },500);
 }
 async function npRefreshBookInteractions(bookId){
   const b=npBook(bookId); if(!b) return;
@@ -7965,10 +8039,17 @@ async function npRefreshBookInteractions(bookId){
   const ch=b.chapters[b.chapters.length-1];
   const summary=npSeedPublishedChapterReactions(b,ch,{initial:firstPublish,readers:joined});
   const comments=await npGenerateReaderCommentBatch(b,ch,{count:20+(npHash(b.id+Date.now())%11)});
+  const groupAdded=await npGenerateReaderGroupBurst(20+(npHash(b.id+Date.now()+'group')%11));
   npAddMessage('system',firstPublish?('《'+b.title+'》已发布，读者开始涌入。'):('《'+b.title+'》又收到一批新的读者互动。'),{bookId:b.id,chapterId:ch.id});
   npNormalizeBook(b); npRecalcAuthor(); save(); render();
   toast(firstPublish?'作品已发布并生成互动':'互动已刷新');
-  setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+comments.total+' 条评论 · '+summary.favorites+' 个收藏 · '+summary.tips+' 币打赏'); },500);
+  setTimeout(function(){ toast('新增 '+joined.length+' 位读者 · '+comments.total+' 条评论 · '+groupAdded+' 条群聊 · '+summary.favorites+' 个收藏'); },500);
+}
+async function npRefreshAuthorInteractions(){
+  const mine=npAllBooks().filter(function(b){ return b.authorId==='me'&&(b.chapters||[]).length; })
+    .sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); });
+  if(!mine.length){ toast('先发布至少一章'); return; }
+  await npRefreshBookInteractions(mine[0].id);
 }
 function bookById(id){ return (DB.books||[]).find(function(x){ return x.id===id; })||null; }
 function readingById(id){ return (DB.readings||[]).find(function(x){ return x.id===id; })||null; }
@@ -8163,6 +8244,10 @@ function bindScreenInner(){
   });
   $$('[data-npmetab]',s).forEach(el=>el.onclick=function(){ DB.np.meTab=el.dataset.npmetab; save(); render(); });
   $$('[data-npawardclaim]',s).forEach(el=>el.onclick=function(){ npClaimAward(el.dataset.npawardclaim); });
+  $$('[data-npawardrefresh]',s).forEach(el=>el.onclick=npRefreshAwards);
+  $$('[data-npawardhistory]',s).forEach(el=>el.onclick=sheetAwardHistory);
+  $$('[data-npachrefresh]',s).forEach(el=>el.onclick=npRefreshAchievements);
+  $$('[data-npachhistory]',s).forEach(el=>el.onclick=sheetAchievementHistory);
   $$('[data-npbook]',s).forEach(el=>el.onclick=function(){ if(el.dataset.npbook) go('novelbook',el.dataset.npbook); });
   $$('[data-npchapter]',s).forEach(el=>el.onclick=function(){ const p=String(el.dataset.npchapter||'').split('|'); if(p[0]&&p[1]) npGoChapter(p[0],p[1]); });
   $$('[data-npchaptermenu]',s).forEach(el=>el.onclick=function(){ const p=String(el.dataset.npchaptermenu||'').split('|'); if(p[0]&&p[1]) sheetNpChapterMenu(p[0],p[1]); });
@@ -8201,6 +8286,7 @@ function bindScreenInner(){
   $$('[data-npvolumes]',s).forEach(el=>el.onclick=function(){ sheetNpVolumes(el.dataset.npvolumes); });
   $$('[data-nppublish]',s).forEach(el=>el.onclick=function(){ npPublishBook(el.dataset.nppublish); });
   $$('[data-nprefreshbook]',s).forEach(el=>el.onclick=function(){ npRefreshBookInteractions(el.dataset.nprefreshbook); });
+  $$('[data-nprefreshauthor]',s).forEach(el=>el.onclick=function(){ npRefreshAuthorInteractions(); });
   $$('[data-npbookmenu]',s).forEach(el=>el.onclick=function(){ sheetNpBookMenu(el.dataset.npbookmenu); });
   $$('[data-nptip]',s).forEach(el=>el.onclick=function(){ const p=String(el.dataset.nptip||'').split('|'); if(p.length===2) sheetNpTip(p[0],p[1]); });
   $$('[data-npchapters]',s).forEach(el=>el.onclick=function(){ sheetNpChapters(el.dataset.npchapters); });
@@ -8992,7 +9078,7 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-24 · 第 51 轮';
+const BUILD='2026-10-24 · 第 52 轮';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
