@@ -1888,9 +1888,9 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 .l7-group .app{width:100%;min-width:0;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px}
 .l7-group .app .ic{width:52px!important;height:52px!important;min-width:52px!important;border-radius:14px!important;font-size:calc(24px * var(--ui-font-scale,1))!important}
 .l7-group .app .nm{font-size:calc(10px * var(--ui-font-scale,1))!important;line-height:1.1!important;color:#5b5358!important}
-.l7-group.dense{grid-auto-rows:60px;column-gap:8px;row-gap:8px}
-.l7-group.dense .app{min-height:60px;gap:2px}
-.l7-group.dense .app .ic{width:44px!important;height:44px!important;min-width:44px!important;border-radius:12px!important;font-size:calc(21px * var(--ui-font-scale,1))!important}
+.l7-group.dense{grid-auto-rows:70px;column-gap:8px;row-gap:12px}
+.l7-group.dense .app{min-height:70px;gap:3px}
+.l7-group.dense .app .ic{width:52px!important;height:52px!important;min-width:52px!important;border-radius:14px!important;font-size:calc(24px * var(--ui-font-scale,1))!important}
 .l7-group.dense .app .nm{font-size:calc(9px * var(--ui-font-scale,1))!important}
 .l7-dots{position:absolute;left:0;right:0;bottom:117px;display:flex;justify-content:center;gap:6px;margin:0!important;z-index:6}
 .l7-dock{position:absolute;left:24px;right:24px;bottom:22px;height:82px;margin:0!important;padding:4px 8px!important;gap:8px!important;align-items:center;z-index:6;grid-template-columns:repeat(4,1fr)!important}
@@ -1986,10 +1986,55 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .tb-thumb{width:84px;height:84px}
 .about-version{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 92%,transparent);margin-bottom:10px}
 .about-version b{display:block;font-size:calc(17px * var(--ui-font-scale,1));margin-top:3px}
+.takeout-shell{min-height:calc(var(--app-h,100dvh) - 12px);padding-bottom:92px}
+.screen.takeout-screen{overflow-y:auto}
+.takeout-page{padding:0 0 98px}
+.takeout-location{display:flex;align-items:center;gap:9px;width:calc(100% - 28px);margin:2px 14px 10px;padding:10px 12px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 90%,transparent);color:var(--fg);text-align:left;cursor:pointer}
+.takeout-location>span:first-child{color:var(--deep);display:flex;flex:none}
+.takeout-location div{min-width:0;flex:1}.takeout-location small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}.takeout-location b{display:block;font-size:calc(13px * var(--ui-font-scale,1));white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.takeout-search{display:flex;align-items:center;gap:8px;margin:0 14px 12px;height:42px;padding:0 13px;border-radius:13px;background:color-mix(in srgb,var(--card) 93%,transparent);border:1px solid var(--line);color:var(--fg2)}
+.takeout-search input{flex:1;min-width:0;border:0;background:transparent;color:var(--fg);outline:none;font-size:calc(13px * var(--ui-font-scale,1))}
+.takeout-bottomnav{position:fixed;left:50%;bottom:0;transform:translateX(-50%);width:min(100%,520px);display:grid;grid-template-columns:repeat(4,1fr);padding:7px 10px calc(7px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 94%,transparent);border-top:1px solid var(--line);backdrop-filter:blur(20px);z-index:30}
+.takeout-bottomnav button{border:0;background:none;color:var(--fg2);display:flex;flex-direction:column;align-items:center;gap:2px;padding:4px 2px;cursor:pointer;min-width:0}
+.takeout-bottomnav .g{position:relative;display:flex;align-items:center;justify-content:center;width:32px;height:28px}
+.takeout-bottomnav b{font-size:calc(9.5px * var(--ui-font-scale,1));font-weight:500;line-height:1.1}
+.takeout-bottomnav button.on{color:var(--deep)}
+.takeout-bottomnav .bd{position:absolute;right:-9px;top:-5px;min-width:16px;height:16px;padding:0 4px;border-radius:99px;background:#e65a68;color:#fff;font-style:normal;font-size:9px;line-height:16px;text-align:center}
+.takeout-address-card{display:flex;align-items:center;width:calc(100% - 28px);margin:0 14px 12px;padding:11px 13px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 91%,transparent);color:var(--fg);text-align:left}
+.takeout-address-card>div{flex:1;min-width:0}.takeout-address-card small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}.takeout-address-card b{display:block;margin-top:2px;font-size:calc(12.5px * var(--ui-font-scale,1));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.takeout-cats{display:flex;gap:8px;overflow-x:auto;margin:0 12px 14px;padding-bottom:3px;scrollbar-width:none}
+.takeout-cats::-webkit-scrollbar{display:none}
+.takeout-cat.flex:not(.on){background:color-mix(in srgb,var(--card) 90%,transparent)}
+.takeout-cats .takeout-cat{flex:0 0 72px;min-height:67px;border-radius:14px}
+.takeout-store-card{display:flex;align-items:center;gap:10px;width:calc(100% - 20px);margin:0 10px 11px;padding:11px;border:1px solid var(--line);border-radius:15px;background:color-mix(in srgb,var(--card) 95%,transparent);color:var(--fg);text-align:left;cursor:pointer}
+.store-cover{width:88px;height:88px;flex:none;border-radius:12px;overflow:hidden;background:#faf8f9}
+.store-thumb{width:100%;height:100%;object-fit:cover;display:block}
+.store-info{min-width:0;flex:1}.store-line{display:flex;align-items:center;gap:7px}.store-line b{font-size:calc(15px * var(--ui-font-scale,1));line-height:1.3;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.store-line span{font-size:calc(8px * var(--ui-font-scale,1));padding:2px 5px;border-radius:4px;background:color-mix(in srgb,var(--theme-rose-soft) 80%,#fff);color:var(--deep);flex:none}
+.store-meta{font-size:calc(10.5px * var(--ui-font-scale,1));color:var(--fg2);margin-top:6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.store-meta b{color:#bd6d2d}
+.store-sub{font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--fg2);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.store-preview{font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--fg2);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.store-detail-head{display:flex;gap:12px;align-items:center;margin-bottom:12px}.store-detail-cover{width:82px;height:82px;flex:none;border-radius:14px;overflow:hidden;background:#faf8f9}.store-detail-thumb{width:100%;height:100%;object-fit:cover}.store-detail-head h3{text-align:left;margin:0 0 4px;font-size:calc(18px * var(--ui-font-scale,1))}
+.takeout-store-menu{max-height:58dvh;overflow:auto;margin:0 -4px}.takeout-section-title{display:flex;justify-content:space-between;align-items:center;margin:8px 2px;gap:10px}.takeout-section-title b{font-size:calc(16px * var(--ui-font-scale,1))}.takeout-section-title span{font-size:calc(10px * var(--ui-font-scale,1));color:var(--fg2)}
+.takeout-section-title .link{border:0;background:none;color:var(--deep);font-size:inherit;padding:0;cursor:pointer}
+.takeout-store-menu .takeout-product{margin:0 0 8px;padding:9px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 95%,transparent)}
+.takeout-store-menu .takeout-thumb{width:76px;height:76px}
+.takeout-specs{margin-top:10px;border-top:1px solid var(--line);padding-top:6px}.spec-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:7px 0}.spec-row span{font-size:calc(13px * var(--ui-font-scale,1))}.spec-row select{width:150px;max-width:58%}
+.takeout-cart-page{padding:0 12px 90px}.takeout-cart-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--line)}.cart-item-thumb{width:66px;height:66px;flex:none}.cart-item-thumb .takeout-thumb{width:66px;height:66px}.cart-item-bottom{display:flex;justify-content:space-between;gap:8px;color:var(--fg2);font-size:calc(11px * var(--ui-font-scale,1));margin-top:7px}.cart-actions{display:flex;flex-direction:column;gap:6px}.cart-actions button{border:1px solid var(--line);background:var(--card);color:var(--fg);border-radius:9px;padding:5px 8px;font-size:calc(10.5px * var(--ui-font-scale,1))}.cart-actions button.danger{color:#c6535e}
+.takeout-recipient-box{padding:13px 2px 8px}.takeout-recipient-box>b{display:block;margin-bottom:9px}.takeout-cart-checkout{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 0}.takeout-cart-checkout>div{display:flex;flex-direction:column}.takeout-cart-checkout>div>span{font-size:calc(10px * var(--ui-font-scale,1));color:var(--fg2)}.takeout-cart-checkout>div>b{font-size:calc(23px * var(--ui-font-scale,1));color:var(--deep)}
+.takeout-checkout-address{display:flex;align-items:center;gap:10px;width:100%;padding:12px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--theme-rose-soft) 35%,var(--card));color:var(--fg);text-align:left;margin-bottom:10px}.takeout-checkout-address small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}.takeout-checkout-address b{display:block;margin-top:3px;font-size:calc(13px * var(--ui-font-scale,1));line-height:1.45}.takeout-checkout-address .muted{margin-top:4px;line-height:1.55}
+.checkout-recipient{padding:10px 0}.checkout-recipient>b{display:block;margin-bottom:8px}.checkout-product-list{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:3px 0;margin:8px 0}
+.takeout-checkout-line.total{border:0}.takeout-checkout-line.total b{color:var(--deep);font-size:calc(20px * var(--ui-font-scale,1))}
+.address-card{display:flex;align-items:center;gap:8px;padding:11px 6px;border-bottom:1px solid var(--line)}.address-card.on{background:color-mix(in srgb,var(--theme-rose-soft) 38%,transparent);border-radius:10px}.address-card.role{opacity:.92}.address-card .grow{min-width:0}.address-label{flex:none;padding:4px 7px;border-radius:6px;background:var(--deep);color:#fff;font-size:calc(9px * var(--ui-font-scale,1))}
+.takeout-order-progress{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:2px;margin:12px 0;padding:12px 4px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 91%,transparent)}.order-step{min-width:0;display:flex;flex-direction:column;align-items:center;gap:4px;color:var(--fg2);font-size:calc(8.5px * var(--ui-font-scale,1));text-align:center}.order-step i{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#eee8eb;color:#b3a4aa;font-style:normal}.order-step.on i{background:var(--deep);color:#fff}.order-step.current span{color:var(--deep);font-weight:600}
+.to-order-head{padding:4px 2px 8px}.to-order-kicker{font-size:calc(10px * var(--ui-font-scale,1));color:var(--deep);margin-bottom:4px}.to-order-head h3{text-align:left;margin:0 0 6px;font-size:calc(22px * var(--ui-font-scale,1))}.to-order-head .muted{line-height:1.6}
+.to-order-merchant{display:flex;align-items:center;gap:8px;padding:12px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 95%,transparent);margin-top:10px}.to-order-products{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:10px}.to-order-product{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}.to-order-product:last-child{border-bottom:0}.to-order-product-img{width:60px;height:60px;flex:none;border-radius:10px;overflow:hidden}.order-item-thumb{width:60px;height:60px;object-fit:cover}.to-order-product small{color:var(--fg2);font-size:calc(10px * var(--ui-font-scale,1))}.to-order-product .rt{display:flex;flex-direction:column;align-items:flex-end;gap:6px}.to-order-product .btn{padding:5px 8px;font-size:calc(10px * var(--ui-font-scale,1))}
+.to-order-breakdown{padding:10px 0;border-bottom:1px solid var(--line)}.to-order-breakdown>div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2)}.to-order-breakdown>div.total{font-size:calc(14px * var(--ui-font-scale,1));color:var(--fg)}.to-order-breakdown>div.total b{color:var(--deep);font-size:calc(19px * var(--ui-font-scale,1))}
+.to-order-route{padding:8px 0;border-bottom:1px solid var(--line)}.route-line{display:flex;gap:10px;position:relative;padding:9px 0}.route-line>i{width:9px;height:9px;border-radius:50%;background:var(--deep);flex:none;margin-top:6px}.route-line small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}.route-line b{display:block;margin-top:3px;font-size:calc(12px * var(--ui-font-scale,1))}.route-line span{display:block;margin-top:3px;line-height:1.5;color:var(--fg2);font-size:calc(10.5px * var(--ui-font-scale,1))}
+.takeout-msg.from-me{background:color-mix(in srgb,var(--theme-rose-soft) 55%,var(--card))}.takeout-msg.from-ta{background:color-mix(in srgb,var(--card) 97%,transparent)}.takeout-msg .to-msg-top small{display:block;font-size:calc(8.5px * var(--ui-font-scale,1));color:var(--fg2);margin-bottom:2px}.takeout-msg .to-msg-top b{display:block;font-size:calc(13px * var(--ui-font-scale,1));line-height:1.35}.to-msg-progress{height:3px;border-radius:99px;background:#eee7ea;margin:0 12px 9px;overflow:hidden}.to-msg-progress i{display:block;height:100%;background:var(--deep);border-radius:inherit}.to-msg-foot{display:flex;justify-content:space-between;gap:8px}.to-msg-foot b{color:var(--deep)}.to-msg-link{padding:7px 12px;border-top:1px solid var(--line);font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--deep);display:flex;justify-content:space-between;align-items:center}
 @media (max-width:380px){
-  .takeout-cats{grid-template-columns:repeat(3,minmax(0,1fr))}
   .takeout-hero .tk-title{font-size:calc(19px * var(--ui-font-scale,1))}
   .takeout-role-grid{grid-template-columns:1fr}
+  .store-cover{width:76px;height:76px}.store-line b{font-size:calc(14px * var(--ui-font-scale,1))}
+  .takeout-bottomnav b{font-size:calc(9px * var(--ui-font-scale,1))}
 }
 </style>
 <style id="userCustomCss"></style>
@@ -2093,7 +2138,7 @@ const DEF={
   hang:{phone:{},doing:{}}, hangCid:null, hangTab:'phone', checkCid:null,
   checkins:[], shopItems:{}, mallCid:null, mallTier:'mid', mallMode:'solo',
   tbItems:{}, tbCid:null, tbTab:'feed', tbPersona:null, tbPrice:'all', tbCat:'all', cartMe:[], cartTa:{}, orders:[], shopName:'网购',
-  takeout:{activeTab:'home',mode:'hybrid',worldMode:'modern',category:'美食',personaId:null,contactId:null,chatId:null,beneficiary:'self',customProductImages:{},addresses:{},payments:{},carts:[],orders:[],storeCache:{}},
+  takeout:{activeTab:'home',mode:'hybrid',worldMode:'modern',category:'奶茶',search:'',personaId:null,contactId:null,chatId:null,activeStoreId:null,beneficiary:'me',customProductImages:{},addresses:{},contactAddresses:{},selectedAddresses:{},payments:{},carts:[],orders:[],storeCache:{}},
   dates:[], curDate:null, dateCid:null,
   outContacts:[], outPersona:null, outState:null, outings:[],
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
@@ -2143,12 +2188,27 @@ function fixAll(){
   DB.cartMe=DB.cartMe||[];
   DB.cartTa=DB.cartTa||{};
   DB.orders=DB.orders||[];
-  DB.takeout=Object.assign({activeTab:'home',mode:'hybrid',worldMode:'modern',category:'美食',personaId:null,contactId:null,chatId:null,beneficiary:'self',customProductImages:{},addresses:{},payments:{},carts:[],orders:[],storeCache:{}},DB.takeout||{});
-  if(['home','orders','mine'].indexOf(DB.takeout.activeTab)<0) DB.takeout.activeTab='home';
+  DB.takeout=Object.assign({activeTab:'home',mode:'hybrid',worldMode:'modern',category:'奶茶',search:'',personaId:null,contactId:null,chatId:null,activeStoreId:null,beneficiary:'me',customProductImages:{},addresses:{},contactAddresses:{},selectedAddresses:{},payments:{},carts:[],orders:[],storeCache:{}},DB.takeout||{});
+  if(['home','cart','orders','mine'].indexOf(DB.takeout.activeTab)<0) DB.takeout.activeTab='home';
   if(['hybrid','fixed','ai'].indexOf(DB.takeout.mode)<0) DB.takeout.mode='hybrid';
   if(['modern','fantasy'].indexOf(DB.takeout.worldMode)<0) DB.takeout.worldMode='modern';
   DB.takeout.customProductImages=DB.takeout.customProductImages||{};
   DB.takeout.addresses=DB.takeout.addresses||{};
+  DB.takeout.contactAddresses=DB.takeout.contactAddresses||{};
+  DB.takeout.selectedAddresses=DB.takeout.selectedAddresses||{};
+  Object.keys(DB.takeout.addresses||{}).forEach(function(pid){
+    const value=DB.takeout.addresses[pid];
+    if(Array.isArray(value)) return;
+    if(value&&Array.isArray(value.items)) return;
+    if(value&&(value.detail||value.name||value.phone)){
+      const item=Object.assign({id:uid(),label:'家'},value);
+      DB.takeout.addresses[pid]={items:[item],selectedId:item.id};
+    }else{
+      DB.takeout.addresses[pid]={items:[],selectedId:null};
+    }
+  });
+  DB.takeout.addresses=DB.takeout.addresses||{};
+  if(['me','contact','both'].indexOf(DB.takeout.beneficiary)<0) DB.takeout.beneficiary='me';
   DB.takeout.payments=DB.takeout.payments||{};
   DB.takeout.carts=Array.isArray(DB.takeout.carts)?DB.takeout.carts:[];
   DB.takeout.orders=Array.isArray(DB.takeout.orders)?DB.takeout.orders:[];
@@ -2170,6 +2230,15 @@ function fixAll(){
         ch.baseMemorySnapshot=(c&&c.memories||[]).map(function(m){ return m.text; }).filter(Boolean);
       }
     }
+  });
+  (DB.takeout.orders||[]).forEach(function(order){
+    const ch=chat(order.chatId); if(!ch) return;
+    (ch.msgs||[]).forEach(function(m){
+      if(m.type==='takeout'&&m.orderId===order.id&&m.role==='sys'){
+        m.role=order.source==='contact'?'ta':'me';
+        m.from=order.contactId||null;
+      }
+    });
   });
   DB.dates=DB.dates||[];
   DB.outContacts=DB.outContacts||[];
@@ -2379,23 +2448,55 @@ function fixAll(){
     }
     DB.ui.layout7PositionRepairV1=true;
   }
-  DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).slice(0,16); });
+  DB.ui.homePages=DB.ui.homePages.map(function(page){ return Array.isArray(page)?page.slice():[]; });
   if(!DB.ui.homePages.length) DB.ui.homePages=defaultHomePages();
-  if(!DB.ui.takeoutDesktopV54){
-    const targetIndex=Math.max(0,DB.ui.widgetPages.findIndex(function(page){
-      return (page||[]).some(function(w){ return w.id==='l7_p2_apps'; });
-    }));
-    while(DB.ui.homePages.length<=targetIndex) DB.ui.homePages.push([]);
+  if(!DB.ui.takeoutDesktopV55){
+    let targetPage=-1;
     DB.ui.homePages.forEach(function(page,i){
-      if(i!==targetIndex) DB.ui.homePages[i]=(page||[]).filter(function(k){ return k!=='takeout'; });
+      const idx=(page||[]).indexOf('checkin');
+      if(idx>=0&&targetPage<0){ page[idx]='takeout'; targetPage=i; }
     });
-    if(DB.ui.homePages[targetIndex].indexOf('takeout')<0) DB.ui.homePages[targetIndex].push('takeout');
+    DB.ui.homePages.forEach(function(page,i){
+      DB.ui.homePages[i]=(page||[]).filter(function(k){ return k!=='checkin'&&(i===targetPage||k!=='takeout'); }).filter(function(k,idx,arr){ return arr.indexOf(k)===idx; });
+    });
+    if(targetPage<0){
+      const existing=DB.ui.homePages.findIndex(function(page){ return (page||[]).indexOf('takeout')>=0; });
+      if(existing>=0) targetPage=existing;
+    }
+    if(targetPage<0){
+      while(!DB.ui.homePages[0]) DB.ui.homePages.push([]);
+      DB.ui.homePages[0].push('takeout');
+      targetPage=0;
+    }
+    let groupTarget=-1;
+    DB.ui.widgetPages.forEach(function(page,i){
+      (page||[]).forEach(function(w){
+        if(w.type!=='appgroup'||!Array.isArray(w.appKeys)) return;
+        const at=w.appKeys.indexOf('checkin');
+        if(at>=0&&groupTarget<0){ w.appKeys[at]='takeout'; groupTarget=i; }
+        w.appKeys=w.appKeys.filter(function(k){ return k!=='checkin'; }).filter(function(k,idx,arr){ return arr.indexOf(k)===idx; });
+        if(w.id==='l7_p2_apps') w.appKeys=w.appKeys.filter(function(k){ return k!=='takeout'; });
+        if(w.appCols) w.appCols=Math.min(2,Number(w.appCols)||2);
+      });
+    });
+    if(groupTarget<0){
+      DB.ui.widgetPages.forEach(function(page,i){
+        const g=(page||[]).find(function(w){ return w.id==='l7_p1_tools'; });
+        if(g&&groupTarget<0) groupTarget=i;
+      });
+    }
+    DB.ui.widgetPages.forEach(function(page,i){
+      (page||[]).forEach(function(w){
+        if(w.type!=='appgroup'||!Array.isArray(w.appKeys)) return;
+        if(i!==groupTarget) w.appKeys=w.appKeys.filter(function(k){ return k!=='takeout'; });
+      });
+      const tools=(page||[]).find(function(w){ return w.id==='l7_p1_tools'; });
+      if(tools&&i===groupTarget&&tools.appKeys.indexOf('takeout')<0) tools.appKeys.unshift('takeout');
+    });
     DB.ui.takeoutDesktopV54=true;
-  }else if(!DB.ui.homePages.some(function(page){ return (page||[]).indexOf('takeout')>=0; })){
-    const target=DB.ui.homePages.find(function(page){ return (page||[]).length<16; });
-    if(target) target.push('takeout');
-    else DB.ui.homePages.push(['takeout']);
+    DB.ui.takeoutDesktopV55=true;
   }
+  DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).filter(function(k,i,arr){ return arr.indexOf(k)===i; }).slice(0,16); });
   DB.ui.homePage=Math.max(0,Math.min(Number(DB.ui.homePage)||0,DB.ui.homePages.length-1));
   if(!DB.mallTier) DB.mallTier='mid';
   if(!DB.mallMode) DB.mallMode='solo';
@@ -2405,8 +2506,8 @@ function fixAll(){
 }
 function defaultHomePages(){
   return [
-    ['wechat','novel','diary','weibo','gallery','hang'],
-    ['checkin','date','out','shop','takeout'],
+    ['wechat','novel','diary','weibo','gallery','hang','takeout'],
+    ['date','out','shop'],
     ['forum','world','regex','settings']
   ];
 }
@@ -2426,7 +2527,7 @@ function defaultDesktopWidgetPages(){
     [
       {id:'final_p2_todo',type:'list',title:'创作清单',text:'整理旧稿\n补一场夜戏\n记下今天的灵感',x:0,y:0,w:4,h:2,shape:'rounded',pattern:'none'},
       {id:'final_p2_calendar',type:'calendar',title:'这一周',text:'周二交稿 · 周四读书会',x:0,y:2,w:4,h:2,shape:'rounded',pattern:'none'},
-      {id:'final_p2_apps',type:'appgroup',appKeys:['checkin','date','out','shop'],appCols:4,x:0,y:4,w:4,h:2,shape:'rounded',pattern:'none'},
+      {id:'final_p2_apps',type:'appgroup',appKeys:['takeout','date','out','shop'],appCols:4,x:0,y:4,w:4,h:2,shape:'rounded',pattern:'none'},
       {id:'final_p2_photo',type:'image',title:'午后',image:photos[1],x:0,y:6,w:4,h:3,shape:'frame',pattern:'none'}
     ],
     [
@@ -2439,8 +2540,8 @@ function defaultDesktopWidgetPages(){
 }
 function defaultLayout7HomePages(){
   return [
-    ['wechat','novel','gallery','weibo','checkin','diary'],
-    ['hang','shop','takeout','out','date'],
+    ['wechat','novel','gallery','weibo','takeout','diary'],
+    ['hang','shop','out','date'],
     ['settings','forum','world','regex']
   ];
 }
@@ -2453,7 +2554,7 @@ function defaultLayout7WidgetPages(){
       {id:'l7_p1_clock',type:'clock',title:'今天',text:'晴 · 19°C',x:0,y:1,w:3.75,h:1.75,shape:'arch',pattern:'none'},
       {id:'l7_p1_photo',type:'image',title:'',image:photo,x:0,y:2.98,w:2,h:2.56,shape:'frame',pattern:'stars'},
       {id:'l7_p1_bubble',type:'bubble',title:'今天也要',text:'慢一点，也没关系。',x:2,y:2.98,w:1.76,h:1,shape:'rounded',pattern:'none'},
-      {id:'l7_p1_tools',type:'appgroup',appKeys:['checkin','diary'],appCols:2,x:2,y:4.25,w:1.75,h:1,shape:'rounded',pattern:'none'},
+      {id:'l7_p1_tools',type:'appgroup',appKeys:['takeout','diary'],appCols:2,x:2,y:4.25,w:1.75,h:1,shape:'rounded',pattern:'none'},
       {id:'l7_p1_apps',type:'appgroup',appKeys:['wechat','novel','gallery','weibo'],appCols:2,x:0,y:5.75,w:2,h:1,shape:'rounded',pattern:'none'},
       {id:'l7_p1_vinyl',type:'text',title:'今日一句',text:'慢慢做好',x:2,y:5.75,w:1.76,h:2.5,shape:'vinyl',pattern:'lines'},
       {id:'l7_p1_collage',type:'collage',title:'生活切片',images:photos,x:0,y:8.58,w:3.75,h:2.25,shape:'frame',pattern:'stars'}
@@ -2462,7 +2563,7 @@ function defaultLayout7WidgetPages(){
       {id:'l7_p2_books',type:'books',title:'桌面书架',text:'雨停之前|长夜来信|旧城手记',bookImages:['','',''],x:0,y:.5,w:3.75,h:2.25,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_note1',type:'text',title:'小记',text:'',x:0,y:3,w:2,h:1,shape:'pill',pattern:'stars'},
       {id:'l7_p2_list',type:'list',title:'创作清单',text:'整理旧稿\n补一场夜戏\n记下今天的灵感',x:2,y:3,w:1.75,h:3,shape:'arch',pattern:'stars'},
-      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','takeout','out','date'],appCols:3,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
+      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','out','date'],appCols:2,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
       {id:'l7_p2_quote',type:'quote',title:'摘录',text:'你只需要把灯留着，回来的人会看见。',x:2,y:6.25,w:1.75,h:2.5,shape:'rounded',pattern:'none'},
       {id:'l7_p2_note2',type:'text',title:'小记',text:'和重要的人，再靠近一点。',x:0,y:7,w:2,h:1.75,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_photo',type:'image',title:'',image:photos[1],x:0,y:9,w:3.75,h:1.75,shape:'rounded',pattern:'none'}
@@ -3226,7 +3327,6 @@ const APPS=[
   {k:'forum',   n:'论坛', i:'forum',  c:'#C8B3BC'},
   {k:'gallery', n:'相册', i:'image', c:'#C8B3BC'},
   {k:'hang',    n:'查岗', i:'search', c:'#C8B3BC'},
-  {k:'checkin', n:'打卡', i:'check', c:'#C8B3BC'},
   {k:'date',    n:'约会', i:'heart', c:'#C8B3BC'},
   {k:'out',     n:'出门', i:'walk', c:'#C8B3BC'},
   {k:'shop',    n:'网购', i:'bag', c:'#C8B3BC'},
@@ -3261,13 +3361,14 @@ function render(){
   const R={home:screenHome,wechat:screenWechat,chatroom:screenChatRoom,contactedit:screenContactEdit,
     contactview:screenContactView,novel:screenNovel,novelbook:screenNovelBook,novelchapter:screenNovelChapter,read:screenRead,diary:screenDiary,forum:screenForum,
     gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,
-    hang:screenHang,checkin:screenCheckin,mall:screenMall,shop:screenTaobao,takeout:screenTakeout,checkup:screenCheckup,
+    hang:screenHang,mall:screenMall,shop:screenTaobao,takeout:screenTakeout,checkup:screenCheckup,
     date:screenDate,dateroom:screenDateRoom,out:screenOut,outnew:screenOutNew,outroom:screenOutRoom,world:screenWorldBooks,regex:screenRegexList,weibo:screenWeibo}[route.name]||screenHome;
   const noNav=(route.name==='home'||route.name==='wechat'||route.name==='chatroom'
-    ||['hang','checkin','mall','shop','takeout','date','dateroom','out','outnew','outroom','world','regex','weibo','novel','novelbook','novelchapter'].indexOf(route.name)>=0);
+    ||['hang','mall','shop','takeout','date','dateroom','out','outnew','outroom','world','regex','weibo','novel','novelbook','novelchapter'].indexOf(route.name)>=0);
   s.innerHTML=(noNav?'':navBar(route.name))+R();
   if(route.name==='contactview'){ const tt=$('.nav .ttl',s); const cc=ct(route.arg); if(tt&&cc) tt.textContent=contactDisplayName(cc); }
   s.classList.toggle('lock', route.name==='wechat'||route.name==='chatroom');
+  s.classList.toggle('takeout-screen', route.name==='takeout');
   if(route.name!=='home'&&route.name!=='wechat'){ const b=$('.nav .back',s); if(b) b.onclick=back; }
   bindScreen(); enhanceEditors(s); bindRegen(s); applyTheme(); syncGlobalBack();
   requestAnimationFrame(function(){fitLayout7Homes(s);});
@@ -3300,7 +3401,7 @@ function back(){
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
-  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','checkin','date','dateroom','out','outnew','outroom','shop','takeout','weibo','world','regex','appearance','settings','contactview','mall'];
+  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','date','dateroom','out','outnew','outroom','shop','takeout','weibo','world','regex','appearance','settings','contactview','mall'];
   if(allow.indexOf(lr.name)<0) return;
   if(lr.name==='chatroom'&&!chat(lr.arg)) return;
   if(lr.name==='dateroom'&&!dateById(lr.arg)) return;
@@ -4646,7 +4747,13 @@ function takeoutMsgHTML(m,ch){
   const o=(DB.takeout.orders||[]).find(function(x){ return x.id===m.orderId; });
   const status=o?takeoutStatusLabel(o.status):'订单更新';
   const items=o?(o.items||[]).map(function(x){ return x.name+' ×'+x.qty; }).join('、'):'点开查看订单';
-  return '<div class="takeout-msg" data-takeout-order="'+esc(m.orderId||'')+'"><div class="to-msg-top"><span class="to-msg-icon">'+ic('gift',20)+'</span><div class="grow"><b>'+esc(o?o.merchant:'外卖订单')+'</b><div class="muted">'+esc(status)+'</div></div><span class="chev">›</span></div><div class="to-msg-items">'+esc(items)+'</div><div class="to-msg-foot">'+esc(o?money(o.total):'')+' · 点击查看商品和配送进度</div></div>';
+  const isContact=o&&o.source==='contact';
+  return '<div class="takeout-msg '+(isContact?'from-ta':'from-me')+'" data-takeout-order="'+esc(m.orderId||'')+'">'
+    +'<div class="to-msg-top"><span class="to-msg-icon">'+ic('bag',20)+'</span><div class="grow"><small>'+(isContact?'Ta 给你点的外卖':'外卖订单')+'</small><b>'+esc(o?o.merchant:'外卖订单')+'</b></div><span class="tk-status '+esc(o?o.status:'')+'">'+esc(status)+'</span></div>'
+    +'<div class="to-msg-items">'+esc(items)+'</div>'
+    +'<div class="to-msg-progress"><i style="width:'+(o?Math.max(8,Math.min(100,(takeoutStatusRank(o.status)+1)*20)):8)+'%"></i></div>'
+    +'<div class="to-msg-foot"><span>'+esc(o?takeoutOrderRecipientLabel(o):'')+'</span><b>'+esc(o?money(o.total):'')+'</b></div>'
+    +'<div class="to-msg-link">查看订单详情与配送进度 <span class="chev">›</span></div></div>';
 }
 function msgHTML(m,ch){
   const selecting=chatSelectChat===ch.id;
@@ -4664,7 +4771,6 @@ function msgHTML(m,ch){
   if(m.type==='turn') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+turnHTML(m)+'</div>';
   if(m.type==='myturn') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+myTurnHTML(m)+'</div>';
   if(m.type==='shop') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+shopHTML(m)+'</div>';
-  if(m.type==='takeout') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+takeoutMsgHTML(m,ch)+'</div>';
   if(m.role==='sys') return '<div class="sysline">'+esc(m.text||'')+'</div>';
   if(m.role==='narr') return '<div class="narr '+rowClass+'"'+rowAttr+'>'+mark+esc(m.text||'').replace(/\n/g,'<br>')+'</div>';
   const mine=m.role==='me';
@@ -4700,6 +4806,9 @@ function msgHTML(m,ch){
   }
   else if(T==='doc'){
     inner='<div class="rich" data-doc="'+m.id+'"><div style="padding:12px;display:flex;gap:10px;align-items:center"><div class="ic3">'+ic('doc',24)+'</div><div><div style="font-size:calc(14px * var(--ui-font-scale,1));font-weight:600">'+esc(m.title||'文件')+'</div><div class="muted">'+esc(m.size||'')+(m.content? ' · 有内容':'')+'</div></div></div><div class="ft">文件'+(m.content? ' · 点开看内容':'')+'</div></div>';
+  }
+  else if(T==='takeout'){
+    inner=takeoutMsgHTML(m,ch);
   }
   else { inner='<div class="bub">'+textHTML(m.text)+'</div>'; }
   return '<div class="mrow'+(mine?' me':'')+' '+rowClass+'"'+rowAttr+'>'+mark+av
@@ -9180,15 +9289,32 @@ function bindScreenInner(){
   $$('[data-order]',s).forEach(el=>el.onclick=function(){ const o=(DB.orders||[]).find(function(x){ return x.id===el.dataset.order; }); if(o) sheetOrder(o); });
   $$('[data-orderdel]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); DB.orders=(DB.orders||[]).filter(function(o){ return o.id!==el.dataset.orderdel; }); save(); render(); });
   $$('[data-totab]',s).forEach(el=>el.onclick=function(){ DB.takeout.activeTab=el.dataset.totab; save(); render(); });
-  $$('[data-tocat]',s).forEach(el=>el.onclick=function(){ DB.takeout.category=el.dataset.tocat; save(); render(); });
+  $$('[data-tocat]',s).forEach(el=>el.onclick=function(){ DB.takeout.category=el.dataset.tocat; DB.takeout.activeStoreId=null; save(); render(); });
   $$('[data-to-setsession]',s).forEach(el=>el.onclick=sheetTakeoutSession);
-  $$('[data-toproduct]',s).forEach(el=>el.onclick=function(){ sheetTakeoutProduct(el.dataset.toproduct); });
+  $$('[data-tostore]',s).forEach(el=>el.onclick=function(){ sheetTakeoutStore(el.dataset.tostore); });
+  $$('[data-toproduct]',s).forEach(el=>el.onclick=function(){ sheetTakeoutProduct(el.dataset.toproduct,DB.takeout.activeStoreId); });
   $$('[data-toadd]',s).forEach(el=>el.onclick=function(ev){
     ev.stopPropagation();
-    const p=takeoutProducts(DB.takeout.category).find(function(x){ return x.id===el.dataset.toadd; });
-    if(p&&takeoutAddToCart(p,p.cat||DB.takeout.category,1,DB.takeout.beneficiary)){ render(); toast('已加入购物车'); }
+    const p=takeoutProductById(DB.takeout.category,el.dataset.toadd,DB.takeout.activeStoreId);
+    if(p&&takeoutAddToCart(p,p.cat||DB.takeout.category,1,DB.takeout.beneficiary,p.specs&&p.specs.length?(p.specs[0].name+'：'+p.specs[0].options[0]):'')){ DB.takeout.activeTab='cart'; save(); render(); toast('已加入购物车'); }
   });
+  const search=$('#takeoutSearch');
+  if(search){
+    const applySearch=function(){ DB.takeout.search=String(search.value||''); save(); render(); };
+    search.onchange=applySearch;
+    search.onkeydown=function(ev){ if(ev.key==='Enter'){ ev.preventDefault(); applySearch(); } };
+  }
   const toCart=$('#toCart'); if(toCart) toCart.onclick=sheetTakeoutCart;
+  const cartList=takeoutCartFor();
+  $$('[data-todelcart]',s).forEach(function(el){ el.onclick=function(){ const row=cartList[Number(el.dataset.todelcart)]; if(!row) return; DB.takeout.carts=DB.takeout.carts.filter(function(x){ return x.id!==row.id; }); save(); render(); }; });
+  $$('[data-toqty]',s).forEach(function(el){ el.onclick=function(){ const row=cartList[Number(el.dataset.toqty)]; if(!row) return; row.qty=(Math.max(1,Number(row.qty)||1)%20)+1; save(); render(); }; });
+  $$('[data-tocartrecipient]',s).forEach(function(el){ el.onclick=function(){ DB.takeout.beneficiary=el.dataset.tocartrecipient; cartList.forEach(function(x){ x.beneficiary=DB.takeout.beneficiary; }); save(); render(); }; });
+  $$('[data-tocartclear]',s).forEach(function(el){ el.onclick=function(){ const ids=cartList.map(function(x){ return x.id; }); DB.takeout.carts=DB.takeout.carts.filter(function(x){ return ids.indexOf(x.id)<0; }); save(); render(); toast('购物车已清空'); }; });
+  const cartCheckout=$('#toCartCheckout');
+  if(cartCheckout) cartCheckout.onclick=function(){
+    if(!cartList.length) return;
+    sheetTakeoutCheckout(cartList.map(function(x){ return {product:Object.assign({},x,{specText:x.spec}),cat:x.cat,qty:x.qty,beneficiary:x.beneficiary,cartId:x.id}; }));
+  };
   $$('[data-torefresh]',s).forEach(el=>el.onclick=takeoutRefreshCatalog);
   $$('[data-torole]',s).forEach(el=>el.onclick=function(){ takeoutRoleOrder(el.dataset.torole); });
   $$('[data-to-persona]',s).forEach(el=>el.onclick=sheetTakeoutPersona);
@@ -9534,8 +9660,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-26 · 3.44 · 第 54 轮';
-const BUILD_CODE=54;
+const BUILD='2026-10-26 · 3.45 · 第 55 轮';
+const BUILD_CODE=55;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -9556,7 +9682,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenCheckin','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','screenOut','screenWeibo','screenForum','screenGallery','screenDiary','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','screenOut','screenWeibo','screenForum','screenGallery','screenDiary','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -9597,7 +9723,7 @@ async function runCheckupUI(){
     ['contactedit',firstContact,'联系人编辑'],['novel',null,'小说'],['novelbook',firstBook&&firstBook.id,'书籍'],
     ['novelchapter',firstBook&&firstChapter?(firstBook.id+'|'+firstChapter.id):null,'章节'],['read',firstRead,'共读'],
     ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],
-    ['hang',null,'查岗'],['checkin',null,'打卡'],['mall',null,'商城'],['shop',null,'网购'],['takeout',null,'外卖'],['checkup',null,'自检'],
+    ['hang',null,'查岗'],['mall',null,'商城'],['shop',null,'网购'],['takeout',null,'外卖'],['checkup',null,'自检'],
     ['date',null,'约会'],['dateroom',firstDate,'约会房间'],['out',null,'出门'],['outnew',null,'准备出门'],['outroom',firstOut,'出门房间'],
     ['world',null,'世界书'],['regex',null,'正则'],['weibo',null,'微博']
   ];
@@ -12366,6 +12492,7 @@ async function orderDo(o,kind){
 /* ================= 外卖 ================= */
 const TAKEOUT_CATS=[
   {k:'美食',e:'🍜',c:'#E7A55C'},
+  {k:'奶茶',e:'🧋',c:'#B98069'},
   {k:'甜点饮品',e:'🍰',c:'#D98FA8'},
   {k:'超市便利',e:'🛒',c:'#73A88B'},
   {k:'蔬菜水果',e:'🥬',c:'#6EA568'},
@@ -12470,6 +12597,54 @@ const TAKEOUT_LOCAL={
     {store:'半糖蛋糕房',rating:4.9,sold:'提前 3 小时',name:'小尺寸纪念蛋糕',price:68,desc:'4 寸小蛋糕，适合两个人',review:'尺寸刚好，不会浪费。'}
   ]
 };
+const TAKEOUT_BRANDS={
+  '美食':['老乡鸡','南城香','杨国福麻辣烫','张亮麻辣烫','袁记云饺','米村拌饭'],
+  '奶茶':['瑞幸','蜜雪冰城','星巴克','霸王茶姬','茶百道','一点点'],
+  '甜点饮品':['好利来','鲍师傅','泸溪河','奈雪的茶','沪上阿姨','DQ'],
+  '超市便利':['全家便利店','罗森','7-ELEVEn','便利蜂','永辉超市','盒马鲜生'],
+  '蔬菜水果':['叮咚买菜','盒马鲜生','美团买菜','朴朴超市','百果园','每日优鲜'],
+  '看病买药':['益丰大药房','老百姓大药房','海王星辰','叮当快药','京东大药房'],
+  '鲜花花束':['花点时间','野兽派','花加','本地花房','ROSEONLY'],
+  '早餐':['巴比馒头','永和大王','肯德基早餐','和府捞面','曼玲粥店','真功夫'],
+  '夜宵':['海底捞外送','木屋烧烤','很久以前羊肉串','胡大饭馆','夜宵小馆','烧烤研究所'],
+  '咖啡':['瑞幸咖啡','星巴克','Manner Coffee','库迪咖啡','Tims天好咖啡','M Stand'],
+  '宠物用品':['宠物家','波奇宠物','小佩宠物','宠物医院','毛球补给站'],
+  '成人用品':['月光私享','夜航便利店','柔软生活馆','私享小铺'],
+  '药品处方':['线上执业药师','益丰处方药房','叮当处方审核','老百姓处方药房'],
+  '蛋糕定制':['好利来','熊猫不走','21cake','幸福西饼','元祖','半糖蛋糕房']
+};
+const TAKEOUT_POOLS={
+  '美食':['招牌牛肉面','番茄滑蛋饭','黑椒鸡腿饭','鲜虾馄饨','酸辣粉','麻辣烫','玉米鲜肉饺','卤肉饭','小炒肉盖饭','番茄鸡蛋面','排骨年糕','咖喱鸡饭','藤椒鸡排饭','香菇滑鸡饭','香辣鸡腿堡','黄金脆薯条'],
+  '奶茶':['招牌珍珠奶茶','茉莉奶绿','杨枝甘露','芋圆葡萄','草莓啵啵','满杯百香果','桂花乌龙','生椰拿铁','抹茶拿铁','黑糖珍珠鲜奶','四季春茶','冰鲜柠檬水','芝士葡萄','椰果奶茶','厚乳红茶','轻乳茶'],
+  '甜点饮品':['草莓奶油杯','抹茶生巧卷','提拉米苏','巴斯克芝士','杨枝甘露','芒果班戟','肉松小贝','桃酥','麻薯','泡芙','芋泥波波','可可奶油卷','柠檬茶','水果茶','冰激凌','布丁'],
+  '超市便利':['抽取式纸巾','无糖气泡水','洗衣凝珠','鲜牛奶','酸奶','矿泉水','湿巾','垃圾袋','一次性餐具','饼干','泡面','咖啡饮料','冰杯','雨伞','充电线','旅行洗漱包'],
+  '蔬菜水果':['脆甜蓝莓','小番茄','生菜黄瓜组合','香蕉','红富士苹果','阳光玫瑰','橙子','西兰花','土豆胡萝卜','菠菜','金针菇','玉米','牛油果','猕猴桃','草莓','车厘子'],
+  '看病买药':['创可贴组合装','电子体温计','医用口罩','碘伏棉签','退热贴','酒精湿巾','纱布','体温贴','一次性手套','生理盐水','医用胶带','家庭急救包'],
+  '鲜花花束':['奶油白玫瑰','向日葵小花束','洋桔梗混搭','粉色康乃馨','郁金香花束','洋甘菊','红玫瑰','香槟玫瑰','百合花束','满天星','永生花礼盒','绿植小盆栽'],
+  '早餐':['豆浆油条套餐','鲜肉小笼包','鸡蛋火腿三明治','皮蛋瘦肉粥','鲜肉包','玉米汁','茶叶蛋','煎饼果子','饭团','烧麦','生煎包','牛肉饼','咖啡早餐组合','牛奶燕麦','鸡蛋灌饼'],
+  '夜宵':['孜然鸡肉串','蒜香烤茄子','关东煮组合','烤冷面','炒米粉','小龙虾拌面','烤鸡翅','炸串拼盘','螺蛳粉','烤玉米','铁板鱿鱼','酸辣粉','卤味拼盘','冰啤酒'],
+  '咖啡':['冰美式','燕麦拿铁','海盐焦糖拿铁','生椰拿铁','厚乳拿铁','冷萃咖啡','澳白','卡布奇诺','摩卡','抹茶拿铁','可颂','贝果','芝士蛋糕','橙C美式','气泡美式','拿铁'],
+  '宠物用品':['猫砂 5L','宠物湿巾','冻干鸡胸肉','猫条','狗粮试吃装','猫抓板','逗猫棒','宠物尿垫','除臭喷雾','宠物零食','牵引绳','宠物碗'],
+  '成人用品':['柔软护理套装','香氛按摩油','舒适睡眠眼罩','温和清洁喷雾','亲肤毛巾','隐私收纳袋','精油礼盒','柔软抱枕','香氛蜡烛','护理湿巾','旅行隐私包','舒适睡衣'],
+  '药品处方':['处方药代购服务','家庭用药咨询','线上药师审核','用药清单整理','慢病续方咨询','药品说明书解读','儿童用药咨询','老人用药整理','处方拍照审核','隐私配送服务'],
+  '蛋糕定制':['简约奶油蛋糕','莓果夹心蛋糕','小尺寸纪念蛋糕','巧克力慕斯','水果蛋糕','芋泥麻薯蛋糕','芝士蛋糕','冰淇淋蛋糕','生日蛋糕','拍照小蛋糕','低糖蛋糕','双层庆祝蛋糕']
+};
+const TAKEOUT_BRAND_MENUS={
+  '瑞幸':['生椰拿铁','厚乳拿铁','丝绒拿铁','标准美式','橙C美式','柚C美式','冰吸生椰拿铁','抹茶瑞纳冰','巧克力瑞纳冰','海盐芝士厚乳','贝果','可颂'],
+  '蜜雪冰城':['冰鲜柠檬水','棒打鲜橙','蜜桃四季春','珍珠奶茶','椰果奶茶','满杯百香果','草莓啵啵','芋圆葡萄','雪顶咖啡','原味圣代','摩天脆脆','雪王柠檬茶'],
+  '星巴克':['经典拿铁','美式咖啡','焦糖玛奇朵','摩卡','馥芮白','燕麦拿铁','冷萃咖啡','抹茶星冰乐','红茶拿铁','可颂','芝士蛋糕','火腿芝士三明治'],
+  '霸王茶姬':['伯牙绝弦','桂馥兰香','花田乌龙','寻香山茶','万里木兰','青沫观音','白雾红尘','春日桃桃','青青糯山','山野栀子','云南玫瑰','茉莉雪芽'],
+  '茶百道':['杨枝甘露','豆乳玉麒麟','招牌芋圆奶茶','茉莉奶绿','桂花酒酿','草莓奶冻','西瓜啵啵','生椰西瓜','轻芝葡萄','抹茶奶绿','黑糖珍珠奶茶','芋泥波波'],
+  '一点点':['波霸奶茶','四季奶青','阿华田','冰淇淋红茶','茉莉绿茶','乌龙奶茶','燕麦奶茶','珍珠奶绿','红茶玛奇朵','奶盖四季春','椰果奶茶','布丁奶茶']
+};
+const TAKEOUT_SPECS={
+  '奶茶':[{name:'糖度',options:['全糖','七分糖','五分糖','三分糖','无糖']},{name:'冰量',options:['正常冰','少冰','去冰','热饮']}],
+  '咖啡':[{name:'糖度',options:['标准糖','半糖','无糖']},{name:'温度',options:['热','正常冰','少冰']}],
+  '甜点饮品':[{name:'糖度',options:['标准糖','半糖','无糖']},{name:'冰量',options:['正常冰','少冰','去冰']}],
+  '美食':[{name:'份量',options:['标准份','加量份']},{name:'辣度',options:['不辣','微辣','中辣','特辣']}],
+  '夜宵':[{name:'份量',options:['单人份','双人份']},{name:'辣度',options:['不辣','微辣','中辣','特辣']}],
+  '蛋糕定制':[{name:'尺寸',options:['4寸','6寸','8寸','10寸']},{name:'甜度',options:['标准甜','低糖']}]
+};
 const TAKEOUT_FLOW=[
   {k:'placed',n:'已下单',delay:2200},
   {k:'confirmed',n:'商家已接单',delay:3600},
@@ -12479,6 +12654,13 @@ const TAKEOUT_FLOW=[
 ];
 const TAKEOUT_STATUS_NAMES={placed:'已下单',confirmed:'商家已接单',preparing:'制作中',delivering:'配送中',delivered:'已送达',completed:'已完成',refund_pending:'退款审核中',refunded:'已退款',cancelled:'已取消'};
 function takeoutStatusLabel(k){ return TAKEOUT_STATUS_NAMES[k]||'处理中'; }
+function takeoutOrderRecipientLabel(order){
+  if(!order) return '';
+  const c=ct(order.contactId),p=(DB.me.personas||[]).find(function(x){ return x.id===order.personaId; })||DB.me;
+  if(order.orderedFor==='contact') return c?contactDisplayName(c):'对方';
+  if(order.orderedFor==='both') return c?('我和 '+contactDisplayName(c)):'两个人';
+  return p.name||'我';
+}
 function takeoutNormalizeProductKey(name,cat){
   return String(name||'').replace(/\s+/g,'').toLowerCase()+'|'+String(cat||'').trim();
 }
@@ -12507,31 +12689,93 @@ function takeoutCurrentContext(){
   const persona=takeoutActivePersona();
   return {chat:ch,contact:c,persona:persona,personaId:persona?persona.id:(DB.me.personaId||null)};
 }
-function takeoutProductVisual(name,cat){
-  if(cat==='成人用品') return {kind:'emoji',emoji:'💗',url:''};
+function takeoutGeneratedImage(name,cat,merchant){
+  const info=TAKEOUT_CATS.find(function(x){ return x.k===cat; })||{e:'🍽️',c:'#d8c3cb'};
+  const seed=npHash(String(name||'')+'|'+String(cat||'')+'|'+String(merchant||''));
+  const hue=seed%360,hue2=(hue+28+seed%53)%360;
+  const safeName=String(name||'商品').replace(/[<>&"]/g,'');
+  const safeMerchant=String(merchant||'').replace(/[<>&"]/g,'');
+  const svg='<svg xmlns="http://www.w3.org/2000/svg" width="480" height="360" viewBox="0 0 480 360">'+
+    '<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="hsl('+hue+',45%,97%)"/><stop offset="1" stop-color="hsl('+hue2+',34%,91%)"/></linearGradient><filter id="s"><feGaussianBlur stdDeviation="13"/></filter></defs>'+
+    '<rect width="480" height="360" fill="#fff"/>'+
+    '<circle cx="86" cy="72" r="94" fill="hsl('+hue+',42%,90%)" opacity=".62"/><circle cx="412" cy="306" r="116" fill="hsl('+hue2+',38%,90%)" opacity=".55"/>'+
+    '<ellipse cx="240" cy="228" rx="146" ry="31" fill="#b6aeb2" opacity=".16" filter="url(#s)"/>'+
+    '<circle cx="240" cy="184" r="105" fill="url(#g)" stroke="#fff" stroke-width="12"/>'+
+    '<circle cx="240" cy="184" r="86" fill="hsl('+hue+',28%,96%)" stroke="hsl('+hue+',24%,82%)" stroke-width="2"/>'+
+    '<text x="240" y="204" text-anchor="middle" font-size="70">'+info.e+'</text>'+
+    '<rect x="28" y="292" width="424" height="48" rx="16" fill="#fff" opacity=".9"/>'+
+    '<text x="44" y="322" font-size="21" font-weight="600" fill="#4d4448">'+safeName.slice(0,18)+'</text>'+
+    '<text x="436" y="321" text-anchor="end" font-size="13" fill="#9a8e93">'+safeMerchant.slice(0,12)+'</text>'+
+    '</svg>';
+  return 'data:image/svg+xml;charset=utf-8,'+encodeURIComponent(svg);
+}
+function takeoutProductVisual(name,cat,merchant){
+  if(cat==='成人用品'){
+    const icons=['💗','🌙','🫧','🌿','🕯️','🧴','🧸','🛏️','🫶','🎀','✨','🌹'];
+    return {kind:'emoji',emoji:icons[npHash(String(name)+String(merchant))%icons.length],url:''};
+  }
   const custom=(DB.takeout.customProductImages||{})[takeoutNormalizeProductKey(name,cat)];
   if(custom) return {kind:'custom',url:custom,emoji:''};
   if(DB.takeout.worldMode!=='modern') return {kind:'blank',url:'',emoji:''};
-  return {kind:'url',url:TAKEOUT_IMAGES[cat]||TAKEOUT_IMAGES['日用百货'],emoji:''};
+  return {kind:'url',url:takeoutGeneratedImage(name,cat,merchant),emoji:''};
 }
-function productVisualHTML(name,cat,cls){
-  const v=takeoutProductVisual(name,cat);
+function productVisualHTML(name,cat,cls,merchant){
+  const v=takeoutProductVisual(name,cat,merchant);
   if(v.kind==='emoji') return '<div class="'+(cls||'takeout-thumb')+' takeout-emoji">'+v.emoji+'</div>';
   if(v.kind==='blank') return '<div class="'+(cls||'takeout-thumb')+' takeout-blank">白图<br><small>非现代世界观</small></div>';
   return '<img class="'+(cls||'takeout-thumb')+'" src="'+esc(v.url)+'" alt="'+esc(name)+'" loading="lazy" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
-}
-function takeoutLocalProducts(cat){
-  const list=TAKEOUT_LOCAL[cat]||[];
-  return list.map(function(x,i){ return Object.assign({},x,{id:'takeout_'+cat+'_'+i,cat:cat,merchant:x.merchant||x.store||'本地商家',emoji:(TAKEOUT_CATS.find(function(c){ return c.k===cat; })||{}).e||'🍽️'}); });
 }
 function takeoutCachedAIProducts(cat){
   const d=DB.takeout.storeCache[cat];
   return d&&Array.isArray(d.items)?d.items:[];
 }
+function takeoutStoreCatalog(cat){
+  const brands=(TAKEOUT_BRANDS[cat]||['本地商家']);
+  const pool=(TAKEOUT_POOLS[cat]||['招牌商品','人气推荐','季节限定','经典口味','低糖版本','分享装','单人餐','热卖套餐','清爽款','浓香款','加料版','精选组合']);
+  const catInfo=TAKEOUT_CATS.find(function(x){ return x.k===cat; })||{e:'🍽️'};
+  const basePrices={'美食':18,'奶茶':12,'甜点饮品':18,'超市便利':9,'蔬菜水果':12,'看病买药':12,'鲜花花束':59,'早餐':9,'夜宵':18,'咖啡':16,'宠物用品':19,'成人用品':39,'药品处方':0,'蛋糕定制':68};
+  const descs={'美食':'现做现送，包装分装','奶茶':'现制茶饮，可选甜度与冰量','甜点饮品':'当日制作，冷藏配送','超市便利':'日常便利店商品，快速送达','蔬菜水果':'生鲜称重，坏果售后','看病买药':'家庭常备，隐私包装','鲜花花束':'花材新鲜，附祝福卡','早餐':'早餐现做，热食配送','夜宵':'夜宵现烤现做，趁热吃','咖啡':'现磨咖啡，可选温度','宠物用品':'宠物日常补给，正品保障','成人用品':'隐私包装，配送信息保密','药品处方':'需审核处方或咨询药师','蛋糕定制':'现做蛋糕，支持祝福语'};
+  let stores=(DB.takeout.mode==='ai'?[]:brands.map(function(brand,si){
+    const seed=npHash(cat+'|'+brand);
+    const menu=TAKEOUT_BRAND_MENUS[brand]||pool;
+    const count=Math.max(10,Math.min(20,12+(seed%5)));
+    const items=[];
+    for(let i=0;i<count;i++){
+      const base=menu[(i+seed)%menu.length],cycle=Math.floor(i/menu.length);
+      const name=base+(cycle?(' · '+['加量版','精选版','双份装','限定装'][cycle%4]):'');
+      const price=Number(basePrices[cat]||15)+(i%5)*3+((seed+i)%4);
+      const specs=TAKEOUT_SPECS[cat]?JSON.parse(JSON.stringify(TAKEOUT_SPECS[cat])):[];
+      items.push({id:'toi_'+npHash(cat+brand+name+i).toString(36),name:name,price:price,desc:(descs[cat]||'本地商家商品')+(i%3===0?' · 热卖推荐':''),cat:cat,merchant:brand,storeId:'tos_'+npHash(cat+brand).toString(36),emoji:catInfo.e,specs:specs,rating:(4.5+(seed%5)/10).toFixed(1),review:i%2===0?'包装完整，送达及时，口味稳定。':'分量足，和页面描述一致。'});
+    }
+    return {id:'tos_'+npHash(cat+brand).toString(36),name:brand,cat:cat,rating:(4.5+(seed%5)/10).toFixed(1),monthly:400+(seed%4800),eta:22+(seed%19),distance:(.4+(seed%32)/10).toFixed(1)+'km',deliveryFee:seed%4===0?0:2+(seed%4),minOrder:seed%3===0?0:20,tag:seed%2===0?'品牌商家':'本地热卖',items:items,ai:false};
+  }));
+  const ai=takeoutCachedAIProducts(cat);
+  if(ai.length&&DB.takeout.mode!=='fixed'){
+    const grouped={};
+    ai.forEach(function(x){ const name=x.merchant||'AI 临时店铺'; (grouped[name]=grouped[name]||[]).push(x); });
+    Object.keys(grouped).forEach(function(name){
+      const id='toa_'+npHash(cat+name).toString(36);
+      const items=grouped[name].map(function(x,i){ return Object.assign({},x,{storeId:id,emoji:x.emoji||catInfo.e,specs:TAKEOUT_SPECS[cat]||[]}); });
+      stores.push({id:id,name:name,cat:cat,rating:'4.7',monthly:120+items.length*31,eta:24, distance:'1.2km',deliveryFee:3,minOrder:20,tag:'AI 补全',items:items,ai:true});
+    });
+  }
+  return stores;
+}
 function takeoutProducts(cat){
+  return takeoutStoreCatalog(cat).flatMap(function(store){ return store.items; });
+}
+function takeoutStoreById(cat,storeId){
+  return takeoutStoreCatalog(cat).find(function(store){ return store.id===storeId; })||null;
+}
+function takeoutProductById(cat,productId,storeId){
+  const store=storeId?takeoutStoreById(cat,storeId):null;
+  if(store) return store.items.find(function(item){ return item.id===productId; })||null;
+  return takeoutProducts(cat).find(function(item){ return item.id===productId; })||null;
+}
+function takeoutModeProducts(cat){
   const ai=takeoutCachedAIProducts(cat);
   if(DB.takeout.mode==='ai') return ai;
-  return takeoutLocalProducts(cat).concat(DB.takeout.mode==='hybrid'?ai:[]);
+  return takeoutProducts(cat);
 }
 function takeoutStatusRank(k){
   const flow=TAKEOUT_FLOW.map(function(x){ return x.k; });
@@ -12547,8 +12791,63 @@ function takeoutOrderMatches(o,ctx){
 function takeoutOrderItemsTotal(items){
   return (items||[]).reduce(function(sum,x){ return sum+Number(x.price||0)*Math.max(1,Number(x.qty)||1); },0);
 }
-function takeoutAddressFor(personaId){
-  return DB.takeout.addresses[personaId]||{name:'我',phone:'',detail:'还没填写收货地址'};
+function takeoutPersonaAddressState(personaId){
+  if(!personaId) return {items:[],selectedId:null};
+  let state=DB.takeout.addresses[personaId];
+  if(Array.isArray(state)) state={items:state,selectedId:(state[0]||{}).id||null};
+  state=state&&Array.isArray(state.items)?state:{items:[],selectedId:null};
+  if(state.selectedId&&!state.items.some(function(x){ return x.id===state.selectedId; })) state.selectedId=null;
+  if(!state.selectedId&&state.items[0]) state.selectedId=state.items[0].id;
+  DB.takeout.addresses[personaId]=state;
+  return state;
+}
+function takeoutEnsureContactAddresses(contactId){
+  if(!contactId||!ct(contactId)) return [];
+  let list=DB.takeout.contactAddresses[contactId];
+  if(Array.isArray(list)&&list.length) return list;
+  const c=ct(contactId),seed=npHash(contactId);
+  list=[
+    {id:'ca_'+contactId+'_home',label:'家',name:contactDisplayName(c),phone:'138'+String(10000000+(seed%89999999)).slice(-8),detail:(seed%2?'云栖别墅 8 栋 1201':'梧桐里小区 3 栋 902')},
+    {id:'ca_'+contactId+'_work',label:'公司',name:contactDisplayName(c),phone:'办公电话',detail:(c.identity?c.identity+' · ':'')+'滨江中心 A 座 18F'},
+    {id:'ca_'+contactId+'_villa',label:'半山别墅',name:contactDisplayName(c),phone:'家人代收',detail:'半山云墅 6 号'},
+    {id:'ca_'+contactId+'_community',label:'青禾小区',name:contactDisplayName(c),phone:'门卫代收',detail:'青禾公寓 2 单元 1103'}
+  ];
+  DB.takeout.contactAddresses[contactId]=list;
+  return list;
+}
+function takeoutAddressOptions(beneficiary,ctx){
+  ctx=ctx||takeoutCurrentContext();
+  const mine=(takeoutPersonaAddressState(ctx.personaId).items||[]).map(function(x){ return Object.assign({owner:'me'},x); });
+  const role=takeoutEnsureContactAddresses(ctx.contact&&ctx.contact.id).map(function(x){ return Object.assign({owner:'contact'},x); });
+  if(beneficiary==='contact') return role;
+  if(beneficiary==='both') return role.concat(mine);
+  return mine;
+}
+function takeoutAddressFor(personaId,beneficiary,contactId){
+  const state=takeoutPersonaAddressState(personaId);
+  const mine=state.items.find(function(x){ return x.id===state.selectedId; })||state.items[0]||{id:null,label:'家',name:'我',phone:'',detail:'还没填写收货地址'};
+  const choice=DB.takeout.checkoutAddressChoice;
+  if(beneficiary==='both'&&choice&&choice.owner==='me'){
+    const selected=state.items.find(function(x){ return x.id===choice.id; });
+    if(selected) return Object.assign({owner:'me'},selected);
+  }
+  if(beneficiary==='contact'||beneficiary==='both'){
+    const list=takeoutEnsureContactAddresses(contactId);
+    const key='contact:'+contactId;
+    const selected=list.find(function(x){ return x.id===DB.takeout.selectedAddresses[key]; })||list[0];
+    if(selected) return Object.assign({owner:'contact'},selected);
+  }
+  return Object.assign({owner:'me'},mine);
+}
+function takeoutSetSelectedAddress(owner,ownerId,addressId){
+  const key=owner+':'+ownerId;
+  DB.takeout.selectedAddresses[key]=addressId;
+  if(owner==='me'){
+    const state=takeoutPersonaAddressState(ownerId);
+    state.selectedId=addressId;
+  }
+  DB.takeout.checkoutAddressChoice={owner:owner,id:addressId};
+  save();
 }
 function takeoutPaymentFor(personaId){
   return DB.takeout.payments[personaId]||{type:'wallet',label:'小手机钱包'};
@@ -12565,15 +12864,17 @@ function takeoutCartFor(ctx){
   ctx=ctx||takeoutCurrentContext();
   return (DB.takeout.carts||[]).filter(function(x){ return takeoutCartMatch(x,ctx); });
 }
-function takeoutAddToCart(product,cat,qty,beneficiary){
+function takeoutAddToCart(product,cat,qty,beneficiary,spec){
   const ctx=takeoutCurrentContext();
   if(!ctx.personaId){ toast('先选择用户人设'); return false; }
   DB.takeout.carts=DB.takeout.carts||[];
+  const existing=takeoutCartFor(ctx);
+  if(existing.length&&existing.some(function(x){ return x.merchant!==product.merchant; })){ toast('购物车里已有其他店铺的商品，请先结算或清空'); return false; }
   const same=DB.takeout.carts.find(function(x){
-    return takeoutCartMatch(x,ctx)&&x.name===product.name&&x.merchant===product.merchant&&x.beneficiary===(beneficiary||DB.takeout.beneficiary||'me');
+    return takeoutCartMatch(x,ctx)&&x.name===product.name&&x.merchant===product.merchant&&(x.spec||'')===(spec||'')&&x.beneficiary===(beneficiary||DB.takeout.beneficiary||'me');
   });
   if(same) same.qty=Math.max(1,Number(same.qty)||1)+Math.max(1,Number(qty)||1);
-  else DB.takeout.carts.push({id:uid(),personaId:ctx.personaId,chatId:ctx.chat&&ctx.chat.id||null,contactId:ctx.contact&&ctx.contact.id||null,beneficiary:beneficiary||DB.takeout.beneficiary||'me',productId:product.id,name:product.name,merchant:product.merchant,price:Number(product.price)||0,qty:Math.max(1,Number(qty)||1),desc:product.desc||'',cat:cat||product.cat||'',emoji:product.emoji||'',addedAt:Date.now()});
+  else DB.takeout.carts.push({id:uid(),personaId:ctx.personaId,chatId:ctx.chat&&ctx.chat.id||null,contactId:ctx.contact&&ctx.contact.id||null,beneficiary:beneficiary||DB.takeout.beneficiary||'me',productId:product.id,name:product.name,merchant:product.merchant,price:Number(product.price)||0,qty:Math.max(1,Number(qty)||1),desc:product.desc||'',cat:cat||product.cat||'',emoji:product.emoji||'',spec:spec||'',specs:product.specs||[],addedAt:Date.now()});
   save();
   return true;
 }
@@ -12584,7 +12885,7 @@ function takeoutRecipientLabel(beneficiary,ctx){
 }
 function takeoutPushOrderMessage(order,text){
   if(!order||!order.chatId||!chat(order.chatId)) return;
-  pushMsg(order.chatId,{role:'sys',type:'takeout',orderId:order.id,status:order.status,text:text||('外卖订单：'+order.merchant+' · '+takeoutStatusLabel(order.status))});
+  pushMsg(order.chatId,{role:order.source==='contact'?'ta':'me',from:order.contactId||null,type:'takeout',orderId:order.id,status:order.status,text:text||('外卖订单：'+order.merchant+' · '+takeoutStatusLabel(order.status))});
 }
 function takeoutScheduleNext(order){
   const idx=TAKEOUT_FLOW.map(function(x){ return x.k; }).indexOf(order.status);
@@ -12599,9 +12900,11 @@ function takeoutScheduleNext(order){
 function takeoutCreateOrder(opts){
   const ctx=takeoutCurrentContext();
   opts=opts||{};
-  const items=(opts.items||[]).map(function(x){ return {productId:x.id||x.productId||'',name:x.name,price:Number(x.price)||0,qty:Math.max(1,Number(x.qty)||1),spec:x.spec||'',cat:x.cat||'',merchant:x.merchant||opts.merchant||'',desc:x.desc||'',review:x.review||'',emoji:x.emoji||'',imageMeta:takeoutProductVisual(x.name,x.cat)}; });
+  const items=(opts.items||[]).map(function(x){ return {productId:x.id||x.productId||'',name:x.name,price:Number(x.price)||0,qty:Math.max(1,Number(x.qty)||1),spec:x.spec||'',cat:x.cat||'',merchant:x.merchant||opts.merchant||'',desc:x.desc||'',review:x.review||'',emoji:x.emoji||'',imageMeta:takeoutProductVisual(x.name,x.cat,x.merchant||opts.merchant)}; });
   if(!items.length) return null;
-  const order={id:uid(),personaId:opts.personaId||ctx.personaId,chatId:opts.chatId!==undefined?opts.chatId:(ctx.chat&&ctx.chat.id||null),contactId:opts.contactId!==undefined?opts.contactId:(ctx.contact&&ctx.contact.id||null),source:opts.source||'user',payer:opts.payer||'user',orderedFor:opts.orderedFor||'me',merchant:opts.merchant||items[0].merchant||'本地商家',items:items,total:takeoutOrderItemsTotal(items),status:'placed',address:opts.address||takeoutAddressFor(opts.personaId||ctx.personaId),payment:opts.payment||takeoutPaymentFor(opts.personaId||ctx.personaId),createdAt:Date.now(),updatedAt:Date.now(),timeline:[{status:'placed',ts:Date.now(),text:'订单已提交'}]};
+  const goodsTotal=takeoutOrderItemsTotal(items),packFee=opts.packFee===undefined?2:Math.max(0,Number(opts.packFee)||0),deliveryFee=opts.deliveryFee===undefined?3:Math.max(0,Number(opts.deliveryFee)||0);
+  const riders=['王师傅','李师傅','陈师傅','周师傅'],seed=npHash(items.map(function(x){ return x.name; }).join('')+Date.now());
+  const order={id:uid(),orderNo:'BS'+String(Date.now()).slice(-8)+String(seed%1000).padStart(3,'0'),personaId:opts.personaId||ctx.personaId,chatId:opts.chatId!==undefined?opts.chatId:(ctx.chat&&ctx.chat.id||null),contactId:opts.contactId!==undefined?opts.contactId:(ctx.contact&&ctx.contact.id||null),source:opts.source||'user',payer:opts.payer||'user',orderedFor:opts.orderedFor||'me',merchant:opts.merchant||items[0].merchant||'本地商家',items:items,goodsTotal:goodsTotal,packFee:packFee,deliveryFee:deliveryFee,total:goodsTotal+packFee+deliveryFee,etaMinutes:opts.etaMinutes||(24+seed%8),rider:opts.rider||riders[seed%riders.length],status:'placed',address:opts.address||takeoutAddressFor(opts.personaId||ctx.personaId),payment:opts.payment||takeoutPaymentFor(opts.personaId||ctx.personaId),createdAt:Date.now(),updatedAt:Date.now(),timeline:[{status:'placed',ts:Date.now(),text:'订单已提交'}]};
   takeoutScheduleNext(order);
   DB.takeout.orders.unshift(order);
   save();
@@ -12638,11 +12941,11 @@ function takeoutAIAvailable(){ return !!(DB.api&&DB.api.key); }
 async function takeoutGenerateAIProducts(cat){
   if(!takeoutAIAvailable()) throw new Error('先配置 API');
   const sys='你在为一个中文生活模拟器生成外卖商品。只输出 JSON 数组，不聊天。不要使用真实品牌名，不要生成真实药店处方。成人用品只写含蓄的护理或陪伴用品名称。';
-  const user='分类：'+cat+'。生成 6 件无品牌商品，每项字段：name,price(数字),desc(20到40字),store(虚构店名),review(15到35字)。不要代码块。';
+  const user='分类：'+cat+'。生成 2 家虚构店铺，每家 10 件无品牌商品，共 20 件。每项字段：name,price(数字),desc(20到40字),store(虚构店名),review(15到35字)。两家店商品不要重复。不要代码块。';
   const out=await callModel([{role:'system',content:sys},{role:'user',content:user}]);
   let arr=npJSON(out); if(arr&&arr.items) arr=arr.items;
   if(!Array.isArray(arr)||!arr.length) throw new Error('没有生成商品');
-  return arr.filter(function(x){ return x&&x.name; }).slice(0,6).map(function(x,i){ return {id:'takeout_ai_'+cat+'_'+Date.now()+'_'+i,cat:cat,name:String(x.name).slice(0,30),price:Math.max(0,Number(x.price)||0),desc:String(x.desc||'').slice(0,80),merchant:String(x.store||'AI 临时店铺').slice(0,24),rating:4.5+(npHash(String(x.name)+i)%5)/10,sold:'AI 生成',review:String(x.review||'描述简洁，适合本次模拟。').slice(0,80),ai:true,emoji:(TAKEOUT_CATS.find(function(c){ return c.k===cat; })||{}).e||'🍽️'}; });
+  return arr.filter(function(x){ return x&&x.name; }).slice(0,20).map(function(x,i){ return {id:'takeout_ai_'+cat+'_'+Date.now()+'_'+i,cat:cat,name:String(x.name).slice(0,30),price:Math.max(0,Number(x.price)||0),desc:String(x.desc||'').slice(0,80),merchant:String(x.store||'AI 临时店铺').slice(0,24),rating:4.5+(npHash(String(x.name)+i)%5)/10,sold:'AI 生成',review:String(x.review||'描述简洁，适合本次模拟。').slice(0,80),ai:true,emoji:(TAKEOUT_CATS.find(function(c){ return c.k===cat; })||{}).e||'🍽️',specs:TAKEOUT_SPECS[cat]||[]}; });
 }
 async function takeoutRefreshCatalog(){
   const cat=DB.takeout.category||'美食';
@@ -12661,17 +12964,32 @@ function takeoutSessionRow(ctx){
   return '<div class="lrow" data-to-setsession="1">'+avBox(ctx.contact)+'<div class="mi"><div class="t1">'+esc(chatName(ctx.chat))+'</div><div class="t2">'+esc(ctx.contact?contactDisplayName(ctx.contact):'')+' · '+(ctx.chat.msgs||[]).length+' 条消息 · 订单只属于这里</div></div><div class="rt"><span class="chev">›</span></div></div>';
 }
 function takeoutHeader(ctx){
-  const w=walletForPersona(ctx.personaId),cart=takeoutCartFor(ctx);
+  const w=walletForPersona(ctx.personaId),a=takeoutAddressFor(ctx.personaId);
   return wxTop('外卖','<span class="muted" style="font-size:calc(12px * var(--ui-font-scale,1))">余额 '+money(w.balance)+'</span>')
-    +'<div class="takeout-hero"><div><div class="tk-kicker">送到 '+esc(takeoutAddressFor(ctx.personaId).detail||'还没有地址')+'</div><div class="tk-title">今天想吃什么</div></div><button class="btn primary" id="toCart">购物车'+(cart.length?' '+cart.length:'')+'</button></div>';
+    +'<button class="takeout-location" data-to-address="1"><span>'+ic('pin',16)+'</span><div><small>送到</small><b>'+esc(a.detail||'先添加收货地址')+'</b></div><span class="chev">›</span></button>'
+    +'<div class="takeout-search"><span>'+ic('search',17)+'</span><input id="takeoutSearch" value="'+esc(DB.takeout.search||'')+'" placeholder="搜索商家、奶茶、咖啡或商品"></div>';
 }
-function takeoutTabs(){
-  const t=DB.takeout,tabs=[['home','外卖'],['orders','订单'],['mine','我的']];
-  return '<div class="tabs takeout-tabs">'+tabs.map(function(x){ return '<div class="tab'+(t.activeTab===x[0]?' on':'')+'" data-totab="'+x[0]+'">'+x[1]+'</div>'; }).join('')+'</div>';
+function takeoutBottomNav(ctx){
+  const cart=takeoutCartFor(ctx),orders=(DB.takeout.orders||[]).filter(function(o){ return takeoutOrderMatches(o,ctx)&&['placed','confirmed','preparing','delivering'].indexOf(o.status)>=0; }).length;
+  const tabs=[['home','外卖','home',0],['cart','购物车','bag',cart.length],['orders','订单','doc',orders],['mine','我的','userplus',0]];
+  return '<div class="takeout-bottomnav">'+tabs.map(function(x){
+    return '<button class="'+(DB.takeout.activeTab===x[0]?'on':'')+'" data-totab="'+x[0]+'"><span class="g">'+ic(x[2],21)+(x[3]?'<i class="bd">'+(x[3]>99?'99+':x[3])+'</i>':'')+'</span><b>'+x[1]+'</b></button>';
+  }).join('')+'</div>';
 }
 function takeoutProductCard(p,ctx){
   const cat=p.cat||DB.takeout.category;
-  return '<div class="takeout-product"><button class="takeout-product-main" data-toproduct="'+esc(p.id)+'">'+productVisualHTML(p.name,cat,'takeout-thumb')+'<div class="takeout-product-copy"><div class="tk-name">'+esc(p.name)+'</div><div class="tk-desc">'+esc(p.desc||'')+'</div><div class="tk-price">'+money(p.price)+'</div></div></button><button class="tk-add" data-toadd="'+esc(p.id)+'" title="加入购物车">＋</button></div>';
+  return '<div class="takeout-product"><button class="takeout-product-main" data-toproduct="'+esc(p.id)+'">'+productVisualHTML(p.name,cat,'takeout-thumb',p.merchant)+'<div class="takeout-product-copy"><div class="tk-name">'+esc(p.name)+'</div><div class="tk-desc">'+esc(p.desc||'')+'</div><div class="tk-price">'+money(p.price)+'</div></div></button><button class="tk-add" data-toadd="'+esc(p.id)+'" title="加入购物车">＋</button></div>';
+}
+function takeoutStoreCard(store){
+  const first=store.items[0]||{name:store.name,merchant:store.name,cat:store.cat};
+  return '<button class="takeout-store-card" data-tostore="'+esc(store.id)+'"><div class="store-cover">'+productVisualHTML(first.name,store.cat,'store-thumb',store.name)+'</div><div class="store-info"><div class="store-line"><b>'+esc(store.name)+'</b><span>'+(store.ai?'AI':'品牌')+'</span></div><div class="store-meta"><b>'+esc(store.rating)+'</b> 分 · 月售 '+esc(store.monthly)+' · '+esc(store.eta)+'分钟</div><div class="store-sub">'+esc(store.tag)+' · 起送 ¥'+esc(store.minOrder)+' · 配送 ¥'+esc(store.deliveryFee)+' · '+esc(store.distance)+'</div><div class="store-preview">'+store.items.slice(0,2).map(function(x){ return esc(x.name); }).join(' · ')+'</div></div><span class="chev">›</span></button>';
+}
+function takeoutCartPage(ctx,list){
+  const total=list.reduce(function(sum,x){ return sum+Number(x.price||0)*Math.max(1,Number(x.qty)||1); },0);
+  return '<div class="takeout-cart-page"><div class="takeout-section-title"><b>购物车</b><span>'+list.length+' 件'+(list.length?' · <button class="link" data-tocartclear="1">清空</button>':'')+'</span></div>'
+    +(list.length?list.map(function(x,i){ return '<div class="takeout-cart-item"><div class="cart-item-thumb">'+productVisualHTML(x.name,x.cat,'takeout-thumb',x.merchant)+'</div><div class="grow"><b>'+esc(x.name)+'</b><div class="muted">'+esc(x.merchant)+(x.spec?' · '+esc(x.spec):'')+'</div><div class="cart-item-bottom"><span>'+money(x.price)+' × '+x.qty+'</span><span>'+esc(takeoutRecipientLabel(x.beneficiary,ctx))+'</span></div></div><div class="cart-actions"><button data-toqty="'+i+'">×'+x.qty+'</button><button class="danger" data-todelcart="'+i+'">删</button></div></div>'; }).join('') : '<div class="empty">购物车还空着，去挑一杯奶茶吧。</div>')
+    +'<div class="takeout-recipient-box"><b>这单给谁</b><div class="takeout-recipient"><button class="'+(DB.takeout.beneficiary==='me'?'on':'')+'" data-tocartrecipient="me">给我</button><button class="'+(DB.takeout.beneficiary==='contact'?'on':'')+'" data-tocartrecipient="contact">给 Ta</button><button class="'+(DB.takeout.beneficiary==='both'?'on':'')+'" data-tocartrecipient="both">一起吃</button></div></div>'
+    +'<div class="takeout-cart-checkout"><div><span>合计</span><b>'+money(total)+'</b></div><button class="btn primary" id="toCartCheckout" '+(list.length?'':'disabled')+'>去结算</button></div></div>';
 }
 function screenTakeout(){
   const ctx=takeoutCurrentContext();
@@ -12680,20 +12998,18 @@ function screenTakeout(){
   if(!ctx.persona){
     body='<div class="card"><b>先选择用户人设</b><div class="muted" style="margin:8px 0 12px">地址、支付方式和订单都会跟着人设分开保存。</div><button class="btn primary full" data-to-persona="1">选择人设</button></div>';
   }else if(tab==='home'){
-    const cat=DB.takeout.category||'美食';
-    const products=takeoutProducts(cat);
-    const groups={};
-    products.forEach(function(p){ (groups[p.merchant]=groups[p.merchant]||[]).push(p); });
-    body='<div class="takeout-cats">'+TAKEOUT_CATS.map(function(c){ return '<button class="takeout-cat'+(cat===c.k?' on':'')+'" data-tocat="'+c.k+'"><span>'+c.e+'</span><b>'+c.k+'</b></button>'; }).join('')+'</div>'
+    const cat=DB.takeout.category||'奶茶';
+    const q=String(DB.takeout.search||'').trim().toLowerCase();
+    const stores=takeoutStoreCatalog(cat).filter(function(store){ return !q||store.name.toLowerCase().includes(q)||store.items.some(function(x){ return x.name.toLowerCase().includes(q); }); });
+    body='<button class="takeout-address-card" data-to-setsession="1"><div><small>当前会话</small><b>'+esc(ctx.chat?chatName(ctx.chat):'先绑定聊天会话')+'</b></div><span class="chev">›</span></button>'
+      +'<div class="takeout-cats">'+TAKEOUT_CATS.map(function(c){ return '<button class="takeout-cat'+(cat===c.k?' on':'')+'" data-tocat="'+c.k+'"><span>'+c.e+'</span><b>'+c.k+'</b></button>'; }).join('')+'</div>'
       +'<div class="takeout-toolbar"><div><b>'+esc(cat)+'</b><div class="muted">'+esc(DB.takeout.mode==='hybrid'?'固定本地商品库 + AI 补全':DB.takeout.mode==='fixed'?'固定本地商品库':'全部由 AI 生成')+'</div></div><button class="btn" data-torefresh="1">'+(DB.takeout.mode==='fixed'?'固定商品':'刷新店铺')+'</button></div>'
       +(DB.takeout.mode==='ai'?'<div class="takeout-warning">全部由AI生成，同款商品和图片可能会不稳定</div>':'')
-      +Object.keys(groups).map(function(store){
-        const arr=groups[store];
-        return '<div class="takeout-store"><div class="takeout-store-head"><div><b>'+esc(store)+'</b><div class="muted">'+esc(arr[0].sold||'')+' · '+esc(arr[0].rating||'4.8')+' 分</div></div><span class="tk-badge">无品牌测试店</span></div>'
-          +arr.map(function(p){ return takeoutProductCard(p,ctx); }).join('')+'</div>';
-      }).join('')
-      +(products.length?'':'<div class="empty">当前是全部 AI 生成模式。<br>点「刷新店铺」生成这一分类的商品。</div>')
+      +stores.map(takeoutStoreCard).join('')
+      +(stores.length?'':'<div class="empty">没有找到对应商家。<br>换个关键词或点「刷新店铺」。</div>')
       +'<div class="takeout-role"><b>让 Ta 主动点单</b><div class="muted">自己吃、给你点、双人餐都会实际生成订单、聊天气泡和配送状态。</div><div class="takeout-role-grid"><button data-torole="self">Ta 给自己点</button><button data-torole="user">Ta 给你点</button><button data-torole="both">Ta 点双人餐</button><button data-torole="auto">让 Ta 自己决定</button><button data-torole="random">随机来一单</button></div></div>';
+  }else if(tab==='cart'){
+    body=takeoutCartPage(ctx,takeoutCartFor(ctx));
   }else if(tab==='orders'){
     const all=(DB.takeout.orders||[]).filter(function(o){ return takeoutOrderMatches(o,ctx); }).sort(function(a,b){ return (b.createdAt||0)-(a.createdAt||0); });
     body=all.length? all.map(function(o){
@@ -12705,15 +13021,16 @@ function screenTakeout(){
     const addr=takeoutAddressFor(ctx.personaId);
     const pay=takeoutPaymentLabel(ctx.personaId);
     body='<div class="takeout-mine-card"><div class="takeout-avatar">'+esc((ctx.persona.name||'我').slice(0,1))+'</div><div class="grow"><b>'+esc(ctx.persona.name||'我')+'</b><div class="muted">'+esc(ctx.persona.identity||'当前用户人设')+'</div></div><button class="btn" data-to-persona="1">切换</button></div>'
+      +takeoutSessionRow(ctx)
       +'<div class="card takeout-settings">'
-      +'<div class="lrow" data-to-address="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">收货地址</div><div class="t2">'+esc(addr.name||'我')+' · '+esc(addr.phone||'未填电话')+' · '+esc(addr.detail||'未填写')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+      +'<div class="lrow" data-to-address="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">收货地址 · '+takeoutPersonaAddressState(ctx.personaId).items.length+' 个</div><div class="t2">'+esc(addr.name||'我')+' · '+esc(addr.phone||'未填电话')+' · '+esc(addr.detail||'未填写')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
       +'<div class="lrow" data-to-payment="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">支付方式</div><div class="t2">'+esc(pay)+' · 与现有小手机钱包共用余额</div></div><div class="rt"><span class="chev">›</span></div></div>'
       +'<div class="lrow" data-to-mode="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">商品生成模式</div><div class="t2">'+esc(DB.takeout.mode==='hybrid'?'固定本地商品库 + AI 补全店铺/商品/评价':DB.takeout.mode==='fixed'?'固定本地商品库':'全部由 AI 生成')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
       +'<div class="lrow" data-to-world="1" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">世界观</div><div class="t2">'+esc(DB.takeout.worldMode==='modern'?'现代都市 · 自动匹配白底商品图':'非现代 · 白图，可自定义绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
       +'<div class="card"><div class="row"><div class="grow"><b>商品图片绑定</b><div class="muted">已自定义 '+Object.keys(DB.takeout.customProductImages||{}).length+' 件。相同名称和分类会一直使用你的图片。</div></div><button class="btn" data-to-clearimages="1">清除</button></div></div>';
     if(DB.takeout.mode==='ai') body+='<div class="takeout-warning">全部由AI生成，同款商品和图片可能会不稳定</div>';
   }
-  return '<div class="pad takeout-page" style="padding-top:0">'+takeoutHeader(ctx)+takeoutTabs()+takeoutSessionRow(ctx)+body+'</div>';
+  return '<div class="takeout-shell"><div class="takeout-page">'+takeoutHeader(ctx)+body+'</div>'+takeoutBottomNav(ctx)+'</div>';
 }
 function sheetTakeoutSession(){
   const chats=(DB.chats||[]).filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ct(ch.memberIds[0]); });
@@ -12734,10 +13051,58 @@ function sheetTakeoutPersona(){
 function sheetTakeoutAddress(){
   const ctx=takeoutCurrentContext();
   if(!ctx.personaId){ toast('先选择人设'); return; }
-  const a=takeoutAddressFor(ctx.personaId);
-  sheet('<h3>收货地址</h3><div class="muted" style="margin:6px 0 10px">只保存当前用户人设的地址。</div><input id="toAddrName" value="'+esc(a.name||'')+'" placeholder="收货人"><input id="toAddrPhone" value="'+esc(a.phone||'')+'" placeholder="联系电话（虚拟号码即可）" style="margin-top:8px"><textarea id="toAddrDetail" style="margin-top:8px" placeholder="详细地址和门牌号">'+esc(a.detail||'')+'</textarea><button class="btn primary full" id="toAddrSave">保存</button><button class="btn full" id="toAddrClose">取消</button>');
-  $('#toAddrClose').onclick=closeSheet;
-  $('#toAddrSave').onclick=function(){ DB.takeout.addresses[ctx.personaId]={name:String($('#toAddrName').value||'').trim()||'我',phone:String($('#toAddrPhone').value||'').trim(),detail:String($('#toAddrDetail').value||'').trim()}; save(); closeSheet(); render(); toast('地址已保存'); };
+  const draw=function(){
+    const state=takeoutPersonaAddressState(ctx.personaId),role=takeoutEnsureContactAddresses(ctx.contact&&ctx.contact.id);
+    sheetFull('<h3>收货地址</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">可保存多个地址。当前用户人设的地址可编辑；角色地址可直接用于送给 Ta。</div>'
+      +(state.items.length?state.items.map(function(a){ return '<div class="address-card '+(state.selectedId===a.id?'on':'')+'" data-toaddrselect="'+a.id+'"><div class="address-label">'+esc(a.label||'地址')+'</div><div class="grow"><b>'+esc(a.name||'我')+' '+esc(a.phone||'')+'</b><div class="muted">'+esc(a.detail||'')+'</div></div><button class="btn" data-toaddredit="'+a.id+'">编辑</button><button class="btn danger" data-toaddrdel="'+a.id+'">删</button></div>'; }).join(''):'<div class="muted" style="padding:8px 0 12px">还没有保存地址。</div>')
+      +'<div class="row" style="margin:8px 0"><button class="btn primary grow" id="toAddrAdd">新增地址</button><button class="btn grow" id="toAddrQuick">常用地址</button></div>'
+      +(ctx.contact?'<div class="takeout-section-title"><b>'+esc(contactDisplayName(ctx.contact))+' 的地址</b><span>送给 Ta 时可选</span></div>'+role.map(function(a){ return '<div class="address-card role"><div class="address-label">'+esc(a.label)+'</div><div class="grow"><b>'+esc(a.name)+' '+esc(a.phone)+'</b><div class="muted">'+esc(a.detail)+'</div></div></div>'; }).join(''):'')
+      +'<button class="btn full" id="toAddrClose">关闭</button>');
+    $('#toAddrClose').onclick=closeSheet;
+    $$('#sheetBox [data-toaddrselect]').forEach(function(el){ el.onclick=function(){ takeoutSetSelectedAddress('me',ctx.personaId,el.dataset.toaddrselect); draw(); }; });
+    $$('#sheetBox [data-toaddredit]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); sheetTakeoutAddressEditor(ctx.personaId,el.dataset.toaddredit); }; });
+    $$('#sheetBox [data-toaddrdel]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); state.items=state.items.filter(function(x){ return x.id!==el.dataset.toaddrdel; }); if(state.selectedId===el.dataset.toaddrdel) state.selectedId=(state.items[0]||{}).id||null; save(); draw(); }; });
+    $('#toAddrAdd').onclick=function(){ sheetTakeoutAddressEditor(ctx.personaId,null); };
+    $('#toAddrQuick').onclick=function(){
+      const presets=[['家','云栖别墅 8 栋 1201'],['公司','滨江中心 A 座 18F'],['小区','梧桐里小区 3 栋 902'],['别墅','半山云墅 6 号']];
+      sheet('<h3>常用地址</h3><div class="muted" style="margin:6px 0 10px">选一个模板，再补上电话即可。</div>'+presets.map(function(p,i){ return '<div class="lrow" data-toquick="'+i+'"><div class="mi"><div class="t1">'+p[0]+'</div><div class="t2">'+esc(p[1])+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join('')+'<button class="btn full" id="toQuickClose">关闭</button>');
+      $$('#sheetBox [data-toquick]').forEach(function(el){ el.onclick=function(){ const p=presets[Number(el.dataset.toquick)]; sheetTakeoutAddressEditor(ctx.personaId,null,{label:p[0],detail:p[1],name:ctx.persona.name||'我'}); }; });
+      $('#toQuickClose').onclick=closeSheet;
+    };
+  };
+  draw();
+}
+function sheetTakeoutAddressEditor(personaId,addressId,preset,done){
+  const state=takeoutPersonaAddressState(personaId);
+  const old=addressId?state.items.find(function(x){ return x.id===addressId; }):null;
+  const a=old||Object.assign({id:'',label:'家',name:'',phone:'',detail:''},preset||{});
+  sheetFull('<h3>'+(old?'编辑地址':'新增地址')+'</h3><select id="toAddrLabel">'+['家','公司','小区','别墅','其他'].map(function(x){ return '<option'+(a.label===x?' selected':'')+'>'+x+'</option>'; }).join('')+'</select><input id="toAddrName" value="'+esc(a.name||'')+'" placeholder="收货人" style="margin-top:8px"><input id="toAddrPhone" value="'+esc(a.phone||'')+'" placeholder="联系电话（虚拟号码即可）" style="margin-top:8px"><textarea id="toAddrDetail" style="margin-top:8px" placeholder="详细地址和门牌号">'+esc(a.detail||'')+'</textarea><button class="btn primary full" id="toAddrSave">保存地址</button><button class="btn full" id="toAddrCancel">取消</button>');
+  $('#toAddrCancel').onclick=function(){ if(done){ closeSheet(); done(); } else sheetTakeoutAddress(); };
+  $('#toAddrSave').onclick=function(){
+    const item={id:old?old.id:uid(),label:$('#toAddrLabel').value||'家',name:String($('#toAddrName').value||'').trim()||'我',phone:String($('#toAddrPhone').value||'').trim(),detail:String($('#toAddrDetail').value||'').trim()};
+    if(!item.detail){ toast('先填写详细地址'); return; }
+    if(old) Object.assign(old,item); else state.items.push(item);
+    state.selectedId=item.id;
+    save();
+    if(done){ closeSheet(); done(); } else sheetTakeoutAddress();
+    toast('地址已保存');
+  };
+}
+function sheetTakeoutChooseAddress(beneficiary,onPick){
+  const ctx=takeoutCurrentContext(),options=takeoutAddressOptions(beneficiary,ctx);
+  sheet('<h3>选择收货地址</h3><div class="muted" style="margin:6px 0 10px">'+(beneficiary==='me'?'送到你自己的地址':beneficiary==='contact'?'送到 '+esc(ctx.contact?contactDisplayName(ctx.contact):'角色')+' 的地址':'送到角色地址')+'</div>'
+    +(options.length?options.map(function(a){ return '<div class="lrow" data-tochooseaddr="'+a.id+'"><div class="mi"><div class="t1">'+esc(a.label||'地址')+' · '+esc(a.name||'')+'</div><div class="t2">'+esc(a.detail||'')+' · '+esc(a.phone||'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'; }).join(''):'<div class="muted" style="padding:8px 0 12px">这个收货人还没有地址。</div>')
+    +(beneficiary==='me'?'<button class="btn full" id="toChooseAddrManage">管理我的地址</button>':'')
+    +'<button class="btn full" id="toChooseAddrClose">取消</button>');
+  $$('#sheetBox [data-tochooseaddr]').forEach(function(el){ el.onclick=function(){
+    const chosen=options.find(function(x){ return x.id===el.dataset.tochooseaddr; });
+    if(!chosen) return;
+    const owner=chosen.owner==='contact'?'contact':'me',ownerId=owner==='contact'?(ctx.contact&&ctx.contact.id):ctx.personaId;
+    takeoutSetSelectedAddress(owner,ownerId,chosen.id);
+    closeSheet(); if(onPick) onPick(chosen);
+  }; });
+  const mg=$('#toChooseAddrManage'); if(mg) mg.onclick=sheetTakeoutAddress;
+  $('#toChooseAddrClose').onclick=closeSheet;
 }
 function sheetTakeoutPayment(){
   const ctx=takeoutCurrentContext();
@@ -12768,29 +13133,43 @@ function sheetTakeoutWorld(){
   $$('#sheetBox [data-to-world-id]').forEach(function(el){ el.onclick=function(){ DB.takeout.worldMode=el.dataset.toWorldId; save(); closeSheet(); render(); }; });
   $('#toWorldClose').onclick=closeSheet;
 }
-function sheetTakeoutProduct(productId){
-  const cat=DB.takeout.category||'美食';
-  const p=takeoutProducts(cat).find(function(x){ return x.id===productId; });
+function sheetTakeoutStore(storeId){
+  const cat=DB.takeout.category||'奶茶',store=takeoutStoreById(cat,storeId);
+  if(!store){ toast('店铺已经刷新，请重新打开'); return; }
+  DB.takeout.activeStoreId=storeId;
+  const first=store.items[0]||{name:store.name,cat:cat};
+  sheetFull('<div class="store-detail-head"><div class="store-detail-cover">'+productVisualHTML(first.name,cat,'store-detail-thumb',store.name)+'</div><div class="grow"><h3>'+esc(store.name)+'</h3><div class="muted">'+esc(store.rating)+' 分 · 月售 '+esc(store.monthly)+' · '+esc(store.eta)+' 分钟</div><div class="store-sub">'+esc(store.tag)+' · 起送 ¥'+esc(store.minOrder)+' · 配送 ¥'+esc(store.deliveryFee)+'</div></div></div>'
+    +'<div class="takeout-store-menu"><div class="takeout-section-title"><b>商品</b><span>'+store.items.length+' 种</span></div>'+store.items.map(function(p){ return takeoutProductCard(p,takeoutCurrentContext()); }).join('')+'</div>'
+    +'<button class="btn full" id="toStoreClose">返回商家列表</button>');
+  $$('#sheetBox [data-toproduct]').forEach(function(el){ el.onclick=function(){ sheetTakeoutProduct(el.dataset.toproduct,store.id); }; });
+  $$('#sheetBox [data-toadd]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); const p=store.items.find(function(x){ return x.id===el.dataset.toadd; }); if(p&&takeoutAddToCart(p,p.cat||cat,1,DB.takeout.beneficiary,(p.specs&&p.specs[0])?(p.specs[0].name+'：'+p.specs[0].options[0]):'')){ closeSheet(); DB.takeout.activeTab='cart'; save(); render(); toast('已加入购物车'); } }; });
+  $('#toStoreClose').onclick=function(){ closeSheet(); DB.takeout.activeStoreId=null; save(); render(); };
+}
+function sheetTakeoutProduct(productId,storeId){
+  const cat=DB.takeout.category||'奶茶';
+  const p=takeoutProductById(cat,productId,storeId||DB.takeout.activeStoreId);
   if(!p){ toast('商品已经刷新，请重新打开'); return; }
   const draw=function(){
-    const v=takeoutProductVisual(p.name,p.cat||cat);
+    const v=takeoutProductVisual(p.name,p.cat||cat,p.merchant);
     const visual=v.kind==='emoji'?'<div class="takeout-detail-img takeout-emoji">💗</div>':v.kind==='blank'?'<div class="takeout-detail-img takeout-blank">白图<br><small>非现代世界观</small></div>':'<img class="takeout-detail-img" src="'+esc(v.url)+'" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
     sheetBig('<h3>'+esc(p.name)+'</h3>'+visual
-      +'<div class="takeout-detail-head"><div><b>'+esc(p.merchant||'本地商家')+'</b><div class="muted">'+esc(p.sold||'')+' · '+esc(p.rating||'4.8')+' 分</div></div><b class="tk-price">'+money(p.price)+'</b></div>'
+      +'<div class="takeout-detail-head"><div><b>'+esc(p.merchant||'本地商家')+'</b><div class="muted">'+[p.sold?esc(p.sold):'',esc(p.rating||'4.8')+' 分'].filter(Boolean).join(' · ')+'</div></div><b class="tk-price">'+money(p.price)+'</b></div>'
       +'<div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(p.desc||'')+'</div>'
       +'<div class="takeout-review">“'+esc(p.review||'评价简洁，适合本次模拟。')+'”</div>'
+      +((p.specs||[]).length?'<div class="takeout-specs">'+p.specs.map(function(spec,si){ return '<div class="spec-row"><span>'+esc(spec.name)+'</span><select data-tospec="'+si+'">'+spec.options.map(function(x){ return '<option>'+esc(x)+'</option>'; }).join('')+'</select></div>'; }).join('')+'</div>':'')
       +'<div class="row" style="margin-top:10px"><span class="grow">数量</span><input id="toQty" type="number" min="1" max="20" value="1" style="width:84px"></div>'
-      +'<div class="takeout-recipient"><button class="'+(DB.takeout.beneficiary==='me'?'on':'')+'" data-torecipient="me">给我</button><button class="'+(DB.takeout.beneficiary==='contact'?'on':'')+'" data-torecipient="contact">给 Ta</button><button class="'+(DB.takeout.beneficiary==='both'?'on':'')+'" data-torecipient="both">一起吃</button></div>'
-      +'<button class="btn primary full" id="toAddDetail">加入购物车</button><button class="btn full" id="toBuyDetail">立即下单</button>'
+      +'<div class="muted" style="margin:8px 0">加入购物车后再选择给谁购买。</div>'
+      +'<button class="btn primary full" id="toAddDetail">加入购物车</button>'
       +'<button class="btn full" id="toBindImg">'+(v.kind==='custom'?'更换绑定图片':'上传并绑定商品图片')+'</button>'
       +(v.kind==='custom'?'<button class="btn danger full" id="toClearImg">取消这张绑定图</button>':'')
       +'<button class="btn full" id="toProductClose">关闭</button>');
-    $$('#sheetBox [data-torecipient]').forEach(function(el){ el.onclick=function(){ DB.takeout.beneficiary=el.dataset.torecipient; save(); draw(); }; });
-    $('#toAddDetail').onclick=function(){ if(takeoutAddToCart(p,p.cat||cat,Number($('#toQty').value)||1,DB.takeout.beneficiary)){ closeSheet(); render(); toast('已加入购物车'); } };
-    $('#toBuyDetail').onclick=function(){ closeSheet(); sheetTakeoutCheckout([{product:p,cat:p.cat||cat,qty:Number($('#toQty').value)||1,beneficiary:DB.takeout.beneficiary}]); };
+    $('#toAddDetail').onclick=function(){
+      const specs=Array.from(document.querySelectorAll('#sheetBox [data-tospec]')).map(function(sel){ return sel.closest('.spec-row').querySelector('span').textContent+'：'+sel.value; });
+      if(takeoutAddToCart(p,p.cat||cat,Number($('#toQty').value)||1,DB.takeout.beneficiary,specs.join(' / '))){ closeSheet(); DB.takeout.activeTab='cart'; save(); render(); toast('已加入购物车，可以选择给谁购买'); }
+    };
     $('#toBindImg').onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; readImage(i.files[0],900,function(url){ DB.takeout.customProductImages[takeoutNormalizeProductKey(p.name,p.cat||cat)]=url; save(); draw(); toast('商品图已绑定'); }); }; i.click(); };
     const ci=$('#toClearImg'); if(ci) ci.onclick=function(){ delete DB.takeout.customProductImages[takeoutNormalizeProductKey(p.name,p.cat||cat)]; save(); draw(); toast('已取消绑定'); };
-    $('#toProductClose').onclick=closeSheet;
+    $('#toProductClose').onclick=function(){ if(p.storeId) sheetTakeoutStore(p.storeId); else closeSheet(); };
   };
   draw();
 }
@@ -12812,41 +13191,60 @@ function sheetTakeoutCheckout(rows){
   const ctx=takeoutCurrentContext();
   if(!ctx.personaId){ toast('先选择用户人设'); return; }
   if(!ctx.chat){ toast('先绑定一个聊天会话'); sheetTakeoutSession(); return; }
-  const addr=takeoutAddressFor(ctx.personaId);
-  const total=rows.reduce(function(s,r){ return s+Number(r.product.price||0)*Math.max(1,Number(r.qty)||1); },0);
-  sheet('<h3>确认订单</h3><div class="takeout-checkout-address"><b>'+esc(addr.name||'我')+' '+esc(addr.phone||'')+'</b><div class="muted">'+esc(addr.detail||'还没有填写详细地址')+'</div><button class="btn full" id="toCheckoutAddr">编辑地址</button></div>'
-    +rows.map(function(r){ return '<div class="takeout-checkout-line"><span>'+esc(r.product.name)+' ×'+r.qty+'<small>'+esc(takeoutRecipientLabel(r.beneficiary,ctx))+'</small></span><b>'+money(Number(r.product.price||0)*Number(r.qty||1))+'</b></div>'; }).join('')
-    +'<div class="kv"><span>支付方式</span><b>'+esc(takeoutPaymentLabel(ctx.personaId))+'</b></div><div class="kv"><span>合计</span><b>'+money(total)+'</b></div>'
-    +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">下单后会依次经历商家接单、制作、配送和送达；每次状态变化都会向聊天发送新的订单气泡。</div>'
-    +'<button class="btn primary full" id="toPlaceOrder">提交订单</button><button class="btn full" id="toCheckoutPay">换支付方式</button><button class="btn full" id="toCheckoutClose">取消</button>');
-  $('#toCheckoutClose').onclick=closeSheet;
-  $('#toCheckoutAddr').onclick=function(){ closeSheet(); sheetTakeoutAddress(); };
-  $('#toCheckoutPay').onclick=function(){ closeSheet(); sheetTakeoutPayment(); };
-  $('#toPlaceOrder').onclick=function(){
-    if(!addr.detail||addr.detail==='还没填写收货地址'){ toast('先填写收货地址'); sheetTakeoutAddress(); return; }
-    const w=walletForPersona(ctx.personaId);
-    if(Number(w.balance||0)<total){ toast('钱包余额不够，去钱包改一下余额'); return; }
-    w.balance=Number(w.balance||0)-total;
-    const groups={};
-    rows.forEach(function(r){ const key=r.product.merchant||'本地商家'; (groups[key]=groups[key]||[]).push(r); });
-    Object.keys(groups).forEach(function(merchant){
-      const list=groups[merchant];
-      const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact&&ctx.contact.id,source:'user',payer:'user',orderedFor:list[0].beneficiary||'me',merchant:merchant,items:list.map(function(r){ return {id:r.product.id,name:r.product.name,price:r.product.price,qty:r.qty,cat:r.cat,merchant:merchant,desc:r.product.desc||'',review:r.product.review||'',emoji:r.product.emoji||''}; }),address:addr,payment:takeoutPaymentFor(ctx.personaId)});
-      if(order) takeoutPushOrderMessage(order,'外卖已下单：'+merchant+' · '+takeoutStatusLabel(order.status));
-    });
-    DB.takeout.carts=DB.takeout.carts.filter(function(x){ return !rows.some(function(r){ return r.cartId&&r.cartId===x.id; }); });
-    save(); closeSheet(); DB.takeout.activeTab='orders'; render(); toast('订单已提交'); setTimeout(takeoutTickOrders,500);
+  let recipient=rows[0]&&rows[0].beneficiary||DB.takeout.beneficiary||'me';
+  const draw=function(){
+    const addr=takeoutAddressFor(ctx.personaId,recipient,ctx.contact&&ctx.contact.id);
+    const total=rows.reduce(function(s,r){ return s+Number(r.product.price||0)*Math.max(1,Number(r.qty)||1); },0);
+    sheetFull('<h3>确认订单</h3><div class="checkout-recipient"><b>这单给谁</b><div class="takeout-recipient"><button class="'+(recipient==='me'?'on':'')+'" data-tocheckoutrecipient="me">给我</button><button class="'+(recipient==='contact'?'on':'')+'" data-tocheckoutrecipient="contact">给 Ta</button><button class="'+(recipient==='both'?'on':'')+'" data-tocheckoutrecipient="both">一起吃</button></div></div>'
+      +'<button class="takeout-checkout-address" id="toCheckoutAddr"><div class="grow"><small>'+esc(addr.owner==='contact'?'角色收货地址':'我的收货地址')+'</small><b>'+esc(addr.label||'地址')+' · '+esc(addr.name||'')+' '+esc(addr.phone||'')+'</b><div class="muted">'+esc(addr.detail||'还没有选择地址')+'</div></div><span class="chev">›</span></button>'
+      +'<div class="checkout-product-list">'+rows.map(function(r){ return '<div class="takeout-checkout-line"><span>'+esc(r.product.name)+' ×'+r.qty+'<small>'+esc(r.product.specText||r.spec||'')+'</small></span><b>'+money(Number(r.product.price||0)*Number(r.qty||1))+'</b></div>'; }).join('')+'</div>'
+      +'<div class="kv"><span>包装费</span><b>¥2.00</b></div><div class="kv"><span>配送费</span><b>¥3.00</b></div><div class="kv total"><span>合计</span><b>'+money(total+5)+'</b></div>'
+      +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">下单后会依次经历商家接单、制作、配送和送达；每次状态变化都会向聊天发送新的订单气泡。</div>'
+      +'<button class="btn primary full" id="toPlaceOrder">提交订单</button><button class="btn full" id="toCheckoutPay">'+esc(takeoutPaymentLabel(ctx.personaId))+' · 换支付方式</button><button class="btn full" id="toCheckoutClose">取消</button>');
+    $('#toCheckoutClose').onclick=closeSheet;
+    $('#toCheckoutAddr').onclick=function(){
+      if(recipient==='me'&&!takeoutPersonaAddressState(ctx.personaId).items.length){ sheetTakeoutAddressEditor(ctx.personaId,null,null,draw); return; }
+      sheetTakeoutChooseAddress(recipient,function(){ draw(); });
+    };
+    $$('#sheetBox [data-tocheckoutrecipient]').forEach(function(el){ el.onclick=function(){ recipient=el.dataset.tocheckoutrecipient; rows.forEach(function(r){ r.beneficiary=recipient; if(r.cartId){ const c=DB.takeout.carts.find(function(x){ return x.id===r.cartId; }); if(c) c.beneficiary=recipient; } }); DB.takeout.beneficiary=recipient; save(); draw(); }; });
+    $('#toCheckoutPay').onclick=function(){ closeSheet(); sheetTakeoutPayment(); };
+    $('#toPlaceOrder').onclick=function(){
+      const current=takeoutAddressFor(ctx.personaId,recipient,ctx.contact&&ctx.contact.id);
+      if(!current.detail||current.detail==='还没填写收货地址'){ toast('先选择收货地址'); return; }
+      const totalFee=total+5,w=walletForPersona(ctx.personaId);
+      if(Number(w.balance||0)<totalFee){ toast('钱包余额不够，去钱包改一下余额'); return; }
+      w.balance=Number(w.balance||0)-totalFee;
+      const groups={};
+      rows.forEach(function(r){ const key=r.product.merchant||'本地商家'; (groups[key]=groups[key]||[]).push(r); });
+      Object.keys(groups).forEach(function(merchant){
+        const list=groups[merchant];
+        const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact&&ctx.contact.id,source:'user',payer:'user',orderedFor:recipient,merchant:merchant,items:list.map(function(r){ return {id:r.product.id,name:r.product.name,price:r.product.price,qty:r.qty,cat:r.cat,merchant:merchant,desc:r.product.desc||'',review:r.product.review||'',emoji:r.product.emoji||'',spec:r.product.specText||r.spec||''}; }),address:current,payment:takeoutPaymentFor(ctx.personaId)});
+        if(order){ save(); takeoutPushOrderMessage(order,'外卖已下单：'+merchant+' · '+takeoutStatusLabel(order.status)); }
+      });
+      DB.takeout.carts=DB.takeout.carts.filter(function(x){ return !rows.some(function(r){ return r.cartId&&r.cartId===x.id; }); });
+      save(); closeSheet(); DB.takeout.activeTab='orders'; render(); toast('订单已提交'); setTimeout(takeoutTickOrders,500);
+    };
   };
+  draw();
 }
 function sheetTakeoutOrder(orderId){
   const ctx=takeoutCurrentContext(),o=(DB.takeout.orders||[]).find(function(x){ return x.id===orderId; });
   if(!o) return;
-  const timeline=(o.timeline||[]).map(function(t){ return '<div class="takeout-time-line"><i></i><div><b>'+esc(takeoutStatusLabel(t.status))+'</b><div class="muted">'+shortTime(t.ts)+' · '+esc(t.text||'')+'</div></div></div>'; }).join('');
   const canRefund=['placed','confirmed','preparing','delivering','delivered'].indexOf(o.status)>=0;
-  sheetBig('<h3>订单详情</h3><div class="takeout-order-title"><div><b>'+esc(o.merchant)+'</b><div class="muted">'+shortTime(o.createdAt)+' · '+esc(takeoutStatusLabel(o.status))+'</div></div><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span></div>'
+  const flow=['placed','confirmed','preparing','delivering','delivered','completed'];
+  const active=Math.max(0,flow.indexOf(o.status));
+  const goodsSubtotal=o.goodsTotal!==undefined?o.goodsTotal:Math.max(0,Number(o.total||0)-Number(o.packFee===undefined?2:o.packFee)-Number(o.deliveryFee===undefined?3:o.deliveryFee));
+  const progress=flow.slice(0,5).map(function(k,i){ return '<div class="order-step '+(i<=active?'on':'')+(i===active?' current':'')+'"><i>'+ic(i<active?'check':i===4?'home':'clock',13)+'</i><span>'+esc(takeoutStatusLabel(k))+'</span></div>'; }).join('');
+  const statusText=o.status==='delivered'?'骑手已送达，请确认收货':o.status==='completed'?'订单已完成，感谢你的选择':o.status==='refund_pending'?'退款申请正在审核':o.status==='refunded'?'退款已原路退回':o.status==='cancelled'?'订单已取消':'预计 '+esc(o.etaMinutes||25)+' 分钟送达';
+  const timeline=(o.timeline||[]).map(function(t){ return '<div class="takeout-time-line"><i></i><div><b>'+esc(takeoutStatusLabel(t.status))+'</b><div class="muted">'+shortTime(t.ts)+' · '+esc(t.text||'')+'</div></div></div>'; }).join('');
+  sheetBig('<div class="to-order-head"><div class="to-order-kicker">订单详情</div><h3>'+esc(statusText)+'</h3><div class="muted">商家预计 '+esc(o.etaMinutes||25)+' 分钟送达 · 订单号 '+esc(o.orderNo||o.id.slice(-10))+'</div></div>'
+    +'<div class="takeout-order-progress">'+progress+'</div>'
+    +'<div class="to-order-merchant"><span class="tk-badge">外卖</span><div class="grow"><b>'+esc(o.merchant)+'</b><div class="muted">'+esc(o.source==='contact'?'角色下单':'本机下单')+' · '+shortTime(o.createdAt)+'</div></div><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span></div>'
+    +'<div class="to-order-products">'+(o.items||[]).map(function(x,i){ return '<div class="to-order-product"><div class="to-order-product-img">'+productVisualHTML(x.name,x.cat,'order-item-thumb',x.merchant||o.merchant)+'</div><div class="grow"><b>'+esc(x.name)+'</b><div class="muted">'+esc(x.spec||x.desc||'')+'</div><small>×'+x.qty+'</small></div><div class="rt"><b>'+money(Number(x.price||0)*Number(x.qty||1))+'</b><button class="btn" data-toorderitem="'+i+'">详情</button></div></div>'; }).join('')+'</div>'
+    +'<div class="to-order-breakdown"><div><span>商品小计</span><b>'+money(goodsSubtotal)+'</b></div><div><span>包装费</span><b>'+money(o.packFee===undefined?2:o.packFee)+'</b></div><div><span>配送费</span><b>'+money(o.deliveryFee===undefined?3:o.deliveryFee)+'</b></div><div class="total"><span>实付</span><b>'+money(o.total)+'</b></div></div>'
+    +'<div class="to-order-route"><div class="route-line"><i></i><div><small>收货地址</small><b>'+esc(o.address&&o.address.name||'我')+' '+esc(o.address&&o.address.phone||'')+'</b><span>'+esc(o.address&&o.address.detail||'未填写')+'</span></div></div><div class="route-line"><i></i><div><small>配送骑手</small><b>'+esc(o.rider||'本机骑手')+'</b><span>'+esc(takeoutStatusLabel(o.status))+' · 点击下方查看完整进度</span></div></div></div>'
     +'<div class="takeout-timeline">'+timeline+'</div>'
-    +'<div class="card" style="margin-top:10px">'+(o.items||[]).map(function(x,i){ return '<div class="takeout-checkout-line"><span>'+esc(x.name)+' ×'+x.qty+'<small>'+esc(x.spec||x.desc||'')+'</small></span><div class="rt"><b>'+money(Number(x.price||0)*Number(x.qty||1))+'</b><button class="btn" data-toorderitem="'+i+'" style="margin-left:8px">详情</button></div></div>'; }).join('')+'<div class="kv"><span>商品合计</span><b>'+money(o.total)+'</b></div></div>'
-    +'<div class="card"><b>配送信息</b><div class="muted" style="margin-top:7px;line-height:1.8">'+esc(o.address&&o.address.name||'我')+' '+esc(o.address&&o.address.phone||'')+'<br>'+esc(o.address&&o.address.detail||'未填写')+'<br>支付：'+esc(o.payment&&o.payment.label||'小手机钱包')+'</div></div>'
+    +'<div class="muted" style="margin:4px 0 8px">支付方式：'+esc(o.payment&&o.payment.label||'小手机钱包')+'</div>'
     +(o.status==='delivered'?'<button class="btn primary full" id="toConfirmReceipt">确认收货</button>':'')
     +(canRefund?'<button class="btn danger full" id="toRefund">申请退款</button>':'')
     +(o.status==='placed'?'<button class="btn full" id="toCancelOrder">取消订单</button>':'')
@@ -12866,8 +13264,8 @@ function sheetTakeoutOrderItem(orderId,index){
   const x=o&&(o.items||[])[index];
   if(!x) return;
   const cat=x.cat||DB.takeout.category||'美食';
-  const visual=productVisualHTML(x.name,cat,'takeout-detail-img');
-  sheet('<h3>'+esc(x.name)+'</h3>'+visual+'<div class="takeout-detail-head"><div><b>'+esc(x.merchant||o.merchant)+'</b><div class="muted">'+esc(cat)+' · 下单数量 '+x.qty+'</div></div><b class="tk-price">'+money(x.price)+'</b></div><div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(x.desc||'这条订单没有保存更多商品说明。')+'</div>'+(x.review?'<div class="takeout-review">“'+esc(x.review)+'”</div>':'')+'<button class="btn full" id="toOrderItemClose">关闭</button>');
+  const visual=productVisualHTML(x.name,cat,'takeout-detail-img',x.merchant||o.merchant);
+  sheet('<h3>'+esc(x.name)+'</h3>'+visual+'<div class="takeout-detail-head"><div><b>'+esc(x.merchant||o.merchant)+'</b><div class="muted">'+esc(cat)+' · 下单数量 '+x.qty+'</div></div><b class="tk-price">'+money(x.price)+'</b></div>'+(x.spec?'<div class="takeout-review">'+esc(x.spec)+'</div>':'')+'<div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(x.desc||'这条订单没有保存更多商品说明。')+'</div>'+(x.review?'<div class="takeout-review">“'+esc(x.review)+'”</div>':'')+'<button class="btn full" id="toOrderItemClose">关闭</button>');
   $('#toOrderItemClose').onclick=function(){ closeSheet(); sheetTakeoutOrder(o.id); };
 }
 async function takeoutRoleOrder(kind){
@@ -12894,7 +13292,7 @@ async function takeoutRoleOrder(kind){
     }catch(e){ logErr('角色点外卖生成失败，使用本地句：'+e.message); }
     finally{ busyDone(); }
   }
-  const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact.id,source:'contact',payer:'contact',orderedFor:orderedFor,merchant:picked[0].merchant||'角色点的外卖',items:picked.map(function(p){ return {id:p.id,name:p.name,price:p.price,qty:1,cat:cat,merchant:p.merchant,desc:p.desc||'',review:p.review||'',emoji:p.emoji||''}; }),address:takeoutAddressFor(ctx.personaId),payment:{type:'contact',label:contactDisplayName(ctx.contact)+'付款'}});
+  const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact.id,source:'contact',payer:'contact',orderedFor:orderedFor,merchant:picked[0].merchant||'角色点的外卖',items:picked.map(function(p){ return {id:p.id,name:p.name,price:p.price,qty:1,cat:cat,merchant:p.merchant,desc:p.desc||'',review:p.review||'',emoji:p.emoji||'',spec:(p.specs||[]).map(function(s){ return s.name+'：'+s.options[0]; }).join(' / ')}; }),address:takeoutAddressFor(ctx.personaId,orderedFor,ctx.contact.id),payment:{type:'contact',label:contactDisplayName(ctx.contact)+'付款'}});
   pushMsg(ctx.chat.id,{role:'ta',from:ctx.contact.id,type:'text',text:words});
   takeoutPushOrderMessage(order,'角色给你发送了外卖订单');
   save(); render(); toast('Ta 已经下单');
@@ -13039,7 +13437,7 @@ function screenTaobao(){
       return '<div class="sechead">'+esc(k)+' · '+esc(tbPriceLabel(price))+'</div>'
         +groups[k].map(function(x){
           const i=items.indexOf(x);
-          return '<div class="card"><div class="tb-product-row"><button class="tb-product-visual" data-tbproduct="'+i+'">'+productVisualHTML(x.name,x.cat||k,'takeout-thumb tb-thumb')+'</button><div class="grow"><div><b>'+esc(x.name)+'</b></div>'
+          return '<div class="card"><div class="tb-product-row"><button class="tb-product-visual" data-tbproduct="'+i+'">'+productVisualHTML(x.name,x.cat||k,'takeout-thumb tb-thumb','网购')+'</button><div class="grow"><div><b>'+esc(x.name)+'</b></div>'
             +'<div class="muted" style="margin-top:4px">'+esc(x.desc||'')+'</div></div><div class="rt"><div><b>'+money(x.price)+'</b></div></div></div>'
             +((x.opts&&x.opts.length)? '<select data-spec="'+i+'" style="margin-top:10px">'+x.opts.map(function(o){ return '<option>'+esc(o)+'</option>'; }).join('')+'</select>' : '')
             +'<div class="row" style="margin-top:10px"><button class="btn grow" data-addme="'+i+'" data-run="addMe:'+i+'">加我的</button>'
@@ -13092,7 +13490,7 @@ function sheetTbProduct(i){
   if(!x){ toast('商品已经刷新，请重新打开'); return; }
   const cat=x.cat||'其他';
   const draw=function(){
-    const v=takeoutProductVisual(x.name,cat);
+    const v=takeoutProductVisual(x.name,cat,'网购');
     const visual=v.kind==='emoji'?'<div class="takeout-detail-img takeout-emoji">'+v.emoji+'</div>':v.kind==='blank'?'<div class="takeout-detail-img takeout-blank">白图<br><small>非现代世界观</small></div>':'<img class="takeout-detail-img" src="'+esc(v.url)+'" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
     sheetBig('<h3>'+esc(x.name)+'</h3>'+visual+'<div class="takeout-detail-head"><div><b>'+esc(c?contactDisplayName(c):'网购')+'</b><div class="muted">'+esc(cat)+' · 商品详情</div></div><b class="tk-price">'+money(x.price)+'</b></div><div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(x.desc||'')+'</div>'
       +'<button class="btn full" id="tbBindImage">'+(v.kind==='custom'?'更换绑定图片':'上传并绑定商品图片')+'</button>'

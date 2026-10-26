@@ -1,9 +1,9 @@
 {
-  "version": "3.44",
-  "versionCode": 54,
-  "round": 54,
+  "version": "3.45",
+  "versionCode": 55,
+  "round": 55,
   "releasedAt": "2026-10-26",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=54",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=55",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "多会话消息迁移、外卖完整状态流、商品图绑定、小说独立世界书与版本更新入口。"
+  "notes": "移除打卡，外卖移到首页；商家与商品扩充、规格选择、多地址、角色地址和聊天订单气泡对齐。"
 }
