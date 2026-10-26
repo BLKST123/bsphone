@@ -1888,6 +1888,10 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 .l7-group .app{width:100%;min-width:0;min-height:70px;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:3px}
 .l7-group .app .ic{width:52px!important;height:52px!important;min-width:52px!important;border-radius:14px!important;font-size:calc(24px * var(--ui-font-scale,1))!important}
 .l7-group .app .nm{font-size:calc(10px * var(--ui-font-scale,1))!important;line-height:1.1!important;color:#5b5358!important}
+.l7-group.dense{grid-auto-rows:60px;column-gap:8px;row-gap:8px}
+.l7-group.dense .app{min-height:60px;gap:2px}
+.l7-group.dense .app .ic{width:44px!important;height:44px!important;min-width:44px!important;border-radius:12px!important;font-size:calc(21px * var(--ui-font-scale,1))!important}
+.l7-group.dense .app .nm{font-size:calc(9px * var(--ui-font-scale,1))!important}
 .l7-dots{position:absolute;left:0;right:0;bottom:117px;display:flex;justify-content:center;gap:6px;margin:0!important;z-index:6}
 .l7-dock{position:absolute;left:24px;right:24px;bottom:22px;height:82px;margin:0!important;padding:4px 8px!important;gap:8px!important;align-items:center;z-index:6;grid-template-columns:repeat(4,1fr)!important}
 .l7-dock .app{gap:1px!important}
@@ -1900,6 +1904,92 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 @media (orientation:landscape){
   html.portrait-fullscreen,html.portrait-fullscreen body{width:100%;height:100%;overflow:hidden!important;background:#161316}
   html.portrait-fullscreen #phone{position:fixed;left:50%;top:50%;width:min(100dvh,520px);height:100vw;max-width:none;margin:0;transform:translate(-50%,-50%) rotate(90deg);transform-origin:center center}
+}
+/* 多会话消息迁移 */
+.chatlist.selecting .msg-select-row{cursor:pointer;position:relative;border-radius:12px;transition:background .15s ease,box-shadow .15s ease}
+.chatlist.selecting .msg-select-row.selected{background:color-mix(in srgb,var(--theme-rose-soft) 74%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-rose-deep) 24%,transparent)}
+.msg-select-row.can-select{padding:8px 34px 8px 8px}
+.msg-check{position:absolute;right:8px;top:10px;width:20px;height:20px;border-radius:50%;border:1px solid color-mix(in srgb,var(--fg2) 36%,transparent);display:flex;align-items:center;justify-content:center;font-size:calc(12px * var(--ui-font-scale,1));background:color-mix(in srgb,var(--card) 86%,transparent);color:var(--deep);z-index:2}
+.msg-select-row.selected .msg-check{background:var(--deep);border-color:var(--deep);color:#fff}
+.chat-selectbar{display:flex;align-items:center;gap:8px;padding:9px 10px calc(9px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 92%,transparent);border-top:1px solid var(--line);flex:none}
+.chat-selectbar span{font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chat-selectbar .btn,.chat-selectbar .cbtn{flex:none}
+/* 外卖 */
+.takeout-page{padding-bottom:28px}
+.takeout-hero{display:flex;align-items:center;gap:12px;justify-content:space-between;margin:4px 14px 12px;padding:16px;border-radius:16px;background:linear-gradient(135deg,color-mix(in srgb,var(--theme-rose-soft) 78%,#fff),color-mix(in srgb,var(--theme-rose) 22%,#fff));border:1px solid color-mix(in srgb,var(--theme-rose-deep) 12%,transparent)}
+.takeout-hero .tk-kicker{font-size:calc(11px * var(--ui-font-scale,1));color:var(--fg2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:190px}
+.takeout-hero .tk-title{font-size:calc(22px * var(--ui-font-scale,1));font-weight:650;margin-top:5px;letter-spacing:0}
+.takeout-tabs{margin-top:2px}
+.takeout-cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 14px 14px}
+.takeout-cat{appearance:none;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 88%,transparent);color:var(--fg);border-radius:12px;min-height:70px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;min-width:0}
+.takeout-cat span{font-size:24px;line-height:1}
+.takeout-cat b{font-size:calc(10.5px * var(--ui-font-scale,1));font-weight:500;line-height:1.2;max-width:100%;overflow-wrap:anywhere;text-align:center}
+.takeout-cat.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.takeout-toolbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 14px 10px}
+.takeout-toolbar b{display:block;font-size:calc(17px * var(--ui-font-scale,1))}
+.takeout-warning{margin:8px 14px 12px;padding:9px 12px;border-radius:10px;background:#fff4e6;color:#8b5b2a;font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.55;border:1px solid #f0dcc3}
+.takeout-store{margin:0 10px 12px;background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--line);border-radius:14px;overflow:hidden}
+.takeout-store-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 13px 8px}
+.takeout-store-head b{font-size:calc(14px * var(--ui-font-scale,1))}
+.tk-badge{font-size:calc(9px * var(--ui-font-scale,1));padding:3px 7px;border-radius:99px;background:color-mix(in srgb,var(--theme-rose-soft) 75%,#fff);color:var(--deep);white-space:nowrap}
+.takeout-product{display:flex;align-items:center;gap:8px;padding:8px 12px;border-top:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
+.takeout-product-main{flex:1;min-width:0;display:flex;gap:10px;align-items:center;background:none;border:0;color:var(--fg);text-align:left;padding:0;cursor:pointer}
+.takeout-thumb{width:68px;height:62px;border-radius:11px;object-fit:cover;background:#f7f6f7;flex:none;border:1px solid var(--line)}
+.takeout-product-copy{min-width:0;flex:1}
+.tk-name{font-size:calc(13.5px * var(--ui-font-scale,1));font-weight:600;line-height:1.35;overflow-wrap:anywhere}
+.tk-desc{font-size:calc(10.5px * var(--ui-font-scale,1));color:var(--fg2);line-height:1.45;margin-top:3px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.tk-price{font-size:calc(14px * var(--ui-font-scale,1));font-weight:650;color:var(--deep);white-space:nowrap;margin-top:3px}
+.tk-add{width:32px;height:32px;border-radius:50%;border:0;background:var(--deep);color:#fff;font-size:20px;line-height:1;cursor:pointer;flex:none}
+.takeout-emoji{display:flex;align-items:center;justify-content:center;font-size:32px;background:#fff7f9;color:#b9798d}
+.takeout-blank{display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fbfbfc;color:#aaa2a6;text-align:center;font-size:calc(10px * var(--ui-font-scale,1));border:1px dashed #ded9dc}
+.takeout-blank small{font-size:calc(8px * var(--ui-font-scale,1));line-height:1.3}
+.takeout-role{margin:6px 14px 0;padding:14px;border-radius:14px;background:color-mix(in srgb,var(--card) 92%,transparent);border:1px solid var(--line)}
+.takeout-role .muted{margin-top:4px;line-height:1.55}
+.takeout-role-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:10px}
+.takeout-role-grid button{min-width:0;min-height:42px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--theme-rose-soft) 48%,var(--card));color:var(--fg);font-size:calc(11px * var(--ui-font-scale,1));line-height:1.25;padding:6px 4px;cursor:pointer}
+.takeout-order{margin:10px 12px;padding:13px;border-radius:14px;background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--line);cursor:pointer}
+.tk-status{display:inline-flex;align-items:center;justify-content:center;min-width:58px;padding:4px 7px;border-radius:99px;background:#f0edef;color:#776c72;font-size:calc(10px * var(--ui-font-scale,1));white-space:nowrap}
+.tk-status.delivering,.tk-status.confirmed,.tk-status.preparing{background:#f5e5d9;color:#97603b}
+.tk-status.delivered,.tk-status.completed{background:#e2f2e8;color:#39764f}
+.tk-status.refunded,.tk-status.cancelled{background:#f2e4e7;color:#98616e}
+.takeout-progress{height:4px;border-radius:99px;background:#eee9eb;overflow:hidden;margin-top:10px}
+.takeout-progress i{display:block;height:100%;background:var(--deep);border-radius:inherit;transition:width .3s ease}
+.tk-live{font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--deep);margin-top:6px}
+.takeout-mine-card{display:flex;align-items:center;gap:10px;margin:12px 14px;padding:13px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--card) 92%,transparent)}
+.takeout-avatar{width:46px;height:46px;border-radius:14px;background:var(--deep);color:#fff;display:flex;align-items:center;justify-content:center;font-size:20px;flex:none}
+.takeout-settings{margin:0 14px}
+.takeout-detail-img{width:100%;max-height:310px;object-fit:cover;border-radius:14px;background:#faf9fa}
+.takeout-detail-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;margin-top:12px}
+.takeout-review{margin:9px 0;padding:10px 12px;border-left:2px solid var(--deep);background:color-mix(in srgb,var(--theme-rose-soft) 42%,transparent);border-radius:0 8px 8px 0;font-size:calc(12px * var(--ui-font-scale,1));line-height:1.65;color:var(--fg2)}
+.takeout-recipient{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:10px 0}
+.takeout-recipient button{min-height:38px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--fg);font-size:calc(12px * var(--ui-font-scale,1));cursor:pointer}
+.takeout-recipient button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.takeout-cart-row{display:flex;align-items:center;gap:7px;padding:10px 0;border-bottom:1px solid var(--line)}
+.takeout-checkout-address{padding:11px 12px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--theme-rose-soft) 35%,var(--card))}
+.takeout-checkout-address .muted{margin:4px 0 8px;line-height:1.55}
+.takeout-checkout-line{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
+.takeout-checkout-line span{min-width:0;overflow-wrap:anywhere}
+.takeout-checkout-line small{display:block;color:var(--fg2);font-size:calc(10px * var(--ui-font-scale,1));margin-top:2px}
+.takeout-order-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.takeout-timeline{margin-top:12px;padding-left:6px}
+.takeout-time-line{display:flex;gap:10px;position:relative;padding:0 0 13px}
+.takeout-time-line:not(:last-child):before{content:"";position:absolute;left:5px;top:12px;bottom:0;width:1px;background:var(--line)}
+.takeout-time-line i{width:11px;height:11px;border-radius:50%;background:var(--deep);flex:none;margin-top:4px;z-index:1}
+.takeout-time-line b{font-size:calc(12.5px * var(--ui-font-scale,1))}
+.takeout-msg{width:min(270px,72vw);border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 96%,transparent);overflow:hidden;cursor:pointer}
+.to-msg-top{display:flex;align-items:center;gap:9px;padding:11px 12px 8px}
+.to-msg-icon{width:34px;height:34px;border-radius:10px;background:color-mix(in srgb,var(--theme-rose-soft) 74%,#fff);display:flex;align-items:center;justify-content:center;color:var(--deep);flex:none}
+.to-msg-items{padding:0 12px 9px;font-size:calc(12px * var(--ui-font-scale,1));line-height:1.55;overflow-wrap:anywhere}
+.to-msg-foot{padding:7px 12px;background:color-mix(in srgb,var(--theme-rose-soft) 36%,transparent);font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--fg2)}
+.tb-product-row{display:flex;align-items:flex-start;gap:10px}
+.tb-product-visual{padding:0;border:0;background:none;flex:none;cursor:pointer}
+.tb-thumb{width:84px;height:84px}
+.about-version{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:13px 14px;border:1px solid var(--line);border-radius:13px;background:color-mix(in srgb,var(--card) 92%,transparent);margin-bottom:10px}
+.about-version b{display:block;font-size:calc(17px * var(--ui-font-scale,1));margin-top:3px}
+@media (max-width:380px){
+  .takeout-cats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .takeout-hero .tk-title{font-size:calc(19px * var(--ui-font-scale,1))}
+  .takeout-role-grid{grid-template-columns:1fr}
 }
 </style>
 <style id="userCustomCss"></style>
@@ -2003,6 +2093,7 @@ const DEF={
   hang:{phone:{},doing:{}}, hangCid:null, hangTab:'phone', checkCid:null,
   checkins:[], shopItems:{}, mallCid:null, mallTier:'mid', mallMode:'solo',
   tbItems:{}, tbCid:null, tbTab:'feed', tbPersona:null, tbPrice:'all', tbCat:'all', cartMe:[], cartTa:{}, orders:[], shopName:'网购',
+  takeout:{activeTab:'home',mode:'hybrid',worldMode:'modern',category:'美食',personaId:null,contactId:null,chatId:null,beneficiary:'self',customProductImages:{},addresses:{},payments:{},carts:[],orders:[],storeCache:{}},
   dates:[], curDate:null, dateCid:null,
   outContacts:[], outPersona:null, outState:null, outings:[],
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
@@ -2052,11 +2143,50 @@ function fixAll(){
   DB.cartMe=DB.cartMe||[];
   DB.cartTa=DB.cartTa||{};
   DB.orders=DB.orders||[];
+  DB.takeout=Object.assign({activeTab:'home',mode:'hybrid',worldMode:'modern',category:'美食',personaId:null,contactId:null,chatId:null,beneficiary:'self',customProductImages:{},addresses:{},payments:{},carts:[],orders:[],storeCache:{}},DB.takeout||{});
+  if(['home','orders','mine'].indexOf(DB.takeout.activeTab)<0) DB.takeout.activeTab='home';
+  if(['hybrid','fixed','ai'].indexOf(DB.takeout.mode)<0) DB.takeout.mode='hybrid';
+  if(['modern','fantasy'].indexOf(DB.takeout.worldMode)<0) DB.takeout.worldMode='modern';
+  DB.takeout.customProductImages=DB.takeout.customProductImages||{};
+  DB.takeout.addresses=DB.takeout.addresses||{};
+  DB.takeout.payments=DB.takeout.payments||{};
+  DB.takeout.carts=Array.isArray(DB.takeout.carts)?DB.takeout.carts:[];
+  DB.takeout.orders=Array.isArray(DB.takeout.orders)?DB.takeout.orders:[];
+  DB.takeout.storeCache=DB.takeout.storeCache||{};
+  DB.chats=Array.isArray(DB.chats)?DB.chats:[];
+  const sessionSeq={};
+  DB.chats.forEach(function(ch){
+    ch.memberIds=Array.isArray(ch.memberIds)?ch.memberIds:[];
+    ch.msgs=Array.isArray(ch.msgs)?ch.msgs:[];
+    if(ch.unread===undefined) ch.unread=0;
+    if(ch.type==='private'&&ch.memberIds[0]){
+      const cid=ch.memberIds[0];
+      sessionSeq[cid]=(sessionSeq[cid]||0)+1;
+      if(!ch.sessionNo) ch.sessionNo=sessionSeq[cid];
+      if(!ch.sessionLabel) ch.sessionLabel='会话 '+ch.sessionNo;
+      if(!ch.personaId) ch.personaId=DB.me&&DB.me.personaId||null;
+      if(!Array.isArray(ch.baseMemorySnapshot)){
+        const c=(DB.contacts||[]).find(function(x){ return x.id===cid; });
+        ch.baseMemorySnapshot=(c&&c.memories||[]).map(function(m){ return m.text; }).filter(Boolean);
+      }
+    }
+  });
   DB.dates=DB.dates||[];
   DB.outContacts=DB.outContacts||[];
   DB.outings=DB.outings||[];
   if((!DB.outings.length)&&Array.isArray(DB.outs)&&DB.outs.length) DB.outings=DB.outs;
   delete DB.outs;
+  DB.dates.forEach(function(d){
+    if(d.chatId||d.boundChatId) return;
+    const ch=(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===d.cid; });
+    if(ch) d.chatId=ch.id;
+  });
+  DB.outings.forEach(function(o){
+    if(o.chatId||o.boundChatId) return;
+    const cid=o.meetCid||o.cid;
+    const ch=(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===cid; });
+    if(ch) o.chatId=ch.id;
+  });
   DB.notifs=DB.notifs||[];
   (DB.contacts||[]).forEach(function(c){ if(c.remark===undefined) c.remark=''; if(c.autoOn===undefined) c.autoOn=true; if(c.voiceFreq===undefined) c.voiceFreq=0; });
   DB.galleryAlbums=Array.isArray(DB.galleryAlbums)?DB.galleryAlbums:[];
@@ -2227,6 +2357,14 @@ function fixAll(){
     if(w.shape===undefined) w.shape='rounded'; if(w.pattern===undefined) w.pattern='none';
     if(w.bgImage===undefined) w.bgImage=''; if(!Array.isArray(w.images)) w.images=[]; if(!Array.isArray(w.bookImages)) w.bookImages=[];
   }); });
+  DB.ui.widgetPages.forEach(function(pageWidgets){
+    const group=(pageWidgets||[]).find(function(w){ return w.id==='l7_p2_apps'; });
+    if(group){
+      group.appKeys=Array.isArray(group.appKeys)?group.appKeys:['hang','shop','out','date'];
+      if(group.appKeys.indexOf('takeout')<0) group.appKeys.push('takeout');
+      group.appCols=Math.max(3,Number(group.appCols)||2);
+    }
+  });
   if(!DB.ui.layout7PositionRepairV1){
     const defaults=defaultLayout7WidgetPages();
     const original=defaults[0].find(function(w){ return w.id==='l7_p1_vinyl'; });
@@ -2243,6 +2381,21 @@ function fixAll(){
   }
   DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).slice(0,16); });
   if(!DB.ui.homePages.length) DB.ui.homePages=defaultHomePages();
+  if(!DB.ui.takeoutDesktopV54){
+    const targetIndex=Math.max(0,DB.ui.widgetPages.findIndex(function(page){
+      return (page||[]).some(function(w){ return w.id==='l7_p2_apps'; });
+    }));
+    while(DB.ui.homePages.length<=targetIndex) DB.ui.homePages.push([]);
+    DB.ui.homePages.forEach(function(page,i){
+      if(i!==targetIndex) DB.ui.homePages[i]=(page||[]).filter(function(k){ return k!=='takeout'; });
+    });
+    if(DB.ui.homePages[targetIndex].indexOf('takeout')<0) DB.ui.homePages[targetIndex].push('takeout');
+    DB.ui.takeoutDesktopV54=true;
+  }else if(!DB.ui.homePages.some(function(page){ return (page||[]).indexOf('takeout')>=0; })){
+    const target=DB.ui.homePages.find(function(page){ return (page||[]).length<16; });
+    if(target) target.push('takeout');
+    else DB.ui.homePages.push(['takeout']);
+  }
   DB.ui.homePage=Math.max(0,Math.min(Number(DB.ui.homePage)||0,DB.ui.homePages.length-1));
   if(!DB.mallTier) DB.mallTier='mid';
   if(!DB.mallMode) DB.mallMode='solo';
@@ -2253,7 +2406,7 @@ function fixAll(){
 function defaultHomePages(){
   return [
     ['wechat','novel','diary','weibo','gallery','hang'],
-    ['checkin','date','out','shop'],
+    ['checkin','date','out','shop','takeout'],
     ['forum','world','regex','settings']
   ];
 }
@@ -2287,7 +2440,7 @@ function defaultDesktopWidgetPages(){
 function defaultLayout7HomePages(){
   return [
     ['wechat','novel','gallery','weibo','checkin','diary'],
-    ['hang','shop','out','date'],
+    ['hang','shop','takeout','out','date'],
     ['settings','forum','world','regex']
   ];
 }
@@ -2309,7 +2462,7 @@ function defaultLayout7WidgetPages(){
       {id:'l7_p2_books',type:'books',title:'桌面书架',text:'雨停之前|长夜来信|旧城手记',bookImages:['','',''],x:0,y:.5,w:3.75,h:2.25,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_note1',type:'text',title:'小记',text:'',x:0,y:3,w:2,h:1,shape:'pill',pattern:'stars'},
       {id:'l7_p2_list',type:'list',title:'创作清单',text:'整理旧稿\n补一场夜戏\n记下今天的灵感',x:2,y:3,w:1.75,h:3,shape:'arch',pattern:'stars'},
-      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','out','date'],appCols:2,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
+      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','takeout','out','date'],appCols:3,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
       {id:'l7_p2_quote',type:'quote',title:'摘录',text:'你只需要把灯留着，回来的人会看见。',x:2,y:6.25,w:1.75,h:2.5,shape:'rounded',pattern:'none'},
       {id:'l7_p2_note2',type:'text',title:'小记',text:'和重要的人，再靠近一点。',x:0,y:7,w:2,h:1.75,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_photo',type:'image',title:'',image:photos[1],x:0,y:9,w:3.75,h:1.75,shape:'rounded',pattern:'none'}
@@ -2837,15 +2990,38 @@ function contactDisplayName(c){
   return String(c.remark||'').trim() || String(c.name||'').trim() || '未命名';
 }
 function chat(id){ return DB.chats.find(c=>c.id===id)||null; }
-function chatOfContact(id){
-  let ch=DB.chats.find(c=>c.type==='private'&&c.memberIds[0]===id);
-  if(!ch){ ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now()}; DB.chats.push(ch); }
+function nextChatSessionNo(id){
+  const list=(DB.chats||[]).filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ch.memberIds[0]===id; });
+  const max=list.reduce(function(n,ch){ return Math.max(n,Number(ch.sessionNo)||0); },0);
+  return Math.max(list.length,max)+1;
+}
+function newPrivateChat(id,label){
+  const n=nextChatSessionNo(id);
+  const c=ct(id);
+  const ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),sessionNo:n,sessionLabel:String(label||'').trim()||('会话 '+n),personaId:DB.me&&DB.me.personaId||null,baseMemorySnapshot:((c&&c.memories)||[]).map(function(m){ return m.text; }).filter(Boolean),mem:{ts:0,items:[]}};
+  DB.chats.push(ch);
   return ch;
+}
+function chatOfContact(id){
+  const list=(DB.chats||[]).filter(function(c){ return c.type==='private'&&c.memberIds&&c.memberIds[0]===id; }).sort(function(a,b){ return (b.lastTs||b.created||0)-(a.lastTs||a.created||0); });
+  return list[0]||newPrivateChat(id);
+}
+function chatSessionCount(id){
+  return (DB.chats||[]).filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ch.memberIds[0]===id; }).length;
+}
+function privateChatLabel(ch){
+  if(!ch||ch.type!=='private') return '';
+  const cid=ch.memberIds&&ch.memberIds[0];
+  if((chatSessionCount(cid)||0)<=1&&(!ch.sessionLabel||ch.sessionLabel==='会话 1')) return '';
+  return String(ch.sessionLabel||('会话 '+(Number(ch.sessionNo)||1))).trim();
 }
 function chatName(ch){
   if(!ch) return '';
   if(ch.type==='group') return ch.name||(ch.memberIds.map(i=>{const c=ct(i);return c?contactDisplayName(c):'?';}).join('、'));
-  const c=ct(ch.memberIds[0]); return c?contactDisplayName(c):'（已删除）';
+  const c=ct(ch.memberIds[0]);
+  const base=c?contactDisplayName(c):'（已删除）';
+  const sub=privateChatLabel(ch);
+  return sub? (base+' · '+sub):base;
 }
 function personaFullText(p){
   if(!p) return '';
@@ -3054,6 +3230,7 @@ const APPS=[
   {k:'date',    n:'约会', i:'heart', c:'#C8B3BC'},
   {k:'out',     n:'出门', i:'walk', c:'#C8B3BC'},
   {k:'shop',    n:'网购', i:'bag', c:'#C8B3BC'},
+  {k:'takeout', n:'外卖', i:'gift', c:'#E7A55C'},
   {k:'weibo',   n:'微博', i:'hash', c:'#C8B3BC'},
   {k:'world',   n:'世界书', i:'globe', c:'#C8B3BC'},
   {k:'regex',   n:'正则', i:'braces', c:'#C8B3BC'},
@@ -3084,10 +3261,10 @@ function render(){
   const R={home:screenHome,wechat:screenWechat,chatroom:screenChatRoom,contactedit:screenContactEdit,
     contactview:screenContactView,novel:screenNovel,novelbook:screenNovelBook,novelchapter:screenNovelChapter,read:screenRead,diary:screenDiary,forum:screenForum,
     gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,
-    hang:screenHang,checkin:screenCheckin,mall:screenMall,shop:screenTaobao,checkup:screenCheckup,
+    hang:screenHang,checkin:screenCheckin,mall:screenMall,shop:screenTaobao,takeout:screenTakeout,checkup:screenCheckup,
     date:screenDate,dateroom:screenDateRoom,out:screenOut,outnew:screenOutNew,outroom:screenOutRoom,world:screenWorldBooks,regex:screenRegexList,weibo:screenWeibo}[route.name]||screenHome;
   const noNav=(route.name==='home'||route.name==='wechat'||route.name==='chatroom'
-    ||['hang','checkin','mall','shop','date','dateroom','out','outnew','outroom','world','regex','weibo','novel','novelbook','novelchapter'].indexOf(route.name)>=0);
+    ||['hang','checkin','mall','shop','takeout','date','dateroom','out','outnew','outroom','world','regex','weibo','novel','novelbook','novelchapter'].indexOf(route.name)>=0);
   s.innerHTML=(noNav?'':navBar(route.name))+R();
   if(route.name==='contactview'){ const tt=$('.nav .ttl',s); const cc=ct(route.arg); if(tt&&cc) tt.textContent=contactDisplayName(cc); }
   s.classList.toggle('lock', route.name==='wechat'||route.name==='chatroom');
@@ -3123,7 +3300,7 @@ function back(){
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
-  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','checkin','date','dateroom','out','outnew','outroom','shop','weibo','world','regex','appearance','settings','contactview','mall'];
+  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','checkin','date','dateroom','out','outnew','outroom','shop','takeout','weibo','world','regex','appearance','settings','contactview','mall'];
   if(allow.indexOf(lr.name)<0) return;
   if(lr.name==='chatroom'&&!chat(lr.arg)) return;
   if(lr.name==='dateroom'&&!dateById(lr.arg)) return;
@@ -3627,11 +3804,12 @@ function layout7Box(w){
   };
 }
 function layout7GroupHTML(w,wi,appKeys){
-  const box=layout7Box(w),cols=Math.max(1,Number(w.cols)||2);
+  const box=layout7Box(w);
   const keys=Array.isArray(appKeys)?appKeys:w.appKeys;
   const apps=(Array.isArray(keys)?keys:[]).map(function(k){ return APPS.find(function(a){ return a.k===k; }); }).filter(Boolean);
+  const cols=Math.max(1,Number(w.cols)||Number(w.appCols)||(apps.length>4?3:2));
   const bg=w.bgImage?('background-image:linear-gradient(rgba(255,250,252,.28),rgba(255,250,252,.28)),'+cssUrl(w.bgImage)+';background-size:cover;background-position:center;border-radius:18px;'):'';
-  return '<div class="l7-group'+(w.bgImage?' has-bg':'')+'" data-layout-id="'+esc(w.id||'')+'" data-homewidget="'+wi+'" style="left:'+box.left+'px;top:'+box.top+'px;width:'+box.width+'px;height:'+box.height+'px;grid-template-columns:repeat('+cols+',minmax(0,1fr));'+bg+'">'+apps.map(appHTML).join('')+'</div>';
+  return '<div class="l7-group'+(apps.length>4?' dense':'')+(w.bgImage?' has-bg':'')+'" data-layout-id="'+esc(w.id||'')+'" data-homewidget="'+wi+'" style="left:'+box.left+'px;top:'+box.top+'px;width:'+box.width+'px;height:'+box.height+'px;grid-template-columns:repeat('+cols+',minmax(0,1fr));'+bg+'">'+apps.map(appHTML).join('')+'</div>';
 }
 function layout7WidgetHTML(w,wi,appKeys){
   if(w.type==='appgroup') return layout7GroupHTML(w,wi,appKeys);
@@ -3765,7 +3943,7 @@ function chRow(ch){
 function preview(m){
   if(!m) return '还没有消息';
   const pre=m.role==='me'?'我：':'';
-  const tags={sticker:'[表情]',image:'[图片]',redpacket:'[红包]',transfer:'[转账]',gift:'[礼物]',location:'[位置]',music:'[音乐]',doc:'[文件]',voice:'[语音]'};
+  const tags={sticker:'[表情]',image:'[图片]',redpacket:'[红包]',transfer:'[转账]',gift:'[礼物]',location:'[位置]',music:'[音乐]',doc:'[文件]',voice:'[语音]',takeout:'[外卖订单]'};
   if(tags[m.type]) return pre+tags[m.type]+(m.type==='redpacket'||m.type==='transfer'? '  '+m.note||'' : '');
   return (pre+String(m.text||'').replace(/''/g,'').replace(/\n/g,' ')).slice(0,60);
 }
@@ -3775,7 +3953,8 @@ function sheetNewChat(){
    +'<div class="lrow" id="newGroup">'+avBox({icon:'users'})+'<div class="mi"><div class="t1">群聊</div><div class="t2">把多个联系人放进一个群里</div></div><div class="rt"><span class="chev">›</span></div></div>');
   $('#newPrivate').onclick=()=>sheetPick('选择联系人',1,(ids)=>{
     if(!ids.length) return;
-    const ch=chatOfContact(ids[0]); ch.unread=0;
+    const ch=newPrivateChat(ids[0]);
+    ch.unread=0; save();
     closeSheet(); go('chatroom',ch.id);
   });
   $('#newGroup').onclick=()=>sheetPick('选择群成员（可多选）',9,(ids,name)=>{
@@ -4220,6 +4399,8 @@ function sheetChatMenu(ch){
     +'<button class="btn full" id="cmVoice">角色发语音：'+voiceModeLabel(Math.max.apply(null,ch.memberIds.map(function(id){ return voiceModeOf(ct(id)); }).concat([0])))+'</button>'
     +(isGroup? '' : '<button class="btn full" id="cmEdit">编辑角色信息</button>')
     +'<button class="btn full" id="cmMem">自动保存记忆</button>'
+    +(isGroup?'':'<button class="btn full" id="cmTakeout">给 Ta 点外卖</button>')
+    +(isGroup?'':'<button class="btn full" id="cmSessionName">会话名称</button><button class="btn full" id="cmSelectMsgs">多选消息并迁移到新会话</button>')
     +(isGroup? '' : '<button class="btn full" id="cmPoke">拍一拍后缀</button>')
     +'<button class="btn full" id="cmSettle">连发模式'+(Number(ch.settle)? ('（'+ch.settle+' 秒）'):'（关）')+'</button>'
     +'<button class="btn full" id="cmClear">清空聊天记录</button>'
@@ -4230,6 +4411,16 @@ function sheetChatMenu(ch){
   const ce=$('#cmEdit');
   if(ce) ce.onclick=()=>{ const id=ch.memberIds[0]; closeSheet(); go('contactedit',id); };
   const cmem=$('#cmMem'); if(cmem) cmem.onclick=()=>{ closeSheet(); sheetChatMemory(ch); };
+  const cto=$('#cmTakeout'); if(cto) cto.onclick=function(){ DB.takeout.chatId=ch.id; DB.takeout.contactId=ch.memberIds[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; DB.takeout.activeTab='home'; save(); closeSheet(); go('takeout'); };
+  const csn=$('#cmSessionName');
+  if(csn) csn.onclick=function(){
+    closeSheet();
+    sheetSmall('<h3>会话名称</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">只改这个会话在列表里的名字，不联系人备注，也不会写进角色记忆。</div><input id="chatSessName" value="'+esc(ch.sessionLabel||('会话 '+(ch.sessionNo||1)))+'"><button class="btn primary full" id="chatSessOk">保存</button><button class="btn full" id="chatSessNo">取消</button>');
+    $('#chatSessNo').onclick=closeSheet;
+    $('#chatSessOk').onclick=function(){ ch.sessionLabel=String($('#chatSessName').value||'').trim()||('会话 '+(ch.sessionNo||1)); save(); closeSheet(); render(); toast('会话名称已保存'); };
+  };
+  const csel=$('#cmSelectMsgs');
+  if(csel) csel.onclick=function(){ closeSheet(); chatSelectionStart(ch); };
   const cpk=$('#cmPoke'); if(cpk) cpk.onclick=()=>{ closeSheet(); sheetPoke(ch); };
   const cst=$('#cmSettle'); if(cst) cst.onclick=()=>{ closeSheet(); sheetSettle(ch); };
   const au=$('#cmAuto');
@@ -4275,21 +4466,69 @@ function sheetReplyRange(ch){
   draw();
 }
 /* ================= 会话 ================= */
-let curChatId=null, autoLock=0;
+let curChatId=null, autoLock=0, chatSelectChat=null, chatSelectIds=[];
+function chatSelectionStart(ch){
+  if(!ch) return;
+  chatSelectChat=ch.id; chatSelectIds=[];
+  render();
+}
+function chatSelectionEnd(redraw){
+  chatSelectChat=null; chatSelectIds=[];
+  if(redraw!==false&&route.name==='chatroom') render();
+}
+function toggleChatSelect(id){
+  const i=chatSelectIds.indexOf(id);
+  if(i>=0) chatSelectIds.splice(i,1); else chatSelectIds.push(id);
+  render();
+}
+function sheetMigrateChatMessages(ch){
+  if(!ch) return;
+  const picked=(ch.msgs||[]).filter(function(m){ return chatSelectIds.indexOf(m.id)>=0; });
+  if(!picked.length){ toast('先勾选要迁移的消息'); return; }
+  sheet('<h3>迁移到新会话</h3>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.8">新会话只会出现你勾选的 '+picked.length+' 条消息。旧会话里这些消息会继续保留，不会被删除。</div>'
+    +'<input id="migSessionName" value="从「'+esc(chatName(ch))+'」复制">'
+    +'<label class="lrow" style="margin-top:8px;padding-left:0;padding-right:0"><div class="mi"><div class="t1">角色继承当前记忆</div><div class="t2">勾选后，本会话已整理出的记忆 B 会带进新会话；不勾选只保留人设和联系人级记忆 A。</div></div><input id="migInherit" type="checkbox" style="width:22px;height:22px"></label>'
+    +'<button class="btn primary full" id="migGo">创建副本会话</button><button class="btn full" id="migCancel">取消</button>');
+  $('#migCancel').onclick=function(){ closeSheet(); render(); };
+  $('#migGo').onclick=function(){
+    const c=ct(ch.memberIds[0]);
+    if(!c){ toast('角色已不存在'); return; }
+    const label=String($('#migSessionName').value||'').trim();
+    const inherit=!!$('#migInherit').checked;
+    const nc=newPrivateChat(c.id,label);
+    nc.baseMemorySnapshot=JSON.parse(JSON.stringify(ch.baseMemorySnapshot||[]));
+    nc.personaId=ch.personaId||DB.me.personaId||null;
+    nc.mem=inherit&&ch.mem?JSON.parse(JSON.stringify(ch.mem)):{ts:0,items:[]};
+    nc.inheritedFrom=ch.id;
+    nc.inheritedMemory=inherit;
+    nc.msgs=picked.map(function(m){ return Object.assign(JSON.parse(JSON.stringify(m)),{id:uid(),ts:m.ts||Date.now(),migratedFrom:m.id,migratedAt:Date.now()}); });
+    nc.lastTs=nc.msgs.reduce(function(t,m){ return Math.max(t,Number(m.ts)||0); },0)||Date.now();
+    nc.created=Date.now();
+    save();
+    chatSelectionEnd(false);
+    closeSheet();
+    go('chatroom',nc.id);
+    toast('新会话已创建，旧会话原样保留');
+  };
+}
 function screenChatRoom(){
   const ch=chat(route.arg);
   if(!ch) return emptyState('会话不见了','它可能被删掉了。','回微信','backwx');
   curChatId=ch.id; ch.unread=0;
   const isGroup=ch.type==='group';
+  const selecting=chatSelectChat===ch.id;
   const body=(ch.msgs||[]).map(m=>msgHTML(m,ch)).join('')||'<div class="empty">还没有消息，说点什么吧。</div>';
   return '<div class="chatwrap">'
    +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+esc(chatName(ch))+(isGroup?'（'+ch.memberIds.length+'）':'')+'</div>'
      +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
-   +'<div class="chatlist" id="msgs">'+body+'</div>'
-   +'<div class="composer"><button class="cbtn" id="plusBtn">＋</button>'
-     +'<input id="say" placeholder="发消息…" autocomplete="off">'
-     +'<button class="cbtn" id="stkBtn">'+ic('smile',18)+'</button>'
-     +'<button class="cbtn pri" id="send">'+ic('arrow',18)+'</button></div>'
+   +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
+   +(selecting
+     ? '<div class="chat-selectbar"><button class="cbtn" id="chatSelAll" title="全选">'+ic('check',18)+'</button><span>已选 '+chatSelectIds.length+' 条</span><button class="btn primary" id="chatSelMigrate">迁移到新会话</button><button class="btn" id="chatSelCancel">取消</button></div>'
+     : '<div class="composer"><button class="cbtn" id="plusBtn">＋</button>'
+       +'<input id="say" placeholder="发消息…" autocomplete="off">'
+       +'<button class="cbtn" id="stkBtn">'+ic('smile',18)+'</button>'
+       +'<button class="cbtn pri" id="send">'+ic('arrow',18)+'</button></div>')
    +'<div id="panel" style="display:none"></div>'
    +'</div>';
 }
@@ -4403,19 +4642,31 @@ function voiceBarsHTML(){
   for(let i=0;i<5;i++) bars+='<i style="height:'+(6+((i*7)%9))+'px"></i>';
   return bars;
 }
+function takeoutMsgHTML(m,ch){
+  const o=(DB.takeout.orders||[]).find(function(x){ return x.id===m.orderId; });
+  const status=o?takeoutStatusLabel(o.status):'订单更新';
+  const items=o?(o.items||[]).map(function(x){ return x.name+' ×'+x.qty; }).join('、'):'点开查看订单';
+  return '<div class="takeout-msg" data-takeout-order="'+esc(m.orderId||'')+'"><div class="to-msg-top"><span class="to-msg-icon">'+ic('gift',20)+'</span><div class="grow"><b>'+esc(o?o.merchant:'外卖订单')+'</b><div class="muted">'+esc(status)+'</div></div><span class="chev">›</span></div><div class="to-msg-items">'+esc(items)+'</div><div class="to-msg-foot">'+esc(o?money(o.total):'')+' · 点击查看商品和配送进度</div></div>';
+}
 function msgHTML(m,ch){
-  if(m.recalled) return '<div class="sysline">'+esc(m.text||'你撤回了一条消息')+'</div>';
+  const selecting=chatSelectChat===ch.id;
+  const selected=chatSelectIds.indexOf(m.id)>=0;
+  const rowAttr=' data-msgrow="'+m.id+'"';
+  const rowClass='msg-select-row'+(selecting?' can-select':'')+(selected?' selected':'');
+  const mark=selecting?'<span class="msg-check">'+(selected?'✓':'')+'</span>':'';
+  if(m.recalled) return '<div class="sysline '+rowClass+'"'+rowAttr+'>'+mark+esc(m.text||'你撤回了一条消息')+'</div>';
   if(m.type==='event'){
-    return '<div class="evcard"><div class="t">'+esc(m.text||'')+'</div>'
+    return '<div class="evcard '+rowClass+'"'+rowAttr+'>'+mark+'<div class="t">'+esc(m.text||'')+'</div>'
       +(m.chosen? '<div class="muted" style="margin-top:8px">你选了：'+esc(m.chosen)+'</div>'
         : '<div class="opts">'+(m.options||[]).map(function(o){ return '<button data-evopt="'+m.id+'">'+esc(o)+'</button>'; }).join('')+'</div>')
       +'</div>';
   }
-  if(m.type==='turn') return turnHTML(m);
-  if(m.type==='myturn') return myTurnHTML(m);
-  if(m.type==='shop') return shopHTML(m);
+  if(m.type==='turn') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+turnHTML(m)+'</div>';
+  if(m.type==='myturn') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+myTurnHTML(m)+'</div>';
+  if(m.type==='shop') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+shopHTML(m)+'</div>';
+  if(m.type==='takeout') return '<div class="msg-turn-wrap '+rowClass+'"'+rowAttr+'>'+mark+takeoutMsgHTML(m,ch)+'</div>';
   if(m.role==='sys') return '<div class="sysline">'+esc(m.text||'')+'</div>';
-  if(m.role==='narr') return '<div class="narr">'+esc(m.text||'').replace(/\n/g,'<br>')+'</div>';
+  if(m.role==='narr') return '<div class="narr '+rowClass+'"'+rowAttr+'>'+mark+esc(m.text||'').replace(/\n/g,'<br>')+'</div>';
   const mine=m.role==='me';
   const p=ct(m.from);
   const showWho=!mine&&ch.type==='group';
@@ -4451,7 +4702,7 @@ function msgHTML(m,ch){
     inner='<div class="rich" data-doc="'+m.id+'"><div style="padding:12px;display:flex;gap:10px;align-items:center"><div class="ic3">'+ic('doc',24)+'</div><div><div style="font-size:calc(14px * var(--ui-font-scale,1));font-weight:600">'+esc(m.title||'文件')+'</div><div class="muted">'+esc(m.size||'')+(m.content? ' · 有内容':'')+'</div></div></div><div class="ft">文件'+(m.content? ' · 点开看内容':'')+'</div></div>';
   }
   else { inner='<div class="bub">'+textHTML(m.text)+'</div>'; }
-  return '<div class="mrow'+(mine?' me':'')+'">'+av
+  return '<div class="mrow'+(mine?' me':'')+' '+rowClass+'"'+rowAttr+'>'+mark+av
     +'<div class="colw" data-bub="'+m.id+'">'+(showWho?'<div class="who">'+esc(p?p.name:'')+'</div>':'')+inner+'</div></div>';
 }
 function labelOf(m){
@@ -4463,6 +4714,7 @@ function labelOf(m){
   if(t==='redpacket') return '[发了一个红包：'+(m.note||'恭喜发财')+'，金额 ¥'+m.amount+']';
   if(t==='transfer') return '[转账 ¥'+m.amount+'：'+(m.note||'')+']';
   if(t==='gift') return '[送了一份礼物：'+m.title+'，价值 ¥'+m.amount+']';
+  if(t==='takeout'){ const o=(DB.takeout.orders||[]).find(function(x){ return x.id===m.orderId; }); return '[外卖订单：'+(o?o.merchant+' · '+takeoutStatusLabel(o.status)+' · '+money(o.total):'状态更新')+']'; }
   if(t==='location') return '[发了位置：'+(m.place||'')+']';
   if(t==='music') return '[分享了一首歌：'+m.title+' - '+m.artist+']';
   if(t==='turn') return [].concat(m.narr||[],m.talk||[]).join(' ');
@@ -4602,7 +4854,7 @@ function sendRich(m,nudge){
 /* ---- 加号面板 ---- */
 function panelPlus(){
   const items=[['envelope','红包','rp'],['arrow','转账','tf'],['gift','礼物','gf'],['pin','位置','loc'],
-               ['image','图片','img'],['music','音乐','mus'],['doc','文件','doc'],['smile','表情包','stk']];
+               ['image','图片','img'],['music','音乐','mus'],['doc','文件','doc'],['gift','外卖','takeout'],['smile','表情包','stk']];
   return '<div class="plus">'+items.map(i=>'<div class="it" data-plus="'+i[2]+'"><div class="ic">'+ic(i[0],24)+'</div><div>'+i[1]+'</div></div>').join('')+'</div>';
 }
 function showPanel(html,kind){
@@ -4632,6 +4884,10 @@ function panelAction(k){
   else if(k==='img') pickImage();
   else if(k==='mus') sheetMusic();
   else if(k==='doc') sheetDoc();
+  else if(k==='takeout'){
+    const ch=chat(curChatId); if(!ch) return;
+    DB.takeout.chatId=ch.id; DB.takeout.contactId=ch.memberIds[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; DB.takeout.activeTab='home'; save(); hidePanel(); go('takeout');
+  }
   else if(k==='stk') showPanel(panelStickers(),'stk');
 }
 function toggleMeet(){
@@ -5531,7 +5787,7 @@ function decorateSettingsBubbles(root){
   const pad=root&&root.querySelector?root.querySelector('.pad'):null;
   if(!pad||pad.dataset.bubblesReady) return;
   pad.dataset.bubblesReady='1';
-  const iconMap={'对话接口':'chat','语音朗读':'speaker','角色自动活动':'sparkles','显示与字体':'pen','外观与美化':'palette','低性能模式':'flame','全屏模式':'eye','消息提示音':'bell','点击音效':'music','后台与通知':'bell','数据管理':'grid','自检':'check','关于小手机':'at','免责声明':'lock','示例手机':'gift','示例内容':'gift','上架模式':'lock'};
+  const iconMap={'对话接口':'chat','语音朗读':'speaker','角色自动活动':'sparkles','显示与字体':'pen','外观与美化':'palette','低性能模式':'flame','全屏模式':'eye','消息提示音':'bell','点击音效':'music','后台与通知':'bell','数据管理':'grid','自检':'check','版本与更新':'refresh','关于小手机':'at','免责声明':'lock','示例手机':'gift','示例内容':'gift','上架模式':'lock'};
   Array.from(pad.children).filter(function(el){ return el.classList&&el.classList.contains('card'); }).forEach(function(card,idx){
     const direct=Array.from(card.children).find(function(x){ return x.tagName==='B'; });
     const titleEl=direct||card.querySelector('.lrow .t1')||card.querySelector('.row b');
@@ -5612,6 +5868,7 @@ function screenSettings(){
   +'<div class="card"><b>数据管理</b><div class="muted" style="margin:6px 0 10px">当前数据约 '+fmtSize(dataSize())+'　·　存储方式：'+(IDB.ok? '本地数据库（大容量）':'浏览器小仓库（约 5MB，容易满）')+'</div>'
   +'<button class="btn full" id="exp">导出全部数据</button><button class="btn full" id="imp">导入备份</button><button class="btn full danger" id="wipe">清空所有数据</button></div>'
   +'<div class="card"><b>自检</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">全面检查页面、按钮、数据结构和接口。哪里不对，报告会直接写出来。</div><div class="lrow" data-go="checkup" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">开始全面自检</div><div class="t2">所有板块、功能、接口和按钮</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
+  +'<div class="card"><div class="lrow" data-settingsview="update" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">版本与更新</div><div class="t2">检查网页和 APK 是否有新版本</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="lrow" data-settingsview="about" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">关于小手机</div><div class="t2">版本、设备、存储和接口状态</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="lrow" data-settingsview="disclaimer" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">免责声明</div><div class="t2">使用范围和内容责任说明</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +(DB.ui&&DB.ui.commercialMode
@@ -5641,6 +5898,33 @@ function sheetAboutPhone(){
     +'<button class="btn full" id="aboutCheck">打开自检</button><button class="btn full" id="aboutClose">关闭</button>');
   $('#aboutClose').onclick=closeSheet;
   $('#aboutCheck').onclick=function(){ closeSheet(); go('checkup'); };
+}
+function sheetVersionUpdate(){
+  const draw=function(info){
+    const newer=info&&Number(info.versionCode)>BUILD_CODE;
+    sheetFull('<h3>版本与更新</h3><div class="about-version"><div><div class="mini">当前版本</div><b>'+esc(BUILD)+'</b><div class="muted">versionCode '+BUILD_CODE+'</div></div><span class="tk-badge">'+(location.protocol==='file:'?'本地安装包':'网页 / APK')+'</span></div>'
+      +(info? '<div class="card" style="box-shadow:none"><div class="kv"><span>线上最新</span><b>'+esc(info.version||'未知')+'</b></div><div class="muted" style="margin-top:7px;line-height:1.7">'+esc(info.notes||'暂无更新说明')+'</div></div>':'<div class="muted" style="margin:8px 0;line-height:1.7">点下方按钮检查线上版本。网页版会读取版本清单；APK 会提示下载新安装包，安装时仍由安卓系统确认。</div>')
+      +(newer? '<div class="takeout-warning">发现新版本 '+esc(info.version)+'</div><button class="btn primary full" id="vuDownload">下载最新 APK</button>':'')
+      +'<button class="btn primary full" id="vuCheck">检查更新</button>'
+      +'<button class="btn full" id="vuReload">刷新当前页面</button>'
+      +(info&&info.pageUrl?'<button class="btn full" id="vuWeb">打开最新网页版</button>':'')
+      +'<div class="muted" style="margin-top:10px;line-height:1.7">更新方式不收费，也不需要应用商店审核。代价是 APK 升级由用户手动确认安装；正式上架商店才需要开发者账号和签名发布流程。</div>'
+      +'<button class="btn full" id="vuClose">关闭</button>');
+    $('#vuClose').onclick=closeSheet;
+    $('#vuReload').onclick=function(){ const u=new URL(location.href); u.searchParams.set('v',String(Date.now())); location.href=u.toString(); };
+    $('#vuCheck').onclick=async function(){
+      busy('正在检查更新，请稍后');
+      try{
+        const r=await fetch(REMOTE_VERSION_URL+'?t='+Date.now(),{cache:'no-store'});
+        if(!r.ok) throw new Error('HTTP '+r.status);
+        const data=await r.json();
+        busyDone(); draw(data); toast(Number(data.versionCode)>BUILD_CODE?'发现新版本':'已经是最新版本');
+      }catch(e){ busyDone(); toast('检查失败：'+e.message); }
+    };
+    const dl=$('#vuDownload'); if(dl) dl.onclick=function(){ location.href=(info&&info.apkUrl)||APK_DOWNLOAD_URL; };
+    const wb=$('#vuWeb'); if(wb) wb.onclick=function(){ location.href=info.pageUrl; };
+  };
+  draw(null);
 }
 function sheetDisclaimer(){
   sheetFull('<h3>免责声明</h3><div class="muted" style="line-height:1.85">'
@@ -6494,6 +6778,8 @@ function npNormalizeBook(b){
   b.protagonists=Array.isArray(b.protagonists)? b.protagonists:[];
   b.volumes=Array.isArray(b.volumes)?b.volumes:[];
   b.readerPrefs=b.readerPrefs||{};
+  b.worldbook=Object.assign({enabled:true,entries:[],updatedAt:0},b.worldbook||{});
+  b.worldbook.entries=Array.isArray(b.worldbook.entries)?b.worldbook.entries.filter(function(e){ return e&&String(e.text||'').trim(); }).map(function(e,i){ return {id:e.id||uid(),kind:String(e.kind||e.k||'设定').slice(0,20),text:String(e.text||e.v||'').slice(0,1200),createdAt:Number(e.createdAt)||Date.now()+i}; }):[];
   b.createdAt=Number(b.createdAt)||Number(b.created)||Date.now();
   b.updatedAt=Number(b.updatedAt)||b.createdAt;
   if(!Array.isArray(b.chapters)) b.chapters=npParseChapters(b.text||'',b.title||'正文');
@@ -7070,6 +7356,7 @@ function sheetNpSettings(){
     +'<div class="lrow" data-npreadersettings="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">阅读排版</div><div class="t2">字号、行距和背景</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-npnovelregex="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">小说正则</div><div class="t2">生成章节后自动替换词句、称谓和标点</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-npstyleprompt="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">文风指令</div><div class="t2">告诉 AI 你想要的叙事节奏、口吻和禁写项</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">小说世界书</div><div class="t2">每本书单独设置，不影响全局世界书和读者评论</div></div><div class="rt"><span class="mini">在书籍 ⋯ 中打开</span></div></div>'
     +'<button class="btn full" id="npResetReaders">重置读者网名与人设</button><button class="btn full" id="npCloseSettings">完成</button>');
   $('#npCloseSettings').onclick=closeSheet;
   $('#npResetReaders').onclick=function(){ npEnsureReaders(true); closeSheet(); toast('读者已重新生成'); };
@@ -7143,10 +7430,12 @@ function sheetNpBookMenu(bookId){
   const b=npBook(bookId); if(!b) return;
   const mine=b.authorId==='me';
   sheetSmall('<h3>'+esc(b.title)+'</h3><button class="btn full" id="npExportTxt">导出 TXT</button>'
+    +'<button class="btn full" id="npBookWorld">小说世界书'+(b.worldbook&&b.worldbook.entries.length?' · '+b.worldbook.entries.length+' 条':'')+'</button>'
     +(mine? '<button class="btn full" data-npeditbook="'+b.id+'">编辑书籍资料</button>':'')
     +(mine? '<button class="btn full danger" id="npClearChapters">清空所有章节</button>':'')
     +'<button class="btn full danger" id="npDeleteBook">删除这本书</button><button class="btn full" id="npBookMenuClose">取消</button>');
   $('#npBookMenuClose').onclick=closeSheet;
+  $('#npBookWorld').onclick=function(){ closeSheet(); sheetNpBookWorld(b.id); };
   $('#npExportTxt').onclick=function(){
     const text=(b.chapters||[]).map(function(c){ return c.title+'\n\n'+npParas(c).join('\n\n'); }).join('\n\n');
     const blob=new Blob([text],{type:'text/plain;charset=utf-8'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=b.title+'.txt'; a.click();
@@ -7162,6 +7451,26 @@ function sheetNpBookMenu(bookId){
     $('#npDelNo').onclick=closeSheet;
     $('#npDelYes').onclick=function(){ DB.books=DB.books.filter(function(x){ return x.id!==b.id; }); DB.np.shelf=DB.np.shelf.filter(function(id){ return id!==b.id; }); save(); closeSheet(); go('novel'); toast('已删除'); };
   };
+}
+function npWorldBlock(b){
+  if(!b||!b.worldbook||b.worldbook.enabled===false||!(b.worldbook.entries||[]).length) return '';
+  return '【本书独立小说世界书（仅用于小说正文与后台记忆）】\n'+b.worldbook.entries.map(function(e){ return '- ['+e.kind+'] '+e.text; }).join('\n')+'\n【世界书边界】以上是小说设定与正文生成依据。读者群、段评、章评和书荒广场中的读者并不知道这些未在正文中公开的内容，他们的理解只能视为猜测或评论，不能写成小说正史。';
+}
+function sheetNpBookWorld(bookId){
+  const b=npBook(bookId); if(!b) return;
+  b.worldbook=Object.assign({enabled:true,entries:[],updatedAt:0},b.worldbook||{});
+  const draw=function(){
+    sheetFull('<h3>小说世界书 · '+esc(b.title)+'</h3><div class="muted" style="margin:6px 0 10px;line-height:1.75">这本书单独使用，不会写入或绑定全局世界书。它只影响 AI 写新章节、章节后台记忆和小说本体生成；不影响读者群、段评章评和书荒广场。</div>'
+      +'<label class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">启用本书世界书</div><div class="t2">'+(b.worldbook.enabled===false?'当前关闭':'当前开启')+'</div></div><input id="npbwEnabled" type="checkbox" '+(b.worldbook.enabled!==false?'checked':'')+' style="width:22px;height:22px"></label>'
+      +((b.worldbook.entries||[]).length? b.worldbook.entries.map(function(e,i){ return '<div class="np-card"><div class="row"><div class="grow"><div class="mini">'+esc(e.kind||'设定')+'</div><div style="margin-top:5px;line-height:1.65;overflow-wrap:anywhere">'+esc(e.text)+'</div></div><button class="btn danger" data-npbwdel="'+i+'">删</button></div></div>'; }).join('') : '<div class="np-empty">还没有本书世界书条目。</div>')
+      +'<div class="np-card"><select id="npbwKind">'+['世界观','人物','关系','能力','地点','物件','时间线','禁忌','其他'].map(function(x){ return '<option>'+x+'</option>'; }).join('')+'</select><textarea id="npbwText" style="margin-top:8px;min-height:150px" placeholder="写这本书独有的事实，例如：这座城市终年下雨，角色不能离开旧城区。"></textarea><button class="btn primary full" id="npbwAdd">添加条目</button></div>'
+      +'<button class="btn full" id="npbwClose">关闭</button>');
+    $('#npbwEnabled').onchange=function(){ b.worldbook.enabled=!!this.checked; b.worldbook.updatedAt=Date.now(); save(); };
+    $$('#sheetBox [data-npbwdel]').forEach(function(el){ el.onclick=function(){ b.worldbook.entries.splice(Number(el.dataset.npbwdel),1); b.worldbook.updatedAt=Date.now(); save(); draw(); }; });
+    $('#npbwAdd').onclick=function(){ const text=String($('#npbwText').value||'').trim(); if(!text){ toast('先写设定'); return; } b.worldbook.entries.push({id:uid(),kind:$('#npbwKind').value||'设定',text:text.slice(0,1200),createdAt:Date.now()}); b.worldbook.updatedAt=Date.now(); save(); draw(); toast('世界书条目已保存'); };
+    $('#npbwClose').onclick=closeSheet;
+  };
+  draw();
 }
 function sheetNpGenerateNeed(bookId){
   const b=npBook(bookId); if(!b) return;
@@ -7724,18 +8033,20 @@ function sheetNpGenerateBook(){
   const genres=genre&&genre!=='推荐'?[genre]:[];
   const tags=(DB.np.tags||[]).slice();
   const personas=[];
+  const worlds=(DB.books||[]).filter(function(b){ return b.worldbook&&(b.worldbook.entries||[]).length; });
   sheetFull('<h3>生成新书</h3><div class="muted" style="margin-bottom:8px;line-height:1.75">选择你要的口味，留空的项交给 AI 自由发挥。</div>'
     +npChipEditorHTML('题材','genre',genres,NP_GENRE_PRESETS)
     +npChipEditorHTML('标签','tags',tags,NP_TAG_PRESETS)
     +npChipEditorHTML('人设','persona',personas,NP_PERSONA_PRESETS)
     +'<div class="row" style="margin-top:8px"><select id="npGenOrientation" class="grow"><option>无CP</option><option>言情</option><option>耽美</option><option>百合</option></select><select id="npGenStructure" class="grow"><option>1V1（双主角）</option><option>1VN（单主角对多情感对象）</option><option>群像</option><option>多CP</option></select></div>'
     +'<textarea id="npGenIdea" placeholder="补充口味或剧情偏好，可留空" style="margin-top:8px"></textarea>'
+    +'<div class="mini" style="margin-top:10px">小说世界书（生成后仍为每本书单独一份）</div><select id="npGenWorldBook" style="margin-top:6px"><option value="">不使用已有小说世界书</option>'+worlds.map(function(b){ return '<option value="'+b.id+'">'+esc(b.title)+' · '+b.worldbook.entries.length+' 条</option>'; }).join('')+'</select>'
     +'<div class="row" style="margin-top:8px"><span class="mini grow">生成数量</span><input id="npGenCount" type="number" min="3" max="8" value="6" style="width:70px"></div>'
     +'<button class="btn primary full" id="npGenGo">按这些条件生成</button><button class="btn full" id="npGenCancel">取消</button>');
   npBindChipEditor($('#sheetBox'),{genre:genres,tags:tags,persona:personas});
   $('#npGenCancel').onclick=closeSheet;
   $('#npGenGo').onclick=function(){
-    const opts={genre:genres.join(' / ')||'AI自由发挥',tags:tags.slice(),persona:personas.join('；'),orientation:$('#npGenOrientation').value,structure:$('#npGenStructure').value,idea:String($('#npGenIdea').value||'').trim(),count:Math.max(3,Math.min(8,Number($('#npGenCount').value)||6))};
+    const opts={genre:genres.join(' / ')||'AI自由发挥',tags:tags.slice(),persona:personas.join('；'),orientation:$('#npGenOrientation').value,structure:$('#npGenStructure').value,idea:String($('#npGenIdea').value||'').trim(),count:Math.max(3,Math.min(8,Number($('#npGenCount').value)||6)),worldBookId:$('#npGenWorldBook').value||null};
     closeSheet(); npRefreshBooks(opts);
   };
 }
@@ -7743,8 +8054,10 @@ function npRefreshBooks(opts){
   if(!needKey()) return;
   opts=opts||{};
   const tags=(opts.tags||[]).concat(DB.np.tags||[]).filter(function(x,i,a){ return a.indexOf(x)===i; });
+  const sourceWorld=opts.worldBookId?npBook(opts.worldBookId):null;
   busy('正在生成新书，请稍后');
-  const sys='你是中文网文平台的选书与书籍包装生成器。你只输出 JSON，不聊天。书籍要像真实平台的新书推荐：类型明确、卖点清楚、简介有钩子、作者公告有活人感。';
+  const sys='你是中文网文平台的选书与书籍包装生成器。你只输出 JSON，不聊天。书籍要像真实平台的新书推荐：类型明确、卖点清楚、简介有钩子、作者公告有活人感。'
+    +(sourceWorld?'\n【本次绑定的小说世界书事实】\n'+sourceWorld.worldbook.entries.map(function(e){ return '['+e.kind+'] '+e.text; }).join('\n')+'\n生成的新书必须遵守这些事实，但不要假装读者已经知道全书。':'');
   const user='按这些筛选条件生成 '+(Number(opts.count)||6)+' 本新书：题材='+(opts.genre||'AI自由发挥')+'；标签='+(tags.join('、')||'AI自由发挥')+'；人设='+(opts.persona||'AI自由发挥')+'；性向='+(opts.orientation||'无CP')+'；关系结构='+(opts.structure||'1V1')+'；补充想法='+(opts.idea||'自由发挥')+'。'
     +'\n输出 JSON 数组，每项字段：title, authorName, genre, tags(数组，2到4个), synopsis(180到420字，不能超过500字), announcement(40到100字), cpLine(必须是网文标签化人设句，格式类似「清冷禁欲高岭之花攻X贪财偏执美强惨受」), protagonists(数组，1到2项，每项 name 和 line)。'
     +'\n不要输出解释、代码块或 Markdown。';
@@ -7752,7 +8065,14 @@ function npRefreshBooks(opts){
     let arr=npJSON(out); if(arr&&arr.books) arr=arr.books; if(!Array.isArray(arr)) arr=[arr];
     arr=arr.filter(function(x){ return x&&x.title; }).slice(0,Number(opts.count)||6);
     if(!arr.length) throw new Error('没有生成出新书');
-    arr.forEach(function(item,i){ const b=npAIBookItem(item,i); b.orientation=opts.orientation||'无CP'; b.structure=opts.structure||'1V1'; DB.books.push(b); });
+    arr.forEach(function(item,i){
+      const b=npAIBookItem(item,i);
+      b.orientation=opts.orientation||'无CP'; b.structure=opts.structure||'1V1';
+      if(sourceWorld&&sourceWorld.worldbook){
+        b.worldbook={enabled:sourceWorld.worldbook.enabled!==false,entries:JSON.parse(JSON.stringify(sourceWorld.worldbook.entries||[])).map(function(e){ return Object.assign({},e,{id:uid(),createdAt:Date.now()}); }),updatedAt:Date.now(),boundFromBookId:sourceWorld.id};
+      }
+      DB.books.push(b);
+    });
     DB.np.genre=DB.np.genre||'推荐'; save(); if(route.name==='novel'){ DB.np.tab='home'; render(); }
     busyDone(); toast('生成了 '+arr.length+' 本新书');
   }).catch(function(e){ busyDone(); toast('生成失败：'+e.message); });
@@ -7867,7 +8187,8 @@ function npGenerateBookChapters(bookId){
         busy('正在写第 '+(idx+1)+' 章，请稍后');
         const prev=(b.chapters||[]).slice(-3).map(function(c){ return c.title+'：'+String(c.summary||'').slice(0,120); }).join('\n');
         const sys='你是中文网文作者。只输出 JSON，不聊天。章节要像真实连载：有开篇钩子、具体场景、动作和对话，结尾留钩子。不要写标题外的解释。'
-          +(DB.np.stylePrompt? '\n【文风要求】'+DB.np.stylePrompt:'');
+          +(DB.np.stylePrompt? '\n【文风要求】'+DB.np.stylePrompt:'')
+          +(npWorldBlock(b)? '\n'+npWorldBlock(b)+'\n小说世界书只用于写正文和后台连贯性，不是读者已知信息。':'');
         const user='书籍：'+b.title+'\n题材：'+(b.genre||'')+'\n标签：'+(b.tags||[]).join('、')+'\n性向：'+(b.orientation||'无CP')+'\n关系结构：'+(b.structure||'1V1')+'\n简介：'+(b.synopsis||'')+'\n主角：'+(b.protagonists||[]).map(function(p){ return p.name+'：'+p.line; }).join('；')+'\nCP：'+(b.cpLine||'')+'\n前情摘要：\n'+(prev||'暂无')+'\n请写第 '+(idx+1)+' 章。输出 JSON：{title, content, summary, authorNote, comments}。content 用 \\n 分段；summary 50到100字；authorNote 30到80字；comments 是 2到4 条对象数组，每项 {paragraphIndex, readerName, readerType, text}。不要输出代码块。';
         const out=await callModel([{role:'system',content:sys},{role:'user',content:user}]);
         let item=npJSON(out); if(Array.isArray(item)) item=item[0]; if(!item||!item.content) throw new Error('第 '+(idx+1)+' 章没有正文');
@@ -7938,7 +8259,7 @@ async function npUpdateBookMemory(b,ch){
     try{
       const body=String(ch.content||npParas(ch).join('\n')).slice(0,9000);
       const out=await callModel([
-        {role:'system',content:'你是小说编辑，只输出 JSON，不聊天。你的任务是把正文中已经明确发生的事实压缩成后台记忆，供后续读者评论和读者群使用。绝对不能补充正文没有写成事实的人物、关系、事件或设定。读者猜测和野史不能写入正史记忆。'},
+        {role:'system',content:'你是小说编辑，只输出 JSON，不聊天。你的任务是把正文中已经明确发生的事实压缩成后台记忆，供后续章节保持连贯。绝对不能补充正文没有写成事实的人物、关系、事件或设定。'+(npWorldBlock(b)?'\n'+npWorldBlock(b):'')+'\n小说世界书只帮助你理解本书设定，不得把未在正文出现的世界书事实写进摘要，也不得假设读者已经知道。读者猜测和野史不能写入正史记忆。'},
         {role:'user',content:'作品：'+b.title+'\n隐藏旧记忆：\n'+(previous||'暂无')+'\n最近章节摘要：\n'+(recent||'暂无')+'\n当前章节：'+ch.title+'\n正文：\n'+body+'\n输出 JSON：{"chapterSummary":"本章明确发生的事实，80到180字","characterDynamics":"人物关系和状态变化，60到160字","worldFacts":"地点、物件、线索和因果关系，60到160字","rollingSummary":"合并旧记忆与本章后的滚动摘要，不超过600字"}。不要代码块。'}
       ]);
       const data=npJSON(out);
@@ -8272,8 +8593,8 @@ function npFinishCoRead(rid,target){
     c.memories.push({id:uid(),text:summary});
   }
   if(target==='chat'||target==='both'){
-    let ch=(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===c.id; });
-    if(!ch){ ch={id:uid(),type:'private',memberIds:[c.id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now()}; DB.chats.push(ch); }
+    let ch=chat(r.chatId)||(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===c.id; });
+    if(!ch) ch=newPrivateChat(c.id);
     ch.msgs.push({id:uid(),role:'sys',type:'text',text:'共读记录：'+summary,ts:Date.now()}); ch.lastTs=Date.now();
   }
   r.memorySynced=true; r.updatedAt=Date.now(); save(); closeSheet(); render(); toast('共读已保存');
@@ -8521,6 +8842,20 @@ function bindScreenInner(){
     const pb=$('#plusBtn'); if(pb) pb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='plus') hidePanel(); else showPanel(panelPlus(),'plus'); };
     const sb=$('#stkBtn'); if(sb) sb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='stk') hidePanel(); else showPanel(panelStickers(),'stk'); };
     const ci=$('#chInfo'); if(ci) ci.onclick=()=>sheetMembers(chat(route.arg));
+    const selAll=$('#chatSelAll');
+    if(selAll) selAll.onclick=function(){
+      const ch=chat(route.arg); if(!ch) return;
+      const ids=(ch.msgs||[]).filter(function(m){ return m.role!=='sys'; }).map(function(m){ return m.id; });
+      chatSelectIds=chatSelectIds.length===ids.length?[]:ids;
+      render();
+    };
+    const selMigrate=$('#chatSelMigrate'); if(selMigrate) selMigrate.onclick=function(){ sheetMigrateChatMessages(chat(route.arg)); };
+    const selCancel=$('#chatSelCancel'); if(selCancel) selCancel.onclick=function(){ chatSelectionEnd(); };
+    if(chatSelectChat===route.arg){
+      $$('[data-msgrow]',s).forEach(function(el){
+        el.onclick=function(ev){ ev.preventDefault(); ev.stopPropagation(); toggleChatSelect(el.dataset.msgrow); };
+      });
+    }
     $$('[data-voice]',s).forEach(el=>el.onclick=e=>{ e.stopPropagation(); const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.voice); if(m) playVoice(m); });
     $$('[data-vtext]',s).forEach(el=>el.onclick=e=>{ e.stopPropagation(); const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.vtext); if(!m) return; m.showText=!m.showText; save(); render(); });
     $$('[data-rp]',s).forEach(el=>el.onclick=()=>{ const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.rp); if(!m) return;
@@ -8528,6 +8863,7 @@ function bindScreenInner(){
     $$('[data-bub]',s).forEach(el=>{
       const open=()=>sheetMsg(route.arg, el.dataset.bub);
       el.onclick=e=>{
+        if(chatSelectChat===route.arg) return;
         if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')) return;
         open();
       };
@@ -8705,6 +9041,10 @@ function bindScreenInner(){
   /* 出门（互动小说） */
   $$('[data-outnew]',s).forEach(el=>el.onclick=()=>{ DB.outSetup={persona:null,chats:(DB.chats||[]).map(function(ch){ return ch.id; }).slice(0,6),slot:'',weather:'',day:todayCN()}; save(); go('outnew'); });
   $$('[data-openout]',s).forEach(el=>el.onclick=()=>go('outroom',el.dataset.openout));
+  $$('[data-pickoutchat]',s).forEach(el=>el.onclick=()=>sheetPickChats('选择出门所属会话',1,function(ids){
+    if(!ids[0]) return;
+    DB.outViewChatId=ids[0]; save(); closeSheet(); render();
+  }));
   $$('[data-outback]',s).forEach(el=>el.onclick=()=>go('out'));
   $$('[data-setpersona]',s).forEach(el=>el.onclick=()=>sheetOutPersona());
   $$('[data-setpick]',s).forEach(el=>el.onclick=()=>sheetPickChats('选择可能遇到的会话（最多 6 条）',6,function(ids){
@@ -8798,6 +9138,7 @@ function bindScreenInner(){
     if(buyItem({src:'商城',tier:DB.mallTier,name:it.name,price:it.price,desc:it.desc,cid:c.id})){ toast('买下了 '+it.name); render(); }
   });
   $$('[data-tbtab]',s).forEach(el=>el.onclick=()=>{ DB.tbTab=el.dataset.tbtab; save(); render(); });
+  $$('[data-tbproduct]',s).forEach(el=>el.onclick=function(){ sheetTbProduct(Number(el.dataset.tbproduct)); });
   $$('[data-tbprice]',s).forEach(el=>el.onclick=()=>{ DB.tbPrice=el.dataset.tbprice; save(); render(); });
   $$('[data-tbcat]',s).forEach(el=>el.onclick=()=>{ DB.tbCat=el.dataset.tbcat; save(); render(); });
   $$('[data-tbpersona]',s).forEach(el=>el.onclick=()=>sheetTbPersona());
@@ -8838,6 +9179,34 @@ function bindScreenInner(){
   };
   $$('[data-order]',s).forEach(el=>el.onclick=function(){ const o=(DB.orders||[]).find(function(x){ return x.id===el.dataset.order; }); if(o) sheetOrder(o); });
   $$('[data-orderdel]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); DB.orders=(DB.orders||[]).filter(function(o){ return o.id!==el.dataset.orderdel; }); save(); render(); });
+  $$('[data-totab]',s).forEach(el=>el.onclick=function(){ DB.takeout.activeTab=el.dataset.totab; save(); render(); });
+  $$('[data-tocat]',s).forEach(el=>el.onclick=function(){ DB.takeout.category=el.dataset.tocat; save(); render(); });
+  $$('[data-to-setsession]',s).forEach(el=>el.onclick=sheetTakeoutSession);
+  $$('[data-toproduct]',s).forEach(el=>el.onclick=function(){ sheetTakeoutProduct(el.dataset.toproduct); });
+  $$('[data-toadd]',s).forEach(el=>el.onclick=function(ev){
+    ev.stopPropagation();
+    const p=takeoutProducts(DB.takeout.category).find(function(x){ return x.id===el.dataset.toadd; });
+    if(p&&takeoutAddToCart(p,p.cat||DB.takeout.category,1,DB.takeout.beneficiary)){ render(); toast('已加入购物车'); }
+  });
+  const toCart=$('#toCart'); if(toCart) toCart.onclick=sheetTakeoutCart;
+  $$('[data-torefresh]',s).forEach(el=>el.onclick=takeoutRefreshCatalog);
+  $$('[data-torole]',s).forEach(el=>el.onclick=function(){ takeoutRoleOrder(el.dataset.torole); });
+  $$('[data-to-persona]',s).forEach(el=>el.onclick=sheetTakeoutPersona);
+  $$('[data-to-address]',s).forEach(el=>el.onclick=sheetTakeoutAddress);
+  $$('[data-to-payment]',s).forEach(el=>el.onclick=sheetTakeoutPayment);
+  $$('[data-to-mode]',s).forEach(el=>el.onclick=sheetTakeoutMode);
+  $$('[data-to-world]',s).forEach(el=>el.onclick=sheetTakeoutWorld);
+  $$('[data-to-clearimages]',s).forEach(el=>el.onclick=function(){
+    sheetSmall('<h3>清除全部商品图绑定？</h3><div class="muted" style="margin:8px 0 14px">只会清除你为商品绑定的图片，不删商品和订单。</div><button class="btn danger full" id="toClearImgsYes">确认清除</button><button class="btn full" id="toClearImgsNo">取消</button>');
+    $('#toClearImgsNo').onclick=closeSheet;
+    $('#toClearImgsYes').onclick=function(){ DB.takeout.customProductImages={}; save(); closeSheet(); render(); toast('商品图绑定已清除'); };
+  });
+  $$('[data-toorder]',s).forEach(el=>el.onclick=function(){ sheetTakeoutOrder(el.dataset.toorder); });
+  $$('[data-takeout-order]',s).forEach(el=>el.onclick=function(ev){
+    if(chatSelectChat===route.arg) return;
+    ev.stopPropagation();
+    if(el.dataset.takeoutOrder) sheetTakeoutOrder(el.dataset.takeoutOrder);
+  });
   /* 设置 */
   if(route.name==='settings'){
     decorateSettingsBubbles(s);
@@ -8914,6 +9283,7 @@ function bindScreenInner(){
         const v=el.dataset.settingsview;
         if(v==='logs') sheetRuntimeLogs();
         else if(v==='about') sheetAboutPhone();
+        else if(v==='update') sheetVersionUpdate();
         else if(v==='disclaimer') sheetDisclaimer();
       };
     });
@@ -9164,7 +9534,10 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-24 · 第 53 轮';
+const BUILD='2026-10-26 · 3.44 · 第 54 轮';
+const BUILD_CODE=54;
+const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
+const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
 function screenCheckup(){
   setTimeout(function(){ const b=$('#ckRun'); if(b) b.onclick=function(){ runCheckupUI(); }; },0);
@@ -9183,7 +9556,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenCheckin','screenMall','screenTaobao','screenDate','screenOut','screenWeibo','screenForum','screenGallery','screenDiary','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenCheckin','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','screenOut','screenWeibo','screenForum','screenGallery','screenDiary','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -9224,7 +9597,7 @@ async function runCheckupUI(){
     ['contactedit',firstContact,'联系人编辑'],['novel',null,'小说'],['novelbook',firstBook&&firstBook.id,'书籍'],
     ['novelchapter',firstBook&&firstChapter?(firstBook.id+'|'+firstChapter.id):null,'章节'],['read',firstRead,'共读'],
     ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],
-    ['hang',null,'查岗'],['checkin',null,'打卡'],['mall',null,'商城'],['shop',null,'网购'],['checkup',null,'自检'],
+    ['hang',null,'查岗'],['checkin',null,'打卡'],['mall',null,'商城'],['shop',null,'网购'],['takeout',null,'外卖'],['checkup',null,'自检'],
     ['date',null,'约会'],['dateroom',firstDate,'约会房间'],['out',null,'出门'],['outnew',null,'准备出门'],['outroom',firstOut,'出门房间'],
     ['world',null,'世界书'],['regex',null,'正则'],['weibo',null,'微博']
   ];
@@ -9315,7 +9688,7 @@ function screenDate(){
   if(!DB.dateDay) DB.dateDay=todayCN();
   const c=ct(cid);
   if(!c) return '<div class="pad" style="padding-top:0">'+wxTop('约会')+emptyState('还没有联系人','先去「微信 · 联系人」建一位。','去微信','openwx')+'</div>';
-  const list=DB.dates.filter(function(d){ return d.cid===cid; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); });
+  const list=DB.dates.filter(function(d){ return d.cid===cid&&(d.boundChatId||d.chatId)===DB.dateChat; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); });
   return '<div class="pad" style="padding-top:0">'
    +wxTop('约会',clearBtn('date')+'<button class="ic2" data-pickdatechat="1">换会话</button>')
    +'<div class="lrow" data-pickdatechat="1">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(dch? chatName(dch):c.name)+'</div><div class="t2">'+esc(c? c.name:'')+(dch? (' · '+(dch.msgs||[]).length+' 条消息'):'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
@@ -9329,7 +9702,7 @@ function screenDate(){
 }
 function startDate(k,customName){
   const c=ct(DB.dateCid)||ct((DB.contacts[0]||{}).id); if(!c) return; DB.dateCid=c.id;
-  const d={id:uid(),cid:c.id,chatId:DB.dateChat||null,day:DB.dateDay||todayCN(),scene:k,sceneName:customName||'',msgs:[],boundChatId:null,created:Date.now(),lastTs:Date.now()};
+  const d={id:uid(),cid:c.id,chatId:DB.dateChat||null,day:DB.dateDay||todayCN(),scene:k,sceneName:customName||'',msgs:[],boundChatId:DB.dateChat||null,created:Date.now(),lastTs:Date.now()};
   DB.dates=DB.dates||[];
   DB.outContacts=DB.outContacts||[];
   DB.outings=DB.outings||[]; DB.dates.unshift(d); DB.curDate=d.id; save();
@@ -9337,7 +9710,7 @@ function startDate(k,customName){
   if(DB.api.key){
     genDateScene(d).then(function(){ if(route.name==='dateroom'&&route.arg===d.id) render(); }).catch(function(){});
   }
-  setTimeout(function(){ toast('点右上角 ⋯ 可以绑定共享会话'); },900);
+  setTimeout(function(){ toast(d.boundChatId?'这次约会已和当前会话共享记忆':'点右上角 ⋯ 可以绑定共享会话'); },900);
 }
 async function genDateScene(d){
   const c=ct(d.cid); if(!c) return null;
@@ -9547,7 +9920,11 @@ async function dateTurn(d,nudge){
     await sleep(Math.min(1600,240+clean.length*12));
     const tt=$('#dtyping'); if(tt) tt.remove();
     const nt=await formatTurn(clean,c.name);
-    if(nt.narr.length||nt.talk.length) d.msgs.push({id:uid(),role:'turn',cid:c.id,type:'turn',narr:nt.narr,talk:nt.talk,ts:Date.now()});
+    if(nt.narr.length||nt.talk.length){
+      const mm={id:uid(),role:'turn',cid:c.id,type:'turn',narr:nt.narr,talk:nt.talk,ts:Date.now()};
+      d.msgs.push(mm);
+      mirrorToChat(d,mm);
+    }
     d.lastTs=Date.now(); save();
     if(route.name==='dateroom'&&route.arg===d.id) render();
     if(d.out && (d.evCount||0)<2 && Math.random()<0.65){
@@ -9572,7 +9949,7 @@ async function sendDate(){
   const t=parenToQuote(raw);
   inp.value='';
   const mm={id:uid(),role:'me',type:'myturn',text:t,ts:Date.now()};
-  d.msgs.push(mm); d.lastTs=Date.now();
+  d.msgs.push(mm); d.lastTs=Date.now(); mirrorToChat(d,mm);
   save(); render();
   await dateTurn(d);
 }
@@ -9648,8 +10025,10 @@ function sheetCustomScene(){
 }
 /* ================= 共享记忆 ================= */
 function memoryBlockForDate(d){
-  if(!d||!d.boundChatId) return '';
-  const ch=chat(d.boundChatId); if(!ch) return '';
+  if(!d) return '';
+  const chatId=d.boundChatId||d.chatId;
+  if(!chatId) return '';
+  const ch=chat(chatId); if(!ch) return '';
   const ms=(ch.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-10);
   if(!ms.length) return '';
   return '【你们之前在微信里聊过这些（只是记忆，别复述）】\n'+ms.map(function(m){
@@ -9657,14 +10036,26 @@ function memoryBlockForDate(d){
   }).join('\n');
 }
 function memoryBlockForChat(chatId){
-  const list=(DB.dates||[]).filter(function(x){ return x.boundChatId===chatId; });
-  if(!list.length) return '';
-  const d=list.sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); })[0];
-  const ms=(d.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-10);
-  if(!ms.length) return '';
-  return '【你们最近在线下（'+sceneName(d)+'）见过，聊过这些（只是记忆，别复述）】\n'+ms.map(function(m){
-    return (m.role==='me'?'对方':'你')+'：'+String(labelOf(m)).slice(0,60);
-  }).join('\n');
+  const out=[];
+  const dates=(DB.dates||[]).filter(function(x){ return x.boundChatId===chatId; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); }).slice(0,2);
+  dates.forEach(function(d){
+    const ms=(d.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-10);
+    if(ms.length) out.push('【你们在约会地点「'+sceneName(d)+'」经历过这些（同一会话记忆，别复述）】\n'+ms.map(function(m){ return (m.role==='me'?'对方':'你')+'：'+String(labelOf(m)).slice(0,70); }).join('\n'));
+  });
+  const outs=(DB.outings||[]).filter(function(o){ return (o.chatId===chatId||o.boundChatId===chatId)&&(o.steps||[]).length; }).sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); }).slice(0,2);
+  outs.forEach(function(o){
+    const hist=(o.steps||[]).filter(function(st){ return st.type!=='meet'; }).slice(-12).map(function(st){
+      if(st.type==='you') return '对方：'+st.text;
+      if(st.type==='say') return '你：'+st.text;
+      if(st.type==='narr') return '旁白：'+st.text;
+      if(st.type==='turn') return '场景：'+((st.narr||[]).join(' ')+' '+(st.talk||[]).join(' ')).slice(0,180);
+      return '';
+    }).filter(Boolean).join('\n');
+    if(hist) out.push('【你们最近出门去过「'+(o.place||'外面')+'」（同一会话记忆，别复述）】\n'+hist);
+  });
+  const orders=(DB.takeout&&DB.takeout.orders||[]).filter(function(o){ return o.chatId===chatId; }).slice(-4);
+  if(orders.length) out.push('【这个会话里点过的外卖】\n'+orders.map(function(o){ return o.merchant+'：'+o.items.map(function(x){ return x.name+'×'+x.qty; }).join('、')+'，'+takeoutStatusLabel(o.status); }).join('\n'));
+  return out.join('\n');
 }
 /* ================= 突然来找你 ================= */
 const MEET_GAP=[Infinity,6*3600e3,3*3600e3,90*60e3,45*60e3,20*60e3];
@@ -11223,9 +11614,13 @@ function polaroidHTML(p){
     +'<div class="pcap">'+esc(p.day? (p.day+' · '):'')+esc(shortTime(p.ts))+' · '+esc(p.place||'')+(c? ' · '+esc(contactDisplayName(c)):'')+'</div></div>';
 }
 function screenOut(){
-  const list=outings().slice().sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); });
+  let viewChat=chat(DB.outViewChatId);
+  if(!viewChat) viewChat=(DB.chats||[]).filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ct(ch.memberIds[0]); }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); })[0]||null;
+  DB.outViewChatId=viewChat?viewChat.id:null;
+  const list=outings().filter(function(o){ return !viewChat||(o.chatId||o.boundChatId)===viewChat.id; }).slice().sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); });
   return '<div class="pad" style="padding-top:0">'
     +wxTop('出门',clearBtn('out')+'<button class="ic2" data-outnew="1">＋</button>')
+    +(viewChat? '<div class="lrow" data-pickoutchat="1"><div class="mi"><div class="t1">当前会话</div><div class="t2">'+esc(chatName(viewChat))+' · 只显示这次会话的出门</div></div><div class="rt"><span class="chev">›</span></div></div>':'')
     +(list.length? list.map(function(o){
         const last=(o.steps||[]).slice(-1)[0];
         return '<div class="lrow" data-openout="'+o.id+'"><div class="av" style="background:#2d9cdb">'+esc(String(o.place||'出门').slice(0,2))+'</div>'
@@ -11235,7 +11630,7 @@ function screenOut(){
           +(o.unread? '<div class="ub">新</div>':'')
           +(o.state!=='done'? '<div class="ub" style="background:#2d9cdb">走</div>':'')+'</div></div>';
       }).join('')
-      : '<div class="empty">还没有出过门。<br>点右上角 ＋ 出去走走。</div>')
+      : '<div class="empty">这个会话还没有出过门。<br>点右上角 ＋ 出去走走。</div>')
     +'</div>';
 }
 function screenOutNew(){
@@ -11269,8 +11664,9 @@ async function startOut(){
   if(!meet){ toast('这条会话里没有角色'); return; }
   const o={id:uid(),cid:null,meetCid:meet.id,chatId:dch.id,day:(st.day||todayCN()),persona:st.persona||DB.me.personaId||null,
     slot:st.slot||slotNow(),weather:st.weather||'晴',place:'',steps:[],pending:null,state:'playing',
-    createdAt:Date.now(),updatedAt:Date.now(),mem:null,polaroid:null,unread:0,turn:0,meetAt:3+Math.floor(Math.random()*2),boundChatId:null};
+    createdAt:Date.now(),updatedAt:Date.now(),mem:null,polaroid:null,unread:0,turn:0,meetAt:3+Math.floor(Math.random()*2),boundChatId:dch.id};
   outings().unshift(o); save();
+  DB.outViewChatId=dch.id;
   go('outroom',o.id);
   busy('正在出门，请稍后');
   try{ await outTurn(o,null); }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
@@ -11305,6 +11701,7 @@ async function outTurn(o,chosen){
     +'\n【设定】日期：'+(o.day||'不详')+'；时间：'+o.slot+'；天气：'+o.weather+(o.place? ('；地点：'+o.place):'')
     +(persona? '\n【用户是谁】'+String(persona.text||'').slice(0,200):'')
     +(outWorldFlavor()? '\n【世界设定】'+outWorldFlavor():'')
+    +(o.chatId? '\n'+memoryBlockForChat(o.chatId):'')
     +'\n【已经发生的事】\n'+(hist||'（还没开始）')
     +'\n【这次的任务】'+(chosen? ('用户刚选了「'+chosen+'」。'):'')
     +(mustMeet? ('现在必须让「'+meet.name+'」出现，只能出现这一位，并写 Ta 的一句话（可以带动作，用两个英文单引号夹住）。')
@@ -11966,6 +12363,542 @@ async function orderDo(o,kind){
     save(); sheetOrderResult(o);
   }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
 }
+/* ================= 外卖 ================= */
+const TAKEOUT_CATS=[
+  {k:'美食',e:'🍜',c:'#E7A55C'},
+  {k:'甜点饮品',e:'🍰',c:'#D98FA8'},
+  {k:'超市便利',e:'🛒',c:'#73A88B'},
+  {k:'蔬菜水果',e:'🥬',c:'#6EA568'},
+  {k:'看病买药',e:'💊',c:'#6F9ECA'},
+  {k:'鲜花花束',e:'💐',c:'#C77FA2'},
+  {k:'早餐',e:'🥟',c:'#D6A15C'},
+  {k:'夜宵',e:'🍢',c:'#B77962'},
+  {k:'咖啡',e:'☕',c:'#9A765D'},
+  {k:'宠物用品',e:'🐾',c:'#8D9A79'},
+  {k:'成人用品',e:'💗',c:'#B9798D'},
+  {k:'药品处方',e:'🩺',c:'#6D9BA5'},
+  {k:'蛋糕定制',e:'🎂',c:'#C98B9F'}
+];
+const TAKEOUT_IMAGES={
+  '美食':'https://images.unsplash.com/photo-1547592180-85f173990554?auto=format&fit=crop&w=520&q=78',
+  '甜点饮品':'https://images.unsplash.com/photo-1551024506-0bccd828d307?auto=format&fit=crop&w=520&q=78',
+  '超市便利':'https://images.unsplash.com/photo-1604719312566-8912e9227c6a?auto=format&fit=crop&w=520&q=78',
+  '蔬菜水果':'https://images.unsplash.com/photo-1619566636858-adf3ef46400b?auto=format&fit=crop&w=520&q=78',
+  '看病买药':'https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=520&q=78',
+  '鲜花花束':'https://images.unsplash.com/photo-1490750967868-88aa4486c946?auto=format&fit=crop&w=520&q=78',
+  '早餐':'https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=520&q=78',
+  '夜宵':'https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=520&q=78',
+  '咖啡':'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=520&q=78',
+  '宠物用品':'https://images.unsplash.com/photo-1583337130417-3346a1be7dee?auto=format&fit=crop&w=520&q=78',
+  '药品处方':'https://images.unsplash.com/photo-1471864190281-a93a3070b6de?auto=format&fit=crop&w=520&q=78',
+  '蛋糕定制':'https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=520&q=78',
+  '食品饮料':'https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=520&q=78',
+  '日用百货':'https://images.unsplash.com/photo-1583947215259-38e31be8751f?auto=format&fit=crop&w=520&q=78',
+  '服饰鞋包':'https://images.unsplash.com/photo-1445205170230-053b83016050?auto=format&fit=crop&w=520&q=78',
+  '数码电器':'https://images.unsplash.com/photo-1498049794561-7780e7231661?auto=format&fit=crop&w=520&q=78',
+  '美妆护理':'https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=520&q=78',
+  '家居收纳':'https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?auto=format&fit=crop&w=520&q=78',
+  '文具书籍':'https://images.unsplash.com/photo-1456324504439-367cee3b3c32?auto=format&fit=crop&w=520&q=78',
+  '运动户外':'https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=520&q=78'
+};
+const TAKEOUT_PLACEHOLDER='data:image/svg+xml;charset=utf-8,'+encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="520" height="390" viewBox="0 0 520 390"><rect width="520" height="390" fill="#fbfbfc"/><rect x="24" y="24" width="472" height="342" rx="22" fill="none" stroke="#ece9ec" stroke-width="2"/><path d="M196 208h128l-13 75h-102z" fill="#f0e9eb"/><path d="M218 208c0-39 17-61 42-61s42 22 42 61" fill="none" stroke="#d8c9ce" stroke-width="12" stroke-linecap="round"/><circle cx="222" cy="244" r="7" fill="#d8c9ce"/><circle cx="298" cy="244" r="7" fill="#d8c9ce"/><text x="260" y="326" text-anchor="middle" font-size="18" fill="#a79ca1">自定义商品图</text></svg>');
+const TAKEOUT_LOCAL={
+  '美食':[
+    {store:'灶台边小馆',rating:4.8,sold:'月售 2180',name:'招牌牛肉面',price:28,desc:'现切牛肉，汤底清亮，面条单独装',review:'汤很热，面条没有坨，牛肉给得实在。'},
+    {store:'灶台边小馆',rating:4.8,sold:'月售 2180',name:'番茄滑蛋饭',price:24,desc:'酸甜番茄配嫩滑鸡蛋，米饭分装',review:'番茄味很足，拌饭刚好。'},
+    {store:'夜航小厨',rating:4.7,sold:'月售 1630',name:'黑椒鸡腿饭',price:32,desc:'去骨鸡腿现煎，附时蔬和酱汁',review:'鸡腿皮是脆的，黑椒酱没有齁咸。'},
+    {store:'夜航小厨',rating:4.7,sold:'月售 1630',name:'鲜虾馄饨',price:26,desc:'虾仁猪肉馅，紫菜虾皮汤底',review:'个头不小，汤底很鲜。'}
+  ],
+  '甜点饮品':[
+    {store:'云朵甜室',rating:4.9,sold:'月售 980',name:'草莓奶油杯',price:23,desc:'草莓果肉、淡奶油和海绵蛋糕',review:'奶油轻，草莓不酸。'},
+    {store:'云朵甜室',rating:4.9,sold:'月售 980',name:'抹茶生巧卷',price:29,desc:'抹茶蛋糕卷配生巧夹心',review:'抹茶苦味明显，正好压住甜。'},
+    {store:'一杯慢饮',rating:4.8,sold:'月售 3400',name:'茉莉奶绿',price:16,desc:'茉莉茶底，少糖也清爽',review:'茶味没有被奶盖住，冰量合适。'},
+    {store:'一杯慢饮',rating:4.8,sold:'月售 3400',name:'杨枝甘露',price:22,desc:'芒果、西柚粒和椰奶，现做',review:'西柚粒有微苦，整体很清爽。'}
+  ],
+  '超市便利':[
+    {store:'楼下便利店',rating:4.7,sold:'月售 5400',name:'抽取式纸巾 3 包',price:13.9,desc:'柔韧不掉屑，日常家用',review:'包装完整，送达很快。'},
+    {store:'楼下便利店',rating:4.7,sold:'月售 5400',name:'无糖气泡水 6 瓶',price:19.9,desc:'白桃风味，零糖零脂',review:'冰镇过，气泡还足。'},
+    {store:'即刻便利仓',rating:4.6,sold:'月售 2600',name:'洗衣凝珠旅行装',price:15.8,desc:'小盒装，清香型',review:'临时补货很方便。'}
+  ],
+  '蔬菜水果':[
+    {store:'青禾生鲜',rating:4.8,sold:'月售 1900',name:'脆甜蓝莓 125g',price:19.9,desc:'果粉完整，酸甜适中',review:'没有压坏，个头均匀。'},
+    {store:'青禾生鲜',rating:4.8,sold:'月售 1900',name:'小番茄 500g',price:12.8,desc:'现摘番茄，洗净即食',review:'很新鲜，没有裂果。'},
+    {store:'青禾生鲜',rating:4.8,sold:'月售 1900',name:'生菜与黄瓜组合',price:14.9,desc:'轻食搭配，附保鲜袋',review:'叶子挺脆，黄瓜也新鲜。'}
+  ],
+  '看病买药':[
+    {store:'安心药房',rating:4.9,sold:'月售 730',name:'创可贴组合装',price:9.9,desc:'不同尺寸，家庭常备',review:'密封很好，日期新。'},
+    {store:'安心药房',rating:4.9,sold:'月售 730',name:'电子体温计',price:39,desc:'快速测温，软头设计',review:'读数稳定，包装完整。'},
+    {store:'安心药房',rating:4.9,sold:'月售 730',name:'医用口罩 10 只',price:12.9,desc:'独立包装，日常防护',review:'戴着不勒耳朵。'}
+  ],
+  '鲜花花束':[
+    {store:'枝间花房',rating:4.9,sold:'月售 460',name:'奶油白玫瑰 9 枝',price:89,desc:'浅色包装，附手写卡片',review:'花苞新鲜，包装很有质感。'},
+    {store:'枝间花房',rating:4.9,sold:'月售 460',name:'向日葵小花束',price:69,desc:'明亮配色，适合日常送花',review:'花头很大，没有折损。'},
+    {store:'枝间花房',rating:4.9,sold:'月售 460',name:'洋桔梗混搭花束',price:79,desc:'淡紫与白色搭配，附灯串',review:'颜色比图片还温柔。'}
+  ],
+  '早餐':[
+    {store:'清晨豆浆铺',rating:4.8,sold:'月售 3100',name:'豆浆油条套餐',price:12,desc:'现磨豆浆，油条独立包装',review:'送到还是热的，豆浆不甜腻。'},
+    {store:'清晨豆浆铺',rating:4.8,sold:'月售 3100',name:'鲜肉小笼包 8 只',price:16,desc:'薄皮肉馅，附醋包',review:'汤汁有，皮没破。'},
+    {store:'早安三明治',rating:4.7,sold:'月售 980',name:'鸡蛋火腿三明治',price:18,desc:'烘烤吐司，生菜番茄夹心',review:'面包松软，酱不多。'}
+  ],
+  '夜宵':[
+    {store:'巷口烧烤',rating:4.7,sold:'月售 2200',name:'孜然鸡肉串 10 串',price:25,desc:'现烤鸡肉串，辣度可选',review:'孜然香很足，肉不柴。'},
+    {store:'巷口烧烤',rating:4.7,sold:'月售 2200',name:'蒜香烤茄子',price:18,desc:'整只茄子，蒜蓉铺满',review:'蒜蓉很香，火候刚好。'},
+    {store:'深夜小摊',rating:4.6,sold:'月售 1500',name:'关东煮组合',price:22,desc:'萝卜、鱼丸、豆皮和汤',review:'汤很暖，分量够。'}
+  ],
+  '咖啡':[
+    {store:'路灯咖啡',rating:4.8,sold:'月售 1600',name:'冰美式',price:16,desc:'双份浓缩，冰水分离',review:'不酸涩，冰块没化太多。'},
+    {store:'路灯咖啡',rating:4.8,sold:'月售 1600',name:'燕麦拿铁',price:22,desc:'燕麦奶与坚果调咖啡豆',review:'奶泡细，燕麦味不抢。'},
+    {store:'路灯咖啡',rating:4.8,sold:'月售 1600',name:'海盐焦糖拿铁',price:24,desc:'微咸奶盖，焦糖风味',review:'甜度克制，海盐很轻。'}
+  ],
+  '宠物用品':[
+    {store:'毛球补给站',rating:4.8,sold:'月售 860',name:'猫砂 5L',price:29.9,desc:'低尘结团，无香型',review:'粉尘少，结团很快。'},
+    {store:'毛球补给站',rating:4.8,sold:'月售 860',name:'宠物湿巾 80 抽',price:19.9,desc:'温和无酒精，日常清洁',review:'纸张厚实，没有异味。'},
+    {store:'毛球补给站',rating:4.8,sold:'月售 860',name:'冻干鸡胸肉粒',price:35,desc:'单一肉源，小颗粒训练零食',review:'配料表干净，猫很爱吃。'}
+  ],
+  '成人用品':[
+    {store:'月光私享',rating:4.8,sold:'隐私配送',name:'柔软护理套装',price:69,desc:'温和清洁与护理，隐私包装',review:'包装很隐蔽，说明清楚。'},
+    {store:'月光私享',rating:4.8,sold:'隐私配送',name:'香氛按摩油',price:59,desc:'淡香型，小瓶装',review:'气味不冲，瓶口好控制。'},
+    {store:'月光私享',rating:4.8,sold:'隐私配送',name:'舒适睡眠眼罩',price:39,desc:'柔软遮光，可调节松紧',review:'不压眼，遮光很好。'}
+  ],
+  '药品处方':[
+    {store:'线上执业药师',rating:4.9,sold:'需提交处方',name:'处方药代购服务',price:0,desc:'提交处方后由药师审核，不直接售药',review:'流程清楚，人工审核很谨慎。'},
+    {store:'线上执业药师',rating:4.9,sold:'需提交处方',name:'家庭用药咨询',price:0,desc:'仅提供用药信息整理，不替代医生诊断',review:'会提醒及时就医，没有乱推荐。'}
+  ],
+  '蛋糕定制':[
+    {store:'半糖蛋糕房',rating:4.9,sold:'提前 3 小时',name:'简约奶油蛋糕 6 寸',price:128,desc:'可写祝福语，动物奶油',review:'奶油不腻，字写得很清楚。'},
+    {store:'半糖蛋糕房',rating:4.9,sold:'提前 3 小时',name:'莓果夹心蛋糕 8 寸',price:188,desc:'双层莓果夹心，附餐具',review:'切开层次很好，水果新鲜。'},
+    {store:'半糖蛋糕房',rating:4.9,sold:'提前 3 小时',name:'小尺寸纪念蛋糕',price:68,desc:'4 寸小蛋糕，适合两个人',review:'尺寸刚好，不会浪费。'}
+  ]
+};
+const TAKEOUT_FLOW=[
+  {k:'placed',n:'已下单',delay:2200},
+  {k:'confirmed',n:'商家已接单',delay:3600},
+  {k:'preparing',n:'商家制作中',delay:5200},
+  {k:'delivering',n:'骑手配送中',delay:6500},
+  {k:'delivered',n:'已送达',delay:0}
+];
+const TAKEOUT_STATUS_NAMES={placed:'已下单',confirmed:'商家已接单',preparing:'制作中',delivering:'配送中',delivered:'已送达',completed:'已完成',refund_pending:'退款审核中',refunded:'已退款',cancelled:'已取消'};
+function takeoutStatusLabel(k){ return TAKEOUT_STATUS_NAMES[k]||'处理中'; }
+function takeoutNormalizeProductKey(name,cat){
+  return String(name||'').replace(/\s+/g,'').toLowerCase()+'|'+String(cat||'').trim();
+}
+function takeoutActivePersona(){
+  const t=DB.takeout||{};
+  const persona=(DB.me.personas||[]).find(function(p){ return p.id===(t.personaId||DB.me.personaId); })||curPersona();
+  if(persona) t.personaId=persona.id;
+  return persona;
+}
+function walletForPersona(personaId){
+  const p=(DB.me.personas||[]).find(function(x){ return x.id===personaId; });
+  if(p){ p.wallet=p.wallet||{balance:0,cards:[]}; p.wallet.cards=p.wallet.cards||[]; return p.wallet; }
+  DB.me.wallet=DB.me.wallet||{balance:0,cards:[]}; DB.me.wallet.cards=DB.me.wallet.cards||[]; return DB.me.wallet;
+}
+function takeoutActiveChat(){
+  const t=DB.takeout||{};
+  let ch=chat(t.chatId);
+  if(ch&&ch.type==='private') return ch;
+  ch=(DB.chats||[]).filter(function(x){ return x.type==='private'&&x.memberIds&&ct(x.memberIds[0]); }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); })[0]||null;
+  if(ch){ t.chatId=ch.id; t.contactId=ch.memberIds[0]||null; }
+  return ch;
+}
+function takeoutCurrentContext(){
+  const ch=takeoutActiveChat();
+  const c=ch?ct(ch.memberIds[0]):null;
+  const persona=takeoutActivePersona();
+  return {chat:ch,contact:c,persona:persona,personaId:persona?persona.id:(DB.me.personaId||null)};
+}
+function takeoutProductVisual(name,cat){
+  if(cat==='成人用品') return {kind:'emoji',emoji:'💗',url:''};
+  const custom=(DB.takeout.customProductImages||{})[takeoutNormalizeProductKey(name,cat)];
+  if(custom) return {kind:'custom',url:custom,emoji:''};
+  if(DB.takeout.worldMode!=='modern') return {kind:'blank',url:'',emoji:''};
+  return {kind:'url',url:TAKEOUT_IMAGES[cat]||TAKEOUT_IMAGES['日用百货'],emoji:''};
+}
+function productVisualHTML(name,cat,cls){
+  const v=takeoutProductVisual(name,cat);
+  if(v.kind==='emoji') return '<div class="'+(cls||'takeout-thumb')+' takeout-emoji">'+v.emoji+'</div>';
+  if(v.kind==='blank') return '<div class="'+(cls||'takeout-thumb')+' takeout-blank">白图<br><small>非现代世界观</small></div>';
+  return '<img class="'+(cls||'takeout-thumb')+'" src="'+esc(v.url)+'" alt="'+esc(name)+'" loading="lazy" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
+}
+function takeoutLocalProducts(cat){
+  const list=TAKEOUT_LOCAL[cat]||[];
+  return list.map(function(x,i){ return Object.assign({},x,{id:'takeout_'+cat+'_'+i,cat:cat,merchant:x.merchant||x.store||'本地商家',emoji:(TAKEOUT_CATS.find(function(c){ return c.k===cat; })||{}).e||'🍽️'}); });
+}
+function takeoutCachedAIProducts(cat){
+  const d=DB.takeout.storeCache[cat];
+  return d&&Array.isArray(d.items)?d.items:[];
+}
+function takeoutProducts(cat){
+  const ai=takeoutCachedAIProducts(cat);
+  if(DB.takeout.mode==='ai') return ai;
+  return takeoutLocalProducts(cat).concat(DB.takeout.mode==='hybrid'?ai:[]);
+}
+function takeoutStatusRank(k){
+  const flow=TAKEOUT_FLOW.map(function(x){ return x.k; });
+  const i=flow.indexOf(k);
+  if(k==='completed') return flow.length;
+  if(k==='refunded'||k==='cancelled') return -1;
+  return i;
+}
+function takeoutOrderMatches(o,ctx){
+  ctx=ctx||takeoutCurrentContext();
+  return !!o&&o.personaId===ctx.personaId&&(!ctx.chat||o.chatId===ctx.chat.id)&&(!ctx.contact||o.contactId===ctx.contact.id);
+}
+function takeoutOrderItemsTotal(items){
+  return (items||[]).reduce(function(sum,x){ return sum+Number(x.price||0)*Math.max(1,Number(x.qty)||1); },0);
+}
+function takeoutAddressFor(personaId){
+  return DB.takeout.addresses[personaId]||{name:'我',phone:'',detail:'还没填写收货地址'};
+}
+function takeoutPaymentFor(personaId){
+  return DB.takeout.payments[personaId]||{type:'wallet',label:'小手机钱包'};
+}
+function takeoutPaymentLabel(personaId){
+  const p=takeoutPaymentFor(personaId);
+  if(p.type==='wallet') return '小手机钱包';
+  return p.label||p.bank||'钱包';
+}
+function takeoutCartMatch(x,ctx){
+  return x.personaId===ctx.personaId&&x.chatId===(ctx.chat&&ctx.chat.id||null)&&x.contactId===(ctx.contact&&ctx.contact.id||null);
+}
+function takeoutCartFor(ctx){
+  ctx=ctx||takeoutCurrentContext();
+  return (DB.takeout.carts||[]).filter(function(x){ return takeoutCartMatch(x,ctx); });
+}
+function takeoutAddToCart(product,cat,qty,beneficiary){
+  const ctx=takeoutCurrentContext();
+  if(!ctx.personaId){ toast('先选择用户人设'); return false; }
+  DB.takeout.carts=DB.takeout.carts||[];
+  const same=DB.takeout.carts.find(function(x){
+    return takeoutCartMatch(x,ctx)&&x.name===product.name&&x.merchant===product.merchant&&x.beneficiary===(beneficiary||DB.takeout.beneficiary||'me');
+  });
+  if(same) same.qty=Math.max(1,Number(same.qty)||1)+Math.max(1,Number(qty)||1);
+  else DB.takeout.carts.push({id:uid(),personaId:ctx.personaId,chatId:ctx.chat&&ctx.chat.id||null,contactId:ctx.contact&&ctx.contact.id||null,beneficiary:beneficiary||DB.takeout.beneficiary||'me',productId:product.id,name:product.name,merchant:product.merchant,price:Number(product.price)||0,qty:Math.max(1,Number(qty)||1),desc:product.desc||'',cat:cat||product.cat||'',emoji:product.emoji||'',addedAt:Date.now()});
+  save();
+  return true;
+}
+function takeoutRecipientLabel(beneficiary,ctx){
+  if(beneficiary==='contact') return ctx.contact?contactDisplayName(ctx.contact):'对方';
+  if(beneficiary==='both') return ctx.contact?('我和 '+contactDisplayName(ctx.contact)):'两个人';
+  return ctx.persona?ctx.persona.name:'我';
+}
+function takeoutPushOrderMessage(order,text){
+  if(!order||!order.chatId||!chat(order.chatId)) return;
+  pushMsg(order.chatId,{role:'sys',type:'takeout',orderId:order.id,status:order.status,text:text||('外卖订单：'+order.merchant+' · '+takeoutStatusLabel(order.status))});
+}
+function takeoutScheduleNext(order){
+  const idx=TAKEOUT_FLOW.map(function(x){ return x.k; }).indexOf(order.status);
+  if(order.status==='refund_pending'){ order.nextStatus='refunded'; order.nextAt=Date.now()+3200; return; }
+  if(idx>=0&&idx<TAKEOUT_FLOW.length-1){
+    order.nextStatus=TAKEOUT_FLOW[idx+1].k;
+    order.nextAt=Date.now()+TAKEOUT_FLOW[idx].delay;
+  }else{
+    delete order.nextStatus; delete order.nextAt;
+  }
+}
+function takeoutCreateOrder(opts){
+  const ctx=takeoutCurrentContext();
+  opts=opts||{};
+  const items=(opts.items||[]).map(function(x){ return {productId:x.id||x.productId||'',name:x.name,price:Number(x.price)||0,qty:Math.max(1,Number(x.qty)||1),spec:x.spec||'',cat:x.cat||'',merchant:x.merchant||opts.merchant||'',desc:x.desc||'',review:x.review||'',emoji:x.emoji||'',imageMeta:takeoutProductVisual(x.name,x.cat)}; });
+  if(!items.length) return null;
+  const order={id:uid(),personaId:opts.personaId||ctx.personaId,chatId:opts.chatId!==undefined?opts.chatId:(ctx.chat&&ctx.chat.id||null),contactId:opts.contactId!==undefined?opts.contactId:(ctx.contact&&ctx.contact.id||null),source:opts.source||'user',payer:opts.payer||'user',orderedFor:opts.orderedFor||'me',merchant:opts.merchant||items[0].merchant||'本地商家',items:items,total:takeoutOrderItemsTotal(items),status:'placed',address:opts.address||takeoutAddressFor(opts.personaId||ctx.personaId),payment:opts.payment||takeoutPaymentFor(opts.personaId||ctx.personaId),createdAt:Date.now(),updatedAt:Date.now(),timeline:[{status:'placed',ts:Date.now(),text:'订单已提交'}]};
+  takeoutScheduleNext(order);
+  DB.takeout.orders.unshift(order);
+  save();
+  return order;
+}
+function takeoutTickOrders(){
+  const now=Date.now();
+  let changed=false,rerender=false;
+  (DB.takeout.orders||[]).forEach(function(o){
+    if(!o.nextStatus||!o.nextAt||o.nextAt>now) return;
+    const from=o.status;
+    o.status=o.nextStatus;
+    o.updatedAt=now;
+    o.timeline=o.timeline||[];
+    o.timeline.push({status:o.status,ts:now,text:takeoutStatusLabel(o.status)});
+    delete o.nextStatus; delete o.nextAt;
+    if(o.status==='refunded'){
+      if(o.payer!=='contact'){
+        const w=walletForPersona(o.personaId);
+        w.balance=Number(w.balance||0)+Number(o.total||0);
+      }
+    }else{
+      takeoutScheduleNext(o);
+    }
+    takeoutPushOrderMessage(o,'外卖状态更新：'+takeoutStatusLabel(o.status));
+    changed=true;
+    if(route.name==='takeout'||(route.name==='chatroom'&&route.arg===o.chatId)) rerender=true;
+    appLog('takeout','外卖状态 '+from+' → '+o.status);
+  });
+  if(changed) save();
+  if(rerender) render();
+}
+function takeoutAIAvailable(){ return !!(DB.api&&DB.api.key); }
+async function takeoutGenerateAIProducts(cat){
+  if(!takeoutAIAvailable()) throw new Error('先配置 API');
+  const sys='你在为一个中文生活模拟器生成外卖商品。只输出 JSON 数组，不聊天。不要使用真实品牌名，不要生成真实药店处方。成人用品只写含蓄的护理或陪伴用品名称。';
+  const user='分类：'+cat+'。生成 6 件无品牌商品，每项字段：name,price(数字),desc(20到40字),store(虚构店名),review(15到35字)。不要代码块。';
+  const out=await callModel([{role:'system',content:sys},{role:'user',content:user}]);
+  let arr=npJSON(out); if(arr&&arr.items) arr=arr.items;
+  if(!Array.isArray(arr)||!arr.length) throw new Error('没有生成商品');
+  return arr.filter(function(x){ return x&&x.name; }).slice(0,6).map(function(x,i){ return {id:'takeout_ai_'+cat+'_'+Date.now()+'_'+i,cat:cat,name:String(x.name).slice(0,30),price:Math.max(0,Number(x.price)||0),desc:String(x.desc||'').slice(0,80),merchant:String(x.store||'AI 临时店铺').slice(0,24),rating:4.5+(npHash(String(x.name)+i)%5)/10,sold:'AI 生成',review:String(x.review||'描述简洁，适合本次模拟。').slice(0,80),ai:true,emoji:(TAKEOUT_CATS.find(function(c){ return c.k===cat; })||{}).e||'🍽️'}; });
+}
+async function takeoutRefreshCatalog(){
+  const cat=DB.takeout.category||'美食';
+  if(DB.takeout.mode==='fixed'){ toast('当前是固定商品库'); return; }
+  if(!needKey()) return;
+  busy('正在补全店铺和商品，请稍后');
+  try{
+    const items=await takeoutGenerateAIProducts(cat);
+    DB.takeout.storeCache[cat]={ts:Date.now(),items:items,mode:DB.takeout.mode};
+    save(); render(); toast(DB.takeout.mode==='ai'?'AI 商品已换一批':'已补全店铺和商品');
+  }catch(e){ toast('补全失败，继续使用本地商品库：'+e.message); }
+  finally{ busyDone(); }
+}
+function takeoutSessionRow(ctx){
+  if(!ctx.chat) return '<div class="lrow" data-to-setsession="1"><div class="av" style="background:#d19a61">单</div><div class="mi"><div class="t1">绑定聊天会话</div><div class="t2">外卖订单、角色记忆和聊天会共用同一个会话</div></div><div class="rt"><span class="chev">›</span></div></div>';
+  return '<div class="lrow" data-to-setsession="1">'+avBox(ctx.contact)+'<div class="mi"><div class="t1">'+esc(chatName(ctx.chat))+'</div><div class="t2">'+esc(ctx.contact?contactDisplayName(ctx.contact):'')+' · '+(ctx.chat.msgs||[]).length+' 条消息 · 订单只属于这里</div></div><div class="rt"><span class="chev">›</span></div></div>';
+}
+function takeoutHeader(ctx){
+  const w=walletForPersona(ctx.personaId),cart=takeoutCartFor(ctx);
+  return wxTop('外卖','<span class="muted" style="font-size:calc(12px * var(--ui-font-scale,1))">余额 '+money(w.balance)+'</span>')
+    +'<div class="takeout-hero"><div><div class="tk-kicker">送到 '+esc(takeoutAddressFor(ctx.personaId).detail||'还没有地址')+'</div><div class="tk-title">今天想吃什么</div></div><button class="btn primary" id="toCart">购物车'+(cart.length?' '+cart.length:'')+'</button></div>';
+}
+function takeoutTabs(){
+  const t=DB.takeout,tabs=[['home','外卖'],['orders','订单'],['mine','我的']];
+  return '<div class="tabs takeout-tabs">'+tabs.map(function(x){ return '<div class="tab'+(t.activeTab===x[0]?' on':'')+'" data-totab="'+x[0]+'">'+x[1]+'</div>'; }).join('')+'</div>';
+}
+function takeoutProductCard(p,ctx){
+  const cat=p.cat||DB.takeout.category;
+  return '<div class="takeout-product"><button class="takeout-product-main" data-toproduct="'+esc(p.id)+'">'+productVisualHTML(p.name,cat,'takeout-thumb')+'<div class="takeout-product-copy"><div class="tk-name">'+esc(p.name)+'</div><div class="tk-desc">'+esc(p.desc||'')+'</div><div class="tk-price">'+money(p.price)+'</div></div></button><button class="tk-add" data-toadd="'+esc(p.id)+'" title="加入购物车">＋</button></div>';
+}
+function screenTakeout(){
+  const ctx=takeoutCurrentContext();
+  const tab=DB.takeout.activeTab||'home';
+  let body='';
+  if(!ctx.persona){
+    body='<div class="card"><b>先选择用户人设</b><div class="muted" style="margin:8px 0 12px">地址、支付方式和订单都会跟着人设分开保存。</div><button class="btn primary full" data-to-persona="1">选择人设</button></div>';
+  }else if(tab==='home'){
+    const cat=DB.takeout.category||'美食';
+    const products=takeoutProducts(cat);
+    const groups={};
+    products.forEach(function(p){ (groups[p.merchant]=groups[p.merchant]||[]).push(p); });
+    body='<div class="takeout-cats">'+TAKEOUT_CATS.map(function(c){ return '<button class="takeout-cat'+(cat===c.k?' on':'')+'" data-tocat="'+c.k+'"><span>'+c.e+'</span><b>'+c.k+'</b></button>'; }).join('')+'</div>'
+      +'<div class="takeout-toolbar"><div><b>'+esc(cat)+'</b><div class="muted">'+esc(DB.takeout.mode==='hybrid'?'固定本地商品库 + AI 补全':DB.takeout.mode==='fixed'?'固定本地商品库':'全部由 AI 生成')+'</div></div><button class="btn" data-torefresh="1">'+(DB.takeout.mode==='fixed'?'固定商品':'刷新店铺')+'</button></div>'
+      +(DB.takeout.mode==='ai'?'<div class="takeout-warning">全部由AI生成，同款商品和图片可能会不稳定</div>':'')
+      +Object.keys(groups).map(function(store){
+        const arr=groups[store];
+        return '<div class="takeout-store"><div class="takeout-store-head"><div><b>'+esc(store)+'</b><div class="muted">'+esc(arr[0].sold||'')+' · '+esc(arr[0].rating||'4.8')+' 分</div></div><span class="tk-badge">无品牌测试店</span></div>'
+          +arr.map(function(p){ return takeoutProductCard(p,ctx); }).join('')+'</div>';
+      }).join('')
+      +(products.length?'':'<div class="empty">当前是全部 AI 生成模式。<br>点「刷新店铺」生成这一分类的商品。</div>')
+      +'<div class="takeout-role"><b>让 Ta 主动点单</b><div class="muted">自己吃、给你点、双人餐都会实际生成订单、聊天气泡和配送状态。</div><div class="takeout-role-grid"><button data-torole="self">Ta 给自己点</button><button data-torole="user">Ta 给你点</button><button data-torole="both">Ta 点双人餐</button><button data-torole="auto">让 Ta 自己决定</button><button data-torole="random">随机来一单</button></div></div>';
+  }else if(tab==='orders'){
+    const all=(DB.takeout.orders||[]).filter(function(o){ return takeoutOrderMatches(o,ctx); }).sort(function(a,b){ return (b.createdAt||0)-(a.createdAt||0); });
+    body=all.length? all.map(function(o){
+      const items=(o.items||[]).map(function(x){ return x.name+' ×'+x.qty; }).join('、');
+      const canTrack=['placed','confirmed','preparing','delivering','delivered'].indexOf(o.status)>=0;
+      return '<div class="takeout-order" data-toorder="'+o.id+'"><div class="row"><div class="grow"><b>'+esc(o.merchant)+'</b><div class="muted" style="margin-top:5px">'+esc(items)+'</div></div><div class="rt"><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span><b>'+money(o.total)+'</b></div></div><div class="takeout-progress"><i style="width:'+Math.max(8,Math.min(100,(takeoutStatusRank(o.status)+1)*20))+'%"></i></div><div class="muted" style="margin-top:7px">'+shortTime(o.createdAt)+' · '+esc(o.source==='contact'?'角色下单':'我下单')+' · '+esc(takeoutRecipientLabel(o.orderedFor,ctx))+'</div>'+(canTrack?'<div class="tk-live">状态会自动更新，并继续发送到对应聊天</div>':'')+'</div>';
+    }).join('') : '<div class="empty">当前人设和当前会话还没有外卖订单。</div>';
+  }else{
+    const addr=takeoutAddressFor(ctx.personaId);
+    const pay=takeoutPaymentLabel(ctx.personaId);
+    body='<div class="takeout-mine-card"><div class="takeout-avatar">'+esc((ctx.persona.name||'我').slice(0,1))+'</div><div class="grow"><b>'+esc(ctx.persona.name||'我')+'</b><div class="muted">'+esc(ctx.persona.identity||'当前用户人设')+'</div></div><button class="btn" data-to-persona="1">切换</button></div>'
+      +'<div class="card takeout-settings">'
+      +'<div class="lrow" data-to-address="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">收货地址</div><div class="t2">'+esc(addr.name||'我')+' · '+esc(addr.phone||'未填电话')+' · '+esc(addr.detail||'未填写')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+      +'<div class="lrow" data-to-payment="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">支付方式</div><div class="t2">'+esc(pay)+' · 与现有小手机钱包共用余额</div></div><div class="rt"><span class="chev">›</span></div></div>'
+      +'<div class="lrow" data-to-mode="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">商品生成模式</div><div class="t2">'+esc(DB.takeout.mode==='hybrid'?'固定本地商品库 + AI 补全店铺/商品/评价':DB.takeout.mode==='fixed'?'固定本地商品库':'全部由 AI 生成')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+      +'<div class="lrow" data-to-world="1" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">世界观</div><div class="t2">'+esc(DB.takeout.worldMode==='modern'?'现代都市 · 自动匹配白底商品图':'非现代 · 白图，可自定义绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
+      +'<div class="card"><div class="row"><div class="grow"><b>商品图片绑定</b><div class="muted">已自定义 '+Object.keys(DB.takeout.customProductImages||{}).length+' 件。相同名称和分类会一直使用你的图片。</div></div><button class="btn" data-to-clearimages="1">清除</button></div></div>';
+    if(DB.takeout.mode==='ai') body+='<div class="takeout-warning">全部由AI生成，同款商品和图片可能会不稳定</div>';
+  }
+  return '<div class="pad takeout-page" style="padding-top:0">'+takeoutHeader(ctx)+takeoutTabs()+takeoutSessionRow(ctx)+body+'</div>';
+}
+function sheetTakeoutSession(){
+  const chats=(DB.chats||[]).filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ct(ch.memberIds[0]); });
+  sheetFull('<h3>外卖绑定会话</h3><div class="muted" style="margin:6px 0 10px;line-height:1.75">用户人设 + 会话 + 角色三者共同绑定订单。同一角色新开一个会话后，旧订单只会留在旧会话。</div>'
+    +(chats.length? chats.map(function(ch){ const c=ct(ch.memberIds[0]); return '<div class="lrow" data-to-session="'+ch.id+'">'+avBox(c)+'<div class="mi"><div class="t1">'+esc(chatName(ch))+'</div><div class="t2">'+esc(c?contactDisplayName(c):'')+' · '+(ch.msgs||[]).length+' 条消息</div></div><div class="rt">'+(DB.takeout.chatId===ch.id?'✓':'')+'</div></div>'; }).join('') : '<div class="muted">还没有私聊会话，先去微信和角色说话。</div>')
+    +'<button class="btn full" id="toSessionClose">关闭</button>');
+  $$('#sheetBox [data-to-session]').forEach(function(el){ el.onclick=function(){ const ch=chat(el.dataset.toSession); if(!ch) return; DB.takeout.chatId=ch.id; DB.takeout.contactId=(ch.memberIds||[])[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; save(); closeSheet(); render(); }; });
+  $('#toSessionClose').onclick=closeSheet;
+}
+function sheetTakeoutPersona(){
+  const ps=DB.me.personas||[];
+  sheet('<h3>外卖用户人设</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">地址、支付方式和订单会按人设分开保存。</div>'
+    +(ps.length? ps.map(function(p){ return '<div class="lrow" data-to-persona-id="'+p.id+'"><div class="mi"><div class="t1">'+esc(p.name||'人设')+'</div><div class="t2">'+esc(personaFullText(p).replace(/\n/g,' ').slice(0,42))+'</div></div><div class="rt">'+(DB.me.personaId===p.id?'✓':'')+'</div></div>'; }).join('') : '<div class="muted">还没有人设，请先到用户人设库创建。</div>')
+    +'<button class="btn full" id="toPersonaClose">关闭</button>');
+  $$('#sheetBox [data-to-persona-id]').forEach(function(el){ el.onclick=function(){ DB.me.personaId=el.dataset.toPersonaId; DB.takeout.personaId=DB.me.personaId; const ch=takeoutActiveChat(); if(ch&&!ch.personaId) ch.personaId=DB.me.personaId; save(); closeSheet(); render(); }; });
+  $('#toPersonaClose').onclick=closeSheet;
+}
+function sheetTakeoutAddress(){
+  const ctx=takeoutCurrentContext();
+  if(!ctx.personaId){ toast('先选择人设'); return; }
+  const a=takeoutAddressFor(ctx.personaId);
+  sheet('<h3>收货地址</h3><div class="muted" style="margin:6px 0 10px">只保存当前用户人设的地址。</div><input id="toAddrName" value="'+esc(a.name||'')+'" placeholder="收货人"><input id="toAddrPhone" value="'+esc(a.phone||'')+'" placeholder="联系电话（虚拟号码即可）" style="margin-top:8px"><textarea id="toAddrDetail" style="margin-top:8px" placeholder="详细地址和门牌号">'+esc(a.detail||'')+'</textarea><button class="btn primary full" id="toAddrSave">保存</button><button class="btn full" id="toAddrClose">取消</button>');
+  $('#toAddrClose').onclick=closeSheet;
+  $('#toAddrSave').onclick=function(){ DB.takeout.addresses[ctx.personaId]={name:String($('#toAddrName').value||'').trim()||'我',phone:String($('#toAddrPhone').value||'').trim(),detail:String($('#toAddrDetail').value||'').trim()}; save(); closeSheet(); render(); toast('地址已保存'); };
+}
+function sheetTakeoutPayment(){
+  const ctx=takeoutCurrentContext();
+  if(!ctx.personaId){ toast('先选择人设'); return; }
+  const w=walletForPersona(ctx.personaId),cur=takeoutPaymentFor(ctx.personaId);
+  sheet('<h3>支付方式</h3><div class="muted" style="margin:6px 0 10px">外卖与现有小手机钱包共用余额。</div>'
+    +'<div class="lrow" data-to-pay="wallet"><div class="mi"><div class="t1">小手机钱包</div><div class="t2">余额 '+money(w.balance)+'</div></div><div class="rt">'+(cur.type==='wallet'?'✓':'')+'</div></div>'
+    +(w.cards||[]).map(function(card){ return '<div class="lrow" data-to-pay="'+card.id+'"><div class="mi"><div class="t1">'+esc(card.bank||'银行卡')+'</div><div class="t2">'+esc(card.no||'')+' · 虚拟卡</div></div><div class="rt">'+(cur.type==='card'&&cur.cardId===card.id?'✓':'')+'</div></div>'; }).join('')
+    +'<button class="btn full" id="toPayClose">关闭</button>');
+  $$('#sheetBox [data-to-pay]').forEach(function(el){ el.onclick=function(){ const k=el.dataset.toPay; if(k==='wallet') DB.takeout.payments[ctx.personaId]={type:'wallet',label:'小手机钱包'}; else { const c=(w.cards||[]).find(function(x){ return x.id===k; }); DB.takeout.payments[ctx.personaId]={type:'card',cardId:k,label:c&&c.bank||'银行卡'}; } save(); closeSheet(); render(); }; });
+  $('#toPayClose').onclick=closeSheet;
+}
+function sheetTakeoutMode(){
+  const cur=DB.takeout.mode;
+  sheet('<h3>商品生成模式</h3>'
+    +'<div class="lrow" data-to-mode-id="hybrid"><div class="mi"><div class="t1">固定本地商品库 + AI 补全</div><div class="t2">默认。店铺、商品和评价可补全，基础商品稳定</div></div><div class="rt">'+(cur==='hybrid'?'✓':'')+'</div></div>'
+    +'<div class="lrow" data-to-mode-id="fixed"><div class="mi"><div class="t1">固定本地商品库</div><div class="t2">完全不调用 AI，商品和图片最稳定</div></div><div class="rt">'+(cur==='fixed'?'✓':'')+'</div></div>'
+    +'<div class="lrow" data-to-mode-id="ai"><div class="mi"><div class="t1">全部由 AI 生成</div><div class="t2">全部由AI生成，同款商品和图片可能会不稳定</div></div><div class="rt">'+(cur==='ai'?'✓':'')+'</div></div>'
+    +'<button class="btn full" id="toModeClose">关闭</button>');
+  $$('#sheetBox [data-to-mode-id]').forEach(function(el){ el.onclick=function(){ DB.takeout.mode=el.dataset.toModeId; save(); closeSheet(); render(); }; });
+  $('#toModeClose').onclick=closeSheet;
+}
+function sheetTakeoutWorld(){
+  sheet('<h3>外卖世界观</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">现代都市会自动匹配白底商品图；非现代默认显示白图，你也可以手动绑定商品图。</div>'
+    +'<div class="lrow" data-to-world-id="modern"><div class="mi"><div class="t1">现代都市</div><div class="t2">自动匹配白底实物风格商品图</div></div><div class="rt">'+(DB.takeout.worldMode==='modern'?'✓':'')+'</div></div>'
+    +'<div class="lrow" data-to-world-id="fantasy"><div class="mi"><div class="t1">非现代／超现实</div><div class="t2">默认白图，用户可为每个商品绑定图片</div></div><div class="rt">'+(DB.takeout.worldMode==='fantasy'?'✓':'')+'</div></div>'
+    +'<button class="btn full" id="toWorldClose">关闭</button>');
+  $$('#sheetBox [data-to-world-id]').forEach(function(el){ el.onclick=function(){ DB.takeout.worldMode=el.dataset.toWorldId; save(); closeSheet(); render(); }; });
+  $('#toWorldClose').onclick=closeSheet;
+}
+function sheetTakeoutProduct(productId){
+  const cat=DB.takeout.category||'美食';
+  const p=takeoutProducts(cat).find(function(x){ return x.id===productId; });
+  if(!p){ toast('商品已经刷新，请重新打开'); return; }
+  const draw=function(){
+    const v=takeoutProductVisual(p.name,p.cat||cat);
+    const visual=v.kind==='emoji'?'<div class="takeout-detail-img takeout-emoji">💗</div>':v.kind==='blank'?'<div class="takeout-detail-img takeout-blank">白图<br><small>非现代世界观</small></div>':'<img class="takeout-detail-img" src="'+esc(v.url)+'" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
+    sheetBig('<h3>'+esc(p.name)+'</h3>'+visual
+      +'<div class="takeout-detail-head"><div><b>'+esc(p.merchant||'本地商家')+'</b><div class="muted">'+esc(p.sold||'')+' · '+esc(p.rating||'4.8')+' 分</div></div><b class="tk-price">'+money(p.price)+'</b></div>'
+      +'<div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(p.desc||'')+'</div>'
+      +'<div class="takeout-review">“'+esc(p.review||'评价简洁，适合本次模拟。')+'”</div>'
+      +'<div class="row" style="margin-top:10px"><span class="grow">数量</span><input id="toQty" type="number" min="1" max="20" value="1" style="width:84px"></div>'
+      +'<div class="takeout-recipient"><button class="'+(DB.takeout.beneficiary==='me'?'on':'')+'" data-torecipient="me">给我</button><button class="'+(DB.takeout.beneficiary==='contact'?'on':'')+'" data-torecipient="contact">给 Ta</button><button class="'+(DB.takeout.beneficiary==='both'?'on':'')+'" data-torecipient="both">一起吃</button></div>'
+      +'<button class="btn primary full" id="toAddDetail">加入购物车</button><button class="btn full" id="toBuyDetail">立即下单</button>'
+      +'<button class="btn full" id="toBindImg">'+(v.kind==='custom'?'更换绑定图片':'上传并绑定商品图片')+'</button>'
+      +(v.kind==='custom'?'<button class="btn danger full" id="toClearImg">取消这张绑定图</button>':'')
+      +'<button class="btn full" id="toProductClose">关闭</button>');
+    $$('#sheetBox [data-torecipient]').forEach(function(el){ el.onclick=function(){ DB.takeout.beneficiary=el.dataset.torecipient; save(); draw(); }; });
+    $('#toAddDetail').onclick=function(){ if(takeoutAddToCart(p,p.cat||cat,Number($('#toQty').value)||1,DB.takeout.beneficiary)){ closeSheet(); render(); toast('已加入购物车'); } };
+    $('#toBuyDetail').onclick=function(){ closeSheet(); sheetTakeoutCheckout([{product:p,cat:p.cat||cat,qty:Number($('#toQty').value)||1,beneficiary:DB.takeout.beneficiary}]); };
+    $('#toBindImg').onclick=function(){ const i=document.createElement('input'); i.type='file'; i.accept='image/*'; i.onchange=function(){ if(!i.files[0]) return; readImage(i.files[0],900,function(url){ DB.takeout.customProductImages[takeoutNormalizeProductKey(p.name,p.cat||cat)]=url; save(); draw(); toast('商品图已绑定'); }); }; i.click(); };
+    const ci=$('#toClearImg'); if(ci) ci.onclick=function(){ delete DB.takeout.customProductImages[takeoutNormalizeProductKey(p.name,p.cat||cat)]; save(); draw(); toast('已取消绑定'); };
+    $('#toProductClose').onclick=closeSheet;
+  };
+  draw();
+}
+function sheetTakeoutCart(){
+  const ctx=takeoutCurrentContext(),list=takeoutCartFor(ctx);
+  const draw=function(){
+    const total=list.reduce(function(s,x){ return s+Number(x.price||0)*Math.max(1,Number(x.qty)||1); },0);
+    sheet('<h3>购物车</h3><div class="muted" style="margin:6px 0 10px">'+esc(ctx.chat?chatName(ctx.chat):'未绑定会话')+' · '+esc(ctx.persona?ctx.persona.name:'未选择人设')+'</div>'
+      +(list.length?list.map(function(x,i){ return '<div class="takeout-cart-row"><div class="grow"><b>'+esc(x.name)+'</b><div class="muted">'+esc(x.merchant)+' · '+money(x.price)+' × '+x.qty+' · '+esc(takeoutRecipientLabel(x.beneficiary,ctx))+'</div></div><button class="btn" data-toqty="'+i+'">改数量</button><button class="btn danger" data-todelcart="'+i+'">删</button></div>'; }).join('') : '<div class="empty">购物车还空着。</div>')
+      +'<div class="kv"><span>合计</span><b>'+money(total)+'</b></div><button class="btn primary full" id="toCheckout">去结算</button><button class="btn full" id="toCartClose">关闭</button>');
+    $$('#sheetBox [data-todelcart]').forEach(function(el){ el.onclick=function(){ const row=list[Number(el.dataset.todelcart)]; if(row){ DB.takeout.carts=DB.takeout.carts.filter(function(x){ return x.id!==row.id; }); save(); closeSheet(); sheetTakeoutCart(); render(); } }; });
+    $$('#sheetBox [data-toqty]').forEach(function(el){ el.onclick=function(){ const row=list[Number(el.dataset.toqty)]; if(!row) return; const v=prompt('数量（1-20）',String(row.qty||1)); if(v===null) return; row.qty=Math.max(1,Math.min(20,Number(v)||1)); save(); closeSheet(); sheetTakeoutCart(); render(); }; });
+    $('#toCartClose').onclick=closeSheet;
+    $('#toCheckout').onclick=function(){ if(!list.length) return; closeSheet(); sheetTakeoutCheckout(list.map(function(x){ return {product:x,cat:x.cat,qty:x.qty,beneficiary:x.beneficiary,cartId:x.id}; })); };
+  };
+  draw();
+}
+function sheetTakeoutCheckout(rows){
+  const ctx=takeoutCurrentContext();
+  if(!ctx.personaId){ toast('先选择用户人设'); return; }
+  if(!ctx.chat){ toast('先绑定一个聊天会话'); sheetTakeoutSession(); return; }
+  const addr=takeoutAddressFor(ctx.personaId);
+  const total=rows.reduce(function(s,r){ return s+Number(r.product.price||0)*Math.max(1,Number(r.qty)||1); },0);
+  sheet('<h3>确认订单</h3><div class="takeout-checkout-address"><b>'+esc(addr.name||'我')+' '+esc(addr.phone||'')+'</b><div class="muted">'+esc(addr.detail||'还没有填写详细地址')+'</div><button class="btn full" id="toCheckoutAddr">编辑地址</button></div>'
+    +rows.map(function(r){ return '<div class="takeout-checkout-line"><span>'+esc(r.product.name)+' ×'+r.qty+'<small>'+esc(takeoutRecipientLabel(r.beneficiary,ctx))+'</small></span><b>'+money(Number(r.product.price||0)*Number(r.qty||1))+'</b></div>'; }).join('')
+    +'<div class="kv"><span>支付方式</span><b>'+esc(takeoutPaymentLabel(ctx.personaId))+'</b></div><div class="kv"><span>合计</span><b>'+money(total)+'</b></div>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">下单后会依次经历商家接单、制作、配送和送达；每次状态变化都会向聊天发送新的订单气泡。</div>'
+    +'<button class="btn primary full" id="toPlaceOrder">提交订单</button><button class="btn full" id="toCheckoutPay">换支付方式</button><button class="btn full" id="toCheckoutClose">取消</button>');
+  $('#toCheckoutClose').onclick=closeSheet;
+  $('#toCheckoutAddr').onclick=function(){ closeSheet(); sheetTakeoutAddress(); };
+  $('#toCheckoutPay').onclick=function(){ closeSheet(); sheetTakeoutPayment(); };
+  $('#toPlaceOrder').onclick=function(){
+    if(!addr.detail||addr.detail==='还没填写收货地址'){ toast('先填写收货地址'); sheetTakeoutAddress(); return; }
+    const w=walletForPersona(ctx.personaId);
+    if(Number(w.balance||0)<total){ toast('钱包余额不够，去钱包改一下余额'); return; }
+    w.balance=Number(w.balance||0)-total;
+    const groups={};
+    rows.forEach(function(r){ const key=r.product.merchant||'本地商家'; (groups[key]=groups[key]||[]).push(r); });
+    Object.keys(groups).forEach(function(merchant){
+      const list=groups[merchant];
+      const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact&&ctx.contact.id,source:'user',payer:'user',orderedFor:list[0].beneficiary||'me',merchant:merchant,items:list.map(function(r){ return {id:r.product.id,name:r.product.name,price:r.product.price,qty:r.qty,cat:r.cat,merchant:merchant,desc:r.product.desc||'',review:r.product.review||'',emoji:r.product.emoji||''}; }),address:addr,payment:takeoutPaymentFor(ctx.personaId)});
+      if(order) takeoutPushOrderMessage(order,'外卖已下单：'+merchant+' · '+takeoutStatusLabel(order.status));
+    });
+    DB.takeout.carts=DB.takeout.carts.filter(function(x){ return !rows.some(function(r){ return r.cartId&&r.cartId===x.id; }); });
+    save(); closeSheet(); DB.takeout.activeTab='orders'; render(); toast('订单已提交'); setTimeout(takeoutTickOrders,500);
+  };
+}
+function sheetTakeoutOrder(orderId){
+  const ctx=takeoutCurrentContext(),o=(DB.takeout.orders||[]).find(function(x){ return x.id===orderId; });
+  if(!o) return;
+  const timeline=(o.timeline||[]).map(function(t){ return '<div class="takeout-time-line"><i></i><div><b>'+esc(takeoutStatusLabel(t.status))+'</b><div class="muted">'+shortTime(t.ts)+' · '+esc(t.text||'')+'</div></div></div>'; }).join('');
+  const canRefund=['placed','confirmed','preparing','delivering','delivered'].indexOf(o.status)>=0;
+  sheetBig('<h3>订单详情</h3><div class="takeout-order-title"><div><b>'+esc(o.merchant)+'</b><div class="muted">'+shortTime(o.createdAt)+' · '+esc(takeoutStatusLabel(o.status))+'</div></div><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span></div>'
+    +'<div class="takeout-timeline">'+timeline+'</div>'
+    +'<div class="card" style="margin-top:10px">'+(o.items||[]).map(function(x,i){ return '<div class="takeout-checkout-line"><span>'+esc(x.name)+' ×'+x.qty+'<small>'+esc(x.spec||x.desc||'')+'</small></span><div class="rt"><b>'+money(Number(x.price||0)*Number(x.qty||1))+'</b><button class="btn" data-toorderitem="'+i+'" style="margin-left:8px">详情</button></div></div>'; }).join('')+'<div class="kv"><span>商品合计</span><b>'+money(o.total)+'</b></div></div>'
+    +'<div class="card"><b>配送信息</b><div class="muted" style="margin-top:7px;line-height:1.8">'+esc(o.address&&o.address.name||'我')+' '+esc(o.address&&o.address.phone||'')+'<br>'+esc(o.address&&o.address.detail||'未填写')+'<br>支付：'+esc(o.payment&&o.payment.label||'小手机钱包')+'</div></div>'
+    +(o.status==='delivered'?'<button class="btn primary full" id="toConfirmReceipt">确认收货</button>':'')
+    +(canRefund?'<button class="btn danger full" id="toRefund">申请退款</button>':'')
+    +(o.status==='placed'?'<button class="btn full" id="toCancelOrder">取消订单</button>':'')
+    +'<button class="btn full" id="toOrderChat">回到对应聊天</button><button class="btn full" id="toOrderClose">关闭</button>');
+  $('#toOrderClose').onclick=closeSheet;
+  $$('#sheetBox [data-toorderitem]').forEach(function(el){ el.onclick=function(){ sheetTakeoutOrderItem(o.id,Number(el.dataset.toorderitem)); }; });
+  $('#toOrderChat').onclick=function(){ if(o.chatId&&chat(o.chatId)){ closeSheet(); go('chatroom',o.chatId); } };
+  const cr=$('#toConfirmReceipt');
+  if(cr) cr.onclick=function(){ o.status='completed'; o.updatedAt=Date.now(); o.timeline.push({status:'completed',ts:Date.now(),text:'用户确认收货'}); save(); takeoutPushOrderMessage(o,'外卖已确认收货'); closeSheet(); render(); toast('已确认收货'); };
+  const rf=$('#toRefund');
+  if(rf) rf.onclick=function(){ o.status='refund_pending'; o.updatedAt=Date.now(); o.timeline.push({status:'refund_pending',ts:Date.now(),text:'退款申请已提交'}); takeoutScheduleNext(o); save(); takeoutPushOrderMessage(o,'外卖退款申请已提交'); closeSheet(); render(); toast('退款申请已提交'); };
+  const co=$('#toCancelOrder');
+  if(co) co.onclick=function(){ if(takeoutStatusRank(o.status)>0){ toast('商家已接单，不能直接取消'); return; } o.status='cancelled'; o.updatedAt=Date.now(); o.timeline.push({status:'cancelled',ts:Date.now(),text:'订单已取消'}); const w=walletForPersona(o.personaId); w.balance=Number(w.balance||0)+Number(o.total||0); save(); takeoutPushOrderMessage(o,'外卖订单已取消'); closeSheet(); render(); toast('订单已取消，余额已退回'); };
+}
+function sheetTakeoutOrderItem(orderId,index){
+  const o=(DB.takeout.orders||[]).find(function(x){ return x.id===orderId; });
+  const x=o&&(o.items||[])[index];
+  if(!x) return;
+  const cat=x.cat||DB.takeout.category||'美食';
+  const visual=productVisualHTML(x.name,cat,'takeout-detail-img');
+  sheet('<h3>'+esc(x.name)+'</h3>'+visual+'<div class="takeout-detail-head"><div><b>'+esc(x.merchant||o.merchant)+'</b><div class="muted">'+esc(cat)+' · 下单数量 '+x.qty+'</div></div><b class="tk-price">'+money(x.price)+'</b></div><div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(x.desc||'这条订单没有保存更多商品说明。')+'</div>'+(x.review?'<div class="takeout-review">“'+esc(x.review)+'”</div>':'')+'<button class="btn full" id="toOrderItemClose">关闭</button>');
+  $('#toOrderItemClose').onclick=function(){ closeSheet(); sheetTakeoutOrder(o.id); };
+}
+async function takeoutRoleOrder(kind){
+  const ctx=takeoutCurrentContext();
+  if(!ctx.chat||!ctx.contact){ toast('先绑定一个角色会话'); sheetTakeoutSession(); return; }
+  if(!ctx.personaId){ toast('先选择用户人设'); return; }
+  const cat=DB.takeout.category||'美食';
+  const pool=takeoutProducts(cat).filter(function(p){ return p.price>0; });
+  if(!pool.length){ toast('这个分类暂时没有可下单商品'); return; }
+  if(kind==='auto'||kind==='random') kind=['self','user','both'][Math.floor(Math.random()*3)];
+  const count=kind==='both'?3:1+(npHash(Date.now()+kind)%2);
+  const picked=[];
+  for(let i=0;i<count;i++){ const p=pool[(npHash(kind+Date.now()+i)%pool.length)]; if(p&&!picked.some(function(x){ return x.id===p.id; })) picked.push(p); }
+  if(!picked.length) picked.push(pool[0]);
+  const orderedFor=kind==='self'?'contact':kind==='user'?'me':'both';
+  let words=kind==='self'?'我给自己点了点吃的。':kind==='user'?'给你点了一份，记得趁热吃。':'点了个双人份，等你一起吃。';
+  if(DB.api.key){
+    busy('Ta 正在看菜单，请稍后');
+    try{
+      const sys=promptOf(ctx.contact,null,[],{format:'chat'})+'\n【任务】你刚决定点外卖。收货对象是：'+(orderedFor==='contact'?'你自己':orderedFor==='me'?'对方':'你和对方一起吃')+'。商品：'+picked.map(function(p){ return p.name; }).join('、')+'。请只写一句你发给对方的话，不要解释选项，不要提 AI。';
+      const out=await callModel([{role:'system',content:sys},{role:'user',content:'发一句。'}]);
+      const clean=regexOf(ctx.contact,out).trim();
+      if(clean) words=clean.split(/\r?\n/).filter(Boolean)[0].slice(0,120);
+    }catch(e){ logErr('角色点外卖生成失败，使用本地句：'+e.message); }
+    finally{ busyDone(); }
+  }
+  const order=takeoutCreateOrder({personaId:ctx.personaId,chatId:ctx.chat.id,contactId:ctx.contact.id,source:'contact',payer:'contact',orderedFor:orderedFor,merchant:picked[0].merchant||'角色点的外卖',items:picked.map(function(p){ return {id:p.id,name:p.name,price:p.price,qty:1,cat:cat,merchant:p.merchant,desc:p.desc||'',review:p.review||'',emoji:p.emoji||''}; }),address:takeoutAddressFor(ctx.personaId),payment:{type:'contact',label:contactDisplayName(ctx.contact)+'付款'}});
+  pushMsg(ctx.chat.id,{role:'ta',from:ctx.contact.id,type:'text',text:words});
+  takeoutPushOrderMessage(order,'角色给你发送了外卖订单');
+  save(); render(); toast('Ta 已经下单');
+}
 /* ================= 网购（线上） ================= */
 function worldFlavor(c){
   const out=[];
@@ -12106,7 +13039,7 @@ function screenTaobao(){
       return '<div class="sechead">'+esc(k)+' · '+esc(tbPriceLabel(price))+'</div>'
         +groups[k].map(function(x){
           const i=items.indexOf(x);
-          return '<div class="card"><div class="row"><div class="grow"><div><b>'+esc(x.name)+'</b></div>'
+          return '<div class="card"><div class="tb-product-row"><button class="tb-product-visual" data-tbproduct="'+i+'">'+productVisualHTML(x.name,x.cat||k,'takeout-thumb tb-thumb')+'</button><div class="grow"><div><b>'+esc(x.name)+'</b></div>'
             +'<div class="muted" style="margin-top:4px">'+esc(x.desc||'')+'</div></div><div class="rt"><div><b>'+money(x.price)+'</b></div></div></div>'
             +((x.opts&&x.opts.length)? '<select data-spec="'+i+'" style="margin-top:10px">'+x.opts.map(function(o){ return '<option>'+esc(o)+'</option>'; }).join('')+'</select>' : '')
             +'<div class="row" style="margin-top:10px"><button class="btn grow" data-addme="'+i+'" data-run="addMe:'+i+'">加我的</button>'
@@ -12152,8 +13085,30 @@ function cartHTML(list,who,title){
       +(x.why? '<div class="muted" style="margin-top:4px">'+esc(x.why)+'</div>':'')+'</div>'
       +'<div class="rt"><b>'+money(x.price)+'</b><button class="btn danger" data-cartdel="'+who+':'+i+'" style="margin-top:6px">删</button></div></div></div>').join('');
 }
+function sheetTbProduct(i){
+  const c=ct(DB.tbCid||(DB.contacts[0]||{}).id);
+  const d=c&&(DB.tbItems||{})[c.id];
+  const x=d&&d.items&&d.items[i];
+  if(!x){ toast('商品已经刷新，请重新打开'); return; }
+  const cat=x.cat||'其他';
+  const draw=function(){
+    const v=takeoutProductVisual(x.name,cat);
+    const visual=v.kind==='emoji'?'<div class="takeout-detail-img takeout-emoji">'+v.emoji+'</div>':v.kind==='blank'?'<div class="takeout-detail-img takeout-blank">白图<br><small>非现代世界观</small></div>':'<img class="takeout-detail-img" src="'+esc(v.url)+'" onerror="this.onerror=null;this.src=\''+TAKEOUT_PLACEHOLDER+'\'">';
+    sheetBig('<h3>'+esc(x.name)+'</h3>'+visual+'<div class="takeout-detail-head"><div><b>'+esc(c?contactDisplayName(c):'网购')+'</b><div class="muted">'+esc(cat)+' · 商品详情</div></div><b class="tk-price">'+money(x.price)+'</b></div><div class="card muted" style="margin-top:10px;line-height:1.75">'+esc(x.desc||'')+'</div>'
+      +'<button class="btn full" id="tbBindImage">'+(v.kind==='custom'?'更换绑定图片':'上传并绑定商品图片')+'</button>'
+      +(v.kind==='custom'?'<button class="btn danger full" id="tbClearImage">取消这张绑定图</button>':'')
+      +'<button class="btn primary full" id="tbDetailAdd">加入我的购物车</button><button class="btn full" id="tbDetailBuy">直接购买</button><button class="btn full" id="tbDetailClose">关闭</button>');
+    $('#tbBindImage').onclick=function(){ const inp=document.createElement('input'); inp.type='file'; inp.accept='image/*'; inp.onchange=function(){ if(!inp.files[0]) return; readImage(inp.files[0],900,function(url){ DB.takeout.customProductImages[takeoutNormalizeProductKey(x.name,cat)]=url; save(); draw(); render(); toast('商品图已绑定'); }); }; inp.click(); };
+    const ci=$('#tbClearImage'); if(ci) ci.onclick=function(){ delete DB.takeout.customProductImages[takeoutNormalizeProductKey(x.name,cat)]; save(); draw(); render(); toast('已取消绑定'); };
+    $('#tbDetailAdd').onclick=function(){ tbAdd('me',i); closeSheet(); };
+    $('#tbDetailBuy').onclick=function(){ closeSheet(); tbBuy(i); };
+    $('#tbDetailClose').onclick=closeSheet;
+  };
+  draw();
+}
 window.addEventListener('resize',function(){fitLayout7Homes(document);},{passive:true});
 window.addEventListener('orientationchange',function(){setTimeout(function(){fitLayout7Homes(document);},80);},{passive:true});
+window.setInterval(function(){ try{ takeoutTickOrders(); }catch(e){ logErr('外卖状态轮询失败：'+e.message); } },3000);
 </script>
 </body>
 </html>
