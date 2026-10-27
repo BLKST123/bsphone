@@ -1,9 +1,9 @@
 {
-  "version": "3.61",
-  "versionCode": 72,
-  "round": 72,
+  "version": "3.62",
+  "versionCode": 73,
+  "round": 73,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=72",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=73",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "新增角色主动拍一拍、1分钟至12小时的主动消息滚轮间隔、微信式消息引用与原位重新生成分支；通知改为跟随主题的多气泡堆叠并增强后台原生通知；修复打字时被清空、A/B会话串线；重做语音与文字分流和语音转文字清理。"
+  "notes": "微信聊天新增居中的时间分隔条，按小手机模拟时间显示今天、昨天和更早日期；角色主动消息改为只扮演角色本人，禁止替用户说话和自问自答。"
 }

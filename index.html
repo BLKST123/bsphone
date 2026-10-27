@@ -146,7 +146,13 @@ textarea{min-height:90px;resize:vertical;line-height:1.55}
 .who{font-size:calc(11px * var(--ui-font-scale,1));color:var(--fg2);padding:0 3px}
 .bub{padding:9px 12px;border-radius:16px;font-size:calc(15.5px * var(--ui-font-scale,1));line-height:1.55;word-break:break-word;white-space:pre-wrap;background:var(--bub-ta);color:var(--bub-ta-fg);border:1px solid var(--line)}
 .mrow.me .bub{background:var(--bub-me);color:var(--bub-me-fg);border-color:transparent}
-.quote-ref{max-width:min(250px,100%);margin-bottom:5px;padding:5px 8px 5px 10px;border-left:3px solid rgba(120,120,128,.42);border-radius:4px 8px 8px 4px;background:rgba(120,120,128,.10);color:var(--fg2);font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.45;white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
+.quote-ref{display:block;width:auto;max-width:min(230px,88%);margin:0 0 4px;padding:5px 8px;border:0;border-radius:8px;background:rgba(120,120,128,.10);color:var(--fg2);font:inherit;font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.45;text-align:left;white-space:normal;overflow:hidden;cursor:pointer;word-break:break-word}
+.mrow.me .quote-ref{margin-left:auto}
+.quote-ref span{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.quote-ref.flash{animation:quoteFlash .9s ease}
+@keyframes quoteFlash{0%,100%{background:rgba(120,120,128,.10)}35%{background:color-mix(in srgb,var(--deep) 24%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--deep) 12%,transparent)}}
+.quote-target-flash{animation:quoteTargetFlash .9s ease}
+@keyframes quoteTargetFlash{0%,100%{background:transparent}35%{background:color-mix(in srgb,var(--theme-rose-soft) 44%,transparent);box-shadow:0 0 0 3px color-mix(in srgb,var(--theme-rose-soft) 28%,transparent)}}
 .quote-ref b{font-weight:600;color:color-mix(in srgb,var(--fg2) 78%,var(--fg));margin-right:3px}
 .composer-stack{flex:none}
 .reply-preview{display:flex;align-items:center;gap:8px;margin:0 14px 6px;padding:8px 10px;border-left:3px solid var(--deep);border-radius:5px 10px 10px 5px;background:color-mix(in srgb,var(--card) 84%,transparent);color:var(--fg2);font-size:calc(11px * var(--ui-font-scale,1));line-height:1.45;backdrop-filter:blur(12px)}
@@ -158,6 +164,7 @@ textarea{min-height:90px;resize:vertical;line-height:1.55}
 .bub .t{white-space:pre-wrap}
 .chatty{align-self:flex-start;color:var(--fg2);font-size:calc(12.5px * var(--ui-font-scale,1));padding:0 8px}
 .sysline{align-self:center;font-size:calc(11.5px * var(--ui-font-scale,1));color:var(--fg2);background:rgba(0,0,0,.05);padding:3px 10px;border-radius:8px}
+.chat-time-sep{align-self:center;width:100%;text-align:center;color:var(--fg2);font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.4;padding:8px 0 7px;font-variant-numeric:tabular-nums;pointer-events:none}
 .rich{width:232px;border-radius:12px;overflow:hidden;background:#fff;color:#111;border:1px solid rgba(0,0,0,.07)}
 .rp{background:linear-gradient(145deg,#f7a928,#e8811a);color:#fff;padding:13px;display:flex;gap:10px;align-items:center}
 .rp .ic3{font-size:calc(26px * var(--ui-font-scale,1))}
@@ -3253,6 +3260,13 @@ document.addEventListener('click',function(e){
   if(hit&&!hit.matches('[data-clickpreset],#clickTest')) playClickSound();
   if(hit&&DB.ui&&DB.ui.fullscreen&&!document.fullscreenElement) restoreFullscreenIntent();
 },true);
+document.addEventListener('click',function(e){
+  const quote=e.target.closest?e.target.closest('[data-quote-msg]'):null;
+  if(!quote) return;
+  e.preventDefault();
+  e.stopPropagation();
+  locateQuotedMessage(quote.dataset.quoteMsg||'');
+},true);
 const statEl=$('.stat'); if(statEl) statEl.addEventListener('click',function(){ if($('#sheet').classList.contains('on')) return; sheetSystem(); });
 function hasInPageBack(root){
   if(!root) return false;
@@ -3867,6 +3881,26 @@ function stripQuotedRestatement(text){
     .replace(/^(?:你|您)(?:刚才|之前|那)?(?:句|说)[:：]?\s*[“"「『][^”"」』]{1,160}[”"」』][，,：:\s]*/,'')
     .replace(/^(?:你说|你那句)[:：]?\s*[“"「『][^”"」』]{1,160}[”"」』][，,：:\s]*(?:我|但|不过|确实|真的)?/,'')
     .trim();
+}
+function stripUserQuoteRestatement(text,ch){
+  const userTexts=(ch&&ch.msgs||[]).filter(function(m){ return m.role==='me'&&!m.recalled; }).slice(-20).map(function(m){ return normLine(labelOf(m)); }).filter(Boolean);
+  let t=String(text||'');
+  if(!userTexts.length) return t;
+  t=t.replace(/(?:你|您)(?:刚才|之前|那)?(?:句|说)?[：:]?\s*[“"「『]([^”"」』]{1,240})[”"」』]/g,function(match,inner){
+    const n=normLine(inner);
+    const hit=n&&userTexts.some(function(u){ return u===n||(n.length>=2&&u.indexOf(n)>=0)||(u.length>=2&&n.indexOf(u)>=0); });
+    return hit?'':match;
+  });
+  return t.replace(/^[\s，,。；;：:\-]+/,'').trim();
+}
+function cleanChatOutput(text,ch){
+  let t=stripUserQuoteRestatement(stripQuotedRestatement(text),ch);
+  t=t.replace(/[“”「」『』"]/g,'');
+  t=t.replace(/(?:^|\n)\s*[‘’']+\s*(?=\n|$)/g,'');
+  t=t.replace(/(?:^|\n)\s*那\s*[。.!！？?…]+\s*(?=\n|$)/g,'\n');
+  t=t.replace(/(?:^|\n)\s*(?:那|这)?\s*是什么意思\s*/g,'');
+  t=t.replace(/^[\s，,。；;：:\-]+/gm,'');
+  return t.replace(/\n{3,}/g,'\n\n').trim();
 }
 function resolveVoicePlan(plan,speaker,wantsVoice){
   const mode=voiceModeOf(speaker||{});
@@ -5162,13 +5196,14 @@ async function regenerateChatMessage(ch,m){
     const others=ch.type==='group'?(ch.memberIds||[]).map(ct).filter(function(x){ return x&&x.id!==speaker.id; }).map(function(x){ return x.name; }):[];
     let sys=promptOf(speaker,others,before.slice(-6),{format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
     if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
-    if(m.quote) sys+='\n【这条回复引用着一段消息】'+m.quote.who+'：'+m.quote.text+'\n直接回应被引用的内容，不要用双引号复述。';
+    if(m.quote) sys+='\n【这条回复引用着一段消息】'+m.quote.who+'：'+m.quote.text+'\n引用只用于定位上下文，不是新问题；优先回应用户实际文字，不要用双引号复述被引用内容。';
+    sys+='\n【禁止复述用户原话】不要用双引号、直角引号或书名号式引号复述用户以前说过的话，直接回应意思。';
     sys+='\n【覆盖式重新生成】这次只生成 1 个完整气泡，用来原位替换你刚才那条回复。不要解释、不要复述旧回复、不要写“重新生成”。只输出 [文字] 或 [语音] 开头的一个气泡。';
     sys+='\n【语音与文字分流】语音只用于完整、短、口语化的一两句话；长解释和动作旁白用文字。绝不能把同一句话拆成语音前半句和文字后半句。语音转文字不要以“。。。”或“……”开头。';
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(speaker,out);
     if(!clean) throw new Error('模型没有返回内容');
-    const plan=enforceBubblePlan(clean,1).map(function(item){ return Object.assign({},item,{text:stripQuotedRestatement(item.text)}); });
+    const plan=enforceBubblePlan(clean,1).map(function(item){ return Object.assign({},item,{text:cleanChatOutput(item.text,ch)}); });
     const parts=resolveVoicePlan(plan,speaker,false);
     if(!parts.length) throw new Error('没有生成出可替换的消息');
     const part=parts[0];
@@ -5430,11 +5465,56 @@ function quoteFromMessage(ch,m){
 }
 function quoteRefHTML(q){
   if(!q) return '';
-  return '<div class="quote-ref"><b>'+esc(q.who||'')+'：</b>'+esc(q.text||'')+'</div>';
+  return '<button type="button" class="quote-ref" data-quote-msg="'+esc(q.msgId||'')+'" title="定位原消息"><span><b>'+esc(q.who||'')+'：</b>'+esc(q.text||'')+'</span></button>';
+}
+function locateQuotedMessage(id){
+  const target=Array.from(document.querySelectorAll('#msgs [data-msgrow]')).find(function(row){ return row.dataset.msgrow===id; });
+  if(!target){ toast('这条原消息已不在当前会话'); return false; }
+  const box=$('#msgs');
+  if(box) box.scrollTo({top:Math.max(0,target.offsetTop-box.clientHeight/2+target.clientHeight/2),behavior:'smooth'});
+  target.classList.remove('quote-target-flash');
+  void target.offsetWidth;
+  target.classList.add('quote-target-flash');
+  setTimeout(function(){ target.classList.remove('quote-target-flash'); },1000);
+  return true;
 }
 function replyPreviewHTML(q){
   if(!q) return '';
   return '<div class="reply-preview"><span><b>'+esc(q.who||'')+'：</b>'+esc(q.text||'')+'</span><button id="replyQuoteClose" title="取消引用">×</button></div>';
+}
+function chatMessageDate(ch,m){
+  const simMs=simNow(ch&&ch.id).getTime();
+  const realTs=Number(m&&m.ts);
+  if(m&&Number(m.simTs)) return new Date(Number(m.simTs));
+  if(!Number.isFinite(realTs)||realTs<=0) return new Date(simMs);
+  return new Date(simMs-Math.max(0,Date.now()-realTs));
+}
+function chatDateKey(d){
+  return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+}
+function chatTimeLabel(ch,m){
+  const d=chatMessageDate(ch,m);
+  const now=simNow(ch&&ch.id);
+  const yesterday=new Date(now.getFullYear(),now.getMonth(),now.getDate()-1);
+  const hm=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+  if(chatDateKey(d)===chatDateKey(now)) return hm;
+  if(chatDateKey(d)===chatDateKey(yesterday)) return '昨天 '+hm;
+  if(d.getFullYear()===now.getFullYear()) return (d.getMonth()+1)+'月'+d.getDate()+'日 '+hm;
+  return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日 '+hm;
+}
+function chatTimeSeparatorHTML(ch,index){
+  const msgs=(ch&&ch.msgs)||[];
+  const m=msgs[index],prev=msgs[index-1];
+  if(!m) return '';
+  const current=Number(m.simTs)||Number(m.ts)||0;
+  const previous=prev?(Number(prev.simTs)||Number(prev.ts)||0):0;
+  const currentDate=chatDateKey(chatMessageDate(ch,m));
+  const previousDate=prev?chatDateKey(chatMessageDate(ch,prev)):currentDate;
+  const show=index===0||currentDate!==previousDate||(current&&previous&&current-previous>=5*60*1000);
+  return show?'<div class="chat-time-sep">'+esc(chatTimeLabel(ch,m))+'</div>':'';
+}
+function chatBodyHTML(ch){
+  return (ch.msgs||[]).map(function(m,index){ return chatTimeSeparatorHTML(ch,index)+msgHTML(m,ch); }).join('');
 }
 function screenChatRoom(){
   const ch=chat(route.arg);
@@ -5443,7 +5523,7 @@ function screenChatRoom(){
   curChatId=ch.id; ch.unread=0;
   const isGroup=ch.type==='group';
   const selecting=chatSelectChat===ch.id;
-  const body=(ch.msgs||[]).map(m=>msgHTML(m,ch)).join('')||'<div class="empty">还没有消息，说点什么吧。</div>';
+  const body=chatBodyHTML(ch)||'<div class="empty">还没有消息，说点什么吧。</div>';
   return '<div class="chatwrap">'
    +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+esc(chatName(ch))+(isGroup?'（'+ch.memberIds.length+'）':'')+(ch.source==='soul'?'<div class="sub">来源：灵魂匹配</div>':'')+'</div>'
      +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
@@ -5820,13 +5900,15 @@ function appendMessageToOpenChat(ch,mm){
   if(!ch||!mm||route.name!=='chatroom'||route.arg!==ch.id||chatSelectChat===ch.id) return false;
   const box=$('#msgs');
   if(!box) return false;
-  box.insertAdjacentHTML('beforeend',msgHTML(mm,ch,{active:false,ids:[]}));
+  const index=(ch.msgs||[]).findIndex(function(item){ return item.id===mm.id; });
+  box.insertAdjacentHTML('beforeend',chatTimeSeparatorHTML(ch,index)+msgHTML(mm,ch,{active:false,ids:[]}));
   requestAnimationFrame(scrollChatBottom);
   return true;
 }
 function pushMsg(chatId,m,quiet){
   const ch=chat(chatId); if(!ch) return null;
   const mm=Object.assign({id:uid(),ts:Date.now()},m);
+  if(mm.simTs===undefined) mm.simTs=simNow(chatId).getTime();
   ch.msgs.push(mm); ch.lastTs=Date.now();
   if(!quiet&&!(route.name==='chatroom'&&route.arg===chatId)) ch.unread=(ch.unread||0)+1;
   if(!quiet) playUiSound(mm.role==='me'?'send':'receive');
@@ -5839,6 +5921,38 @@ function pushMsg(chatId,m,quiet){
   return mm;
 }
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));/* ---- AI 回合 ---- */
+function proactiveFallback(speaker){
+  const lines=[
+    '刚刚突然想起你。',
+    '今天这边有点安静。',
+    '在做什么？',
+    '我刚刚看到一件很适合你的事。'
+  ];
+  return pick(lines);
+}
+function sanitizeProactiveReply(text,speaker){
+  let t=String(text||'')
+    .replace(/\r/g,'')
+    .replace(/```[a-z]*\n?/gi,'')
+    .replace(/```/g,'')
+    .trim();
+  t=t.replace(/(?:^|\n)\s*(?:用户|对方|User)\s*[:：][\s\S]*$/i,'');
+  t=t.replace(/(?:^|\n)\s*你\s*[:：][\s\S]*$/,'');
+  t=t.replace(/(?:^|\n)\s*[\[【]\s*(?:用户|对方|你)\s*[\]】][\s\S]*$/,'');
+  t=t.replace(/(?:^|\s)(?:用户|对方)\s*[:：][\s\S]*$/i,'');
+  t=t.replace(/[“「『]\s*(?:用户|对方|你)\s*[:：][\s\S]*$/,'');
+  t=t.replace(/\*[^*\n]{1,120}\*/g,'');
+  const ownName=speaker&&contactDisplayName?contactDisplayName(speaker):'';
+  const ownPrefixes=['我','角色','Ta','TA'];
+  if(ownName) ownPrefixes.push(ownName);
+  const prefixRe=new RegExp('^\\s*(?:'+ownPrefixes.map(function(x){ return String(x).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }).join('|')+')\\s*[:：]\\s*','');
+  t=t.replace(prefixRe,'');
+  t=t.replace(/([？?])[\s]*(?:嗯|啊|哦|好|行|在|我在|我知道|知道了|当然|可以|没有|没事|是啊|对)[，,。.!！\s]*[\s\S]*$/u,'$1');
+  const first=parseChatBubblePlan(t)[0];
+  if(!first||!first.text) return '';
+  const prefix=first.kind==='voice'?'[语音]':first.kind==='text'?'[文字]':'';
+  return prefix+first.text;
+}
 async function aiTurn(opt){
   const chatId=(opt&&opt.chatId)||(route.name==='chatroom'?route.arg:curChatId);
   const ch=chat(chatId); if(!ch) return;
@@ -5847,11 +5961,12 @@ async function aiTurn(opt){
   if(!DB.api.key){ toast('先到「设置」里填 API Key'); return; }
   const speaker=(opt&&opt.speaker)||(ch.type==='group'? pick(members) : members[0]);
   if(!speaker) return;
+  const proactive=!!(opt&&opt.proactive);
   const min=Math.max(1,Number(ch.replyMin)||1);
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
-  const want=min+Math.floor(Math.random()*(max-min+1));
+  const want=proactive?1:(min+Math.floor(Math.random()*(max-min+1)));
   const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled; });
-  const wantsVoice=!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
+  const wantsVoice=!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
     const history=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),24).map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
@@ -5860,18 +5975,24 @@ async function aiTurn(opt){
     if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
     if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
-    sys+='\n【微信引用规则】历史里的“引用”是真实的消息引用上下文，不是让你用双引号复述对方原话。需要回应被引用内容时，直接接着谈它，不要写“你那句『……』”。';
+    if(proactive) sys+='\n【主动消息的唯一规则】当前没有新的用户回复，你只能扮演'+String(speaker.name||'你自己')+'。只写你自己这一条完整消息，不能替用户说话，不能写任何“你：”“用户：”“对方：”的台词，不能补写用户的动作、反应或回答，不能自问自答。你可以问一个问题，但问完立即停止，不能自己接答案。';
+    sys+='\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。';
+    sys+='\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。';
     sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。';
     sys+='\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。';
     sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
     const out=await callModel([{role:'system',content:sys}].concat(history));
-    const clean=regexOf(speaker, out);
+    let clean=regexOf(speaker, out);
+    if(proactive){
+      clean=sanitizeProactiveReply(clean,speaker);
+      if(!clean) clean=proactiveFallback(speaker);
+    }
     if(!clean) throw new Error('模型没有返回内容');
     await sleep(Math.min(1600, 240 + clean.length*12));
     const t0=$('#typing'); if(t0) t0.remove();
     const badVoice=/设备不匹配|未配置.{0,6}(接口|语音)|接口.{0,6}未配置|不能发语音|发不了语音|没法发语音|不支持语音|语音功能.{0,6}(不可用|未配置)/;
-    const plan=enforceBubblePlan(clean,want).map(function(item){
-      const text=badVoice.test(item.text)?'好，我发给你。':stripQuotedRestatement(item.text);
+    const plan=enforceBubblePlan(clean,proactive?1:want).map(function(item){
+      const text=badVoice.test(item.text)?'好，我发给你。':cleanChatOutput(item.text,ch);
       return Object.assign({},item,{text:text});
     });
     const parts=resolveVoicePlan(plan,speaker,wantsVoice);
@@ -5885,7 +6006,7 @@ async function aiTurn(opt){
       }
       if(parts.length>1) await sleep(420);
     }
-    if(ch.type==='group'&&members.length>1&&Math.random()<0.35){
+    if(!proactive&&ch.type==='group'&&members.length>1&&Math.random()<0.35){
       const other=pick(members.filter(x=>x.id!==speaker.id));
       if(other){ await sleep(900); await aiTurn({chatId:ch.id,speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
     }
@@ -6769,7 +6890,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.61 · 第 72 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.62 · 第 73 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -12350,7 +12471,7 @@ function bindScreenInner(){
       const open=()=>sheetMsg(route.arg, el.dataset.bub);
       el.onclick=e=>{
         if(chatSelectChat===route.arg) return;
-        if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')) return;
+        if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')||e.target.closest('[data-quote-msg]')) return;
         open();
       };
       let tmr=null;
@@ -13140,7 +13261,7 @@ async function taPokeUser(ch,c){
   const text=name+'拍了拍你的'+(c.nudgeMe||'小脑袋');
   pushMsg(ch.id,{role:'sys',type:'text',text:text,notify:true,notifyTitle:name,notifyBody:'拍了拍你'});
   if(DB.api.key){
-    try{ await aiTurn({chatId:ch.id,speaker:c,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号，按设置的句数回复。'}); }catch(e){}
+    try{ await aiTurn({chatId:ch.id,speaker:c,proactive:true,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号；只写你自己的一条，不替用户说话，不自问自答。'}); }catch(e){}
     save();
   }
   if(route.name==='wechat'||(route.name==='chatroom'&&route.arg===ch.id)) render();
@@ -13170,7 +13291,7 @@ async function autoTick(){
     }
     if(!DB.api.key) return;
     try{
-      await aiTurn({chatId:target.id,nudge:'你自己主动找对方说话。注意：对方还没有回你，所以绝对不要自问自答，也不要说「好的」「可以」「那就这样」这种像是在回应自己的话。换一个新的点：说说你正在做的事、你刚想到的事，或者想对方了。只说一到两句。'});
+      await aiTurn({chatId:target.id,proactive:true,nudge:'你自己主动找对方说话。注意：对方还没有回你，所以绝对不要自问自答，也不要说「好的」「可以」「那就这样」这种像是在回应自己的话。只写你自己这一条，不能补写用户的台词、动作或反应。换一个新的点：说说你正在做的事、你刚想到的事，或者想对方了。'});
     }catch(e){}
     save();
     if(route.name==='wechat'||(route.name==='chatroom'&&route.arg===target.id)) render();
@@ -13306,8 +13427,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.61 · 第 72 轮';
-const BUILD_CODE=72;
+const BUILD='2026-10-28 · 3.62 · 第 73 轮';
+const BUILD_CODE=73;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
