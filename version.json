@@ -1,9 +1,9 @@
 {
-  "version": "3.48",
-  "versionCode": 59,
-  "round": 59,
+  "version": "3.49",
+  "versionCode": 60,
+  "round": 60,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=59",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=60",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "第二页恢复 3.41 排版：查岗/网购一行，约会/出门一行；图标统一为第一页 52px，外卖只保留在第一页，其它桌面页不变。"
+  "notes": "新增设置内开发进度页，持续区分已完成、部分完成、尚未完成；微博绑定角色自动点赞/评论/随机转发；第二页排版继续保留。"
 }

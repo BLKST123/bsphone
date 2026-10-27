@@ -3008,7 +3008,7 @@ function npPageWallKey(name){
   if(['wechat','chatroom','contactview','contactedit'].indexOf(name)>=0) return 'wechat';
   if(name.indexOf('novel')===0||name==='read') return 'novel';
   if(name==='weibo') return 'weibo';
-  if(['settings','appearance','world','regex','checkup'].indexOf(name)>=0) return 'settings';
+  if(['settings','appearance','progress','world','regex','checkup'].indexOf(name)>=0) return 'settings';
   return 'other';
 }
 function floatAssetSrc(style,index){
@@ -3505,7 +3505,7 @@ function render(){
   const oldNovelScroll=route.name==='novelchapter'&&s.querySelector('.np-body')?s.querySelector('.np-body').scrollTop:0;
   const R={home:screenHome,wechat:screenWechat,chatroom:screenChatRoom,contactedit:screenContactEdit,
     contactview:screenContactView,novel:screenNovel,novelbook:screenNovelBook,novelchapter:screenNovelChapter,read:screenRead,diary:screenDiary,forum:screenForum,
-    gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,
+    gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,progress:screenProgress,
     hang:screenHang,mall:screenMall,shop:screenTaobao,takeout:screenTakeout,clock:screenClock,couple:screenCouple,soul:screenSoul,music:screenMusic,checkup:screenCheckup,
     date:screenDate,dateroom:screenDateRoom,out:screenOut,outnew:screenOutNew,outroom:screenOutRoom,world:screenWorldBooks,regex:screenRegexList,weibo:screenWeibo}[route.name]||screenHome;
   const noNav=(route.name==='home'||route.name==='wechat'||route.name==='chatroom'
@@ -3540,13 +3540,13 @@ function back(){
   if(route.name==='dateroom'){ go('date'); return; }
   if(route.name==='outroom'){ go('out'); return; }
   if(route.name==='checkup'){ go('settings'); return; }
-  const map={chatroom:'wechat',contactedit:'wechat',contactview:'wechat',mall:'home',appearance:'settings'};
+  const map={chatroom:'wechat',contactedit:'wechat',contactview:'wechat',mall:'home',appearance:'settings',progress:'settings'};
   go(map[route.name]||'home');
 }
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
-  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','date','dateroom','out','outnew','outroom','shop','takeout','clock','couple','soul','music','weibo','world','regex','appearance','settings','contactview','mall'];
+  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','date','dateroom','out','outnew','outroom','shop','takeout','clock','couple','soul','music','weibo','world','regex','appearance','settings','progress','contactview','mall'];
   if(allow.indexOf(lr.name)<0) return;
   if(lr.name==='chatroom'&&!chat(lr.arg)) return;
   if(lr.name==='dateroom'&&!dateById(lr.arg)) return;
@@ -3558,7 +3558,7 @@ function restoreLastRoute(){
   if(lr.wtab) wtab=lr.wtab;
 }
 function navBar(name){
-  const titles={chatroom:'',contactedit:'联系人',contactview:'',novel:'小说',read:'一起看小说',diary:'日记',forum:'论坛',gallery:'相册',appearance:'外观',settings:'设置',checkup:'自检',date:'约会',dateroom:'',out:'出门',outnew:'',outroom:'',world:'世界书',regex:'正则',weibo:''};
+  const titles={chatroom:'',contactedit:'联系人',contactview:'',novel:'小说',read:'一起看小说',diary:'日记',forum:'论坛',gallery:'相册',appearance:'外观',settings:'设置',progress:'开发进度',checkup:'自检',date:'约会',dateroom:'',out:'出门',outnew:'',outroom:'',world:'世界书',regex:'正则',weibo:''};
   return '<div class="nav"><button class="back">‹ 返回</button><div class="ttl">'+esc(titles[name]||'')+'</div><div class="act"></div></div>';
 }
 function emptyState(t,m,btn,fn){
@@ -6029,6 +6029,33 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
+const PROGRESS_UPDATED='2026-10-27 · 3.49 · 第 60 轮';
+const PROGRESS_GROUPS=[
+  {k:'done',n:'已经完成',color:'#2f9d62',items:[
+    ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行。'],
+    ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
+    ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
+    ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、读者群、收益、奖项、成就、刷新互动和消息红点。'],
+    ['外卖','分类、店铺、商品规格、购物车、多地址、用户/角色下单、订单号、备注、配送进度、订单详情和会话气泡。'],
+    ['约会与出门','精确绑定、约会开场白、场景生成、共享会话记忆、出门剧情、拍立得和自定义动作。'],
+    ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
+  ]},
+  {k:'partial',n:'部分完成',color:'#c28b23',items:[
+    ['小说多人生态','已有单读者群和入群/刷新系统；多读者群、总读者群、每群独立开关与跨群隔离尚未全部完成。'],
+    ['小说世界书','已有单书世界书和生成记忆；按每次生成自由选择/绑定世界书的完整流程仍需补齐。'],
+    ['查岗','已有手机内容、当前动态和基础状态；地点/物品/人物可点击平面图、多情绪对象来源与隐身/发现机制需继续完善。'],
+    ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
+    ['约会/出门消息工具','支持继续生成和共享记忆；类似微信的多选消息迁移、任意节点重开等工具仍未完全对齐。'],
+    ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
+  ]},
+  {k:'pending',n:'尚未完成',color:'#c4545b',items:[
+    ['情侣空间','纪念日、交换日记、默契挑战、真心话、做饭、相簿、情侣任务、我们的小家、领养和分支记忆。'],
+    ['灵魂匹配','五分钟匹配聊天、暂停计时、拒绝三次策略、匹配日志、微信好友迁移和来源保留。'],
+    ['音乐','本地音频、网易云扫码导入、跨页面播放、一起听、歌词、评论、共同收藏、历史记录和后台播放。'],
+    ['AI 生图','用户自有生图 API、场景自拍/食物/双人照、角色脸一致性、图片本地保存与重新生成；本轮按要求暂不接。'],
+    ['高级统计与发布','完整的跨模块数据统计、内容时间线来源视图和更细的发布运营工具。']
+  ]}
+];
 function apiName(){
   const b=normBase(DB.api.base||'');
   const p=PROVIDERS.find(x=>x.base&&x.base===b);
@@ -6128,6 +6155,26 @@ async function fetchModelList(){
   DB.api.listMsg='拉取失败：'+msg+'  可以直接用预设的模型名，或手动填一个。';
   save(); render();
 }
+function screenProgress(){
+  const counts={};
+  PROGRESS_GROUPS.forEach(function(g){ counts[g.k]=g.items.length; });
+  return '<div class="pad">'
+    +'<div class="card"><div class="row"><div class="grow"><b>BS 小手机开发进度</b><div class="muted" style="margin-top:5px">最近更新：'+esc(PROGRESS_UPDATED)+'</div></div><span class="np-chip on">'+esc(BUILD)+'</span></div>'
+    +'<div class="row" style="margin-top:12px;align-items:stretch">'
+    +'<div class="grow" style="text-align:center;padding:9px;border-radius:14px;background:rgba(47,157,98,.10)"><b style="font-size:calc(21px * var(--ui-font-scale,1));color:#2f9d62">'+counts.done+'</b><div class="mini">已完成大类</div></div>'
+    +'<div class="grow" style="text-align:center;padding:9px;border-radius:14px;background:rgba(194,139,35,.10)"><b style="font-size:calc(21px * var(--ui-font-scale,1));color:#c28b23">'+counts.partial+'</b><div class="mini">部分完成</div></div>'
+    +'<div class="grow" style="text-align:center;padding:9px;border-radius:14px;background:rgba(196,84,91,.10)"><b style="font-size:calc(21px * var(--ui-font-scale,1));color:#c4545b">'+counts.pending+'</b><div class="mini">待开发大类</div></div>'
+    +'</div></div>'
+    +PROGRESS_GROUPS.map(function(g){
+      return '<div class="card"><div class="row"><b class="grow">'+esc(g.n)+'</b><span class="mini" style="color:'+g.color+'">'+g.items.length+' 项</span></div>'
+        +g.items.map(function(item){
+          return '<div class="lrow" style="align-items:flex-start"><span style="width:8px;height:8px;border-radius:50%;background:'+g.color+';margin-top:7px;flex:none"></span><div class="mi"><div class="t1">'+esc(item[0])+'</div><div class="t2" style="white-space:normal;line-height:1.65;overflow:visible;text-overflow:clip">'+esc(item[1])+'</div></div></div>';
+        }).join('')
+        +'</div>';
+    }).join('')
+    +'<div class="muted" style="padding:0 4px 18px;line-height:1.7">每轮发布后会同步更新这里和仓库中的《小手机_功能进度清单.md》。</div>'
+    +'</div>';
+}
 function decorateSettingsBubbles(root){
   const pad=root&&root.querySelector?root.querySelector('.pad'):null;
   if(!pad||pad.dataset.bubblesReady) return;
@@ -6160,6 +6207,7 @@ function decorateSettingsBubbles(root){
 function screenSettings(){
   const af=DB.audio.provider||'minimax';
   return '<div class="pad">'
+  +'<div class="card"><b>开发进度</b><div class="muted" style="margin:6px 0 9px;line-height:1.7">查看已经完成、部分完成和尚未开发的完整清单。</div><div class="lrow" id="s_progress" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">功能清单与本轮更新</div><div class="t2">已完成 '+PROGRESS_GROUPS[0].items.length+' 类 · 部分完成 '+PROGRESS_GROUPS[1].items.length+' 类 · 待开发 '+PROGRESS_GROUPS[2].items.length+' 类</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><b>API 接口设置</b>'
   +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">这是唯一的接口入口，软件不内置也不代售 API。填写用户自己的 OpenAI 兼容地址、Key 和模型名；聊天、小说、微博、约会及刷新生成共用这一套设置。</div>'
   +'<select id="s_provider">'+PROVIDERS.map((p,i)=>'<option value="'+i+'"'+(normBase(DB.api.base)===p.base?' selected':'')+'>'+esc(p.n)+'</option>').join('')+'</select>'
@@ -9658,6 +9706,7 @@ function bindScreenInner(){
   /* 设置 */
   if(route.name==='settings'){
     decorateSettingsBubbles(s);
+    const progressEntry=$('#s_progress'); if(progressEntry) progressEntry.onclick=function(){ go('progress'); };
     $('#s_save').onclick=()=>{ DB.api.base=normBase($('#s_ep').value)||DB.api.base; DB.api.endpoint=''; DB.api.key=$('#s_key').value.trim(); DB.api.model=$('#s_md').value.trim()||'deepseek-chat'; DB.api.temp=Number($('#s_tp').value)||0.9; save(); toast('已保存'); };
     const apiCtxRange=$('#apiCtxRange'),apiCtxNum=$('#apiCtxNum'),apiTokRange=$('#apiTokRange'),apiTokNum=$('#apiTokNum');
     if(apiCtxRange&&apiCtxNum){ apiCtxRange.oninput=function(){ apiCtxNum.value=this.value; DB.api.contextLimit=Number(this.value); save(); }; apiCtxNum.onchange=function(){ DB.api.contextLimit=Math.max(-1,Math.min(500,Number(this.value)||0)); apiCtxRange.value=DB.api.contextLimit; save(); }; }
@@ -10003,8 +10052,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.48 · 第 59 轮';
-const BUILD_CODE=59;
+const BUILD='2026-10-27 · 3.49 · 第 60 轮';
+const BUILD_CODE=60;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10025,7 +10074,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10039,6 +10088,7 @@ async function runCheckupUI(){
   const p2=(DB.ui.homePages||[])[1]||[],p2Group=((DB.ui.widgetPages||[])[1]||[]).find(function(w){ return w.id==='l7_p2_apps'; });
   const p2Ok=JSON.stringify(p2)===JSON.stringify(['hang','shop','date','out'])&&p2Group&&JSON.stringify(p2Group.appKeys)===JSON.stringify(p2)&&Number(p2Group.appCols)===2;
   add('第二页图标布局', !!p2Ok, p2Ok?'查岗/网购 · 约会/出门 · 两列 52px':'布局异常，请恢复默认第二页');
+  add('开发进度清单', Array.isArray(PROGRESS_GROUPS)&&PROGRESS_GROUPS.length===3, PROGRESS_GROUPS.map(function(g){ return g.n+' '+g.items.length; }).join(' · '));
   add('联系人', (DB.contacts||[]).length>0, (DB.contacts||[]).length+' 位');
   add('会话', true, (DB.chats||[]).length+' 个');
   add('作者 / 小说', true, '作者 '+(DB.np.author.penName||'未命名')+' · 书 '+(DB.books||[]).length+' 本 · 读者 '+(DB.np.readers||[]).length+' 位');
@@ -10078,7 +10128,7 @@ async function runCheckupUI(){
     ['home',null,'桌面'],['wechat',null,'微信'],['chatroom',firstChat,'聊天'],['contactview',firstContact,'联系人'],
     ['contactedit',firstContact,'联系人编辑'],['novel',null,'小说'],['novelbook',firstBook&&firstBook.id,'书籍'],
     ['novelchapter',firstBook&&firstChapter?(firstBook.id+'|'+firstChapter.id):null,'章节'],['read',firstRead,'共读'],
-    ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],
+    ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],['progress',null,'开发进度'],
     ['hang',null,'查岗'],['mall',null,'商城'],['shop',null,'网购'],['takeout',null,'外卖'],['checkup',null,'自检'],
     ['clock',null,'时钟'],['couple',null,'情侣空间'],['soul',null,'灵魂匹配'],['music',null,'音乐'],
     ['date',null,'约会'],['dateroom',firstDate,'约会房间'],['out',null,'出门'],['outnew',null,'准备出门'],['outroom',firstOut,'出门房间'],
