@@ -47,6 +47,9 @@ html,body{margin:0;height:100%;overflow:hidden;font:calc(16px * var(--ui-font-sc
 .stat .gback{display:none;background:none;border:0;color:var(--fg);font-size:calc(20px * var(--ui-font-scale,1));line-height:1;padding:0 5px 0 0;cursor:pointer}
 .stat.has-back .gback{display:block}
 .stat .r{display:flex;gap:6px;align-items:center;font-weight:500;opacity:.9}
+.page-back{position:absolute;left:12px;top:calc(env(safe-area-inset-top) + 8px);z-index:260;display:none;align-items:center;justify-content:center;min-width:68px;height:34px;padding:0 13px 1px 11px;border:1px solid rgba(255,255,255,.34);border-radius:18px;background:rgba(30,28,31,.62);color:#fff;box-shadow:0 5px 18px rgba(0,0,0,.16);backdrop-filter:blur(14px);font-size:calc(14px * var(--ui-font-scale,1));font-weight:600;cursor:pointer}
+.page-back.on{display:flex}
+#screen.has-page-back .pad{padding-top:calc(env(safe-area-inset-top) + 48px)}
 /* 屏幕区 */
 .screen{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch}
 .screen.lock{overflow:hidden}
@@ -2065,6 +2068,7 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
   <div id="pageBg"></div>
   <div class="global-float" id="globalFloat" aria-hidden="true"></div>
   <div class="screen" id="screen"></div>
+  <button class="page-back" id="pageBack" title="返回">‹ 返回</button>
 </div>
 <div class="toast" id="toast"></div>
 <div class="busy" id="busy"></div>
@@ -2965,8 +2969,28 @@ document.addEventListener('click',function(e){
   if(hit&&DB.ui&&DB.ui.fullscreen&&!document.fullscreenElement) restoreFullscreenIntent();
 },true);
 const statEl=$('.stat'); if(statEl) statEl.addEventListener('click',function(){ if($('#sheet').classList.contains('on')) return; sheetSystem(); });
-function syncGlobalBack(){ const s=$('.stat'); if(!s) return; const sheetOn=$('#sheet').classList.contains('on'); s.classList.toggle('has-back',route.name!=='home'||sheetOn); s.classList.toggle('sheet-open',sheetOn); }
+function hasInPageBack(root){
+  if(!root) return false;
+  return Array.from(root.querySelectorAll('button')).some(function(el){
+    const text=String(el.textContent||'').replace(/\s+/g,'').trim();
+    if(!(el.matches('.wxback,.nav .back,.page-back')||/^(‹|←|返回|‹返回)/.test(text))) return false;
+    const r=el.getBoundingClientRect();
+    return r.width>0&&r.height>0&&r.top<170;
+  });
+}
+function syncGlobalBack(){
+  const screen=$('#screen'),pageBack=$('#pageBack'),stat=$('.stat');
+  const sheetOn=$('#sheet').classList.contains('on');
+  const fallback=route.name!=='home'&&!sheetOn&&!hasInPageBack(screen);
+  if(pageBack){
+    pageBack.classList.toggle('on',fallback);
+    pageBack.setAttribute('aria-hidden',fallback?'false':'true');
+  }
+  if(screen) screen.classList.toggle('has-page-back',fallback);
+  if(stat){ stat.classList.toggle('has-back',route.name!=='home'||sheetOn); stat.classList.toggle('sheet-open',sheetOn); }
+}
 const globalBackEl=$('#globalBack'); if(globalBackEl) globalBackEl.addEventListener('click',function(e){ e.stopPropagation(); if($('#sheet').classList.contains('on')) closeSheet(); else back(); });
+const pageBackEl=$('#pageBack'); if(pageBackEl) pageBackEl.addEventListener('click',function(e){ e.stopPropagation(); if($('#sheet').classList.contains('on')) closeSheet(); else back(); });
 function npPageWallKey(name){
   name=String(name||'');
   if(name==='home') return 'home';
@@ -6651,7 +6675,8 @@ function clockWritableState(){
 function screenClock(){
   const b=DB.clock.binding||{},st=clockBindingState(),d=simNow(b.chatId||null);
   const ch=b.chatId?chat(b.chatId):null,c=b.contactId?ct(b.contactId):(ch?ct(ch.memberIds[0]):null),p=(DB.me.personas||[]).find(function(x){ return x.id===b.personaId; });
-  return '<div class="pad"><div class="card clock-app-card"><div class="clock-app-time">'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</div><div class="clock-app-date">'+esc(dateCN(b.chatId||null))+'</div><div class="muted" style="margin-top:8px">这里的时间只属于小手机，不影响现实系统时间。</div></div>'
+  return '<div class="pad" style="padding-top:0">'+wxTop('时钟')
+    +'<div class="card clock-app-card"><div class="clock-app-time">'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</div><div class="clock-app-date">'+esc(dateCN(b.chatId||null))+'</div><div class="muted" style="margin-top:8px">这里的时间只属于小手机，不影响现实系统时间。</div></div>'
     +'<div class="card"><b>当前绑定</b><div class="lrow" data-clockbind="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">'+(ch?esc(chatName(ch)):'全局时间')+'</div><div class="t2">'+esc(c?contactDisplayName(c):'未绑定角色')+' · '+esc(p?p.name:'未绑定用户人设')+'</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
     +'<div class="card"><b>设置时间</b><input id="clockManual" type="datetime-local" value="'+esc(clockInputValue(d))+'" style="margin-top:10px"><div class="row" style="margin-top:9px"><button class="btn grow" data-clockpreset="morning">清晨</button><button class="btn grow" data-clockpreset="noon">午后</button><button class="btn grow" data-clockpreset="night">夜晚</button></div><button class="btn primary full" id="clockSave" style="margin-top:10px">应用这个时间</button></div>'
     +'<div class="card"><div class="row"><div class="grow"><b>时间自动流动</b><div class="muted">开启后，从设定时间开始随真实流逝推进。</div></div><button class="btn" id="clockAuto">'+(st.autoAdvance?'已开启':'关闭')+'</button></div></div>';
@@ -6662,13 +6687,13 @@ function sheetClockBinding(){
   }});
 }
 function screenCouple(){
-  return '<div class="pad"><div class="card"><b>情侣空间</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">这里将承载纪念日、交换日记、默契挑战、一起做饭、任务、相簿和我们的小家。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入完整互动。</div></div></div>';
+  return '<div class="pad" style="padding-top:0">'+wxTop('情侣空间')+'<div class="card"><b>情侣空间</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">这里将承载纪念日、交换日记、默契挑战、一起做饭、任务、相簿和我们的小家。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入完整互动。</div></div></div>';
 }
 function screenSoul(){
-  return '<div class="pad"><div class="card"><b>灵魂匹配</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">选择世界书、正则和想认识的人类型，进行五分钟匹配聊天。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入生成与微信迁移。</div></div></div>';
+  return '<div class="pad" style="padding-top:0">'+wxTop('灵魂匹配')+'<div class="card"><b>灵魂匹配</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">选择世界书、正则和想认识的人类型，进行五分钟匹配聊天。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入生成与微信迁移。</div></div></div>';
 }
 function screenMusic(){
-  return '<div class="pad"><div class="card"><b>音乐 · 一起听</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">本地歌单、网易云导入、共同收藏、实时评论和后台播放将在这里实现。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入播放器。</div></div></div>';
+  return '<div class="pad" style="padding-top:0">'+wxTop('音乐 · 一起听')+'<div class="card"><b>音乐 · 一起听</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">本地歌单、网易云导入、共同收藏、实时评论和后台播放将在这里实现。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入播放器。</div></div></div>';
 }
 /* ================= 日记 / 小说 / 论坛 ================= */
 function screenDiary(){
@@ -9967,8 +9992,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.46 · 第 57 轮';
-const BUILD_CODE=57;
+const BUILD='2026-10-27 · 3.47 · 第 58 轮';
+const BUILD_CODE=58;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -9989,7 +10014,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10054,6 +10079,8 @@ async function runCheckupUI(){
       const sc=$('#screen'), text=(sc.innerText||'').trim();
       if(!text) pageFails.push(r[2]+':空白');
       if(sc.scrollWidth>sc.clientWidth+1) pageFails.push(r[2]+':横向溢出');
+      const pageBack=$('#pageBack');
+      if(r[0]!=='home'&&!hasInPageBack(sc)&&!(pageBack&&getComputedStyle(pageBack).display!=='none')) pageFails.push(r[2]+':没有返回键');
       const bs=[].slice.call(sc.querySelectorAll('button'));
       totalButtons+=bs.length;
       const bad=bs.filter(function(b){ return typeof b.onclick!=='function'&&!b.dataset.run&&!Object.keys(b.dataset||{}).length; });

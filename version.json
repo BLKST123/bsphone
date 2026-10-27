@@ -1,9 +1,9 @@
 {
-  "version": "3.46",
-  "versionCode": 57,
-  "round": 57,
+  "version": "3.47",
+  "versionCode": 58,
+  "round": 58,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=57",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=58",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "严格精确绑定默认，仅微博支持多选并集；约会开场白与来源记录；出门、日记、外卖、时钟统一绑定；API 设置窗口改为用户自带接口。"
+  "notes": "修复页面返回键：时钟、情侣空间、灵魂匹配、音乐补齐顶栏，并增加全局返回兜底；逐页验证所有非桌面页面都能退出。"
 }

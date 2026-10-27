@@ -1,5 +1,5 @@
 /* BS小手机 · 离线兜底：缓存优先，网络更新不再无限等待 */
-var C='bsphone-v57';
+var C='bsphone-v58';
 function timedFetch(req,ms){
   return new Promise(function(resolve,reject){
     var done=false;
