@@ -1,9 +1,9 @@
 {
-  "version": "3.47",
-  "versionCode": 58,
-  "round": 58,
+  "version": "3.48",
+  "versionCode": 59,
+  "round": 59,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=58",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=59",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "修复页面返回键：时钟、情侣空间、灵魂匹配、音乐补齐顶栏，并增加全局返回兜底；逐页验证所有非桌面页面都能退出。"
+  "notes": "第二页恢复 3.41 排版：查岗/网购一行，约会/出门一行；图标统一为第一页 52px，外卖只保留在第一页，其它桌面页不变。"
 }

@@ -2480,9 +2480,8 @@ function fixAll(){
   DB.ui.widgetPages.forEach(function(pageWidgets){
     const group=(pageWidgets||[]).find(function(w){ return w.id==='l7_p2_apps'; });
     if(group){
-      group.appKeys=Array.isArray(group.appKeys)?group.appKeys:['hang','shop','out','date'];
-      if(group.appKeys.indexOf('takeout')<0) group.appKeys.push('takeout');
-      group.appCols=Math.max(3,Number(group.appCols)||2);
+      group.appKeys=Array.isArray(group.appKeys)?group.appKeys:['hang','shop','date','out'];
+      group.appCols=Math.max(1,Math.min(4,Number(group.appCols)||2));
     }
   });
   if(!DB.ui.layout7PositionRepairV1){
@@ -2527,7 +2526,7 @@ function fixAll(){
         if(at>=0&&groupTarget<0){ w.appKeys[at]='takeout'; groupTarget=i; }
         w.appKeys=w.appKeys.filter(function(k){ return k!=='checkin'; }).filter(function(k,idx,arr){ return arr.indexOf(k)===idx; });
         if(w.id==='l7_p2_apps') w.appKeys=w.appKeys.filter(function(k){ return k!=='takeout'; });
-        if(w.appCols) w.appCols=Math.min(2,Number(w.appCols)||2);
+        if(w.appCols) w.appCols=Math.max(1,Math.min(4,Number(w.appCols)||2));
       });
     });
     if(groupTarget<0){
@@ -2546,6 +2545,18 @@ function fixAll(){
     });
     DB.ui.takeoutDesktopV54=true;
     DB.ui.takeoutDesktopV55=true;
+  }
+  if(!DB.ui.desktopPage2V59){
+    while(DB.ui.homePages.length<2) DB.ui.homePages.push([]);
+    DB.ui.homePages[1]=['hang','shop','date','out'];
+    DB.ui.widgetPages.forEach(function(pageWidgets){
+      const group=(pageWidgets||[]).find(function(w){ return w.id==='l7_p2_apps'; });
+      if(!group) return;
+      group.appKeys=['hang','shop','date','out'];
+      group.appCols=2;
+      group.cols=2;
+    });
+    DB.ui.desktopPage2V59=true;
   }
   DB.ui.homePages=DB.ui.homePages.map(function(page){ return (Array.isArray(page)?page:[]).filter(function(k){ return APPS.some(function(a){ return a.k===k; }); }).filter(function(k,i,arr){ return arr.indexOf(k)===i; }).slice(0,16); });
   if(!DB.ui.fourthPageV1){
@@ -2599,7 +2610,7 @@ function defaultDesktopWidgetPages(){
 function defaultLayout7HomePages(){
   return [
     ['wechat','novel','gallery','weibo','takeout','diary'],
-    ['hang','shop','out','date'],
+    ['hang','shop','date','out'],
     ['settings','forum','world','regex'],
     ['clock','couple','soul','music']
   ];
@@ -2625,7 +2636,7 @@ function defaultLayout7WidgetPages(){
       {id:'l7_p2_books',type:'books',title:'桌面书架',text:'雨停之前|长夜来信|旧城手记',bookImages:['','',''],x:0,y:.5,w:3.75,h:2.25,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_note1',type:'text',title:'小记',text:'',x:0,y:3,w:2,h:1,shape:'pill',pattern:'stars'},
       {id:'l7_p2_list',type:'list',title:'创作清单',text:'整理旧稿\n补一场夜戏\n记下今天的灵感',x:2,y:3,w:1.75,h:3,shape:'arch',pattern:'stars'},
-      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','out','date'],appCols:2,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
+      {id:'l7_p2_apps',type:'appgroup',appKeys:['hang','shop','date','out'],appCols:2,x:0,y:4.25,w:2,h:2.25,shape:'rounded',pattern:'none'},
       {id:'l7_p2_quote',type:'quote',title:'摘录',text:'你只需要把灯留着，回来的人会看见。',x:2,y:6.25,w:1.75,h:2.5,shape:'rounded',pattern:'none'},
       {id:'l7_p2_note2',type:'text',title:'小记',text:'和重要的人，再靠近一点。',x:0,y:7,w:2,h:1.75,shape:'rounded',pattern:'stars'},
       {id:'l7_p2_photo',type:'image',title:'',image:photos[1],x:0,y:9,w:3.75,h:1.75,shape:'rounded',pattern:'none'}
@@ -9992,8 +10003,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.47 · 第 58 轮';
-const BUILD_CODE=58;
+const BUILD='2026-10-27 · 3.48 · 第 59 轮';
+const BUILD_CODE=59;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10014,7 +10025,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10024,6 +10035,10 @@ async function runCheckupUI(){
   const exactBad=exactStates.filter(function(x){ return x[1].mode!=='exact'||x[1].scope==='union'; });
   add('精确绑定', exactBad.length===0, exactBad.length?('异常：'+exactBad.map(function(x){ return x[0]; }).join('、')):exactStates.map(function(x){ return x[0]+'='+(x[1].chatId?'会话':x[1].contactId?'角色':x[1].personaId?'人设':'未绑定'); }).join(' · '));
   add('微博并集绑定', wbBindings().length>=1, wbBindings().length+' 个来源 · 生成内容保留独立来源记录');
+  add('微博角色互动', typeof wbReactToUserPost==='function'&&typeof wbReactLikeUserPost==='function'&&typeof wbReactRepostUserPost==='function', '点赞 / 评论 / 随机转发已接入');
+  const p2=(DB.ui.homePages||[])[1]||[],p2Group=((DB.ui.widgetPages||[])[1]||[]).find(function(w){ return w.id==='l7_p2_apps'; });
+  const p2Ok=JSON.stringify(p2)===JSON.stringify(['hang','shop','date','out'])&&p2Group&&JSON.stringify(p2Group.appKeys)===JSON.stringify(p2)&&Number(p2Group.appCols)===2;
+  add('第二页图标布局', !!p2Ok, p2Ok?'查岗/网购 · 约会/出门 · 两列 52px':'布局异常，请恢复默认第二页');
   add('联系人', (DB.contacts||[]).length>0, (DB.contacts||[]).length+' 位');
   add('会话', true, (DB.chats||[]).length+' 个');
   add('作者 / 小说', true, '作者 '+(DB.np.author.penName||'未命名')+' · 书 '+(DB.books||[]).length+' 本 · 读者 '+(DB.np.readers||[]).length+' 位');
@@ -11152,6 +11167,64 @@ async function wbGenComments(post,count){
   res.forEach(wbAttachTrace);
   return res;
 }
+function wbReactLikeUserPost(post){
+  if(!post) return null;
+  const roles=wbCast();
+  if(!roles.length) return null;
+  post.roleLikes=Array.isArray(post.roleLikes)?post.roleLikes:[];
+  const candidates=roles.filter(function(c){ return post.roleLikes.indexOf(c.id)<0; });
+  if(!candidates.length) return null;
+  const c=candidates[Math.floor(Math.random()*candidates.length)];
+  post.roleLikes.push(c.id);
+  post.likes=Math.max(1,(Number(post.likes)||0)+1);
+  wbNotify('like',contactDisplayName(c)+' 赞了你的微博',post.id);
+  save();
+  return c;
+}
+async function wbReactRepostUserPost(post){
+  if(!post||!DB.api.key) return null;
+  const roles=wbCast();
+  if(!roles.length||Math.random()>=0.4) return null;
+  const c=roles[Math.floor(Math.random()*roles.length)];
+  const binding=wbBindings().find(function(b){ return b.contactId===c.id; })||{};
+  try{
+    const sys=promptOf(c,null,[],{format:'plain',personaId:binding.personaId,chatId:binding.chatId})
+      +'\n【任务】你刚在微博刷到用户发的这条内容。写一句你自己的转发语，10 到 35 个中文字，必须紧扣原微博的具体内容。'
+      +'\n只输出转发语，不要引号，不要解释，不要写用户名。';
+    const out=await callModel([{role:'system',content:sys},{role:'user',content:'原微博：'+String(post.text||'').slice(0,420)}]);
+    const text=wbClean(out).slice(0,80);
+    if(!text) return null;
+    const rp=wbAttachTrace({
+      id:uid(),author:wbAuthor(c.id),text:text,topic:'',cat:'热门',local:false,ts:Date.now(),
+      likes:Math.floor(Math.random()*60),reposts:0,liked:false,comments:[],img:0,
+      repostOf:{name:wbMeName(),text:String(post.text||'').slice(0,160)},
+      source:wbAuthor(c.id).source
+    });
+    const w=wbDB();
+    w.posts.unshift(rp);
+    post.reposts=(Number(post.reposts)||0)+1;
+    wbNotify('comment',contactDisplayName(c)+' 转发了你的微博：'+text.slice(0,18),post.id);
+    save();
+    return rp;
+  }catch(e){ logErr('微博角色转发失败：'+e.message); return null; }
+}
+async function wbReactToUserPost(post){
+  if(!post) return;
+  setTimeout(function(){ const c=wbReactLikeUserPost(post); if(c&&route.name==='weibo') render(); },450);
+  if(!DB.api.key) return;
+  try{
+    await sleep(700);
+    const comments=await wbGenComments(post,2+Math.floor(Math.random()*3));
+    if(comments.length){
+      post.comments=(post.comments||[]).concat(comments);
+      comments.slice(0,2).forEach(function(c){ wbNotify('comment',c.name+' 评论了你的微博：'+String(c.text).slice(0,18),post.id); });
+      save();
+    }
+    await wbReactRepostUserPost(post);
+    save();
+    if(route.name==='weibo') render();
+  }catch(e){ logErr('微博绑定角色互动失败：'+e.message); }
+}
 function wbNoticeExcerpt(p){ return String((p&&p.text)||'').replace(/\s+/g,' ').slice(0,18); }
 function wbNotifyMentions(posts){ (posts||[]).forEach(function(p){ if(p&&p.author&&p.author.key!=='me'&&wbMentionsUser(p.text)) wbNotify('at',p.author.name+' 在微博里@了你',p.id); }); }
 async function wbGenBatchComments(posts){
@@ -12035,10 +12108,12 @@ function sheetWbCompose(id){
     const t=wbClean($('#wb_txt').value);
     if(!t){ toast('写点东西'); return; }
     const a=wbAuthor('me');
-    w.posts.unshift(wbAttachTrace({id:uid(),author:a,text:t,topic:wbClean($('#wb_topic').value),cat:'热门',local:false,
-      ts:Date.now(),likes:0,reposts:0,liked:false,comments:[],repostOf:null,img:0,source:'来自 微博网页版'}));
+    const post=wbAttachTrace({id:uid(),author:a,text:t,topic:wbClean($('#wb_topic').value),cat:'热门',local:false,
+      ts:Date.now(),likes:0,reposts:0,liked:false,comments:[],repostOf:null,img:0,source:'来自 微博网页版'});
+    w.posts.unshift(post);
     if(wbDraftEditing) w.drafts=w.drafts.filter(function(x){ return x.id!==wbDraftEditing; });
     save(); closeSheet(); render(); toast('已发布');
+    wbReactToUserPost(post).catch(function(e){ logErr(e.message); });
   };
 }
 function sheetWbRepost(pid){
@@ -12056,13 +12131,7 @@ function sheetWbRepost(pid){
     w.posts.unshift(np);
     p.reposts=(p.reposts||0)+1;
     save(); closeSheet(); render(); toast('已转发');
-    if(DB.api.key){
-      wbGenComments(np,3).then(function(add){
-        np.comments=(np.comments||[]).concat(add);
-        if(add.length) wbNotify('comment',add[0].name+' 评论了你的转发：'+String(add[0].text).slice(0,18),np.id);
-        save(); if(route.name==='weibo') render();
-      }).catch(function(){});
-    }
+    wbReactToUserPost(np).catch(function(e){ logErr(e.message); });
   };
 }
 function sheetTrend(title){
