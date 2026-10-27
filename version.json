@@ -1,9 +1,9 @@
 {
-  "version": "3.57",
-  "versionCode": 68,
-  "round": 68,
+  "version": "3.58",
+  "versionCode": 69,
+  "round": 69,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=68",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=69",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "情侣空间基础闭环上线：精确绑定、主空间与会话分支、纪念日、交换日记、相册、任务、亲密度、小家与微信记忆互通。"
+  "notes": "情侣空间完整闭环：新增一起做饭、默契大挑战、真心话大冒险、领养养成、家庭币与任务小道具奖励。"
 }

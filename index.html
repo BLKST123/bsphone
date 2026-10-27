@@ -2027,6 +2027,39 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .couple-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border-radius:8px;background:color-mix(in srgb,var(--theme-rose-soft) 45%,var(--card));font-size:calc(10.5px * var(--ui-font-scale,1));max-width:100%;overflow-wrap:anywhere}
 .couple-chip button{border:0;background:transparent;color:var(--fg2);padding:0 2px;cursor:pointer}
 .couple-branch{margin:4px 14px 10px;padding:8px 10px;border-radius:9px;background:color-mix(in srgb,var(--theme-rose-soft) 34%,var(--card));font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.6;color:var(--fg2)}
+.couple-kitchen-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}
+.couple-recipe{padding:10px;border:1px solid var(--line);border-radius:10px;background:color-mix(in srgb,var(--card) 94%,transparent);min-width:0}
+.couple-recipe b{display:block;font-size:calc(12.5px * var(--ui-font-scale,1));line-height:1.45}
+.couple-recipe small{display:block;color:var(--fg2);font-size:calc(9.5px * var(--ui-font-scale,1));line-height:1.5;margin-top:4px;overflow-wrap:anywhere}
+.couple-recipe button{margin-top:7px;width:100%}
+.couple-ingredient{display:inline-flex;align-items:center;gap:4px;padding:6px 8px;border-radius:9px;background:color-mix(in srgb,var(--theme-rose-soft) 44%,var(--card));margin:3px 4px 3px 0;font-size:calc(10.5px * var(--ui-font-scale,1))}
+.couple-cook-stage{margin-top:10px;padding:11px;border-radius:11px;background:color-mix(in srgb,var(--theme-rose-soft) 34%,var(--card));border:1px solid color-mix(in srgb,var(--theme-rose-deep) 12%,var(--line))}
+.couple-cook-stage .steps{display:flex;gap:5px;margin:7px 0}
+.couple-cook-stage .steps i{height:4px;flex:1;border-radius:99px;background:color-mix(in srgb,var(--fg2) 18%,transparent)}
+.couple-cook-stage .steps i.on{background:var(--deep)}
+.couple-cook-actions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;margin-top:8px}
+.couple-cook-actions .btn{font-size:calc(10.5px * var(--ui-font-scale,1));padding:8px 4px;min-width:0}
+.couple-polaroid{width:100%;height:100%;padding:8px 8px 18px;background:linear-gradient(145deg,#fffdf8,#f2e9dc);color:#3e3432;display:flex;flex-direction:column;justify-content:space-between;position:relative;box-sizing:border-box}
+.couple-polaroid b{font-size:calc(10px * var(--ui-font-scale,1));line-height:1.4;overflow:hidden;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.couple-polaroid small{font-size:calc(8px * var(--ui-font-scale,1));color:#8c7770;text-align:right}
+.couple-play-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:9px}
+.couple-play-card{padding:11px;border-radius:11px;border:1px solid var(--line);background:color-mix(in srgb,var(--theme-rose-soft) 30%,var(--card));min-width:0}
+.couple-play-card b{display:block;font-size:calc(13px * var(--ui-font-scale,1))}
+.couple-play-card .muted{line-height:1.55;margin-top:5px}
+.couple-quiz-option{display:block;width:100%;text-align:left;margin-top:7px;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:var(--card);color:var(--fg);font-size:calc(12px * var(--ui-font-scale,1));cursor:pointer}
+.couple-quiz-option:active{border-color:var(--deep)}
+.couple-result{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:9px}
+.couple-result div{padding:7px 4px;border-radius:8px;background:color-mix(in srgb,var(--theme-rose-soft) 38%,var(--card));text-align:center;min-width:0}
+.couple-result b{display:block;font-size:calc(13px * var(--ui-font-scale,1))}
+.couple-result small{font-size:calc(8px * var(--ui-font-scale,1));color:var(--fg2)}
+.couple-adopt-card{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--line)}
+.couple-adopt-card:last-child{border-bottom:0}
+.couple-adopt-emoji{width:38px;height:38px;border-radius:11px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--theme-rose-soft) 48%,var(--card));font-size:19px;flex:none}
+.couple-adopt-card .grow{min-width:0}
+.couple-adopt-card b{display:block;font-size:calc(12.5px * var(--ui-font-scale,1))}
+.couple-adopt-card small{display:block;color:var(--fg2);font-size:calc(9.5px * var(--ui-font-scale,1));margin-top:3px;overflow-wrap:anywhere}
+.couple-care{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
+.couple-care button{border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--fg);padding:4px 7px;font-size:calc(9.5px * var(--ui-font-scale,1));cursor:pointer}
 .takeout-order-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .takeout-timeline{margin-top:12px;padding-left:6px}
 .takeout-time-line{display:flex;gap:10px;position:relative;padding:0 0 13px}
@@ -6331,7 +6364,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.57 · 第 68 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.58 · 第 69 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6344,12 +6377,12 @@ const PROGRESS_GROUPS=[
     ['小说多读者群','永久总群、每书独立群、自定义群；成员、消息、未读和自动刷新按群隔离；支持拉人、解散、清空和删除；总群可跨作品讨论；发布与新增章节会一次加入 20 位以上读者。'],
     ['外卖','分类、店铺、商品规格、购物车、多地址、用户/角色下单、订单号、备注、配送进度、订单详情和会话气泡。'],
     ['约会与出门','精确绑定、约会开场白、场景生成、共享会话记忆、出门剧情、拍立得和自定义动作；约会与出门都支持多选迁移、从节点重开、复制副本、选择性继承记忆和重新生成最后一轮，旧记录保留且失败自动回滚。'],
+    ['情侣空间','精确绑定、主空间与会话分支记忆、纪念日、交换日记、相册、情侣任务、一起做饭、默契大挑战、真心话大冒险、领养养成、亲密度、我们的小家与微信记忆互通。'],
     ['灵魂匹配','绑定用户人设、世界书与正则；匿名网名生成、五分钟现实计时、退出暂停、好友申请红点、拒绝后自动重试、第三次拒绝清空，以及通过后把原聊天和来源标签迁移到微信。'],
     ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
-    ['情侣空间','精确绑定、主空间、会话分支记忆、纪念日、交换日记、相册、任务奖励、亲密度和小家成员已可用；做饭、默契挑战、真心话和完整领养流程仍待补齐。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
   ]},
   {k:'pending',n:'尚未完成',color:'#c4545b',items:[
@@ -7187,7 +7220,7 @@ function screenCouple(){
   const space=coupleSpaceFor(c.activeBinding,true);
   if(!space) return '<div class="pad">'+wxTop('情侣空间')+'<div class="empty">这个绑定暂时无法建立空间。</div></div>';
   const tab=c.tab||'home';
-  const body=tab==='days'?coupleDaysHTML(space):tab==='diary'?coupleDiaryHTML(space):tab==='album'?coupleAlbumHTML(space):tab==='tasks'?coupleTasksHTML(space):tab==='home'?coupleHomeHTML(space):coupleDashboardHTML(space);
+  const body=tab==='days'?coupleDaysHTML(space):tab==='diary'?coupleDiaryHTML(space):tab==='album'?coupleAlbumHTML(space):tab==='tasks'?coupleTasksHTML(space):tab==='kitchen'?coupleKitchenHTML(space):tab==='play'?couplePlayHTML(space):tab==='home'?coupleHomeHTML(space):coupleDashboardHTML(space);
   return '<div class="pad" style="padding-top:0">'
     +wxTop('情侣空间','<button class="ic2" id="coupleMenu" title="空间设置">⋯</button>')
     +'<div class="lrow" data-couplebind="1">'+avBox(r.contact)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(r.contact)+' · '+r.persona.name)+'</div><div class="t2">'+esc(exactBindingSummary(c.activeBinding))+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
@@ -7195,7 +7228,7 @@ function screenCouple(){
     +coupleBranchHTML(space)
     +body+'</div>';
 }
-const COUPLE_TABS=[['home','小家'],['days','纪念日'],['diary','交换日记'],['album','相簿'],['tasks','情侣任务']];
+const COUPLE_TABS=[['home','小家'],['days','纪念日'],['diary','交换日记'],['album','相簿'],['tasks','情侣任务'],['kitchen','一起做饭'],['play','互动']];
 function coupleEnsure(){
   DB.couple=Object.assign({activeBinding:null,activeSpaceId:null,tab:'home',spaces:[],memories:{},foods:[],meals:[],tasks:[],adoptions:[]},DB.couple||{});
   DB.couple.spaces=Array.isArray(DB.couple.spaces)?DB.couple.spaces:[];
@@ -7207,6 +7240,15 @@ function coupleEnsure(){
     s.album=Array.isArray(s.album)?s.album:[];
     s.tasks=Array.isArray(s.tasks)?s.tasks:[];
     s.branches=s.branches&&typeof s.branches==='object'?s.branches:{};
+    s.kitchen=Object.assign({inventory:{},active:null,history:[]},s.kitchen||{});
+    s.kitchen.inventory=s.kitchen.inventory&&typeof s.kitchen.inventory==='object'?s.kitchen.inventory:{};
+    s.kitchen.history=Array.isArray(s.kitchen.history)?s.kitchen.history:[];
+    s.play=Object.assign({compat:null,challenge:null,history:[]},s.play||{});
+    s.play.history=Array.isArray(s.play.history)?s.play.history:[];
+    s.family=Object.assign({coins:3,items:[],adoptions:[]},s.family||{});
+    s.family.items=Array.isArray(s.family.items)?s.family.items:[];
+    s.family.adoptions=Array.isArray(s.family.adoptions)?s.family.adoptions:[];
+    s.family.coins=Math.max(0,Number(s.family.coins)||0);
     s.home=Object.assign({name:'我们的小家',rooms:[],items:[],members:[],notes:''},s.home||{});
     s.home.rooms=Array.isArray(s.home.rooms)?s.home.rooms:[];
     s.home.items=Array.isArray(s.home.items)?s.home.items:[];
@@ -7239,6 +7281,9 @@ function coupleSpaceFor(binding,create){
       tasks:[],
       branches:{},
       home:{name:'我们的小家',rooms:[],items:[],members:[],notes:''},
+      kitchen:{inventory:{番茄:2,鸡蛋:2,面条:1,青菜:2},active:null,history:[]},
+      play:{compat:null,challenge:null,history:[]},
+      family:{coins:3,items:[],adoptions:[]},
       intimacy:0
     };
     c.spaces.unshift(space);
@@ -7344,7 +7389,8 @@ function coupleDiaryHTML(space){
 function coupleAlbumHTML(space){
   return '<div class="card"><div class="row"><b class="grow">情侣相簿</b><button class="btn primary" id="couplePickPhoto">从相册选</button></div>'
     +(space.album.length?'<div class="couple-album">'+space.album.map(function(p){
-      return '<div class="couple-photo" data-couplephoto="'+p.id+'"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||'情侣照片')+'"><div class="cap">'+esc(p.caption||'我们的照片')+'</div><button class="ic2" data-couplephotodel="'+p.id+'" title="移除" style="position:absolute;right:3px;top:3px;background:rgba(0,0,0,.45);color:#fff">×</button></div>';
+      const visual=p.type==='polaroid'?'<div class="couple-polaroid"><b>'+esc(p.title||'一起做饭')+'</b><small>'+esc(p.score? p.score+'分':'拍立得')+'</small></div>':'<img src="'+esc(p.url)+'" alt="'+esc(p.caption||'情侣照片')+'">';
+      return '<div class="couple-photo" data-couplephoto="'+p.id+'">'+visual+'<div class="cap">'+esc(p.caption||(p.type==='polaroid'?'做饭拍立得':'我们的照片'))+'</div><button class="ic2" data-couplephotodel="'+p.id+'" title="移除" style="position:absolute;right:3px;top:3px;background:rgba(0,0,0,.45);color:#fff">×</button></div>';
     }).join('')+'</div>':'<div class="empty" style="padding:24px 8px">从相册里选一张放进情侣相簿。</div>')+'</div>';
 }
 function coupleTasksHTML(space){
@@ -7360,6 +7406,288 @@ function coupleHomeHTML(space){
     +'<div class="muted" style="margin-top:12px">家庭成员</div><div class="couple-chip-row">'+(space.home.members.length?space.home.members.map(function(m){ return '<span class="couple-chip">'+esc((m.kind||'成员')+' · '+(m.name||''))+'<button data-couplememberdel="'+m.id+'">×</button></span>'; }).join(''):'<span class="muted">还没有添加</span>')+'</div><button class="btn full" data-couplehomeadd="member" style="margin-top:7px">＋ 领养宠物或添加孩子</button>'
     +(space.home.notes?'<div class="takeout-review" style="margin-top:12px">'+esc(space.home.notes)+'</div>':'')
     +'</div>';
+}
+const COUPLE_INGREDIENTS={
+  番茄:{icon:'🍅',price:3},牛腩:{icon:'🥩',price:12},鸡蛋:{icon:'🥚',price:2},面条:{icon:'🍜',price:3},
+  青菜:{icon:'🥬',price:2},蘑菇:{icon:'🍄',price:4},奶油:{icon:'🥛',price:5},鸡翅:{icon:'🍗',price:10},米饭:{icon:'🍚',price:2}
+};
+const COUPLE_RECIPES=[
+  {id:'tomato_beef',title:'番茄牛腩',desc:'慢炖到汤汁浓一点，适合两个人守着锅聊天。',ingredients:{牛腩:1,番茄:2}},
+  {id:'tomato_egg',title:'番茄炒蛋',desc:'简单但考验火候，鸡蛋要嫩，番茄要出汁。',ingredients:{番茄:1,鸡蛋:2}},
+  {id:'mushroom_pasta',title:'奶油蘑菇面',desc:'先把蘑菇煎香，再让奶油裹住面条。',ingredients:{蘑菇:1,奶油:1,面条:1}},
+  {id:'chicken_wings',title:'红烧鸡翅',desc:'收汁的时候最容易偷吃，适合一起看火。',ingredients:{鸡翅:2}},
+  {id:'green_rice',title:'清炒时蔬配饭',desc:'一顿安静的家常饭，洗菜和控火都能一起做。',ingredients:{青菜:2,米饭:1}}
+];
+const COUPLE_COOK_STAGES=[
+  {title:'处理食材',desc:'洗、切、分盘，也可以把肉和菜分开处理。',options:['我洗切','Ta处理肉菜','一起准备']},
+  {title:'下锅烹饪',desc:'火候和调味都在这一刻决定。',options:['我掌勺','Ta掌勺','一起看火']},
+  {title:'装盘拍照',desc:'把今天这一顿留下来。',options:['我来摆盘','Ta来摆盘','一起摆盘']}
+];
+const COUPLE_QUIZ=[
+  {q:'周末突然空出半天，你们最可能怎么过？',options:['窝在家里各做各的','临时出门散步','一起做大餐','把欠下的消息慢慢回完']},
+  {q:'吵架后，谁更容易先递台阶？',options:['我','Ta','看谁理亏','不用台阶，直接抱一下']},
+  {q:'对方最容易被哪一种小动作哄好？',options:['主动牵手','认真听完','准备吃的','假装没事地靠近']},
+  {q:'如果只能留下一种共同记忆，会选？',options:['一次旅行','每天一起吃饭','深夜长聊','一个普通周末']},
+  {q:'看到对方情绪低落，你更常怎么做？',options:['先问怎么了','安静陪着','转移注意力','直接替Ta解决']}
+];
+const COUPLE_TRUTH_PROMPTS=['说一件最近没告诉对方的小情绪。','第一次觉得对方特别，是在什么时候？','如果今天能重来一次，你想改哪个瞬间？','你最容易因为对方的什么细节心软？','最近一次想主动找对方，却忍住了是为什么？'];
+const COUPLE_DARE_PROMPTS=['用三个动作向对方撒娇，不许说话。','给对方录十五秒语音，只说此刻最想说的话。','找出手机里一张照片，讲它背后的故事。','让对方替你选今天下一件要做的小事。','用一句只有你们懂的话哄对方开心。'];
+function coupleInventoryCount(space,name){ return Math.max(0,Number(space.kitchen.inventory[name])||0); }
+function coupleRecipeMissing(space,recipe){
+  return Object.keys(recipe.ingredients).filter(function(name){ return coupleInventoryCount(space,name)<Number(recipe.ingredients[name]); });
+}
+function coupleIngredientNames(recipe){
+  return Object.keys(recipe.ingredients).map(function(name){ return name+'×'+recipe.ingredients[name]; }).join('、');
+}
+function coupleKitchenHTML(space){
+  const pantry=Object.keys(COUPLE_INGREDIENTS).map(function(name){ const n=coupleInventoryCount(space,name); return n?'<span class="couple-ingredient">'+COUPLE_INGREDIENTS[name].icon+' '+esc(name)+' ×'+n+'</span>':''; }).join('');
+  const active=space.kitchen.active;
+  let activeHTML='';
+  if(active){
+    const recipe=COUPLE_RECIPES.find(function(x){ return x.id===active.recipeId; })||COUPLE_RECIPES[0];
+    const stage=COUPLE_COOK_STAGES[Math.min(2,Number(active.stage)||0)];
+    activeHTML='<div class="couple-cook-stage"><div class="row"><b class="grow">正在做：'+esc(recipe.title)+'</b><button class="btn danger" id="coupleCookCancel">取消</button></div><div class="steps">'+COUPLE_COOK_STAGES.map(function(_,i){ return '<i class="'+(i<Number(active.stage)?'on':'')+'"></i>'; }).join('')+'</div><b>'+esc(stage.title)+'</b><div class="muted" style="margin-top:4px">'+esc(stage.desc)+'</div>'+(active.lines&&active.lines.length?'<div class="takeout-review">'+esc(active.lines[active.lines.length-1])+'</div>':'')+'<div class="couple-cook-actions">'+stage.options.map(function(t,i){ return '<button class="btn" data-couplecookstep="'+i+'">'+esc(t)+'</button>'; }).join('')+'</div></div>';
+  }else{
+    activeHTML='<div class="couple-kitchen-list">'+COUPLE_RECIPES.map(function(r){
+      const miss=coupleRecipeMissing(space,r);
+      return '<div class="couple-recipe"><b>'+esc(r.title)+'</b><small>'+esc(r.desc)+'<br>'+esc(coupleIngredientNames(r))+'</small><button class="btn primary" data-couplestartcook="'+r.id+'">'+(miss.length?'缺'+esc(miss.join('、')):'开始做')+'</button></div>';
+    }).join('')+'</div>';
+  }
+  return '<div class="card"><div class="row"><b class="grow">一起做饭</b><button class="btn" id="coupleReplenish">补食材</button></div><div class="couple-chip-row">'+(pantry||'<span class="muted">食材柜还是空的</span>')+'</div>'+activeHTML+'</div>'
+    +(space.kitchen.history.length?'<div class="card"><b>做过的饭</b>'+space.kitchen.history.slice(0,5).map(function(m){ return '<div class="couple-row"><div class="grow"><b>'+esc(m.title)+'</b><div class="muted">'+esc(m.comment||'')+'</div></div><span class="np-chip on">'+Number(m.score||0)+'分</span></div>'; }).join('')+'</div>':'');
+}
+function sheetCoupleReplenish(){
+  const space=coupleActiveSpace(); if(!space) return;
+  const r=exactBindingResolved(DB.couple.activeBinding);
+  const draw=function(){
+    const wallet=walletForPersona(r.persona.id);
+    sheet('<h3>补充食材</h3><div class="muted" style="margin:6px 0 10px">从共同钱包购买。当前余额 '+money(wallet.balance)+'。</div>'
+      +Object.keys(COUPLE_INGREDIENTS).map(function(name){ const x=COUPLE_INGREDIENTS[name]; return '<div class="lrow" data-couplebuying="'+name+'"><div class="mi"><div class="t1">'+x.icon+' '+esc(name)+'</div><div class="t2">已有 '+coupleInventoryCount(space,name)+' · '+money(x.price)+'</div></div><div class="rt"><button class="btn primary">买一份</button></div></div>'; }).join('')
+      +'<button class="btn full" id="coupleReplenishClose">关闭</button>');
+    $('#coupleReplenishClose').onclick=closeSheet;
+    $$('#sheetBox [data-couplebuying]').forEach(function(el){ el.onclick=function(){
+      const name=el.dataset.couplebuying,price=COUPLE_INGREDIENTS[name].price,w=walletForPersona(r.persona.id);
+      if(Number(w.balance||0)<price){ toast('共同钱包余额不够'); return; }
+      w.balance=Number(w.balance||0)-price;
+      space.kitchen.inventory[name]=coupleInventoryCount(space,name)+1;
+      space.updatedAt=Date.now(); save(); draw();
+    }; });
+  };
+  draw();
+}
+function startCoupleCooking(recipeId){
+  const space=coupleActiveSpace(); if(!space) return;
+  if(space.kitchen.active){ toast('先把正在做的这道菜完成'); return; }
+  const recipe=COUPLE_RECIPES.find(function(x){ return x.id===recipeId; }); if(!recipe) return;
+  const miss=coupleRecipeMissing(space,recipe);
+  if(miss.length){ toast('还缺：'+miss.join('、')); sheetCoupleReplenish(); return; }
+  Object.keys(recipe.ingredients).forEach(function(name){ space.kitchen.inventory[name]=coupleInventoryCount(space,name)-Number(recipe.ingredients[name]); });
+  space.kitchen.active={id:uid(),recipeId:recipe.id,stage:0,lines:[],startedAt:Date.now()};
+  space.updatedAt=Date.now(); save(); render();
+}
+function coupleCookFallback(stage,action,recipe){
+  const lead=['你们把食材摊开，水声和刀碰到案板的声音混在一起。','锅热起来以后，香气慢慢把厨房填满。','最后一点热气留在盘沿，你们把这一顿放到了桌上。'][stage];
+  return lead+action+'，'+recipe.title+'比想象里更像一顿认真过日子的饭。';
+}
+async function advanceCoupleCooking(actionIndex){
+  const space=coupleActiveSpace(); if(!space||!space.kitchen.active) return;
+  const active=space.kitchen.active;
+  const recipe=COUPLE_RECIPES.find(function(x){ return x.id===active.recipeId; }); if(!recipe) return;
+  const stage=Math.max(0,Math.min(2,Number(active.stage)||0));
+  const action=COUPLE_COOK_STAGES[stage].options[Math.max(0,Math.min(2,Number(actionIndex)||0))];
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  let line=coupleCookFallback(stage,action,recipe);
+  busy('正在一起做饭，请稍后');
+  try{
+    if(DB.api.key){
+      try{
+        const sys=promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-6),{chatId:r.binding.chatId,personaId:r.persona.id})
+          +'\n【做饭场景】你们正在一起做「'+recipe.title+'」。当前步骤：'+COUPLE_COOK_STAGES[stage].title+'。用户刚选择：'+action+'。'
+          +'\n只写一到两句中文现场描写，要包含具体动作、气味或声音。不要列步骤，不要提 AI，不要替用户说话。';
+        const out=await callModel([{role:'system',content:sys},{role:'user',content:'继续做这一步。'}]);
+        if(String(out||'').trim()) line=String(out).trim().slice(0,420);
+      }catch(e){ logErr('做饭步骤生成失败：'+e.message); }
+    }
+    active.lines.push({stage:stage,action:action,text:line,ts:Date.now()});
+    active.stage=stage+1;
+    if(active.stage>=3) await finishCoupleMeal(space,active,recipe);
+    else { space.updatedAt=Date.now(); save(); render(); }
+  }finally{ busyDone(); }
+}
+function coupleMealFallbackScore(space){
+  return {score:78+(space.kitchen.history.length*3)%18,taste:82,cooperation:88,mood:86,comment:'火候不算完美，但两个人一起做出来的味道很稳。'};
+}
+async function finishCoupleMeal(space,active,recipe){
+  const r=exactBindingResolved(DB.couple.activeBinding);
+  let result=coupleMealFallbackScore(space);
+  if(DB.api.key&&r.contact){
+    try{
+      const lines=(active.lines||[]).map(function(x){ return x.text; }).join('\n');
+      const out=await callModel([{role:'system',content:promptOf(r.contact,null,[],{chatId:r.binding.chatId,personaId:r.persona.id})+'\n【任务】评价你们刚一起完成的「'+recipe.title+'」。只输出 JSON：{"score":0到100的数字,"taste":0到100,"cooperation":0到100,"mood":0到100,"comment":"30到80字，符合角色语气，具体、不模板化"}。\n【过程】\n'+lines},{role:'user',content:'评价这顿饭。'}]);
+      const j=soulParseJSON(out);
+      result={score:Math.max(0,Math.min(100,Number(j.score)||0)),taste:Math.max(0,Math.min(100,Number(j.taste)||0)),cooperation:Math.max(0,Math.min(100,Number(j.cooperation)||0)),mood:Math.max(0,Math.min(100,Number(j.mood)||0)),comment:String(j.comment||'').slice(0,180)};
+    }catch(e){ logErr('做饭评价生成失败：'+e.message); }
+  }
+  const meal={id:uid(),recipeId:recipe.id,title:recipe.title,score:result.score,taste:result.taste,cooperation:result.cooperation,mood:result.mood,comment:result.comment,lines:active.lines.slice(),ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-meal')};
+  space.kitchen.history.unshift(meal);
+  const polaroid={id:uid(),type:'polaroid',title:recipe.title,mealId:meal.id,text:result.comment,score:result.score,ts:Date.now(),caption:recipe.title+' · '+result.score+'分'};
+  space.album.unshift(polaroid);
+  space.intimacy+=Math.max(1,Math.round(result.score/10));
+  coupleRecordMemory(space,'我们一起做了'+recipe.title+'。'+(result.comment||''));
+  space.kitchen.active=null; space.updatedAt=Date.now();
+  save(); render(); toast('这顿饭做好了，拍立得已存进相簿');
+}
+function cancelCoupleCooking(){
+  const space=coupleActiveSpace(); if(!space||!space.kitchen.active) return;
+  sheetSmall('<h3>停止这次做饭？</h3><div class="muted" style="margin:8px 0 14px">已经用掉的食材不会退回。</div><button class="btn danger full" id="coupleCookStopYes">停止</button><button class="btn full" id="coupleCookStopNo">继续做</button>');
+  $('#coupleCookStopNo').onclick=closeSheet;
+  $('#coupleCookStopYes').onclick=function(){ space.kitchen.active=null; save(); closeSheet(); render(); };
+}
+function couplePartnerQuizFallback(space){
+  return COUPLE_QUIZ.map(function(q,i){ const seed=npHash((space.contactId||'')+(space.personaId||'')+i+space.intimacy); return {answer:seed%q.options.length,reason:'按 Ta 平时的习惯，大概会这样选。'}; });
+}
+async function startCoupleCompatibility(){
+  const space=coupleActiveSpace(); if(!space) return;
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  let partner=couplePartnerQuizFallback(space);
+  busy('正在等 Ta 作答，请稍后');
+  try{
+    if(DB.api.key){
+      try{
+        const questions=COUPLE_QUIZ.map(function(q,i){ return (i+1)+'. '+q.q+' 选项：'+q.options.map(function(o,j){ return String.fromCharCode(65+j)+'.'+o; }).join(' / '); }).join('\n');
+        const out=await callModel([{role:'system',content:promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-8),{chatId:r.binding.chatId,personaId:r.persona.id})+'\n【默契挑战】请完全按照角色自己的人设回答以下五题，不要迎合用户。只输出 JSON：{"answers":[索引0到3,...5个],"reasons":["每题一句理由",...5句]}。\n'+questions},{role:'user',content:'按你的真实选择回答。'}]);
+        const j=soulParseJSON(out);
+        if(Array.isArray(j.answers)&&j.answers.length===5) partner=j.answers.map(function(a,i){ return {answer:Math.max(0,Math.min(3,Number(a)||0)),reason:String((j.reasons||[])[i]||'Ta 的选择').slice(0,100)}; });
+      }catch(e){ logErr('默契挑战生成失败：'+e.message); }
+    }
+    space.play.compat={id:uid(),index:0,answers:[],partner:partner,finished:false,score:0,ts:Date.now()};
+    space.updatedAt=Date.now(); save(); render();
+  }finally{ busyDone(); }
+}
+function answerCoupleCompatibility(optionIndex){
+  const space=coupleActiveSpace(); if(!space||!space.play.compat||space.play.compat.finished) return;
+  const c=space.play.compat;
+  c.answers.push(Math.max(0,Math.min(3,Number(optionIndex)||0)));
+  c.index=c.answers.length;
+  if(c.index>=COUPLE_QUIZ.length){
+    c.score=c.answers.reduce(function(sum,ans,i){ return sum+(ans===c.partner[i].answer?1:0); },0);
+    c.finished=true;
+    space.intimacy+=c.score*3;
+    coupleRecordMemory(space,'我们完成了一次默契挑战，答对 '+c.score+'/5。');
+    space.updatedAt=Date.now(); save(); render(); toast('默契挑战完成：'+c.score+'/5，亲密度 +'+c.score*3);
+  }else{ space.play.compat.index=c.index; save(); render(); }
+}
+function coupleChallengeFallback(kind,space){
+  const pool=kind==='truth'?COUPLE_TRUTH_PROMPTS:COUPLE_DARE_PROMPTS;
+  return pool[(pool.length+space.intimacy+space.play.history.length)%pool.length];
+}
+async function startCoupleChallenge(kind){
+  const space=coupleActiveSpace(); if(!space) return;
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  let prompt=coupleChallengeFallback(kind,space);
+  busy('正在出题，请稍后');
+  try{
+    if(DB.api.key){
+      try{
+        const out=await callModel([{role:'system',content:promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-8),{chatId:r.binding.chatId,personaId:r.persona.id})+'\n【'+(kind==='truth'?'真心话':'大冒险')+'】给情侣双方出一道适合现在做的问题或互动，必须符合角色和当前关系，不涉及危险、违法、金钱或第三方隐私。只输出一句中文，不超过60字。'},{role:'user',content:'出一道题。'}]);
+        if(String(out||'').trim()) prompt=stripFormatTitles(out).trim().slice(0,120);
+      }catch(e){ logErr('真心话大冒险生成失败：'+e.message); }
+    }
+    space.play.challenge={id:uid(),kind:kind,prompt:prompt,status:'pending',createdAt:Date.now()};
+    space.updatedAt=Date.now(); save(); render();
+  }finally{ busyDone(); }
+}
+function sheetCoupleChallengeMine(){
+  const space=coupleActiveSpace(); const ch=space&&space.play.challenge; if(!ch) return;
+  sheet('<h3>'+(ch.kind==='truth'?'我的真心话':'我的大冒险')+'</h3><div class="takeout-review">'+esc(ch.prompt)+'</div><textarea id="coupleChallengeAnswer" style="min-height:130px" placeholder="写下你的回答或完成记录"></textarea><button class="btn primary full" id="coupleChallengeMineSave">完成</button><button class="btn full" id="coupleChallengeMineCancel">取消</button>');
+  $('#coupleChallengeMineCancel').onclick=closeSheet;
+  $('#coupleChallengeMineSave').onclick=function(){
+    const text=String($('#coupleChallengeAnswer').value||'').trim(); if(!text){ toast('还没有写内容'); return; }
+    space.play.history.unshift({id:uid(),kind:ch.kind,prompt:ch.prompt,role:'me',text:text.slice(0,800),ts:Date.now()});
+    space.intimacy+=2; coupleRecordMemory(space,'我完成了'+(ch.kind==='truth'?'真心话':'大冒险')+'：'+text.slice(0,70));
+    space.play.challenge=null; save(); closeSheet(); render(); toast('完成，亲密度 +2');
+  };
+}
+async function coupleChallengeTa(){
+  const space=coupleActiveSpace(); const ch=space&&space.play.challenge; if(!ch) return;
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  let text=ch.kind==='truth'?'我想了一会儿，还是觉得，最想留住的是你认真听我说话的时候。':'那我把手伸给你，今天剩下的路都一起走。';
+  busy('正在等 Ta 回答，请稍后');
+  try{
+    if(DB.api.key){
+      try{
+        const out=await callModel([{role:'system',content:promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-8),{chatId:r.binding.chatId,personaId:r.persona.id})+'\n【情侣互动】题目：'+ch.prompt+'\n请以角色本人身份完成这个'+(ch.kind==='truth'?'真心话':'大冒险')+'。直接写回答，不解释，不提 AI，30到100字。'},{role:'user',content:'轮到你。'}]);
+        if(String(out||'').trim()) text=stripFormatTitles(out).trim().slice(0,400);
+      }catch(e){ logErr('角色互动回答失败：'+e.message); }
+    }
+    space.play.history.unshift({id:uid(),kind:ch.kind,prompt:ch.prompt,role:'ta',text:text,ts:Date.now()});
+    space.intimacy+=3; coupleRecordMemory(space,contactDisplayName(r.contact)+'完成了'+(ch.kind==='truth'?'真心话':'大冒险')+'：'+text.slice(0,70));
+    space.play.challenge=null; save(); render(); toast('Ta 完成了，亲密度 +3');
+  }finally{ busyDone(); }
+}
+function coupleAdoptedMembers(space){
+  return (space.family.adoptions||[]).map(function(a){ return {adopt:a,member:(space.home.members||[]).find(function(m){ return m.adoptId===a.id; })}; }).filter(function(x){ return x.member; });
+}
+function coupleFamilyHTML(space){
+  const adopted=coupleAdoptedMembers(space);
+  return '<div class="card"><div class="row"><b class="grow">领养与家庭成员</b><span class="np-chip on">'+space.family.coins+' 枚家庭币</span></div><div class="muted" style="margin-top:5px">完成任务会获得家庭币和随机小道具；只能领养宠物、孩子或虚拟家庭成员，不创建成年伴侣角色。</div>'
+    +'<div class="couple-chip-row">'+(space.family.items.length?space.family.items.map(function(item){ return '<span class="couple-chip">'+esc(item.name||'小道具')+' ×'+Number(item.qty||1)+'</span>'; }).join(''):'<span class="muted">完成情侣任务可获得小道具</span>')+'</div>'
+    +(adopted.length?adopted.map(function(x){ const a=x.adopt,m=x.member; return '<div class="couple-adopt-card"><div class="couple-adopt-emoji">'+esc(a.emoji||'🐾')+'</div><div class="grow"><b>'+esc(m.name)+'</b><small>'+esc(a.kind)+' · 成长 '+Number(a.growth||0)+' · 心情 '+Number(a.mood||0)+'</small><div class="couple-care"><button data-couplecare="'+a.id+':feed">喂食</button><button data-couplecare="'+a.id+':play">陪玩</button><button data-couplecare="'+a.id+':teach">教学</button></div></div></div>'; }).join(''):'<div class="empty" style="padding:18px 6px">还没有领养新的家庭成员。</div>')
+    +'<button class="btn primary full" id="coupleAdoptBtn" style="margin-top:8px">去领养</button></div>';
+}
+function sheetCoupleAdopt(){
+  const space=coupleActiveSpace(); if(!space) return;
+  const options=[
+    {kind:'宠物',emoji:'🐱',name:'小猫'},{kind:'宠物',emoji:'🐶',name:'小狗'},{kind:'宠物',emoji:'🐰',name:'兔子'},{kind:'宠物',emoji:'🦜',name:'鹦鹉'},
+    {kind:'孩子',emoji:'🧒',name:'孩子'},{kind:'虚拟家庭成员',emoji:'🌱',name:'小精灵'}
+  ];
+  let pick=0;
+  const draw=function(){
+    sheet('<h3>领养新的家庭成员</h3><div class="muted" style="margin:6px 0 10px">每次领养需要 3 枚家庭币。当前 '+space.family.coins+' 枚。</div>'
+      +options.map(function(x,i){ return '<div class="lrow" data-coupleadoptpick="'+i+'"><div class="mi"><div class="t1">'+x.emoji+' '+esc(x.kind)+' · '+esc(x.name)+'</div></div><div class="rt"><span class="chev">'+(pick===i?'✓':'')+'</span></div></div>'; }).join('')
+      +'<input id="coupleAdoptName" placeholder="给它取个名字" style="margin-top:8px"><button class="btn primary full" id="coupleAdoptGo">领养</button><button class="btn full" id="coupleAdoptCancel">取消</button>');
+    $('#coupleAdoptCancel').onclick=closeSheet;
+    $$('#sheetBox [data-coupleadoptpick]').forEach(function(el){ el.onclick=function(){ pick=Number(el.dataset.coupleadoptpick)||0; draw(); }; });
+    $('#coupleAdoptGo').onclick=function(){
+      if(space.family.coins<3){ toast('家庭币不够，先完成情侣任务'); return; }
+      const opt=options[pick],name=String($('#coupleAdoptName').value||'').trim()||opt.name;
+      space.family.coins-=3;
+      const a={id:uid(),kind:opt.kind,emoji:opt.emoji,species:opt.name,growth:0,mood:80,adoptedAt:Date.now()};
+      space.family.adoptions.push(a);
+      space.home.members.push({id:uid(),adoptId:a.id,name:name.slice(0,24),kind:opt.kind});
+      coupleRecordMemory(space,'我们一起领养了'+opt.kind+'「'+name+'」。');
+      space.updatedAt=Date.now(); save(); closeSheet(); render(); toast('新家庭成员已加入');
+    };
+  };
+  draw();
+}
+function careCoupleAdopted(id,action){
+  const space=coupleActiveSpace(); if(!space) return;
+  const a=space.family.adoptions.find(function(x){ return x.id===id; }); if(!a) return;
+  const member=space.home.members.find(function(x){ return x.adoptId===id; });
+  if(!member) return;
+  const labels={feed:'喂了'+member.name,play:'陪'+member.name+'玩了一会儿',teach:'教'+member.name+'做了一个小动作'};
+  a.growth=Math.max(0,Number(a.growth)||0)+(action==='teach'?3:action==='play'?2:1);
+  a.mood=Math.min(100,Math.max(0,Number(a.mood)||0)+(action==='feed'?4:3));
+  space.intimacy+=1;
+  coupleRecordMemory(space,'我们'+labels[action]+'。');
+  space.updatedAt=Date.now(); save(); render(); toast('亲密度 +1');
+}
+function couplePlayHTML(space){
+  const c=space.play.compat;
+  let quiz='';
+  if(!c||c.finished){
+    quiz='<div class="couple-play-card"><b>默契大挑战</b><div class="muted">'+(c?'上次答对 '+c.score+'/5':'五道题，看看你们有多了解彼此。')+'</div><button class="btn primary full" data-couplequizstart="1" style="margin-top:7px">'+(c?'再来一局':'开始挑战')+'</button></div>';
+  }else{
+    const q=COUPLE_QUIZ[Math.min(COUPLE_QUIZ.length-1,c.index)];
+    quiz='<div class="card"><div class="row"><b class="grow">默契大挑战 '+(c.index+1)+'/'+COUPLE_QUIZ.length+'</b><span class="np-chip on">'+c.score+'分</span></div><b style="display:block;margin-top:8px;line-height:1.6">'+esc(q.q)+'</b>'+q.options.map(function(o,i){ return '<button class="couple-quiz-option" data-couplequizanswer="'+i+'">'+String.fromCharCode(65+i)+'. '+esc(o)+'</button>'; }).join('')+'</div>';
+  }
+  const ch=space.play.challenge;
+  const challenge=ch?'<div class="couple-play-card" style="grid-column:1/-1"><b>'+esc(ch.kind==='truth'?'真心话':'大冒险')+'</b><div class="takeout-review">'+esc(ch.prompt)+'</div><div class="row"><button class="btn grow" id="coupleChallengeMine">我来完成</button><button class="btn primary grow" id="coupleChallengeTa">让 Ta 来</button></div></div>':'';
+  return quiz
+    +'<div class="card"><div class="row"><b class="grow">真心话 / 大冒险</b></div><div class="couple-play-grid"><div class="couple-play-card"><b>真心话</b><div class="muted">说出一个真实答案。</div><button class="btn full" data-couplechallenge="truth" style="margin-top:7px">出一道</button></div><div class="couple-play-card"><b>大冒险</b><div class="muted">做一个小互动。</div><button class="btn full" data-couplechallenge="dare" style="margin-top:7px">出一道</button></div></div>'+challenge+'</div>'
+    +coupleFamilyHTML(space)
+    +(space.play.history.length?'<div class="card"><b>最近互动</b>'+space.play.history.slice(0,5).map(function(h){ return '<div class="couple-row"><div class="grow"><b>'+esc(h.kind==='truth'?'真心话':'大冒险')+' · '+(h.role==='me'?'我':'Ta')+'</b><div class="muted">'+esc(h.prompt)+'</div><div style="margin-top:4px">'+esc(h.text)+'</div></div></div>'; }).join('')+'</div>':'');
 }
 function sheetCoupleBinding(){
   sheetExactBinding({title:'情侣空间精确绑定',desc:'绑定一条会话，或分别选择角色和用户人设。相同用户人设与同一角色共用一份主空间；不同会话保留独立分支记忆。',binding:DB.couple.activeBinding,scope:'none',requireContact:true,requirePersona:true,onSave:function(binding){
@@ -7489,6 +7817,13 @@ function completeCoupleTask(id){
   const task=space.tasks.find(function(t){ return t.id===id; }); if(!task||task.done) return;
   task.done=true; task.doneAt=Date.now();
   space.intimacy+=Number(task.reward)||5;
+  space.family=space.family||{coins:0,items:[],adoptions:[]};
+  space.family.coins=Number(space.family.coins||0)+1;
+  const itemNames=['情侣贴纸','小夜灯','共同存钱罐','拍立得相纸'];
+  const item=itemNames[(space.tasks.filter(function(t){ return t.done; }).length+space.intimacy)%itemNames.length];
+  space.family.items=Array.isArray(space.family.items)?space.family.items:[];
+  const existing=space.family.items.find(function(x){ return x.name===item; });
+  if(existing) existing.qty=Number(existing.qty||1)+1; else space.family.items.push({id:uid(),name:item,qty:1});
   coupleRecordMemory(space,'我们一起完成了情侣任务：'+task.title);
   space.updatedAt=Date.now(); save(); render(); toast('任务完成，亲密度 +'+(Number(task.reward)||5));
 }
@@ -7888,6 +8223,7 @@ function soulRejectRequest(reqId){
 function sheetSoulMultiPick(kind){
   const s=soulEnsure();
   const isWorld=kind==='world';
+  const settingKey=isWorld?'worldIds':'regexIds';
   const items=isWorld?(DB.worldbooks||[]):(DB.regexes||[]);
   let sel=(isWorld?s.settings.worldIds:s.settings.regexIds).slice();
   const draw=function(){
@@ -7896,7 +8232,11 @@ function sheetSoulMultiPick(kind){
       +'<button class="btn primary full" id="soulMultiOk">完成</button><button class="btn full" id="soulMultiCancel">取消</button>');
     $$('#sheetBox [data-soulmulti]').forEach(function(el){ el.onclick=function(){ const id=el.dataset.soulmulti,i=sel.indexOf(id); if(i>=0) sel.splice(i,1); else sel.push(id); draw(); }; });
     $('#soulMultiCancel').onclick=function(){ closeSheet(); render(); };
-    $('#soulMultiOk').onclick=function(){ if(isWorld) s.settings.worldIds=sel.slice(); else s.settings.regexIds=sel.slice(); save(); closeSheet(); render(); };
+    $('#soulMultiOk').onclick=function(){
+      s.settings[settingKey]=sel.slice();
+      save();
+      closeSheet(); render();
+    };
   };
   draw();
 }
@@ -10976,6 +11316,17 @@ function bindScreenInner(){
   const coupleGenTask=$('#coupleGenTask'); if(coupleGenTask) coupleGenTask.onclick=generateCoupleTask;
   const coupleCustomTask=$('#coupleCustomTask'); if(coupleCustomTask) coupleCustomTask.onclick=sheetCoupleCustomTask;
   const coupleHomeEdit=$('#coupleHomeEdit'); if(coupleHomeEdit) coupleHomeEdit.onclick=sheetCoupleHomeEdit;
+  const coupleReplenish=$('#coupleReplenish'); if(coupleReplenish) coupleReplenish.onclick=sheetCoupleReplenish;
+  $$('[data-couplestartcook]',s).forEach(function(el){ el.onclick=function(){ startCoupleCooking(el.dataset.couplestartcook); }; });
+  $$('[data-couplecookstep]',s).forEach(function(el){ el.onclick=function(){ advanceCoupleCooking(el.dataset.couplecookstep); }; });
+  const coupleCookCancel=$('#coupleCookCancel'); if(coupleCookCancel) coupleCookCancel.onclick=cancelCoupleCooking;
+  $$('[data-couplequizstart]',s).forEach(function(el){ el.onclick=startCoupleCompatibility; });
+  $$('[data-couplequizanswer]',s).forEach(function(el){ el.onclick=function(){ answerCoupleCompatibility(el.dataset.couplequizanswer); }; });
+  $$('[data-couplechallenge]',s).forEach(function(el){ el.onclick=function(){ startCoupleChallenge(el.dataset.couplechallenge); }; });
+  const coupleChallengeMine=$('#coupleChallengeMine'); if(coupleChallengeMine) coupleChallengeMine.onclick=sheetCoupleChallengeMine;
+  const coupleChallengeTaBtn=$('#coupleChallengeTa'); if(coupleChallengeTaBtn) coupleChallengeTaBtn.onclick=coupleChallengeTa;
+  const coupleAdoptBtn=$('#coupleAdoptBtn'); if(coupleAdoptBtn) coupleAdoptBtn.onclick=sheetCoupleAdopt;
+  $$('[data-couplecare]',s).forEach(function(el){ el.onclick=function(){ const bits=String(el.dataset.couplecare||'').split(':'); careCoupleAdopted(bits[0],bits[1]||'feed'); }; });
   $$('[data-couplehomeadd]',s).forEach(function(el){ el.onclick=function(){ sheetCoupleHomeAdd(el.dataset.couplehomeadd); }; });
   $$('[data-coupletaskdone]',s).forEach(function(el){ el.onclick=function(){ completeCoupleTask(el.dataset.coupletaskdone); }; });
   $$('[data-coupledaydel]',s).forEach(function(el){ el.onclick=function(){
@@ -10996,7 +11347,7 @@ function bindScreenInner(){
     const space=coupleActiveSpace(); if(!space) return;
     space.album=space.album.filter(function(x){ return x.id!==el.dataset.couplephotodel; }); save(); render();
   }; });
-  $$('[data-couplephoto]',s).forEach(function(el){ el.onclick=function(){ const space=coupleActiveSpace(); const p=space&&space.album.find(function(x){ return x.id===el.dataset.couplephoto; }); if(p) sheet('<img src="'+esc(p.url)+'" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px"><div class="muted" style="margin-top:8px">'+esc(p.caption||'')+'</div><button class="btn full" id="couplePhotoClose">关闭</button>')||($('#couplePhotoClose').onclick=closeSheet); }; });
+  $$('[data-couplephoto]',s).forEach(function(el){ el.onclick=function(ev){ if(ev.target.closest('[data-couplephotodel]')) return; const space=coupleActiveSpace(); const p=space&&space.album.find(function(x){ return x.id===el.dataset.couplephoto; }); if(!p) return; const body=p.type==='polaroid'?'<div class="couple-polaroid" style="aspect-ratio:1/1;border-radius:12px"><b>'+esc(p.title||'做饭拍立得')+'</b><small>'+esc(p.score?p.score+'分':'')+'</small></div><div class="muted" style="margin-top:8px">'+esc(p.text||p.caption||'')+'</div>':'<img src="'+esc(p.url)+'" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px"><div class="muted" style="margin-top:8px">'+esc(p.caption||'')+'</div>'; sheet(body+'<button class="btn full" id="couplePhotoClose">关闭</button>'); $('#couplePhotoClose').onclick=closeSheet; }; });
   $$('[data-couplehomedel]',s).forEach(function(el){ el.onclick=function(){
     const space=coupleActiveSpace(); if(!space) return;
     const bits=String(el.dataset.couplehomedel||'').split(':'),kind=bits.shift(),value=bits.join(':');
@@ -11829,8 +12180,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.57 · 第 68 轮';
-const BUILD_CODE=68;
+const BUILD='2026-10-27 · 3.58 · 第 69 轮';
+const BUILD_CODE=69;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -11851,7 +12202,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -11865,7 +12216,7 @@ async function runCheckupUI(){
   const soulState=soulEnsure();
   add('灵魂匹配', Array.isArray(soulState.sessions)&&Array.isArray(soulState.pending)&&typeof soulAcceptRequest==='function', soulState.sessions.length+' 次匹配 · '+soulPendingCount()+' 条待处理申请 · 五分钟计时与好友迁移已接入');
   const coupleState=coupleEnsure();
-  add('情侣空间', Array.isArray(coupleState.spaces)&&typeof coupleSpaceFor==='function'&&typeof generateCoupleDiary==='function', coupleState.spaces.length+' 份主空间 · 纪念日/交换日记/相簿/任务/小家/分支记忆已接入');
+  add('情侣空间', Array.isArray(coupleState.spaces)&&typeof coupleSpaceFor==='function'&&typeof generateCoupleDiary==='function'&&typeof advanceCoupleCooking==='function'&&typeof startCoupleCompatibility==='function'&&typeof sheetCoupleAdopt==='function', coupleState.spaces.length+' 份主空间 · 纪念日/日记/相簿/任务/做饭/互动/领养/小家/分支记忆已接入');
   npEnsureNovelWorldbooks();
   const novelWorldIds=new Set((DB.np.novelWorldbooks||[]).map(function(item){ return item.id; }));
   const globalWorldIds=new Set((DB.worldbooks||[]).map(function(item){ return item.id; }));
