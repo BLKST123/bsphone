@@ -1,9 +1,9 @@
 {
-  "version": "3.58",
-  "versionCode": 69,
-  "round": 69,
-  "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=69",
+  "version": "3.59",
+  "versionCode": 70,
+  "round": 70,
+  "releasedAt": "2026-10-28",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=70",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "情侣空间完整闭环：新增一起做饭、默契大挑战、真心话大冒险、领养养成、家庭币与任务小道具奖励。"
+  "notes": "音乐与一起听上线：本地音频、歌单、LRC 歌词、跨板块播放、一起听、实时评论、共同收藏和最近播放；网易云授权导入仍待接入。"
 }
