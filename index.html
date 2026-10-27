@@ -2520,6 +2520,7 @@ function fixAll(){
         ch.baseMemorySnapshot=(c&&c.memories||[]).map(function(m){ return m.text; }).filter(Boolean);
       }
     }
+    repairSplitChatQuoteMessages(ch);
   });
   (DB.takeout.orders||[]).forEach(function(order){
     const ch=chat(order.chatId); if(!ch) return;
@@ -3901,6 +3902,27 @@ function cleanChatOutput(text,ch){
   t=t.replace(/(?:^|\n)\s*(?:那|这)?\s*是什么意思\s*/g,'');
   t=t.replace(/^[\s，,。；;：:\-]+/gm,'');
   return t.replace(/\n{3,}/g,'\n\n').trim();
+}
+function repairSplitChatQuoteMessages(ch){
+  const msgs=(ch&&ch.msgs)||[];
+  let changed=false;
+  for(let i=0;i<msgs.length-1;i++){
+    const first=msgs[i],second=msgs[i+1];
+    if(!first||!second||first.role!=='ta'||second.role!=='ta'||(first.type||'text')!=='text'||(second.type||'text')!=='text') continue;
+    const a=String(first.text||''),b=String(second.text||'');
+    const hasOpen=/[“「『"]/.test(a)&&!/[”」』"]/.test(a);
+    const startsClose=/^\s*[”」』"]/.test(b);
+    if(!hasOpen||!startsClose) continue;
+    const parts=[cleanChatOutput(a,ch),cleanChatOutput(b,ch)].filter(Boolean);
+    if(!parts.length) continue;
+    first.text=parts.join(' ').trim();
+    first.ts=second.ts||first.ts;
+    first.simTs=second.simTs||first.simTs;
+    msgs.splice(i+1,1);
+    changed=true;
+    i--;
+  }
+  return changed;
 }
 function resolveVoicePlan(plan,speaker,wantsVoice){
   const mode=voiceModeOf(speaker||{});
@@ -6890,7 +6912,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.62 · 第 73 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.63 · 第 74 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -13427,8 +13449,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.62 · 第 73 轮';
-const BUILD_CODE=73;
+const BUILD='2026-10-28 · 3.63 · 第 74 轮';
+const BUILD_CODE=74;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */

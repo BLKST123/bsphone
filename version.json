@@ -1,9 +1,9 @@
 {
-  "version": "3.62",
-  "versionCode": 73,
-  "round": 73,
+  "version": "3.63",
+  "versionCode": 74,
+  "round": 74,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=73",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=74",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "微信聊天新增居中的时间分隔条，按小手机模拟时间显示今天、昨天和更早日期；角色主动消息改为只扮演角色本人，禁止替用户说话和自问自答。"
+  "notes": "微信聊天新增居中时间分隔条；引用改为可定位原消息的小气泡；主动消息只扮演角色本人，禁止替用户说话和自问自答；自动清理用户原话复述和跨气泡引号碎片。"
 }
