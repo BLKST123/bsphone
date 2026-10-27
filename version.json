@@ -1,9 +1,9 @@
 {
-  "version": "3.49",
-  "versionCode": 60,
-  "round": 60,
+  "version": "3.50",
+  "versionCode": 61,
+  "round": 61,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=60",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=61",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "新增设置内开发进度页，持续区分已完成、部分完成、尚未完成；微博绑定角色自动点赞/评论/随机转发；第二页排版继续保留。"
+  "notes": "新增永久总读者群、每书独立读者群和自定义读者群；群成员、消息、未读与自动刷新隔离；发布新书和新增章节会一次加入 20 位以上读者；修复查岗动态循环引用导致导出失败的问题。"
 }
