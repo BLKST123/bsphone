@@ -1,9 +1,9 @@
 {
-  "version": "3.60",
-  "versionCode": 71,
-  "round": 71,
+  "version": "3.61",
+  "versionCode": 72,
+  "round": 72,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=71",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=72",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "AI 生图上线：用户自有兼容接口、自拍/食物/双人/场景识别、参考图、相册保存、角色绑定、修改提示词、重新生成和删除；并修复灵魂匹配世界书/正则选择保存为空的问题。"
+  "notes": "新增角色主动拍一拍、1分钟至12小时的主动消息滚轮间隔、微信式消息引用与原位重新生成分支；通知改为跟随主题的多气泡堆叠并增强后台原生通知；修复打字时被清空、A/B会话串线；重做语音与文字分流和语音转文字清理。"
 }

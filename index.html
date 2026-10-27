@@ -146,6 +146,13 @@ textarea{min-height:90px;resize:vertical;line-height:1.55}
 .who{font-size:calc(11px * var(--ui-font-scale,1));color:var(--fg2);padding:0 3px}
 .bub{padding:9px 12px;border-radius:16px;font-size:calc(15.5px * var(--ui-font-scale,1));line-height:1.55;word-break:break-word;white-space:pre-wrap;background:var(--bub-ta);color:var(--bub-ta-fg);border:1px solid var(--line)}
 .mrow.me .bub{background:var(--bub-me);color:var(--bub-me-fg);border-color:transparent}
+.quote-ref{max-width:min(250px,100%);margin-bottom:5px;padding:5px 8px 5px 10px;border-left:3px solid rgba(120,120,128,.42);border-radius:4px 8px 8px 4px;background:rgba(120,120,128,.10);color:var(--fg2);font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.45;white-space:normal;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;word-break:break-word}
+.quote-ref b{font-weight:600;color:color-mix(in srgb,var(--fg2) 78%,var(--fg));margin-right:3px}
+.composer-stack{flex:none}
+.reply-preview{display:flex;align-items:center;gap:8px;margin:0 14px 6px;padding:8px 10px;border-left:3px solid var(--deep);border-radius:5px 10px 10px 5px;background:color-mix(in srgb,var(--card) 84%,transparent);color:var(--fg2);font-size:calc(11px * var(--ui-font-scale,1));line-height:1.45;backdrop-filter:blur(12px)}
+.reply-preview span{min-width:0;flex:1;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+.reply-preview button{width:24px;height:24px;border:0;border-radius:50%;background:rgba(120,120,128,.12);color:var(--fg2);padding:0;flex:none}
+.branch-current{box-shadow:inset 3px 0 0 var(--deep);background:color-mix(in srgb,var(--theme-rose-soft) 50%,var(--card))}
 .act{display:block;margin:6px 0;padding:7px 9px;border-radius:9px;background:rgba(0,0,0,.055);font:calc(13px * var(--ui-font-scale,1))/1.6 ui-monospace,Consolas,monospace;color:var(--fg2)}
 #phone.dark .act{background:rgba(255,255,255,.08)}
 .bub .t{white-space:pre-wrap}
@@ -2166,10 +2173,16 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .to-order-breakdown{padding:10px 0;border-bottom:1px solid var(--line)}.to-order-breakdown>div{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2)}.to-order-breakdown>div.total{font-size:calc(14px * var(--ui-font-scale,1));color:var(--fg)}.to-order-breakdown>div.total b{color:var(--deep);font-size:calc(19px * var(--ui-font-scale,1))}
 .to-order-route{padding:8px 0;border-bottom:1px solid var(--line)}.route-line{display:flex;gap:10px;position:relative;padding:9px 0}.route-line>i{width:9px;height:9px;border-radius:50%;background:var(--deep);flex:none;margin-top:6px}.route-line small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}.route-line b{display:block;margin-top:3px;font-size:calc(12px * var(--ui-font-scale,1))}.route-line span{display:block;margin-top:3px;line-height:1.5;color:var(--fg2);font-size:calc(10.5px * var(--ui-font-scale,1))}
 .takeout-msg.from-me{background:color-mix(in srgb,var(--theme-rose-soft) 55%,var(--card))}.takeout-msg.from-ta{background:color-mix(in srgb,var(--card) 97%,transparent)}.takeout-msg .to-msg-top small{display:block;font-size:calc(8.5px * var(--ui-font-scale,1));color:var(--fg2);margin-bottom:2px}.takeout-msg .to-msg-top b{display:block;font-size:calc(13px * var(--ui-font-scale,1));line-height:1.35}.to-msg-note{margin:0 12px 8px;padding:7px 9px;border-radius:8px;background:color-mix(in srgb,var(--theme-rose-soft) 36%,transparent);font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.5;color:var(--fg)}.to-msg-progress{height:3px;border-radius:99px;background:#eee7ea;margin:0 12px 9px;overflow:hidden}.to-msg-progress i{display:block;height:100%;background:var(--deep);border-radius:inherit}.to-msg-foot{display:flex;justify-content:space-between;gap:8px}.to-msg-foot b{color:var(--deep)}.to-msg-link{padding:7px 12px;border-top:1px solid var(--line);font-size:calc(9.5px * var(--ui-font-scale,1));color:var(--deep);display:flex;justify-content:space-between;align-items:center}
-.app-notice{position:fixed;left:50%;top:calc(8px + env(safe-area-inset-top));transform:translate(-50%,-150%);width:min(calc(100% - 24px),496px);border:1px solid rgba(255,255,255,.35);border-radius:18px;background:rgba(42,38,41,.92);color:#fff;box-shadow:0 12px 32px rgba(0,0,0,.24);padding:11px 13px;display:flex;align-items:center;gap:10px;text-align:left;z-index:120;opacity:0;pointer-events:none;transition:transform .25s ease,opacity .25s ease;backdrop-filter:blur(20px)}
-.app-notice.on{transform:translate(-50%,0);opacity:1;pointer-events:auto}
-.app-notice .ani{width:36px;height:36px;border-radius:11px;background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;flex:none}
-.app-notice .ant{min-width:0;flex:1}.app-notice .ant b{display:block;font-size:calc(12.5px * var(--ui-font-scale,1));line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.app-notice .ant span{display:block;font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.4;color:rgba(255,255,255,.74);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-notice-stack{position:fixed;left:50%;top:calc(8px + env(safe-area-inset-top));transform:translateX(-50%);width:min(calc(100% - 22px),498px);z-index:120;display:flex;flex-direction:column;align-items:stretch;gap:8px;pointer-events:none}
+.app-notice-card{position:relative;width:100%;min-height:72px;overflow:hidden;border:1px solid color-mix(in srgb,var(--deep) 20%,var(--line));border-radius:17px;background:color-mix(in srgb,var(--card) 91%,transparent);color:var(--fg);box-shadow:inset 0 1px 0 rgba(255,255,255,.72),0 14px 34px color-mix(in srgb,var(--deep) 18%,transparent);padding:13px 14px;display:flex;align-items:center;gap:11px;text-align:left;pointer-events:auto;backdrop-filter:blur(22px) saturate(1.16);animation:appNoticeIn .22s ease both;transition:opacity .18s ease,transform .18s ease}
+.app-notice-card::before{content:"";position:absolute;inset:0;background:linear-gradient(120deg,color-mix(in srgb,var(--theme-rose-soft) 36%,transparent),transparent 48%);pointer-events:none}
+.app-notice-card.out{opacity:0;transform:translateY(-8px) scale(.985)}
+.app-notice-card .ani{position:relative;z-index:1;width:42px;height:42px;border-radius:13px;background:color-mix(in srgb,var(--theme-rose-soft) 72%,var(--card));color:var(--deep);display:flex;align-items:center;justify-content:center;flex:none;box-shadow:inset 0 1px 0 rgba(255,255,255,.62)}
+.app-notice-card .ant{position:relative;z-index:1;min-width:0;flex:1}.app-notice-card .ant b{display:block;font-size:calc(14px * var(--ui-font-scale,1));line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--fg)}.app-notice-card .ant span{display:block;font-size:calc(12px * var(--ui-font-scale,1));line-height:1.45;color:var(--fg2);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.app-notice-card .chev{position:relative;z-index:1;opacity:.68;flex:none;color:var(--fg2)}
+#phone.dark .app-notice-card{box-shadow:inset 0 1px 0 rgba(255,255,255,.15),0 14px 34px rgba(0,0,0,.32)}
+#phone[data-style="liquidclear"] .app-notice-card{background:rgba(255,255,255,.095);border-color:rgba(255,255,255,.58);box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 14px 34px rgba(32,43,61,.18)}
+@keyframes appNoticeIn{from{opacity:0;transform:translateY(-13px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 .status-pull-zone{position:fixed;left:0;right:0;top:0;height:24px;z-index:60;background:transparent;pointer-events:none}
 .status-center{position:fixed;left:50%;top:0;transform:translate(-50%,-102%);width:min(100%,520px);height:min(82dvh,700px);z-index:130;background:color-mix(in srgb,var(--card) 82%,transparent);backdrop-filter:blur(28px) saturate(1.15);border-radius:0 0 28px 28px;box-shadow:0 20px 50px rgba(0,0,0,.22);padding:calc(22px + env(safe-area-inset-top)) 16px 24px;transition:transform .28s cubic-bezier(.2,.8,.2,1);overflow:auto}
 .status-center.on{transform:translate(-50%,0)}
@@ -2203,6 +2216,7 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .clock-wheel-item.on{color:var(--fg);font-weight:700;opacity:1}
 .clock-wheel-preview{text-align:center;font-size:calc(17px * var(--ui-font-scale,1));font-weight:650;color:var(--deep);padding:14px 4px 8px;font-variant-numeric:tabular-nums}
 .clock-wheel-presets{gap:6px}.clock-wheel-presets .btn{padding:9px 4px;font-size:calc(11px * var(--ui-font-scale,1))}
+.auto-wheel-pad{grid-template-columns:repeat(3,minmax(0,1fr))!important}
 .hang-access{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--card) 62%,transparent)}
 .hang-access button{border:0;border-radius:10px;padding:8px 6px;background:transparent;color:var(--fg2);font:inherit;font-size:calc(11.5px * var(--ui-font-scale,1));cursor:pointer}
 .hang-access button.on{background:var(--deep);color:#fff;box-shadow:0 4px 12px color-mix(in srgb,var(--deep) 28%,transparent)}
@@ -2277,9 +2291,7 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 </div>
 <div class="toast" id="toast"></div>
 <div class="busy" id="busy"></div>
-<button class="app-notice" id="appNotice" aria-live="polite"></button>
-<div class="status-center" id="statusCenter"></div>
-<div class="status-pull-zone" id="statusPullZone" aria-hidden="true"></div>
+<div class="app-notice-stack" id="appNotice" aria-live="polite"></div>
 <div class="sheet" id="sheet"><button id="globalBack" class="sheet-back" title="返回">‹</button><div class="box" id="sheetBox"></div></div>
 <div class="np-sel-bar" id="npSelBar"><span id="npSelHint">已选中一段</span><button id="npSelTalk">跟 Ta 聊一聊这段</button><button id="npSelComment">看/写段评</button><button id="npSelClose">取消</button></div>
 <script>
@@ -2540,7 +2552,7 @@ function fixAll(){
     if(ch) o.chatId=ch.id;
   });
   DB.notifs=DB.notifs||[];
-  (DB.contacts||[]).forEach(function(c){ if(c.remark===undefined) c.remark=''; if(c.autoOn===undefined) c.autoOn=true; if(c.voiceFreq===undefined) c.voiceFreq=0; });
+  (DB.contacts||[]).forEach(function(c){ if(c.remark===undefined) c.remark=''; if(c.autoOn===undefined) c.autoOn=true; if(c.autoIntervalSec===undefined) c.autoIntervalSec=autoIntervalSec(c); if(c.voiceFreq===undefined) c.voiceFreq=0; });
   DB.galleryAlbums=Array.isArray(DB.galleryAlbums)?DB.galleryAlbums:[];
   [{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}].forEach(function(a){
     if(!DB.galleryAlbums.some(function(x){ return x.id===a.id; })) DB.galleryAlbums.unshift(a);
@@ -3789,24 +3801,88 @@ function parseChatBubbles(text){
   lines=lines.map(function(s){ return s.replace(/^["“「『]+|["”」』]+$/g,'').replace(/^(Ta|TA|ta|对白|台词|角色)[:：]\s*/,'').trim(); }).filter(Boolean);
   return lines;
 }
-function enforceBubbleCount(text,n){
+function parseChatBubblePlan(text){
+  return parseChatBubbles(text).map(function(line){
+    let kind='auto';
+    const raw=String(line||'').trim();
+    if(/^\[(语音|语音消息|voice)\]\s*/i.test(raw)) kind='voice';
+    else if(/^\[(文字|文本|text)\]\s*/i.test(raw)) kind='text';
+    return {
+      text:raw.replace(/^\[(语音|语音消息|voice|文字|文本|text)\]\s*/i,'').trim(),
+      kind:kind,
+      voiceSafe:true
+    };
+  }).filter(function(item){ return item.text; });
+}
+function enforceBubblePlan(text,n){
   n=Math.max(1,Number(n)||1);
-  let lines=parseChatBubbles(text);
-  if(!lines.length) return [];
-  while(lines.length>n){
-    const last=lines.pop();
-    if(!lines.length) break;
-    lines[lines.length-1]=lines[lines.length-1]+' '+last;
+  let plan=parseChatBubblePlan(text);
+  if(!plan.length) return [];
+  while(plan.length>n){
+    const last=plan.pop();
+    if(!plan.length) break;
+    const prev=plan[plan.length-1];
+    prev.text=(prev.text+' '+last.text).trim();
+    if(prev.kind!==last.kind){
+      prev.kind='text';
+      prev.voiceSafe=false;
+    }
   }
-  while(lines.length<n){
+  while(plan.length<n){
     let idx=0;
-    for(let i=1;i<lines.length;i++){ if(lines[i].length>lines[idx].length) idx=i; }
-    if(lines[idx].length<=1) break;
-    const parts=splitBubbleText(lines[idx]);
+    for(let i=1;i<plan.length;i++){ if(plan[i].text.length>plan[idx].text.length) idx=i; }
+    if(plan[idx].text.length<=1||!plan[idx].voiceSafe) break;
+    const parts=splitBubbleText(plan[idx].text);
     if(parts.length<2) break;
-    lines.splice(idx,1,...parts);
+    const sourceKind=plan[idx].kind;
+    plan.splice(idx,1,...parts.map(function(part){
+      return {text:part,kind:sourceKind==='voice'?'voice':'text',voiceSafe:false};
+    }));
   }
-  return lines.slice(0,n);
+  return plan.slice(0,n);
+}
+function enforceBubbleCount(text,n){
+  return enforceBubblePlan(text,n).map(function(item){ return item.text; });
+}
+function voiceTranscriptText(text){
+  return String(text||'')
+    .replace(/^\s*(?:[.。…·]+|\[(?:语音|语音消息|voice)\])[\s,，、]*/i,'')
+    .replace(/[（(][^（）()]{0,80}[）)]/g,'')
+    .replace(/([。！？!?])\1+/g,'$1')
+    .replace(/…{2,}/g,'…')
+    .replace(/\s+/g,' ')
+    .trim();
+}
+function voiceSuitable(text){
+  const t=voiceTranscriptText(text);
+  if(t.length<2||t.length>52) return false;
+  if(/https?:|www\.|[A-Za-z]{5,}|\d{3,}|代码|表格|清单|第一|第二|第三/.test(t)) return false;
+  if(/^[\[【].*[\]】]$/.test(t)) return false;
+  if(/[（(].*[）)]/.test(t)) return false;
+  if((t.match(/[。！？!?]/g)||[]).length>2) return false;
+  return true;
+}
+function stripQuotedRestatement(text){
+  return String(text||'')
+    .replace(/^(?:你|您)(?:刚才|之前|那)?(?:句|说)[:：]?\s*[“"「『][^”"」』]{1,160}[”"」』][，,：:\s]*/,'')
+    .replace(/^(?:你说|你那句)[:：]?\s*[“"「『][^”"」』]{1,160}[”"」』][，,：:\s]*(?:我|但|不过|确实|真的)?/,'')
+    .trim();
+}
+function resolveVoicePlan(plan,speaker,wantsVoice){
+  const mode=voiceModeOf(speaker||{});
+  const allowVoice=wantsVoice||mode>0;
+  const explicitVoices=plan.filter(function(item){ return item.kind==='voice'; }).length;
+  const explicitTexts=plan.filter(function(item){ return item.kind==='text'; }).length;
+  const eligible=plan.length>0&&plan.every(function(item){ return item.voiceSafe&&voiceSuitable(item.text); });
+  let requested=false;
+  if(allowVoice&&eligible&&explicitTexts===0){
+    if(explicitVoices>0) requested=true;
+    else if(wantsVoice||Math.random()<voiceModeChance(mode)) requested=true;
+  }
+  if(requested&&eligible){
+    return plan.map(function(item){ return {text:voiceTranscriptText(item.text),type:'voice'}; }).filter(function(item){ return item.text; });
+  }
+  return plan.map(function(item){ return {text:item.text,type:'text'}; }).filter(function(item){ return item.text; });
 }
 function stripFormatTitles(t){
   return String(t||'').replace(/【(旁白|对白|台词|Ta)】/g,'').replace(/''[^']*''/g,'').trim();
@@ -3852,6 +3928,12 @@ function render(){
   const s=$('#screen');
   const key=route.name+'|'+(route.arg||'');
   const keepScroll=key===lastRenderKey;
+  const activeEl=document.activeElement;
+  const sayFocused=route.name==='chatroom'&&activeEl&&activeEl.id==='say';
+  const draftValue=sayFocused?String(activeEl.value||''):'';
+  const draftStart=sayFocused?Number(activeEl.selectionStart)||draftValue.length:0;
+  const draftEnd=sayFocused?Number(activeEl.selectionEnd)||draftValue.length:0;
+  if(sayFocused) chatDrafts.set(route.arg,draftValue);
   const oldScroll=s.scrollTop;
   const oldNovelScroll=route.name==='novelchapter'&&s.querySelector('.np-body')?s.querySelector('.np-body').scrollTop:0;
   const R={home:screenHome,wechat:screenWechat,chatroom:screenChatRoom,contactedit:screenContactEdit,
@@ -3867,6 +3949,16 @@ function render(){
   s.classList.toggle('takeout-screen', route.name==='takeout');
   if(route.name!=='home'&&route.name!=='wechat'){ const b=$('.nav .back',s); if(b) b.onclick=back; }
   bindScreen(); enhanceEditors(s); bindRegen(s); applyTheme(); syncGlobalBack();
+  if(sayFocused){
+    const nextSay=$('#say');
+    if(nextSay){
+      nextSay.value=draftValue;
+      chatDrafts.set(route.arg,draftValue);
+      requestAnimationFrame(function(){
+        try{ nextSay.focus({preventScroll:true}); nextSay.setSelectionRange(draftStart,draftEnd); }catch(e){}
+      });
+    }
+  }
   requestAnimationFrame(function(){fitLayout7Homes(s);});
   if(route.name!=='novelchapter'){ const sb=$('#npSelBar'); if(sb) sb.classList.remove('on'); }
   if(route.name==='appearance') requestAnimationFrame(bindAppearancePreview);
@@ -4625,29 +4717,102 @@ function screenContactView(){
     +'</div>';
 }
 function lv(n){ n=Number(n)||0; return n===0? '不主动' : ('等级 '+Math.min(5,n)); }
-const AUTO_NAME=['从不','很少','少','正常','频繁','很频繁'];
-const AUTO_GAP=['不会主动找你','大概 6 小时一条','大概 3 小时一条','大概 1 个半小时一条','大概 40 分钟一条','大概 15 分钟一条'];
-function autoLabel(n){ return AUTO_NAME[Math.max(0,Math.min(5,Number(n)||0))]; }
-function autoGapText(n){ return AUTO_GAP[Math.max(0,Math.min(5,Number(n)||0))]; }
+const AUTO_INTERVAL_MIN_SEC=60;
+const AUTO_INTERVAL_MAX_SEC=12*3600;
+const AUTO_INTERVAL_STEP_SEC=30;
+const AUTO_LEGACY_INTERVAL_SEC=[6*3600,6*3600,3*3600,90*60,30*60,60];
+function autoIntervalSec(c){
+  let sec=Number(c&&c.autoIntervalSec);
+  if(!Number.isFinite(sec)||sec<=0){
+    const legacy=Math.max(0,Math.min(5,Number(c&&c.autoFreq)||0));
+    sec=AUTO_LEGACY_INTERVAL_SEC[legacy]||3*3600;
+  }
+  return Math.max(AUTO_INTERVAL_MIN_SEC,Math.min(AUTO_INTERVAL_MAX_SEC,Math.round(sec/AUTO_INTERVAL_STEP_SEC)*AUTO_INTERVAL_STEP_SEC));
+}
+function autoIntervalMs(c){
+  if(c&&c.autoOn===false) return Infinity;
+  return autoIntervalSec(c)*1000;
+}
+function autoIntervalText(sec){
+  sec=Math.max(AUTO_INTERVAL_MIN_SEC,Math.min(AUTO_INTERVAL_MAX_SEC,Math.round((Number(sec)||60)/30)*30));
+  const h=Math.floor(sec/3600),m=Math.floor((sec%3600)/60),s=sec%60;
+  const parts=[];
+  if(h) parts.push(h+' 小时');
+  if(m) parts.push(m+' 分钟');
+  if(s) parts.push(s+' 秒');
+  return parts.join(' ')||'1 分钟';
+}
+function autoLabel(n){ return autoIntervalText(autoIntervalSec({autoFreq:n})); }
+function autoGapText(n){ return autoIntervalText(autoIntervalSec({autoFreq:n})); }
 function voiceModeOf(c){ return Math.max(0,Math.min(2,Number(c&&c.voiceFreq)||0)); }
 function voiceModeLabel(n){ return ['不会发语音','偶尔发语音','经常发语音'][voiceModeOf({voiceFreq:n})]; }
 function voiceModeChance(n){ return voiceModeOf({voiceFreq:n})===2?.55:(voiceModeOf({voiceFreq:n})===1?.22:0); }
 function sheetAuto(){
   const v=route.edit;
-  const draw=()=>{
-    sheet('<h3>主动发消息频率</h3>'
-      +'<div class="muted" style="margin:4px 0 12px;line-height:1.7">Ta 多久会主动找你说话。设 0 就是永远不会主动，只有你先开口 Ta 才回。觉得 Ta 太黏就调小一点。</div>'
-      +'<div class="kv"><span>频率</span><span style="display:flex;align-items:center;gap:10px">'
-      +'<button class="cbtn" data-af="-1">−</button><b style="min-width:44px;text-align:center">'+autoLabel(v.autoFreq)+'</b><button class="cbtn" data-af="1">＋</button></span></div>'
-      +'<div class="muted" style="margin-top:10px">现在的间隔：'+autoGapText(v.autoFreq)+'</div>'
-      +'<button class="btn primary full" id="afOk">完成</button>');
-    $$('#sheetBox [data-af]').forEach(el=>el.onclick=()=>{
-      v.autoFreq=Math.max(0,Math.min(5,(Number(v.autoFreq)||0)+Number(el.dataset.af)));
-      flushEdit(); draw();
-    });
-    $('#afOk').onclick=()=>{ flushEdit(); closeSheet(); render(); };
+  const current=autoIntervalSec(v);
+  let hour=Math.floor(current/3600);
+  let minute=Math.floor((current%3600)/60);
+  let second=current%60>=30?30:0;
+  const minuteValues=Array.from({length:60},function(_,i){ return i; });
+  const wheelHTML=function(kind,values,selected,label){
+    return '<div class="clock-wheel-col"><div class="clock-wheel-label">'+label+'</div><div class="clock-wheel-scroller" data-auto-wheel="'+kind+'">'
+      +values.map(function(x){ return '<div class="clock-wheel-item '+(x===selected?'on':'')+'" data-auto-wheel-value="'+x+'">'+String(x).padStart(2,'0')+'</div>'; }).join('')
+      +'</div></div>';
   };
-  draw();
+  sheet('<h3>主动发消息间隔</h3>'
+    +'<div class="muted" style="margin:4px 0 12px;line-height:1.7">最短 1 分钟，最长 12 小时，按 30 秒为一档。上下滚动或直接点数字，调整后点完成。</div>'
+    +'<div class="clock-wheel-pad auto-wheel-pad">'+wheelHTML('h',Array.from({length:13},function(_,i){ return i; }),hour,'小时')+wheelHTML('m',minuteValues,minute,'分钟')+wheelHTML('s',[0,30],second,'秒')+'</div>'
+    +'<div class="clock-wheel-preview" id="autoWheelPreview">'+autoIntervalText(hour*3600+minute*60+second)+'</div>'
+    +'<div class="row clock-wheel-presets" style="margin:10px 0">'
+    +[60,300,1800,3600,10800,21600].map(function(sec){ return '<button class="btn grow" data-auto-preset="'+sec+'">'+autoIntervalText(sec)+'</button>'; }).join('')
+    +'</div>'
+    +'<button class="btn primary full" id="afOk">完成</button>'
+    +'<button class="btn full" id="afOff">关闭主动发消息</button>');
+  const preview=$('#autoWheelPreview');
+  const updatePreview=function(){
+    const sec=Math.max(AUTO_INTERVAL_MIN_SEC,Math.min(AUTO_INTERVAL_MAX_SEC,hour*3600+minute*60+second));
+    if(preview) preview.textContent=autoIntervalText(sec);
+  };
+  const mark=function(kind,value){
+    if(kind==='h') hour=Number(value)||0;
+    else if(kind==='m') minute=Number(value)||0;
+    else second=Number(value)||0;
+    $$('#sheetBox [data-auto-wheel="'+kind+'"] [data-auto-wheel-value]').forEach(function(el){ el.classList.toggle('on',Number(el.dataset.autoWheelValue)===Number(value)); });
+    updatePreview();
+  };
+  $$('#sheetBox [data-auto-wheel]').forEach(function(scroller){
+    const kind=scroller.dataset.autoWheel;
+    const values=Array.from(scroller.querySelectorAll('[data-auto-wheel-value]'));
+    values.forEach(function(el){ el.onclick=function(){ mark(kind,el.dataset.autoWheelValue); scroller.scrollTo({top:values.indexOf(el)*42,behavior:'smooth'}); }; });
+    let timer=null;
+    scroller.onscroll=function(){
+      clearTimeout(timer);
+      timer=setTimeout(function(){
+        const idx=Math.max(0,Math.min(values.length-1,Math.round(scroller.scrollTop/42)));
+        mark(kind,values[idx].dataset.autoWheelValue);
+      },90);
+    };
+    const selected=kind==='h'?hour:kind==='m'?minute:second;
+    const idx=Math.max(0,values.findIndex(function(el){ return Number(el.dataset.autoWheelValue)===selected; }));
+    requestAnimationFrame(function(){ scroller.scrollTop=idx*42; });
+  });
+  $$('#sheetBox [data-auto-preset]').forEach(function(el){
+    el.onclick=function(){
+      const sec=Number(el.dataset.autoPreset)||60;
+      hour=Math.floor(sec/3600); minute=Math.floor((sec%3600)/60); second=sec%60>=30?30:0;
+      mark('h',hour); mark('m',minute); mark('s',second);
+      const hs=$('#sheetBox [data-auto-wheel="h"]'),ms=$('#sheetBox [data-auto-wheel="m"]'),ss=$('#sheetBox [data-auto-wheel="s"]');
+      if(hs) hs.scrollTo({top:hour*42,behavior:'smooth'});
+      if(ms) ms.scrollTo({top:minute*42,behavior:'smooth'});
+      if(ss) ss.scrollTo({top:(second===30?1:0)*42,behavior:'smooth'});
+    };
+  });
+  $('#afOff').onclick=function(){ v.autoOn=false; flushEdit(); closeSheet(); render(); toast('Ta 不会主动发消息了'); };
+  $('#afOk').onclick=function(){
+    v.autoIntervalSec=Math.max(AUTO_INTERVAL_MIN_SEC,Math.min(AUTO_INTERVAL_MAX_SEC,hour*3600+minute*60+second));
+    v.autoOn=true;
+    flushEdit(); closeSheet(); render(); toast('主动消息间隔：'+autoIntervalText(v.autoIntervalSec));
+  };
 }/* ================= 联系人：新建 / 编辑 ================= */
 let editBuf=null;
 function flushEdit(){
@@ -4664,7 +4829,7 @@ function screenContactEdit(){
     v= c? JSON.parse(JSON.stringify(c)) : {
       name:'',remark:'',avatar:'',age:'',gender:'',identity:'',callMe:'',desc:'',persona:'',style:'',
       opener:'',examples:'',memories:[],groupId:'def',regexIds:[],worldIds:[],
-      freq:{post:2,like:2,comment:2,reply:2},meetFreq:0,autoFreq:2,autoOn:true,voiceFreq:0,created:Date.now(),metAt:''
+      freq:{post:2,like:2,comment:2,reply:2},meetFreq:0,autoFreq:2,autoIntervalSec:3*3600,autoOn:true,voiceFreq:0,created:Date.now(),metAt:''
     };
     v.__key=id||'new';
     editBuf=v;
@@ -4672,6 +4837,7 @@ function screenContactEdit(){
   v.freq=Object.assign({post:2,like:2,comment:2,reply:2}, v.freq||{});
   v.regexIds=v.regexIds||[]; v.worldIds=v.worldIds||[];
   if(v.autoFreq===undefined) v.autoFreq=2;
+  if(v.autoIntervalSec===undefined) v.autoIntervalSec=autoIntervalSec(v);
   if(v.autoOn===undefined) v.autoOn=true;
   if(v.voiceFreq===undefined) v.voiceFreq=0;
   route.edit=v;
@@ -4696,7 +4862,7 @@ function screenContactEdit(){
     +row2('绑定世界书', (v.worldIds.length? v.worldIds.length+' 本':'未绑定'), 'data-bindworld')
     +row2('好友分组', grp? grp.name : '未分组', 'data-pickgroup')
     +row2('朋友圈发送频率', lv(v.freq.post)+' · 赞'+lv(v.freq.like)+' · 评'+lv(v.freq.comment)+' · 回'+lv(v.freq.reply), 'data-freq')
-    +row2('主动发消息频率', autoLabel(v.autoFreq)+'（'+autoGapText(v.autoFreq)+'）', 'data-auto')
+    +row2('主动发消息间隔', autoIntervalText(autoIntervalSec(v))+(v.autoOn===false?'（已关闭）':''), 'data-auto')
     +row2('主动发消息', (v.autoOn===false? '已关闭，只有你先开口才回':'开启中'), 'data-autoon')
     +row2('角色发语音', voiceModeLabel(v.voiceFreq)+'（点一下切换）', 'data-voicefreq')
     +row2('线下见面频率', (Number(v.meetFreq||0)===0? '不会突然来找你' : ('等级 '+Math.min(5,Number(v.meetFreq)||0)+' · 会突然出现在你面前')), 'data-meet')
@@ -4881,10 +5047,11 @@ function setTyping(on,text){
 /* ================= 拍一拍 / 连发模式 ================= */
 function pokeTa(cid){
   const c=ct(cid); if(!c) return;
+  const chatId=route.name==='chatroom'?(route.arg||curChatId):curChatId;
   const txt='我拍了拍'+c.name+'的'+(c.nudgeTa||'肩膀');
-  pushMsg(curChatId,{role:'sys',type:'text',text:txt,ts:Date.now()});
+  pushMsg(chatId,{role:'sys',type:'text',text:txt,ts:Date.now()});
   toast(txt);
-  const chs=chat(curChatId);
+  const chs=chat(chatId);
   if(chs) scheduleReply(chs,'对方刚拍了拍你，你回应一下，一到两句，可以带个动作。');
 }
 function sheetPoke(ch){
@@ -4904,7 +5071,7 @@ function sheetPoke(ch){
 const settleTimers={};
 function scheduleReply(ch,nudge){
   const s=Number(ch&&ch.settle)||0;
-  const run=function(){ curChatId=ch.id; aiTurn(nudge? {nudge:nudge}:undefined).catch(function(){}); };
+  const run=function(){ const opt={chatId:ch.id}; if(nudge) opt.nudge=nudge; aiTurn(opt).catch(function(){}); };
   if(!s){ run(); return; }
   clearTimeout(settleTimers[ch.id]);
   settleTimers[ch.id]=setTimeout(function(){ delete settleTimers[ch.id]; run(); }, s*1000);
@@ -4924,6 +5091,99 @@ function sheetSettle(ch){
   $('#stClose').onclick=closeSheet;
 }
 /* ================= 消息与会话菜单 ================= */
+function messageVariantSnapshot(m){
+  return {
+    id:'var_'+uid(),
+    text:String(m.text||''),
+    type:m.type||'text',
+    duration:m.duration,
+    url:m.url,
+    title:m.title,
+    amount:m.amount,
+    place:m.place,
+    sub:m.sub,
+    note:m.note,
+    content:m.content,
+    createdAt:Date.now()
+  };
+}
+function ensureMessageVariant(m){
+  if(!Array.isArray(m.variants)) m.variants=[];
+  if(!m.variants.length){
+    m.variants.push(messageVariantSnapshot(m));
+    m.variantIndex=0;
+  }
+  m.variantIndex=Math.max(0,Math.min(m.variants.length-1,Number(m.variantIndex)||0));
+  return m.variants[m.variantIndex];
+}
+function applyMessageVariant(m,index){
+  const v=(m.variants||[])[index];
+  if(!v) return false;
+  ['text','type','duration','url','title','amount','place','sub','note','content'].forEach(function(key){
+    if(v[key]===undefined) delete m[key]; else m[key]=v[key];
+  });
+  m.variantIndex=index;
+  m.updatedAt=Date.now();
+  return true;
+}
+function sheetMessageBranches(ch,m){
+  if(!ch||!m) return;
+  ensureMessageVariant(m);
+  sheet('<h3>选择分支</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">同一条消息保留了你生成过的版本。选择后会原位覆盖当前显示，不会新增消息。</div>'
+    +(m.variants||[]).map(function(v,i){
+      return '<button class="lrow '+(i===m.variantIndex?'branch-current':'')+'" data-msgvariant="'+i+'"><div class="mi"><div class="t1">第 '+(i+1)+' 版'+(i===m.variantIndex?' · 当前':'')+'</div><div class="t2">'+esc(quoteSnippet(v.text||labelOf(v),150))+'</div></div><div class="rt"><span class="chev">'+(i===m.variantIndex?'✓':'›')+'</span></div></button>';
+    }).join('')
+    +'<button class="btn full" id="branchClose">关闭</button>');
+  $$('#sheetBox [data-msgvariant]').forEach(function(el){
+    el.onclick=function(){
+      const index=Number(el.dataset.msgvariant)||0;
+      if(applyMessageVariant(m,index)){
+        save(); closeSheet(); render(); toast('已切换到第 '+(index+1)+' 版');
+      }
+    };
+  });
+  $('#branchClose').onclick=closeSheet;
+}
+async function regenerateChatMessage(ch,m){
+  if(!ch||!m||m.role==='me'||m.role==='sys') return;
+  if(!needKey()) return;
+  const speaker=ct(m.from)||(ch.memberIds||[]).map(ct).find(Boolean);
+  if(!speaker){ toast('找不到这条消息对应的角色'); return; }
+  ensureMessageVariant(m);
+  const targetIndex=ch.msgs.findIndex(function(x){ return x.id===m.id; });
+  if(targetIndex<0){ toast('这条消息不见了'); return; }
+  closeSheet();
+  busy('正在原位重新生成这条消息');
+  try{
+    const before=ch.msgs.slice(0,targetIndex).filter(function(x){ return x.role!=='sys'; });
+    const history=contextHistory(before,24).map(function(x){
+      return {role:x.role==='me'?'user':'assistant',content:messageContextLabel(x)};
+    });
+    const others=ch.type==='group'?(ch.memberIds||[]).map(ct).filter(function(x){ return x&&x.id!==speaker.id; }).map(function(x){ return x.name; }):[];
+    let sys=promptOf(speaker,others,before.slice(-6),{format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
+    if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
+    if(m.quote) sys+='\n【这条回复引用着一段消息】'+m.quote.who+'：'+m.quote.text+'\n直接回应被引用的内容，不要用双引号复述。';
+    sys+='\n【覆盖式重新生成】这次只生成 1 个完整气泡，用来原位替换你刚才那条回复。不要解释、不要复述旧回复、不要写“重新生成”。只输出 [文字] 或 [语音] 开头的一个气泡。';
+    sys+='\n【语音与文字分流】语音只用于完整、短、口语化的一两句话；长解释和动作旁白用文字。绝不能把同一句话拆成语音前半句和文字后半句。语音转文字不要以“。。。”或“……”开头。';
+    const out=await callModel([{role:'system',content:sys}].concat(history));
+    const clean=regexOf(speaker,out);
+    if(!clean) throw new Error('模型没有返回内容');
+    const plan=enforceBubblePlan(clean,1).map(function(item){ return Object.assign({},item,{text:stripQuotedRestatement(item.text)}); });
+    const parts=resolveVoicePlan(plan,speaker,false);
+    if(!parts.length) throw new Error('没有生成出可替换的消息');
+    const part=parts[0];
+    const variant=messageVariantSnapshot({type:part.type,text:part.text,duration:part.type==='voice'?voiceSeconds({text:part.text}):undefined});
+    m.variants.push(variant);
+    m.variants=m.variants.slice(-20);
+    m.variantIndex=m.variants.length-1;
+    applyMessageVariant(m,m.variantIndex);
+    save(); render(); toast('已原位重新生成，可从消息菜单选择分支');
+  }catch(e){
+    toast('重新生成失败：'+e.message);
+  }finally{
+    busyDone();
+  }
+}
 function sheetMsg(chatId,msgId){
   const ch=chat(chatId); if(!ch) return;
   const m=ch.msgs.find(x=>x.id===msgId); if(!m||m.role==='sys') return;
@@ -4933,13 +5193,17 @@ function sheetMsg(chatId,msgId){
     +'<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:0 0 10px"><div class="muted">'+esc(who)+'</div>'
     +'<div style="margin-top:6px;white-space:pre-wrap">'+esc(text)+'</div></div>'
     +'<button class="btn full" id="mvCopy">复制文字</button>'
+    +'<button class="btn full" id="mvQuote">引用这条</button>'
     +(!mine? '<button class="btn full" id="mvRegen">重新生成这条</button>':'')
+    +(Array.isArray(m.variants)&&m.variants.length>1? '<button class="btn full" id="mvBranches">选择分支（'+m.variants.length+' 版）</button>':'')
     +'<button class="btn full" id="mvFav">收藏这条</button>'
     +(mine? '<button class="btn full" id="mvBack">撤回这条</button>':'')
     +'<button class="btn full danger" id="mvDel">删除这条</button>'
     +'<button class="btn full" id="mvCancel">取消</button>');
   $('#mvCopy').onclick=()=>{ try{ navigator.clipboard.writeText(text); toast('已复制'); }catch(e){ toast('复制不了，手动选中试试'); } closeSheet(); };
-  const rg=$('#mvRegen'); if(rg) rg.onclick=function(){ const from=m.from; ch.msgs=ch.msgs.filter(function(x){ return x.id!==msgId; }); save(); closeSheet(); render(); curChatId=ch.id; aiTurn({speaker:ct(from),nudge:'重新生成刚才那条回复，换一种说法，不要重复原来的内容。'}).catch(function(){}); };
+  $('#mvQuote').onclick=function(){ chatQuote=quoteFromMessage(ch,m); closeSheet(); render(); toast('已引用这条消息'); };
+  const rg=$('#mvRegen'); if(rg) rg.onclick=function(){ regenerateChatMessage(ch,m).catch(function(){}); };
+  const mb=$('#mvBranches'); if(mb) mb.onclick=function(){ sheetMessageBranches(ch,m); };
   $('#mvFav').onclick=()=>{ DB.favorites=DB.favorites||[]; DB.favorites.unshift({id:uid(),who:who,text:text,ts:m.ts}); save(); closeSheet(); toast('已收藏'); };
   const bk=$('#mvBack');
   if(bk) bk.onclick=()=>{ const original=labelOf(m); const known=Math.random()<0.5; m.type='text'; m.recalled={text:original,known:known}; m.text='你撤回了一条消息'; delete m.url; delete m.title; delete m.amount; save(); closeSheet(); render(); toast('已撤回'); if(ch&&DB.api.key) scheduleReply(ch,'对方刚撤回了一条消息。'+(known? ('你瞥到了撤回前的内容：「'+original+'」。你可以问一句、调侃，或者装作没看见。') : '你没看清撤回前的内容。你可以问一句，或者装作没看见。')+'不要自问自答。'); };
@@ -5067,7 +5331,8 @@ function sheetReplyRange(ch){
   draw();
 }
 /* ================= 会话 ================= */
-let curChatId=null, autoLock=0, chatSelectChat=null, chatSelectIds=[];
+let curChatId=null, autoLock=0, chatSelectChat=null, chatSelectIds=[], chatQuote=null;
+const chatDrafts=new Map();
 let dateToolRoomId=null,dateToolIds=[],outToolRoomId=null,outToolIds=[];
 function chatSelectionStart(ch){
   if(!ch) return;
@@ -5148,9 +5413,33 @@ function sheetMigrateChatMessages(ch){
     toast('新会话已创建，旧会话原样保留');
   };
 }
+function quoteSnippet(text,max){
+  return String(text||'').replace(/\s+/g,' ').trim().slice(0,max||90);
+}
+function quoteFromMessage(ch,m){
+  if(!ch||!m) return null;
+  const mine=m.role==='me';
+  const c=mine?null:ct(m.from);
+  return {
+    chatId:ch.id,
+    msgId:m.id,
+    who:mine?'我':contactDisplayName(c||{}),
+    text:quoteSnippet(labelOf(m),110),
+    type:m.type||'text'
+  };
+}
+function quoteRefHTML(q){
+  if(!q) return '';
+  return '<div class="quote-ref"><b>'+esc(q.who||'')+'：</b>'+esc(q.text||'')+'</div>';
+}
+function replyPreviewHTML(q){
+  if(!q) return '';
+  return '<div class="reply-preview"><span><b>'+esc(q.who||'')+'：</b>'+esc(q.text||'')+'</span><button id="replyQuoteClose" title="取消引用">×</button></div>';
+}
 function screenChatRoom(){
   const ch=chat(route.arg);
   if(!ch) return emptyState('会话不见了','它可能被删掉了。','回微信','backwx');
+  if(chatQuote&&chatQuote.chatId!==ch.id) chatQuote=null;
   curChatId=ch.id; ch.unread=0;
   const isGroup=ch.type==='group';
   const selecting=chatSelectChat===ch.id;
@@ -5161,10 +5450,10 @@ function screenChatRoom(){
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
    +(selecting
      ? '<div class="chat-selectbar"><button class="cbtn" id="chatSelAll" title="全选">'+ic('check',18)+'</button><span>已选 '+chatSelectIds.length+' 条</span><button class="btn primary" id="chatSelMigrate">迁移到新会话</button><button class="btn" id="chatSelCancel">取消</button></div>'
-     : '<div class="composer"><button class="cbtn" id="plusBtn">＋</button>'
-       +'<input id="say" placeholder="发消息…" autocomplete="off">'
+     : '<div class="composer-stack">'+replyPreviewHTML(chatQuote)+'<div class="composer"><button class="cbtn" id="plusBtn">＋</button>'
+       +'<input id="say" value="'+esc(chatDrafts.get(ch.id)||'')+'" placeholder="发消息…" autocomplete="off">'
        +'<button class="cbtn" id="stkBtn">'+ic('smile',18)+'</button>'
-       +'<button class="cbtn pri" id="send">'+ic('arrow',18)+'</button></div>')
+       +'<button class="cbtn pri" id="send">'+ic('arrow',18)+'</button></div></div>')
    +'<div id="panel" style="display:none"></div>'
    +'</div>';
 }
@@ -5348,8 +5637,9 @@ function msgHTML(m,ch,selection){
     inner=takeoutMsgHTML(m,ch);
   }
   else { inner='<div class="bub">'+textHTML(m.text)+'</div>'; }
+  const quoteHTML=quoteRefHTML(m.quote);
   return '<div class="mrow'+(mine?' me':'')+' '+rowClass+'"'+rowAttr+'>'+mark+av
-    +'<div class="colw" data-bub="'+m.id+'">'+(showWho?'<div class="who">'+esc(p?p.name:'')+'</div>':'')+inner+'</div></div>';
+    +'<div class="colw" data-bub="'+m.id+'">'+(showWho?'<div class="who">'+esc(p?p.name:'')+'</div>':'')+quoteHTML+inner+'</div></div>';
 }
 function labelOf(m){
   if(m.recalled) return m.recalled.known? ('[用户撤回了一条消息，撤回前的内容：'+m.recalled.text+']') : '[用户撤回了一条消息，你没有看清内容]';
@@ -5369,6 +5659,11 @@ function labelOf(m){
   if(t==='turn') return [].concat(m.narr||[],m.talk||[]).join(' ');
   if(t==='doc') return '[发了一个文件：'+(m.title||'')+(m.content? ('，内容是：'+String(m.content).slice(0,900)):'')+']';
   return m.text||'';
+}
+function messageContextLabel(m){
+  const text=labelOf(m);
+  if(!m||!m.quote) return text;
+  return '[引用 '+String(m.quote.who||'')+'：'+String(m.quote.text||'').slice(0,110)+']\n'+text;
 }
 function scrollChatBottom(){ const box=$('.chatlist')||$('#msgs')||$('#dmsgs')||$('#omsgs'); if(box) box.scrollTop=box.scrollHeight; }
 let uiAudioCtx=null;
@@ -5425,20 +5720,28 @@ function notificationActive(item){
   if(item.route&&route.name===item.route&&(!item.arg||String(route.arg||'')===String(item.arg))) return true;
   return false;
 }
+function appIsForeground(){
+  try{
+    if(window.NativeNotifications&&typeof window.NativeNotifications.isAppVisible==='function'){
+      return !!window.NativeNotifications.isAppVisible();
+    }
+  }catch(e){}
+  return !document.hidden;
+}
 function emitNotification(input){
   if(!input) return null;
-  if(!DB.ui||!DB.ui.pushEnabled) return null;
   const item=Object.assign({id:uid(),ts:Date.now(),app:'wechat',title:'BS小手机',body:'',route:'home',arg:null,chatId:null,read:false,dedupeKey:''},input);
-  if(notificationActive(item)) return null;
+  const foreground=appIsForeground();
+  if(foreground&&notificationActive(item)) return null;
   if(item.dedupeKey&&(DB.notify.items||[]).some(function(x){ return x.dedupeKey===item.dedupeKey; })) return null;
   DB.notify.items=Array.isArray(DB.notify.items)?DB.notify.items:[];
   DB.notify.items.unshift(item);
   DB.notify.items=DB.notify.items.slice(0,120);
   save();
-  if(DB.ui.pushEnabled&&!document.hidden){
+  if(foreground){
     showAppNotice(item);
   }
-  if(DB.ui.pushEnabled&&document.hidden){
+  if(DB.ui&&DB.ui.pushEnabled&&!foreground){
     try{
       if(window.NativeNotifications&&typeof window.NativeNotifications.notify==='function') window.NativeNotifications.notify(item.title,item.body,item.id);
       else if('Notification' in window&&Notification.permission==='granted') new Notification(item.title,{body:String(item.body||'').slice(0,120),icon:'./icon-192.png',tag:item.id});
@@ -5447,22 +5750,39 @@ function emitNotification(input){
   return item;
 }
 function notifyBackground(title,body,chatId,sourceId){
-  if(!DB.ui||!DB.ui.pushEnabled) return;
   return emitNotification({app:'wechat',title:title||'BS小手机',body:String(body||'').slice(0,140),route:'chatroom',arg:chatId||null,chatId:chatId||null,dedupeKey:sourceId?('wechat:'+sourceId):''});
 }
 function showAppNotice(item){
-  const el=$('#appNotice'); if(!el||!item) return;
-  el.innerHTML='<span class="ani">'+notifyAppIcon(item.app)+'</span><span class="ant"><b>'+esc(item.title||'BS小手机')+'</b><span>'+esc(item.body||'')+'</span></span><span class="chev">›</span>';
-  el.classList.add('on');
-  el.onclick=function(){ openNotification(item.id); };
-  clearTimeout(showAppNotice._t);
-  showAppNotice._t=setTimeout(function(){ el.classList.remove('on'); },4200);
+  const stack=$('#appNotice'); if(!stack||!item) return;
+  const card=document.createElement('button');
+  card.type='button';
+  card.className='app-notice-card';
+  card.dataset.noticeId=item.id;
+  card.innerHTML='<span class="ani">'+notifyAppIcon(item.app)+'</span><span class="ant"><b>'+esc(item.title||'BS小手机')+'</b><span>'+esc(item.body||'')+'</span></span><span class="chev">›</span>';
+  card.onclick=function(){ openNotification(item.id); };
+  stack.insertBefore(card,stack.firstChild);
+  const cards=Array.from(stack.querySelectorAll('.app-notice-card'));
+  cards.slice(5).forEach(function(el){ el.remove(); });
+  setTimeout(function(){
+    if(!card.isConnected) return;
+    card.classList.add('out');
+    setTimeout(function(){ card.remove(); },200);
+  },5200);
+}
+function dismissAppNotice(id){
+  const stack=$('#appNotice'); if(!stack) return;
+  const card=Array.from(stack.querySelectorAll('.app-notice-card')).find(function(el){ return el.dataset.noticeId===id; });
+  if(!card) return;
+  card.classList.add('out');
+  setTimeout(function(){ card.remove(); },180);
+}
+function clearAppNotices(){
+  const stack=$('#appNotice'); if(stack) stack.innerHTML='';
 }
 function openNotification(id){
   const item=(DB.notify.items||[]).find(function(x){ return x.id===id; }); if(!item) return;
   item.read=true; save();
-  const el=$('#appNotice'); if(el) el.classList.remove('on');
-  toggleStatusCenter(false);
+  dismissAppNotice(id);
   if(item.wtab) wtab=item.wtab;
   if(item.route) go(item.route,item.arg||null);
 }
@@ -5487,12 +5807,7 @@ function renderStatusCenter(){
   $$('#statusCenter [data-status-settings]').forEach(function(el){ el.onclick=function(){ toggleStatusCenter(false); go('settings'); }; });
   $$('#statusCenter [data-status-music]').forEach(function(el){ el.onclick=function(){ toggleStatusCenter(false); go('music'); }; });
 }
-function toggleStatusCenter(open){
-  const el=$('#statusCenter'); if(!el) return;
-  const on=open===undefined?!el.classList.contains('on'):!!open;
-  if(on) renderStatusCenter();
-  el.classList.toggle('on',on);
-}
+function toggleStatusCenter(){ return false; }
 function appLog(type,text,detail){
   try{
     DB.logs=Array.isArray(DB.logs)?DB.logs:[];
@@ -5501,20 +5816,32 @@ function appLog(type,text,detail){
     if(String(type)!=='error'&&typeof save==='function') setTimeout(function(){ try{ save(); }catch(e){} },600);
   }catch(e){}
 }
+function appendMessageToOpenChat(ch,mm){
+  if(!ch||!mm||route.name!=='chatroom'||route.arg!==ch.id||chatSelectChat===ch.id) return false;
+  const box=$('#msgs');
+  if(!box) return false;
+  box.insertAdjacentHTML('beforeend',msgHTML(mm,ch,{active:false,ids:[]}));
+  requestAnimationFrame(scrollChatBottom);
+  return true;
+}
 function pushMsg(chatId,m,quiet){
   const ch=chat(chatId); if(!ch) return null;
   const mm=Object.assign({id:uid(),ts:Date.now()},m);
   ch.msgs.push(mm); ch.lastTs=Date.now();
   if(!quiet&&!(route.name==='chatroom'&&route.arg===chatId)) ch.unread=(ch.unread||0)+1;
   if(!quiet) playUiSound(mm.role==='me'?'send':'receive');
-  if(!quiet&&mm.role==='ta') notifyBackground(chatName(ch),labelOf(mm),ch.id,mm.id);
+  if(!quiet&&(mm.role==='ta'||mm.notify)) notifyBackground(mm.notifyTitle||chatName(ch),mm.notifyBody||labelOf(mm),ch.id,mm.id);
   save();
-  if((route.name==='chatroom'&&route.arg===chatId)||(!quiet&&(route.name==='home'||route.name==='wechat'))) render();
+  const sameOpenChat=route.name==='chatroom'&&route.arg===chatId;
+  if(sameOpenChat){
+    if(!appendMessageToOpenChat(ch,mm)) render();
+  }else if(!quiet&&(route.name==='home'||route.name==='wechat')) render();
   return mm;
 }
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));/* ---- AI 回合 ---- */
 async function aiTurn(opt){
-  const ch=chat(curChatId||route.arg); if(!ch) return;
+  const chatId=(opt&&opt.chatId)||(route.name==='chatroom'?route.arg:curChatId);
+  const ch=chat(chatId); if(!ch) return;
   const members=ch.memberIds.map(ct).filter(Boolean);
   if(!members.length) return;
   if(!DB.api.key){ toast('先到「设置」里填 API Key'); return; }
@@ -5527,13 +5854,15 @@ async function aiTurn(opt){
   const wantsVoice=!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
-    const history=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),24).map(m=>({role:m.role==='me'?'user':'assistant',content:labelOf(m)}));
+    const history=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),24).map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
     const others=ch.type==='group'? members.filter(x=>x.id!==speaker.id).map(x=>x.name):[];
     let sys=promptOf(speaker, others, ch.msgs.slice(-6), {format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
     if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
     if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
-    sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用；对方让你发语音时，直接发就好。';
+    sys+='\n【微信引用规则】历史里的“引用”是真实的消息引用上下文，不是让你用双引号复述对方原话。需要回应被引用内容时，直接接着谈它，不要写“你那句『……』”。';
+    sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。';
+    sys+='\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。';
     sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(speaker, out);
@@ -5541,14 +5870,15 @@ async function aiTurn(opt){
     await sleep(Math.min(1600, 240 + clean.length*12));
     const t0=$('#typing'); if(t0) t0.remove();
     const badVoice=/设备不匹配|未配置.{0,6}(接口|语音)|接口.{0,6}未配置|不能发语音|发不了语音|没法发语音|不支持语音|语音功能.{0,6}(不可用|未配置)/;
-    const parts=enforceBubbleCount(clean,want).map(function(t){ return badVoice.test(t)?'好，我发给你。':t; });
+    const plan=enforceBubblePlan(clean,want).map(function(item){
+      const text=badVoice.test(item.text)?'好，我发给你。':stripQuotedRestatement(item.text);
+      return Object.assign({},item,{text:text});
+    });
+    const parts=resolveVoicePlan(plan,speaker,wantsVoice);
     if(!parts.length) throw new Error('没有可发送的气泡');
-    let sentVoice=false;
     for(let pi=0;pi<parts.length;pi++){
-      const t=parts[pi];
-      const asVoice=(wantsVoice&&pi===0)||(!sentVoice&&Math.random()<voiceModeChance(speaker.voiceFreq));
-      if(asVoice){
-        sentVoice=true;
+      const part=parts[pi],t=part.text;
+      if(part.type==='voice'){
         pushMsg(ch.id,{role:'ta',from:speaker.id,type:'voice',text:t,duration:voiceSeconds({text:t})});
       }else{
         pushMsg(ch.id,{role:'ta',from:speaker.id,type:'text',text:t});
@@ -5557,7 +5887,7 @@ async function aiTurn(opt){
     }
     if(ch.type==='group'&&members.length>1&&Math.random()<0.35){
       const other=pick(members.filter(x=>x.id!==speaker.id));
-      if(other){ await sleep(900); await aiTurn({speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
+      if(other){ await sleep(900); await aiTurn({chatId:ch.id,speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
     }
   }catch(e){
     setTyping(false);
@@ -5567,10 +5897,15 @@ async function aiTurn(opt){
 async function sendText(){
   const inp=$('#say'); if(!inp) return;
   const raw=String(inp.value||'').replace(/\r\n/g,'\n'); if(!raw.trim()) return;
+  const sendChatId=route.name==='chatroom'?route.arg:curChatId;
   const t=parenToQuote(raw);
+  const quoted=chatQuote&&chatQuote.chatId===sendChatId?Object.assign({},chatQuote):null;
+  chatQuote=null;
+  chatDrafts.delete(sendChatId);
   inp.value=''; hidePanel();
-  pushMsg(curChatId,{role:'me',type:'text',text:t});
-  const chs=chat(curChatId);
+  const replyPreview=$('.reply-preview'); if(replyPreview) replyPreview.remove();
+  pushMsg(sendChatId,{role:'me',type:'text',text:t,quote:quoted});
+  const chs=chat(sendChatId);
   if(chs){
     maybeAutoGenerateChatImage(chs,t);
     const intent=/(帮我点|给我点|点个外卖|点份外卖|我想吃|我想喝|我饿了|给我买杯|帮我买杯)/.test(String(t||''))&&!/(别点|不要点|不用点|别买)/.test(String(t||''));
@@ -5584,9 +5919,13 @@ async function sendText(){
   }
 }
 function sendRich(m,nudge){
-  pushMsg(curChatId,Object.assign({role:'me'},m));
+  const sendChatId=route.name==='chatroom'?route.arg:curChatId;
+  const quoted=chatQuote&&chatQuote.chatId===sendChatId?Object.assign({},chatQuote):null;
+  chatQuote=null;
+  const replyPreview=$('.reply-preview'); if(replyPreview) replyPreview.remove();
+  pushMsg(sendChatId,Object.assign({role:'me',quote:quoted},m));
   hidePanel();
-  if(nudge) aiTurn({nudge});
+  if(nudge) aiTurn({chatId:sendChatId,nudge:nudge});
 }
 /* ---- 加号面板 ---- */
 function panelPlus(){
@@ -5623,7 +5962,7 @@ function panelAction(k){
   else if(k==='mus') sheetMusic();
   else if(k==='doc') sheetDoc();
   else if(k==='takeout'){
-    const ch=chat(curChatId); if(!ch) return;
+    const ch=chat(route.name==='chatroom'?route.arg:curChatId); if(!ch) return;
     DB.takeout.binding=exactBindingSetChat(DB.takeout.binding,ch.id);
     DB.takeout.chatId=ch.id; DB.takeout.contactId=ch.memberIds[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; DB.takeout.activeTab='home'; save(); hidePanel(); go('takeout');
   }
@@ -5631,7 +5970,7 @@ function panelAction(k){
   else if(k==='stk') showPanel(panelStickers(),'stk');
 }
 function toggleMeet(){
-  const ch=chat(curChatId); if(!ch) return;
+  const ch=chat(route.name==='chatroom'?route.arg:curChatId); if(!ch) return;
   const nowOff=ch.memberIds.some(id=>{ const c=ct(id); return c&&Number(c.meetFreq)>0; });
   ch.memberIds.forEach(id=>{ const c=ct(id); if(c) c.meetFreq= nowOff? 0 : 3; });
   pushMsg(ch.id,{role:'sys',type:'text',text: nowOff? '已切回线上：Ta 不再写动作，只发消息' : '已切换到线下：Ta 会写动作，用两个单引号夹住'});
@@ -5961,7 +6300,12 @@ function sheetCover(){
   $('#cvUrl').onclick=()=>{ const u=window.prompt('图片网址'); if(u){ DB.momentCover=u.trim(); save(); closeSheet(); render(); } };
   $$('#sheetBox [data-cv]').forEach(el=>el.onclick=()=>{ DB.momentCover=DB.pics[Number(el.dataset.cv)]; save(); closeSheet(); render(); toast('封面已换'); });
 }/* ---- 朋友圈：角色自动行为 ---- */
-function addNotif(text){ DB.notifs=DB.notifs||[]; DB.notifs.unshift({id:uid(),text,ts:Date.now(),read:false}); }
+function addNotif(text){
+  DB.notifs=DB.notifs||[];
+  const item={id:uid(),text,ts:Date.now(),read:false};
+  DB.notifs.unshift(item);
+  emitNotification({app:'weibo',title:'朋友圈',body:String(text||'').slice(0,140),route:'weibo',arg:null,dedupeKey:'moment-notice:'+item.id});
+}
 function authorName(p){ return p.by==='me'? '你' : ((ct(p.by)||{}).name||'某人'); }
 async function genPost(c){
   const sys=promptOf(c,null,[])
@@ -6425,7 +6769,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.60 · 第 71 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.61 · 第 72 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6443,7 +6787,7 @@ const PROGRESS_GROUPS=[
     ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
-    ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
+    ['通知与后台','已有任意板块消息气泡、角标、Android 原生通知和前台保活服务；正常返回桌面后会继续接收。系统“强行停止”或厂商彻底冻结仍受 Android 限制。'],
     ['音乐与一起听','本地音频导入、歌单、LRC/文本歌词、进度、跨板块播放、一起听、实时评论、共同收藏和听歌历史已可用；网易云扫码登录与授权歌单导入仍未接入。'],
     ['AI 生图','设置、自拍/食物/双人/场景识别、角色与用户参考图、相册保存、角色永久绑定、修改提示词、重新生成和删除已接入；还需用自己的真实生图接口验证不同供应商兼容性与费用。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
@@ -6694,7 +7038,7 @@ function sheetImageApiSettings(){
   };
 }
 function sheetImageGenerate(kind){
-  const ch=chat(curChatId||route.arg); if(!ch) return;
+  const ch=chat(route.name==='chatroom'?route.arg:(curChatId||route.arg)); if(!ch) return;
   const c=ct((ch.memberIds||[])[0]); if(!c){ toast('这个会话没有可生成的角色'); return; }
   const g=imageEnsure();
   if(!g.enabled){ toast('先到设置里开启 AI 生图'); sheetImageApiSettings(); return; }
@@ -7114,12 +7458,18 @@ document.addEventListener('fullscreenchange',async function(){
   save(); if(route.name==='settings') render();
 });
 async function togglePushNotifications(){
-  if(DB.ui.pushEnabled){ DB.ui.pushEnabled=false; save(); render(); toast('后台消息提醒已关闭'); return; }
+  if(DB.ui.pushEnabled){
+    DB.ui.pushEnabled=false;
+    try{ if(window.NativeNotifications&&window.NativeNotifications.disableBackground) window.NativeNotifications.disableBackground(); }catch(e){}
+    save(); render(); toast('后台消息提醒已关闭'); return;
+  }
   try{
     let mode='inapp';
     if(window.NativeNotifications&&typeof window.NativeNotifications.requestPermission==='function'){
-      const ok=await window.NativeNotifications.requestPermission();
-      mode=ok?'native':'inapp';
+      const already=typeof window.NativeNotifications.hasPermission==='function'?!!window.NativeNotifications.hasPermission():false;
+      if(!already) window.NativeNotifications.requestPermission();
+      mode=already?'native':'native-pending';
+      if(window.NativeNotifications.enableBackground) window.NativeNotifications.enableBackground();
     }else if('Notification' in window){
       const p=await Notification.requestPermission();
       mode=p==='granted'?'web':'inapp';
@@ -7127,7 +7477,7 @@ async function togglePushNotifications(){
     DB.ui.pushEnabled=true;
     DB.ui.pushMode=mode;
     save(); render();
-    toast(mode==='native'?'通知已开启（含系统通知）':mode==='web'?'通知已开启（网页通知）':'通知已开启（App 内顶部提醒）');
+    toast(mode==='native-pending'?'已开启通知，正在等待系统授权':mode==='native'?'通知已开启（含后台系统通知）':mode==='web'?'通知已开启（网页通知）':'通知已开启（App 内顶部提醒）');
   }catch(e){ DB.ui.pushEnabled=true; DB.ui.pushMode='inapp'; save(); render(); toast('已开启 App 内通知，系统权限未通过'); }
 }
 let nextRatio=0;
@@ -9614,6 +9964,7 @@ function npAddMessage(type,text,opt){
   DB.np.messages=DB.np.messages||[];
   DB.np.messages.unshift({id:uid(),type:type,text:text,bookId:opt.bookId||null,chapterId:opt.chapterId||null,paraIndex:opt.paraIndex===undefined?null:Math.max(0,Number(opt.paraIndex)||0),reader:opt.reader||'',ts:Date.now(),read:false});
   if(DB.np.messages.length>120) DB.np.messages.length=120;
+  emitNotification({app:'novel',title:'小说互动',body:String(text||'').slice(0,140),route:opt.chapterId?'novelchapter':(opt.bookId?'novelbook':'novel'),arg:opt.chapterId||opt.bookId||null,dedupeKey:'novel-event:'+DB.np.messages[0].id});
   save();
   if(route.name==='novel') render();
 }
@@ -9626,6 +9977,7 @@ function npAddGroup(name,type,text,role,groupId){
   if(group.messages.length>240) group.messages=group.messages.slice(-240);
   group.updatedAt=Date.now();
   npSyncActiveGroup();
+  if(role!=='me') emitNotification({app:'novel',title:group.name||'读者群',body:String(name||'读者')+'：'+String(text||'').slice(0,120),route:'novel',arg:null,dedupeKey:'reader-group:'+group.messages[group.messages.length-1].id});
   return group;
 }
 function npMarkReaderGroupRead(groupId){
@@ -11965,7 +12317,13 @@ function bindScreenInner(){
   /* 会话页 */
   if(route.name==='chatroom'){
     const box=$('#msgs'); if(box) box.scrollTop=box.scrollHeight;
-    const say=$('#say'); if(say){ say.onkeydown=e=>{ if(e.key==='Enter') sendText(); }; say.onfocus=function(){ setTimeout(scrollChatBottom,240); }; }
+    const say=$('#say');
+    if(say){
+      say.oninput=function(){ chatDrafts.set(route.arg,String(say.value||'')); };
+      say.onblur=function(){ chatDrafts.set(route.arg,String(say.value||'')); };
+      say.onkeydown=e=>{ if(e.key==='Enter'&&!e.isComposing) sendText(); };
+      say.onfocus=function(){ setTimeout(scrollChatBottom,240); };
+    }
     const sd=$('#send'); if(sd) sd.onclick=sendText;
     const pb=$('#plusBtn'); if(pb) pb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='plus') hidePanel(); else showPanel(panelPlus(),'plus'); };
     const sb=$('#stkBtn'); if(sb) sb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='stk') hidePanel(); else showPanel(panelStickers(),'stk'); };
@@ -12001,6 +12359,8 @@ function bindScreenInner(){
       el.addEventListener('touchend',stop);
       el.addEventListener('touchmove',stop);
     });
+    const replyQuoteClose=$('#replyQuoteClose');
+    if(replyQuoteClose) replyQuoteClose.onclick=function(){ chatQuote=null; render(); };
     const chm=$('#chMenu'); if(chm) chm.onclick=()=>sheetChatMenu(chat(route.arg));
     $$('[data-poke]',s).forEach(el=>{
       let last=0;
@@ -12765,49 +13125,58 @@ function bindScreenInner(){
 }
 function bindScreen(){ try{ bindScreenInner(); }catch(e){ logErr('bindScreen 出错: '+e.message); } }
 /* ================= 主动行为 ================= */
-const AUTO_GAP_MS=[Infinity,6*3600e3,3*3600e3,90*60e3,40*60e3,15*60e3];
-function fqOfChat(ch){
-  let f=2;
-  ch.memberIds.forEach(id=>{ const c=ct(id); const v=(c&&c.autoFreq!==undefined)? Number(c.autoFreq) : 2; if(v>f) f=v; });
-  return Math.max(0,Math.min(5,f));
+let autoTickBusy=false;
+function autoGapOfChat(ch){
+  let gap=Infinity;
+  (ch.memberIds||[]).forEach(function(id){
+    const c=ct(id);
+    if(c&&c.autoOn!==false) gap=Math.min(gap,autoIntervalMs(c));
+  });
+  return gap;
+}
+async function taPokeUser(ch,c){
+  if(!ch||!c) return;
+  const name=contactDisplayName(c);
+  const text=name+'拍了拍你的'+(c.nudgeMe||'小脑袋');
+  pushMsg(ch.id,{role:'sys',type:'text',text:text,notify:true,notifyTitle:name,notifyBody:'拍了拍你'});
+  if(DB.api.key){
+    try{ await aiTurn({chatId:ch.id,speaker:c,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号，按设置的句数回复。'}); }catch(e){}
+    save();
+  }
+  if(route.name==='wechat'||(route.name==='chatroom'&&route.arg===ch.id)) render();
 }
 async function autoTick(){
-  if(!DB.api.key||!DB.auto) return;
-  const now=Date.now();
-  const cands=[];
-  DB.chats.forEach(ch=>{
-    if(!ch.memberIds.length) return;
-    const allOff=ch.memberIds.every(function(id){ const c=ct(id); return c&&c.autoOn===false; });
-    if(allOff) return;
-    const gap=AUTO_GAP_MS[fqOfChat(ch)];
-    if(!isFinite(gap)) return;
-    if(now-(ch.lastAuto||0)<gap) return;
-    if(now-(ch.lastTs||0)<60000) return;
-    cands.push(ch);
-  });
-  if(!cands.length) return;
-  cands.sort((a,b)=>(a.lastTs||0)-(b.lastTs||0));
-  const target=cands[0];
-  target.lastAuto=now;
-  if(Math.random()<0.22){
+  if(autoTickBusy||!DB.auto) return;
+  autoTickBusy=true;
+  try{
+    const now=Date.now();
+    const cands=[];
+    DB.chats.forEach(function(ch){
+      if(!ch.memberIds||!ch.memberIds.length) return;
+      const gap=autoGapOfChat(ch);
+      if(!isFinite(gap)) return;
+      if(now-(ch.lastAuto||0)<gap) return;
+      if(now-(ch.lastTs||0)<30000) return;
+      cands.push(ch);
+    });
+    if(!cands.length) return;
+    cands.sort(function(a,b){ return (a.lastAuto||a.lastTs||0)-(b.lastAuto||b.lastTs||0); });
+    const target=cands[0];
+    target.lastAuto=now;
     const cc=ct(target.memberIds[0]);
-    if(cc){
-      pushMsg(target.id,{role:'sys',type:'text',text:cc.name+'拍了拍你的'+(cc.nudgeMe||'小脑袋'),ts:Date.now()});
-      save();
-      const prev=curChatId; curChatId=target.id;
-      try{ await aiTurn({speaker:cc,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号，按设置的句数回复。'}); }catch(e){}
-      curChatId=prev; save();
-      if(route.name==='wechat') render();
+    if(cc&&Math.random()<0.35){
+      await taPokeUser(target,cc);
       return;
     }
+    if(!DB.api.key) return;
+    try{
+      await aiTurn({chatId:target.id,nudge:'你自己主动找对方说话。注意：对方还没有回你，所以绝对不要自问自答，也不要说「好的」「可以」「那就这样」这种像是在回应自己的话。换一个新的点：说说你正在做的事、你刚想到的事，或者想对方了。只说一到两句。'});
+    }catch(e){}
+    save();
+    if(route.name==='wechat'||(route.name==='chatroom'&&route.arg===target.id)) render();
+  }finally{
+    autoTickBusy=false;
   }
-  const prev=curChatId; curChatId=target.id;
-  try{
-    await aiTurn({nudge:'你自己主动找对方说话。注意：对方还没有回你，所以绝对不要自问自答，也不要说「好的」「可以」「那就这样」这种像是在回应自己的话。换一个新的点：说说你正在做的事、你刚想到的事，或者想对方了。只说一到两句。'});
-  }catch(e){}
-  curChatId=prev;
-  save();
-  if(route.name==='wechat') render();
 }
 /* ================= 关键动作（统一通道，绑不上也能点） ================= */
 async function doHang(){
@@ -12937,8 +13306,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.60 · 第 71 轮';
-const BUILD_CODE=71;
+const BUILD='2026-10-28 · 3.61 · 第 72 轮';
+const BUILD_CODE=72;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -12959,7 +13328,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','showAppNotice','autoIntervalSec','resolveVoicePlan','regenerateChatMessage','sheetMessageBranches','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -13012,8 +13381,9 @@ async function runCheckupUI(){
   const hangContact=exactBindingResolved(DB.hang.binding).contact;
   add('查岗精确绑定', !!hangContact&&!!DB.hang.binding.personaId, hangContact?exactBindingSummary(DB.hang.binding):'未绑定角色');
   add('查岗手机与动态', HANG_PHONE_APPS.length===11, '11 个 App · '+((DB.hang.phone&&hangContact&&DB.hang.phone[hangContact.id])?'已有手机内容':'未查看手机')+' · '+((DB.hang.doing&&hangContact&&DB.hang.doing[hangContact.id])?'已有此刻动态':'未生成动态')+' · '+DB.hang.mode);
-  add('通知中心', !!(DB.notify&&Array.isArray(DB.notify.items)&&$('#statusCenter')), (DB.notify&&DB.notify.items?DB.notify.items.length:0)+' 条记录');
+  add('消息通知气泡', !!(DB.notify&&Array.isArray(DB.notify.items)&&$('#appNotice')), '多气泡堆叠 · 当前保留 '+(DB.notify&&DB.notify.items?DB.notify.items.length:0)+' 条记录');
   add('原生通知桥', !!(window.NativeNotifications||('Notification' in window)), window.NativeNotifications?'Android 原生通知':('Notification' in window?'浏览器通知':'App 内提醒'));
+  add('后台消息保活', !!(window.NativeNotifications&&typeof window.NativeNotifications.enableBackground==='function'), window.NativeNotifications?'前台保活服务可用 · 返回键只退到后台':'网页端仅保留 App 内提醒');
   add('上下文参数', Number.isFinite(Number(DB.api.contextLimit))&&Number.isFinite(Number(DB.api.maxTokens)), '历史 '+(DB.api.contextLimit<0?'不限制':DB.api.contextLimit)+' 条 · 输出 '+(DB.api.maxTokens?DB.api.maxTokens+' token':'不限制')+' · 流式 '+(DB.api.stream?'开':'关'));
   add('语音接口', true, (DB.audio.key&&DB.audio.voiceId)? '已配置' : '未配置（语音气泡和转文字仍可用）');
   add('提示音', true, DB.ui.soundCustom? ('自定义：'+DB.ui.soundCustomName) : ('内置：'+(SOUND_PRESETS.find(function(x){ return x.k===DB.ui.soundPreset; })||{n:'清铃'}).n));
@@ -13804,6 +14174,7 @@ async function meetTick(){
       c.lastMeet=Date.now();
       save();
       if(route.name==='date'||route.name==='dateroom'||route.name==='home'||route.name==='wechat') render();
+      emitNotification({app:'date',title:contactDisplayName(c),body:invite?('约你今晚在'+place+'见面'):('来找你了：'+place),route:'date',arg:d.id,dedupeKey:'date-invite:'+d.id});
       toast(invite? (c.name+' 约你今晚在'+place+'见面') : (c.name+' 来找你了：'+place));
     }catch(e){ logErr('突然来访生成失败（已跳过）：'+e.message); }
     break;
@@ -15144,8 +15515,10 @@ function sheetWbComment(pid,withPost){
 }
 function wbNotify(type,text,postId){
   const w=wbDB();
-  w.notifs.unshift({id:uid(),type:type||'comment',text:text,postId:postId||null,ts:Date.now(),read:false});
+  const item={id:uid(),type:type||'comment',text:text,postId:postId||null,ts:Date.now(),read:false};
+  w.notifs.unshift(item);
   w.notifs=w.notifs.slice(0,80);
+  emitNotification({app:'weibo',title:type==='like'?'微博点赞':type==='repost'?'微博转发':'微博互动',body:String(text||'').slice(0,140),route:'weibo',arg:null,dedupeKey:'weibo-notice:'+item.id});
 }
 function sheetWbCompose(id){
   const w=wbDB();
@@ -16015,13 +16388,14 @@ function installDemoPhone(force){
   npNormalizePlatform();
   saveNow();
   initNativeFullscreen();
+  try{ if(DB.ui.pushEnabled&&window.NativeNotifications&&window.NativeNotifications.enableBackground) window.NativeNotifications.enableBackground(); }catch(e){}
   syncAppHeight(); if(window.visualViewport){ window.visualViewport.addEventListener('resize',syncAppHeight); window.visualViewport.addEventListener('scroll',syncAppHeight); }
   window.addEventListener('resize',syncAppHeight);
   tickStatus(); setInterval(tickStatus,20000);
   applyTheme(); restoreLastRoute(); render();
   if(navigator.storage&&navigator.storage.persist) navigator.storage.persist().catch(function(){});
   if(window.visualViewport){ window.visualViewport.addEventListener('resize',function(){ if(route.name==='chatroom'||route.name==='dateroom'||route.name==='outroom') setTimeout(scrollChatBottom,80); }); }
-  setInterval(function(){ autoTick().catch(function(){}); },20000);
+  setInterval(function(){ autoTick().catch(function(){}); },10000);
   setInterval(function(){ meetTick().catch(function(){}); },60000);
   setInterval(function(){ if(DB.api.key&&DB.auto) autoMoments().catch(function(){}); },45000);
   setInterval(function(){ try{ soulTickUI(); }catch(e){ logErr('灵魂匹配计时失败：'+e.message); } },1000);
@@ -17643,19 +18017,15 @@ function sheetTbProduct(i){
 }
 window.addEventListener('resize',function(){fitLayout7Homes(document);},{passive:true});
 window.addEventListener('orientationchange',function(){setTimeout(function(){fitLayout7Homes(document);},80);},{passive:true});
-let statusPullStart=null;
-document.addEventListener('pointerdown',function(e){ if(e.clientY<=28) statusPullStart={x:e.clientX,y:e.clientY}; },{passive:true});
-document.addEventListener('pointerup',function(e){
-  if(!statusPullStart) return;
-  const dx=Math.abs(e.clientX-statusPullStart.x),dy=e.clientY-statusPullStart.y;
-  statusPullStart=null;
-  if(dy>55&&dx<80) toggleStatusCenter(true);
-},{passive:true});
-document.addEventListener('keydown',function(e){ if(e.key==='Escape') toggleStatusCenter(false); });
+document.addEventListener('keydown',function(e){ if(e.key==='Escape') clearAppNotices(); });
 window.addEventListener('nativepermissionchange',function(e){
   DB.ui.pushMode=e.detail?'native':'inapp';
   DB.ui.pushEnabled=true;
   save();
+  try{
+    if(e.detail&&window.NativeNotifications&&window.NativeNotifications.enableBackground) window.NativeNotifications.enableBackground();
+    if(!e.detail&&window.NativeNotifications&&window.NativeNotifications.disableBackground) window.NativeNotifications.disableBackground();
+  }catch(err){}
   toast(e.detail?'系统通知权限已开启':'系统通知权限未通过，已保留 App 内提醒');
 });
 window.setInterval(function(){ try{ takeoutTickOrders(); }catch(e){ logErr('外卖状态轮询失败：'+e.message); } },3000);
