@@ -2053,6 +2053,31 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
   .store-cover{width:76px;height:76px}.store-line b{font-size:calc(14px * var(--ui-font-scale,1))}
   .takeout-bottomnav b{font-size:calc(9px * var(--ui-font-scale,1))}
 }
+/* 所有页面页标横向贴边；内容按刘海和圆角安全区向内收。 */
+:root{
+  --page-gutter:20px;
+  --safe-left:env(safe-area-inset-left,0px);
+  --safe-right:env(safe-area-inset-right,0px);
+}
+.pad{padding-left:var(--page-gutter);padding-right:var(--page-gutter)}
+.wxtop,.nav,.np-top,.wbtop,.np-reader-bar{
+  width:100%;
+  max-width:none;
+  padding-left:calc(var(--safe-left) + 16px);
+  padding-right:calc(var(--safe-right) + 16px);
+}
+.pad > .wxtop:first-child,
+.pad > .nav:first-child,
+.pad > .np-top:first-child,
+.pad > .wbtop:first-child,
+.pad > .np-reader-bar:first-child{
+  width:calc(100% + var(--page-gutter) + var(--page-gutter));
+  margin-left:calc(0px - var(--page-gutter));
+  margin-right:calc(0px - var(--page-gutter));
+  padding-left:calc(var(--safe-left) + var(--page-gutter));
+  padding-right:calc(var(--safe-right) + var(--page-gutter));
+  border-radius:0;
+}
 </style>
 <style id="userCustomCss"></style>
 <style id="uiFontStyle"></style>
@@ -6068,10 +6093,10 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.50 · 第 61 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.51 · 第 62 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
-    ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行。'],
+    ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
     ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
     ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
@@ -10369,8 +10394,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.50 · 第 61 轮';
-const BUILD_CODE=61;
+const BUILD='2026-10-27 · 3.51 · 第 62 轮';
+const BUILD_CODE=62;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10405,6 +10430,18 @@ async function runCheckupUI(){
   const p2=(DB.ui.homePages||[])[1]||[],p2Group=((DB.ui.widgetPages||[])[1]||[]).find(function(w){ return w.id==='l7_p2_apps'; });
   const p2Ok=JSON.stringify(p2)===JSON.stringify(['hang','shop','date','out'])&&p2Group&&JSON.stringify(p2Group.appKeys)===JSON.stringify(p2)&&Number(p2Group.appCols)===2;
   add('第二页图标布局', !!p2Ok, p2Ok?'查岗/网购 · 约会/出门 · 两列 52px':'布局异常，请恢复默认第二页');
+  const phoneRect=$('#phone')?$('#phone').getBoundingClientRect():null;
+  const pageBar=[].slice.call(document.querySelectorAll('#screen .wxtop,#screen .nav,#screen .np-top,#screen .wbtop,#screen .np-reader-bar')).find(function(el){
+    const rect=el.getBoundingClientRect(); return rect.width>0&&rect.height>0&&rect.top<150;
+  });
+  if(phoneRect&&pageBar){
+    const rect=pageBar.getBoundingClientRect(),style=getComputedStyle(pageBar);
+    const edgeOk=Math.abs(rect.left-phoneRect.left)<=1&&Math.abs(rect.right-phoneRect.right)<=1;
+    const safeOk=(parseFloat(style.paddingLeft)||0)>=16&&(parseFloat(style.paddingRight)||0)>=16;
+    add('页标横向贴边', edgeOk&&safeOk, '左右贴边 '+(edgeOk?'正常':'异常')+' · 安全区内边距 '+(safeOk?'正常':'异常'));
+  }else{
+    add('页标横向贴边', true, '当前页没有独立页标');
+  }
   add('开发进度清单', Array.isArray(PROGRESS_GROUPS)&&PROGRESS_GROUPS.length===3, PROGRESS_GROUPS.map(function(g){ return g.n+' '+g.items.length; }).join(' · '));
   add('联系人', (DB.contacts||[]).length>0, (DB.contacts||[]).length+' 位');
   add('会话', true, (DB.chats||[]).length+' 个');
