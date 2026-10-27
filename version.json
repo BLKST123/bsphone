@@ -1,9 +1,9 @@
 {
-  "version": "3.54",
-  "versionCode": 65,
-  "round": 65,
+  "version": "3.55",
+  "versionCode": 66,
+  "round": 66,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=65",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=66",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "新增独立小说世界书库：生成 3–8 本小说时选择并自动绑定；单本可自定义或换绑；删除模板会自动保留绑定书籍副本，且不影响全局世界书。"
+  "notes": "约会与出门新增多选迁移、从节点重开、复制副本、选择性继承记忆和重新生成最后一轮；旧记录保留，生成失败会回滚。"
 }

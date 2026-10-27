@@ -1911,9 +1911,13 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 /* 多会话消息迁移 */
 .chatlist.selecting .msg-select-row{cursor:pointer;position:relative;border-radius:12px;transition:background .15s ease,box-shadow .15s ease}
 .chatlist.selecting .msg-select-row.selected{background:color-mix(in srgb,var(--theme-rose-soft) 74%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-rose-deep) 24%,transparent)}
+.chatlist.selecting .out-select-row{cursor:pointer;position:relative;padding:6px;border-radius:12px;transition:background .15s ease,box-shadow .15s ease}
+.chatlist.selecting .out-select-row.selected{background:color-mix(in srgb,var(--theme-rose-soft) 74%,transparent);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--theme-rose-deep) 24%,transparent)}
+.chatlist.selecting .out-select-row.can-select{padding:8px 38px 8px 8px}
+.out-select-row>.msg-check{right:8px;top:8px}
 .msg-select-row.can-select{padding:8px 34px 8px 8px}
 .msg-check{position:absolute;right:8px;top:10px;width:20px;height:20px;border-radius:50%;border:1px solid color-mix(in srgb,var(--fg2) 36%,transparent);display:flex;align-items:center;justify-content:center;font-size:calc(12px * var(--ui-font-scale,1));background:color-mix(in srgb,var(--card) 86%,transparent);color:var(--deep);z-index:2}
-.msg-select-row.selected .msg-check{background:var(--deep);border-color:var(--deep);color:#fff}
+.msg-select-row.selected .msg-check,.out-select-row.selected .msg-check{background:var(--deep);border-color:var(--deep);color:#fff}
 .chat-selectbar{display:flex;align-items:center;gap:8px;padding:9px 10px calc(9px + env(safe-area-inset-bottom));background:color-mix(in srgb,var(--card) 92%,transparent);border-top:1px solid var(--line);flex:none}
 .chat-selectbar span{font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2);flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .chat-selectbar .btn,.chat-selectbar .cbtn{flex:none}
@@ -4914,6 +4918,7 @@ function sheetReplyRange(ch){
 }
 /* ================= 会话 ================= */
 let curChatId=null, autoLock=0, chatSelectChat=null, chatSelectIds=[];
+let dateToolRoomId=null,dateToolIds=[],outToolRoomId=null,outToolIds=[];
 function chatSelectionStart(ch){
   if(!ch) return;
   chatSelectChat=ch.id; chatSelectIds=[];
@@ -4922,6 +4927,40 @@ function chatSelectionStart(ch){
 function chatSelectionEnd(redraw){
   chatSelectChat=null; chatSelectIds=[];
   if(redraw!==false&&route.name==='chatroom') render();
+}
+function dateToolStart(d){
+  if(!d) return;
+  dateEnsureMsgIds(d);
+  outToolRoomId=null; outToolIds=[];
+  dateToolRoomId=d.id; dateToolIds=[];
+  save();
+  render();
+}
+function dateToolEnd(redraw){
+  dateToolRoomId=null; dateToolIds=[];
+  if(redraw!==false&&route.name==='dateroom') render();
+}
+function toggleDateToolMessage(id){
+  const i=dateToolIds.indexOf(id);
+  if(i>=0) dateToolIds.splice(i,1); else dateToolIds.push(id);
+  render();
+}
+function outToolStart(o){
+  if(!o) return;
+  outEnsureStepIds(o);
+  dateToolRoomId=null; dateToolIds=[];
+  outToolRoomId=o.id; outToolIds=[];
+  save();
+  render();
+}
+function outToolEnd(redraw){
+  outToolRoomId=null; outToolIds=[];
+  if(redraw!==false&&route.name==='outroom') render();
+}
+function toggleOutToolStep(id){
+  const i=outToolIds.indexOf(id);
+  if(i>=0) outToolIds.splice(i,1); else outToolIds.push(id);
+  render();
 }
 function toggleChatSelect(id){
   const i=chatSelectIds.indexOf(id);
@@ -5102,9 +5141,10 @@ function takeoutMsgHTML(m,ch){
     +'<div class="to-msg-foot"><span>'+esc(o?takeoutOrderRecipientLabel(o):'')+'</span><b>'+esc(o?money(o.total):'')+'</b></div>'
     +'<div class="to-msg-link">查看订单详情与配送进度 <span class="chev">›</span></div></div>';
 }
-function msgHTML(m,ch){
-  const selecting=chatSelectChat===ch.id;
-  const selected=chatSelectIds.indexOf(m.id)>=0;
+function msgHTML(m,ch,selection){
+  const selecting=selection? !!selection.active : chatSelectChat===ch.id;
+  const selectedIds=selection&&Array.isArray(selection.ids)?selection.ids:chatSelectIds;
+  const selected=selectedIds.indexOf(m.id)>=0;
   const rowAttr=' data-msgrow="'+m.id+'"';
   const rowClass='msg-select-row'+(selecting?' can-select':'')+(selected?' selected':'');
   const mark=selecting?'<span class="msg-check">'+(selected?'✓':'')+'</span>':'';
@@ -6231,7 +6271,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.54 · 第 65 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.55 · 第 66 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6243,12 +6283,11 @@ const PROGRESS_GROUPS=[
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
     ['小说多读者群','永久总群、每书独立群、自定义群；成员、消息、未读和自动刷新按群隔离；支持拉人、解散、清空和删除；总群可跨作品讨论；发布与新增章节会一次加入 20 位以上读者。'],
     ['外卖','分类、店铺、商品规格、购物车、多地址、用户/角色下单、订单号、备注、配送进度、订单详情和会话气泡。'],
-    ['约会与出门','精确绑定、约会开场白、场景生成、共享会话记忆、出门剧情、拍立得和自定义动作。'],
+    ['约会与出门','精确绑定、约会开场白、场景生成、共享会话记忆、出门剧情、拍立得和自定义动作；约会与出门都支持多选迁移、从节点重开、复制副本、选择性继承记忆和重新生成最后一轮，旧记录保留且失败自动回滚。'],
     ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
-    ['约会/出门消息工具','支持继续生成和共享记忆；类似微信的多选消息迁移、任意节点重开等工具仍未完全对齐。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
   ]},
   {k:'pending',n:'尚未完成',color:'#c4545b',items:[
@@ -10253,7 +10292,7 @@ function bindScreenInner(){
     binding:DB.outBinding,scope:'none',requireContact:true,requirePersona:true,
     onSave:function(binding){ DB.outBinding=binding; DB.outViewChatId=binding.chatId||null; save(); closeSheet(); render(); }
   }));
-  $$('[data-outback]',s).forEach(el=>el.onclick=()=>go('out'));
+  $$('[data-outback]',s).forEach(el=>el.onclick=()=>{ outToolEnd(false); go('out'); });
   $$('[data-setslot]',s).forEach(el=>el.onclick=()=>{ DB.outSetup.slot=el.dataset.setslot; save(); render(); });
   $$('[data-setweather]',s).forEach(el=>el.onclick=()=>{ DB.outSetup.weather=el.dataset.setweather; save(); render(); });
   const og2=$('#outGo2'); if(og2) og2.onclick=function(){
@@ -10272,16 +10311,44 @@ function bindScreenInner(){
   });
   const omn=$('#oMenu'); if(omn) omn.onclick=function(){
     const o=outById(route.arg); if(!o) return;
+    outEnsureStepIds(o);
     sheet('<h3>'+esc(o.place||'出门')+'</h3>'
+      +'<button class="btn full" id="ombSelect">多选步骤并迁移到新出门</button>'
+      +'<button class="btn full" id="ombFork">选择一个步骤，从该节点重开</button>'
+      +'<button class="btn full" id="ombRegen">重新生成最后一轮出门</button>'
       +'<button class="btn full" id="ombMem">保存记忆</button>'
       +'<button class="btn full" id="ombEnd">'+(o.state==='done'? '重新生成拍立得':'结束这次出门（生成拍立得）')+'</button>'
       +'<button class="btn full danger" id="ombDel">删掉这次出门</button>'
       +'<button class="btn full" id="ombClose">关闭</button>');
+    $('#ombSelect').onclick=function(){ closeSheet(); outToolStart(o); };
+    $('#ombFork').onclick=function(){ closeSheet(); outToolStart(o); toast('点选一个步骤，再点底部「节点重开」'); };
+    $('#ombRegen').onclick=async function(){
+      closeSheet(); busy('正在重新生成，请稍后');
+      try{ await regenLastOutTurn(o); }finally{ busyDone(); }
+    };
     $('#ombMem').onclick=function(){ closeSheet(); sheetOutMemory(o); };
     $('#ombEnd').onclick=function(){ closeSheet(); endOut(o); };
     $('#ombDel').onclick=function(){ closeSheet(); DB.outings=(DB.outings||[]).filter(function(x){ return x.id!==o.id; }); save(); go('out'); toast('已删除'); };
     $('#ombClose').onclick=closeSheet;
   };
+  const outSelAll=$('#outSelAll');
+  if(outSelAll) outSelAll.onclick=function(){
+    const o=outById(route.arg); if(!o) return;
+    const ids=(o.steps||[]).map(function(step){ return step.id; });
+    outToolIds=ids.length&&outToolIds.length===ids.length?[]:ids;
+    render();
+  };
+  const outSelMigrate=$('#outSelMigrate');
+  if(outSelMigrate) outSelMigrate.onclick=function(){ const o=outById(route.arg); if(o) sheetOutBranch(o,false); };
+  const outSelFork=$('#outSelFork');
+  if(outSelFork) outSelFork.onclick=function(){ const o=outById(route.arg); if(o) sheetOutBranch(o,true); };
+  const outSelCancel=$('#outSelCancel');
+  if(outSelCancel) outSelCancel.onclick=function(){ outToolEnd(); };
+  if(outToolRoomId===route.arg){
+    $$('[data-outstep]',s).forEach(function(el){
+      el.onclick=function(ev){ ev.preventDefault(); ev.stopPropagation(); toggleOutToolStep(el.dataset.outstep); };
+    });
+  }
   const oms=$('#omsgs'); if(oms) oms.scrollTop=oms.scrollHeight;  /* 约会 */
   $$('[data-pickdatechat]',s).forEach(el=>el.onclick=()=>sheetExactBinding({
     title:'约会精确绑定',
@@ -10302,7 +10369,7 @@ function bindScreenInner(){
   $$('[data-scene]',s).forEach(el=>el.onclick=()=>{ const k=el.dataset.scene; if(k==='custom') sheetCustomScene(); else prepareDateScene(k); });
   $$('[data-opendate]',s).forEach(el=>el.onclick=()=>go('dateroom',el.dataset.opendate));
   $$('[data-nudge]',s).forEach(el=>el.onclick=()=>{ const d=dateById(route.arg); if(d) dateTurn(d,'你主动一点：说说你现在看到什么、想带对方去哪、或者递个东西过去，用一两个动作引对方往下接。不要问太多问题，不要自问自答。'); });
-  $$('[data-dateback]',s).forEach(el=>el.onclick=()=>go('date'));
+  $$('[data-dateback]',s).forEach(el=>el.onclick=()=>{ dateToolEnd(false); go('date'); });
   $$('[data-mallback]',s).forEach(el=>el.onclick=()=>{ if(DB.curDate) go('dateroom',DB.curDate); else go('home'); });
   const ds=$('#dsend'); if(ds) ds.onclick=()=>sendDate();
   const mplus=$('#mallPlus'); if(mplus) mplus.onclick=function(){
@@ -10319,6 +10386,24 @@ function bindScreenInner(){
   };
   const di=$('#dsay'); if(di) di.onkeydown=function(e){ if(e.key==='Enter') sendDate(); };
   const dm=$('#dMenu'); if(dm) dm.onclick=()=>{ const d=dateById(route.arg); if(d) sheetDateMenu(d); };
+  const dateSelAll=$('#dateSelAll');
+  if(dateSelAll) dateSelAll.onclick=function(){
+    const d=dateById(route.arg); if(!d) return;
+    const ids=dateSelectableMsgs(d).map(function(m){ return m.id; });
+    dateToolIds=ids.length&&dateToolIds.length===ids.length?[]:ids;
+    render();
+  };
+  const dateSelMigrate=$('#dateSelMigrate');
+  if(dateSelMigrate) dateSelMigrate.onclick=function(){ const d=dateById(route.arg); if(d) sheetDateBranch(d,false); };
+  const dateSelFork=$('#dateSelFork');
+  if(dateSelFork) dateSelFork.onclick=function(){ const d=dateById(route.arg); if(d) sheetDateBranch(d,true); };
+  const dateSelCancel=$('#dateSelCancel');
+  if(dateSelCancel) dateSelCancel.onclick=function(){ dateToolEnd(); };
+  if(dateToolRoomId===route.arg){
+    $$('[data-msgrow]',s).forEach(function(el){
+      el.onclick=function(ev){ ev.preventDefault(); ev.stopPropagation(); toggleDateToolMessage(el.dataset.msgrow); };
+    });
+  }
   const dbx=$('#dmsgs'); if(dbx) dbx.scrollTop=dbx.scrollHeight;
   /* 查岗 / 打卡 / 商城 / 网购 */
   $$('[data-pickhang]',s).forEach(el=>el.onclick=()=>sheetPick('选择要查的人',1,ids=>{ if(ids[0]){ DB.hangCid=ids[0]; save(); closeSheet(); render(); } }));
@@ -10860,8 +10945,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.54 · 第 65 轮';
-const BUILD_CODE=65;
+const BUILD='2026-10-27 · 3.55 · 第 66 轮';
+const BUILD_CODE=66;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10882,7 +10967,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -11421,17 +11506,20 @@ function screenDateRoom(){
   if(!d) return '<div class="pad" style="padding-top:0">'+wxTop('约会')+emptyState('这次约会不见了','可能被删掉了。','回约会','dateback')+'</div>';
   DB.curDate=d.id;
   if(d.unread){ d.unread=0; save(); }
-  const ch={type:'private',memberIds:[d.cid]};
-  const body=(d.msgs||[]).map(function(m){ return msgHTML(m,ch); }).join('')
+  if(dateEnsureMsgIds(d)) save();
+  const selecting=dateToolRoomId===d.id;
+  const ch={id:'date:'+d.id,type:'private',memberIds:[d.cid]};
+  const body=(d.msgs||[]).map(function(m){ return msgHTML(m,ch,{active:selecting,ids:dateToolIds}); }).join('')
     || '<div class="empty">你们到了'+esc(sceneName(d))+'。<br>点上面的按钮让 Ta 先开口，或者你先说一句。</div>';
   return '<div class="chatwrap">'
    +'<div class="nav"><button class="back" data-dateback="1">‹ 约会</button><div class="ttl">'+esc(sceneName(d))+(d.boundChatId?' · 同步中':'')+'<div class="sub">'+esc((d.day? d.day+' · ':'')+'用（）写动作，发送后变成灰色小块')+'</div></div>'
    +'<div class="act"><button class="link" id="dMenu">⋯</button></div></div>'
    +'<div class="datehint" data-nudge="1">不知道跟角色做什么？点一下</div>'
-   +'<div class="chatlist" id="dmsgs">'+body+'</div>'
-   +'<div class="composer"><button class="cbtn" id="mallPlus">＋</button>'
+   +'<div class="chatlist'+(selecting?' selecting':'')+'" id="dmsgs">'+body+'</div>'
+   +(selecting?'<div class="chat-selectbar"><button class="cbtn" id="dateSelAll" title="全选">'+ic('check',18)+'</button><span>已选 '+dateToolIds.length+' 条</span><button class="btn primary" id="dateSelMigrate">迁移</button><button class="btn" id="dateSelFork">节点重开</button><button class="btn" id="dateSelCancel">取消</button></div>'
+   :'<div class="composer"><button class="cbtn" id="mallPlus">＋</button>'
    +'<input id="dsay" placeholder="在'+esc(sceneName(d))+'里说点什么…" autocomplete="off">'
-   +'<button class="cbtn pri" id="dsend">↑</button></div>'
+   +'<button class="cbtn pri" id="dsend">↑</button></div>')
    +'</div>';
 }
 async function dateTurn(d,nudge){
@@ -11450,22 +11538,25 @@ async function dateTurn(d,nudge){
     await sleep(Math.min(1600,240+clean.length*12));
     const tt=$('#dtyping'); if(tt) tt.remove();
     const nt=await formatTurn(clean,c.name);
+    let added=null;
     if(nt.narr.length||nt.talk.length){
       const mm={id:uid(),role:'turn',cid:c.id,type:'turn',narr:nt.narr,talk:nt.talk,ts:Date.now()};
       d.msgs.push(mm);
       mirrorToChat(d,mm);
+      added=mm;
     }
     d.lastTs=Date.now(); save();
     if(route.name==='dateroom'&&route.arg===d.id) render();
     if(d.out && (d.evCount||0)<2 && Math.random()<0.65){
       try{ await genOutEvent(d); if(route.name==='dateroom'&&route.arg===d.id) render(); }catch(e){}
     }
-  }catch(e){ const tt=$('#dtyping'); if(tt) tt.remove(); toast('出错：'+e.message); }
+    return added;
+  }catch(e){ const tt=$('#dtyping'); if(tt) tt.remove(); toast('出错：'+e.message); return null; }
 }
 function mirrorToChat(d,m){
   if(!d.boundChatId) return;
   const ch=chat(d.boundChatId); if(!ch) return;
-  ch.msgs.push(Object.assign({},m,{id:uid(),date:true,scene:sceneName(d)}));
+  ch.msgs.push(Object.assign({},m,{id:uid(),date:true,dateId:d.id,dateMessageId:m.id||null,scene:sceneName(d)}));
   ch.lastTs=Date.now();
   save();
 }
@@ -11482,6 +11573,83 @@ async function sendDate(){
   d.msgs.push(mm); d.lastTs=Date.now(); mirrorToChat(d,mm);
   save(); render();
   await dateTurn(d);
+}
+function dateEnsureMsgIds(d){
+  let changed=false;
+  (d.msgs||[]).forEach(function(m,index){
+    if(!m.id){ m.id='date_msg_'+uid(); changed=true; }
+    if(!m.ts){ m.ts=Date.now()+index; changed=true; }
+  });
+  return changed;
+}
+function dateSelectableMsgs(d){
+  return (d&&d.msgs||[]).filter(function(m){ return m.role!=='sys'; });
+}
+function dateSelectedMsgs(d,forkMode){
+  if(!d) return [];
+  const selected=(d.msgs||[]).filter(function(m){ return dateToolIds.indexOf(m.id)>=0; });
+  if(!forkMode) return selected;
+  if(selected.length!==1) return [];
+  const node=selected[0],index=(d.msgs||[]).findIndex(function(m){ return m.id===node.id; });
+  return index>=0?(d.msgs||[]).slice(0,index+1):[];
+}
+function sheetDateBranch(d,forkMode){
+  const picked=dateSelectedMsgs(d,forkMode);
+  if(!picked.length){
+    toast(forkMode?'从节点重开只能选择 1 个节点':'先勾选要迁移的消息');
+    return;
+  }
+  const node=forkMode?picked[picked.length-1]:null;
+  sheet('<h3>'+(forkMode?'从这个节点重开':'迁移到新约会副本')+'</h3>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.8">'+(forkMode?('会把这一节点及之前的 '+picked.length+' 条内容复制到新约会，旧约会完整保留。'):('会把勾选的 '+picked.length+' 条消息复制到新约会，旧约会完整保留。'))+'</div>'
+    +'<label class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">角色继承这段约会记忆</div><div class="t2">勾选后复制当前约会已整理记忆；不勾选只保留角色人设和绑定会话记忆。</div></div><input id="dateBranchInherit" type="checkbox" style="width:22px;height:22px"></label>'
+    +'<button class="btn primary full" id="dateBranchGo">创建副本</button><button class="btn full" id="dateBranchNo">取消</button>');
+  $('#dateBranchNo').onclick=function(){ closeSheet(); render(); };
+  $('#dateBranchGo').onclick=function(){
+    const inherit=!!$('#dateBranchInherit').checked;
+    const nd=Object.assign({},JSON.parse(JSON.stringify(d)),{id:uid(),created:Date.now(),lastTs:Date.now(),forkedFrom:d.id,forkNodeId:node?node.id:null,inheritedMemory:inherit,mem:inherit&&d.mem?JSON.parse(JSON.stringify(d.mem)):null});
+    nd.msgs=picked.map(function(m,index){ return Object.assign(JSON.parse(JSON.stringify(m)),{id:uid(),sourceMessageId:m.id||null,ts:Date.now()+index,forkedAt:Date.now()}); });
+    DB.dates.unshift(nd);
+    const chatId=nd.boundChatId||nd.chatId;
+    const ch=chatId?chat(chatId):null;
+    if(ch){
+      ch.msgs.push({id:uid(),role:'sys',type:'text',text:'你们从「'+sceneName(d)+'」的一个剧情节点重开了一段约会（旧记录仍保留）',ts:Date.now(),date:true,forkFor:nd.id});
+      ch.lastTs=Date.now();
+    }
+    save(); dateToolEnd(false); closeSheet(); go('dateroom',nd.id);
+    toast(forkMode?'已从节点创建新约会':'已迁移到新约会副本');
+  };
+}
+async function regenLastDateTurn(d){
+  if(!needKey()) return;
+  let index=-1;
+  for(let i=(d.msgs||[]).length-1;i>=0;i--){ if(d.msgs[i].role==='turn'){ index=i; break; } }
+  if(index<0){ toast('这段约会还没有可重新生成的回复'); return; }
+  const old=JSON.parse(JSON.stringify(d.msgs[index]));
+  const oldLastTs=d.lastTs;
+  d.msgs.splice(index,1);
+  const chatId=d.boundChatId||d.chatId,ch=chatId?chat(chatId):null;
+  let mirrorIndex=-1,mirrorOld=null;
+  if(ch){
+    for(let i=(ch.msgs||[]).length-1;i>=0;i--){
+      const m=ch.msgs[i];
+      if(m.date&&(m.dateMessageId===old.id||(!m.dateMessageId&&m.type==='turn'&&m.scene===sceneName(d)))){ mirrorIndex=i; break; }
+    }
+    if(mirrorIndex>=0){ mirrorOld=JSON.parse(JSON.stringify(ch.msgs[mirrorIndex])); ch.msgs.splice(mirrorIndex,1); }
+  }
+  d.lastTs=Date.now(); save(); render();
+  const generated=await dateTurn(d,'重新生成刚才那段回复，换一种说法，不要重复上一版。保持角色口吻和当前场景连贯。');
+  if(!generated){
+    d.msgs.splice(Math.min(index,d.msgs.length),0,old);
+    d.lastTs=oldLastTs;
+    if(ch&&mirrorOld){
+      ch.msgs.splice(Math.min(mirrorIndex,ch.msgs.length),0,mirrorOld);
+      ch.lastTs=Date.now();
+    }
+    save(); render(); toast('没有生成出新回复，已保留原来的内容');
+    return false;
+  }
+  return true;
 }
 function sheetBindDate(d){
   const current={mode:'exact',chatId:d.boundChatId||d.chatId||null,contactId:d.cid||null,personaId:d.personaId||DB.me.personaId||null,scope:d.boundChatId?'session':'contact',confirmed:true};
@@ -11505,11 +11673,15 @@ function sheetBindDate(d){
   }});
 }
 function sheetDateMenu(d){
+  dateEnsureMsgIds(d);
   const boundTxt='绑定：'+exactBindingSummary({chatId:d.boundChatId||d.chatId,contactId:d.cid,personaId:d.personaId,scope:'session',confirmed:true});
   sheet('<h3>'+esc(sceneName(d))+'</h3>'
     +'<button class="btn full" id="dmBind">'+esc(boundTxt)+'</button>'
     +'<button class="btn full" id="dmNudge">让 Ta 主动带一下剧情</button>'
     +'<button class="btn full" id="dmScene">补一段场景旁白</button>'
+    +'<button class="btn full" id="dmSelect">多选消息并迁移到新约会</button>'
+    +'<button class="btn full" id="dmFork">选择一条消息，从该节点重开</button>'
+    +'<button class="btn full" id="dmRegen">重新生成刚才那段回复</button>'
     +(d.scene==='mall'? '<button class="btn full" id="dmMall">逛逛商场里的店</button>':'')
     +(d.out? '<button class="btn full" id="dmEnd">结束这次出门（生成拍立得）</button>':'')
     +'<button class="btn full" id="dmClear">清空这次约会的对话</button>'
@@ -11517,6 +11689,12 @@ function sheetDateMenu(d){
     +'<button class="btn full" id="dmClose">关闭</button>');
   $('#dmBind').onclick=function(){ closeSheet(); sheetBindDate(d); };
   $('#dmNudge').onclick=function(){ closeSheet(); dateTurn(d,'你主动一点：说说你现在看到什么、想带对方去哪、或者递个东西过去，用一两个动作引对方往下接。不要问太多问题，不要自问自答。'); };
+  $('#dmSelect').onclick=function(){ closeSheet(); dateToolStart(d); };
+  $('#dmFork').onclick=function(){ closeSheet(); dateToolStart(d); toast('点选一条消息，再点底部「节点重开」'); };
+  $('#dmRegen').onclick=async function(){
+    closeSheet(); busy('正在重新生成，请稍后');
+    try{ await regenLastDateTurn(d); }finally{ busyDone(); }
+  };
   const sc=$('#dmScene');
   if(sc) sc.onclick=function(){ closeSheet(); if(!needKey()) return; busy('正在写场景，请稍后'); genDateScene(d).then(function(){ if(route.name==='dateroom') render(); }).catch(function(e){ toast('出错：'+e.message); }); };
   const mm=$('#dmMall'); if(mm) mm.onclick=function(){ DB.mallCid=d.cid; save(); closeSheet(); go('mall'); };
@@ -13295,19 +13473,114 @@ function outWorldFlavor(){
   return out.slice(0,8).join('；');
 }
 function slotNow(){ const h=simNow().getHours(); return h<6? '深夜':h<11? '上午':h<14? '中午':h<17? '下午':h<19? '傍晚':h<23? '夜晚':'深夜'; }
+function outStepBodyHTML(o,s){
+  if(s.type==='narr') return '<div class="narr">'+esc(s.text||'').replace(/\n/g,'<br>')+'</div>';
+  if(s.type==='meet') return '<div class="sysline">'+esc(s.text||'')+'</div>';
+  if(s.type==='turn') return turnHTML(Object.assign({},s,{cid:s.cid||o.cid,label:s.label||o.place}));
+  if(s.type==='say'){
+    const c=ct(s.cid||o.cid);
+    return '<div class="mrow">'+avBox(c||{},'msgav')+'<div class="colw"><div class="bub">'+esc(String(s.text||'')).replace(/\n/g,'<br>')+'</div></div></div>';
+  }
+  if(s.type==='you') return '<div class="sysline">你选择了：'+esc(s.text||'')+'</div>';
+  return '';
+}
 function outStepsHTML(o){
-  const me=DB.me||{};
+  const selecting=outToolRoomId===o.id;
   return (o.steps||[]).map(function(s){
-    if(s.type==='narr') return '<div class="narr">'+esc(s.text||'').replace(/\n/g,'<br>')+'</div>';
-    if(s.type==='meet') return '<div class="sysline">'+esc(s.text||'')+'</div>';
-    if(s.type==='turn') return turnHTML(s);
-    if(s.type==='say'){
-      const c=ct(o.cid);
-      return '<div class="mrow">'+avBox(c||{},'msgav')+'<div class="colw"><div class="bub">'+esc(String(s.text||'')).replace(/\n/g,'<br>')+'</div></div></div>';
-    }
-    if(s.type==='you') return '<div class="sysline">你选择了：'+esc(s.text||'')+'</div>';
-    return '';
+    const body=outStepBodyHTML(o,s);
+    if(!body) return '';
+    const selected=outToolIds.indexOf(s.id)>=0;
+    return '<div class="out-select-row'+(selecting?' can-select':'')+(selected?' selected':'')+'" data-outstep="'+esc(s.id||'')+'">'
+      +(selecting?'<span class="msg-check">'+(selected?'✓':'')+'</span>':'')+body+'</div>';
   }).join('');
+}
+function outEnsureStepIds(o){
+  let changed=false;
+  (o.steps||[]).forEach(function(s){
+    if(!s.id){ s.id='out_step_'+uid(); changed=true; }
+  });
+  return changed;
+}
+function outSelectedSteps(o,forkMode){
+  if(!o) return [];
+  const selected=(o.steps||[]).filter(function(s){ return outToolIds.indexOf(s.id)>=0; });
+  if(!forkMode) return selected;
+  if(selected.length!==1) return [];
+  const index=(o.steps||[]).findIndex(function(s){ return s.id===selected[0].id; });
+  return index>=0?(o.steps||[]).slice(0,index+1):[];
+}
+function sheetOutBranch(o,forkMode){
+  outEnsureStepIds(o);
+  const picked=outSelectedSteps(o,forkMode);
+  if(!picked.length){
+    toast(forkMode?'从节点重开只能选择 1 个步骤':'先勾选要迁移的步骤');
+    return;
+  }
+  const node=forkMode?picked[picked.length-1]:null;
+  sheet('<h3>'+(forkMode?'从这个步骤重开':'迁移到新出门副本')+'</h3>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.8">'+(forkMode?('会把该步骤及之前的 '+picked.length+' 个步骤复制到新出门，原记录完整保留。'):('会把勾选的 '+picked.length+' 个步骤复制到新出门，原记录完整保留。'))+'</div>'
+    +'<label class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">角色继承这段出门记忆</div><div class="t2">勾选后复制当前出门已整理记忆；不勾选只保留角色人设和绑定会话记忆。</div></div><input id="outBranchInherit" type="checkbox" style="width:22px;height:22px"></label>'
+    +'<button class="btn primary full" id="outBranchGo">创建副本</button><button class="btn full" id="outBranchNo">取消</button>');
+  $('#outBranchNo').onclick=function(){ closeSheet(); render(); };
+  $('#outBranchGo').onclick=function(){
+    const inherit=!!$('#outBranchInherit').checked;
+    const base=JSON.parse(JSON.stringify(o));
+    const lastPickedId=picked[picked.length-1].id;
+    const atTail=(o.steps||[]).length&&(o.steps||[])[(o.steps||[]).length-1].id===lastPickedId;
+    base.id=uid();
+    base.createdAt=Date.now();
+    base.updatedAt=Date.now();
+    base.forkedFrom=o.id;
+    base.forkNodeId=node?node.id:null;
+    base.inheritedMemory=inherit;
+    base.mem=inherit&&o.mem?JSON.parse(JSON.stringify(o.mem)):null;
+    base.steps=picked.map(function(s,index){
+      return Object.assign(JSON.parse(JSON.stringify(s)),{id:uid(),sourceStepId:s.id||null,ts:Date.now()+index,forkedAt:Date.now()});
+    });
+    base.turn=base.steps.filter(function(s){ return s.type==='turn'; }).length;
+    base.pending=atTail&&o.pending&&o.pending.length?JSON.parse(JSON.stringify(o.pending)):['继续往前走','停下来看看','回头看一眼','靠着栏杆站一会儿'];
+    base.state='playing';
+    base.polaroid=null;
+    base.unread=0;
+    outings().unshift(base);
+    const chatId=base.boundChatId||base.chatId;
+    const ch=chatId?chat(chatId):null;
+    if(ch){
+      ch.msgs.push({id:uid(),role:'sys',type:'text',text:'你们从「'+(o.place||'出门')+'」的一个剧情步骤重开了一段出门（旧记录仍保留）',ts:Date.now(),out:true,forkFor:base.id});
+      ch.lastTs=Date.now();
+    }
+    save(); outToolEnd(false); closeSheet(); go('outroom',base.id);
+    toast(forkMode?'已从该步骤创建新出门':'已迁移到新出门副本');
+  };
+}
+async function regenLastOutTurn(o){
+  if(!needKey()) return false;
+  let index=-1;
+  for(let i=(o.steps||[]).length-1;i>=0;i--){ if(o.steps[i].type==='turn'){ index=i; break; } }
+  if(index<0){ toast('这次出门还没有可重新生成的回复'); return false; }
+  if(index<(o.steps||[]).length-1){ toast('最后一段生成后还有新选择，请先从节点重开'); return false; }
+  const before=JSON.parse(JSON.stringify(o));
+  const oldState=o.state;
+  o.steps.splice(index,1);
+  o.pending=null;
+  o.turn=Math.max(0,(Number(o.turn)||1)-1);
+  o.updatedAt=Date.now();
+  save(); render();
+  try{
+    await outTurn(o,null);
+    if(!(o.steps||[]).slice(index).some(function(s){ return s.type==='turn'; })) throw new Error('没有生成出新内容');
+    if(oldState==='done'){ o.state='done'; o.pending=null; }
+    o.updatedAt=Date.now(); save();
+    if(route.name==='outroom'&&route.arg===o.id) render();
+    return true;
+  }catch(e){
+    Object.keys(o).forEach(function(k){ delete o[k]; });
+    Object.assign(o,before);
+    save();
+    if(route.name==='outroom'&&route.arg===o.id) render();
+    toast('没有生成出新内容，已保留原来的出门');
+    return false;
+  }
 }
 function sheetOutPersona(){
   const ps=DB.me.personas||[];
@@ -13388,15 +13661,18 @@ function screenOutRoom(){
   const o=outById(route.arg);
   if(!o) return '<div class="pad" style="padding-top:0">'+wxTop('出门')+emptyState('这次出门不见了','可能被删掉了。','回出门','outback')+'</div>';
   o.unread=0;
+  if(outEnsureStepIds(o)) save();
+  const selecting=outToolRoomId===o.id;
   const body=outStepsHTML(o);
   return '<div class="chatwrap">'
     +'<div class="nav"><button class="back" data-outback="1">‹ 出门</button><div class="ttl">'+esc(o.place||(o.slot+'出门'))+'<div class="sub">'+esc((o.day? o.day+' · ':'')+o.slot+' · '+o.weather)+'</div></div>'
     +'<div class="act"><button class="link" id="oMenu">⋯</button></div></div>'
-    +'<div class="chatlist" id="omsgs">'+(body||'<div class="empty">正在出门…</div>')+'</div>'
-    +(o.state==='done'? '<div class="dnote">这次出门已经结束</div>'
-      : (o.pending&&o.pending.length
-        ? '<div class="outopts">'+o.pending.map(function(t,i){ return '<button data-outopt="'+i+'">'+esc(t)+'</button>'; }).join('')+'</div>'
-        : '<div class="dnote">等一会儿…</div>'))
+    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="omsgs">'+(body||'<div class="empty">正在出门…</div>')+'</div>'
+    +(selecting?'<div class="chat-selectbar"><button class="cbtn" id="outSelAll" title="全选">'+ic('check',18)+'</button><span>已选 '+outToolIds.length+' 个步骤</span><button class="btn primary" id="outSelMigrate">迁移</button><button class="btn" id="outSelFork">节点重开</button><button class="btn" id="outSelCancel">取消</button></div>'
+      : (o.state==='done'? '<div class="dnote">这次出门已经结束</div>'
+        : (o.pending&&o.pending.length
+          ? '<div class="outopts">'+o.pending.map(function(t,i){ return '<button data-outopt="'+i+'">'+esc(t)+'</button>'; }).join('')+'</div>'
+          : '<div class="dnote">等一会儿…</div>')))
     +'</div>';
 }
 async function outTurn(o,chosen){
