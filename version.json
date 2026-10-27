@@ -1,9 +1,9 @@
 {
-  "version": "3.52",
-  "versionCode": 63,
-  "round": 63,
+  "version": "3.53",
+  "versionCode": 64,
+  "round": 64,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=63",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=64",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "时间 App 支持新建多套时间；每套可独立命名、精确绑定和自动流动，并使用年/月/日/时/分五列滚轮设置。"
+  "notes": "查岗支持精确绑定、角色手机 11 个 App、可点击 emoji 平面图、30–80 字第一人称内心、多来源情绪，以及隐身/随机被发现机制。"
 }

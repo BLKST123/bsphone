@@ -2070,6 +2070,30 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .clock-wheel-item.on{color:var(--fg);font-weight:700;opacity:1}
 .clock-wheel-preview{text-align:center;font-size:calc(17px * var(--ui-font-scale,1));font-weight:650;color:var(--deep);padding:14px 4px 8px;font-variant-numeric:tabular-nums}
 .clock-wheel-presets{gap:6px}.clock-wheel-presets .btn{padding:9px 4px;font-size:calc(11px * var(--ui-font-scale,1))}
+.hang-access{display:grid;grid-template-columns:1fr 1fr;gap:6px;padding:5px;margin-top:10px;border:1px solid var(--line);border-radius:14px;background:color-mix(in srgb,var(--card) 62%,transparent)}
+.hang-access button{border:0;border-radius:10px;padding:8px 6px;background:transparent;color:var(--fg2);font:inherit;font-size:calc(11.5px * var(--ui-font-scale,1));cursor:pointer}
+.hang-access button.on{background:var(--deep);color:#fff;box-shadow:0 4px 12px color-mix(in srgb,var(--deep) 28%,transparent)}
+.hang-expose-note{margin-top:10px;padding:9px 11px;border-radius:11px;background:rgba(255,59,48,.09);border:1px solid rgba(255,59,48,.2);color:var(--danger);font-size:calc(11px * var(--ui-font-scale,1));line-height:1.55}
+.hang-device{margin-top:12px;padding:12px;border:5px solid #28282b;border-radius:24px;background:linear-gradient(160deg,#eef0f8,#e7dce5);box-shadow:0 14px 34px rgba(26,24,28,.2)}
+.hang-device-status{display:flex;justify-content:space-between;align-items:center;font-size:calc(10.5px * var(--ui-font-scale,1));color:#5f5b61;margin-bottom:10px}
+.hang-device-person{display:flex;align-items:center;gap:9px;padding:10px;border-radius:14px;background:rgba(255,255,255,.58)}
+.hang-device-person .av,.hang-device-person .wav{width:38px;height:38px;border-radius:12px;overflow:hidden;flex:none}
+.hang-device-person .av img,.hang-device-person .wav img{width:100%;height:100%;object-fit:cover;display:block}
+.hang-device-person b{font-size:calc(13px * var(--ui-font-scale,1))}.hang-device-person small{display:block;color:#7c7680;font-size:calc(9.5px * var(--ui-font-scale,1));margin-top:2px}
+.hang-app-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px 6px;padding:14px 0 4px}
+.hang-app-icon{border:0;background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;cursor:pointer;color:#5f5b61;font:inherit}
+.hang-app-icon .he{width:44px;height:44px;border-radius:12px;background:rgba(255,255,255,.72);display:flex;align-items:center;justify-content:center;font-size:22px;box-shadow:0 5px 13px rgba(91,86,94,.13)}
+.hang-app-icon b{font-size:calc(9.5px * var(--ui-font-scale,1));font-weight:500;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.hang-app-page{padding:2px 1px 6px}.hang-app-page-head{display:flex;align-items:center;gap:8px;margin-bottom:10px}.hang-app-page-head .ttl{flex:1;font-weight:650}.hang-app-page-head button{border:0;background:transparent;color:var(--fg);font:inherit;font-size:calc(22px * var(--ui-font-scale,1));cursor:pointer}
+.hang-app-lines{display:flex;flex-direction:column;gap:7px}.hang-app-line{padding:9px 10px;border-radius:10px;background:rgba(255,255,255,.62);font-size:calc(12px * var(--ui-font-scale,1));line-height:1.5}
+.hang-map{position:relative;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;padding:12px;margin-top:10px;border-radius:16px;background:linear-gradient(145deg,rgba(244,238,228,.84),rgba(225,232,238,.72));border:1px solid rgba(80,68,62,.12);overflow:hidden}
+.hang-map::before{content:'';position:absolute;inset:10px;border:1px dashed rgba(90,78,72,.15);border-radius:12px;pointer-events:none}
+.hang-scene{position:relative;z-index:1;min-width:0;border:1px solid rgba(90,78,72,.12);border-radius:12px;background:rgba(255,255,255,.58);padding:8px 4px;color:var(--fg);display:flex;flex-direction:column;align-items:center;gap:3px;font:inherit;cursor:pointer}
+.hang-scene .he{font-size:22px;line-height:1.1}.hang-scene b{font-size:calc(9.5px * var(--ui-font-scale,1));white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.hang-scene small{font-size:calc(8px * var(--ui-font-scale,1));color:var(--fg2)}
+.hang-emotion{padding:8px 0;border-bottom:1px solid var(--line)}.hang-emotion:last-child{border-bottom:0}
+.hang-emotion-head{display:flex;justify-content:space-between;gap:8px;font-size:calc(11.5px * var(--ui-font-scale,1))}.hang-emotion-head span{color:var(--fg2)}
+.hang-emotion-bar{height:6px;border-radius:3px;background:rgba(0,0,0,.07);overflow:hidden;margin-top:5px}.hang-emotion-bar i{display:block;height:100%;border-radius:inherit;background:var(--deep)}
+.hang-thought{font-size:calc(14.5px * var(--ui-font-scale,1));line-height:1.85;margin-top:8px;white-space:pre-wrap}
 @media (max-width:380px){
   .takeout-hero .tk-title{font-size:calc(19px * var(--ui-font-scale,1))}
   .takeout-role-grid{grid-template-columns:1fr}
@@ -2281,6 +2305,7 @@ function fixAll(){
   DB.audio=Object.assign({provider:'minimax',endpoint:'https://api.minimax.chat/v1/t2a_v2',key:'',model:'speech-01-turbo',voiceId:'',groupId:''},DB.audio||{});
   DB.hang=DB.hang||{phone:{},doing:{}};
   fixHangHistory();
+  hangEnsureState();
   DB.checkins=DB.checkins||[];
   DB.shopItems=DB.shopItems||{};
   DB.tbItems=DB.tbItems||{};
@@ -6113,13 +6138,14 @@ const SYSWORLD=`【系统硬规则·功能格式总表｜每次生成只执行�
 - 提到用户用「你」。
 
 6. 查手机
-- 严格按【最近聊天】【通话记录】【相册】【备忘录】【消费记录】五个标题输出。
+- 严格按【微信】【电话】【相册】【备忘录】【地图】【消费账单】【微博】【音乐】【日历】【搜索】【设置】十一个标题输出。
 - 最近聊天只写角色手机上收到的、与角色有关的消息，不写用户发给角色的消息，也不写角色发给用户的消息。
 
 7. 此刻状态
-- 严格按【地点】【正在做】【心情】【手机】【想法】【好感度】【爱意】【愤怒】【性欲】【理智】【占有欲】【恨意】【厌恶值】输出。
-- 想法不超过 80 字，大白话，直白，不隐喻。
-- 百分比写 0 到 100 的数字。
+- 严格按【地点】【正在做】【心情】【手机】【想法】【场景】【情绪】输出。
+- 想法必须 30 到 80 个中文字，大白话，直白，不隐喻。
+- 场景每行：emoji|名称|类型|状态|补充细节。类型只能是地点、家具、人物、宠物、手机、门窗、交通工具、物品。
+- 情绪每行：情绪名|0到100|对应的人|来源类型。每个情绪必须明确对应具体人物或关系来源。
 
 8. 打卡
 - 只输出角色的一句回复，一到两句，不写旁白/对白标题。
@@ -6205,11 +6231,12 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.52 · 第 63 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.53 · 第 64 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
     ['时间系统','可新建多套时间，每套独立命名、精确绑定、自动流动，并用年/月/日/时/分五列滚轮设置；旧单时间会自动迁移。'],
+    ['查岗','精确绑定会话/角色/人设；角色手机含微信、电话、相册、备忘录、地图、账单、微博、音乐、日历、搜索和设置；此刻动态为可点击 emoji 平面图，含 30–80 字内心与多来源情绪；支持隐身和随机被发现。'],
     ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
     ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
@@ -6220,7 +6247,6 @@ const PROGRESS_GROUPS=[
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
     ['小说世界书','已有单书世界书和生成记忆；按每次生成自由选择/绑定世界书的完整流程仍需补齐。'],
-    ['查岗','已有手机内容、当前动态和基础状态；地点/物品/人物可点击平面图、多情绪对象来源与隐身/发现机制需继续完善。'],
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
     ['约会/出门消息工具','支持继续生成和共享记忆；类似微信的多选消息迁移、任意节点重开等工具仍未完全对齐。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
@@ -10138,12 +10164,43 @@ function bindScreenInner(){
   const dbx=$('#dmsgs'); if(dbx) dbx.scrollTop=dbx.scrollHeight;
   /* 查岗 / 打卡 / 商城 / 网购 */
   $$('[data-pickhang]',s).forEach(el=>el.onclick=()=>sheetPick('选择要查的人',1,ids=>{ if(ids[0]){ DB.hangCid=ids[0]; save(); closeSheet(); render(); } }));
+  $$('[data-hangbind]',s).forEach(el=>el.onclick=sheetHangBinding);
+  $$('[data-hangmode]',s).forEach(el=>el.onclick=function(){ hangEnsureState(); DB.hang.mode=el.dataset.hangmode; save(); render(); });
+  $$('[data-hang-app]',s).forEach(el=>el.onclick=function(){
+    hangEnsureState();
+    const c=exactBindingResolved(DB.hang.binding).contact,key=el.dataset.hangApp;
+    DB.hang.activeApp=DB.hang.activeApp||{};
+    DB.hang.activeApp[c.id]=key;
+    const app=HANG_PHONE_APPS.find(function(x){ return x.k===key; });
+    hangMaybeExpose(c,'打开「'+(app?app.n:key)+'」');
+    save(); render();
+  });
+  $$('[data-hang-app-back]',s).forEach(el=>el.onclick=function(){
+    hangEnsureState();
+    const c=exactBindingResolved(DB.hang.binding).contact;
+    if(c&&DB.hang.activeApp) DB.hang.activeApp[c.id]=null;
+    save(); render();
+  });
+  $$('[data-hang-scene]',s).forEach(el=>el.onclick=function(){
+    const c=exactBindingResolved(DB.hang.binding).contact;
+    if(c) sheetHangScene(c,el.dataset.hangScene);
+  });
   $$('[data-pickcheck]',s).forEach(el=>el.onclick=()=>sheetPick('选择打卡对象',1,ids=>{ if(ids[0]){ DB.checkCid=ids[0]; save(); closeSheet(); render(); } }));
   $$('[data-metdate]',s).forEach(el=>el.onclick=()=>{ const c=ct(el.dataset.metdate); if(c) sheetMetDate(c); });
   $$('[data-pickmall]',s).forEach(el=>el.onclick=()=>sheetPick('绑定一位联系人',1,ids=>{ if(ids[0]){ DB.mallCid=ids[0]; save(); closeSheet(); render(); } }));
   $$('[data-picktb]',s).forEach(el=>el.onclick=()=>sheetPick('绑定一位联系人',1,ids=>{ if(ids[0]){ DB.tbCid=ids[0]; save(); closeSheet(); render(); } }));
   $$('[data-hangtab]',s).forEach(el=>el.onclick=()=>{ DB.hangTab=el.dataset.hangtab; save(); render(); });
-  $$('[data-hangclear]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); const k=el.dataset.hangclear, cid=DB.hangCid; if(!cid) return; DB.hang=DB.hang||{phone:{},doing:{}}; if(k==='phone') delete DB.hang.phone[cid]; else delete DB.hang.doing[cid]; save(); render(); toast(k==='phone'?'查手机记录已清空':'此刻动态已清空'); });
+  $$('[data-hangclear]',s).forEach(el=>el.onclick=function(ev){
+    ev.stopPropagation();
+    hangEnsureState();
+    const c=exactBindingResolved(DB.hang.binding).contact;
+    const cid=c?c.id:DB.hangCid;
+    if(!cid) return;
+    const k=el.dataset.hangclear;
+    if(k==='phone'){ delete DB.hang.phone[cid]; if(DB.hang.activeApp) DB.hang.activeApp[cid]=null; }
+    else delete DB.hang.doing[cid];
+    save(); render(); toast(k==='phone'?'查手机记录已清空':'此刻动态已清空');
+  });
   const hg=$('#hangGo');
   if(hg) hg.onclick=()=>doHang();
   const dg=$('#doingGo');
@@ -10519,32 +10576,49 @@ async function autoTick(){
 }
 /* ================= 关键动作（统一通道，绑不上也能点） ================= */
 async function doHang(){
-  const c=ct(DB.hangCid)||ct((DB.contacts[0]||{}).id); if(!c) return; DB.hangCid=c.id;
-  if(!needKey()) return;
-  busy('正在翻手机，请稍后');
-  try{ DB.hang=DB.hang||{phone:{},doing:{}}; DB.hang.phone[c.id]=await genPhoneLog(c); save(); render(); }
-  catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
+  hangEnsureState();
+  const c=exactBindingResolved(DB.hang.binding).contact; if(!c) return; DB.hangCid=c.id;
+  let data=null;
+  if(DB.api.key){
+    busy('正在翻手机，请稍后');
+    try{ data=await genPhoneLog(c); }
+    catch(e){ logErr('查岗手机生成失败，已使用本地内容：'+e.message); }
+    finally{ busyDone(); }
+  }
+  if(!data) data=hangLocalPhone(c);
+  DB.hang.phone[c.id]=hangNormalizePhoneData(c,data);
+  DB.hang.activeApp[c.id]=null;
+  hangMaybeExpose(c,'打开手机桌面');
+  save(); render();
+  toast(DB.api.key?'手机内容已更新':'已使用本地内容模拟手机');
 }
 async function doDoing(){
-  const c=ct(DB.hangCid)||ct((DB.contacts[0]||{}).id); if(!c) return; DB.hangCid=c.id;
-  if(!needKey()) return;
-  busy('正在看 Ta 此刻，请稍后');
-  try{
-    DB.hang=DB.hang||{phone:{},doing:{}};
-    const old=DB.hang.doing[c.id];
-    const now=await genDoing(c);
-    const snapshot=jsonSafeCopy(now);
-    snapshot.history=[];
-    const oldHistory=old&&Array.isArray(old.history)?old.history.filter(function(item){
-      return item&&typeof item==='object'&&item!==old&&item!==now;
-    }).map(function(item){
-      const copy=jsonSafeCopy(item)||{};
-      delete copy.history;
-      return copy;
-    }):[];
-    now.history=[snapshot].concat(oldHistory).slice(0,6);
-    DB.hang.doing[c.id]=now; save(); render();
-  }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
+  hangEnsureState();
+  const c=exactBindingResolved(DB.hang.binding).contact; if(!c) return; DB.hangCid=c.id;
+  let now=null;
+  if(DB.api.key){
+    busy('正在看 Ta 此刻，请稍后');
+    try{ now=await genDoing(c); }
+    catch(e){ logErr('此刻动态生成失败，已使用本地内容：'+e.message); }
+    finally{ busyDone(); }
+  }
+  if(!now) now=hangLocalDoing(c);
+  now=hangNormalizeDoing(c,now);
+  const old=DB.hang.doing[c.id];
+  const snapshot=jsonSafeCopy(now);
+  snapshot.history=[];
+  const oldHistory=old&&Array.isArray(old.history)?old.history.filter(function(item){
+    return item&&typeof item==='object'&&item!==old&&item!==now;
+  }).map(function(item){
+    const copy=jsonSafeCopy(item)||{};
+    delete copy.history;
+    return copy;
+  }):[];
+  now.history=[snapshot].concat(oldHistory).slice(0,6);
+  DB.hang.doing[c.id]=now;
+  hangMaybeExpose(c,'查看此刻动态');
+  save(); render();
+  toast(DB.api.key?'此刻已更新':'已使用本地内容模拟此刻');
 }
 async function doCheckin(){
   const c=ct(DB.checkCid)||ct((DB.contacts[0]||{}).id); if(!c) return; DB.checkCid=c.id;
@@ -10628,8 +10702,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.52 · 第 63 轮';
-const BUILD_CODE=63;
+const BUILD='2026-10-27 · 3.53 · 第 64 轮';
+const BUILD_CODE=64;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10650,7 +10724,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10685,6 +10759,10 @@ async function runCheckupUI(){
   const clockItems=DB.clock.items||[],clockBad=clockItems.filter(function(item){ return !item.datetime||isNaN(new Date(item.datetime).getTime()); });
   add('多时间方案', clockItems.length>0&&clockBad.length===0, clockItems.length+' 个 · 当前 '+(clockActiveItem().name||'时间')+' · '+dateCN()+' '+hhmm());
   add('模拟时钟', !!(DB.clock&&DB.clock.datetime&&!isNaN(new Date(DB.clock.datetime).getTime())), dateCN()+' '+hhmm());
+  hangEnsureState();
+  const hangContact=exactBindingResolved(DB.hang.binding).contact;
+  add('查岗精确绑定', !!hangContact&&!!DB.hang.binding.personaId, hangContact?exactBindingSummary(DB.hang.binding):'未绑定角色');
+  add('查岗手机与动态', HANG_PHONE_APPS.length===11, '11 个 App · '+((DB.hang.phone&&hangContact&&DB.hang.phone[hangContact.id])?'已有手机内容':'未查看手机')+' · '+((DB.hang.doing&&hangContact&&DB.hang.doing[hangContact.id])?'已有此刻动态':'未生成动态')+' · '+DB.hang.mode);
   add('通知中心', !!(DB.notify&&Array.isArray(DB.notify.items)&&$('#statusCenter')), (DB.notify&&DB.notify.items?DB.notify.items.length:0)+' 条记录');
   add('原生通知桥', !!(window.NativeNotifications||('Notification' in window)), window.NativeNotifications?'Android 原生通知':('Notification' in window?'浏览器通知':'App 内提醒'));
   add('上下文参数', Number.isFinite(Number(DB.api.contextLimit))&&Number.isFinite(Number(DB.api.maxTokens)), '历史 '+(DB.api.contextLimit<0?'不限制':DB.api.contextLimit)+' 条 · 输出 '+(DB.api.maxTokens?DB.api.maxTokens+' token':'不限制')+' · 流式 '+(DB.api.stream?'开':'关'));
@@ -13584,27 +13662,205 @@ function parseItems(text){
   return items;
 }
 function money(n){ return '¥'+Number(n||0).toFixed(2); }
+const HANG_PHONE_APPS=[
+  {k:'wechat',n:'微信',e:'💬'},{k:'phone',n:'电话',e:'📞'},{k:'photos',n:'相册',e:'🖼️'},
+  {k:'notes',n:'备忘录',e:'📝'},{k:'map',n:'地图',e:'🗺️'},{k:'bills',n:'消费账单',e:'💳'},
+  {k:'weibo',n:'微博',e:'🌐'},{k:'music',n:'音乐',e:'🎵'},{k:'calendar',n:'日历',e:'📅'},
+  {k:'search',n:'搜索',e:'🔎'},{k:'settings',n:'设置',e:'⚙️'}
+];
+const HANG_SCENE_KINDS=['地点','家具','人物','宠物','手机','门窗','交通工具','物品'];
+function hangResolved(){
+  hangEnsureState();
+  return exactBindingResolved(DB.hang.binding);
+}
+function hangEnsureState(){
+  DB.hang=DB.hang||{phone:{},doing:{}};
+  DB.hang.phone=DB.hang.phone||{};
+  DB.hang.doing=DB.hang.doing||{};
+  DB.hang.exposures=DB.hang.exposures||{};
+  DB.hang.activeApp=DB.hang.activeApp||{};
+  if(['stealth','visible'].indexOf(DB.hang.mode)<0) DB.hang.mode='stealth';
+  let contact=DB.hang.binding?exactBindingResolved(DB.hang.binding).contact:null;
+  if(!contact&&DB.hangCid) contact=ct(DB.hangCid);
+  if(!contact) contact=ct((DB.contacts[0]||{}).id);
+  if(contact){
+    let binding=DB.hang.binding?normalizeExactBinding(DB.hang.binding,{scope:'contact'}):exactBindingBlank('contact');
+    if(!binding.chatId&&!binding.contactId) binding=exactBindingSetContact(binding,contact.id);
+    if(!binding.personaId) binding.personaId=DB.me.personaId||null;
+    binding.confirmed=true;
+    DB.hang.binding=normalizeExactBinding(binding,{scope:'contact'});
+    DB.hangCid=(exactBindingResolved(DB.hang.binding).contact||contact).id;
+  }else{
+    DB.hang.binding=normalizeExactBinding(DB.hang.binding||exactBindingBlank('contact'),{scope:'contact'});
+  }
+  return DB.hang;
+}
+function hangPhoneDefaultApps(c){
+  const name=c?contactDisplayName(c):'Ta';
+  const other=(DB.contacts||[]).find(function(x){ return x.id!==(c&&c.id); });
+  const otherName=other?contactDisplayName(other):'许棠';
+  return {
+    wechat:{lines:[otherName+' 18:42：周六的地点定了，还是原来的地方。','材料店 16:08：你要的砂纸到了。','工作群 15:20：明天十点碰一下进度。']},
+    phone:{lines:['材料店 · 今天 16:08 · 通话 1 分 06 秒','工作群语音 · 今天 15:21 · 未接',''+otherName+' · 昨天 21:35 · 通话 4 分 12 秒']},
+    photos:{lines:['今天 18:48 · 桌角的一盏暖灯','今天 16:02 · 窗边还没收起来的水痕','昨天 23:11 · 半杯冷掉的茶']},
+    notes:{lines:['买新的砂纸，800 目和 1500 目。','周六把修好的小灯带过去。','记得提前十分钟出门。']},
+    map:{lines:['当前位置：旧城 · 工作室附近','今天去过：材料店、咖啡店','搜索过：附近还开着的五金店']},
+    bills:{lines:['旧城材料店 -¥126.00','街角咖啡 -¥32.00','五金市场 -¥58.00']},
+    weibo:{lines:['最近浏览：旧物修复、城市摄影','草稿：今天这盏灯的光有点太暖了。','点赞过一条关于旧城天气的帖子。']},
+    music:{lines:['最近播放：雨停之前','循环过：夜航','收藏歌单：一个人做事的背景声']},
+    calendar:{lines:['今天 19:30 · 收工','周六 15:00 · 旧城北口','下周一 10:00 · 工作进度沟通']},
+    search:{lines:['怎么去掉旧木头上的水渍','附近还开着的材料店','晚上旧城哪条路不堵']},
+    settings:{lines:['电量 38% · Wi-Fi 已连接','相册最近删除：29 天','通知预览：锁屏时隐藏内容']}
+  };
+}
+function hangNormalizePhoneData(c,data){
+  data=data||{ts:Date.now()};
+  const defaults=hangPhoneDefaultApps(c);
+  const apps={};
+  if(data.apps&&typeof data.apps==='object'){
+    HANG_PHONE_APPS.forEach(function(app){
+      const item=data.apps[app.k]||{};
+      const lines=Array.isArray(item.lines)?item.lines.map(String).filter(Boolean).slice(0,20):[];
+      apps[app.k]={lines:lines.length?lines:(defaults[app.k]||{}).lines||[]};
+    });
+  }else{
+    const alias={'最近聊天':'wechat','通话记录':'phone','相册':'photos','备忘录':'notes','地图':'map','消费记录':'bills','微博':'weibo','音乐':'music','日历':'calendar','搜索':'search','设置':'settings'};
+    const mapped={};
+    (data.sections||[]).forEach(function(section){
+      const key=alias[section.t];
+      if(key) mapped[key]=(section.lines||[]).map(String);
+    });
+    HANG_PHONE_APPS.forEach(function(app){ apps[app.k]={lines:mapped[app.k]&&mapped[app.k].length?mapped[app.k]:(defaults[app.k]||{}).lines||[]}; });
+  }
+  data.apps=apps;
+  data.ts=Number(data.ts)||Date.now();
+  return data;
+}
+function hangLocalPhone(c){
+  return {ts:Date.now(),apps:hangPhoneDefaultApps(c)};
+}
 async function genPhoneLog(c){
   const me=DB.me||{};
+  const titles=HANG_PHONE_APPS.map(function(app){ return '【'+app.n+'】'; }).join('\n');
   const sys=promptOf(c,null,[],{format:'hang'})
-    +'\n【这次的任务】有人正在翻你的手机。你要如实呈现你手机里的东西，像真的翻到一样：第一人称，短句，具体，不要解释也不要评价。'
-    +'\n严格按下面五个标题输出，标题一个字都不要改：\n【最近聊天】\n（只写你手机上收到的、与你有关的消息。不要出现用户「'+(me.name||'用户')+'」发给你的消息，也不要出现你发给用户的消息。写 2 到 4 条来自不同联系人的消息，带时间和未读状态。）\n【通话记录】\n（3 条，带时间）\n【相册】\n（3 条，照片内容和拍摄时间）\n【备忘录】\n（2 到 3 条你自己写下的）\n【消费记录】\n（3 条，带金额）';
+    +'\n【这次的任务】有人正在翻你的手机。你要如实呈现手机里的东西，像真的翻到一样：第一人称，短句，具体，不要解释也不要评价。'
+    +'\n严格按下面十一个标题输出，标题一字都不要改：\n'+titles
+    +'\n每个标题下写 3 到 5 条，带时间或地点；聊天里不要出现用户「'+(me.name||'用户')+'」发给你的消息，也不要出现你发给用户的消息。';
   const out=await callModel([{role:'system',content:sys},{role:'user',content:'让我看看你手机。'}]);
-  return {ts:Date.now(),sections:parseSections(out)};
+  const sec=parseSections(out),apps={};
+  HANG_PHONE_APPS.forEach(function(app){
+    const found=sec.find(function(x){ return x.t===app.n; });
+    if(found) apps[app.k]={lines:found.lines.slice(0,8)};
+  });
+  return hangNormalizePhoneData(c,{ts:Date.now(),apps:apps});
+}
+function hangThoughtText(text,c){
+  let value=String(text||'').replace(/\s+/g,' ').trim();
+  if(!value) value='我还没想好要不要主动开口。先把眼前的事做完，等她真的来了再说。';
+  const tail='我还没想好要不要主动开口，先把眼前的事做完。';
+  if(Array.from(value).length<30) value=(value+' '+tail).trim();
+  return Array.from(value).slice(0,80).join('');
+}
+function hangSceneDefaults(c,place){
+  const self=c?contactDisplayName(c):'Ta';
+  return [
+    {emoji:'🏠',label:place||'现在所在的位置',kind:'地点',status:'熟悉、安静',detail:'这是'+self+'现在待着的主要空间。'},
+    {emoji:'🛋️',label:'沙发',kind:'家具',status:'靠垫有点歪',detail:'像是刚有人坐过。'},
+    {emoji:'🪑',label:'工作台',kind:'家具',status:'桌面收了一半',detail:'手边放着还没归位的工具。'},
+    {emoji:'👤',label:self,kind:'人物',status:'正在做自己的事',detail:'动作不快，偶尔看一眼手机。'},
+    {emoji:'🐈',label:'猫',kind:'宠物',status:'趴在椅子上',detail:'尾巴偶尔动一下，没有睡熟。'},
+    {emoji:'📱',label:'手机',kind:'手机',status:DB.hang.mode==='visible'?'屏幕朝下放着':'屏幕刚刚亮过',detail:'通知没有完全展开。'},
+    {emoji:'🚪',label:'门',kind:'门窗',status:'关着',detail:'没有反锁，门口很安静。'},
+    {emoji:'🪟',label:'窗',kind:'门窗',status:'留着一条缝',detail:'外面的风和声音能进来一点。'},
+    {emoji:'🚲',label:'自行车',kind:'交通工具',status:'停在楼下',detail:'车把上还挂着一条旧绑带。'},
+    {emoji:'🪴',label:'绿植',kind:'物品',status:'叶子刚浇过水',detail:'水迹还留在花盆边缘。'}
+  ].map(function(item,i){ return Object.assign({id:'scene_'+i},item); });
+}
+function hangParseScene(c,raw,place){
+  const list=(raw||[]).map(function(line,index){
+    const p=String(line).split(/[|｜]/).map(function(x){ return x.trim(); });
+    if(p.length<3) return null;
+    return {id:'scene_'+index,emoji:p[0]||'📍',label:p[1]||'不明物体',kind:p[2]||'物品',status:p[3]||'状态不明',detail:p[4]||'暂时看不到更多。'};
+  }).filter(Boolean);
+  return list.length>=6?list.slice(0,14):hangSceneDefaults(c,place);
+}
+function hangEmotionDefaults(c){
+  const user=(DB.me.personas||[]).find(function(p){ return p.id===DB.hang.binding.personaId; })||DB.me;
+  const userSource=user&&user.name||DB.me.name||'你';
+  const self=c?contactDisplayName(c):'Ta';
+  return [
+    {id:'emo_favor',label:'好感',value:82,source:userSource,sourceKind:'用户'},
+    {id:'emo_love',label:'爱意',value:64,source:userSource,sourceKind:'用户'},
+    {id:'emo_anger',label:'愤怒',value:22,source:'难缠甲方',sourceKind:'工作'},
+    {id:'emo_pressure',label:'压力',value:71,source:'项目进度',sourceKind:'工作'},
+    {id:'emo_reason',label:'理智',value:78,source:self,sourceKind:'本人'},
+    {id:'emo_possess',label:'占有欲',value:36,source:userSource,sourceKind:'用户'},
+    {id:'emo_hatred',label:'恨意',value:8,source:'旧识',sourceKind:'关系'},
+    {id:'emo_disgust',label:'厌恶',value:12,source:'插队的陌生人',sourceKind:'路人'}
+  ];
+}
+function hangParseEmotions(c,raw){
+  const list=(raw||[]).map(function(line,index){
+    const p=String(line).split(/[|｜]/).map(function(x){ return x.trim(); });
+    if(p.length<3) return null;
+    const value=Math.max(0,Math.min(100,parseInt(String(p[1]).replace(/[^\d]/g,''),10)||0));
+    return {id:'emo_'+index,label:p[0]||'情绪',value:value,source:p[2]||'某个人',sourceKind:p[3]||'关系'};
+  }).filter(Boolean);
+  return list.length>=3?list.slice(0,10):hangEmotionDefaults(c);
+}
+function hangNormalizeDoing(c,data){
+  data=data||{};
+  data.ts=Number(data.ts)||Date.now();
+  data.place=String(data.place||'旧城 · 工作室').slice(0,60);
+  data.doing=String(data.doing||'把手里的事情慢慢收尾。').slice(0,100);
+  data.mood=String(data.mood||'安静').slice(0,40);
+  data.phone=String(data.phone||'38%').slice(0,30);
+  data.thought=hangThoughtText(data.thought,c);
+  data.scene=Array.isArray(data.scene)&&data.scene.length>=6?data.scene.map(function(item,index){ return Object.assign({},item,{id:item.id||('scene_'+index)}); }):hangSceneDefaults(c,data.place);
+  data.emotions=Array.isArray(data.emotions)&&data.emotions.length>=3?data.emotions.map(function(item,index){ return Object.assign({},item,{id:item.id||('emo_'+index)}); }):hangEmotionDefaults(c);
+  return data;
+}
+function hangLocalDoing(c){
+  return hangNormalizeDoing(c,{
+    ts:Date.now(),place:'旧城 · 修复室',doing:'把工具一件件收回盒子里，等雨彻底停。',mood:'安静，松下来一点',phone:'38%',
+    thought:'她今天应该会来。灯先不关，桌面收干净一点，等她推门进来再说。',
+    scene:hangSceneDefaults(c,'旧城 · 修复室'),
+    emotions:hangEmotionDefaults(c)
+  });
 }
 async function genDoing(c){
   const sys=promptOf(c,null,[],{format:'doing'})
-    +'\n【这次的任务】有人想知道你此刻在干什么。用第一人称，具体、有画面，一到两句。'
-    +'\n严格按这十三个标题逐行输出，标题一字不改：\n【地点】\n【正在做】\n【心情】\n【手机】\n【想法】\n【好感度】\n【爱意】\n【愤怒】\n【性欲】\n【理智】\n【占有欲】\n【恨意】\n【厌恶值】'
-    +'\n【想法】不超过 80 字，诚实、直白、大白话，不隐晦、不隐喻。所有百分比只写 0 到 100 的数字。';
+    +'\n【这次的任务】有人想知道你此刻在干什么。用第一人称，具体、有画面，不解释。'
+    +'\n严格按这些标题逐行输出，标题一字不改：\n【地点】\n【正在做】\n【心情】\n【手机】\n【想法】\n【场景】\n【情绪】'
+    +'\n【想法】必须 30 到 80 个中文字，诚实直白，不隐喻。'
+    +'\n【场景】写 8 到 12 行，每行格式：emoji|名称|类型|状态|补充细节。类型只能从地点、家具、人物、宠物、手机、门窗、交通工具、物品中选。至少要出现家具、人物、宠物、手机、门窗、交通工具。'
+    +'\n【情绪】写 4 到 8 行，每行格式：情绪名|0到100|对应的人|来源类型。每个情绪必须明确对应一个具体人物或关系来源。';
   const out=await callModel([{role:'system',content:sys},{role:'user',content:'你现在在干嘛？'}]);
-  const sec=parseSections(out), g=t=>{ const s=sec.find(x=>x.t===t); return s? s.lines.join(' ') : ''; };
-  const num=function(k){
-    const n=parseInt(String(g(k)).replace(/[^\d]/g,''),10);
-    return isNaN(n)?0:Math.max(0,Math.min(100,n));
-  };
-  return {ts:Date.now(),place:g('地点'),doing:g('正在做'),mood:g('心情'),phone:g('手机'),thought:String(g('想法')||'').slice(0,80),
-    stats:{favor:num('好感度'),love:num('爱意'),anger:num('愤怒'),lust:num('性欲'),reason:num('理智'),possess:num('占有欲'),hate:num('恨意'),disgust:num('厌恶值')}};
+  const sec=parseSections(out),g=function(t){ const s=sec.find(function(x){ return x.t===t; }); return s?s.lines:[]; };
+  const data=hangLocalDoing(c);
+  data.place=g('地点').join(' ')||data.place;
+  data.doing=g('正在做').join(' ')||data.doing;
+  data.mood=g('心情').join(' ')||data.mood;
+  data.phone=g('手机').join(' ')||data.phone;
+  data.thought=g('想法').join(' ')||data.thought;
+  data.scene=hangParseScene(c,g('场景'),data.place);
+  data.emotions=hangParseEmotions(c,g('情绪'));
+  return hangNormalizeDoing(c,data);
+}
+function hangMaybeExpose(c,action,force){
+  hangEnsureState();
+  if(DB.hang.mode!=='visible') return false;
+  if(!force&&Math.random()>0.24) return false;
+  const r=exactBindingResolved(DB.hang.binding),ch=r.chat||chatOfContact(c.id);
+  const event={id:uid(),cid:c.id,action:String(action||'查看手机'),ts:Date.now(),detected:true};
+  DB.hang.exposures[c.id]=event;
+  if(ch){
+    const text=pick(['你刚才是不是看我手机了？','手机屏幕怎么亮着……你是不是翻我东西了？','我看到后台记录了。你最好解释一下。']);
+    pushMsg(ch.id,{role:'ta',from:c.id,type:'text',text:text,ts:Date.now()});
+    ch.unread=Number(ch.unread||0)+1;
+  }
+  save(); toast('被 '+contactDisplayName(c)+' 发现了');
+  return true;
 }
 function emptyBar(title){
   return '<div class="pad" style="padding-top:0">'+wxTop(title)
@@ -13612,55 +13868,83 @@ function emptyBar(title){
     +'<button class="btn primary full" data-act="openwx">去微信建一位</button></div></div>';
 }
 function screenHang(){
-  DB.hang=DB.hang||{phone:{},doing:{}};
-  const c=ct(DB.hangCid)||ct((DB.contacts[0]||{}).id);
+  hangEnsureState();
+  const r=exactBindingResolved(DB.hang.binding),c=r.contact||ct(DB.hangCid)||ct((DB.contacts[0]||{}).id);
   if(c) DB.hangCid=c.id;
   if(!c) return emptyBar('查岗');
-  const cid=c.id;
   const tab=DB.hangTab||'phone';
-  const head=wxTop('查岗',clearBtn('hang')+'<button class="ic2" data-pickhang="1">换人</button>')
-    +'<div class="lrow" data-pickhang="1">'+avBox(c)
-      +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+esc(tab==='phone'?'正在查看 Ta 的手机':'看看 Ta 此刻在做什么')+'</div></div>'
+  const exposure=DB.hang.exposures&&DB.hang.exposures[c.id];
+  const head=wxTop('查岗',clearBtn('hang')+'<button class="ic2" data-hangbind="1">绑定</button>')
+    +'<div class="lrow" data-hangbind="1">'+avBox(c)
+      +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+'</div><div class="t2">'+esc(tab==='phone'?'正在查看 Ta 的手机':'看看 Ta 此刻在做什么')+' · '+esc(exactBindingSummary(DB.hang.binding))+'</div></div>'
       +'<div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="hang-access"><button class="'+(DB.hang.mode==='stealth'?'on':'')+'" data-hangmode="stealth">隐身查看</button><button class="'+(DB.hang.mode==='visible'?'on':'')+'" data-hangmode="visible">会被发现</button></div>'
+    +(exposure?'<div class="hang-expose-note">最近一次被发现：'+esc(shortTime(exposure.ts))+' · '+esc(exposure.action)+'。影响已经记录在对应会话里。</div>':'')
     +'<div class="tabs"><div class="tab'+(tab==='phone'?' on':'')+'" data-hangtab="phone">查手机</div>'
     +'<div class="tab'+(tab==='doing'?' on':'')+'" data-hangtab="doing">此刻动态</div></div>';
   if(tab==='doing') return '<div class="pad" style="padding-top:0">'+head+hangDoing(c)+'</div>';
   return '<div class="pad" style="padding-top:0">'+head+hangPhone(c)+'</div>';
 }
 function hangPhone(c){
-  const d=(DB.hang.phone||{})[c.id];
+  hangEnsureState();
+  let d=(DB.hang.phone||{})[c.id];
+  if(d) d=hangNormalizePhoneData(c,d);
+  const activeKey=DB.hang.activeApp&&DB.hang.activeApp[c.id];
   if(!d) return '<div class="card" style="margin-top:12px"><b>看看 Ta 的手机</b>'
-    +'<div class="muted" style="margin:8px 0 12px;line-height:1.7">会翻到 Ta 的最近聊天、通话记录、相册、备忘录和消费记录。每次查都是一次新的偷看。</div>'
+    +'<div class="muted" style="margin:8px 0 12px;line-height:1.7">进入角色手机桌面，可以逐个查看微信、电话、相册、备忘录、地图、消费账单、微博、音乐、日历、搜索和设置。</div>'
     +'<button class="btn primary full" data-run="hangGo" id="hangGo">开始查手机</button>'
     +'<div class="muted" style="margin-top:10px">内容是角色按人设即兴编的，属于虚构，不是真实数据。</div></div>';
-  return '<div class="card" style="margin-top:12px"><div class="row"><b class="grow">'+esc(contactDisplayName(c))+' 的手机</b><span class="muted">'+shortTime(d.ts)+'</span><button class="btn danger" data-hangclear="phone">清空</button></div></div>'
-    + d.sections.map(s=>'<div class="card"><b>'+esc(s.t)+'</b>'
-      +'<div class="muted" style="margin-top:8px;line-height:1.9">'+(s.lines.length? s.lines.map(x=>esc(x)).join('<br>'):'（空的）')+'</div></div>').join('')
-    + '<button class="btn full" data-run="hangGo" id="hangGo">再翻一次</button>';
+  const app=activeKey?HANG_PHONE_APPS.find(function(x){ return x.k===activeKey; }):null;
+  if(app){
+    const lines=(d.apps[app.k]||{}).lines||[];
+    return '<div class="card hang-device" style="margin-top:12px"><div class="hang-app-page"><div class="hang-app-page-head"><button data-hang-app-back="1">‹</button><div class="ttl">'+app.e+' '+esc(app.n)+'</div><span class="muted">'+shortTime(d.ts)+'</span></div>'
+      +'<div class="hang-app-lines">'+(lines.length?lines.map(function(line){ return '<div class="hang-app-line">'+esc(line)+'</div>'; }).join(''):'<div class="empty">这个 App 没有留下内容。</div>')+'</div>'
+      +'<div class="row" style="margin-top:10px"><button class="btn grow" data-run="hangGo" id="hangGo">刷新内容</button><button class="btn danger" data-hangclear="phone">清空</button></div></div></div>';
+  }
+  const now=simNow();
+  return '<div class="card hang-device" style="margin-top:12px"><div class="hang-device-status"><span>'+String(now.getHours()).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+'</span><span>▮▮▮ 38%</span></div>'
+    +'<div class="hang-device-person">'+avBox(c)+'<div><b>'+esc(contactDisplayName(c))+'</b><small>'+esc(c.identity||'角色手机')+' · '+shortTime(d.ts)+' 查看</small></div></div>'
+    +'<div class="hang-app-grid">'+HANG_PHONE_APPS.map(function(item){ return '<button class="hang-app-icon" data-hang-app="'+item.k+'"><span class="he">'+item.e+'</span><b>'+esc(item.n)+'</b></button>'; }).join('')+'</div>'
+    +'<div class="row" style="margin-top:8px"><button class="btn grow" data-run="hangGo" id="hangGo">刷新手机内容</button><button class="btn danger" data-hangclear="phone">清空</button></div></div>';
 }
 function hangDoing(c){
-  const d=(DB.hang.doing||{})[c.id];
+  hangEnsureState();
+  let d=(DB.hang.doing||{})[c.id];
   if(!d) return '<div class="card" style="margin-top:12px"><b>Ta 此刻在做什么</b>'
-    +'<div class="muted" style="margin:8px 0 12px;line-height:1.7">会看到 Ta 现在在哪、在做什么、心情怎么样，还有 Ta 的想法和情绪数值。</div>'
+    +'<div class="muted" style="margin:8px 0 12px;line-height:1.7">会看到 Ta 现在在哪、在做什么、心情怎么样，以及可以点击的平面图和对应人物的情绪。</div>'
     +'<button class="btn primary full" data-run="doingGo" id="doingGo">刷新一下</button></div>';
+  d=hangNormalizeDoing(c,d);
   const hist=(d.history||[]).slice(0,5);
-  const st=d.stats||{};
-  const rows=[['好感度','favor','#ff5f8f'],['爱意','love','#ff375f'],['愤怒','anger','#ff9f0a'],['性欲','lust','#bf5af2'],['理智','reason','#0a84ff'],['占有欲','possess','#5856d6'],['恨意','hate','#8e8e93'],['厌恶值','disgust','#636366']];
-  const bar=function(label,key,color){
-    const v=Math.max(0,Math.min(100,Number(st[key])||0));
-    return '<div style="margin-top:9px"><div style="display:flex;justify-content:space-between;font-size:calc(12.5px * var(--ui-font-scale,1))"><span>'+label+'</span><b>'+v+'%</b></div>'
-      +'<div style="height:6px;border-radius:3px;background:rgba(0,0,0,.07);margin-top:4px;overflow:hidden"><i style="display:block;height:100%;width:'+v+'%;background:'+color+'"></i></div></div>';
-  };
+  const scene=d.scene||hangSceneDefaults(c,d.place);
+  const emotions=d.emotions||hangEmotionDefaults(c);
   return '<div class="card" style="margin-top:12px"><div class="row"><b class="grow">Ta 此刻</b><span class="muted">'+shortTime(d.ts)+'</span><button class="btn danger" data-hangclear="doing">清空</button></div>'
     +'<div class="kv" style="margin-top:10px"><span>在哪</span><b>'+esc(d.place||'不知道')+'</b></div>'
     +'<div class="kv"><span>在做什么</span><b style="max-width:60%;text-align:right">'+esc(d.doing||'没回')+'</b></div>'
     +'<div class="kv"><span>心情</span><b>'+esc(d.mood||'说不清')+'</b></div>'
     +'<div class="kv"><span>手机</span><b>'+esc(d.phone||'—')+'</b></div>'
+    +'<div class="hang-map">'+scene.map(function(item){ return '<button class="hang-scene" data-hang-scene="'+item.id+'"><span class="he">'+esc(item.emoji||'📍')+'</span><b>'+esc(item.label||'物体')+'</b><small>'+esc(item.kind||'物品')+'</small></button>'; }).join('')+'</div>'
     +'<button class="btn full" data-run="doingGo" id="doingGo">刷新一下</button></div>'
-    +'<div class="card"><b>此刻的想法</b><div style="margin-top:8px;line-height:1.8;font-size:calc(14.5px * var(--ui-font-scale,1))">'+esc(d.thought||'……')+'</div></div>'
-    +'<div class="card"><b>情绪数值</b>'+rows.map(function(x){ return bar(x[0],x[1],x[2]); }).join('')+'</div>'
+    +'<div class="card"><b>此刻的想法</b><div class="hang-thought">'+esc(d.thought||'……')+'</div><div class="mini" style="margin-top:5px">第一人称 · '+Array.from(d.thought||'').length+' 字</div></div>'
+    +'<div class="card"><b>情绪</b>'+emotions.map(function(item){ const v=Math.max(0,Math.min(100,Number(item.value)||0)); return '<div class="hang-emotion"><div class="hang-emotion-head"><b>对'+esc(item.source||'某人')+'的'+esc(item.label||'情绪')+'</b><span>'+v+'% · '+esc(item.sourceKind||'关系')+'</span></div><div class="hang-emotion-bar"><i style="width:'+v+'%"></i></div></div>'; }).join('')+'</div>'
     +(hist.length>1? '<div class="card"><b>之前的几次</b><div class="muted" style="margin-top:8px;line-height:1.9">'
       +hist.slice(1).map(function(x){ return esc(shortTime(x.ts))+'　'+esc(x.place||'')+'　'+esc(x.doing||''); }).join('<br>')+'</div></div>':'');
+}
+function sheetHangBinding(){
+  hangEnsureState();
+  sheetExactBinding({title:'查岗精确绑定',desc:'查岗只读取这条会话、角色和用户人设。可以在会话、单独角色或直接指定用户人设之间切换。',binding:DB.hang.binding,scope:'contact',requireContact:true,allowClear:false,onSave:function(binding){
+    DB.hang.binding=binding;
+    const r=exactBindingResolved(binding);
+    DB.hangCid=r.contact?r.contact.id:DB.hangCid;
+    DB.hang.activeApp={};
+    save(); closeSheet(); render(); toast('查岗绑定已更新');
+  }});
+}
+function sheetHangScene(c,id){
+  const d=hangNormalizeDoing(c,(DB.hang.doing||{})[c.id]);
+  const item=(d.scene||[]).find(function(x){ return x.id===id; });
+  if(!item) return;
+  sheetSmall('<h3>'+esc(item.emoji||'📍')+' '+esc(item.label||'物体')+'</h3><div class="kv"><span>类型</span><b>'+esc(item.kind||'物品')+'</b></div><div class="kv"><span>状态</span><b>'+esc(item.status||'不明')+'</b></div><div class="muted" style="margin-top:10px;line-height:1.75">'+esc(item.detail||'暂时看不到更多。')+'</div><button class="btn full" id="hangSceneClose">关闭</button>');
+  $('#hangSceneClose').onclick=closeSheet;
 }
 /* ================= 打卡 ================= */
 function streakOf(){
