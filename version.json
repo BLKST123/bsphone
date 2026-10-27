@@ -1,9 +1,9 @@
 {
-  "version": "3.45",
-  "versionCode": 55,
-  "round": 55,
-  "releasedAt": "2026-10-26",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=55",
+  "version": "3.46",
+  "versionCode": 57,
+  "round": 57,
+  "releasedAt": "2026-10-27",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=57",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "移除打卡，外卖移到首页；商家与商品扩充、规格选择、多地址、角色地址和聊天订单气泡对齐。"
+  "notes": "严格精确绑定默认，仅微博支持多选并集；约会开场白与来源记录；出门、日记、外卖、时钟统一绑定；API 设置窗口改为用户自带接口。"
 }
