@@ -6231,12 +6231,13 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.53 · 第 64 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.54 · 第 65 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
     ['时间系统','可新建多套时间，每套独立命名、精确绑定、自动流动，并用年/月/日/时/分五列滚轮设置；旧单时间会自动迁移。'],
     ['查岗','精确绑定会话/角色/人设；角色手机含微信、电话、相册、备忘录、地图、账单、微博、音乐、日历、搜索和设置；此刻动态为可点击 emoji 平面图，含 30–80 字内心与多来源情绪；支持隐身和随机被发现。'],
+    ['小说世界书库','独立小说世界书模板，与全局世界书隔离；生成 3–8 本小说时选择并自动绑定；单本可复制自定义、换绑，删除模板会自动保留书籍副本。'],
     ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
     ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
@@ -6246,7 +6247,6 @@ const PROGRESS_GROUPS=[
     ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
-    ['小说世界书','已有单书世界书和生成记忆；按每次生成自由选择/绑定世界书的完整流程仍需补齐。'],
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
     ['约会/出门消息工具','支持继续生成和共享记忆；类似微信的多选消息迁移、任意节点重开等工具仍未完全对齐。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
@@ -7784,6 +7784,7 @@ function npNormalizeBook(b){
 function npNormalizePlatform(){
   const commercial=!!(DB.ui&&DB.ui.commercialMode);
   DB.books=npAllBooks().map(npNormalizeBook);
+  npEnsureNovelWorldbooks();
   if(!commercial && !DB.np.demoSeeded && DB.books.filter(function(b){ return !isDemoItem(b); }).length===0){
     const demo=[
       {id:'demo_novel_b1',title:'她把玫瑰留在雨里',authorName:'月下海棠',genre:'纯爱',tags:['暗恋','破镜重圆','都市'],status:'连载中',synopsis:'分手三年后，林晚在一场暴雨里重新见到周砚。他撑着一把坏掉的伞，怀里却抱着她当年留下的那盆玫瑰。她本来只想装作没看见，直到他把伞递过来，说：花快死了，你还要不要。',announcement:'今天也在努力让两个人把话说开。评论都会看，催更可以，别骂太狠。',protagonists:[{name:'林晚',line:'表面冷静，实际上把每一句重话都记很久'},{name:'周砚',line:'不擅长解释，只会用行动把旧关系一点点捡回来'}],cpLine:'清冷克制前任攻 × 嘴硬心软花店老板受',chapters:[{id:'demo_novel_b1_c1',title:'第一章 雨里的花',content:'雨落在旧街的遮阳棚上，声音密得像有人在敲一面很薄的鼓。\n林晚把花店的卷帘门拉到一半，指尖被铁皮边缘蹭出一道白痕。\n街对面的人没有打伞。\n他抱着一盆玫瑰，站在积水最深的地方，裤脚已经湿透。\n林晚看了两秒，低头去翻手机。\n屏幕亮起来，又暗下去。\n那人终于开口：花快死了，你还要不要。',authorNote:'这一章写雨写得太久了，但我喜欢。下一章会让他们真正说上话。',stats:{reads:2860,favorites:430,comments:38,tips:120}}]},
@@ -8332,7 +8333,7 @@ function sheetNpSettings(){
     +'<div class="lrow" data-npreadersettings="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">阅读排版</div><div class="t2">字号、行距和背景</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-npnovelregex="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">小说正则</div><div class="t2">生成章节后自动替换词句、称谓和标点</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-npstyleprompt="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">文风指令</div><div class="t2">告诉 AI 你想要的叙事节奏、口吻和禁写项</div></div><div class="rt"><span class="chev">›</span></div></div>'
-    +'<div class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">小说世界书</div><div class="t2">每本书单独设置，不影响全局世界书和读者评论</div></div><div class="rt"><span class="mini">在书籍 ⋯ 中打开</span></div></div>'
+    +'<div class="lrow" data-npnovelworldlibrary="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">小说世界书库</div><div class="t2">独立管理可复用模板；生成新书时绑定，不影响全局世界书和读者评论</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<button class="btn full" id="npResetReaders">重置读者网名与人设</button><button class="btn full" id="npCloseSettings">完成</button>');
   $('#npCloseSettings').onclick=closeSheet;
   $('#npResetReaders').onclick=function(){ npEnsureReaders(true); closeSheet(); toast('读者已重新生成'); };
@@ -8340,6 +8341,7 @@ function sheetNpSettings(){
   $('#sheetBox [data-npreadersettings]').onclick=function(){ closeSheet(); sheetNpReaderSettings(); };
   $('#sheetBox [data-npnovelregex]').onclick=function(){ closeSheet(); sheetNpRegex(); };
   $('#sheetBox [data-npstyleprompt]').onclick=function(){ closeSheet(); sheetNpStylePrompt(); };
+  $('#sheetBox [data-npnovelworldlibrary]').onclick=function(){ sheetNpNovelWorldbookLibrary(); };
 }
 function npApplyNovelRegexes(text){
   let out=String(text||'');
@@ -8428,22 +8430,167 @@ function sheetNpBookMenu(bookId){
     $('#npDelYes').onclick=function(){ DB.books=DB.books.filter(function(x){ return x.id!==b.id; }); DB.np.shelf=DB.np.shelf.filter(function(id){ return id!==b.id; }); save(); closeSheet(); go('novel'); toast('已删除'); };
   };
 }
+function npNovelWorldbookById(id){
+  npEnsureNovelWorldbooks();
+  return (DB.np.novelWorldbooks||[]).find(function(item){ return item.id===id; })||null;
+}
+function npNormalizeNovelWorldbook(item,index){
+  item=item||{};
+  item.id=item.id||('novel_world_'+uid());
+  item.name=String(item.name||('小说世界书 '+(index+1))).trim().slice(0,32)||('小说世界书 '+(index+1));
+  item.entries=(Array.isArray(item.entries)?item.entries:[]).filter(function(entry){ return entry&&String(entry.text||'').trim(); }).map(function(entry,i){
+    return {id:entry.id||uid(),kind:String(entry.kind||entry.k||'设定').slice(0,20),text:String(entry.text||entry.v||'').trim().slice(0,1200),createdAt:Number(entry.createdAt)||Date.now()+i};
+  });
+  item.createdAt=Number(item.createdAt)||Date.now()+index;
+  item.updatedAt=Number(item.updatedAt)||item.createdAt;
+  return item;
+}
+function npEnsureNovelWorldbooks(){
+  DB.np=DB.np||{};
+  DB.np.novelWorldbooks=Array.isArray(DB.np.novelWorldbooks)?DB.np.novelWorldbooks.map(npNormalizeNovelWorldbook):[];
+  if(!DB.np.novelWorldbooksMigratedV1){
+    (DB.books||[]).forEach(function(book){
+      if(!book.worldbook||!(book.worldbook.entries||[]).length) return;
+      let library=book.worldbook.libraryId?(DB.np.novelWorldbooks||[]).find(function(item){ return item.id===book.worldbook.libraryId; }):null;
+      if(!library){
+        library=(DB.np.novelWorldbooks||[]).find(function(item){ return item.legacyBookId===book.id; })||null;
+        if(!library){
+          library=npNormalizeNovelWorldbook({
+            id:'novel_world_'+book.id,
+            name:String(book.title||'未命名书籍')+' · 世界书',
+            entries:JSON.parse(JSON.stringify(book.worldbook.entries||[])),
+            legacyBookId:book.id,
+            createdAt:book.createdAt,
+            updatedAt:book.worldbook.updatedAt
+          },DB.np.novelWorldbooks.length);
+          DB.np.novelWorldbooks.push(library);
+        }
+        book.worldbook.libraryId=library.id;
+        book.worldbook.libraryName=library.name;
+      }
+    });
+    DB.np.novelWorldbooksMigratedV1=true;
+  }
+  if(!DB.np.novelWorldbooks.some(function(item){ return item.id===DB.np.activeNovelWorldbookId; })) DB.np.activeNovelWorldbookId=(DB.np.novelWorldbooks[0]||{}).id||null;
+  DB.np.novelWorldbooksV1=true;
+  return DB.np.novelWorldbooks;
+}
+function npNovelWorldEntries(book){
+  npEnsureNovelWorldbooks();
+  const current=book&&book.worldbook?book.worldbook:{};
+  const library=current.libraryId?npNovelWorldbookById(current.libraryId):null;
+  return library?library.entries:(current.entries||[]);
+}
+function npBindNovelWorldbook(bookId,libraryId){
+  const b=npBook(bookId); if(!b) return;
+  b.worldbook=Object.assign({enabled:true,entries:[],updatedAt:0},b.worldbook||{});
+  if(libraryId){
+    const library=npNovelWorldbookById(libraryId); if(!library) return;
+    b.worldbook.libraryId=library.id;
+    b.worldbook.libraryName=library.name;
+    b.worldbook.entries=JSON.parse(JSON.stringify(library.entries||[]));
+    b.worldbook.boundFromLibrary=true;
+    DB.np.activeNovelWorldbookId=library.id;
+  }else{
+    b.worldbook.entries=npNovelWorldEntries(b).map(function(entry){ return Object.assign({},entry,{id:uid()}); });
+    delete b.worldbook.libraryId;
+    delete b.worldbook.libraryName;
+    delete b.worldbook.boundFromLibrary;
+  }
+  b.worldbook.updatedAt=Date.now();
+  save();
+}
 function npWorldBlock(b){
-  if(!b||!b.worldbook||b.worldbook.enabled===false||!(b.worldbook.entries||[]).length) return '';
-  return '【本书独立小说世界书（仅用于小说正文与后台记忆）】\n'+b.worldbook.entries.map(function(e){ return '- ['+e.kind+'] '+e.text; }).join('\n')+'\n【世界书边界】以上是小说设定与正文生成依据。读者群、段评、章评和书荒广场中的读者并不知道这些未在正文中公开的内容，他们的理解只能视为猜测或评论，不能写成小说正史。';
+  if(!b||!b.worldbook||b.worldbook.enabled===false) return '';
+  const entries=npNovelWorldEntries(b);
+  if(!entries.length) return '';
+  return '【本书独立小说世界书（仅用于小说正文与后台记忆）】\n'+entries.map(function(e){ return '- ['+e.kind+'] '+e.text; }).join('\n')+'\n【世界书边界】以上是小说设定与正文生成依据。读者群、段评、章评和书荒广场中的读者并不知道这些未在正文中公开的内容，他们的理解只能视为猜测或评论，不能写成小说正史。';
+}
+function sheetNpNovelWorldbookLibrary(bookId,onBack){
+  const draw=function(){
+    const list=npEnsureNovelWorldbooks();
+    sheetFull('<div class="row"><button class="ic2" id="nwLibBack" style="font-size:calc(22px * var(--ui-font-scale,1))">‹</button><h3 style="margin:0;flex:1">小说世界书库</h3><button class="btn primary" id="nwLibNew">新建</button></div>'
+      +'<div class="muted" style="margin:8px 0 12px;line-height:1.75">这是小说专用世界书，不会混入微信或全局世界书。生成 3–8 本小说时可选择一套，生成后会绑定到每本书。</div>'
+      +(list.length?list.map(function(item){
+        return '<div class="np-card"><div class="row"><div class="grow"><b>'+esc(item.name)+'</b><div class="mini" style="margin-top:4px">'+item.entries.length+' 条 · '+esc(item.entries.slice(0,3).map(function(e){ return e.kind; }).join(' / ')||'空世界书')+'</div></div>'+(bookId?'<button class="btn primary" data-nwbind="'+item.id+'">绑定</button>':'')+'<button class="btn" data-nwedit="'+item.id+'">编辑</button><button class="btn danger" data-nwdel="'+item.id+'">删</button></div></div>';
+      }).join(''):'<div class="np-empty">还没有小说世界书。可以新建一套，或者直接在单本书里复制后自定义。</div>')
+      +'<button class="btn full" id="nwLibClose">关闭</button>');
+    $('#nwLibBack').onclick=function(){ if(onBack) onBack(); else closeSheet(); };
+    $('#nwLibClose').onclick=function(){ if(onBack) onBack(); else closeSheet(); };
+    $('#nwLibNew').onclick=function(){ sheetNpNovelWorldbookEdit(null,function(){ sheetNpNovelWorldbookLibrary(bookId,onBack); }); };
+    $$('#sheetBox [data-nwedit]').forEach(function(el){ el.onclick=function(){ sheetNpNovelWorldbookEdit(el.dataset.nwedit,function(){ sheetNpNovelWorldbookLibrary(bookId,onBack); }); }; });
+    $$('#sheetBox [data-nwbind]').forEach(function(el){ el.onclick=function(){ npBindNovelWorldbook(bookId,el.dataset.nwbind); closeSheet(); sheetNpBookWorld(bookId); toast('已绑定小说世界书'); }; });
+    $$('#sheetBox [data-nwdel]').forEach(function(el){ el.onclick=function(){
+      const item=npNovelWorldbookById(el.dataset.nwdel); if(!item) return;
+      sheetSmall('<h3>删除「'+esc(item.name)+'」？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.7">已绑定这本书的书籍会先把当前内容复制成单书自定义世界书，不会丢设定。</div><button class="btn danger full" id="nwDelYes">删除</button><button class="btn full" id="nwDelNo">取消</button>');
+      $('#nwDelNo').onclick=function(){ sheetNpNovelWorldbookLibrary(bookId,onBack); };
+      $('#nwDelYes').onclick=function(){
+        (DB.books||[]).forEach(function(book){
+          if(!book.worldbook||book.worldbook.libraryId!==item.id) return;
+          book.worldbook.entries=JSON.parse(JSON.stringify(item.entries||[])).map(function(entry){ return Object.assign({},entry,{id:uid()}); });
+          delete book.worldbook.libraryId;
+          delete book.worldbook.libraryName;
+          delete book.worldbook.boundFromLibrary;
+          book.worldbook.preservedFromDeletedLibrary=item.name;
+          book.worldbook.updatedAt=Date.now();
+        });
+        DB.np.novelWorldbooks=(DB.np.novelWorldbooks||[]).filter(function(x){ return x.id!==item.id; });
+        if(DB.np.activeNovelWorldbookId===item.id) DB.np.activeNovelWorldbookId=(DB.np.novelWorldbooks[0]||{}).id||null;
+        save(); sheetNpNovelWorldbookLibrary(bookId,onBack); toast('世界书已删除，绑定书籍已保留副本');
+      };
+    }; });
+  };
+  draw();
+}
+function sheetNpNovelWorldbookEdit(id,onBack){
+  const existing=id?npNovelWorldbookById(id):null;
+  const draft=existing?JSON.parse(JSON.stringify(existing)):{id:'',name:'新的小说世界书',entries:[],createdAt:Date.now(),updatedAt:Date.now()};
+  const draw=function(){
+    sheetFull('<div class="row"><button class="ic2" id="nweBack" style="font-size:calc(22px * var(--ui-font-scale,1))">‹</button><h3 style="margin:0;flex:1">'+(existing?'编辑世界书':'新建世界书')+'</h3><button class="btn primary" id="nweSave">保存</button></div>'
+      +'<input id="nweName" value="'+esc(draft.name)+'" placeholder="世界书名称" style="margin-top:10px">'
+      +(draft.entries.length?draft.entries.map(function(entry,i){ return '<div class="np-card"><div class="row"><div class="grow"><div class="mini">'+esc(entry.kind||'设定')+'</div><div style="margin-top:5px;line-height:1.65;overflow-wrap:anywhere">'+esc(entry.text)+'</div></div><button class="btn danger" data-nwedel="'+i+'">删</button></div></div>'; }).join(''):'<div class="np-empty">这套世界书还没有条目。</div>')
+      +'<div class="np-card"><select id="nweKind">'+['世界观','人物','关系','能力','地点','物件','时间线','禁忌','其他'].map(function(x){ return '<option>'+x+'</option>'; }).join('')+'</select><textarea id="nweText" style="margin-top:8px;min-height:150px" placeholder="写这套小说共用的事实，例如：这个世界没有太阳，所有城市靠地底热源照明。"></textarea><button class="btn primary full" id="nweAdd">添加条目</button></div>'
+      +'<button class="btn full" id="nweClose">返回世界书库</button>');
+    $('#nweName').oninput=function(){ draft.name=String(this.value||'').trim(); };
+    $$('#sheetBox [data-nwedel]').forEach(function(el){ el.onclick=function(){ draft.entries.splice(Number(el.dataset.nwedel),1); draw(); }; });
+    $('#nweAdd').onclick=function(){ const text=String($('#nweText').value||'').trim(); if(!text){ toast('先写设定'); return; } draft.entries.push({id:uid(),kind:$('#nweKind').value||'设定',text:text.slice(0,1200),createdAt:Date.now()}); draw(); };
+    $('#nweBack').onclick=function(){ if(onBack) onBack(); else closeSheet(); };
+    $('#nweClose').onclick=function(){ if(onBack) onBack(); else closeSheet(); };
+    $('#nweSave').onclick=function(){
+      draft.name=String($('#nweName').value||draft.name||'小说世界书').trim()||'小说世界书';
+      if(!draft.entries.length){ toast('至少加一条世界书设定'); return; }
+      draft.updatedAt=Date.now();
+      if(existing){ Object.assign(existing,draft); }
+      else{ draft.id='novel_world_'+uid(); draft.createdAt=Date.now(); DB.np.novelWorldbooks.push(npNormalizeNovelWorldbook(draft,DB.np.novelWorldbooks.length)); }
+      DB.np.activeNovelWorldbookId=existing?existing.id:draft.id;
+      save(); if(onBack) onBack(); else closeSheet(); toast('小说世界书已保存');
+    };
+  };
+  draw();
+}
+function sheetNpBindNovelWorldbook(bookId){
+  sheetNpNovelWorldbookLibrary(bookId,function(){ sheetNpBookWorld(bookId); });
 }
 function sheetNpBookWorld(bookId){
   const b=npBook(bookId); if(!b) return;
   b.worldbook=Object.assign({enabled:true,entries:[],updatedAt:0},b.worldbook||{});
   const draw=function(){
-    sheetFull('<h3>小说世界书 · '+esc(b.title)+'</h3><div class="muted" style="margin:6px 0 10px;line-height:1.75">这本书单独使用，不会写入或绑定全局世界书。它只影响 AI 写新章节、章节后台记忆和小说本体生成；不影响读者群、段评章评和书荒广场。</div>'
+    const library=b.worldbook.libraryId?npNovelWorldbookById(b.worldbook.libraryId):null;
+    const entries=npNovelWorldEntries(b);
+    sheetFull('<h3>小说世界书 · '+esc(b.title)+'</h3><div class="muted" style="margin:6px 0 10px;line-height:1.75">小说世界书只影响 AI 写新章节、章节后台记忆和小说本体生成；不影响读者群、段评章评、书荒广场，也不会写入全局世界书。</div>'
       +'<label class="lrow" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">启用本书世界书</div><div class="t2">'+(b.worldbook.enabled===false?'当前关闭':'当前开启')+'</div></div><input id="npbwEnabled" type="checkbox" '+(b.worldbook.enabled!==false?'checked':'')+' style="width:22px;height:22px"></label>'
-      +((b.worldbook.entries||[]).length? b.worldbook.entries.map(function(e,i){ return '<div class="np-card"><div class="row"><div class="grow"><div class="mini">'+esc(e.kind||'设定')+'</div><div style="margin-top:5px;line-height:1.65;overflow-wrap:anywhere">'+esc(e.text)+'</div></div><button class="btn danger" data-npbwdel="'+i+'">删</button></div></div>'; }).join('') : '<div class="np-empty">还没有本书世界书条目。</div>')
-      +'<div class="np-card"><select id="npbwKind">'+['世界观','人物','关系','能力','地点','物件','时间线','禁忌','其他'].map(function(x){ return '<option>'+x+'</option>'; }).join('')+'</select><textarea id="npbwText" style="margin-top:8px;min-height:150px" placeholder="写这本书独有的事实，例如：这座城市终年下雨，角色不能离开旧城区。"></textarea><button class="btn primary full" id="npbwAdd">添加条目</button></div>'
+      +'<div class="lrow" data-npbwbind="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">世界书库绑定</div><div class="t2">'+(library?esc(library.name)+' · 跟随书库实时更新':'本书自定义，不跟随书库')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+      +(library?'<div class="dnote">当前内容来自小说世界书库。需要单独改这本书时，先复制成本书自定义。</div><button class="btn full" id="npbwCustomize">复制到本书后自定义</button>':'')
+      +(entries.length? entries.map(function(e,i){ return '<div class="np-card"><div class="row"><div class="grow"><div class="mini">'+esc(e.kind||'设定')+'</div><div style="margin-top:5px;line-height:1.65;overflow-wrap:anywhere">'+esc(e.text)+'</div></div>'+(library?'':'<button class="btn danger" data-npbwdel="'+i+'">删</button>')+'</div></div>'; }).join('') : '<div class="np-empty">还没有本书世界书条目。</div>')
+      +(library?'':'<div class="np-card"><select id="npbwKind">'+['世界观','人物','关系','能力','地点','物件','时间线','禁忌','其他'].map(function(x){ return '<option>'+x+'</option>'; }).join('')+'</select><textarea id="npbwText" style="margin-top:8px;min-height:150px" placeholder="写这本书独有的事实，例如：这座城市终年下雨，角色不能离开旧城区。"></textarea><button class="btn primary full" id="npbwAdd">添加条目</button></div>')
+      +'<button class="btn full" id="npbwManageLibrary">打开小说世界书库</button>'
       +'<button class="btn full" id="npbwClose">关闭</button>');
     $('#npbwEnabled').onchange=function(){ b.worldbook.enabled=!!this.checked; b.worldbook.updatedAt=Date.now(); save(); };
     $$('#sheetBox [data-npbwdel]').forEach(function(el){ el.onclick=function(){ b.worldbook.entries.splice(Number(el.dataset.npbwdel),1); b.worldbook.updatedAt=Date.now(); save(); draw(); }; });
-    $('#npbwAdd').onclick=function(){ const text=String($('#npbwText').value||'').trim(); if(!text){ toast('先写设定'); return; } b.worldbook.entries.push({id:uid(),kind:$('#npbwKind').value||'设定',text:text.slice(0,1200),createdAt:Date.now()}); b.worldbook.updatedAt=Date.now(); save(); draw(); toast('世界书条目已保存'); };
+    $('#sheetBox [data-npbwbind]').onclick=function(){ sheetNpBindNovelWorldbook(b.id); };
+    const customize=$('#npbwCustomize'); if(customize) customize.onclick=function(){ npBindNovelWorldbook(b.id,null); draw(); toast('已复制成本书自定义世界书'); };
+    const add=$('#npbwAdd'); if(add) add.onclick=function(){ const text=String($('#npbwText').value||'').trim(); if(!text){ toast('先写设定'); return; } b.worldbook.entries.push({id:uid(),kind:$('#npbwKind').value||'设定',text:text.slice(0,1200),createdAt:Date.now()}); b.worldbook.updatedAt=Date.now(); save(); draw(); toast('世界书条目已保存'); };
+    $('#npbwManageLibrary').onclick=function(){ sheetNpNovelWorldbookLibrary(b.id,function(){ sheetNpBookWorld(b.id); }); };
     $('#npbwClose').onclick=closeSheet;
   };
   draw();
@@ -8516,6 +8663,8 @@ function sheetNpBookForm(editId,mode){
   const genres=String(b.genre||'现代').split(/\s*[\/／,，、]\s*/).filter(Boolean);
   const tags=(b.tags||[]).slice();
   const personas=String(b.cpLine||'').split(/[；;]/).map(function(x){ return x.trim(); }).filter(Boolean);
+  const novelWorlds=npEnsureNovelWorldbooks().filter(function(item){ return (item.entries||[]).length; });
+  const boundWorldId=old&&old.worldbook&&old.worldbook.libraryId?old.worldbook.libraryId:(DB.np.activeNovelWorldbookId||'');
   sheetFull('<h3>'+(old?'编辑书籍':(ai?'AI 创作书籍':'自由创建书籍'))+'</h3>'
     +'<div class="row" style="align-items:flex-start"><div class="np-cover" id="npbCoverPreview" style="width:92px;flex:none">'+npCoverHTML(Object.assign({},b,{cover:cover,coverCustom:coverCustom,title:b.title||'未命名'}))+'</div><div class="grow"><input id="npbCoverUrl" placeholder="封面图片 URL"><button class="btn full" id="npbCoverUrlApply" style="margin-top:7px">应用 URL</button><button class="btn full" id="npbCoverUpload" style="margin-top:7px">上传本地封面</button><button class="btn full" id="npbCoverAuto" style="margin-top:7px">跟随主题背景</button></div></div>'
     +'<input id="npbTitle" placeholder="书名'+(ai?'（可留空让 AI 起名）':'')+'" value="'+esc(b.title)+'" style="margin-top:9px">'
@@ -8524,6 +8673,7 @@ function sheetNpBookForm(editId,mode){
     +npChipEditorHTML('人设标签','persona',personas,NP_PERSONA_PRESETS)
     +'<div class="row" style="margin-top:8px"><select id="npbOrientation" class="grow">'+['无CP','言情','耽美','百合'].map(function(x){ return '<option'+(b.orientation===x?' selected':'')+'>'+x+'</option>'; }).join('')+'</select><select id="npbStructure" class="grow">'+['1V1（双主角）','1VN（单主角对多情感对象）','群像','多CP'].map(function(x){ return '<option'+(b.structure===x?' selected':'')+'>'+x+'</option>'; }).join('')+'</select></div>'
     +'<textarea id="npbIdea" placeholder="创作想法（AI 创作时使用）" style="margin-top:8px">'+esc(b.idea||'')+'</textarea>'
+    +'<div class="mini" style="margin-top:10px">小说世界书</div><select id="npbWorldbook" style="margin-top:6px"><option value="">本书自定义 / 不绑定书库</option>'+novelWorlds.map(function(item){ return '<option value="'+item.id+'"'+(boundWorldId===item.id?' selected':'')+'>'+esc(item.name)+' · '+item.entries.length+' 条</option>'; }).join('')+'</select>'
     +'<textarea id="npbSyn" placeholder="500 字以内简介">'+esc(b.synopsis||'')+'</textarea>'
     +'<textarea id="npbAnn" placeholder="作者公告">'+esc(b.announcement||'')+'</textarea>'
     +'<button class="btn primary full" id="npbSave">'+(old?'保存':(ai?'让 AI 生成书籍':'创建书籍'))+'</button><button class="btn full" id="npbBack">返回</button>');
@@ -8540,11 +8690,13 @@ function sheetNpBookForm(editId,mode){
   $('#npbSave').onclick=function(){
     const title=String($('#npbTitle').value||'').trim();
     if(!ai&&!title){ toast('先写书名'); return; }
-    const data={title:title,genre:genres.join(' / ')||'现代',tags:tags.slice(0,10),synopsis:String($('#npbSyn').value||'').slice(0,500),announcement:String($('#npbAnn').value||''),protagonists:old?(old.protagonists||[]):[],cpLine:personas.join('；'),orientation:$('#npbOrientation').value,structure:$('#npbStructure').value,idea:String($('#npbIdea').value||'').trim(),cover:coverCustom?cover:'',coverCustom:coverCustom};
+    const data={title:title,genre:genres.join(' / ')||'现代',tags:tags.slice(0,10),synopsis:String($('#npbSyn').value||'').slice(0,500),announcement:String($('#npbAnn').value||''),protagonists:old?(old.protagonists||[]):[],cpLine:personas.join('；'),orientation:$('#npbOrientation').value,structure:$('#npbStructure').value,idea:String($('#npbIdea').value||'').trim(),cover:coverCustom?cover:'',coverCustom:coverCustom,worldbookId:$('#npbWorldbook').value||null};
     if(ai&&!old){ closeSheet(); npAICreateBookFromForm(data); return; }
     let book;
     if(old){ Object.assign(old,data); old.authorId=old.authorId||'me'; old.updatedAt=Date.now(); book=old; }
     else { book=npNormalizeBook(Object.assign({id:uid(),authorId:'me',authorName:DB.np.author.penName,origin:'user',published:false,chapters:[],status:'连载中',stats:{reads:0,favorites:0,comments:0,tips:0}},data)); DB.books.push(book); }
+    if(data.worldbookId) npBindNovelWorldbook(book.id,data.worldbookId);
+    else if(old&&old.worldbook&&old.worldbook.libraryId) npBindNovelWorldbook(book.id,null);
     save(); closeSheet(); go('novelbook',book.id); toast(old?'已保存':'书籍已创建');
   };
 }
@@ -8557,7 +8709,9 @@ function npAICreateBookFromForm(payload){
     let item=npJSON(out); if(Array.isArray(item)) item=item[0]; if(!item||!item.title) throw new Error('AI 没有生成书名');
     const data={title:payload.title||item.title,genre:payload.genre||item.genre||'现代',tags:(payload.tags&&payload.tags.length)?payload.tags:(item.tags||[]),synopsis:payload.synopsis||item.synopsis||'',announcement:payload.announcement||item.announcement||'',cpLine:payload.cpLine||item.cpLine||'',protagonists:item.protagonists||[],orientation:payload.orientation,structure:payload.structure,idea:payload.idea,cover:payload.coverCustom?payload.cover:'',coverCustom:!!payload.coverCustom};
     const book=npNormalizeBook(Object.assign({id:uid(),authorId:'me',authorName:DB.np.author.penName,origin:'ai-author',published:false,chapters:[],status:'连载中',stats:{reads:0,favorites:0,comments:0,tips:0}},data));
-    DB.books.push(book); save(); busyDone(); go('novelbook',book.id); toast('AI 书籍已创建');
+    DB.books.push(book);
+    if(payload.worldbookId) npBindNovelWorldbook(book.id,payload.worldbookId);
+    save(); busyDone(); go('novelbook',book.id); toast('AI 书籍已创建');
   }).catch(function(e){ busyDone(); toast('生成失败：'+e.message); });
 }
 function sheetNpVolumes(bookId){
@@ -9078,20 +9232,24 @@ function sheetNpGenerateBook(){
   const genres=genre&&genre!=='推荐'?[genre]:[];
   const tags=(DB.np.tags||[]).slice();
   const personas=[];
-  const worlds=(DB.books||[]).filter(function(b){ return b.worldbook&&(b.worldbook.entries||[]).length; });
+  const worlds=npEnsureNovelWorldbooks().filter(function(item){ return (item.entries||[]).length; });
+  const selectedWorldId=worlds.some(function(item){ return item.id===DB.np.activeNovelWorldbookId; })?DB.np.activeNovelWorldbookId:(worlds[0]||{}).id||'';
   sheetFull('<h3>生成新书</h3><div class="muted" style="margin-bottom:8px;line-height:1.75">选择你要的口味，留空的项交给 AI 自由发挥。</div>'
     +npChipEditorHTML('题材','genre',genres,NP_GENRE_PRESETS)
     +npChipEditorHTML('标签','tags',tags,NP_TAG_PRESETS)
     +npChipEditorHTML('人设','persona',personas,NP_PERSONA_PRESETS)
     +'<div class="row" style="margin-top:8px"><select id="npGenOrientation" class="grow"><option>无CP</option><option>言情</option><option>耽美</option><option>百合</option></select><select id="npGenStructure" class="grow"><option>1V1（双主角）</option><option>1VN（单主角对多情感对象）</option><option>群像</option><option>多CP</option></select></div>'
     +'<textarea id="npGenIdea" placeholder="补充口味或剧情偏好，可留空" style="margin-top:8px"></textarea>'
-    +'<div class="mini" style="margin-top:10px">小说世界书（生成后仍为每本书单独一份）</div><select id="npGenWorldBook" style="margin-top:6px"><option value="">不使用已有小说世界书</option>'+worlds.map(function(b){ return '<option value="'+b.id+'">'+esc(b.title)+' · '+b.worldbook.entries.length+' 条</option>'; }).join('')+'</select>'
+    +'<div class="mini" style="margin-top:10px">小说世界书（本次生成会绑定到所有新书）</div><select id="npGenWorldBook" style="margin-top:6px"><option value="">不使用小说世界书</option>'+worlds.map(function(item){ return '<option value="'+item.id+'"'+(selectedWorldId===item.id?' selected':'')+'>'+esc(item.name)+' · '+item.entries.length+' 条</option>'; }).join('')+'</select>'
+    +'<button class="btn full" id="npGenWorldManage" style="margin-top:7px">管理小说世界书</button>'
     +'<div class="row" style="margin-top:8px"><span class="mini grow">生成数量</span><input id="npGenCount" type="number" min="3" max="8" value="6" style="width:70px"></div>'
     +'<button class="btn primary full" id="npGenGo">按这些条件生成</button><button class="btn full" id="npGenCancel">取消</button>');
   npBindChipEditor($('#sheetBox'),{genre:genres,tags:tags,persona:personas});
   $('#npGenCancel').onclick=closeSheet;
+  $('#npGenWorldManage').onclick=function(){ sheetNpNovelWorldbookLibrary(null,function(){ sheetNpGenerateBook(); }); };
   $('#npGenGo').onclick=function(){
     const opts={genre:genres.join(' / ')||'AI自由发挥',tags:tags.slice(),persona:personas.join('；'),orientation:$('#npGenOrientation').value,structure:$('#npGenStructure').value,idea:String($('#npGenIdea').value||'').trim(),count:Math.max(3,Math.min(8,Number($('#npGenCount').value)||6)),worldBookId:$('#npGenWorldBook').value||null};
+    DB.np.activeNovelWorldbookId=opts.worldBookId||null;
     closeSheet(); npRefreshBooks(opts);
   };
 }
@@ -9099,10 +9257,10 @@ function npRefreshBooks(opts){
   if(!needKey()) return;
   opts=opts||{};
   const tags=(opts.tags||[]).concat(DB.np.tags||[]).filter(function(x,i,a){ return a.indexOf(x)===i; });
-  const sourceWorld=opts.worldBookId?npBook(opts.worldBookId):null;
+  const sourceWorld=opts.worldBookId?npNovelWorldbookById(opts.worldBookId):null;
   busy('正在生成新书，请稍后');
   const sys='你是中文网文平台的选书与书籍包装生成器。你只输出 JSON，不聊天。书籍要像真实平台的新书推荐：类型明确、卖点清楚、简介有钩子、作者公告有活人感。'
-    +(sourceWorld?'\n【本次绑定的小说世界书事实】\n'+sourceWorld.worldbook.entries.map(function(e){ return '['+e.kind+'] '+e.text; }).join('\n')+'\n生成的新书必须遵守这些事实，但不要假装读者已经知道全书。':'');
+    +(sourceWorld?'\n【本次绑定的小说世界书事实】\n'+sourceWorld.entries.map(function(e){ return '['+e.kind+'] '+e.text; }).join('\n')+'\n生成的新书必须遵守这些事实，但不要假装读者已经知道全书。':'');
   const user='按这些筛选条件生成 '+(Number(opts.count)||6)+' 本新书：题材='+(opts.genre||'AI自由发挥')+'；标签='+(tags.join('、')||'AI自由发挥')+'；人设='+(opts.persona||'AI自由发挥')+'；性向='+(opts.orientation||'无CP')+'；关系结构='+(opts.structure||'1V1')+'；补充想法='+(opts.idea||'自由发挥')+'。'
     +'\n输出 JSON 数组，每项字段：title, authorName, genre, tags(数组，2到4个), synopsis(180到420字，不能超过500字), announcement(40到100字), cpLine(必须是网文标签化人设句，格式类似「清冷禁欲高岭之花攻X贪财偏执美强惨受」), protagonists(数组，1到2项，每项 name 和 line)。'
     +'\n不要输出解释、代码块或 Markdown。';
@@ -9113,8 +9271,8 @@ function npRefreshBooks(opts){
     arr.forEach(function(item,i){
       const b=npAIBookItem(item,i);
       b.orientation=opts.orientation||'无CP'; b.structure=opts.structure||'1V1';
-      if(sourceWorld&&sourceWorld.worldbook){
-        b.worldbook={enabled:sourceWorld.worldbook.enabled!==false,entries:JSON.parse(JSON.stringify(sourceWorld.worldbook.entries||[])).map(function(e){ return Object.assign({},e,{id:uid(),createdAt:Date.now()}); }),updatedAt:Date.now(),boundFromBookId:sourceWorld.id};
+      if(sourceWorld){
+        b.worldbook={enabled:true,libraryId:sourceWorld.id,libraryName:sourceWorld.name,entries:JSON.parse(JSON.stringify(sourceWorld.entries||[])).map(function(e){ return Object.assign({},e,{id:uid(),createdAt:Date.now()}); }),updatedAt:Date.now(),boundFromLibrary:true};
       }
       DB.books.push(b);
     });
@@ -10702,8 +10860,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.53 · 第 64 轮';
-const BUILD_CODE=64;
+const BUILD='2026-10-27 · 3.54 · 第 65 轮';
+const BUILD_CODE=65;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10724,7 +10882,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10735,6 +10893,12 @@ async function runCheckupUI(){
   add('精确绑定', exactBad.length===0, exactBad.length?('异常：'+exactBad.map(function(x){ return x[0]; }).join('、')):exactStates.map(function(x){ return x[0]+'='+(x[1].chatId?'会话':x[1].contactId?'角色':x[1].personaId?'人设':'未绑定'); }).join(' · '));
   add('微博并集绑定', wbBindings().length>=1, wbBindings().length+' 个来源 · 生成内容保留独立来源记录');
   add('微博角色互动', typeof wbReactToUserPost==='function'&&typeof wbReactLikeUserPost==='function'&&typeof wbReactRepostUserPost==='function', '点赞 / 评论 / 随机转发已接入');
+  npEnsureNovelWorldbooks();
+  const novelWorldIds=new Set((DB.np.novelWorldbooks||[]).map(function(item){ return item.id; }));
+  const globalWorldIds=new Set((DB.worldbooks||[]).map(function(item){ return item.id; }));
+  const worldOverlap=[...novelWorldIds].filter(function(id){ return globalWorldIds.has(id); });
+  const boundBooks=(DB.books||[]).filter(function(book){ return book.worldbook&&book.worldbook.libraryId; }).length;
+  add('小说世界书库', worldOverlap.length===0, (DB.np.novelWorldbooks||[]).length+' 套模板 · '+boundBooks+' 本书已绑定 · 全局世界书 '+(DB.worldbooks||[]).length+' 套');
   const p2=(DB.ui.homePages||[])[1]||[],p2Group=((DB.ui.widgetPages||[])[1]||[]).find(function(w){ return w.id==='l7_p2_apps'; });
   const p2Ok=JSON.stringify(p2)===JSON.stringify(['hang','shop','date','out'])&&p2Group&&JSON.stringify(p2Group.appKeys)===JSON.stringify(p2)&&Number(p2Group.appCols)===2;
   add('第二页图标布局', !!p2Ok, p2Ok?'查岗/网购 · 约会/出门 · 两列 52px':'布局异常，请恢复默认第二页');

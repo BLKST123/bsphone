@@ -1,9 +1,9 @@
 {
-  "version": "3.53",
-  "versionCode": 64,
-  "round": 64,
+  "version": "3.54",
+  "versionCode": 65,
+  "round": 65,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=64",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=65",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "查岗支持精确绑定、角色手机 11 个 App、可点击 emoji 平面图、30–80 字第一人称内心、多来源情绪，以及隐身/随机被发现机制。"
+  "notes": "新增独立小说世界书库：生成 3–8 本小说时选择并自动绑定；单本可自定义或换绑；删除模板会自动保留绑定书籍副本，且不影响全局世界书。"
 }
