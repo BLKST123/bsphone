@@ -1,9 +1,9 @@
 {
-  "version": "3.55",
-  "versionCode": 66,
-  "round": 66,
+  "version": "3.56",
+  "versionCode": 67,
+  "round": 67,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=66",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=67",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "约会与出门新增多选迁移、从节点重开、复制副本、选择性继承记忆和重新生成最后一轮；旧记录保留，生成失败会回滚。"
+  "notes": "灵魂匹配完成匿名生成、五分钟计时、退出暂停、好友申请红点、拒绝重试、三次拒绝清空，以及通过后聊天迁移与来源保留。"
 }

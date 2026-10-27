@@ -1977,6 +1977,19 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .takeout-checkout-line{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:8px 0;border-bottom:1px solid color-mix(in srgb,var(--line) 75%,transparent)}
 .takeout-checkout-line span{min-width:0;overflow-wrap:anywhere}
 .takeout-checkout-line small{display:block;color:var(--fg2);font-size:calc(10px * var(--ui-font-scale,1));margin-top:2px}
+.soul-hero{padding:16px 14px;background:linear-gradient(145deg,color-mix(in srgb,var(--theme-rose-soft) 70%,var(--card)),color-mix(in srgb,var(--theme-rose) 16%,var(--card)));border:1px solid color-mix(in srgb,var(--theme-rose-deep) 14%,var(--line));border-radius:14px;margin:6px 14px 12px}
+.soul-hero h2{font-size:calc(20px * var(--ui-font-scale,1));margin:4px 0 6px;letter-spacing:0}
+.soul-hero p{font-size:calc(12px * var(--ui-font-scale,1));line-height:1.7;color:var(--fg2);margin:0}
+.soul-timer{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 14px 4px;padding:9px 12px;border:1px solid var(--line);border-radius:11px;background:color-mix(in srgb,var(--card) 90%,transparent)}
+.soul-timer b{font-size:calc(17px * var(--ui-font-scale,1));font-variant-numeric:tabular-nums}
+.soul-timer small{color:var(--fg2);font-size:calc(10px * var(--ui-font-scale,1))}
+.soul-status{margin:8px 14px 4px;padding:10px 12px;border-radius:11px;background:color-mix(in srgb,var(--theme-rose-soft) 40%,var(--card));font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.65;color:var(--fg2)}
+.soul-source-chip{display:inline-flex;align-items:center;margin-left:6px;padding:1px 6px;border-radius:99px;background:color-mix(in srgb,var(--theme-rose-soft) 75%,transparent);color:var(--deep);font-size:calc(9px * var(--ui-font-scale,1));vertical-align:2px;flex:none}
+.soul-request-row{display:flex;align-items:center;gap:9px;padding:11px 0;border-bottom:1px solid var(--line)}
+.soul-request-row:last-child{border-bottom:0}
+.soul-request-actions{display:flex;gap:6px;flex:none}
+.soul-request-actions .btn{padding:7px 9px;min-height:34px}
+.soul-empty-orbit{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff,color-mix(in srgb,var(--theme-rose-soft) 80%,#fff));color:var(--deep);margin-bottom:10px;box-shadow:0 8px 22px color-mix(in srgb,var(--theme-rose-deep) 16%,transparent)}
 .takeout-order-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .takeout-timeline{margin-top:12px;padding-left:6px}
 .takeout-time-line{display:flex;gap:10px;position:relative;padding:0 0 13px}
@@ -2344,6 +2357,7 @@ function fixAll(){
   DB.clock=Object.assign({datetime:'2026-10-27T09:30:00',autoAdvance:false,lastTick:Date.now(),binding:{mode:'exact',personaId:null,chatId:null,contactId:null,scope:'global',confirmed:false},scope:{}},DB.clock||{});
   DB.couple=Object.assign({activeBinding:null,spaces:[],memories:{},foods:[],meals:[],tasks:[],adoptions:[]},DB.couple||{});
   DB.soul=Object.assign({sessions:[],pending:[],cooldowns:{},lastResult:null},DB.soul||{});
+  soulEnsure();
   DB.music=Object.assign({playlists:[],current:null,history:[],together:null},DB.music||{});
   DB.notify=Object.assign({items:[],lastBannerId:null},DB.notify||{});
   if(!Array.isArray(DB.notify.items)) DB.notify.items=[];
@@ -2821,7 +2835,10 @@ function save(){
   saveTimer=setTimeout(function(){ pendingSave=false; saveNow(); }, 300);
 }
 function flushSave(){ if(pendingSave){ clearTimeout(saveTimer); pendingSave=false; saveNow(); } }
-document.addEventListener('visibilitychange',function(){ if(document.visibilityState==='hidden') flushSave(); });
+document.addEventListener('visibilitychange',function(){
+  if(document.visibilityState==='hidden'){ soulPauseActive(); flushSave(); }
+  else if(route.name==='soul') soulResumeActive();
+});
 window.addEventListener('pagehide',flushSave);
 function dataSize(){ try{ return JSON.stringify(storedDbSnapshot()).length; }catch(e){ return 0; } }
 function fmtSize(n){ n=Number(n)||0; return n>=1048576? ((n/1048576).toFixed(2)+' MB') : (Math.max(1,Math.round(n/1024))+' KB'); }
@@ -3695,6 +3712,7 @@ let settingsReturnScroll=0,lastRenderKey='';
 function go(name,arg,wtabTo){
   restoreFullscreenIntent();
   const from=route.name;
+  if(from==='soul'&&name!=='soul') soulPauseActive();
   if(from==='settings'&&name!=='settings') settingsReturnScroll=$('#screen').scrollTop;
   if(route.name==='contactedit' && name!=='contactedit') editBuf=null;
   route={name,arg}; if(wtabTo) wtab=wtabTo; DB.lastRoute={name:name,arg:arg||null,wtab:wtab}; save(); render();
@@ -4329,7 +4347,8 @@ function appHTML(a){
   return '<div class="app" data-app="'+a.k+'" data-go="'+a.k+'"><div class="ic" style="background:'+a.c+'">'+appIconHTML(a,26)+(n?'<span class="badge">'+(n>99?'99+':n)+'</span>':'')+'</div><div class="nm">'+a.n+'</div></div>';
 }
 function unreadWB(){ const w=wbDB(); return (w.notifs||[]).filter(function(n){ return !n.read; }).length + (w.dms||[]).reduce(function(s2,d){ return s2+(d.unread||0); },0); }
-function totalUnread(){ return (DB.chats||[]).reduce((s,c)=>s+(c.unread||0),0); }
+function chatUnread(){ return (DB.chats||[]).reduce((s,c)=>s+(c.unread||0),0); }
+function totalUnread(){ return chatUnread()+soulPendingCount(); }
 /* ================= 微信：壳 ================= */
 function ensureDefaultGroup(){
   DB.groups=DB.groups||[];
@@ -4371,10 +4390,10 @@ function confirmClear(key){
 function wxTop(title,right){ return '<div class="wxtop"><button class="wxback" data-act="home">‹</button><div class="h">'+esc(title)+'</div>'+(right||'')+'</div>'; }
 function screenWechat(){
   const tabs=[['msg','消息','chat'],['contacts','联系人','users'],['moments','朋友圈','sparkles'],['mine','我的','me']];
-  const unM=totalUnread(), unMom=momentNewCount();
+  const unM=chatUnread(), unC=soulPendingCount(), unMom=momentNewCount();
   const body={msg:wxMsgs,contacts:wxContacts,moments:wxMoments,mine:wxMine}[wtab]||wxMsgs;
   return '<div class="wx"><div class="wxbody">'+body()+'</div><div class="wxtab">'+tabs.map(t=>{
-    const b = t[0]==='msg'? unM : (t[0]==='moments'? unMom : 0);
+    const b = t[0]==='msg'? unM : (t[0]==='contacts'? unC : (t[0]==='moments'? unMom : 0));
     return '<div class="t'+(wtab===t[0]?' on':'')+'" data-wtab="'+t[0]+'"><div class="g">'+ic(t[2],20)+(b?'<span class="bd">'+(b>99?'99+':b)+'</span>':'')+'</div><div>'+t[1]+'</div></div>';
   }).join('')+'</div></div>';
 }
@@ -4388,7 +4407,7 @@ function chRow(ch){
   const last=ch.msgs[ch.msgs.length-1];
   const c=ct(ch.memberIds[0]);
   return '<div class="lrow" data-openchat="'+ch.id+'">'+ (ch.type==='group'? avBox({icon:'users'}) : avBox(c))
-    +'<div class="mi"><div class="t1">'+esc(chatName(ch))+'</div><div class="t2">'+esc(preview(last))+'</div></div>'
+    +'<div class="mi"><div class="t1">'+esc(chatName(ch))+(ch.source==='soul'?'<span class="soul-source-chip">灵魂匹配</span>':'')+'</div><div class="t2">'+esc(preview(last))+'</div></div>'
     +'<div class="rt"><div class="tm">'+shortTime(ch.lastTs)+'</div>'+(ch.unread?'<div class="ub">'+(ch.unread>99?'99+':ch.unread)+'</div>':'')+'</div></div>';
 }
 function preview(m){
@@ -4440,6 +4459,7 @@ function wxContacts(){
   DB.ui.open=DB.ui.open||{def:true};
   const open=DB.ui.open;
   return wxTop('通讯录',clearBtn('wxContacts')+'<button class="ic2" data-act="newgroup" title="新建好友分组">'+ic('userplus',19)+'</button><button class="ic2" data-act="newcontact" title="新建联系人">＋</button>')
+    +(!soulPendingCount()?'':'<div class="lrow" data-soulrequests="1"><div class="av" style="background:linear-gradient(145deg,#8f7dbf,#d3a9bd)">'+ic('userplus',20)+'</div><div class="mi"><div class="t1">新的朋友</div><div class="t2">'+soulPendingCount()+' 条好友申请</div></div><div class="rt"><span class="ub">'+soulPendingCount()+'</span><span class="chev">›</span></div></div>')
     + gs.map(g=>{
         const list=(DB.contacts||[]).filter(c=>c.groupId===g.id);
         const isOpen=!!open[g.id];
@@ -4452,7 +4472,7 @@ function wxContacts(){
 }
 function ctRow(c){
   return '<div class="lrow" data-openct="'+c.id+'">'+avBox(c)
-    +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div><div class="t2">'+esc(c.identity||'')+'</div></div>'
+    +'<div class="mi"><div class="t1">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+(c.source==='soul'?'<span class="soul-source-chip">灵魂匹配</span>':'')+'</div><div class="t2">'+esc(c.identity||'')+'</div></div>'
     +'<div class="rt"><span class="chev">›</span></div></div>';
 }
 function screenContactView(){
@@ -4461,7 +4481,7 @@ function screenContactView(){
   const f=c.freq||{}, nB=(c.regexIds||[]).length, nW=(c.worldIds||[]).length;
   const grp=(DB.groups||[]).find(g=>g.id===c.groupId);
   return '<div class="mecard">'+avBox(c,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div>'
-    +'<div class="muted">'+esc([c.gender,c.age?c.age+'岁':'',c.identity].filter(Boolean).join(' · ')||'没有填基本资料')+'</div></div></div>'
+    +'<div class="muted">'+esc([c.gender,c.age?c.age+'岁':'',c.identity].filter(Boolean).join(' · ')||'没有填基本资料')+'</div>'+(c.source==='soul'?'<div class="soul-source-chip" style="margin-left:0">来源：灵魂匹配</div>':'')+'</div></div>'
     +'<div class="pad">'
     +'<div class="card" style="margin-top:12px">'
     +'<div class="lrow" data-chatwith="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">发消息</div></div><div class="rt"><span class="chev">›</span></div></div>'
@@ -4471,6 +4491,7 @@ function screenContactView(){
     +'<div class="card"><div class="muted">朋友圈频率</div><div class="kv"><span>发朋友圈</span><b>'+lv(f.post)+'</b></div><div class="kv"><span>点赞</span><b>'+lv(f.like)+'</b></div><div class="kv"><span>评论</span><b>'+lv(f.comment)+'</b></div><div class="kv"><span>回复</span><b>'+lv(f.reply)+'</b></div></div>'
     +'<div class="card"><div class="muted">世界书 '+nW+' 本</div>'
     +'<div class="muted" style="margin-top:6px">分组：'+esc(grp?grp.name:'未分组')+'</div></div>'
+    +(c.soulProfile&&c.soulProfile.background?'<div class="card"><b>匹配后解锁的背景</b><div class="muted" style="margin-top:6px;line-height:1.8;white-space:pre-wrap">'+esc(c.soulProfile.background)+'</div></div>':'')
     +'<button class="btn danger full" data-delct="'+c.id+'">删除联系人</button>'
     +'</div>';
 }
@@ -5006,7 +5027,7 @@ function screenChatRoom(){
   const selecting=chatSelectChat===ch.id;
   const body=(ch.msgs||[]).map(m=>msgHTML(m,ch)).join('')||'<div class="empty">还没有消息，说点什么吧。</div>';
   return '<div class="chatwrap">'
-   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+esc(chatName(ch))+(isGroup?'（'+ch.memberIds.length+'）':'')+'</div>'
+   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+esc(chatName(ch))+(isGroup?'（'+ch.memberIds.length+'）':'')+(ch.source==='soul'?'<div class="sub">来源：灵魂匹配</div>':'')+'</div>'
      +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
    +(selecting
@@ -5313,6 +5334,7 @@ function openNotification(id){
   item.read=true; save();
   const el=$('#appNotice'); if(el) el.classList.remove('on');
   toggleStatusCenter(false);
+  if(item.wtab) wtab=item.wtab;
   if(item.route) go(item.route,item.arg||null);
 }
 function renderStatusCenter(){
@@ -6271,7 +6293,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.55 · 第 66 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.56 · 第 67 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6284,6 +6306,7 @@ const PROGRESS_GROUPS=[
     ['小说多读者群','永久总群、每书独立群、自定义群；成员、消息、未读和自动刷新按群隔离；支持拉人、解散、清空和删除；总群可跨作品讨论；发布与新增章节会一次加入 20 位以上读者。'],
     ['外卖','分类、店铺、商品规格、购物车、多地址、用户/角色下单、订单号、备注、配送进度、订单详情和会话气泡。'],
     ['约会与出门','精确绑定、约会开场白、场景生成、共享会话记忆、出门剧情、拍立得和自定义动作；约会与出门都支持多选迁移、从节点重开、复制副本、选择性继承记忆和重新生成最后一轮，旧记录保留且失败自动回滚。'],
+    ['灵魂匹配','绑定用户人设、世界书与正则；匿名网名生成、五分钟现实计时、退出暂停、好友申请红点、拒绝后自动重试、第三次拒绝清空，以及通过后把原聊天和来源标签迁移到微信。'],
     ['其他','日记、相册图集、时钟、网购、论坛、世界书、正则、API 设置、通知中心、备份导入导出、自检、版本更新和开发进度清单。']
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
@@ -6292,7 +6315,6 @@ const PROGRESS_GROUPS=[
   ]},
   {k:'pending',n:'尚未完成',color:'#c4545b',items:[
     ['情侣空间','纪念日、交换日记、默契挑战、真心话、做饭、相簿、情侣任务、我们的小家、领养和分支记忆。'],
-    ['灵魂匹配','五分钟匹配聊天、暂停计时、拒绝三次策略、匹配日志、微信好友迁移和来源保留。'],
     ['音乐','本地音频、网易云扫码导入、跨页面播放、一起听、歌词、评论、共同收藏、历史记录和后台播放。'],
     ['AI 生图','用户自有生图 API、场景自拍/食物/双人照、角色脸一致性、图片本地保存与重新生成；本轮按要求暂不接。'],
     ['高级统计与发布','完整的跨模块数据统计、内容时间线来源视图和更细的发布运营工具。']
@@ -7119,8 +7141,433 @@ function sheetClockWheel(itemId){
 function screenCouple(){
   return '<div class="pad" style="padding-top:0">'+wxTop('情侣空间')+'<div class="card"><b>情侣空间</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">这里将承载纪念日、交换日记、默契挑战、一起做饭、任务、相簿和我们的小家。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入完整互动。</div></div></div>';
 }
+const SOUL_MATCH_MS=5*60*1000;
+const SOUL_RETRY_MS=60*1000;
+let soulPromptMatchId=null,soulTypingBusy=false;
+function soulEnsure(){
+  DB.soul=Object.assign({sessions:[],pending:[],history:[],activeId:null,lastResult:null,settings:{}},DB.soul||{});
+  DB.soul.sessions=Array.isArray(DB.soul.sessions)?DB.soul.sessions:[];
+  DB.soul.pending=Array.isArray(DB.soul.pending)?DB.soul.pending:[];
+  DB.soul.history=Array.isArray(DB.soul.history)?DB.soul.history:[];
+  DB.soul.settings=Object.assign({
+    personaId:DB.me&&DB.me.personaId||null,
+    worldIds:[],
+    regexIds:[],
+    desire:'',
+    durationMs:SOUL_MATCH_MS
+  },DB.soul.settings||{});
+  DB.soul.settings.worldIds=Array.isArray(DB.soul.settings.worldIds)?DB.soul.settings.worldIds:[];
+  DB.soul.settings.regexIds=Array.isArray(DB.soul.settings.regexIds)?DB.soul.settings.regexIds:[];
+  if(!DB.soul.settings.personaId) DB.soul.settings.personaId=DB.me&&DB.me.personaId||null;
+  DB.soul.sessions.forEach(function(m){
+    m.msgs=Array.isArray(m.msgs)?m.msgs:[];
+    m.elapsedMs=Math.max(0,Number(m.elapsedMs)||0);
+    m.durationMs=Math.max(1000,Number(m.durationMs)||SOUL_MATCH_MS);
+    m.rejectCount=Math.max(0,Number(m.rejectCount)||0);
+    m.status=m.status||'chatting';
+    if(m.contact){
+      m.contact.groupId=m.contact.groupId||'def';
+      m.contact.source='soul';
+      m.contact.soulProfile=m.contact.soulProfile||{};
+    }
+  });
+  if(DB.soul.activeId&&!DB.soul.sessions.some(function(m){ return m.id===DB.soul.activeId; })) DB.soul.activeId=null;
+  return DB.soul;
+}
+function soulActiveMatch(){
+  const s=soulEnsure();
+  return s.sessions.find(function(m){ return m.id===s.activeId; })||null;
+}
+function soulPendingCount(){
+  const s=soulEnsure();
+  return s.pending.filter(function(r){ return r.status!=='accepted'; }).length;
+}
+function soulElapsed(m){
+  if(!m) return 0;
+  return Math.max(0,Number(m.elapsedMs)||0)+(m.runningSince?Math.max(0,Date.now()-Number(m.runningSince)):0);
+}
+function soulRemaining(m){
+  if(!m) return 0;
+  return Math.max(0,(Number(m.durationMs)||SOUL_MATCH_MS)-soulElapsed(m));
+}
+function soulTimeText(ms){
+  const total=Math.ceil(Math.max(0,ms)/1000);
+  return String(Math.floor(total/60)).padStart(2,'0')+':'+String(total%60).padStart(2,'0');
+}
+function soulPause(m){
+  if(!m||!m.runningSince) return false;
+  m.elapsedMs=soulElapsed(m);
+  m.runningSince=null;
+  return true;
+}
+function soulPauseActive(){
+  const m=soulActiveMatch();
+  if(!m) return false;
+  if(m.status!=='chatting'||m.finished){ if(m.runningSince){ m.elapsedMs=soulElapsed(m); m.runningSince=null; save(); return true; } return false; }
+  const changed=soulPause(m);
+  if(changed) save();
+  return changed;
+}
+function soulResumeActive(){
+  const m=soulActiveMatch();
+  if(!m||m.status!=='chatting'||m.finished) return;
+  if(!m.runningSince){ m.runningSince=Date.now(); save(); }
+  if(soulRemaining(m)<=0) setTimeout(function(){ soulCompleteMatch(m.id); },0);
+}
+function soulParseJSON(raw){
+  const t=String(raw||'').trim().replace(/^```(?:json)?/i,'').replace(/```$/,'').trim();
+  const a=t.indexOf('{'),b=t.lastIndexOf('}');
+  if(a<0||b<=a) throw new Error('生成结果格式不对');
+  return JSON.parse(t.slice(a,b+1));
+}
+function soulGeneratePrompt(st){
+  const persona=(DB.me.personas||[]).find(function(p){ return p.id===st.personaId; });
+  const worlds=[];
+  (st.worldIds||[]).forEach(function(id){
+    const w=(DB.worldbooks||[]).find(function(x){ return x.id===id; });
+    if(w) (w.entries||[]).forEach(function(e){ if(e.v) worlds.push((e.k?'['+e.k+'] ':'')+String(e.v).slice(0,260)); });
+  });
+  return '你要生成一个用于「灵魂匹配」的真实网友角色。只输出一个 JSON 对象，不要 Markdown，不要解释。\n'
+    +'字段：nickname, realName, age, gender, identity, appearance, personality, style, background, desc, callMe, opening, friendMessage。\n'
+    +'nickname 是用户在匹配页唯一能看到的网名，要像现实网友自己取的网名，不要写“清冷”“霸道”“温柔”这类标签。\n'
+    +'realName、身份、背景和性格暂不展示给用户，只有通过好友申请后才写入联系人资料。\n'
+    +'opening 是匹配成功后的第一句话，friendMessage 是通过好友后主动发来的第一句，都要自然、像真人、符合角色自己的说话习惯。\n'
+    +'禁止提 AI、模型、提示词、系统、任务。禁止替用户说话。\n'
+    +'【用户人设】\n'+(persona?personaFullText(persona):'未填写')+'\n'
+    +'【用户想认识的类型】\n'+String(st.desire||'自然、有生活感，能持续聊下去').slice(0,800)+'\n'
+    +(worlds.length?'【世界设定】\n- '+worlds.join('\n- ')+'\n':'');
+}
+async function startSoulMatch(){
+  const s=soulEnsure();
+  const personaSel=$('#soulPersona');
+  const desire=$('#soulDesire');
+  if(personaSel) s.settings.personaId=personaSel.value||null;
+  if(desire) s.settings.desire=String(desire.value||'').trim();
+  if(!s.settings.personaId){ toast('先选择用户人设'); return; }
+  if(!needKey()) return;
+  save();
+  busy('正在寻找合拍的人，请稍后');
+  try{
+    const out=await callModel([{role:'system',content:soulGeneratePrompt(s.settings)},{role:'user',content:'开始匹配。'}]);
+    const j=soulParseJSON(out);
+    const nickname=String(j.nickname||'匿名网友').replace(/[<>]/g,'').trim().slice(0,18)||'匿名网友';
+    const cid=uid();
+    const contact={
+      id:'soul_c_'+cid,
+      name:nickname,
+      avatar:'',
+      age:String(j.age||'').slice(0,10),
+      gender:String(j.gender||'').slice(0,10),
+      identity:String(j.identity||'').slice(0,60),
+      appearance:String(j.appearance||'').slice(0,300),
+      persona:[j.personality,j.background].filter(Boolean).join('\n').slice(0,900),
+      desc:String(j.desc||'').slice(0,160),
+      style:String(j.style||'').slice(0,220),
+      callMe:String(j.callMe||'你').slice(0,20),
+      memories:[],
+      groupId:'def',
+      regexIds:s.settings.regexIds.slice(),
+      worldIds:s.settings.worldIds.slice(),
+      freq:{post:2,like:2,comment:3,reply:2},
+      meetFreq:1,
+      autoOn:true,
+      autoFreq:2,
+      voiceFreq:0,
+      source:'soul',
+      soulProfile:{
+        realName:String(j.realName||'').slice(0,40),
+        background:String(j.background||'').slice(0,1000),
+        friendMessage:String(j.friendMessage||'').slice(0,180),
+        matchedAt:Date.now()
+      },
+      created:Date.now()
+    };
+    const opening=String(j.opening||'你好，先随便聊聊？').trim();
+    const now=Date.now();
+    const match={
+      id:'soul_match_'+uid(),
+      personaId:s.settings.personaId,
+      contact:contact,
+      worldIds:s.settings.worldIds.slice(),
+      regexIds:s.settings.regexIds.slice(),
+      desire:String(s.settings.desire||''),
+      durationMs:SOUL_MATCH_MS,
+      elapsedMs:0,
+      runningSince:now,
+      status:'chatting',
+      finished:false,
+      rejectCount:0,
+      retryAt:null,
+      createdAt:now,
+      updatedAt:now,
+      msgs:[{id:uid(),role:'ta',from:contact.id,type:'text',text:opening,ts:now}]
+    };
+    s.sessions.unshift(match);
+    s.activeId=match.id;
+    save(); closeSheet(); render(); toast('匹配成功，聊满五分钟再决定');
+  }catch(e){ toast('匹配失败：'+e.message); }
+  finally{ busyDone(); }
+}
+function soulMsgHTML(m,c){
+  const mine=m.role==='me';
+  const av=mine?avBox(DB.me,'msgav'):'<div class="msgav">'+avatarOf(c||{})+'</div>';
+  return '<div class="mrow'+(mine?' me':'')+'" style="padding:5px 14px">'+av+'<div class="colw"><div class="bub">'+textHTML(m.text||'')+'</div></div></div>';
+}
+function soulRoomHTML(m){
+  const c=m.contact||{};
+  const remaining=soulRemaining(m);
+  const statusText=m.status==='friend_pending'?'好友申请已送到微信联系人，接受后会把这段聊天原样移过去。'
+    :m.status==='waiting_reapply'?('这次先不继续，Ta 会在约 '+soulTimeText(Math.max(0,(m.retryAt||Date.now())-Date.now()))+' 后再次申请好友。已拒绝 '+m.rejectCount+'/3 次。')
+      :m.status==='decision'?'五分钟已经到了，选择是否继续了解。'
+        :'退出这个页面会暂停计时，回来继续。';
+  const body=m.msgs.map(function(x){ return soulMsgHTML(x,c); }).join('')||'<div class="empty">匹配成功，说句话吧。</div>';
+  let bottom='';
+  if(m.status==='chatting'){
+    bottom='<div class="composer"><input id="soulSay" placeholder="和 '+esc(c.name||'Ta')+' 说点什么…" autocomplete="off"><button class="cbtn pri" id="soulSend">'+ic('arrow',18)+'</button></div>';
+  }else if(m.status==='decision'){
+    bottom='<button class="btn primary full" id="soulDecisionOpen" style="margin:8px 14px 14px">处理是否继续了解</button>';
+  }else if(m.status==='friend_pending'){
+    bottom='<button class="btn primary full" id="soulGoRequests" style="margin:8px 14px 14px">去微信联系人查看好友申请</button>';
+  }else{
+    bottom='<div class="dnote">等待对方再次申请</div>';
+  }
+  return '<div class="chatwrap">'
+    +'<div class="nav"><button class="back" data-soulback="1">‹ 主页</button><div class="ttl">'+esc(c.name||'匿名网友')+'<div class="sub">只显示网名 · 来源：灵魂匹配</div></div><div class="act"><button class="link" id="soulMenu">⋯</button></div></div>'
+    +'<div class="soul-timer"><span><small>五分钟匹配</small><b id="soulTimer">'+soulTimeText(remaining)+'</b></span><span id="soulTimerHint">'+(m.status==='chatting'?'计时中':'已暂停')+'</span></div>'
+    +'<div class="soul-status">'+esc(statusText)+'</div>'
+    +'<div class="chatlist" id="soulChat">'+body+'</div>'+bottom
+    +'</div>';
+}
+function soulSetupHTML(){
+  const s=soulEnsure();
+  const ps=DB.me.personas||[];
+  const persona=ps.find(function(p){ return p.id===s.settings.personaId; })||ps.find(function(p){ return p.id===DB.me.personaId; })||ps[0];
+  if(persona&&!s.settings.personaId) s.settings.personaId=persona.id;
+  const worldNames=s.settings.worldIds.map(function(id){ const w=DB.worldbooks.find(function(x){ return x.id===id; }); return w&&w.name; }).filter(Boolean);
+  const regexNames=s.settings.regexIds.map(function(id){ const r=DB.regexes.find(function(x){ return x.id===id; }); return r&&r.name; }).filter(Boolean);
+  return '<div class="pad" style="padding-top:0">'+wxTop('灵魂匹配')
+    +'<div class="soul-hero"><div class="soul-empty-orbit">'+ic('sparkles',25)+'</div><h2>遇见一个陌生人</h2><p>先只看网名聊五分钟。时间到之前不会展示真实资料，也不能提前确认关系。</p></div>'
+    +'<div class="card"><b>用哪个身份去匹配</b>'
+    +(ps.length?'<select id="soulPersona" style="margin-top:9px">'+ps.map(function(p){ return '<option value="'+p.id+'"'+(persona&&persona.id===p.id?' selected':'')+'>'+esc(p.name||'未命名人设')+'</option>'; }).join('')+'</select>':'<div class="muted" style="margin-top:8px;line-height:1.7">还没有用户人设，先到「微信 · 我的 · 用户人设库」创建一个人设。</div>')
+    +'<div class="lrow" data-soulworld="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">世界书</div><div class="t2">'+esc(worldNames.length?worldNames.join('、'):'不绑定世界书')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" data-soulregex="1" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">正则规则</div><div class="t2">'+esc(regexNames.length?regexNames.join('、'):'不绑定正则')+'</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
+    +'<div class="card"><b>想遇见什么样的人</b><div class="muted" style="margin:6px 0 8px">写性格、关系氛围、说话习惯都可以。留空会随机匹配一个自然的人。</div><textarea id="soulDesire" style="min-height:112px" placeholder="比如：话不多但会认真听，不要一上来就查户口">'+esc(s.settings.desire||'')+'</textarea></div>'
+    +'<div class="card"><div class="row"><div class="grow"><b>五分钟匹配制</b><div class="muted" style="margin-top:5px">退出页面暂停计时，不会在后台偷偷走完。</div></div><span class="np-chip on">05:00</span></div></div>'
+    +'<button class="btn primary full" id="soulStart" '+(ps.length?'':'disabled')+'>开始匹配</button>'
+    +'</div>';
+}
 function screenSoul(){
-  return '<div class="pad" style="padding-top:0">'+wxTop('灵魂匹配')+'<div class="card"><b>灵魂匹配</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">选择世界书、正则和想认识的人类型，进行五分钟匹配聊天。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入生成与微信迁移。</div></div></div>';
+  const s=soulEnsure();
+  soulProcessRetries(false);
+  const active=soulActiveMatch();
+  if(active){ soulResumeActive(); return soulRoomHTML(active); }
+  return soulSetupHTML();
+}
+function soulTickUI(){
+  if(route.name!=='soul') return;
+  const m=soulActiveMatch();
+  if(!m||m.status!=='chatting') return;
+  const el=$('#soulTimer');
+  if(el) el.textContent=soulTimeText(soulRemaining(m));
+  if(soulRemaining(m)<=0) soulCompleteMatch(m.id);
+}
+function soulCompleteMatch(id){
+  const s=soulEnsure();
+  const m=s.sessions.find(function(x){ return x.id===id; });
+  if(!m||m.status!=='chatting') return;
+  soulPause(m);
+  m.finished=true;
+  m.status='decision';
+  m.elapsedMs=m.durationMs;
+  m.updatedAt=Date.now();
+  save();
+  if(route.name==='soul'&&soulActiveMatch()&&soulActiveMatch().id===m.id) render();
+  if(soulPromptMatchId!==m.id){ soulPromptMatchId=m.id; sheetSoulDecision(m); }
+}
+function sheetSoulDecision(m){
+  if(!m) return;
+  sheetSmall('<h3>五分钟到了</h3><div class="muted" style="margin:7px 0 13px;line-height:1.8">你只看到了「'+esc(m.contact.name||'匿名网友')+'」这个网名。要继续了解，还是先到这里？</div>'
+    +'<button class="btn primary full" id="soulContinueYes">继续了解</button><button class="btn full" id="soulContinueNo">先不要</button>');
+  $('#soulContinueYes').onclick=function(){
+    soulCreateFriendRequest(m,'continue');
+    closeSheet(); wtab='contacts'; go('wechat');
+    toast('好友申请已送到微信联系人');
+  };
+  $('#soulContinueNo').onclick=function(){
+    closeSheet();
+    soulApplyRejection(m);
+  };
+}
+function soulCreateFriendRequest(m,source){
+  const s=soulEnsure();
+  const exist=s.pending.find(function(r){ return r.matchId===m.id&&r.status==='pending'; });
+  if(exist) return exist;
+  const request={
+    id:'soul_req_'+uid(),
+    matchId:m.id,
+    contactId:m.contact.id,
+    attempt:(Number(m.rejectCount)||0)+1,
+    source:source||'continue',
+    status:'pending',
+    createdAt:Date.now()
+  };
+  s.pending.unshift(request);
+  m.status='friend_pending';
+  m.decision='continue';
+  m.retryAt=null;
+  m.updatedAt=Date.now();
+  s.history.unshift({id:uid(),matchId:m.id,type:'request',attempt:request.attempt,ts:Date.now()});
+  save();
+  emitNotification({app:'wechat',title:'新的朋友',body:(m.contact.name||'匿名网友')+' 申请添加你为好友',route:'wechat',wtab:'contacts',dedupeKey:'soul-request:'+request.id});
+  if(route.name==='soul') render();
+  return request;
+}
+function soulApplyRejection(m){
+  if(!m) return;
+  const s=soulEnsure();
+  m.rejectCount=Math.max(1,(Number(m.rejectCount)||0)+1);
+  m.decision='rejected';
+  m.status=m.rejectCount>=3?'expired':'waiting_reapply';
+  m.retryAt=m.rejectCount>=3?null:Date.now()+SOUL_RETRY_MS;
+  m.updatedAt=Date.now();
+  s.history.unshift({id:uid(),matchId:m.id,type:'reject',attempt:m.rejectCount,ts:Date.now()});
+  if(m.rejectCount>=3){
+    soulExpireMatch(m.id,'rejected-three-times');
+    toast('对方不会再申请，这段匹配已清空记录');
+  }else{
+    save(); render(); toast('已记下这次拒绝，对方之后还会再申请');
+  }
+}
+function soulExpireMatch(matchId,reason){
+  const s=soulEnsure();
+  const m=s.sessions.find(function(x){ return x.id===matchId; });
+  if(!m) return;
+  s.sessions=s.sessions.filter(function(x){ return x.id!==matchId; });
+  s.pending=s.pending.filter(function(r){ return r.matchId!==matchId; });
+  if(s.activeId===matchId) s.activeId=null;
+  s.lastResult={matchId:matchId,status:'expired',reason:reason||'expired',nickname:m.contact&&m.contact.name||'',ts:Date.now()};
+  s.history.unshift({id:uid(),matchId:matchId,type:'expired',reason:reason||'expired',ts:Date.now()});
+  save();
+  if(route.name==='soul') render();
+}
+function soulProcessRetries(redraw){
+  const s=soulEnsure();
+  let changed=false;
+  s.sessions.slice().forEach(function(m){
+    if(m.status!=='waiting_reapply'||!m.retryAt||Date.now()<m.retryAt) return;
+    if(m.rejectCount>=3){ soulExpireMatch(m.id,'rejected-three-times'); changed=true; return; }
+    soulCreateFriendRequest(m,'auto-retry');
+    changed=true;
+  });
+  if(changed&&redraw!==false&&route.name==='soul') render();
+  return changed;
+}
+function sheetSoulRequests(){
+  const s=soulEnsure();
+  const rows=s.pending.filter(function(r){ return r.status==='pending'; }).map(function(r){
+    const m=s.sessions.find(function(x){ return x.id===r.matchId; });
+    if(!m) return '';
+    return '<div class="soul-request-row"><div class="av" style="background:linear-gradient(145deg,#8f7dbf,#d3a9bd)">'+esc(String(m.contact.name||'?').slice(0,1))+'</div><div class="mi"><div class="t1">'+esc(m.contact.name||'匿名网友')+'</div><div class="t2">请求添加你为好友 · 第 '+r.attempt+' 次申请</div></div><div class="soul-request-actions"><button class="btn primary" data-soulaccept="'+r.id+'">同意</button><button class="btn danger" data-soulreject="'+r.id+'">拒绝</button></div></div>';
+  }).join('');
+  sheet('<h3>新的朋友</h3><div class="muted" style="margin:6px 0 10px;line-height:1.75">通过后，灵魂匹配里的聊天会原样迁移到微信，并保留“灵魂匹配”来源标签。</div>'
+    +(rows||'<div class="empty">没有待处理的好友申请。</div>')
+    +'<button class="btn full" id="soulReqClose">关闭</button>');
+  $('#soulReqClose').onclick=closeSheet;
+  $$('#sheetBox [data-soulaccept]').forEach(function(el){ el.onclick=function(){ soulAcceptRequest(el.dataset.soulaccept); }; });
+  $$('#sheetBox [data-soulreject]').forEach(function(el){ el.onclick=function(){ soulRejectRequest(el.dataset.soulreject); }; });
+}
+function soulAcceptRequest(reqId){
+  const s=soulEnsure();
+  const req=s.pending.find(function(r){ return r.id===reqId&&r.status==='pending'; });
+  if(!req) return;
+  const m=s.sessions.find(function(x){ return x.id===req.matchId; });
+  if(!m||!m.contact){ toast('这段匹配记录不见了'); return; }
+  const contact=JSON.parse(JSON.stringify(m.contact));
+  contact.groupId=contact.groupId||'def';
+  contact.source='soul';
+  if(!ct(contact.id)) DB.contacts.unshift(contact);
+  const ch=newPrivateChat(contact.id,'');
+  ch.source='soul';
+  ch.sourceLabel='灵魂匹配';
+  ch.sourceMatchId=m.id;
+  ch.personaId=m.personaId||DB.me.personaId||null;
+  ch.msgs=JSON.parse(JSON.stringify(m.msgs||[]));
+  const friendMessage=String(contact.soulProfile&&contact.soulProfile.friendMessage||'').trim()||'刚刚没聊完的那句，我还记着。';
+  ch.msgs.push({id:uid(),role:'ta',from:contact.id,type:'text',text:friendMessage,ts:Date.now()});
+  ch.lastTs=Date.now();
+  ch.unread=1;
+  ch.baseMemorySnapshot=(contact.memories||[]).map(function(x){ return x.text; }).filter(Boolean);
+  req.status='accepted';
+  s.pending=s.pending.filter(function(r){ return r.id!==req.id; });
+  s.history.unshift({id:uid(),matchId:m.id,type:'accepted',chatId:ch.id,ts:Date.now()});
+  s.lastResult={matchId:m.id,status:'accepted',nickname:contact.name,chatId:ch.id,ts:Date.now()};
+  m.status='accepted';
+  if(s.activeId===m.id) s.activeId=null;
+  save(); closeSheet(); wtab='msg'; go('wechat'); toast('已通过好友申请，聊天记录已迁移');
+}
+function soulRejectRequest(reqId){
+  const s=soulEnsure();
+  const req=s.pending.find(function(r){ return r.id===reqId&&r.status==='pending'; });
+  if(!req) return;
+  const m=s.sessions.find(function(x){ return x.id===req.matchId; });
+  s.pending=s.pending.filter(function(r){ return r.id!==req.id; });
+  if(!m){ closeSheet(); save(); render(); return; }
+  soulApplyRejection(m);
+  if(soulPendingCount()) sheetSoulRequests(); else closeSheet();
+}
+function sheetSoulMultiPick(kind){
+  const s=soulEnsure();
+  const isWorld=kind==='world';
+  const items=isWorld?(DB.worldbooks||[]):(DB.regexes||[]);
+  let sel=(isWorld?s.settings.worldIds:s.settings.regexIds).slice();
+  const draw=function(){
+    sheet('<h3>选择'+(isWorld?'世界书':'正则规则')+'</h3><div class="muted" style="margin:6px 0 9px;line-height:1.7">可以多选。'+(isWorld?'世界书影响角色背景与世界观。':'通过好友后会绑定到角色，聊天输出按这些规则清洗。')+'</div>'
+      +(items.length?items.map(function(x){ return '<div class="lrow" data-soulmulti="'+x.id+'"><div class="mi"><div class="t1">'+esc(x.name||'未命名')+'</div><div class="t2">'+esc(isWorld?((x.entries||[]).length+' 条设定'):(x.pattern||''))+'</div></div><div class="rt"><span class="wbcheck">'+(sel.indexOf(x.id)>=0?'✓':'')+'</span></div></div>'; }).join(''):'<div class="empty">还没有可选项。</div>')
+      +'<button class="btn primary full" id="soulMultiOk">完成</button><button class="btn full" id="soulMultiCancel">取消</button>');
+    $$('#sheetBox [data-soulmulti]').forEach(function(el){ el.onclick=function(){ const id=el.dataset.soulmulti,i=sel.indexOf(id); if(i>=0) sel.splice(i,1); else sel.push(id); draw(); }; });
+    $('#soulMultiCancel').onclick=function(){ closeSheet(); render(); };
+    $('#soulMultiOk').onclick=function(){ if(isWorld) s.settings.worldIds=sel.slice(); else s.settings.regexIds=sel.slice(); save(); closeSheet(); render(); };
+  };
+  draw();
+}
+function sheetSoulMenu(m){
+  if(!m) return;
+  sheet('<h3>'+esc(m.contact.name||'灵魂匹配')+'</h3><div class="muted" style="margin:7px 0 12px">已拒绝 '+m.rejectCount+'/3 次</div>'
+    +'<button class="btn full" id="soulMenuBack">回到匹配</button>'
+    +'<button class="btn danger full" id="soulMenuAbandon">结束并删除这次匹配</button>');
+  $('#soulMenuBack').onclick=closeSheet;
+  $('#soulMenuAbandon').onclick=function(){
+    sheetSmall('<h3>结束这次匹配？</h3><div class="muted" style="margin:7px 0 13px">匹配聊天和登记会清空；系统日志和本次用量仍会保留用于诊断。</div><button class="btn danger full" id="soulAbandonYes">确认结束</button><button class="btn full" id="soulAbandonNo">取消</button>');
+    $('#soulAbandonNo').onclick=function(){ closeSheet(); };
+    $('#soulAbandonYes').onclick=function(){ soulExpireMatch(m.id,'user-abandoned'); closeSheet(); toast('已结束这次匹配'); };
+  };
+}
+async function soulSendTurn(){
+  const m=soulActiveMatch();
+  if(!m||m.status!=='chatting'||soulTypingBusy) return;
+  const inp=$('#soulSay'); if(!inp) return;
+  const raw=String(inp.value||'').trim(); if(!raw) return;
+  inp.value='';
+  m.msgs.push({id:uid(),role:'me',type:'text',text:raw,ts:Date.now()});
+  m.updatedAt=Date.now(); save(); render();
+  if(!needKey()) return;
+  soulTypingBusy=true;
+  const box=$('#soulChat'); if(box){ box.insertAdjacentHTML('beforeend','<div class="chatty" id="soulTyping">'+esc(m.contact.name||'Ta')+' 正在…</div>'); box.scrollTop=box.scrollHeight; }
+  try{
+    const c=m.contact;
+    const msgs=contextHistory(m.msgs,24).map(function(x){ return {role:x.role==='me'?'user':'assistant',content:labelOf(x)}; });
+    let sys=promptOf(c,null,m.msgs.slice(-8),{format:'chat',personaId:m.personaId})+'\n【灵魂匹配规则】你们正在匿名匹配聊天，只有五分钟。你不知道对方的真实姓名、住址和全部资料，也不要编造已经知道。不要提 AI、系统或匹配程序。只保留自己的网名身份。';
+    const out=await callModel([{role:'system',content:sys}].concat(msgs));
+    const clean=regexOf(c,out);
+    const bubbles=splitBubbles(clean).filter(Boolean).slice(0,4);
+    bubbles.forEach(function(text,i){ m.msgs.push({id:uid(),role:'ta',from:c.id,type:'text',text:text,ts:Date.now()+i}); });
+    m.updatedAt=Date.now(); save();
+    if(route.name==='soul'&&soulActiveMatch()&&soulActiveMatch().id===m.id) render();
+    if(soulRemaining(m)<=0) soulCompleteMatch(m.id);
+  }catch(e){
+    const t=$('#soulTyping'); if(t) t.remove();
+    toast('这句没发出去：'+e.message);
+  }finally{ soulTypingBusy=false; }
 }
 function screenMusic(){
   return '<div class="pad" style="padding-top:0">'+wxTop('音乐 · 一起听')+'<div class="card"><b>音乐 · 一起听</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">本地歌单、网易云导入、共同收藏、实时评论和后台播放将在这里实现。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入播放器。</div></div></div>';
@@ -10124,6 +10571,31 @@ function bindScreenInner(){
       el.onclick=function(){ const t=Date.now(); if(t-last<420){ last=0; pokeTa(el.dataset.poke); } else { last=t; } };
     });
   }
+  $$('[data-soulrequests]',s).forEach(function(el){ el.onclick=sheetSoulRequests; });
+  if(route.name==='soul'){
+    const soulPersona=$('#soulPersona');
+    if(soulPersona) soulPersona.onchange=function(){ soulEnsure().settings.personaId=soulPersona.value||null; save(); };
+    const soulDesire=$('#soulDesire');
+    if(soulDesire) soulDesire.oninput=function(){ soulEnsure().settings.desire=String(soulDesire.value||''); save(); };
+    $$('[data-soulworld]',s).forEach(function(el){ el.onclick=function(){ sheetSoulMultiPick('world'); }; });
+    $$('[data-soulregex]',s).forEach(function(el){ el.onclick=function(){ sheetSoulMultiPick('regex'); }; });
+    const soulStartEl=$('#soulStart');
+    if(soulStartEl) soulStartEl.onclick=startSoulMatch;
+    const soulSay=$('#soulSay');
+    if(soulSay){
+      soulSay.onkeydown=function(e){ if(e.key==='Enter'&&!e.isComposing){ e.preventDefault(); soulSendTurn(); } };
+      soulSay.onfocus=function(){ setTimeout(function(){ const box=$('#soulChat'); if(box) box.scrollTop=box.scrollHeight; },220); };
+    }
+    const soulSend=$('#soulSend'); if(soulSend) soulSend.onclick=soulSendTurn;
+    const soulDecision=$('#soulDecisionOpen');
+    if(soulDecision) soulDecision.onclick=function(){ const m=soulActiveMatch(); if(m) sheetSoulDecision(m); };
+    const soulRequests=$('#soulGoRequests');
+    if(soulRequests) soulRequests.onclick=function(){ wtab='contacts'; go('wechat'); };
+    $$('[data-soulback]',s).forEach(function(el){ el.onclick=function(){ go('home'); }; });
+    const soulMenu=$('#soulMenu');
+    if(soulMenu) soulMenu.onclick=function(){ const m=soulActiveMatch(); if(m) sheetSoulMenu(m); };
+    const soulChat=$('#soulChat'); if(soulChat) soulChat.scrollTop=soulChat.scrollHeight;
+  }
   /* 朋友圈 */
   if(route.name==='wechat'&&wtab==='moments'){
     const mp=$('#mPost'); if(mp) mp.onclick=()=>sheetPost();
@@ -10945,8 +11417,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.55 · 第 66 轮';
-const BUILD_CODE=66;
+const BUILD='2026-10-27 · 3.56 · 第 67 轮';
+const BUILD_CODE=67;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10967,7 +11439,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10978,6 +11450,8 @@ async function runCheckupUI(){
   add('精确绑定', exactBad.length===0, exactBad.length?('异常：'+exactBad.map(function(x){ return x[0]; }).join('、')):exactStates.map(function(x){ return x[0]+'='+(x[1].chatId?'会话':x[1].contactId?'角色':x[1].personaId?'人设':'未绑定'); }).join(' · '));
   add('微博并集绑定', wbBindings().length>=1, wbBindings().length+' 个来源 · 生成内容保留独立来源记录');
   add('微博角色互动', typeof wbReactToUserPost==='function'&&typeof wbReactLikeUserPost==='function'&&typeof wbReactRepostUserPost==='function', '点赞 / 评论 / 随机转发已接入');
+  const soulState=soulEnsure();
+  add('灵魂匹配', Array.isArray(soulState.sessions)&&Array.isArray(soulState.pending)&&typeof soulAcceptRequest==='function', soulState.sessions.length+' 次匹配 · '+soulPendingCount()+' 条待处理申请 · 五分钟计时与好友迁移已接入');
   npEnsureNovelWorldbooks();
   const novelWorldIds=new Set((DB.np.novelWorldbooks||[]).map(function(item){ return item.id; }));
   const globalWorldIds=new Set((DB.worldbooks||[]).map(function(item){ return item.id; }));
@@ -14024,6 +14498,8 @@ function installDemoPhone(force){
   setInterval(function(){ autoTick().catch(function(){}); },20000);
   setInterval(function(){ meetTick().catch(function(){}); },60000);
   setInterval(function(){ if(DB.api.key&&DB.auto) autoMoments().catch(function(){}); },45000);
+  setInterval(function(){ try{ soulTickUI(); }catch(e){ logErr('灵魂匹配计时失败：'+e.message); } },1000);
+  setInterval(function(){ try{ soulProcessRetries(); }catch(e){ logErr('灵魂匹配重试失败：'+e.message); } },5000);
   setInterval(function(){
     if(route.name!=='novelchapter') return;
     const d=new Date().toISOString().slice(0,10);
