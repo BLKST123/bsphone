@@ -5932,6 +5932,15 @@ function pushMsg(chatId,m,quiet){
   const mm=Object.assign({id:uid(),ts:Date.now()},m);
   if(mm.simTs===undefined) mm.simTs=simNow(chatId).getTime();
   ch.msgs.push(mm); ch.lastTs=Date.now();
+  if(mm.role==='me'){
+    ch.unansweredAuto=0;
+    ch.lastAuto=Date.now();
+    ch.lastUserAt=Date.now();
+  }
+  if(mm.countsProactive){
+    ch.unansweredAuto=Math.max(0,Number(ch.unansweredAuto)||0)+1;
+    ch.lastProactiveAt=Date.now();
+  }
   if(!quiet&&!(route.name==='chatroom'&&route.arg===chatId)) ch.unread=(ch.unread||0)+1;
   if(!quiet) playUiSound(mm.role==='me'?'send':'receive');
   if(!quiet&&(mm.role==='ta'||mm.notify)) notifyBackground(mm.notifyTitle||chatName(ch),mm.notifyBody||labelOf(mm),ch.id,mm.id);
@@ -5943,14 +5952,25 @@ function pushMsg(chatId,m,quiet){
   return mm;
 }
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));/* ---- AI 回合 ---- */
-function proactiveFallback(speaker){
-  const lines=[
-    '刚刚突然想起你。',
-    '今天这边有点安静。',
-    '在做什么？',
-    '我刚刚看到一件很适合你的事。'
+function proactiveFallback(speaker,stage){
+  const lines=stage===0?[
+    '怎么不理我了？我刚刚是不是惹你生气了？唔……对不起嘛，你理理我好不好。',
+    '你那边怎么没动静了？是不是我哪句话说得不对，别不说话。'
+  ]:stage===1?[
+    '还是说已经睡了，或者还在忙？到底怎么了嘛，有事我们好好说，别不理我。',
+    '怎么一直没回我？你是在忙还是不想理我，告诉我一声好不好。'
+  ]:[
+    '我先不闹你了。看到消息记得回我一声，好不好。',
+    '不逼你现在回，等你忙完看到我再说。'
   ];
   return pick(lines);
+}
+function proactiveReplyRelevant(text,stage){
+  const t=String(text||'');
+  const common=/(不理|不回|没回|理我|生气|对不起|抱歉|睡了|在忙|忙完|看到.*回|怎么了|发生什么|好好说|不说话|没动静|不想理)/;
+  if(!common.test(t)) return false;
+  if(stage>=2&&/(你刚才|你这话|你说|问到|答|接话|续|剧情)/.test(t)) return false;
+  return true;
 }
 function sanitizeProactiveReply(text,speaker){
   let t=String(text||'')
@@ -5984,6 +6004,8 @@ async function aiTurn(opt){
   const speaker=(opt&&opt.speaker)||(ch.type==='group'? pick(members) : members[0]);
   if(!speaker) return;
   const proactive=!!(opt&&opt.proactive);
+  const silence=proactive?chatSilenceState(ch):null;
+  let proactiveStage=-1;
   const min=Math.max(1,Number(ch.replyMin)||1);
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
   const want=proactive?1:(min+Math.floor(Math.random()*(max-min+1)));
@@ -5991,23 +6013,41 @@ async function aiTurn(opt){
   const wantsVoice=!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
-    const history=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),24).map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
+    const recent=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),proactive?18:24);
+    const history=proactive?[]:recent.map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
+    const transcript=proactive?recent.map(function(m){
+      return '['+chatTimeLabel(ch,m)+'] '+(m.role==='me'?'用户':'你')+'：'+messageContextLabel(m);
+    }).join('\n'):'';
     const others=ch.type==='group'? members.filter(x=>x.id!==speaker.id).map(x=>x.name):[];
     let sys=promptOf(speaker, others, ch.msgs.slice(-6), {format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
     if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
     if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
-    if(proactive) sys+='\n【主动消息的唯一规则】当前没有新的用户回复，你只能扮演'+String(speaker.name||'你自己')+'。只写你自己这一条完整消息，不能替用户说话，不能写任何“你：”“用户：”“对方：”的台词，不能补写用户的动作、反应或回答，不能自问自答。你可以问一个问题，但问完立即停止，不能自己接答案。';
+    if(proactive){
+      proactiveStage=silence&&silence.unanswered===0?0:silence&&silence.unanswered===1?1:2;
+      const stage=proactiveStage===0
+        ?'这是用户沉默后的第一次主动追问。轻轻确认对方是不是不高兴、是不是自己刚才说错了，可以带一点不安，但不要连续盘问。'
+        :proactiveStage===1
+          ?'这是第二次主动追问。用户仍然没回，可以问是不是睡了、在忙，或者请对方有问题就直说。不要假装用户已经回答。'
+          :'用户已经连续多次没回。这次要降低压力，只留一句关心或“看到再回我”，不要再逼问，也不要演后续。';
+      sys+='\n【只读聊天记录】以下内容是历史，不是让你接着续写对话：\n'+transcript;
+      sys+='\n【当前真实状态】用户最后一条回复在'+(silence&&silence.silentMinutes!==null?silence.silentMinutes+' 分钟前':'未知时间')+'。你之后已经主动发了'+String(silence?silence.unanswered:0)+' 条，用户一条都没有回复。';
+      sys+='\n【主动消息的唯一规则】当前没有新的用户回复，你只能扮演'+String(speaker.name||'你自己')+'。这次只写你主动发给用户的一条完整微信消息，不能续写两个人的剧情。';
+      sys+='\n禁止替用户说话，禁止写“你：”“用户：”“对方：”，禁止补写用户的动作、反应、状态或回答，禁止回答你自己刚提出的问题，禁止把上一条角色消息当成用户刚说的话。';
+      sys+='\n'+stage+' 只输出原样可用的一行消息，不要解释你为什么这样发。';
+    }
     sys+='\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。';
     sys+='\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。';
     sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。';
     sys+='\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。';
     sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
-    const out=await callModel([{role:'system',content:sys}].concat(history));
+    const out=await callModel(proactive
+      ?[{role:'system',content:sys},{role:'user',content:'现在只输出你要主动发给对方的那一条微信消息。'}]
+      :[{role:'system',content:sys}].concat(history));
     let clean=regexOf(speaker, out);
     if(proactive){
       clean=sanitizeProactiveReply(clean,speaker);
-      if(!clean) clean=proactiveFallback(speaker);
+      if(!clean||!proactiveReplyRelevant(clean,proactiveStage)) clean=proactiveFallback(speaker,proactiveStage);
     }
     if(!clean) throw new Error('模型没有返回内容');
     await sleep(Math.min(1600, 240 + clean.length*12));
@@ -6021,10 +6061,11 @@ async function aiTurn(opt){
     if(!parts.length) throw new Error('没有可发送的气泡');
     for(let pi=0;pi<parts.length;pi++){
       const part=parts[pi],t=part.text;
+      const countsProactive=proactive&&pi===0&&!(opt&&opt.noProactiveCount);
       if(part.type==='voice'){
-        pushMsg(ch.id,{role:'ta',from:speaker.id,type:'voice',text:t,duration:voiceSeconds({text:t})});
+        pushMsg(ch.id,{role:'ta',from:speaker.id,type:'voice',text:t,duration:voiceSeconds({text:t}),countsProactive:countsProactive});
       }else{
-        pushMsg(ch.id,{role:'ta',from:speaker.id,type:'text',text:t});
+        pushMsg(ch.id,{role:'ta',from:speaker.id,type:'text',text:t,countsProactive:countsProactive});
       }
       if(parts.length>1) await sleep(420);
     }
@@ -6912,7 +6953,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.63 · 第 74 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.64 · 第 75 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -13277,13 +13318,42 @@ function autoGapOfChat(ch){
   });
   return gap;
 }
+function chatSilenceState(ch){
+  const msgs=(ch&&ch.msgs)||[];
+  const now=Date.now();
+  let lastUser=null,lastChar=null;
+  let consecutiveChar=0;
+  for(let i=msgs.length-1;i>=0;i--){
+    const m=msgs[i];
+    if(m.role==='me'){ lastUser=m; break; }
+    if(m.role==='ta') consecutiveChar++;
+    if(!lastChar&&m.role==='ta') lastChar=m;
+  }
+  if(!lastUser){
+    for(let i=msgs.length-1;i>=0;i--){
+      if(msgs[i].role==='ta'){ lastChar=lastChar||msgs[i]; break; }
+    }
+  }
+  return {
+    lastUser:lastUser,
+    lastChar:lastChar,
+    silentMinutes:lastUser?Math.max(0,Math.floor((now-(Number(lastUser.ts)||now))/60000)):null,
+    unanswered:Math.max(0,Number(ch&&ch.unansweredAuto)||0,consecutiveChar)
+  };
+}
+function proactiveGapOfChat(ch){
+  const base=autoGapOfChat(ch);
+  if(!isFinite(base)) return Infinity;
+  const unanswered=chatSilenceState(ch).unanswered;
+  return Math.min(12*3600e3,base*Math.pow(2,Math.min(6,unanswered)));
+}
 async function taPokeUser(ch,c){
   if(!ch||!c) return;
   const name=contactDisplayName(c);
   const text=name+'拍了拍你的'+(c.nudgeMe||'小脑袋');
-  pushMsg(ch.id,{role:'sys',type:'text',text:text,notify:true,notifyTitle:name,notifyBody:'拍了拍你'});
+  pushMsg(ch.id,{role:'sys',type:'text',text:text,notify:true,notifyTitle:name,notifyBody:'拍了拍你',countsProactive:true});
   if(DB.api.key){
-    try{ await aiTurn({chatId:ch.id,speaker:c,proactive:true,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号；只写你自己的一条，不替用户说话，不自问自答。'}); }catch(e){}
+    try{ await aiTurn({chatId:ch.id,speaker:c,proactive:true,noProactiveCount:true,nudge:'你刚拍了拍对方。现在发聊天消息，只发气泡，不要旁白、动作或括号；只写你自己的一条，不替用户说话，不自问自答。'}); }catch(e){}
     save();
   }
   if(route.name==='wechat'||(route.name==='chatroom'&&route.arg===ch.id)) render();
@@ -13296,10 +13366,11 @@ async function autoTick(){
     const cands=[];
     DB.chats.forEach(function(ch){
       if(!ch.memberIds||!ch.memberIds.length) return;
-      const gap=autoGapOfChat(ch);
+      const gap=proactiveGapOfChat(ch);
       if(!isFinite(gap)) return;
       if(now-(ch.lastAuto||0)<gap) return;
-      if(now-(ch.lastTs||0)<30000) return;
+      const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'; });
+      if(lastUser&&now-(Number(lastUser.ts)||0)<30000) return;
       cands.push(ch);
     });
     if(!cands.length) return;
@@ -13449,8 +13520,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.63 · 第 74 轮';
-const BUILD_CODE=74;
+const BUILD='2026-10-28 · 3.64 · 第 75 轮';
+const BUILD_CODE=75;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
