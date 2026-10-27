@@ -1,9 +1,9 @@
 {
-  "version": "3.51",
-  "versionCode": 62,
-  "round": 62,
+  "version": "3.52",
+  "versionCode": 63,
+  "round": 63,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=62",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=63",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "所有页面顶部页标改为左右贴边铺满，并适配刘海、圆角和系统手势安全区；正文边距保持不变。"
+  "notes": "时间 App 支持新建多套时间；每套可独立命名、精确绑定和自动流动，并使用年/月/日/时/分五列滚轮设置。"
 }

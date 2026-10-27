@@ -2047,6 +2047,29 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .status-notice-list{display:flex;flex-direction:column;gap:8px}.status-notice{border:1px solid var(--line);background:color-mix(in srgb,var(--card) 82%,transparent);border-radius:14px;padding:10px 11px;display:flex;gap:9px;align-items:flex-start;color:var(--fg);text-align:left}.status-notice.unread{box-shadow:inset 3px 0 0 var(--deep)}.status-notice .g{width:30px;height:30px;border-radius:9px;background:color-mix(in srgb,var(--theme-rose-soft) 65%,#fff);display:flex;align-items:center;justify-content:center;color:var(--deep);flex:none}.status-notice .grow{min-width:0}.status-notice b{display:block;font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.35}.status-notice span{display:block;font-size:calc(10px * var(--ui-font-scale,1));line-height:1.45;color:var(--fg2);margin-top:2px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
 .status-empty{text-align:center;color:var(--fg2);font-size:calc(12px * var(--ui-font-scale,1));padding:28px 10px}
 .clock-app-card{text-align:center;padding:24px 12px}.clock-app-time{font-size:calc(54px * var(--ui-font-scale,1));font-weight:250;letter-spacing:0;line-height:1}.clock-app-date{font-size:calc(13px * var(--ui-font-scale,1));color:var(--fg2);margin-top:8px}
+.clock-profile-kicker{font-size:calc(13px * var(--ui-font-scale,1));font-weight:650;color:var(--deep)}
+.clock-binding-line{font-size:calc(11px * var(--ui-font-scale,1));color:var(--fg2);margin-top:8px;line-height:1.45}
+.clock-list-head{display:flex;align-items:center;justify-content:space-between;padding:14px 4px 5px}
+.clock-list-head b{font-size:calc(15px * var(--ui-font-scale,1))}.clock-list-head span{font-size:calc(11px * var(--ui-font-scale,1));color:var(--fg2)}
+.clock-list-card{padding:6px 14px}
+.clock-item{display:flex;align-items:center;gap:8px;padding:11px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.clock-item:last-child{border-bottom:0}.clock-item.on{background:color-mix(in srgb,var(--theme-rose-soft) 52%,transparent);margin:0 -8px;padding-left:8px;padding-right:8px;border-radius:12px}
+.clock-item-main{min-width:0;flex:1}.clock-item-name{font-size:calc(14px * var(--ui-font-scale,1));font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.clock-item-time{font-size:calc(13px * var(--ui-font-scale,1));color:var(--deep);margin-top:3px}.clock-item-bind{font-size:calc(10.5px * var(--ui-font-scale,1));color:var(--fg2);line-height:1.4;margin-top:3px;white-space:normal;overflow-wrap:anywhere}
+.clock-item-actions{display:flex;align-items:center;gap:3px;flex:none}.clock-item-actions button{border:1px solid var(--line);background:rgba(255,255,255,.46);color:var(--fg);border-radius:8px;padding:5px 7px;font:inherit;font-size:calc(10px * var(--ui-font-scale,1));cursor:pointer}.clock-item-actions button.danger{color:var(--danger)}
+.clock-wheel-sheet{width:100%;max-width:520px;margin:0 auto}
+.clock-wheel-head{gap:8px;margin-bottom:10px}.clock-wheel-head h3{flex:1;text-align:center;margin:0;font-size:calc(17px * var(--ui-font-scale,1))}.clock-wheel-head .btn{padding:7px 12px}
+.clock-wheel-name-card{padding:12px;margin:0 0 10px}.clock-wheel-name-card input{margin-top:6px}
+.clock-wheel-pad{height:210px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--card) 88%,transparent);overflow:hidden;border-radius:14px}
+.clock-wheel-pad::after{content:'';position:absolute;left:4px;right:4px;top:84px;height:42px;border-top:1px solid color-mix(in srgb,var(--deep) 45%,transparent);border-bottom:1px solid color-mix(in srgb,var(--deep) 45%,transparent);background:color-mix(in srgb,var(--theme-rose-soft) 26%,transparent);pointer-events:none}
+.clock-wheel-col{min-width:0;position:relative;border-right:1px solid color-mix(in srgb,var(--line) 60%,transparent)}.clock-wheel-col:last-child{border-right:0}
+.clock-wheel-label{position:absolute;left:0;right:0;top:5px;text-align:center;z-index:2;font-size:calc(9px * var(--ui-font-scale,1));color:var(--fg2);pointer-events:none}
+.clock-wheel-scroller{height:210px;overflow-y:auto;scroll-snap-type:y mandatory;scrollbar-width:none;-ms-overflow-style:none;overscroll-behavior:contain;padding:84px 0;touch-action:pan-y}
+.clock-wheel-scroller::-webkit-scrollbar{display:none}
+.clock-wheel-item{height:42px;display:flex;align-items:center;justify-content:center;scroll-snap-align:center;scroll-snap-stop:always;font-size:calc(15px * var(--ui-font-scale,1));color:var(--fg2);opacity:.48;font-variant-numeric:tabular-nums}
+.clock-wheel-item.on{color:var(--fg);font-weight:700;opacity:1}
+.clock-wheel-preview{text-align:center;font-size:calc(17px * var(--ui-font-scale,1));font-weight:650;color:var(--deep);padding:14px 4px 8px;font-variant-numeric:tabular-nums}
+.clock-wheel-presets{gap:6px}.clock-wheel-presets .btn{padding:9px 4px;font-size:calc(11px * var(--ui-font-scale,1))}
 @media (max-width:380px){
   .takeout-hero .tk-title{font-size:calc(19px * var(--ui-font-scale,1))}
   .takeout-role-grid{grid-template-columns:1fr}
@@ -2331,6 +2354,7 @@ function fixAll(){
   DB.diaryBinding=normalizeExactBinding(DB.diaryBinding,{scope:'none'});
   DB.takeout.binding=normalizeExactBinding(DB.takeout.binding||{chatId:DB.takeout.chatId,contactId:DB.takeout.contactId,personaId:DB.takeout.personaId},{scope:'none'});
   DB.clock.binding=normalizeExactBinding(DB.clock.binding,{scope:'global'});
+  clockEnsureItems();
   DB.bindingsVersion=1;
   DB.outContacts=DB.outContacts||[];
   DB.outBinding=normalizeExactBinding(DB.outBinding||{chatId:DB.outViewChatId},{scope:'none'});
@@ -3235,15 +3259,103 @@ document.addEventListener('focusin',function(e){
 document.addEventListener('focusout',function(e){ if(e.target&&e.target.matches&&e.target.matches('input,textarea')) setTimeout(syncAppHeight,180); });
 function tickStatus(){ const t=$('#stTime'); if(!t) return; const d=simNow(route.name==='chatroom'?route.arg:null); t.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
   if(navigator.getBattery){ navigator.getBattery().then(b=>{ const el=$('#stBat'); if(el) el.textContent=Math.round(b.level*100)+'%'; }); } }
-function clockStateFor(chatId){
-  if(chatId&&DB.clock&&DB.clock.scope&&DB.clock.scope[chatId]) return DB.clock.scope[chatId];
-  return DB.clock||{datetime:'2026-10-27T09:30:00',autoAdvance:false,lastTick:Date.now()};
+function clockItemById(id){
+  clockEnsureItems();
+  return (DB.clock.items||[]).find(function(item){ return item.id===id; })||null;
 }
-function simNow(chatId){
-  const st=clockStateFor(chatId);
+function clockActiveItem(){
+  clockEnsureItems();
+  return clockItemById(DB.clock.activeId)||(DB.clock.items||[])[0]||DB.clock;
+}
+function clockBindingText(item){
+  const b=(item&&item.binding)||{};
+  const ch=b.chatId?chat(b.chatId):null;
+  const c=b.contactId?ct(b.contactId):(ch?ct((ch.memberIds||[])[0]):null);
+  const p=b.personaId?(DB.me.personas||[]).find(function(x){ return x.id===b.personaId; }):null;
+  if(ch) return '会话 · '+chatName(ch)+(c?' · '+contactDisplayName(c):'')+(p?' · '+p.name:'');
+  if(c) return '角色 · '+contactDisplayName(c)+(p?' · '+p.name:'');
+  if(p) return '用户人设 · '+p.name;
+  return '全局时间';
+}
+function clockSyncLegacy(){
+  const items=DB.clock&&Array.isArray(DB.clock.items)?DB.clock.items:[];
+  const active=items.find(function(item){ return item.id===(DB.clock&&DB.clock.activeId); })||items[0];
+  if(!active) return;
+  DB.clock.activeId=active.id;
+  DB.clock.datetime=active.datetime;
+  DB.clock.autoAdvance=active.autoAdvance;
+  DB.clock.lastTick=active.lastTick;
+  DB.clock.binding=normalizeExactBinding(active.binding,{scope:'global'});
+}
+function clockNormalizeItem(item,index){
+  item=item||{};
+  item.id=item.id||('clock_'+uid());
+  item.name=String(item.name||('时间 '+(index+1))).trim().slice(0,24)||('时间 '+(index+1));
+  item.datetime=String(item.datetime||'2026-10-27T09:30').slice(0,16);
+  if(isNaN(new Date(item.datetime).getTime())) item.datetime='2026-10-27T09:30';
+  item.autoAdvance=!!item.autoAdvance;
+  item.lastTick=Number(item.lastTick)||Date.now();
+  item.binding=normalizeExactBinding(item.binding,{scope:'global'});
+  return item;
+}
+function clockEnsureItems(){
+  const c=DB.clock=DB.clock||{};
+  if(!Array.isArray(c.items)) c.items=[];
+  if(!c.items.length){
+    const main=clockNormalizeItem({
+      id:'clock_main',
+      name:'默认时间',
+      datetime:c.datetime,
+      autoAdvance:c.autoAdvance,
+      lastTick:c.lastTick,
+      binding:c.binding
+    },0);
+    c.items.push(main);
+    Object.keys(c.scope||{}).forEach(function(chatId,index){
+      const old=c.scope[chatId]||{};
+      const ch=chat(chatId);
+      const contact=ch?ct((ch.memberIds||[])[0]):null;
+      c.items.push(clockNormalizeItem(Object.assign({},old,{
+        id:'clock_migrated_'+chatId,
+        name:(ch?chatName(ch):'会话')+' · 时间',
+        binding:normalizeExactBinding({mode:'exact',chatId:chatId,contactId:contact?contact.id:null,personaId:ch&&ch.personaId||DB.me.personaId||null,scope:'session',confirmed:true},{scope:'session'})
+      }),index+1));
+    });
+  }
+  c.items=c.items.map(clockNormalizeItem);
+  if(!c.items.some(function(item){ return item.id===c.activeId; })) c.activeId=c.items[0].id;
+  clockSyncLegacy();
+  return c.items;
+}
+function clockResolveItem(chatId){
+  const items=clockEnsureItems();
+  const active=clockActiveItem();
+  const ch=chatId?chat(chatId):null;
+  const contactId=ch?((ch.memberIds||[])[0]||null):null;
+  const matches=function(item){
+    const b=item.binding||{};
+    return !!chatId&&b.chatId===chatId || !!contactId&&!b.chatId&&b.contactId===contactId;
+  };
+  if(chatId){
+    if(active&&matches(active)) return active;
+    const matched=items.find(matches);
+    if(matched) return matched;
+    const global=items.find(function(item){ return !item.binding.chatId&&!item.binding.contactId&&!item.binding.personaId; });
+    if(global) return global;
+  }
+  return active||items.find(function(item){ return !item.binding.chatId&&!item.binding.contactId&&!item.binding.personaId; })||items[0];
+}
+function clockStateFor(chatId){
+  return clockResolveItem(chatId)||DB.clock;
+}
+function clockTimeForState(st){
+  st=st||clockActiveItem();
   const base=new Date(st.datetime||'2026-10-27T09:30:00');
   const bt=isNaN(base.getTime())?Date.now():base.getTime();
   return new Date(bt+(st.autoAdvance?Math.max(0,Date.now()-(Number(st.lastTick)||Date.now())):0));
+}
+function simNow(chatId){
+  return clockTimeForState(clockStateFor(chatId));
 }
 function dateISO(chatId){ const d=simNow(chatId); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
 function dateCN(chatId){ const d=simNow(chatId); return d.getFullYear()+'/'+(d.getMonth()+1)+'/'+d.getDate()+' 星期'+'日一二三四五六'[d.getDay()]; }
@@ -6093,10 +6205,11 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.51 · 第 62 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.52 · 第 63 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
+    ['时间系统','可新建多套时间，每套独立命名、精确绑定、自动流动，并用年/月/日/时/分五列滚轮设置；旧单时间会自动迁移。'],
     ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
     ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
@@ -6785,29 +6898,158 @@ function clockInputValue(d){
   return x.getFullYear()+'-'+String(x.getMonth()+1).padStart(2,'0')+'-'+String(x.getDate()).padStart(2,'0')+'T'+String(x.getHours()).padStart(2,'0')+':'+String(x.getMinutes()).padStart(2,'0');
 }
 function clockBindingState(){
-  const b=DB.clock.binding||{};
-  return b.chatId?clockStateFor(b.chatId):DB.clock;
+  return clockActiveItem();
 }
 function clockWritableState(){
-  const b=DB.clock.binding||{};
-  if(!b.chatId) return DB.clock;
-  DB.clock.scope=DB.clock.scope||{};
-  if(!DB.clock.scope[b.chatId]) DB.clock.scope[b.chatId]={datetime:DB.clock.datetime,autoAdvance:false,lastTick:Date.now()};
-  return DB.clock.scope[b.chatId];
+  return clockActiveItem();
+}
+function clockSelectItem(id){
+  const item=clockItemById(id); if(!item) return;
+  DB.clock.activeId=item.id;
+  clockSyncLegacy(); save(); render();
+}
+function clockCreateItem(){
+  const d=simNow();
+  clockEnsureItems();
+  const items=DB.clock.items;
+  const item=clockNormalizeItem({
+    id:'clock_'+uid(),
+    name:'时间 '+(items.length+1),
+    datetime:clockInputValue(d),
+    autoAdvance:false,
+    lastTick:Date.now(),
+    binding:{mode:'exact',personaId:null,chatId:null,contactId:null,scope:'global',confirmed:false}
+  },items.length);
+  DB.clock.items=items.concat(item); DB.clock.activeId=item.id; clockSyncLegacy(); save(); render();
+  setTimeout(function(){ sheetClockWheel(item.id); },0);
+}
+function clockDeleteItem(id){
+  clockEnsureItems();
+  const item=clockItemById(id),items=DB.clock.items;
+  if(!item) return;
+  if(items.length<=1){ toast('至少保留一个时间'); return; }
+  sheetSmall('<h3>删除「'+esc(item.name)+'」？</h3><div class="muted" style="margin:8px 0 14px">这个时间方案和它的绑定会被删除，其它时间不会受影响。</div><button class="btn danger full" id="clockDeleteYes">删除</button><button class="btn full" id="clockDeleteNo">取消</button>');
+  $('#clockDeleteNo').onclick=closeSheet;
+  $('#clockDeleteYes').onclick=function(){
+    DB.clock.items=items.filter(function(x){ return x.id!==id; });
+    if(DB.clock.activeId===id) DB.clock.activeId=DB.clock.items[0].id;
+    clockSyncLegacy(); save(); closeSheet(); render(); toast('时间已删除');
+  };
 }
 function screenClock(){
-  const b=DB.clock.binding||{},st=clockBindingState(),d=simNow(b.chatId||null);
-  const ch=b.chatId?chat(b.chatId):null,c=b.contactId?ct(b.contactId):(ch?ct(ch.memberIds[0]):null),p=(DB.me.personas||[]).find(function(x){ return x.id===b.personaId; });
-  return '<div class="pad" style="padding-top:0">'+wxTop('时钟')
-    +'<div class="card clock-app-card"><div class="clock-app-time">'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</div><div class="clock-app-date">'+esc(dateCN(b.chatId||null))+'</div><div class="muted" style="margin-top:8px">这里的时间只属于小手机，不影响现实系统时间。</div></div>'
-    +'<div class="card"><b>当前绑定</b><div class="lrow" data-clockbind="1" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">'+(ch?esc(chatName(ch)):'全局时间')+'</div><div class="t2">'+esc(c?contactDisplayName(c):'未绑定角色')+' · '+esc(p?p.name:'未绑定用户人设')+'</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
-    +'<div class="card"><b>设置时间</b><input id="clockManual" type="datetime-local" value="'+esc(clockInputValue(d))+'" style="margin-top:10px"><div class="row" style="margin-top:9px"><button class="btn grow" data-clockpreset="morning">清晨</button><button class="btn grow" data-clockpreset="noon">午后</button><button class="btn grow" data-clockpreset="night">夜晚</button></div><button class="btn primary full" id="clockSave" style="margin-top:10px">应用这个时间</button></div>'
-    +'<div class="card"><div class="row"><div class="grow"><b>时间自动流动</b><div class="muted">开启后，从设定时间开始随真实流逝推进。</div></div><button class="btn" id="clockAuto">'+(st.autoAdvance?'已开启':'关闭')+'</button></div></div>';
+  clockEnsureItems();
+  const active=clockActiveItem(),items=DB.clock.items,d=clockTimeForState(active);
+  const used=clockResolveItem(route.name==='chatroom'?route.arg:null);
+  return '<div class="pad" style="padding-top:0">'+wxTop('时间','<button class="ic2" id="clockNew" title="新建时间">＋</button>')
+    +'<div class="card clock-app-card"><div class="clock-profile-kicker">'+esc(active.name)+'</div><div class="clock-app-time">'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+'</div><div class="clock-app-date">'+esc(dateCN()) +'</div><div class="clock-binding-line">'+esc(clockBindingText(active))+'</div><div class="muted" style="margin-top:8px">这里的时间只属于小手机，不影响现实系统时间。'+(used&&used.id!==active.id?(' 当前页面自动使用「'+esc(used.name)+'」。'):'')+'</div></div>'
+    +'<div class="clock-list-head"><b>我的时间</b><span>'+items.length+' 个</span></div>'
+    +'<div class="card clock-list-card">'+items.map(function(item){
+      const t=clockTimeForState(item);
+      return '<div class="clock-item'+(item.id===active.id?' on':'')+'" data-clock-use="'+item.id+'"><div class="clock-item-main"><div class="clock-item-name">'+esc(item.name)+'</div><div class="clock-item-time">'+clockDateText(t)+' '+String(t.getHours()).padStart(2,'0')+':'+String(t.getMinutes()).padStart(2,'0')+'</div><div class="clock-item-bind">'+esc(clockBindingText(item))+'</div></div><div class="clock-item-actions"><button data-clock-edit="'+item.id+'">编辑</button><button data-clock-bind="'+item.id+'">绑定</button><button class="danger" data-clock-delete="'+item.id+'">删</button></div></div>';
+    }).join('')+'</div>'
+    +'<button class="btn primary full" id="clockCreate">＋ 新建时间</button>'
+    +'<div class="sechead">当前时间设置</div>'
+    +'<div class="card"><div class="lrow" data-clock-edit="'+active.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">日期与时间</div><div class="t2">'+clockDateText(d)+' '+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0')+' · 滚轮设置</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" data-clock-bind="'+active.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">绑定</div><div class="t2">'+esc(clockBindingText(active))+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">时间自动流动</div><div class="t2">开启后，从设定时间开始随真实流逝推进</div></div><button class="btn" data-clock-auto="'+active.id+'">'+(active.autoAdvance?'已开启':'关闭')+'</button></div></div>';
 }
-function sheetClockBinding(){
-  sheetExactBinding({title:'时钟精确绑定',desc:'默认按一条会话使用独立时间，也不会从别的聊天读取角色或用户人设。选择“不绑定角色”时使用全局时间。',binding:DB.clock.binding,scope:'global',allowGlobal:true,allowClear:true,onSave:function(binding){
-    DB.clock.binding=binding; save(); closeSheet(); render(); toast(binding.chatId?'已使用这段会话的独立时间':'已使用精确绑定时间');
+function clockDateText(d){
+  return d.getFullYear()+'年'+(d.getMonth()+1)+'月'+d.getDate()+'日';
+}
+function sheetClockBinding(itemId){
+  const item=clockItemById(itemId)||clockActiveItem();
+  sheetExactBinding({title:'时间精确绑定',desc:'每个时间可以独立绑定一条会话、一个角色或用户人设。聊天和设备页面会优先使用匹配的时间。',binding:item.binding,scope:'global',allowGlobal:true,allowClear:true,onSave:function(binding){
+    item.binding=binding; DB.clock.activeId=item.id; clockSyncLegacy(); save(); closeSheet(); render(); toast(binding.chatId?'这个时间已绑定到会话':binding.contactId?'这个时间已绑定到角色':binding.personaId?'这个时间已绑定到用户人设':'已使用全局时间');
   }});
+}
+function clockWheelDate(datetime){
+  const d=new Date(datetime||'2026-10-27T09:30');
+  return isNaN(d.getTime())?new Date('2026-10-27T09:30'):d;
+}
+function clockWheelValues(parts){
+  const years=[]; for(let y=1900;y<=2100;y++) years.push(y);
+  if(years.indexOf(parts.year)<0){ years.push(parts.year); years.sort(function(a,b){ return a-b; }); }
+  const months=[]; for(let m=1;m<=12;m++) months.push(m);
+  const dim=new Date(parts.year,parts.month,0).getDate();
+  const days=[]; for(let d=1;d<=dim;d++) days.push(d);
+  const hours=[]; for(let h=0;h<24;h++) hours.push(h);
+  const minutes=[]; for(let m=0;m<60;m++) minutes.push(m);
+  return {years:years,months:months,days:days,hours:hours,minutes:minutes,dim:dim};
+}
+function clockWheelColumn(key,label,values,value){
+  const index=Math.max(0,values.indexOf(value));
+  return '<div class="clock-wheel-col"><div class="clock-wheel-label">'+label+'</div><div class="clock-wheel-scroller" data-clock-wheel="'+key+'" data-index="'+index+'" tabindex="0" aria-label="'+label+'">'+values.map(function(v,i){
+    const shown=key==='year'?String(v):String(v).padStart(2,'0');
+    return '<div class="clock-wheel-item'+(i===index?' on':'')+'" data-clock-value="'+v+'" data-index="'+i+'">'+shown+'</div>';
+  }).join('')+'</div></div>';
+}
+function sheetClockWheel(itemId){
+  const item=clockItemById(itemId)||clockActiveItem();
+  const d=clockWheelDate(item.datetime);
+  const parts={year:d.getFullYear(),month:d.getMonth()+1,day:d.getDate(),hour:d.getHours(),minute:d.getMinutes()};
+  const values=clockWheelValues(parts);
+  sheetFull('<div class="clock-wheel-sheet"><div class="row clock-wheel-head"><button class="ic2" id="clockWheelCancel" title="返回">‹</button><h3>滚轮设置时间</h3><button class="btn primary" id="clockWheelDone">完成</button></div>'
+    +'<div class="card clock-wheel-name-card" style="box-shadow:none"><div class="muted">时间名称</div><input id="clockWheelName" value="'+esc(item.name)+'" placeholder="比如：主线时间 / 旧城时间"></div>'
+    +'<div class="clock-wheel-pad">'
+    +clockWheelColumn('year','年',values.years,parts.year)
+    +clockWheelColumn('month','月',values.months,parts.month)
+    +clockWheelColumn('day','日',values.days,parts.day)
+    +clockWheelColumn('hour','时',values.hours,parts.hour)
+    +clockWheelColumn('minute','分',values.minutes,parts.minute)
+    +'</div>'
+    +'<div class="clock-wheel-preview" id="clockWheelPreview">'+clockDateText(new Date(parts.year,parts.month-1,parts.day,parts.hour,parts.minute))+' '+String(parts.hour).padStart(2,'0')+':'+String(parts.minute).padStart(2,'0')+'</div>'
+    +'<div class="row clock-wheel-presets"><button class="btn grow" data-clockpreset="morning">清晨 07:15</button><button class="btn grow" data-clockpreset="noon">午后 14:00</button><button class="btn grow" data-clockpreset="night">夜晚 22:30</button></div>'
+    +'</div>');
+  const rebuildDays=function(){
+    const dim=new Date(parts.year,parts.month,0).getDate();
+    if(parts.day>dim) parts.day=dim;
+    const col=$('[data-clock-wheel="day"]');
+    col.dataset.index=String(parts.day-1);
+    col.innerHTML=Array.from({length:dim},function(_,i){ const v=i+1; return '<div class="clock-wheel-item'+(v===parts.day?' on':'')+'" data-clock-value="'+v+'" data-index="'+i+'">'+String(v).padStart(2,'0')+'</div>'; }).join('');
+    col.scrollTop=(parts.day-1)*42;
+  };
+  const preview=function(){
+    const d2=new Date(parts.year,parts.month-1,parts.day,parts.hour,parts.minute);
+    $('#clockWheelPreview').textContent=clockDateText(d2)+' '+String(parts.hour).padStart(2,'0')+':'+String(parts.minute).padStart(2,'0');
+  };
+  const syncColumn=function(col){
+    const key=col.dataset.clockWheel;
+    const index=Math.max(0,Math.min(col.children.length-1,Math.round(col.scrollTop/42)));
+    col.dataset.index=String(index);
+    col.querySelectorAll('.clock-wheel-item').forEach(function(row,i){ row.classList.toggle('on',i===index); });
+    const v=Number(col.children[index]&&col.children[index].dataset.clockValue);
+    if(key==='year') parts.year=v;
+    else if(key==='month') parts.month=v;
+    else if(key==='day') parts.day=v;
+    else if(key==='hour') parts.hour=v;
+    else if(key==='minute') parts.minute=v;
+    if(key==='year'||key==='month') rebuildDays();
+    preview();
+  };
+  $$('#sheetBox [data-clock-wheel]').forEach(function(col){
+    const index=Number(col.dataset.index)||0;
+    requestAnimationFrame(function(){ col.scrollTop=index*42; });
+    let timer=null;
+    col.addEventListener('scroll',function(){ clearTimeout(timer); timer=setTimeout(function(){ syncColumn(col); },55); },{passive:true});
+    col.addEventListener('wheel',function(ev){ if(Math.abs(ev.deltaY)<1) return; ev.preventDefault(); col.scrollTop+=(ev.deltaY>0?1:-1)*42; },{passive:false});
+    col.addEventListener('keydown',function(ev){ if(ev.key!=='ArrowUp'&&ev.key!=='ArrowDown') return; ev.preventDefault(); col.scrollTop+=(ev.key==='ArrowDown'?1:-1)*42; });
+  });
+  const setPreset=function(hour,minute){
+    parts.hour=hour; parts.minute=minute;
+    const hCol=$('[data-clock-wheel="hour"]'),mCol=$('[data-clock-wheel="minute"]');
+    if(hCol){ hCol.scrollTop=hour*42; syncColumn(hCol); }
+    if(mCol){ mCol.scrollTop=minute*42; syncColumn(mCol); }
+  };
+  $$('#sheetBox [data-clockpreset]').forEach(function(btn){ btn.onclick=function(){ const k=btn.dataset.clockpreset; if(k==='morning') setPreset(7,15); else if(k==='noon') setPreset(14,0); else setPreset(22,30); }; });
+  $('#clockWheelCancel').onclick=function(){ closeSheet(); render(); };
+  $('#clockWheelDone').onclick=function(){
+    const name=String($('#clockWheelName').value||'').trim();
+    item.name=(name||item.name||'时间').slice(0,24);
+    item.datetime=parts.year+'-'+String(parts.month).padStart(2,'0')+'-'+String(parts.day).padStart(2,'0')+'T'+String(parts.hour).padStart(2,'0')+':'+String(parts.minute).padStart(2,'0');
+    item.lastTick=Date.now();
+    DB.clock.activeId=item.id;
+    clockSyncLegacy(); save(); closeSheet(); render(); toast('时间已保存');
+  };
 }
 function screenCouple(){
   return '<div class="pad" style="padding-top:0">'+wxTop('情侣空间')+'<div class="card"><b>情侣空间</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">这里将承载纪念日、交换日记、默契挑战、一起做饭、任务、相簿和我们的小家。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入完整互动。</div></div></div>';
@@ -10013,29 +10255,21 @@ function bindScreenInner(){
     ev.stopPropagation();
     if(el.dataset.takeoutOrder) sheetTakeoutOrder(el.dataset.takeoutOrder);
   });
-  $$('[data-clockbind]',s).forEach(el=>el.onclick=sheetClockBinding);
-  const clockSave=$('#clockSave');
-  if(clockSave) clockSave.onclick=function(){
-    const st=clockWritableState(),v=String($('#clockManual').value||'').trim();
-    if(!v){ toast('先选择时间'); return; }
-    st.datetime=v; st.lastTick=Date.now(); save(); render(); toast('小手机时间已更新');
-  };
-  const clockAuto=$('#clockAuto');
-  if(clockAuto) clockAuto.onclick=function(){
-    const st=clockWritableState();
-    if(st.autoAdvance){ st.datetime=clockInputValue(simNow(DB.clock.binding&&DB.clock.binding.chatId)); st.autoAdvance=false; }
-    else { st.lastTick=Date.now(); st.autoAdvance=true; }
-    save(); render();
-  };
-  $$('[data-clockpreset]',s).forEach(function(el){ el.onclick=function(){
-    const input=$('#clockManual'); if(!input) return;
-    const d=input.value?new Date(input.value):simNow(DB.clock.binding&&DB.clock.binding.chatId);
-    const preset=el.dataset.clockpreset;
-    if(preset==='morning') d.setHours(8,30,0,0);
-    else if(preset==='noon') d.setHours(14,0,0,0);
-    else d.setHours(22,0,0,0);
-    input.value=clockInputValue(d);
-  }; });
+  $$('[data-clock-use]',s).forEach(el=>el.onclick=function(ev){
+    if(ev.target.closest('button')) return;
+    clockSelectItem(el.dataset.clockUse);
+  });
+  $$('[data-clock-edit]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); sheetClockWheel(el.dataset.clockEdit); });
+  $$('[data-clock-bind]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); sheetClockBinding(el.dataset.clockBind); });
+  $$('[data-clock-delete]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); clockDeleteItem(el.dataset.clockDelete); });
+  $$('[data-clock-auto]',s).forEach(el=>el.onclick=function(ev){
+    ev.stopPropagation();
+    const item=clockItemById(el.dataset.clockAuto)||clockActiveItem();
+    if(item.autoAdvance){ item.datetime=clockInputValue(clockTimeForState(item)); item.autoAdvance=false; item.lastTick=Date.now(); }
+    else { item.autoAdvance=true; item.lastTick=Date.now(); }
+    DB.clock.activeId=item.id; clockSyncLegacy(); save(); render();
+  });
+  ['clockNew','clockCreate'].forEach(function(id){ const btn=$('#'+id); if(btn) btn.onclick=clockCreateItem; });
   /* 设置 */
   if(route.name==='settings'){
     decorateSettingsBubbles(s);
@@ -10394,8 +10628,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.51 · 第 62 轮';
-const BUILD_CODE=62;
+const BUILD='2026-10-27 · 3.52 · 第 63 轮';
+const BUILD_CODE=63;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -10416,7 +10650,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','screenOut','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','screenSoul','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -10447,6 +10681,9 @@ async function runCheckupUI(){
   add('会话', true, (DB.chats||[]).length+' 个');
   add('作者 / 小说', true, '作者 '+(DB.np.author.penName||'未命名')+' · 书 '+(DB.books||[]).length+' 本 · 读者 '+(DB.np.readers||[]).length+' 位');
   add('第 4 页 APP', Array.isArray(DB.ui.homePages)&&DB.ui.homePages.length>=4&&['clock','couple','soul','music'].every(function(k){ return DB.ui.homePages[3].indexOf(k)>=0; }), '时钟 / 情侣空间 / 灵魂匹配 / 音乐');
+  clockEnsureItems();
+  const clockItems=DB.clock.items||[],clockBad=clockItems.filter(function(item){ return !item.datetime||isNaN(new Date(item.datetime).getTime()); });
+  add('多时间方案', clockItems.length>0&&clockBad.length===0, clockItems.length+' 个 · 当前 '+(clockActiveItem().name||'时间')+' · '+dateCN()+' '+hhmm());
   add('模拟时钟', !!(DB.clock&&DB.clock.datetime&&!isNaN(new Date(DB.clock.datetime).getTime())), dateCN()+' '+hhmm());
   add('通知中心', !!(DB.notify&&Array.isArray(DB.notify.items)&&$('#statusCenter')), (DB.notify&&DB.notify.items?DB.notify.items.length:0)+' 条记录');
   add('原生通知桥', !!(window.NativeNotifications||('Notification' in window)), window.NativeNotifications?'Android 原生通知':('Notification' in window?'浏览器通知':'App 内提醒'));
