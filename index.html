@@ -1990,6 +1990,43 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .soul-request-actions{display:flex;gap:6px;flex:none}
 .soul-request-actions .btn{padding:7px 9px;min-height:34px}
 .soul-empty-orbit{width:58px;height:58px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 35% 30%,#fff,color-mix(in srgb,var(--theme-rose-soft) 80%,#fff));color:var(--deep);margin-bottom:10px;box-shadow:0 8px 22px color-mix(in srgb,var(--theme-rose-deep) 16%,transparent)}
+.couple-tabs{display:flex;gap:6px;overflow-x:auto;padding:4px 14px 9px;scrollbar-width:none}
+.couple-tabs::-webkit-scrollbar{display:none}
+.couple-tabs button{flex:none;border:1px solid var(--line);background:color-mix(in srgb,var(--card) 92%,transparent);color:var(--fg2);border-radius:99px;padding:7px 11px;font-size:calc(11.5px * var(--ui-font-scale,1));cursor:pointer}
+.couple-tabs button.on{background:var(--deep);border-color:var(--deep);color:#fff}
+.couple-hero{margin:4px 14px 10px;padding:15px 14px;border-radius:14px;border:1px solid color-mix(in srgb,var(--theme-rose-deep) 14%,var(--line));background:linear-gradient(145deg,color-mix(in srgb,var(--theme-rose-soft) 64%,var(--card)),color-mix(in srgb,var(--theme-rose) 16%,var(--card)))}
+.couple-hero .ch-title{display:flex;align-items:center;gap:8px;font-size:calc(18px * var(--ui-font-scale,1));font-weight:650;min-width:0}
+.couple-hero .ch-title span:last-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.couple-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin-top:12px}
+.couple-stat{padding:8px;border-radius:9px;background:color-mix(in srgb,var(--card) 72%,transparent);min-width:0}
+.couple-stat b{display:block;font-size:calc(16px * var(--ui-font-scale,1));white-space:nowrap}
+.couple-stat small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1));margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.couple-row{display:flex;align-items:flex-start;gap:9px;padding:10px 0;border-bottom:1px solid var(--line)}
+.couple-row:last-child{border-bottom:0}
+.couple-row .grow{min-width:0}
+.couple-date-pill{flex:none;width:48px;text-align:center;border-radius:10px;padding:6px 3px;background:color-mix(in srgb,var(--theme-rose-soft) 64%,var(--card))}
+.couple-date-pill b{display:block;font-size:calc(16px * var(--ui-font-scale,1))}
+.couple-date-pill small{display:block;color:var(--fg2);font-size:calc(9px * var(--ui-font-scale,1))}
+.couple-diary{padding:12px 0;border-bottom:1px solid var(--line)}
+.couple-diary:last-child{border-bottom:0}
+.couple-diary .meta{display:flex;justify-content:space-between;gap:8px;color:var(--fg2);font-size:calc(10px * var(--ui-font-scale,1));margin-bottom:6px}
+.couple-diary .txt{white-space:pre-wrap;line-height:1.82;font-size:calc(13px * var(--ui-font-scale,1))}
+.couple-album{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:10px}
+.couple-photo{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1/1;background:#eee;border:1px solid var(--line)}
+.couple-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.couple-photo .cap{position:absolute;left:0;right:0;bottom:0;padding:16px 6px 5px;color:#fff;background:linear-gradient(transparent,rgba(0,0,0,.68));font-size:calc(9px * var(--ui-font-scale,1));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.couple-task{padding:11px 0;border-bottom:1px solid var(--line)}
+.couple-task:last-child{border-bottom:0}
+.couple-task .task-title{display:flex;align-items:flex-start;gap:8px}
+.couple-task .task-title b{font-size:calc(13px * var(--ui-font-scale,1));line-height:1.55;flex:1;min-width:0}
+.couple-task.done .task-title b{text-decoration:line-through;color:var(--fg2)}
+.couple-task .muted{margin-top:4px;line-height:1.65}
+.couple-home-name{display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.couple-home-name b{font-size:calc(17px * var(--ui-font-scale,1));min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.couple-chip-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px}
+.couple-chip{display:inline-flex;align-items:center;gap:4px;padding:4px 7px;border-radius:8px;background:color-mix(in srgb,var(--theme-rose-soft) 45%,var(--card));font-size:calc(10.5px * var(--ui-font-scale,1));max-width:100%;overflow-wrap:anywhere}
+.couple-chip button{border:0;background:transparent;color:var(--fg2);padding:0 2px;cursor:pointer}
+.couple-branch{margin:4px 14px 10px;padding:8px 10px;border-radius:9px;background:color-mix(in srgb,var(--theme-rose-soft) 34%,var(--card));font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.6;color:var(--fg2)}
 .takeout-order-title{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
 .takeout-timeline{margin-top:12px;padding-left:6px}
 .takeout-time-line{display:flex;gap:10px;position:relative;padding:0 0 13px}
@@ -2356,6 +2393,7 @@ function fixAll(){
   DB.takeout.storeCache=DB.takeout.storeCache||{};
   DB.clock=Object.assign({datetime:'2026-10-27T09:30:00',autoAdvance:false,lastTick:Date.now(),binding:{mode:'exact',personaId:null,chatId:null,contactId:null,scope:'global',confirmed:false},scope:{}},DB.clock||{});
   DB.couple=Object.assign({activeBinding:null,spaces:[],memories:{},foods:[],meals:[],tasks:[],adoptions:[]},DB.couple||{});
+  coupleEnsure();
   DB.soul=Object.assign({sessions:[],pending:[],cooldowns:{},lastResult:null},DB.soul||{});
   soulEnsure();
   DB.music=Object.assign({playlists:[],current:null,history:[],together:null},DB.music||{});
@@ -6293,7 +6331,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-27 · 3.56 · 第 67 轮';
+const PROGRESS_UPDATED='2026-10-27 · 3.57 · 第 68 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6311,10 +6349,10 @@ const PROGRESS_GROUPS=[
   ]},
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
+    ['情侣空间','精确绑定、主空间、会话分支记忆、纪念日、交换日记、相册、任务奖励、亲密度和小家成员已可用；做饭、默契挑战、真心话和完整领养流程仍待补齐。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
   ]},
   {k:'pending',n:'尚未完成',color:'#c4545b',items:[
-    ['情侣空间','纪念日、交换日记、默契挑战、真心话、做饭、相簿、情侣任务、我们的小家、领养和分支记忆。'],
     ['音乐','本地音频、网易云扫码导入、跨页面播放、一起听、歌词、评论、共同收藏、历史记录和后台播放。'],
     ['AI 生图','用户自有生图 API、场景自拍/食物/双人照、角色脸一致性、图片本地保存与重新生成；本轮按要求暂不接。'],
     ['高级统计与发布','完整的跨模块数据统计、内容时间线来源视图和更细的发布运营工具。']
@@ -7139,7 +7177,339 @@ function sheetClockWheel(itemId){
   };
 }
 function screenCouple(){
-  return '<div class="pad" style="padding-top:0">'+wxTop('情侣空间')+'<div class="card"><b>情侣空间</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">这里将承载纪念日、交换日记、默契挑战、一起做饭、任务、相簿和我们的小家。</div><div class="empty" style="padding:22px 8px">功能入口已建立，下一批次接入完整互动。</div></div></div>';
+  const c=coupleEnsure();
+  const r=exactBindingResolved(c.activeBinding);
+  if(!r.contact||!r.persona){
+    return '<div class="pad" style="padding-top:0">'+wxTop('情侣空间')
+      +'<div class="card"><b>先选择情侣空间绑定</b><div class="muted" style="margin:7px 0 12px;line-height:1.75">精确绑定一条会话，或分别选择角色和用户人设。相同用户人设与角色共用一份主空间。</div>'
+      +'<button class="btn primary full" data-couplebind="1">选择绑定</button></div></div>';
+  }
+  const space=coupleSpaceFor(c.activeBinding,true);
+  if(!space) return '<div class="pad">'+wxTop('情侣空间')+'<div class="empty">这个绑定暂时无法建立空间。</div></div>';
+  const tab=c.tab||'home';
+  const body=tab==='days'?coupleDaysHTML(space):tab==='diary'?coupleDiaryHTML(space):tab==='album'?coupleAlbumHTML(space):tab==='tasks'?coupleTasksHTML(space):tab==='home'?coupleHomeHTML(space):coupleDashboardHTML(space);
+  return '<div class="pad" style="padding-top:0">'
+    +wxTop('情侣空间','<button class="ic2" id="coupleMenu" title="空间设置">⋯</button>')
+    +'<div class="lrow" data-couplebind="1">'+avBox(r.contact)+'<div class="mi"><div class="t1">'+esc(contactDisplayName(r.contact)+' · '+r.persona.name)+'</div><div class="t2">'+esc(exactBindingSummary(c.activeBinding))+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +coupleTabsHTML(tab)
+    +coupleBranchHTML(space)
+    +body+'</div>';
+}
+const COUPLE_TABS=[['home','小家'],['days','纪念日'],['diary','交换日记'],['album','相簿'],['tasks','情侣任务']];
+function coupleEnsure(){
+  DB.couple=Object.assign({activeBinding:null,activeSpaceId:null,tab:'home',spaces:[],memories:{},foods:[],meals:[],tasks:[],adoptions:[]},DB.couple||{});
+  DB.couple.spaces=Array.isArray(DB.couple.spaces)?DB.couple.spaces:[];
+  DB.couple.activeBinding=normalizeExactBinding(DB.couple.activeBinding,{scope:'none'});
+  if(!COUPLE_TABS.some(function(t){ return t[0]===DB.couple.tab; })) DB.couple.tab='home';
+  DB.couple.spaces.forEach(function(s){
+    s.anniversaries=Array.isArray(s.anniversaries)?s.anniversaries:[];
+    s.diaries=Array.isArray(s.diaries)?s.diaries:[];
+    s.album=Array.isArray(s.album)?s.album:[];
+    s.tasks=Array.isArray(s.tasks)?s.tasks:[];
+    s.branches=s.branches&&typeof s.branches==='object'?s.branches:{};
+    s.home=Object.assign({name:'我们的小家',rooms:[],items:[],members:[],notes:''},s.home||{});
+    s.home.rooms=Array.isArray(s.home.rooms)?s.home.rooms:[];
+    s.home.items=Array.isArray(s.home.items)?s.home.items:[];
+    s.home.members=Array.isArray(s.home.members)?s.home.members:[];
+    s.intimacy=Math.max(0,Number(s.intimacy)||0);
+  });
+  if(DB.couple.activeSpaceId&&!DB.couple.spaces.some(function(s){ return s.id===DB.couple.activeSpaceId; })) DB.couple.activeSpaceId=null;
+  return DB.couple;
+}
+function coupleMasterKey(contactId,personaId){ return String(contactId||'')+'::'+String(personaId||''); }
+function coupleSpaceFor(binding,create){
+  const c=coupleEnsure();
+  const r=exactBindingResolved(binding||c.activeBinding);
+  if(!r.contact||!r.persona) return null;
+  const key=coupleMasterKey(r.contact.id,r.persona.id);
+  let space=c.spaces.find(function(s){ return s.masterKey===key; });
+  if(!space&&create!==false){
+    space={
+      id:'couple_space_'+uid(),
+      masterKey:key,
+      contactId:r.contact.id,
+      personaId:r.persona.id,
+      title:r.persona.name+' & '+contactDisplayName(r.contact),
+      createdAt:Date.now(),
+      updatedAt:Date.now(),
+      activeBranchChatId:null,
+      anniversaries:[],
+      diaries:[],
+      album:[],
+      tasks:[],
+      branches:{},
+      home:{name:'我们的小家',rooms:[],items:[],members:[],notes:''},
+      intimacy:0
+    };
+    c.spaces.unshift(space);
+    c.activeSpaceId=space.id;
+  }
+  if(space){
+    c.activeSpaceId=space.id;
+    const chatId=r.chat?r.chat.id:(normalizeExactBinding(binding||c.activeBinding).chatId||null);
+    if(chatId){
+      space.activeBranchChatId=chatId;
+      space.branches[chatId]=Object.assign({chatId:chatId,memories:[],createdAt:Date.now(),updatedAt:Date.now()},space.branches[chatId]||{});
+      if(!Array.isArray(space.branches[chatId].memories)) space.branches[chatId].memories=[];
+    }
+  }
+  return space||null;
+}
+function coupleActiveSpace(){ return coupleSpaceFor(DB.couple&&DB.couple.activeBinding,true); }
+function coupleActiveBranch(space){
+  if(!space||!space.activeBranchChatId) return null;
+  return space.branches[space.activeBranchChatId]||null;
+}
+function coupleRecordMemory(space,text,meta){
+  text=String(text||'').trim(); if(!space||!text) return;
+  const chatId=space.activeBranchChatId;
+  if(chatId){
+    const branch=space.branches[chatId]=space.branches[chatId]||{chatId:chatId,memories:[],createdAt:Date.now()};
+    branch.memories=Array.isArray(branch.memories)?branch.memories:[];
+    if(branch.memories.indexOf(text)<0) branch.memories.push(text);
+    branch.updatedAt=Date.now();
+    const ch=chat(chatId);
+    if(ch){
+      ch.mem=ch.mem||{ts:Date.now(),items:[]};
+      ch.mem.items=Array.isArray(ch.mem.items)?ch.mem.items:[];
+      if(ch.mem.items.indexOf(text)<0) ch.mem.items.push(text);
+      ch.mem.ts=Date.now();
+    }
+  }
+  space.updatedAt=Date.now();
+}
+function coupleTabsHTML(tab){
+  return '<div class="couple-tabs">'+COUPLE_TABS.map(function(t){ return '<button class="'+(tab===t[0]?'on':'')+'" data-coupletp="'+t[0]+'">'+t[1]+'</button>'; }).join('')+'</div>';
+}
+function coupleBranchHTML(space){
+  if(!space.activeBranchChatId) return '<div class="couple-branch">当前没有会话分支，只使用角色与用户人设。</div>';
+  const ch=chat(space.activeBranchChatId);
+  const branch=coupleActiveBranch(space);
+  return '<div class="couple-branch">当前分支：'+esc(ch?chatName(ch):'会话已删除')+' · '+(branch?(branch.memories||[]).length:0)+' 条空间记忆</div>';
+}
+function coupleDashboardHTML(space){
+  const r=exactBindingResolved(DB.couple.activeBinding);
+  const done=(space.tasks||[]).filter(function(t){ return t.done; }).length;
+  const next=space.anniversaries.slice().sort(function(a,b){ return coupleAnniversaryDate(a).getTime()-coupleAnniversaryDate(b).getTime(); })[0];
+  const recent=space.diaries.slice().sort(function(a,b){ return (b.ts||0)-(a.ts||0); })[0];
+  return '<div class="couple-hero"><div class="ch-title">'+avBox(r.contact,'msgav')+'<span>'+esc(space.title||'情侣空间')+'</span></div><div class="couple-stats">'
+    +'<div class="couple-stat"><b>'+space.intimacy+'</b><small>亲密度</small></div>'
+    +'<div class="couple-stat"><b>'+space.diaries.length+'</b><small>交换日记</small></div>'
+    +'<div class="couple-stat"><b>'+done+'/'+space.tasks.length+'</b><small>情侣任务</small></div>'
+    +'</div></div>'
+    +'<div class="card"><b>最近的我们</b>'
+    +(next?'<div class="couple-row"><div class="couple-date-pill"><b>'+coupleNextDayNumber(next)+'</b><small>天</small></div><div class="grow"><b>'+esc(next.title||'纪念日')+'</b><div class="muted">'+esc(coupleAnniversaryText(next))+'</div></div></div>':'')
+    +(recent?'<div class="couple-row"><div class="mi"><div class="t1">'+esc(recent.role==='me'?'我的日记':(r.contact?contactDisplayName(r.contact):'Ta')+'的日记')+'</div><div class="t2 ell">'+esc(String(recent.text||'').replace(/\n/g,' ').slice(0,52))+'</div></div></div>':'')
+    +(!next&&!recent?'<div class="empty" style="padding:20px 6px">从纪念日、日记或任务开始记录。</div>':'')
+    +'</div>'
+    +'<div class="card"><div class="row"><button class="btn grow" data-coupletp="days">纪念日</button><button class="btn grow" data-coupletp="diary">写日记</button><button class="btn grow" data-coupletp="tasks">做任务</button></div></div>';
+}
+function coupleParseDate(v){
+  const m=String(v||'').match(/^(\d{4})[-/.年](\d{1,2})[-/.月](\d{1,2})/);
+  if(!m) return null;
+  const d=new Date(Number(m[1]),Number(m[2])-1,Number(m[3]));
+  return isNaN(d.getTime())?null:d;
+}
+function coupleAnniversaryDate(item,chatId){
+  const base=coupleParseDate(item.date);
+  if(!base) return new Date(8640000000000000);
+  const now=simNow(chatId||DB.couple.activeBinding.chatId);
+  let y=now.getFullYear();
+  let d=new Date(y,base.getMonth(),base.getDate());
+  if(item.repeat!==false&&d.getTime()<new Date(now.getFullYear(),now.getMonth(),now.getDate()).getTime()) d=new Date(y+1,base.getMonth(),base.getDate());
+  return d;
+}
+function coupleNextDayNumber(item){
+  const now=simNow(DB.couple.activeBinding.chatId);
+  const today=new Date(now.getFullYear(),now.getMonth(),now.getDate());
+  return Math.max(0,Math.ceil((coupleAnniversaryDate(item)-today)/86400000));
+}
+function coupleAnniversaryText(item){
+  const d=coupleAnniversaryDate(item),n=coupleNextDayNumber(item);
+  return item.date+' · '+(n===0?'就是今天':n+' 天后')+(item.note?' · '+item.note:'');
+}
+function coupleDaysHTML(space){
+  return '<div class="card"><div class="row"><b class="grow">纪念日</b><button class="btn primary" id="coupleAddDay">＋ 添加</button></div>'
+    +(space.anniversaries.length?space.anniversaries.slice().sort(function(a,b){ return coupleAnniversaryDate(a)-coupleAnniversaryDate(b); }).map(function(a){
+      return '<div class="couple-row"><div class="couple-date-pill"><b>'+coupleNextDayNumber(a)+'</b><small>天</small></div><div class="grow"><b>'+esc(a.title||'纪念日')+'</b><div class="muted">'+esc(coupleAnniversaryText(a))+'</div></div><button class="btn danger" data-coupledaydel="'+a.id+'">删</button></div>';
+    }).join(''):'<div class="empty" style="padding:24px 8px">还没有纪念日。</div>')+'</div>';
+}
+function coupleDiaryHTML(space){
+  const r=exactBindingResolved(DB.couple.activeBinding),name=r.contact?contactDisplayName(r.contact):'Ta';
+  return '<div class="card"><div class="row"><b class="grow">交换日记</b><button class="btn" id="coupleWriteMine">写我的</button><button class="btn primary" id="coupleGenDiary">生成 '+esc(name)+' 的</button></div>'
+    +(space.diaries.length?space.diaries.slice().sort(function(a,b){ return (b.ts||0)-(a.ts||0); }).map(function(d){
+      return '<div class="couple-diary"><div class="meta"><b>'+(d.role==='me'?'我的日记':esc(name)+'的日记')+'</b><span>'+esc(d.date||shortTime(d.ts))+'</span></div><div class="txt">'+esc(d.text||'')+'</div><button class="btn danger" data-couplediarydel="'+d.id+'" style="margin-top:7px">删除</button></div>';
+    }).join(''):'<div class="empty" style="padding:24px 8px">还没有交换日记。</div>')+'</div>';
+}
+function coupleAlbumHTML(space){
+  return '<div class="card"><div class="row"><b class="grow">情侣相簿</b><button class="btn primary" id="couplePickPhoto">从相册选</button></div>'
+    +(space.album.length?'<div class="couple-album">'+space.album.map(function(p){
+      return '<div class="couple-photo" data-couplephoto="'+p.id+'"><img src="'+esc(p.url)+'" alt="'+esc(p.caption||'情侣照片')+'"><div class="cap">'+esc(p.caption||'我们的照片')+'</div><button class="ic2" data-couplephotodel="'+p.id+'" title="移除" style="position:absolute;right:3px;top:3px;background:rgba(0,0,0,.45);color:#fff">×</button></div>';
+    }).join('')+'</div>':'<div class="empty" style="padding:24px 8px">从相册里选一张放进情侣相簿。</div>')+'</div>';
+}
+function coupleTasksHTML(space){
+  return '<div class="card"><div class="row"><b class="grow">情侣任务</b><button class="btn" id="coupleCustomTask">自定义</button><button class="btn primary" id="coupleGenTask">系统生成</button></div>'
+    +(space.tasks.length?space.tasks.slice().sort(function(a,b){ return Number(a.done)-Number(b.done)||(b.ts||0)-(a.ts||0); }).map(function(t){
+      return '<div class="couple-task '+(t.done?'done':'')+'"><div class="task-title"><b>'+esc(t.title||'情侣任务')+'</b>'+(t.done?'<span class="np-chip on">完成</span>':'<button class="btn primary" data-coupletaskdone="'+t.id+'">完成</button>')+'</div><div class="muted">'+esc(t.desc||'')+'</div><div class="muted">'+esc((t.by==='me'?'你提出':t.by==='ta'?'Ta 提出':'系统生成'))+' · +'+Number(t.reward||5)+' 亲密度</div></div>';
+    }).join(''):'<div class="empty" style="padding:24px 8px">还没有情侣任务。</div>')+'</div>';
+}
+function coupleHomeHTML(space){
+  return '<div class="card"><div class="couple-home-name"><b>'+esc(space.home.name||'我们的小家')+'</b><button class="btn" id="coupleHomeEdit">编辑</button></div>'
+    +'<div class="muted">房间</div><div class="couple-chip-row">'+(space.home.rooms.length?space.home.rooms.map(function(x){ return '<span class="couple-chip">'+esc(x)+'<button data-couplehomedel="room:'+esc(x)+'">×</button></span>'; }).join(''):'<span class="muted">还没有添加</span>')+'</div><button class="btn full" data-couplehomeadd="room" style="margin-top:7px">＋ 添加房间</button>'
+    +'<div class="muted" style="margin-top:12px">物品</div><div class="couple-chip-row">'+(space.home.items.length?space.home.items.map(function(x){ return '<span class="couple-chip">'+esc(x)+'<button data-couplehomedel="item:'+esc(x)+'">×</button></span>'; }).join(''):'<span class="muted">还没有添加</span>')+'</div><button class="btn full" data-couplehomeadd="item" style="margin-top:7px">＋ 添加物品</button>'
+    +'<div class="muted" style="margin-top:12px">家庭成员</div><div class="couple-chip-row">'+(space.home.members.length?space.home.members.map(function(m){ return '<span class="couple-chip">'+esc((m.kind||'成员')+' · '+(m.name||''))+'<button data-couplememberdel="'+m.id+'">×</button></span>'; }).join(''):'<span class="muted">还没有添加</span>')+'</div><button class="btn full" data-couplehomeadd="member" style="margin-top:7px">＋ 领养宠物或添加孩子</button>'
+    +(space.home.notes?'<div class="takeout-review" style="margin-top:12px">'+esc(space.home.notes)+'</div>':'')
+    +'</div>';
+}
+function sheetCoupleBinding(){
+  sheetExactBinding({title:'情侣空间精确绑定',desc:'绑定一条会话，或分别选择角色和用户人设。相同用户人设与同一角色共用一份主空间；不同会话保留独立分支记忆。',binding:DB.couple.activeBinding,scope:'none',requireContact:true,requirePersona:true,onSave:function(binding){
+    coupleEnsure().activeBinding=binding;
+    coupleSpaceFor(binding,true);
+    save(); closeSheet(); render();
+  }});
+}
+function sheetCoupleMenu(){
+  const c=coupleEnsure(),space=coupleActiveSpace();
+  if(!space) return;
+  const branches=Object.keys(space.branches||{}).map(function(id){
+    const ch=chat(id),b=space.branches[id];
+    return '<div class="lrow" data-couplebranch="'+id+'"><div class="mi"><div class="t1">'+esc(ch?chatName(ch):'已删除的会话')+'</div><div class="t2">'+((b.memories||[]).length)+' 条分支记忆'+(space.activeBranchChatId===id?' · 当前':'')+'</div></div><div class="rt"><span class="chev">'+(space.activeBranchChatId===id?'✓':'›')+'</span></div></div>';
+  }).join('');
+  sheet('<h3>'+esc(space.title||'情侣空间')+'</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">'+esc(exactBindingSummary(c.activeBinding))+'</div>'
+    +(branches?'<div class="sechead">会话分支</div>'+branches:'')
+    +'<button class="btn primary full" id="coupleMenuBind">重新选择绑定</button><button class="btn full" id="coupleMenuClose">关闭</button>');
+  $('#coupleMenuBind').onclick=function(){ closeSheet(); sheetCoupleBinding(); };
+  $('#coupleMenuClose').onclick=closeSheet;
+  $$('#sheetBox [data-couplebranch]').forEach(function(el){ el.onclick=function(){
+    c.activeBinding=exactBindingSetChat(c.activeBinding,el.dataset.couplebranch);
+    coupleSpaceFor(c.activeBinding,true); save(); closeSheet(); render();
+  }; });
+}
+function sheetCoupleAnniversary(){
+  const space=coupleActiveSpace(); if(!space) return;
+  sheet('<h3>添加纪念日</h3><input id="cpaTitle" placeholder="名称，比如：第一次见面"><input id="cpaDate" value="'+todayCN()+'" placeholder="日期，比如：2026-10-27" style="margin-top:8px"><textarea id="cpaNote" style="margin-top:8px" placeholder="想记住的细节"></textarea><button class="btn primary full" id="cpaSave">保存</button><button class="btn full" id="cpaCancel">取消</button>');
+  $('#cpaCancel').onclick=closeSheet;
+  $('#cpaSave').onclick=function(){
+    const title=String($('#cpaTitle').value||'').trim();
+    const date=String($('#cpaDate').value||'').trim();
+    if(!title){ toast('写一个纪念日名称'); return; }
+    if(!coupleParseDate(date)){ toast('日期写成 2026-10-27 这样'); return; }
+    space.anniversaries.unshift({id:uid(),title:title.slice(0,40),date:date.slice(0,20),note:String($('#cpaNote').value||'').trim().slice(0,180),repeat:true,ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-anniversary')});
+    space.updatedAt=Date.now(); save(); closeSheet(); render(); toast('纪念日已保存');
+  };
+}
+function coupleMineDiary(){
+  const space=coupleActiveSpace(); if(!space) return;
+  sheet('<h3>写我的日记</h3><textarea id="cpmDiary" style="min-height:180px" placeholder="写下今天想留给这段关系的话"></textarea><button class="btn primary full" id="cpmDiarySave">保存</button><button class="btn full" id="cpmDiaryCancel">取消</button>');
+  $('#cpmDiaryCancel').onclick=closeSheet;
+  $('#cpmDiarySave').onclick=function(){
+    const text=String($('#cpmDiary').value||'').trim(); if(!text){ toast('还没有写内容'); return; }
+    space.diaries.unshift({id:uid(),role:'me',text:text.slice(0,3000),date:dateCN(DB.couple.activeBinding.chatId),ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-diary')});
+    coupleRecordMemory(space,'我在情侣空间写下：'+text.slice(0,70));
+    space.updatedAt=Date.now(); save(); closeSheet(); render(); toast('日记已保存');
+  };
+}
+async function generateCoupleDiary(){
+  const space=coupleActiveSpace(); if(!space) return;
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  if(!needKey()) return;
+  busy('正在写 Ta 的日记，请稍后');
+  try{
+    const branch=coupleActiveBranch(space);
+    const branchMemory=branch&&branch.memories&&branch.memories.length?'\n【这个会话分支里的情侣空间记忆】\n- '+branch.memories.slice(-8).join('\n- '):'';
+    const sys=promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-10),{chatId:r.binding.chatId,personaId:r.persona.id})
+      +'\n【任务】写一篇只给角色自己看的日记，主题围绕你和用户最近的真实相处。不要写成总结报告，不要提 AI、系统、任务。'
+      +'\n【要求】第一人称，180 到 350 个中文字；写具体动作、细节、情绪和没当面说出口的话。不能替用户写内心，不能编造聊天里不存在的大事。'
+      +'\n'+(r.chat?'\n'+memoryBlockForChat(r.chat.id):'')+branchMemory;
+    const out=await callModel([{role:'system',content:sys},{role:'user',content:'写今天的日记。'}]);
+    const text=stripFormatTitles(regexOf(r.contact,out)).trim();
+    if(!text) throw new Error('没有生成内容');
+    space.diaries.unshift({id:uid(),role:'ta',text:text.slice(0,3000),date:dateCN(r.binding.chatId),ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-diary')});
+    coupleRecordMemory(space,contactDisplayName(r.contact)+'在情侣日记里写到：'+text.slice(0,70));
+    space.updatedAt=Date.now(); save(); render(); toast('Ta 的日记写好了');
+  }catch(e){ toast('生成失败：'+e.message); }
+  finally{ busyDone(); }
+}
+function sheetCouplePickPhoto(){
+  const pics=(DB.galleryPics||[]).slice();
+  sheet('<h3>从相册选择</h3><div class="muted" style="margin:6px 0 10px">相簿只保存引用，不移除你原来的相册图片。</div>'
+    +(pics.length?'<div class="couple-album">'+pics.map(function(p){ return '<button class="couple-photo" data-couplepickphoto="'+p.id+'" style="padding:0;cursor:pointer"><img src="'+esc(p.url)+'"><div class="cap">'+esc((galleryAlbums().find(function(a){ return a.id===p.albumId; })||{}).name||'相册')+'</div></button>'; }).join('')+'</div>':'<div class="empty">相册里还没有图片。</div>')
+    +'<button class="btn full" id="couplePickClose" style="margin-top:10px">关闭</button>');
+  $('#couplePickClose').onclick=closeSheet;
+  $$('#sheetBox [data-couplepickphoto]').forEach(function(el){ el.onclick=function(){ const pic=(DB.galleryPics||[]).find(function(x){ return x.id===el.dataset.couplepickphoto; }); if(pic) sheetCouplePhotoCaption(pic); }; });
+}
+function sheetCouplePhotoCaption(pic){
+  sheet('<h3>写一句照片说明</h3><img src="'+esc(pic.url)+'" style="width:100%;max-height:300px;object-fit:cover;border-radius:12px"><input id="couplePhotoCap" placeholder="比如：那天雨停之后" style="margin-top:9px"><button class="btn primary full" id="couplePhotoSave">放进相簿</button><button class="btn full" id="couplePhotoCancel">取消</button>');
+  $('#couplePhotoCancel').onclick=sheetCouplePickPhoto;
+  $('#couplePhotoSave').onclick=function(){
+    const space=coupleActiveSpace(); if(!space) return;
+    space.album.unshift({id:uid(),galleryId:pic.id,url:pic.url,caption:String($('#couplePhotoCap').value||'').trim().slice(0,80),ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-album')});
+    space.updatedAt=Date.now(); save(); closeSheet(); render(); toast('已放进情侣相簿');
+  };
+}
+const COUPLE_TASK_POOL=[
+  ['一起听一首歌','各自选一首最近循环的歌，交换后说说第一句被打动的地方。',5],
+  ['一张不露脸的合照','拍下今天共同经历里的一个局部，比如牵手、杯子或两个人的影子。',6],
+  ['交换一件小事','各自说一件今天没说出口的小情绪，对方只听，不急着解决。',7],
+  ['为对方留一句语音','录制十五秒，不写稿，说此刻最想告诉对方的一件事。',5],
+  ['一起整理一个小角落','挑一个桌面、书架或相册角落，一起决定留下什么。',8]
+];
+async function generateCoupleTask(){
+  const space=coupleActiveSpace(); if(!space) return;
+  const r=exactBindingResolved(DB.couple.activeBinding); if(!r.contact) return;
+  let task=null;
+  if(DB.api.key){
+    busy('正在想一个情侣任务，请稍后');
+    try{
+      const out=await callModel([{role:'system',content:promptOf(r.contact,null,[],{chatId:r.binding.chatId,personaId:r.persona.id})+'\n【任务】生成一个今天就能完成的情侣任务。只输出 JSON：{"title":"短标题","desc":"具体怎么做，30到80字","reward":5}。不能要求花钱或出门，不能替用户做决定，不能 OOC。'},{role:'user',content:'生成一个任务。'}]);
+      const j=soulParseJSON(out);
+      task={title:String(j.title||'').slice(0,40),desc:String(j.desc||'').slice(0,180),reward:Math.max(2,Math.min(20,Number(j.reward)||5))};
+    }catch(e){ logErr('情侣任务生成失败：'+e.message); }
+    finally{ busyDone(); }
+  }
+  if(!task||!task.title){
+    const pick=COUPLE_TASK_POOL[(space.tasks.length+Date.now())%COUPLE_TASK_POOL.length];
+    task={title:pick[0],desc:pick[1],reward:pick[2]};
+  }
+  space.tasks.unshift(Object.assign({id:uid(),by:'system',done:false,ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-task')},task));
+  space.updatedAt=Date.now(); save(); render(); toast('系统任务已生成');
+}
+function sheetCoupleCustomTask(){
+  const space=coupleActiveSpace(); if(!space) return;
+  sheet('<h3>自定义情侣任务</h3><input id="cptTitle" placeholder="任务名称"><textarea id="cptDesc" style="margin-top:8px" placeholder="想一起完成什么"></textarea><div class="row" style="margin-top:8px"><select id="cptBy" class="grow"><option value="me">你提出</option><option value="ta">Ta 提出</option></select><input id="cptReward" type="number" min="2" max="20" value="5" style="width:92px"></div><button class="btn primary full" id="cptSave">保存</button><button class="btn full" id="cptCancel">取消</button>');
+  $('#cptCancel').onclick=closeSheet;
+  $('#cptSave').onclick=function(){
+    const title=String($('#cptTitle').value||'').trim(); if(!title){ toast('写一个任务名称'); return; }
+    space.tasks.unshift({id:uid(),title:title.slice(0,40),desc:String($('#cptDesc').value||'').trim().slice(0,180),by:$('#cptBy').value==='ta'?'ta':'me',reward:Math.max(2,Math.min(20,Number($('#cptReward').value)||5)),done:false,ts:Date.now(),bindingTrace:exactBindingTrace(DB.couple.activeBinding,'couple-task')});
+    space.updatedAt=Date.now(); save(); closeSheet(); render(); toast('任务已保存');
+  };
+}
+function completeCoupleTask(id){
+  const space=coupleActiveSpace(); if(!space) return;
+  const task=space.tasks.find(function(t){ return t.id===id; }); if(!task||task.done) return;
+  task.done=true; task.doneAt=Date.now();
+  space.intimacy+=Number(task.reward)||5;
+  coupleRecordMemory(space,'我们一起完成了情侣任务：'+task.title);
+  space.updatedAt=Date.now(); save(); render(); toast('任务完成，亲密度 +'+(Number(task.reward)||5));
+}
+function sheetCoupleHomeEdit(){
+  const space=coupleActiveSpace(); if(!space) return;
+  sheet('<h3>编辑我们的小家</h3><input id="cphName" value="'+esc(space.home.name||'我们的小家')+'" placeholder="小家名称"><textarea id="cphNotes" style="margin-top:8px" placeholder="想写的小家备注">'+esc(space.home.notes||'')+'</textarea><button class="btn primary full" id="cphSave">保存</button><button class="btn full" id="cphCancel">取消</button>');
+  $('#cphCancel').onclick=closeSheet;
+  $('#cphSave').onclick=function(){ space.home.name=String($('#cphName').value||'').trim().slice(0,30)||'我们的小家'; space.home.notes=String($('#cphNotes').value||'').trim().slice(0,500); space.updatedAt=Date.now(); save(); closeSheet(); render(); };
+}
+function sheetCoupleHomeAdd(kind){
+  const space=coupleActiveSpace(); if(!space) return;
+  if(kind==='member'){
+    sheet('<h3>添加家庭成员</h3><input id="cphMemberName" placeholder="名字"><select id="cphMemberKind" style="margin-top:8px"><option value="宠物">宠物</option><option value="孩子">孩子</option><option value="虚拟家庭成员">虚拟家庭成员</option></select><button class="btn primary full" id="cphMemberSave">添加</button><button class="btn full" id="cphMemberCancel">取消</button>');
+    $('#cphMemberCancel').onclick=closeSheet;
+    $('#cphMemberSave').onclick=function(){ const name=String($('#cphMemberName').value||'').trim(); if(!name){ toast('写一个名字'); return; } space.home.members.push({id:uid(),name:name.slice(0,24),kind:$('#cphMemberKind').value||'宠物'}); space.updatedAt=Date.now(); save(); closeSheet(); render(); };
+    return;
+  }
+  const label=kind==='room'?'房间':'物品';
+  sheet('<h3>添加'+label+'</h3><input id="cphItemName" placeholder="'+label+'名称"><button class="btn primary full" id="cphItemSave">添加</button><button class="btn full" id="cphItemCancel">取消</button>');
+  $('#cphItemCancel').onclick=closeSheet;
+  $('#cphItemSave').onclick=function(){ const name=String($('#cphItemName').value||'').trim(); if(!name){ toast('写一个名称'); return; } const list=kind==='room'?space.home.rooms:space.home.items; if(list.indexOf(name)<0) list.push(name.slice(0,30)); space.updatedAt=Date.now(); save(); closeSheet(); render(); };
 }
 const SOUL_MATCH_MS=5*60*1000;
 const SOUL_RETRY_MS=60*1000;
@@ -10596,6 +10966,48 @@ function bindScreenInner(){
     if(soulMenu) soulMenu.onclick=function(){ const m=soulActiveMatch(); if(m) sheetSoulMenu(m); };
     const soulChat=$('#soulChat'); if(soulChat) soulChat.scrollTop=soulChat.scrollHeight;
   }
+  $$('[data-couplebind]',s).forEach(function(el){ el.onclick=sheetCoupleBinding; });
+  $$('[data-coupletp]',s).forEach(function(el){ el.onclick=function(){ coupleEnsure().tab=el.dataset.coupletp; save(); render(); }; });
+  const coupleMenu=$('#coupleMenu'); if(coupleMenu) coupleMenu.onclick=sheetCoupleMenu;
+  const coupleAddDay=$('#coupleAddDay'); if(coupleAddDay) coupleAddDay.onclick=sheetCoupleAnniversary;
+  const coupleWriteMine=$('#coupleWriteMine'); if(coupleWriteMine) coupleWriteMine.onclick=coupleMineDiary;
+  const coupleGenDiary=$('#coupleGenDiary'); if(coupleGenDiary) coupleGenDiary.onclick=generateCoupleDiary;
+  const couplePickPhoto=$('#couplePickPhoto'); if(couplePickPhoto) couplePickPhoto.onclick=sheetCouplePickPhoto;
+  const coupleGenTask=$('#coupleGenTask'); if(coupleGenTask) coupleGenTask.onclick=generateCoupleTask;
+  const coupleCustomTask=$('#coupleCustomTask'); if(coupleCustomTask) coupleCustomTask.onclick=sheetCoupleCustomTask;
+  const coupleHomeEdit=$('#coupleHomeEdit'); if(coupleHomeEdit) coupleHomeEdit.onclick=sheetCoupleHomeEdit;
+  $$('[data-couplehomeadd]',s).forEach(function(el){ el.onclick=function(){ sheetCoupleHomeAdd(el.dataset.couplehomeadd); }; });
+  $$('[data-coupletaskdone]',s).forEach(function(el){ el.onclick=function(){ completeCoupleTask(el.dataset.coupletaskdone); }; });
+  $$('[data-coupledaydel]',s).forEach(function(el){ el.onclick=function(){
+    const space=coupleActiveSpace(); if(!space) return;
+    const item=space.anniversaries.find(function(x){ return x.id===el.dataset.coupledaydel; }); if(!item) return;
+    sheetSmall('<h3>删除纪念日？</h3><div class="muted" style="margin:8px 0 14px">'+esc(item.title||'纪念日')+'</div><button class="btn danger full" id="cpdDayYes">删除</button><button class="btn full" id="cpdDayNo">取消</button>');
+    $('#cpdDayNo').onclick=closeSheet;
+    $('#cpdDayYes').onclick=function(){ space.anniversaries=space.anniversaries.filter(function(x){ return x.id!==item.id; }); save(); closeSheet(); render(); };
+  }; });
+  $$('[data-couplediarydel]',s).forEach(function(el){ el.onclick=function(){
+    const space=coupleActiveSpace(); if(!space) return;
+    const item=space.diaries.find(function(x){ return x.id===el.dataset.couplediarydel; }); if(!item) return;
+    sheetSmall('<h3>删除这篇日记？</h3><div class="muted" style="margin:8px 0 14px">删除后不会影响微信聊天。</div><button class="btn danger full" id="cpdDiaryYes">删除</button><button class="btn full" id="cpdDiaryNo">取消</button>');
+    $('#cpdDiaryNo').onclick=closeSheet;
+    $('#cpdDiaryYes').onclick=function(){ space.diaries=space.diaries.filter(function(x){ return x.id!==item.id; }); save(); closeSheet(); render(); };
+  }; });
+  $$('[data-couplephotodel]',s).forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation();
+    const space=coupleActiveSpace(); if(!space) return;
+    space.album=space.album.filter(function(x){ return x.id!==el.dataset.couplephotodel; }); save(); render();
+  }; });
+  $$('[data-couplephoto]',s).forEach(function(el){ el.onclick=function(){ const space=coupleActiveSpace(); const p=space&&space.album.find(function(x){ return x.id===el.dataset.couplephoto; }); if(p) sheet('<img src="'+esc(p.url)+'" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px"><div class="muted" style="margin-top:8px">'+esc(p.caption||'')+'</div><button class="btn full" id="couplePhotoClose">关闭</button>')||($('#couplePhotoClose').onclick=closeSheet); }; });
+  $$('[data-couplehomedel]',s).forEach(function(el){ el.onclick=function(){
+    const space=coupleActiveSpace(); if(!space) return;
+    const bits=String(el.dataset.couplehomedel||'').split(':'),kind=bits.shift(),value=bits.join(':');
+    if(kind==='room') space.home.rooms=space.home.rooms.filter(function(x){ return x!==value; });
+    if(kind==='item') space.home.items=space.home.items.filter(function(x){ return x!==value; });
+    save(); render();
+  }; });
+  $$('[data-couplememberdel]',s).forEach(function(el){ el.onclick=function(){
+    const space=coupleActiveSpace(); if(!space) return;
+    space.home.members=space.home.members.filter(function(x){ return x.id!==el.dataset.couplememberdel; }); save(); render();
+  }; });
   /* 朋友圈 */
   if(route.name==='wechat'&&wtab==='moments'){
     const mp=$('#mPost'); if(mp) mp.onclick=()=>sheetPost();
@@ -11417,8 +11829,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-27 · 3.56 · 第 67 轮';
-const BUILD_CODE=67;
+const BUILD='2026-10-27 · 3.57 · 第 68 轮';
+const BUILD_CODE=68;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -11439,7 +11851,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -11452,6 +11864,8 @@ async function runCheckupUI(){
   add('微博角色互动', typeof wbReactToUserPost==='function'&&typeof wbReactLikeUserPost==='function'&&typeof wbReactRepostUserPost==='function', '点赞 / 评论 / 随机转发已接入');
   const soulState=soulEnsure();
   add('灵魂匹配', Array.isArray(soulState.sessions)&&Array.isArray(soulState.pending)&&typeof soulAcceptRequest==='function', soulState.sessions.length+' 次匹配 · '+soulPendingCount()+' 条待处理申请 · 五分钟计时与好友迁移已接入');
+  const coupleState=coupleEnsure();
+  add('情侣空间', Array.isArray(coupleState.spaces)&&typeof coupleSpaceFor==='function'&&typeof generateCoupleDiary==='function', coupleState.spaces.length+' 份主空间 · 纪念日/交换日记/相簿/任务/小家/分支记忆已接入');
   npEnsureNovelWorldbooks();
   const novelWorldIds=new Set((DB.np.novelWorldbooks||[]).map(function(item){ return item.id; }));
   const globalWorldIds=new Set((DB.worldbooks||[]).map(function(item){ return item.id; }));

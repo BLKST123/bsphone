@@ -1,9 +1,9 @@
 {
-  "version": "3.56",
-  "versionCode": 67,
-  "round": 67,
+  "version": "3.57",
+  "versionCode": 68,
+  "round": 68,
   "releasedAt": "2026-10-27",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=67",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=68",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "灵魂匹配完成匿名生成、五分钟计时、退出暂停、好友申请红点、拒绝重试、三次拒绝清空，以及通过后聊天迁移与来源保留。"
+  "notes": "情侣空间基础闭环上线：精确绑定、主空间与会话分支、纪念日、交换日记、相册、任务、亲密度、小家与微信记忆互通。"
 }
