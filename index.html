@@ -2357,6 +2357,7 @@ const STYLES={
 };
 const DEF={
   api:{base:'https://api.deepseek.com',endpoint:'',key:'',model:'deepseek-chat',temp:0.9,modelList:[],listMsg:'',contextLimit:-1,maxTokens:0,stream:false},
+  imageGen:{enabled:false,base:'',key:'',model:'gpt-image-1',size:'1024x1024',quality:'medium',stylePrompt:'自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。',useCharacterRef:true,useUserRef:true},
   apiLib:[],
   audio:{provider:'minimax',endpoint:'https://api.minimax.chat/v1/t2a_v2',key:'',model:'speech-01-turbo',voiceId:'',groupId:''},
   ui:{theme:'sakura',themeStyle:'standard',themeWall:true,wall:'w1',dark:false,customWall:'',appOrder:[],homePages:[],homePage:0,appIcons:{},widgets:[],widgetPages:[],customCss:'',rxOpen:{def:true},open:{},demoSeeded:false,demoVersion:0,wifi:true,silent:false,dnd:false,brightness:1,globalPageWall:'',pageWalls:{},fontFamily:'',fontData:'',fontScale:.85,lowPerf:false,pushEnabled:false,soundEnabled:true,soundVolume:.35,soundPreset:'ding',soundCustom:'',soundCustomName:'',clickSound:'none',clickVolume:.28,fullscreen:false,globalFloat:false,desktopFloat:true,floatStyle:'mix',customFloatImage:'',customFloatName:'',appearanceSaves:[],desktopThemeV:0},
@@ -2416,6 +2417,10 @@ function fixApi(){
   if(DB.api.maxTokens===undefined) DB.api.maxTokens=0;
   DB.api.maxTokens=Math.max(0,Math.min(200000,Number(DB.api.maxTokens)||0));
   DB.api.stream=!!DB.api.stream;
+  DB.imageGen=Object.assign({enabled:false,base:'',key:'',model:'gpt-image-1',size:'1024x1024',quality:'medium',stylePrompt:'自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。',useCharacterRef:true,useUserRef:true},DB.imageGen||{});
+  DB.imageGen.enabled=!!DB.imageGen.enabled;
+  DB.imageGen.useCharacterRef=DB.imageGen.useCharacterRef!==false;
+  DB.imageGen.useUserRef=DB.imageGen.useUserRef!==false;
 }
 function fixHangHistory(){
   DB.hang=DB.hang||{phone:{},doing:{}};
@@ -4609,6 +4614,7 @@ function screenContactView(){
     +'<div class="card" style="margin-top:12px">'
     +'<div class="lrow" data-chatwith="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">发消息</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-editct="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">编辑资料</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +((c.generatedPhotos||[]).length?'<div class="lrow" data-aiphoto-contact="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">AI 照片</div><div class="t2">'+c.generatedPhotos.length+' 张 · 永久绑定这个角色</div></div><div class="rt"><span class="chev">›</span></div></div>':'')
     +'<div class="lrow" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">绑定正则</div><div class="t2">'+(nB?nB+' 条':'未绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'</div>'
     +'<div class="card"><div class="muted">朋友圈频率</div><div class="kv"><span>发朋友圈</span><b>'+lv(f.post)+'</b></div><div class="kv"><span>点赞</span><b>'+lv(f.like)+'</b></div><div class="kv"><span>评论</span><b>'+lv(f.comment)+'</b></div><div class="kv"><span>回复</span><b>'+lv(f.reply)+'</b></div></div>'
@@ -5319,7 +5325,7 @@ function msgHTML(m,ch,selection){
       +(m.showText?'<div class="vtrans">'+textHTML(m.text)+'</div>':'');
   }
   else if(T==='sticker'){ inner='<img class="sticker" src="'+esc(m.url)+'" data-img="'+esc(m.url)+'">'; }
-  else if(T==='image'){ inner='<div class="rich"><img src="'+esc(m.url)+'" data-img="'+esc(m.url)+'"></div>'; }
+  else if(T==='image'){ inner='<div class="rich"><img src="'+esc(m.url)+'" '+(m.imageGenId?('data-genimage="'+esc(m.imageGenId)+'"'):('data-img="'+esc(m.url)+'"'))+'></div>'; }
   else if(T==='redpacket'){
     inner='<div class="rich" data-rp="'+m.id+'"><div class="rp"><div class="ic3">'+ic('envelope',26)+'</div><div><div class="tt">'+esc(m.note||'恭喜发财，大吉大利')+'</div><div class="am">¥ '+esc(m.amount||'0.00')+'</div></div></div><div class="ft">微信红包'+(m.opened?' · 已领取':'')+'</div></div>';
   }
@@ -5566,6 +5572,7 @@ async function sendText(){
   pushMsg(curChatId,{role:'me',type:'text',text:t});
   const chs=chat(curChatId);
   if(chs){
+    maybeAutoGenerateChatImage(chs,t);
     const intent=/(帮我点|给我点|点个外卖|点份外卖|我想吃|我想喝|我饿了|给我买杯|帮我买杯)/.test(String(t||''))&&!/(别点|不要点|不用点|别买)/.test(String(t||''));
     if(intent){
       DB.takeout.binding=exactBindingSetChat(DB.takeout.binding,chs.id);
@@ -5585,6 +5592,7 @@ function sendRich(m,nudge){
 function panelPlus(){
   const items=[['envelope','红包','rp'],['arrow','转账','tf'],['gift','礼物','gf'],['pin','位置','loc'],
                ['image','图片','img'],['music','音乐','mus'],['doc','文件','doc'],['gift','外卖','takeout'],['smile','表情包','stk']];
+  if(imageEnsure().enabled) items.push(['sparkles','AI照片','genimg']);
   return '<div class="plus">'+items.map(i=>'<div class="it" data-plus="'+i[2]+'"><div class="ic">'+ic(i[0],24)+'</div><div>'+i[1]+'</div></div>').join('')+'</div>';
 }
 function showPanel(html,kind){
@@ -5619,6 +5627,7 @@ function panelAction(k){
     DB.takeout.binding=exactBindingSetChat(DB.takeout.binding,ch.id);
     DB.takeout.chatId=ch.id; DB.takeout.contactId=ch.memberIds[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; DB.takeout.activeTab='home'; save(); hidePanel(); go('takeout');
   }
+  else if(k==='genimg') sheetImageGenerate();
   else if(k==='stk') showPanel(panelStickers(),'stk');
 }
 function toggleMeet(){
@@ -6416,7 +6425,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.59 · 第 70 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.60 · 第 71 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -6436,10 +6445,10 @@ const PROGRESS_GROUPS=[
   {k:'partial',n:'部分完成',color:'#c28b23',items:[
     ['通知与后台','已有顶部状态栏、通知中心、角标和原生通知桥；App 完全退出后的持续后台推送仍需真机长期验证和原生服务配合。'],
     ['音乐与一起听','本地音频导入、歌单、LRC/文本歌词、进度、跨板块播放、一起听、实时评论、共同收藏和听歌历史已可用；网易云扫码登录与授权歌单导入仍未接入。'],
+    ['AI 生图','设置、自拍/食物/双人/场景识别、角色与用户参考图、相册保存、角色永久绑定、修改提示词、重新生成和删除已接入；还需用自己的真实生图接口验证不同供应商兼容性与费用。'],
     ['网购素材','商品库和自定义图片已可用；现实白底商品图覆盖率与非现代世界观白图策略还要继续完善。']
   ]},
   {k:'pending',n:'尚未完成',color:'#c4545b',items:[
-    ['AI 生图','用户自有生图 API、场景自拍/食物/双人照、角色脸一致性、图片本地保存与重新生成；本轮按要求暂不接。'],
     ['高级统计与发布','完整的跨模块数据统计、内容时间线来源视图和更细的发布运营工具。']
   ]}
 ];
@@ -6456,6 +6465,287 @@ function readApiForm(){
   if(tp&&Number(tp.value)) DB.api.temp=Number(tp.value);
   DB.api.endpoint='';
   save();
+}
+function imageEnsure(){
+  const defaults={enabled:false,base:'',key:'',model:'gpt-image-1',size:'1024x1024',quality:'medium',stylePrompt:'自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。',useCharacterRef:true,useUserRef:true,history:[]};
+  DB.imageGen=DB.imageGen||{};
+  Object.keys(defaults).forEach(function(k){ if(DB.imageGen[k]===undefined) DB.imageGen[k]=defaults[k]; });
+  if(!Array.isArray(DB.imageGen.history)) DB.imageGen.history=[];
+  return DB.imageGen;
+}
+function imageApiEndpoint(kind){
+  const g=imageEnsure();
+  let base=normBase(g.base);
+  if(!base) return '';
+  if(/\/images\/(generations|edits)$/i.test(base)){
+    if(kind==='generations') return base;
+    return base.replace(/\/images\/(generations|edits)$/i,'/images/edits');
+  }
+  if(!/\/v\d+$/i.test(base)) base+='/v1';
+  return base+'/images/'+kind;
+}
+function imageDataBlobFromDataUrl(url){
+  return fetch(url).then(function(r){ return r.blob(); });
+}
+function imageCompressUrl(url,max){
+  return new Promise(function(resolve){
+    if(!url) return resolve('');
+    if(/^https?:\/\//i.test(url)&&!/^data:/i.test(url)) return resolve(url);
+    const img=new Image();
+    img.onload=function(){
+      try{
+        const side=Math.max(1,Number(max)||1100);
+        const scale=Math.min(1,side/Math.max(img.width||1,img.height||1));
+        const canvas=document.createElement('canvas');
+        canvas.width=Math.max(1,Math.round((img.width||1)*scale));
+        canvas.height=Math.max(1,Math.round((img.height||1)*scale));
+        const ctx=canvas.getContext('2d');
+        ctx.fillStyle='#fff';ctx.fillRect(0,0,canvas.width,canvas.height);ctx.drawImage(img,0,0,canvas.width,canvas.height);
+        resolve(canvas.toDataURL('image/jpeg',0.84));
+      }catch(e){ resolve(url); }
+    };
+    img.onerror=function(){ resolve(url); };
+    img.src=url;
+  });
+}
+async function imageMaterializeResult(item){
+  if(!item) throw new Error('接口没有返回图片');
+  if(item.b64_json){ const url='data:image/png;base64,'+item.b64_json; return imageCompressUrl(url,1200); }
+  const url=item.url||item.image||item.image_url;
+  if(!url) throw new Error('接口没有返回图片地址');
+  if(/^data:/i.test(url)) return imageCompressUrl(url,1200);
+  if(/^https?:\/\//i.test(url)){
+    try{
+      const r=await fetch(url,{cache:'no-store'});
+      if(!r.ok) throw new Error('HTTP '+r.status);
+      const blob=await r.blob();
+      const local=URL.createObjectURL(blob);
+      const compressed=await imageCompressUrl(local,1200);
+      URL.revokeObjectURL(local);
+      return compressed;
+    }catch(e){ logErr('生图结果转存失败：'+e.message); return url; }
+  }
+  return url;
+}
+async function imageParseResponse(r){
+  let body={};
+  const raw=await r.text();
+  try{ body=raw?JSON.parse(raw):{}; }catch(e){ body={raw:raw}; }
+  if(!r.ok){
+    const detail=body.error&&(body.error.message||body.error)||body.message||body.raw||('HTTP '+r.status);
+    const err=new Error(String(detail).slice(0,220)); err.status=r.status; throw err;
+  }
+  const item=body.data&&body.data[0]||body.output&&body.output[0]||body.image&&{url:body.image}||body;
+  return imageMaterializeResult(item);
+}
+function imageRefUrl(value){ return /^(data:image\/|https?:\/\/|blob:)/i.test(String(value||''))?String(value):''; }
+function imageCharacterRef(contact){
+  if(!contact) return '';
+  return imageRefUrl(contact.avatar)||imageRefUrl(contact.aiReferenceImage)||'';
+}
+function imageUserRef(persona){
+  return imageRefUrl(DB.me.avatar)||imageRefUrl(persona&&persona.avatar)||'';
+}
+function imageIntentKind(text){
+  const t=String(text||'');
+  if(/(我们.*合照|双人照|一起.*照片|上次.*照片|我们的照片|拍张合照|拍个合照)/.test(t)) return 'couple';
+  if(/(吃.*什么|吃点啥|看看.*吃的|食物照片|拍.*吃的|夜宵照片|奶茶照片|咖啡照片)/.test(t)) return 'food';
+  if(/(看看你那边|你在哪|拍一下周围|你那边.*样子|看看你窗|你窗外|窗外.*照片|场景照)/.test(t)) return 'scene';
+  if(/(想看看你|看看你|你.*照片|自拍|拍张你|发张照片|拍给我看|让我看看你)/.test(t)) return 'selfie';
+  return '';
+}
+function imagePurposePrompt(kind,userText,custom){
+  if(custom&&String(custom).trim()) return String(custom).trim();
+  if(kind==='food') return '一张真实的食物照片，像坐在对面随手拍下这一顿。重点拍食物、桌面、餐具和当天的生活痕迹，不出现清晰可辨的人脸。';
+  if(kind==='couple') return '一张角色和用户在一起的生活合照，两个人处于同一真实空间，构图自然，不摆拍，不换脸，保持双方原本脸部特征和发型。';
+  if(kind==='scene') return '一张角色此刻所在环境的第一视角或侧拍照片，让人能看见角色生活的真实空间、光线和日常物品。角色可以在画面边缘或背影出现。';
+  if(kind==='selfie') return '一张角色本人的氛围感自拍或朋友视角生活照，脸部清晰自然，像真实手机拍摄，不要棚拍感。';
+  return '一张与聊天语境相符的真实生活照片。';
+}
+function imageBuildPrompt(contact,persona,kind,userText,custom){
+  const g=imageEnsure();
+  const bits=[];
+  bits.push('自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。');
+  bits.push(imagePurposePrompt(kind,userText,custom));
+  if(contact){
+    bits.push('角色固定特征：'+[contact.name,contact.gender,contact.age?contact.age+'岁':'',contact.appearance,contact.identity].filter(Boolean).join('，')+'。所有照片必须是同一张脸、同一发型和同一气质。');
+  }
+  if(persona) bits.push('用户固定特征：'+[persona.name,persona.gender,persona.age?persona.age+'岁':'',persona.appearance,personaFullText(persona)].filter(Boolean).join('；').slice(0,700)+'。用户在照片中必须保持同一张脸。');
+  if(userText) bits.push('聊天里的照片请求：'+String(userText).slice(0,400));
+  if(g.stylePrompt) bits.push('全局画面要求：'+String(g.stylePrompt).slice(0,1000));
+  return bits.join('\n');
+}
+function imageEnsureAlbum(){
+  DB.galleryAlbums=Array.isArray(DB.galleryAlbums)?DB.galleryAlbums:[];
+  let album=DB.galleryAlbums.find(function(a){ return a.id==='ai_generated'; });
+  if(!album){ album={id:'ai_generated',name:'AI 生图',builtin:true}; DB.galleryAlbums.push(album); }
+  return album;
+}
+async function imageRequest(prompt,refs){
+  const g=imageEnsure();
+  if(!g.base) throw new Error('还没有填写生图 API 地址');
+  if(!g.key) throw new Error('还没有填写生图 API Key');
+  const headers={Authorization:'Bearer '+g.key};
+  let r=null;
+  const validRefs=(refs||[]).filter(Boolean).slice(0,2);
+  const attachments=[];
+  for(const ref of validRefs){
+    try{
+      const blob=await imageDataBlobFromDataUrl(ref);
+      if(blob&&blob.size) attachments.push(blob);
+    }catch(e){ logErr('生图参考图读取失败：'+e.message); }
+  }
+  if(attachments.length){
+    const form=new FormData();
+    form.append('model',g.model||'gpt-image-1');
+    form.append('prompt',prompt);
+    form.append('size',g.size||'1024x1024');
+    form.append('quality',g.quality||'medium');
+    form.append('n','1');
+    for(const blob of attachments){
+      form.append(attachments.length===1?'image':'image[]',blob,'reference.'+(blob.type.indexOf('png')>=0?'png':'jpg'));
+    }
+    r=await fetch(imageApiEndpoint('edits'),{method:'POST',headers:headers,body:form});
+    if([400,404,415,422].indexOf(r.status)>=0){
+      const generation=imageApiEndpoint('generations');
+      r=await fetch(generation,{method:'POST',headers:Object.assign({},headers,{'Content-Type':'application/json'}),body:JSON.stringify({model:g.model||'gpt-image-1',prompt:prompt,n:1,size:g.size||'1024x1024',quality:g.quality||'medium'})});
+    }
+  }else{
+    r=await fetch(imageApiEndpoint('generations'),{method:'POST',headers:Object.assign({},headers,{'Content-Type':'application/json'}),body:JSON.stringify({model:g.model||'gpt-image-1',prompt:prompt,n:1,size:g.size||'1024x1024',quality:g.quality||'medium'})});
+  }
+  return imageParseResponse(r);
+}
+async function imageGenerateAndSend(chatId,contactId,personaId,kind,userText,customPrompt,replaceId){
+  const g=imageEnsure();
+  if(!g.enabled) throw new Error('AI 生图还没有开启');
+  const ch=chat(chatId); if(!ch) throw new Error('会话不存在');
+  const c=ct(contactId)||ct((ch.memberIds||[])[0]); if(!c) throw new Error('角色不存在');
+  const p=(DB.me.personas||[]).find(function(x){ return x.id===(personaId||ch.personaId||DB.me.personaId); })||null;
+  const prompt=imageBuildPrompt(c,p,kind,userText,customPrompt);
+  const refs=[];
+  if(g.useCharacterRef){ const r=imageCharacterRef(c); if(r) refs.push(r); }
+  if(g.useUserRef&&(kind==='couple')){ const r=imageUserRef(p); if(r) refs.push(r); }
+  const url=await imageRequest(prompt,refs);
+  const old=replaceId?g.history.find(function(x){ return x.id===replaceId; }):null;
+  let gallery=old?DB.galleryPics.find(function(x){ return x.id===old.galleryId; }):null;
+  if(!gallery){
+    imageEnsureAlbum();
+    gallery=galleryAddPic('ai_generated',url);
+  }else{
+    gallery.url=url;gallery.ts=Date.now();gallerySyncPics();
+  }
+  const rec=old||{id:'img_'+uid(),createdAt:Date.now(),contactId:c.id,chatId:ch.id};
+  Object.assign(rec,{galleryId:gallery.id,kind:kind,userText:String(userText||'').slice(0,500),customPrompt:String(customPrompt||'').slice(0,1200),prompt:prompt,personaId:p?p.id:null,model:g.model,updatedAt:Date.now()});
+  if(!old) g.history.unshift(rec);
+  g.history=g.history.slice(0,40);
+  c.generatedPhotos=Array.isArray(c.generatedPhotos)?c.generatedPhotos:[];
+  if(c.generatedPhotos.indexOf(rec.id)<0) c.generatedPhotos.unshift(rec.id);
+  if(old){
+    (ch.msgs||[]).forEach(function(m){ if(m.imageGenId===rec.id){ m.url=url;m.ts=Date.now(); } });
+  }else{
+    pushMsg(ch.id,{role:'ta',from:c.id,type:'image',url:url,imageGenId:rec.id});
+  }
+  save();
+  return rec;
+}
+function imageByGeneratedId(id){ return imageEnsure().history.find(function(x){ return x.id===id; })||null; }
+function imageRecordUrl(rec){
+  const item=rec&&DB.galleryPics.find(function(x){ return x.id===rec.galleryId; });
+  return item?item.url:'';
+}
+function maybeAutoGenerateChatImage(ch,text){
+  const g=imageEnsure();
+  const kind=imageIntentKind(text);
+  if(!kind||!g.enabled||!g.key||!g.base) return;
+  if(window.__bsImageAutoBusy) return;
+  window.__bsImageAutoBusy=true;
+  busy('Ta 正在拍照片，请稍后');
+  imageGenerateAndSend(ch.id,(ch.memberIds||[])[0],ch.personaId||DB.me.personaId,kind,text,'',null)
+    .catch(function(e){ toast('照片生成失败：'+e.message); logErr('自动生图失败：'+e.message); })
+    .finally(function(){ window.__bsImageAutoBusy=false; busyDone(); if(route.name==='chatroom'&&route.arg===ch.id) render(); });
+}
+function sheetImageApiSettings(){
+  const g=imageEnsure();
+  sheetFull('<h3>AI 生图 API</h3><div class="muted" style="margin:6px 0 12px;line-height:1.75">这是独立的生图接口设置。接口、Key 和费用都由用户自己提供；软件不代理任何模型服务。</div>'
+    +'<div class="card" style="box-shadow:none"><div class="row"><div class="grow"><b>启用 AI 生图</b><div class="muted">聊天里强烈要照片时会自动生成</div></div><input id="igEnabled" type="checkbox" style="width:22px;height:22px" '+(g.enabled?'checked':'')+'></div></div>'
+    +'<input id="igBase" value="'+esc(g.base||'')+'" placeholder="生图 API 地址（比如 https://api.openai.com/v1）">'
+    +'<input id="igKey" type="password" value="'+esc(g.key||'')+'" placeholder="生图 API Key" style="margin-top:8px">'
+    +'<input id="igModel" value="'+esc(g.model||'gpt-image-1')+'" placeholder="生图模型" style="margin-top:8px">'
+    +'<div class="row" style="margin-top:8px"><select id="igSize" class="grow">'+['1024x1024','1024x1536','1536x1024','512x512'].map(function(x){ return '<option'+(g.size===x?' selected':'')+'>'+x+'</option>'; }).join('')+'</select><select id="igQuality" style="width:110px">'+['low','medium','high','auto'].map(function(x){ return '<option'+(g.quality===x?' selected':'')+'>'+x+'</option>'; }).join('')+'</select></div>'
+    +'<textarea id="igStyle" style="margin-top:8px;min-height:120px" placeholder="全局画面要求">'+esc(g.stylePrompt||'')+'</textarea>'
+    +'<div class="row" style="margin-top:9px"><div class="grow"><b>使用角色头像做参考</b><div class="muted">图片型头像会作为参考图；文字头像只能使用人设描述</div></div><input id="igCharRef" type="checkbox" style="width:22px;height:22px" '+(g.useCharacterRef?'checked':'')+'></div>'
+    +'<div class="row" style="margin-top:9px"><div class="grow"><b>双人照使用我的头像做参考</b><div class="muted">仅对双人合照生效</div></div><input id="igUserRef" type="checkbox" style="width:22px;height:22px" '+(g.useUserRef?'checked':'')+'></div>'
+    +'<button class="btn primary full" id="igSave" style="margin-top:12px">保存设置</button>'
+    +'<button class="btn full" id="igTest">测试生图</button>'
+    +'<button class="btn full" id="igClose">关闭</button>');
+  $('#igClose').onclick=closeSheet;
+  const read=function(){
+    g.enabled=!!$('#igEnabled').checked;g.base=normBase($('#igBase').value);g.key=String($('#igKey').value||'').trim();
+    g.model=String($('#igModel').value||'').trim()||'gpt-image-1';g.size=$('#igSize').value;g.quality=$('#igQuality').value;
+    g.stylePrompt=String($('#igStyle').value||'').trim();g.useCharacterRef=!!$('#igCharRef').checked;g.useUserRef=!!$('#igUserRef').checked;save();
+  };
+  $('#igSave').onclick=function(){ read(); closeSheet(); render(); toast('生图设置已保存'); };
+  $('#igTest').onclick=async function(){
+    read(); if(!g.base||!g.key){ toast('先填接口和 Key'); return; }
+    busy('正在测试生图，请稍后');
+    try{ const url=await imageRequest('一个放在木桌上的白色陶瓷杯，真实手机照片，无文字无水印。',[]); toast('生图接口已返回图片'); sheetFull('<h3>生图测试</h3><img src="'+esc(url)+'" style="width:100%;max-height:70vh;object-fit:contain;border-radius:12px"><button class="btn full" id="igTestClose">返回设置</button>'); $('#igTestClose').onclick=sheetImageApiSettings; }
+    catch(e){ toast('生图失败：'+e.message); }
+    finally{ busyDone(); }
+  };
+}
+function sheetImageGenerate(kind){
+  const ch=chat(curChatId||route.arg); if(!ch) return;
+  const c=ct((ch.memberIds||[])[0]); if(!c){ toast('这个会话没有可生成的角色'); return; }
+  const g=imageEnsure();
+  if(!g.enabled){ toast('先到设置里开启 AI 生图'); sheetImageApiSettings(); return; }
+  sheet('<h3>AI 照片</h3><div class="muted" style="margin:6px 0 10px">给 '+esc(contactDisplayName(c))+' 生成一张照片并发到当前会话。</div>'
+    +'<select id="igKind" style="margin-bottom:8px">'+[['selfie','角色自拍'],['food','食物照片'],['couple','双人合照'],['scene','角色所在场景']].map(function(x){ return '<option value="'+x[0]+'"'+(kind===x[0]?' selected':'')+'>'+x[1]+'</option>'; }).join('')+'</select>'
+    +'<textarea id="igCustom" style="min-height:120px" placeholder="可以补充画面，比如：在窗边，刚洗完头发，傍晚的光，不要看镜头"></textarea>'
+    +'<button class="btn primary full" id="igGen">生成并发送</button><button class="btn full" id="igCancel">取消</button>');
+  $('#igCancel').onclick=closeSheet;
+  $('#igGen').onclick=async function(){
+    const k=$('#igKind').value,custom=String($('#igCustom').value||'').trim();closeSheet();busy('正在生成照片，请稍后');
+    try{ await imageGenerateAndSend(ch.id,c.id,ch.personaId||DB.me.personaId,k,custom,custom,null);toast('照片已发送'); }
+    catch(e){ toast('生图失败：'+e.message);logErr('手动生图失败：'+e.message); }
+    finally{ busyDone();if(route.name==='chatroom'&&route.arg===ch.id)render(); }
+  };
+}
+function sheetImageDetail(genId){
+  const rec=imageByGeneratedId(genId); if(!rec){ toast('这张照片的生成记录不见了'); return; }
+  const c=ct(rec.contactId),url=imageRecordUrl(rec);
+  sheetFull('<h3>AI 照片</h3><img src="'+esc(url)+'" style="width:100%;max-height:62vh;object-fit:contain;border-radius:12px;background:#111">'
+    +'<div class="muted" style="margin-top:8px;line-height:1.65">'+esc(c?contactDisplayName(c):'角色')+' · '+esc(rec.model||'')+' · '+shortTime(rec.updatedAt||rec.createdAt)+'</div>'
+    +'<button class="btn primary full" id="igDetailRegen" style="margin-top:10px">重新生成</button>'
+    +'<button class="btn full" id="igDetailEdit">修改提示词后生成</button>'
+    +'<button class="btn full danger" id="igDetailDelete">删除这张生成图</button>'
+    +'<button class="btn full" id="igDetailClose">关闭</button>');
+  $('#igDetailClose').onclick=closeSheet;
+  $('#igDetailRegen').onclick=async function(){ closeSheet();busy('正在重新生成照片，请稍后');try{ await imageGenerateAndSend(rec.chatId,rec.contactId,rec.personaId,rec.kind,rec.userText,rec.customPrompt,rec.id);toast('已重新生成'); }catch(e){toast('生图失败：'+e.message);}finally{busyDone();if(route.name==='chatroom')render();} };
+  $('#igDetailEdit').onclick=function(){
+    sheet('<h3>修改照片提示词</h3><textarea id="igEditPrompt" style="min-height:180px">'+esc(rec.customPrompt||'')+'</textarea><button class="btn primary full" id="igEditGo">按这个提示词生成</button><button class="btn full" id="igEditCancel">取消</button>');
+    $('#igEditCancel').onclick=function(){ sheetImageDetail(rec.id); };
+    $('#igEditGo').onclick=async function(){ const custom=String($('#igEditPrompt').value||'').trim();closeSheet();busy('正在生成照片，请稍后');try{ await imageGenerateAndSend(rec.chatId,rec.contactId,rec.personaId,rec.kind,rec.userText,custom,rec.id);toast('已生成新版本'); }catch(e){toast('生图失败：'+e.message);}finally{busyDone();if(route.name==='chatroom')render();} };
+  };
+  $('#igDetailDelete').onclick=function(){ deleteGeneratedImage(rec.id); };
+}
+function deleteGeneratedImage(genId){
+  const g=imageEnsure(),rec=imageByGeneratedId(genId); if(!rec) return;
+  sheetSmall('<h3>删除这张生成图？</h3><div class="muted" style="margin:8px 0 14px">会从相册和所有引用它的聊天消息里移除。</div><button class="btn danger full" id="igDelYes">删除</button><button class="btn full" id="igDelNo">取消</button>');
+  $('#igDelNo').onclick=closeSheet;
+  $('#igDelYes').onclick=function(){
+    DB.galleryPics=(DB.galleryPics||[]).filter(function(x){ return x.id!==rec.galleryId; });gallerySyncPics();
+    g.history=g.history.filter(function(x){ return x.id!==rec.id; });
+    const c=ct(rec.contactId); if(c) c.generatedPhotos=(c.generatedPhotos||[]).filter(function(id){ return id!==rec.id; });
+    (DB.chats||[]).forEach(function(ch){ ch.msgs=(ch.msgs||[]).filter(function(m){ return m.imageGenId!==rec.id; }); });
+    save();closeSheet();render();toast('生成图已删除');
+  };
+}
+function sheetContactAiPhotos(c){
+  if(!c) return;
+  const ids=c.generatedPhotos||[],rows=ids.map(imageByGeneratedId).filter(Boolean);
+  sheetFull('<h3>'+esc(contactDisplayName(c))+' 的 AI 照片</h3>'+(rows.length?'<div class="couple-album">'+rows.map(function(rec){ const url=imageRecordUrl(rec); return '<button class="couple-photo" data-open-genimage="'+rec.id+'" style="padding:0"><img src="'+esc(url)+'"><div class="cap">'+esc(rec.kind==='food'?'食物照':rec.kind==='couple'?'双人照':rec.kind==='scene'?'场景照':'自拍')+'</div></button>'; }).join('')+'</div>':'<div class="empty">还没有为这个角色生成过照片。</div>')+'<button class="btn full" id="aiphClose">关闭</button>');
+  $('#aiphClose').onclick=closeSheet;
+  $$('#sheetBox [data-open-genimage]').forEach(function(el){ el.onclick=function(){ sheetImageDetail(el.dataset.openGenimage); }; });
 }
 function sheetApiLib(){
   DB.apiLib=DB.apiLib||[];
@@ -6609,6 +6899,8 @@ function screenSettings(){
   +'<div class="lrow" id="s_lib" style="margin-top:10px;padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">API 库</div><div class="t2">'+((DB.apiLib||[]).length? (DB.apiLib.length+' 套，点进去切换、复制、删除') : '还没存过。可以把现在这套存进去，以后一键切换')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
   +'<button class="btn full danger" data-clear="apiLib">清空 API 库</button>'
   +'<div class="muted" style="margin-top:10px;line-height:1.7">Key 只保存在本机数据库，不会发送给 BS 小手机开发者。导出全部数据时，备份文件会包含当前 Key，请妥善保管。</div></div>'
+  +'<div class="card"><b>AI 生图 API</b><div class="muted" style="margin:6px 0 10px;line-height:1.7">使用你自己的 OpenAI 兼容生图接口。软件不内置、不代售 API。支持无参考图生成，以及角色/用户头像参考图编辑。</div>'
+  +'<div class="row"><div class="grow"><b>'+(DB.imageGen.enabled?'已开启':'未开启')+'</b><div class="muted">'+esc(DB.imageGen.model||'gpt-image-1')+' · '+(DB.imageGen.key?'Key 已填':'未填 Key')+'</div></div><button class="btn primary" id="s_imagegen">设置</button></div></div>'
   +'<div class="card"><b>上下文与输出</b><div class="muted" style="margin:6px 0 10px;line-height:1.75">控制角色能读到多少历史消息，以及单次输出的上限。-1 或 0 表示不限制，可能增加 token 消耗。</div>'
   +'<div class="row"><span class="mini grow">上下文消息数量</span><input id="apiCtxNum" type="number" min="-1" max="500" value="'+esc(DB.api.contextLimit)+'" style="width:92px"></div>'
   +'<input id="apiCtxRange" type="range" min="-1" max="500" step="1" value="'+esc(DB.api.contextLimit)+'">'
@@ -8289,7 +8581,8 @@ function sheetSoulMultiPick(kind){
   }; });
   $('#soulMultiCancel').onclick=function(){ closeSheet(); render(); };
   $('#soulMultiOk').onclick=function(){
-    s.settings[settingKey]=sel.slice();
+    const current=soulEnsure();
+    current.settings[settingKey]=sel.slice();
     save(); closeSheet(); render();
   };
 }
@@ -11627,6 +11920,7 @@ function bindScreenInner(){
   $$('[data-openchat]',s).forEach(el=>el.onclick=()=>{ const ch=chat(el.dataset.openchat); if(ch) ch.unread=0; go('chatroom',el.dataset.openchat); });
   $$('[data-openct]',s).forEach(el=>el.onclick=()=>go('contactview',el.dataset.openct));
   $$('[data-editct]',s).forEach(el=>el.onclick=()=>go('contactedit',el.dataset.editct));
+  $$('[data-aiphoto-contact]',s).forEach(el=>el.onclick=()=>sheetContactAiPhotos(ct(el.dataset.aiphotoContact)));
   $$('[data-chatwith]',s).forEach(el=>el.onclick=()=>{ const ch=chatOfContact(el.dataset.chatwith); ch.unread=0; save(); go('chatroom',ch.id); });
   $$('[data-groupedit]',s).forEach(el=>el.onclick=()=>sheetGroupEdit(el.dataset.groupedit));
   const preFlush=()=>{ if(route.name==='contactedit'&&route.edit){ try{ Object.assign(route.edit, readContactForm()); }catch(e){} } };
@@ -11839,6 +12133,7 @@ function bindScreenInner(){
   }
   /* 图片点开看大图 */
   $$('[data-img]',s).forEach(el=>el.onclick=()=>sheet('<img src="'+esc(el.dataset.img)+'" style="width:100%;border-radius:14px"><button class="btn full" id="imClose">关闭</button>')||($('#imClose').onclick=closeSheet));
+  $$('[data-genimage]',s).forEach(el=>el.onclick=function(ev){ ev.stopPropagation(); sheetImageDetail(el.dataset.genimage); });
 /* 微博 */
   $$('[data-wbtab]',s).forEach(el=>el.onclick=function(){
     const w=wbDB(); w.tab=el.dataset.wbtab; if(w.tab==='msg') w.msgTab='all'; save(); render();
@@ -12297,6 +12592,7 @@ function bindScreenInner(){
       DB.api.endpoint=''; };
     ['#s_ep','#s_key','#s_md','#s_tp'].forEach(sel=>{ const el=$(sel); if(el){ el.addEventListener('input',syncApi); el.addEventListener('change',syncApi); } });
     $('#s_test').onclick=async()=>{ toast('正在测试…'); try{ const out=await callModel([{role:'user',content:'回一个字：好'}]); toast('通了：'+out.slice(0,16)); }catch(e){ toast('没通：'+e.message); } };
+    const imageGenBtn=$('#s_imagegen'); if(imageGenBtn) imageGenBtn.onclick=sheetImageApiSettings;
     const apiClear=$('#s_clear');
     if(apiClear) apiClear.onclick=function(){
       sheetSmall('<h3>清空当前 API Key？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.75">只清空当前正在使用的 Key，接口地址、模型名和 API 库里的其它配置会保留。</div><button class="btn danger full" id="apiClearYes">确认清空</button><button class="btn full" id="apiClearNo">取消</button>');
@@ -12641,8 +12937,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.59 · 第 70 轮';
-const BUILD_CODE=70;
+const BUILD='2026-10-28 · 3.60 · 第 71 轮';
+const BUILD_CODE=71;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -12663,7 +12959,7 @@ async function runCheckupUI(){
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
-  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','renderStatusCenter','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -12680,6 +12976,8 @@ async function runCheckupUI(){
   add('情侣空间', Array.isArray(coupleState.spaces)&&typeof coupleSpaceFor==='function'&&typeof generateCoupleDiary==='function'&&typeof advanceCoupleCooking==='function'&&typeof startCoupleCompatibility==='function'&&typeof sheetCoupleAdopt==='function', coupleState.spaces.length+' 份主空间 · 纪念日/日记/相簿/任务/做饭/互动/领养/小家/分支记忆已接入');
   const musicState=musicEnsure();
   add('音乐与一起听', Array.isArray(musicState.playlists)&&typeof musicPlayTrack==='function'&&typeof musicImportFiles==='function'&&typeof musicParseLRC==='function', musicState.playlists.length+' 个歌单 · '+musicState.playlists.reduce(function(sum,p){ return sum+p.tracks.length; },0)+' 首本地音乐 · 歌词/共同收藏/评论/历史已接入');
+  const imageState=imageEnsure();
+  add('AI 生图', typeof imageRequest==='function'&&typeof imageGenerateAndSend==='function'&&typeof sheetImageApiSettings==='function', (imageState.enabled?'已开启':'未开启')+' · 生成/参考图/相册保存/角色绑定/重新生成已接入 · '+imageState.history.length+' 张生成记录');
   npEnsureNovelWorldbooks();
   const novelWorldIds=new Set((DB.np.novelWorldbooks||[]).map(function(item){ return item.id; }));
   const globalWorldIds=new Set((DB.worldbooks||[]).map(function(item){ return item.id; }));

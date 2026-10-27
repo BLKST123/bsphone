@@ -1,9 +1,9 @@
 {
-  "version": "3.59",
-  "versionCode": 70,
-  "round": 70,
+  "version": "3.60",
+  "versionCode": 71,
+  "round": 71,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=70",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=71",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "音乐与一起听上线：本地音频、歌单、LRC 歌词、跨板块播放、一起听、实时评论、共同收藏和最近播放；网易云授权导入仍待接入。"
+  "notes": "AI 生图上线：用户自有兼容接口、自拍/食物/双人/场景识别、参考图、相册保存、角色绑定、修改提示词、重新生成和删除；并修复灵魂匹配世界书/正则选择保存为空的问题。"
 }
