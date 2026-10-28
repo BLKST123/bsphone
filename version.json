@@ -1,9 +1,9 @@
 {
-  "version": "3.67",
-  "versionCode": 78,
-  "round": 78,
+  "version": "3.68",
+  "versionCode": 79,
+  "round": 79,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=78",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=79",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "全量UI回归与状态复位：恢复重构前49个页面状态的DOM/事件一致性，修复正在输入卡死、增量消息气泡未绑定、导入覆盖旧字段与多处loading状态残留。"
+  "notes": "红队报告修复：线下模式、会话快照记忆、Store自动刷新、统一Prompt、受控跨场景记忆、请求超时与红点/世界书一致性。"
 }

@@ -2397,6 +2397,7 @@ const DEF={
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
   moments:[], momentCover:'', momentSeen:0,
   stickers:[], favorites:[], pics:[], galleryAlbums:[{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}], galleryPics:[], galleryActive:'avatar', galleryMigrated:false, diary:[], novels:[], forum:[], books:[], readings:[],
+  memoryEntries:[], memorySettings:{crossLimit:3},
   np:{tab:'home',genre:'推荐',tags:[],customGenres:['悬疑','幻想','都市','仙侠','校园','娱乐圈'],customTags:['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'],shelf:[],readers:[],messages:[],square:[],readerGroup:[],readerGroups:[],activeReaderGroupId:null,readerGroupsV1:false,groupName:'我的读者群',groupUnread:0,coReadPanel:{readingId:null,open:false},novelRegexes:[],stylePrompt:'',readingSeconds:0,todayKey:'',todaySeconds:0,demoSeeded:false,readerPrefs:{fontSize:17,lineHeight:2,theme:'paper'},author:{penName:'我',bio:'在这里写下你想讲的故事。',avatar:'我',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,tips:0,revenue:0,awards:[],awardPool:[],awardHistory:[],awardXp:0,achievementHistory:[],titles:['新人作者'],level:1,xp:0}},
   wb:{accounts:{},posts:[],trends:[],notifs:[],dms:[],following:[],viewed:[],drafts:[],bindings:[],bindingVersion:1,personaIds:[],castMode:'pick',cast:[],tab:'feed',sub:'rec',msgTab:'all',cat:'热门',feedTurn:0,userTab:{},me:{name:'',handle:'',fans:0,follow:0,bio:'',verified:'',views:0,status:'',level:6},newCount:0,newAt:0,hotSeen:0,seeded:false},
   bindingsVersion:1, logs:[], auto:true, lastRoute:null, ver:3
@@ -2411,6 +2412,29 @@ if(window.BSCreateCoreStore){
 }
 function coreStore(){
   try{ return window.BSCoreStore&&window.BSCoreStore.ready()?window.BSCoreStore:null; }catch(e){ return null; }
+}
+function readonlyStore(){
+  try{ return window.BSReadonlyStore&&window.BSReadonlyStore.ready()?window.BSReadonlyStore:null; }catch(e){ return null; }
+}
+function viewChats(){
+  const store=readonlyStore();
+  return store?store.selectors.selectChats():(DB.chats||[]);
+}
+function viewChat(id){
+  const store=readonlyStore();
+  return store?store.selectors.selectChat(id):(DB.chats||[]).find(function(ch){ return ch.id===id; })||null;
+}
+function viewContacts(){
+  const store=readonlyStore();
+  return store?store.selectors.selectContacts():(DB.contacts||[]);
+}
+function viewContact(id){
+  const store=readonlyStore();
+  return store?store.selectors.selectContact(id):(DB.contacts||[]).find(function(c){ return c.id===id; })||null;
+}
+function viewGroups(){
+  const store=readonlyStore();
+  return store?store.selectors.selectGroups():(DB.groups||[]);
 }
 function migrate(raw){
   const o=JSON.parse(JSON.stringify(DEF));
@@ -2447,6 +2471,8 @@ function fixApi(){
   if(DB.api.maxTokens===undefined) DB.api.maxTokens=0;
   DB.api.maxTokens=Math.max(0,Math.min(200000,Number(DB.api.maxTokens)||0));
   DB.api.stream=!!DB.api.stream;
+  if(!Number(DB.api.timeoutSec)) DB.api.timeoutSec=45;
+  DB.api.timeoutSec=Math.max(10,Math.min(180,Number(DB.api.timeoutSec)||45));
   DB.imageGen=Object.assign({enabled:false,base:'',key:'',model:'gpt-image-1',size:'1024x1024',quality:'medium',stylePrompt:'自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。',useCharacterRef:true,useUserRef:true},DB.imageGen||{});
   DB.imageGen.enabled=!!DB.imageGen.enabled;
   DB.imageGen.useCharacterRef=DB.imageGen.useCharacterRef!==false;
@@ -2514,12 +2540,17 @@ function fixAll(){
   musicEnsure();
   DB.notify=Object.assign({items:[],lastBannerId:null},DB.notify||{});
   if(!Array.isArray(DB.notify.items)) DB.notify.items=[];
+  DB.memoryEntries=Array.isArray(DB.memoryEntries)?DB.memoryEntries:[];
+  DB.memorySettings=Object.assign({crossLimit:3},DB.memorySettings||{});
+  DB.memorySettings.crossLimit=Math.max(1,Math.min(8,Number(DB.memorySettings.crossLimit)||3));
   DB.chats=Array.isArray(DB.chats)?DB.chats:[];
   const sessionSeq={};
   DB.chats.forEach(function(ch){
     ch.memberIds=Array.isArray(ch.memberIds)?ch.memberIds:[];
     ch.msgs=Array.isArray(ch.msgs)?ch.msgs:[];
     if(ch.unread===undefined) ch.unread=0;
+    if(ch.offlineMode===undefined) ch.offlineMode=false;
+    if(ch.offlineScene===undefined) ch.offlineScene='';
     if(ch.type==='private'&&ch.memberIds[0]){
       const cid=ch.memberIds[0];
       sessionSeq[cid]=(sessionSeq[cid]||0)+1;
@@ -3604,7 +3635,7 @@ function nextChatSessionNo(id){
 function newPrivateChat(id,label){
   const n=nextChatSessionNo(id);
   const c=ct(id);
-  const ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),sessionNo:n,sessionLabel:String(label||'').trim()||('会话 '+n),personaId:DB.me&&DB.me.personaId||null,baseMemorySnapshot:((c&&c.memories)||[]).map(function(m){ return m.text; }).filter(Boolean),mem:{ts:0,items:[]}};
+  const ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),sessionNo:n,sessionLabel:String(label||'').trim()||('会话 '+n),personaId:DB.me&&DB.me.personaId||null,offlineMode:false,offlineScene:'',baseMemorySnapshot:((c&&c.memories)||[]).map(function(m){ return m.text; }).filter(Boolean),mem:{ts:0,items:[]}};
   const store=coreStore();
   if(store) store.commands.createChat(ch,{persist:false}); else DB.chats.push(ch);
   return ch;
@@ -3632,6 +3663,18 @@ function patchChatMessage(m,patch,patchOptions){
   ((patchOptions&&patchOptions.removeKeys)||[]).forEach(function(key){ delete m[key]; });
   return m;
 }
+function markChatRead(ch){
+  if(!ch||!Number(ch.unread)) return false;
+  const store=coreStore();
+  if(store) store.commands.patchChat(ch.id,{unread:0},{persist:false});
+  else ch.unread=0;
+  return true;
+}
+function chatRoomTitleHTML(ch){
+  if(!ch) return '';
+  const isGroup=ch.type==='group';
+  return esc(chatName(ch))+(isGroup?'（'+(ch.memberIds||[]).length+'）':'')+(ch.source==='soul'?'<div class="sub">来源：灵魂匹配</div>':'');
+}
 function privateChatLabel(ch){
   if(!ch||ch.type!=='private') return '';
   const cid=ch.memberIds&&ch.memberIds[0];
@@ -3640,8 +3683,8 @@ function privateChatLabel(ch){
 }
 function chatName(ch){
   if(!ch) return '';
-  if(ch.type==='group') return ch.name||(ch.memberIds.map(i=>{const c=ct(i);return c?contactDisplayName(c):'?';}).join('、'));
-  const c=ct(ch.memberIds[0]);
+  if(ch.type==='group') return ch.name||(ch.memberIds.map(i=>{const c=viewContact(i);return c?contactDisplayName(c):'?';}).join('、'));
+  const c=viewContact(ch.memberIds[0]);
   const base=c?contactDisplayName(c):'（已删除）';
   const sub=privateChatLabel(ch);
   return sub? (base+' · '+sub):base;
@@ -3670,15 +3713,34 @@ function activePersona(){
 function worldOf(c, chatMsgs){
   const ents=[];
   const store=coreStore();
+  const hay=(chatMsgs||[]).map(function(m){ return m.text||''; }).join('\n');
   (c.worldIds||[]).forEach(id=>{ const w=store?store.read.worldbook(id):DB.worldbooks.find(x=>x.id===id); if(!w) return;
     (w.entries||[]).forEach(e=>{
       const keys=String(e.k||'').split(/[,，\s]+/).filter(Boolean);
       if(!keys.length){ ents.push(e.v); return; }
-      const hay=(chatMsgs||[]).map(m=>m.text||'').join('\n');
       if(keys.some(k=>hay.includes(k))) ents.push(e.v);
     });
   });
   return ents;
+}
+function memoryTextList(list,limit){
+  const out=[];
+  (Array.isArray(list)?list:[]).forEach(function(item){
+    const text=String(typeof item==='string'?item:(item&&item.text)||'').trim();
+    if(text&&out.indexOf(text)<0) out.push(text);
+  });
+  return isFinite(Number(limit))&&Number(limit)>0?out.slice(-Number(limit)):out;
+}
+function memoryContextForCharacter(c,opt){
+  const chatId=opt&&opt.chatId||null;
+  const ch=chatId?chat(chatId):null;
+  return {
+    chatId:chatId,
+    chat:ch,
+    roleLongTerm:memoryTextList(c&&c.memories),
+    sessionSnapshot:memoryTextList(ch&&ch.baseMemorySnapshot),
+    sessionDigest:memoryTextList(ch&&ch.mem&&ch.mem.items)
+  };
 }
 function regexOf(c, text){
   let out=text;
@@ -3691,6 +3753,7 @@ function regexOf(c, text){
 function promptOf(c, other, chatMsgs, opt){
   const p=[], me=DB.me||{};
   const store=coreStore();
+  const memoryContext=memoryContextForCharacter(c,opt);
   const chosenPersona=(opt&&opt.personaId)?(store?store.read.persona(opt.personaId):(DB.me.personas||[]).find(function(x){ return x.id===opt.personaId; })):null;
   const per=chosenPersona?personaFullText(chosenPersona):activePersona();
   const fmt=(opt&&opt.format)||'plain';
@@ -3705,9 +3768,15 @@ function promptOf(c, other, chatMsgs, opt){
   if(me.name) p.push('用户的名字是「'+me.name+'」。');
   if(c.callMe) p.push('你称呼用户为「'+c.callMe+'」。');
   if(per) p.push('【用户的人设（你要当成事实）】'+per);
-  const mem=(c.memories||[]).map(m=>m.text).filter(Boolean);
-  if(mem.length) p.push('【你记得的事】\n'+mem.map(m=>'- '+m).join('\n'));
-  const wd=worldOf(c, chatMsgs);
+  if(memoryContext.roleLongTerm.length) p.push('【角色长期记忆（跨会话事实）】\n'+memoryContext.roleLongTerm.map(m=>'- '+m).join('\n'));
+  if(memoryContext.sessionSnapshot.length) p.push('【当前会话快照记忆】\n'+memoryContext.sessionSnapshot.map(m=>'- '+m).join('\n'));
+  if(memoryContext.sessionDigest.length) p.push('【当前会话整理记忆】\n'+memoryContext.sessionDigest.map(m=>'- '+m).join('\n'));
+  if(memoryContext.chatId&&(!opt||opt.includeCrossMemory!==false)){
+    const cross=memoryBlockForChat(memoryContext.chatId);
+    if(cross) p.push('【同会话跨场景记忆（只按事实使用，不要照搬原话）】\n'+cross);
+  }
+  const worldMessages=(memoryContext.chat&&memoryContext.chat.msgs)||chatMsgs||[];
+  const wd=worldOf(c, worldMessages);
   if(wd.length) p.push('【世界设定】\n'+wd.map(w=>'- '+w).join('\n'));
   if(c.examples) p.push('【对话示例（学这个语气）】\n'+c.examples);
   if(other&&other.length) p.push('【群聊】群里有：'+other.join('、')+'。你只说自己这一条，不要替别人说话，不要在开头写自己的名字。');
@@ -3758,16 +3827,16 @@ function apiFriendly(status,msg){
   if(status>=500) return '接口暂时不稳定（'+status+'），已经自动重试一次';
   return msg||('接口返回 '+status);
 }
-async function rawCall(ep,messages){
+async function rawCall(ep,messages,signal){
   const stream=!!DB.api.stream;
   const body={model:DB.api.model||'deepseek-chat',messages,temperature:Number(DB.api.temp)||0.9,stream:stream};
   if(Number(DB.api.maxTokens)>0) body.max_tokens=Number(DB.api.maxTokens);
   let r;
   try{
-    r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(DB.api.key||'')},body:JSON.stringify(body)});
+    r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(DB.api.key||'')},body:JSON.stringify(body),signal:signal});
   }catch(e){
     try{
-      r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep,key:DB.api.key,model:DB.api.model,messages,maxTokens:body.max_tokens||0,stream:stream})});
+      r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep,key:DB.api.key,model:DB.api.model,messages,maxTokens:body.max_tokens||0,stream:stream}),signal:signal});
     }catch(e2){ throw e; }
   }
   if(stream&&r.ok&&(r.headers.get('content-type')||'').includes('text/event-stream')&&r.body){
@@ -3801,29 +3870,53 @@ async function rawCall(ep,messages){
   if(!out) throw new Error('接口没有返回内容');
   return out.trim();
 }
-async function callModel(messages){
+async function callModel(messages,options){
   const base=normBase(DB.api.base||DB.api.endpoint);
   const list=[];
   if(DB.api.endpoint) list.push(DB.api.endpoint);
   chatCandidates(base).forEach(u=>{ if(list.indexOf(u)<0) list.push(u); });
   if(!list.length){ appLog('api','还没有填写对话 API 地址'); throw new Error('还没填 API 地址'); }
+  const externalSignal=options&&options.signal;
+  const controller=new AbortController();
+  let timedOut=false;
+  const abortFromOutside=function(){ try{ controller.abort(); }catch(e){} };
+  if(externalSignal){
+    if(externalSignal.aborted) abortFromOutside();
+    else externalSignal.addEventListener('abort',abortFromOutside,{once:true});
+  }
+  const timeoutMs=Math.max(10,Math.min(180,Number(DB.api.timeoutSec)||45))*1000;
+  const timer=setTimeout(function(){ timedOut=true; try{ controller.abort(); }catch(e){} },timeoutMs);
+  const makeAbortError=function(){
+    const err=new Error(timedOut?'请求超时，请重试':'请求已取消');
+    err.name=timedOut?'TimeoutError':'AbortError';
+    return err;
+  };
   let lastErr=null;
-  for(let attempt=0;attempt<2;attempt++){
-    let retry=false;
-    for(const ep of list){
-      try{
-        const out=await rawCall(ep,messages);
-        if(DB.api.endpoint!==ep){ DB.api.endpoint=ep; DB.api.base=base; save(); }
-        return out;
-      }catch(e){
-        lastErr=e;
-        if(e.status===404||e.status===405) continue;
-        if(!e.status||e.status===429||e.status>=500||/没有返回内容/.test(e.message)){ retry=true; break; }
-        throw e;
+  try{
+    for(let attempt=0;attempt<2;attempt++){
+      let retry=false;
+      for(const ep of list){
+        try{
+          const out=await rawCall(ep,messages,controller.signal);
+          if(DB.api.endpoint!==ep){ DB.api.endpoint=ep; DB.api.base=base; save(); }
+          return out;
+        }catch(e){
+          lastErr=e;
+          if(controller.signal.aborted) throw makeAbortError();
+          if(e.status===404||e.status===405) continue;
+          if(!e.status||e.status===429||e.status>=500||/没有返回内容/.test(e.message)){ retry=true; break; }
+          throw e;
+        }
       }
+      if(retry&&attempt===0){ await new Promise(function(r){ setTimeout(r,1200); }); continue; }
+      break;
     }
-    if(retry&&attempt===0){ await new Promise(function(r){ setTimeout(r,1200); }); continue; }
-    break;
+  }finally{
+    clearTimeout(timer);
+    if(externalSignal) externalSignal.removeEventListener('abort',abortFromOutside);
+  }
+  if(controller.signal.aborted){
+    throw makeAbortError();
   }
   if(lastErr&&!lastErr.status&&/fetch|network|failed/i.test(lastErr.message)) lastErr=new Error('网络连接失败，请检查网络或接口地址');
   if(lastErr) appLog('api','对话接口失败：'+lastErr.message);
@@ -4013,9 +4106,39 @@ let route={name:'home',arg:null};
 let wtab='msg';
 let npSelBook='',npSelChapter='',npSelText='',npSelPara='',npPendingSelection=null;
 let settingsReturnScroll=0,lastRenderKey='';
+let coreRefreshTimer=null,coreRefreshPending=false;
+const chatRequestControllers=new Map();
+function abortChatRequest(chatId){
+  const item=chatId&&chatRequestControllers.get(chatId);
+  if(item&&item.controller){ try{ item.controller.abort(); }catch(e){} }
+  if(chatId) chatRequestControllers.delete(chatId);
+}
+function scheduleCoreStoreRefresh(detail){
+  const command=String(detail&&detail.command||'');
+  const relevant=/Contact|Chat|Message|Persona|Worldbook|Regex/.test(command);
+  if(!relevant||coreRefreshPending) return;
+  if(route.name==='chatroom'){
+    const ch=chat(route.arg),ttl=$('.chatwrap .ttl');
+    if(ch&&ttl){
+      const title=chatRoomTitleHTML(ch);
+      if(ttl.dataset.orig) ttl.dataset.orig=title; else ttl.innerHTML=title;
+    }
+  }
+  if($('#sheet')&&$('#sheet').classList.contains('on')) return;
+  coreRefreshPending=true;
+  clearTimeout(coreRefreshTimer);
+  coreRefreshTimer=setTimeout(function(){
+    coreRefreshPending=false;
+    if($('#sheet')&&$('#sheet').classList.contains('on')) return;
+    if(route.name==='home'||route.name==='wechat'||route.name==='chatroom'||route.name==='contactview'){
+      render();
+    }
+  },40);
+}
 function go(name,arg,wtabTo){
   restoreFullscreenIntent();
   const from=route.name;
+  if(from==='chatroom'&&(name!=='chatroom'||String(arg||'')!==String(route.arg||''))) abortChatRequest(route.arg);
   if(from==='soul'&&name!=='soul') soulPauseActive();
   if(from==='settings'&&name!=='settings') settingsReturnScroll=$('#screen').scrollTop;
   if(route.name==='contactedit' && name!=='contactedit') editBuf=null;
@@ -4667,7 +4790,7 @@ function appHTML(a){
   return '<div class="app" data-app="'+a.k+'" data-go="'+a.k+'"><div class="ic" style="background:'+a.c+'">'+appIconHTML(a,26)+(n?'<span class="badge">'+(n>99?'99+':n)+'</span>':'')+'</div><div class="nm">'+a.n+'</div></div>';
 }
 function unreadWB(){ const w=wbDB(); return (w.notifs||[]).filter(function(n){ return !n.read; }).length + (w.dms||[]).reduce(function(s2,d){ return s2+(d.unread||0); },0); }
-function chatUnread(){ return (DB.chats||[]).reduce((s,c)=>s+(c.unread||0),0); }
+function chatUnread(){ return viewChats().reduce((s,c)=>s+(c.unread||0),0); }
 function totalUnread(){ return chatUnread()+soulPendingCount(); }
 /* ================= 微信：壳 ================= */
 function ensureDefaultGroup(){
@@ -4719,13 +4842,13 @@ function screenWechat(){
 }
 /* ---- 消息 ---- */
 function wxMsgs(){
-  const list=[...(DB.chats||[])].sort((a,b)=>(b.lastTs||0)-(a.lastTs||0));
+  const list=[...viewChats()].sort((a,b)=>(b.lastTs||0)-(a.lastTs||0));
   return wxTop('微信',clearBtn('wxMsgs')+'<button class="ic2" data-act="newchat">＋</button>')
     + (list.length? list.map(chRow).join('') : '<div class="empty">还没有会话。<br>点右上角 ＋ 发起私聊或群聊。</div>');
 }
 function chRow(ch){
   const last=ch.msgs[ch.msgs.length-1];
-  const c=ct(ch.memberIds[0]);
+  const c=viewContact(ch.memberIds[0]);
   return '<div class="lrow" data-openchat="'+ch.id+'">'+ (ch.type==='group'? avBox({icon:'users'}) : avBox(c))
     +'<div class="mi"><div class="t1">'+esc(chatName(ch))+(ch.source==='soul'?'<span class="soul-source-chip">灵魂匹配</span>':'')+'</div><div class="t2">'+esc(preview(last))+'</div></div>'
     +'<div class="rt"><div class="tm">'+shortTime(ch.lastTs)+'</div>'+(ch.unread?'<div class="ub">'+(ch.unread>99?'99+':ch.unread)+'</div>':'')+'</div></div>';
@@ -4744,7 +4867,7 @@ function sheetNewChat(){
   $('#newPrivate').onclick=()=>sheetPick('选择联系人',1,(ids)=>{
     if(!ids.length) return;
     const ch=newPrivateChat(ids[0]);
-    ch.unread=0; save();
+    markChatRead(ch); save();
     closeSheet(); go('chatroom',ch.id);
   });
   $('#newGroup').onclick=()=>sheetPick('选择群成员（可多选）',9,(ids,name)=>{
@@ -4777,13 +4900,13 @@ function sheetPick(title,max,ok,withName){
 }
 /* ---- 联系人 ---- */
 function wxContacts(){
-  const gs=DB.groups||[];
+  const gs=viewGroups();
   DB.ui.open=DB.ui.open||{def:true};
   const open=DB.ui.open;
   return wxTop('通讯录',clearBtn('wxContacts')+'<button class="ic2" data-act="newgroup" title="新建好友分组">'+ic('userplus',19)+'</button><button class="ic2" data-act="newcontact" title="新建联系人">＋</button>')
     +(!soulPendingCount()?'':'<div class="lrow" data-soulrequests="1"><div class="av" style="background:linear-gradient(145deg,#8f7dbf,#d3a9bd)">'+ic('userplus',20)+'</div><div class="mi"><div class="t1">新的朋友</div><div class="t2">'+soulPendingCount()+' 条好友申请</div></div><div class="rt"><span class="ub">'+soulPendingCount()+'</span><span class="chev">›</span></div></div>')
     + gs.map(g=>{
-        const list=(DB.contacts||[]).filter(c=>c.groupId===g.id);
+        const list=viewContacts().filter(c=>c.groupId===g.id);
         const isOpen=!!open[g.id];
         return '<div class="lrow" data-gtoggle="'+g.id+'">'
           +'<div class="mi"><div class="t1">'+esc(g.name)+'</div><div class="t2">'+list.length+' 位联系人</div></div>'
@@ -4798,10 +4921,10 @@ function ctRow(c){
     +'<div class="rt"><span class="chev">›</span></div></div>';
 }
 function screenContactView(){
-  const c=ct(route.arg);
+  const c=viewContact(route.arg);
   if(!c) return emptyState('找不到这位联系人','可能已经被删掉了。','回微信','backwx');
   const f=c.freq||{}, nB=(c.regexIds||[]).length, nW=(c.worldIds||[]).length;
-  const grp=(DB.groups||[]).find(g=>g.id===c.groupId);
+  const grp=viewGroups().find(g=>g.id===c.groupId);
   return '<div class="mecard">'+avBox(c,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div>'
     +'<div class="muted">'+esc([c.gender,c.age?c.age+'岁':'',c.identity].filter(Boolean).join(' · ')||'没有填基本资料')+'</div>'+(c.source==='soul'?'<div class="soul-source-chip" style="margin-left:0">来源：灵魂匹配</div>':'')+'</div></div>'
     +'<div class="pad">'
@@ -4928,7 +5051,7 @@ function flushEdit(){
   save();
 }
 function screenContactEdit(){
-  const id=route.arg, c=id? ct(id):null;
+  const id=route.arg, c=id? viewContact(id):null;
   let v;
   if(editBuf && editBuf.__key===(id||'new')){ v=editBuf; }
   else{
@@ -5289,8 +5412,7 @@ async function regenerateChatMessage(ch,m){
       return {role:x.role==='me'?'user':'assistant',content:messageContextLabel(x)};
     });
     const others=ch.type==='group'?(ch.memberIds||[]).map(ct).filter(function(x){ return x&&x.id!==speaker.id; }).map(function(x){ return x.name; }):[];
-    let sys=promptOf(speaker,others,before.slice(-6),{format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
-    if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
+    let sys=promptOf(speaker,others,before.slice(-6),{format:'chat',chatId:ch.id,offline:!!ch.offlineMode,scene:String(ch.offlineScene||'你们身边')});
     if(m.quote) sys+='\n【这条回复引用着一段消息】'+m.quote.who+'：'+m.quote.text+'\n引用只用于定位上下文，不是新问题；优先回应用户实际文字，不要用双引号复述被引用内容。';
     sys+='\n【禁止复述用户原话】不要用双引号、直角引号或书名号式引号复述用户以前说过的话，直接回应意思。';
     sys+='\n【覆盖式重新生成】这次只生成 1 个完整气泡，用来原位替换你刚才那条回复。不要解释、不要复述旧回复、不要写“重新生成”。只输出 [文字] 或 [语音] 开头的一个气泡。';
@@ -5298,6 +5420,7 @@ async function regenerateChatMessage(ch,m){
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(speaker,out);
     if(!clean) throw new Error('模型没有返回内容');
+    markCrossMemoryMentioned(clean);
     const plan=enforceBubblePlan(clean,1).map(function(item){ return Object.assign({},item,{text:cleanChatOutput(item.text,ch)}); });
     const parts=resolveVoicePlan(plan,speaker,false);
     if(!parts.length) throw new Error('没有生成出可替换的消息');
@@ -5353,7 +5476,8 @@ function sheetChatMemory(ch){
         +items.map(function(x){ return '<div style="margin-top:6px;line-height:1.7">· '+esc(x)+'</div>'; }).join('')+'</div>'
       : '')
     +'<button class="btn primary full" id="memGo">'+(items.length? '重新总结这段会话':'总结这段会话')+'</button>'
-    +(items.length&&ch.type!=='group'? '<button class="btn full" id="memPush">同步到角色（以后都记得）</button>':'')
+    +'<button class="btn full" id="memCross">跨场景同步记忆</button>'
+    +(items.length&&ch.type!=='group'? '<button class="btn full" id="memPush">把整理记忆记为角色长期经历</button>':'')
     +(ch.type==='group'? '<div class="muted" style="margin-top:8px">群聊只能存在这段会话里，不能同步给单个角色。</div>':'')
     +'<button class="btn full" id="memClose">关闭</button>');
   $('#memClose').onclick=closeSheet;
@@ -5380,18 +5504,67 @@ function sheetChatMemory(ch){
   const pu=$('#memPush');
   if(pu) pu.onclick=function(){
     const c=ct(ch.memberIds[0]); if(!c){ toast('找不到角色'); return; }
-    const store=coreStore();
     let n=0;
-    if(store){
-      n=store.commands.mergeContactMemories(c.id,ch.mem.items,{persist:false}).added;
-    }else{
-      c.memories=c.memories||[];
-      (ch.mem.items||[]).forEach(function(t){
-        if(!c.memories.some(function(x){ return x.text===t; })){ c.memories.push({id:uid(),text:t}); n++; }
+    (ch.mem.items||[]).forEach(function(t){
+      const text=String(t||'').trim(); if(!text) return;
+      syncMemoryFact({
+        sourceType:'manual',
+        sourceId:'chat:'+ch.id+':manual:'+npHash(text),
+        fact:text,
+        keywords:[text],
+        contactId:c.id,
+        chatId:ch.id,
+        personaId:ch.personaId,
+        scope:'character',
+        allowProactive:true
       });
-    }
-    save(); closeSheet(); toast(n? ('已存进角色 '+n+' 条'):'这些记忆角色本来就有');
+      n++;
+    });
+    save(); closeSheet(); toast(n? ('已记成角色长期经历 '+n+' 条'):'没有可同步的记忆');
   };
+  $('#memCross').onclick=function(){ sheetMemoryManager(ch.id); };
+}
+function sheetMemorySyncChoice(title,fact,meta,onChoose){
+  const text=String(fact||'').trim();
+  sheet('<h3>'+esc(title||'同步记忆')+'</h3><div class="card" style="box-shadow:none;border:1px solid var(--line);line-height:1.8">'+esc(text)+'</div>'
+    +'<button class="btn primary full" id="msChat">只记在这次聊天</button>'
+    +'<button class="btn full" id="msChar">记成角色长期经历</button>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">长期经历可能被同一角色的其他聊天线知道。</div>'
+    +'<button class="btn full" id="msNone">不保存</button>');
+  $('#msChat').onclick=function(){ onChoose('session',meta||{}); closeSheet(); };
+  $('#msChar').onclick=function(){ onChoose('character',meta||{}); closeSheet(); };
+  $('#msNone').onclick=closeSheet;
+}
+function sheetMemoryManager(chatId){
+  const ch=chat(chatId);
+  if(!ch){ toast('会话不见了'); return; }
+  const contactId=ch.memberIds&&ch.memberIds[0]||null;
+  const entries=(DB.memoryEntries||[]).filter(function(entry){
+    return entry.scope==='session'?entry.chatId===chatId:entry.contactId===contactId;
+  }).sort(function(a,b){ return (b.syncedAt||0)-(a.syncedAt||0); });
+  const draw=function(){
+    const list=(DB.memoryEntries||[]).filter(function(entry){
+      return entry.scope==='session'?entry.chatId===chatId:entry.contactId===contactId;
+    }).sort(function(a,b){ return (b.syncedAt||0)-(a.syncedAt||0); });
+    sheet('<h3>跨场景同步记忆</h3>'
+      +'<div class="row" style="margin:6px 0 10px"><div class="grow muted">每次最多加入 '+DB.memorySettings.crossLimit+' 条相关记忆</div><button class="btn" data-memlimit="-1">−</button><b>'+DB.memorySettings.crossLimit+'</b><button class="btn" data-memlimit="1">＋</button></div>'
+      +(list.length?list.map(function(entry){
+        return '<div class="card" style="box-shadow:none;border:1px solid var(--line)"><div class="row"><div class="grow"><b>'+esc(memorySourceLabel(entry.sourceType))+' · '+esc(entry.scope==='session'?'仅本会话':'角色长期')+'</b><div class="muted" style="margin-top:4px;line-height:1.7">'+esc(entry.fact)+'</div><div class="muted" style="margin-top:4px">提及 '+Number(entry.mentionCount||0)+' 次'+(entry.lastMentionedAt?' · 最近 '+shortTime(entry.lastMentionedAt):'')+'</div></div></div>'
+          +'<div class="row" style="margin-top:8px"><button class="btn grow" data-memtoggle="'+entry.id+'">'+(entry.allowProactive===false?'恢复主动提及':'停止主动提及')+'</button><button class="btn danger" data-memdel="'+entry.id+'">删除</button></div></div>';
+      }).join(''):'<div class="muted" style="padding:6px 0 14px">还没有同步记忆。</div>')
+      +'<button class="btn full" id="memMgrBack">返回记忆整理</button>');
+    $$('#sheetBox [data-memlimit]').forEach(function(el){
+      el.onclick=function(){ DB.memorySettings.crossLimit=Math.max(1,Math.min(8,Number(DB.memorySettings.crossLimit)||3)+Number(el.dataset.memlimit)); save(); draw(); };
+    });
+    $$('#sheetBox [data-memtoggle]').forEach(function(el){
+      el.onclick=function(){ const entry=(DB.memoryEntries||[]).find(function(x){ return x.id===el.dataset.memtoggle; }); if(!entry) return; entry.allowProactive=entry.allowProactive===false; save(); draw(); };
+    });
+    $$('#sheetBox [data-memdel]').forEach(function(el){
+      el.onclick=function(){ DB.memoryEntries=(DB.memoryEntries||[]).filter(function(x){ return x.id!==el.dataset.memdel; }); save(); draw(); toast('已删除，后续不会再提'); };
+    });
+    $('#memMgrBack').onclick=function(){ sheetChatMemory(ch); };
+  };
+  draw();
 }
 function sheetChatMenu(ch){
   if(!ch) return;
@@ -5404,6 +5577,7 @@ function sheetChatMenu(ch){
     +'<button class="btn full" id="cmAuto">'+(ch.memberIds.every(function(id){ const c=ct(id); return c&&c.autoOn===false; })? '打开 Ta 的主动发消息':'关闭 Ta 的主动发消息')+'</button>'
     +'<button class="btn full" id="cmVoice">角色发语音：'+voiceModeLabel(Math.max.apply(null,ch.memberIds.map(function(id){ return voiceModeOf(ct(id)); }).concat([0])))+'</button>'
     +(isGroup? '' : '<button class="btn full" id="cmEdit">编辑角色信息</button>')
+    +(isGroup? '' : '<button class="btn full" id="cmMeetMode">聊天模式：'+(ch.offlineMode?'线下面对面':'线上微信')+'</button>')
     +'<button class="btn full" id="cmMem">自动保存记忆</button>'
     +(isGroup?'':'<button class="btn full" id="cmTakeout">给 Ta 点外卖</button>')
     +(isGroup?'':'<button class="btn full" id="cmSessionName">会话名称</button><button class="btn full" id="cmSelectMsgs">多选消息并迁移到新会话</button>')
@@ -5416,6 +5590,8 @@ function sheetChatMenu(ch){
   const cr=$('#cmRange'); if(cr) cr.onclick=()=>{ closeSheet(); sheetReplyRange(ch); };
   const ce=$('#cmEdit');
   if(ce) ce.onclick=()=>{ const id=ch.memberIds[0]; closeSheet(); go('contactedit',id); };
+  const cmode=$('#cmMeetMode');
+  if(cmode) cmode.onclick=function(){ closeSheet(); toggleMeet(); };
   const cmem=$('#cmMem'); if(cmem) cmem.onclick=()=>{ closeSheet(); sheetChatMemory(ch); };
   const cto=$('#cmTakeout'); if(cto) cto.onclick=function(){ DB.takeout.binding=exactBindingSetChat(DB.takeout.binding,ch.id); DB.takeout.chatId=ch.id; DB.takeout.contactId=ch.memberIds[0]||null; DB.takeout.personaId=ch.personaId||DB.me.personaId||null; DB.takeout.activeTab='home'; save(); closeSheet(); go('takeout'); };
   const csn=$('#cmSessionName');
@@ -5643,15 +5819,16 @@ function chatBodyHTML(ch){
   return (ch.msgs||[]).map(function(m,index){ return chatTimeSeparatorHTML(ch,index)+msgHTML(m,ch); }).join('');
 }
 function screenChatRoom(){
-  const ch=chat(route.arg);
-  if(!ch) return emptyState('会话不见了','它可能被删掉了。','回微信','backwx');
-  if(chatQuote&&chatQuote.chatId!==ch.id) chatQuote=null;
-  curChatId=ch.id; ch.unread=0;
+  const liveChat=chat(route.arg);
+  if(!liveChat) return emptyState('会话不见了','它可能被删掉了。','回微信','backwx');
+  if(chatQuote&&chatQuote.chatId!==liveChat.id) chatQuote=null;
+  curChatId=liveChat.id; markChatRead(liveChat);
+  const ch=viewChat(route.arg)||liveChat;
   const isGroup=ch.type==='group';
   const selecting=chatSelectChat===ch.id;
   const body=chatBodyHTML(ch)||'<div class="empty">还没有消息，说点什么吧。</div>';
   return '<div class="chatwrap">'
-   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+esc(chatName(ch))+(isGroup?'（'+ch.memberIds.length+'）':'')+(ch.source==='soul'?'<div class="sub">来源：灵魂匹配</div>':'')+'</div>'
+   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+chatRoomTitleHTML(ch)+'</div>'
      +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
    +(selecting
@@ -6114,14 +6291,19 @@ async function aiTurn(opt){
   if(!DB.api.key){ toast('先到「设置」里填 API Key'); return; }
   const speaker=(opt&&opt.speaker)||(ch.type==='group'? pick(members) : members[0]);
   if(!speaker) return;
+  abortChatRequest(ch.id);
+  const requestController=new AbortController();
+  chatRequestControllers.set(ch.id,{controller:requestController});
   const proactive=!!(opt&&opt.proactive);
+  const offlineMode=!!ch.offlineMode;
+  const offlineScene=String(ch.offlineScene||'你们此刻所在的地方').trim();
   const silence=proactive?chatSilenceState(ch):null;
   let proactiveStage=-1;
   const min=Math.max(1,Number(ch.replyMin)||1);
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
   const want=proactive?1:(min+Math.floor(Math.random()*(max-min+1)));
   const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled; });
-  const wantsVoice=!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
+  const wantsVoice=!offlineMode&&!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
     const recent=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),proactive?18:24);
@@ -6130,8 +6312,12 @@ async function aiTurn(opt){
       return '['+chatTimeLabel(ch,m)+'] '+(m.role==='me'?'用户':'你')+'：'+messageContextLabel(m);
     }).join('\n'):'';
     const others=ch.type==='group'? members.filter(x=>x.id!==speaker.id).map(x=>x.name):[];
-    let sys=promptOf(speaker, others, ch.msgs.slice(-6), {format:'chat',chatId:ch.id})+'\n'+memoryBlockForChat(ch.id);
-    if(ch.mem&&ch.mem.items&&ch.mem.items.length) sys+='\n【这段会话里你记得的事】\n'+ch.mem.items.map(function(x){ return '- '+x; }).join('\n');
+    let sys=promptOf(speaker, others, ch.msgs.slice(-6), {
+      format:'chat',
+      chatId:ch.id,
+      offline:offlineMode,
+      scene:offlineScene
+    });
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
     if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
     if(proactive){
@@ -6151,24 +6337,33 @@ async function aiTurn(opt){
     sys+='\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。';
     sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。';
     sys+='\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。';
-    sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
+    if(offlineMode){
+      sys+='\n【当前模式｜线下】这不是微信远距离回复。当前地点是「'+offlineScene+'」。必须写出人物距离、动作、神态或环境反馈，并保留角色亲口说的话；不能写成纯微信聊天，也不能替用户行动或回答。';
+      sys+='\n【本次输出】只输出当前这一轮线下场景，使用【旁白】和【对白】两个标题；对白只写角色说出口的话。';
+    }else{
+      sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
+    }
     const out=await callModel(proactive
       ?[{role:'system',content:sys},{role:'user',content:'现在只输出你要主动发给对方的那一条微信消息。'}]
-      :[{role:'system',content:sys}].concat(history));
+      :[{role:'system',content:sys}].concat(history),{signal:requestController.signal});
     let clean=regexOf(speaker, out);
     if(proactive){
       clean=sanitizeProactiveReply(clean,speaker);
       if(!clean||!proactiveReplyRelevant(clean,proactiveStage)) clean=proactiveFallback(speaker,proactiveStage);
     }
     if(!clean) throw new Error('模型没有返回内容');
+    markCrossMemoryMentioned(clean);
     await sleep(Math.min(1600, 240 + clean.length*12));
     const t0=$('#typing'); if(t0) t0.remove();
     const badVoice=/设备不匹配|未配置.{0,6}(接口|语音)|接口.{0,6}未配置|不能发语音|发不了语音|没法发语音|不支持语音|语音功能.{0,6}(不可用|未配置)/;
-    const plan=enforceBubblePlan(clean,proactive?1:want).map(function(item){
+    const planned=offlineMode
+      ? [{text:clean,kind:'text',voiceSafe:false}]
+      : enforceBubblePlan(clean,proactive?1:want);
+    const plan=planned.map(function(item){
       const text=badVoice.test(item.text)?'好，我发给你。':cleanChatOutput(item.text,ch);
       return Object.assign({},item,{text:text});
     });
-    const parts=resolveVoicePlan(plan,speaker,wantsVoice);
+    const parts=offlineMode?plan:resolveVoicePlan(plan,speaker,wantsVoice);
     if(!parts.length) throw new Error('没有可发送的气泡');
     for(let pi=0;pi<parts.length;pi++){
       const part=parts[pi],t=part.text;
@@ -6185,8 +6380,10 @@ async function aiTurn(opt){
       if(other){ await sleep(900); await aiTurn({chatId:ch.id,speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
     }
   }catch(e){
-    toast('出错：'+e.message);
+    if(e.name!=='AbortError') toast('出错：'+e.message);
   }finally{
+    const active=chatRequestControllers.get(ch.id);
+    if(active&&active.controller===requestController) chatRequestControllers.delete(ch.id);
     setTyping(false);
   }
 }
@@ -6267,10 +6464,13 @@ function panelAction(k){
 }
 function toggleMeet(){
   const ch=chat(route.name==='chatroom'?route.arg:curChatId); if(!ch) return;
-  const nowOff=ch.memberIds.some(id=>{ const c=ct(id); return c&&Number(c.meetFreq)>0; });
+  const nowOff=!!ch.offlineMode;
   const store=coreStore();
-  ch.memberIds.forEach(id=>{ const c=ct(id); if(c){ if(store) store.commands.patchContact(id,{meetFreq:nowOff?0:3},{persist:false}); else c.meetFreq= nowOff? 0 : 3; } });
-  pushMsg(ch.id,{role:'sys',type:'text',text: nowOff? '已切回线上：Ta 不再写动作，只发消息' : '已切换到线下：Ta 会写动作，用两个单引号夹住'});
+  const nextOffline=!nowOff;
+  const scene=nextOffline?String(ch.offlineScene||'你们身边').trim():'';
+  if(store) store.commands.patchChat(ch.id,{offlineMode:nextOffline,offlineScene:scene},{persist:false});
+  else { ch.offlineMode=nextOffline; ch.offlineScene=scene; }
+  pushMsg(ch.id,{role:'sys',type:'text',text: nextOffline? '已切换到线下：当前地点「'+scene+'」，下一次回复会包含动作与面对面场景' : '已切回线上：下一次回复恢复微信聊天'});
   hidePanel(); save(); toast(nowOff? '已切回线上':'已切换到线下');
 }
 function panelStickers(){
@@ -7091,7 +7291,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.67 · 第 78 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.68 · 第 79 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -8785,7 +8985,7 @@ async function generateCoupleDiary(){
     const sys=promptOf(r.contact,null,(r.chat&&r.chat.msgs||[]).slice(-10),{chatId:r.binding.chatId,personaId:r.persona.id})
       +'\n【任务】写一篇只给角色自己看的日记，主题围绕你和用户最近的真实相处。不要写成总结报告，不要提 AI、系统、任务。'
       +'\n【要求】第一人称，180 到 350 个中文字；写具体动作、细节、情绪和没当面说出口的话。不能替用户写内心，不能编造聊天里不存在的大事。'
-      +'\n'+(r.chat?'\n'+memoryBlockForChat(r.chat.id):'')+branchMemory;
+      +branchMemory;
     const out=await callModel([{role:'system',content:sys},{role:'user',content:'写今天的日记。'}]);
     const text=stripFormatTitles(regexOf(r.contact,out)).trim();
     if(!text) throw new Error('没有生成内容');
@@ -12394,31 +12594,46 @@ function npCoReadSummary(r,b,c){
   const last=(r.chat||[]).slice(-2).map(function(m){ return (m.role==='me'?(DB.me.name||'我'):c.name)+'：'+String(m.text||'').slice(0,60); }).join('；');
   return '和 '+c.name+' 一起读了'+npBookTitleQuoted(b)+(r.startChapter+1)+'-'+(r.endChapter+1)+' 章，读到「'+String(ps[r.paraIndex]||'').slice(0,55)+'」。'+(last? '当时聊到：'+last:'');
 }
+function npCoReadMemoryFact(r,b,c){
+  const chapter=(b.chapters||[])[r.chapterIndex]||{},ps=npParas(chapter);
+  return '和 '+c.name+' 一起读了'+npBookTitleQuoted(b)+(r.startChapter+1)+'-'+(r.endChapter+1)+' 章，停在章节「'+String(chapter.title||'').slice(0,40)+'」的一段：'+String(ps[r.paraIndex]||'').slice(0,70)+'。这是书中的内容，不是现实亲历。';
+}
 function sheetEndCoRead(rid){
   const r=readingById(rid), b=r? bookById(r.bookId):null, c=r? ct(r.cid):null; if(!r||!b||!c) return;
   const summary=npCoReadSummary(r,b,c);
-  sheetSmall('<h3>结束这次共读</h3><div class="muted" style="margin:6px 0 12px;line-height:1.8">'+esc(summary)+'</div><button class="btn primary full" id="npSyncBoth">同步到会话和角色记忆</button><button class="btn full" id="npSyncChat">只同步到会话</button><button class="btn full" id="npSyncMem">只写进角色记忆</button><button class="btn full" id="npSyncNo">先不保存</button>');
-  $('#npSyncNo').onclick=closeSheet;
-  $('#npSyncBoth').onclick=function(){ npFinishCoRead(rid,'both'); };
-  $('#npSyncChat').onclick=function(){ npFinishCoRead(rid,'chat'); };
-  $('#npSyncMem').onclick=function(){ npFinishCoRead(rid,'memory'); };
+  const chatId=r.chatId||(chatOfContact(c.id)||{}).id||null;
+  sheetMemorySyncChoice('结束这次共读',summary,{},function(scope){
+    npFinishCoRead(rid,scope,chatId);
+  });
 }
-function npFinishCoRead(rid,target){
+function npFinishCoRead(rid,scope,chatId){
   const r=readingById(rid), b=r? bookById(r.bookId):null, c=r? ct(r.cid):null; if(!r||!b||!c) return;
   const summary=npCoReadSummary(r,b,c);
-  const store=coreStore();
-  if(target==='memory'||target==='both'){
-    if(store) store.commands.addContactMemory(c.id,{id:uid(),text:summary},{persist:false});
-    else { c.memories=c.memories||[]; c.memories.push({id:uid(),text:summary}); }
-  }
-  if(target==='chat'||target==='both'){
-    let ch=chat(r.chatId)||(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===c.id; });
-    if(!ch) ch=newPrivateChat(c.id);
+  const memoryFact=npCoReadMemoryFact(r,b,c);
+  const target=scope==='character'?'character':'session';
+  let ch=chat(chatId)||(DB.chats||[]).find(function(x){ return x.type==='private'&&x.memberIds&&x.memberIds[0]===c.id; });
+  if(target==='session'&&!ch) ch=newPrivateChat(c.id);
+  const chapter=(b.chapters||[])[r.chapterIndex]||{};
+  syncMemoryFact({
+    sourceType:'novel_co_read',
+    sourceId:r.id,
+    sourceLabel:npBookTitleQuoted(b),
+    fact:memoryFact,
+    keywords:[b.title,chapter.title,'共读','小说','剧情'],
+    contactId:c.id,
+    chatId:ch&&ch.id||chatId||null,
+    personaId:r.personaId||ch&&ch.personaId||DB.me.personaId,
+    scope:target,
+    occurredAt:r.updatedAt||r.created,
+    allowProactive:true
+  });
+  if(target==='session'&&ch){
+    const store=coreStore();
     const msg={id:uid(),role:'sys',type:'text',text:'共读记录：'+summary,ts:Date.now()};
     if(store) store.commands.appendMessage(ch.id,msg,{persist:false});
     else { ch.msgs.push(msg); ch.lastTs=Date.now(); }
   }
-  r.memorySynced=true; r.updatedAt=Date.now(); save(); closeSheet(); render(); toast('共读已保存');
+  r.memorySynced=true; r.updatedAt=Date.now(); save(); closeSheet(); render(); toast(target==='character'?'已记成角色长期经历':'已记入当前会话');
 }
 async function readingAskTa(rid){
   const r=readingById(rid), b=r? bookById(r.bookId):null, c=r? ct(r.cid):null;
@@ -12611,11 +12826,11 @@ function bindScreenInner(){
     else if(a==='openwx') go('wechat',null,'msg');
     else if(a==='backwx') go('wechat');
   });
-  $$('[data-openchat]',s).forEach(el=>el.onclick=()=>{ const ch=chat(el.dataset.openchat); if(ch) ch.unread=0; go('chatroom',el.dataset.openchat); });
+  $$('[data-openchat]',s).forEach(el=>el.onclick=()=>{ const ch=chat(el.dataset.openchat); markChatRead(ch); go('chatroom',el.dataset.openchat); });
   $$('[data-openct]',s).forEach(el=>el.onclick=()=>go('contactview',el.dataset.openct));
   $$('[data-editct]',s).forEach(el=>el.onclick=()=>go('contactedit',el.dataset.editct));
   $$('[data-aiphoto-contact]',s).forEach(el=>el.onclick=()=>sheetContactAiPhotos(ct(el.dataset.aiphotoContact)));
-  $$('[data-chatwith]',s).forEach(el=>el.onclick=()=>{ const ch=chatOfContact(el.dataset.chatwith); ch.unread=0; save(); go('chatroom',ch.id); });
+  $$('[data-chatwith]',s).forEach(el=>el.onclick=()=>{ const ch=chatOfContact(el.dataset.chatwith); markChatRead(ch); save(); go('chatroom',ch.id); });
   $$('[data-groupedit]',s).forEach(el=>el.onclick=()=>sheetGroupEdit(el.dataset.groupedit));
   const preFlush=()=>{ if(route.name==='contactedit'&&route.edit){ try{ Object.assign(route.edit, readContactForm()); }catch(e){} } };
   $$('[data-bindregex]',s).forEach(el=>el.onclick=()=>{ preFlush(); sheetRegex(); });
@@ -13453,7 +13668,7 @@ function bindScreenInner(){
       if(!DB.api.key){ toast('先去设置填 API Key'); return; }
       busy('正在生成，请稍后');
       try{
-        const sys=promptOf(c,null,[],{format:'diary',personaId:p.id,chatId:r.chat&&r.chat.id})+(r.chat?'\n'+memoryBlockForDate({boundChatId:r.chat.id}):'');
+        const sys=promptOf(c,null,[],{format:'diary',personaId:p.id,chatId:r.chat&&r.chat.id});
         const out=await callModel([{role:'system',content:sys},{role:'user',content:'用第一人称写今天的日记，200 字左右，写你此刻的心情和今天发生的一件具体小事。只写日记正文，不要【旁白】【对白】标题，不要剧本。'}]);
         DB.diary.unshift({date:dateISO(),who:c.name,kind:'char',contactId:c.id,personaId:p.id,bindingTrace:exactBindingTrace(DB.diaryBinding,'diary'),text:stripFormatTitles(regexOf(c,out))}); save(); render();
       }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
@@ -13691,8 +13906,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.67 · 第 78 轮';
-const BUILD_CODE=78;
+const BUILD='2026-10-28 · 3.68 · 第 79 轮';
+const BUILD_CODE=79;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -14087,7 +14302,6 @@ async function genDateScene(d){
   const hasTalk=(d.msgs||[]).some(function(m){ return m.role!=='narr'; });
   const sys='你在写一段中文小说的场景旁白。人物：「'+c.name+'」和用户。地点：「'+sceneName(d)+'」。'
     +(per? '\n【用户人设】\n'+personaFullText(per).slice(0,700):'')
-    +(memoryBlockForDate(d)? '\n'+memoryBlockForDate(d):'')
     +(d.opening? '\n【用户指定的本次开场】\n'+d.opening+'\n要自然吸收这段设定，不要逐字复述，不要改掉用户指定的事实。':'')
     +(hasTalk? '\n【刚刚发生的事】\n'+recent+'\n要接着这一刻写：写他们现在的姿势、距离、手上的动作和环境，不要重新开场，不要重复说过的话。'
              : '\n要求：第三人称，2 到 4 句，只写环境、光线、声音、气味，以及对方出现时的样子和动作；不要写对话。')
@@ -14284,12 +14498,13 @@ async function dateTurn(d,nudge){
   if(box){ box.insertAdjacentHTML('beforeend','<div class="chatty" id="dtyping">'+esc(contactDisplayName(c))+' 正在…</div>'); box.scrollTop=box.scrollHeight; }
   try{
     const history=contextHistory((d.msgs||[]).filter(function(m){ return m.role!=='sys'; }),24).map(function(m){ return {role:m.role==='me'?'user':'assistant',content:labelOf(m)}; });
-    let sys=promptOf(c,null,(d.msgs||[]).slice(-6),{offline:true,scene:sceneName(d),chatId:d.boundChatId||d.chatId,personaId:d.personaId})+'\n【日期】'+(d.day||'')+'\n'+memoryBlockForDate(d)
+    let sys=promptOf(c,null,(d.msgs||[]).slice(-6),{offline:true,scene:sceneName(d),chatId:d.boundChatId||d.chatId,personaId:d.personaId})+'\n【日期】'+(d.day||'')
       +'\n【格式】每次回复必须分成两块：\n【旁白】动作、神态、身体反应、环境（2 到 4 段）\n【对白】你说的话（可以没有；不加引号）\n标题不要改，不要用括号写动作。';
     if(nudge) sys+='\n【这次的特别要求】'+nudge;
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(c,out);
     if(!clean) throw new Error('模型没有返回内容');
+    markCrossMemoryMentioned(clean);
     await sleep(Math.min(1600,240+clean.length*12));
     const tt=$('#dtyping'); if(tt) tt.remove();
     const nt=await formatTurn(clean,c.name);
@@ -14523,27 +14738,115 @@ function memoryBlockForDate(d){
     return (m.role==='me'?'对方':'你')+'：'+String(labelOf(m)).slice(0,60);
   }).join('\n');
 }
+function memorySourceLabel(type){
+  return ({
+    novel_co_read:'小说共读',
+    takeout_order:'外卖订单',
+    date:'约会',
+    outing:'出门',
+    couple:'情侣空间',
+    manual:'手动记忆'
+  })[type]||'其他记忆';
+}
+function syncMemoryFact(input){
+  const data=input||{};
+  const sourceType=String(data.sourceType||'manual');
+  const sourceId=String(data.sourceId||uid());
+  const scope=data.scope==='character'?'character':'session';
+  DB.memoryEntries=Array.isArray(DB.memoryEntries)?DB.memoryEntries:[];
+  let entry=DB.memoryEntries.find(function(item){
+    return item&&item.sourceType===sourceType&&String(item.sourceId)===sourceId;
+  });
+  if(entry){
+    entry.fact=String(data.fact||entry.fact||'').trim();
+    entry.sourceLabel=String(data.sourceLabel||entry.sourceLabel||'').trim();
+    entry.personaId=data.personaId||entry.personaId||null;
+    entry.chatId=data.chatId||entry.chatId||null;
+    entry.contactId=data.contactId||entry.contactId||null;
+    entry.scope=scope;
+    entry.keywords=Array.isArray(data.keywords)?data.keywords.slice(0,20):entry.keywords||[];
+    entry.occurredAt=Number(data.occurredAt||entry.occurredAt)||Date.now();
+    entry.syncedAt=Date.now();
+    entry.active=data.active!==false;
+    entry.allowProactive=data.allowProactive!==false;
+  }else{
+    entry={
+      id:uid(),
+      sourceType:sourceType,
+      sourceId:sourceId,
+      sourceLabel:String(data.sourceLabel||memorySourceLabel(sourceType)).slice(0,80),
+      fact:String(data.fact||'').trim().slice(0,600),
+      keywords:(Array.isArray(data.keywords)?data.keywords:[]).map(String).map(function(x){ return x.trim(); }).filter(Boolean).slice(0,20),
+      contactId:data.contactId||null,
+      chatId:data.chatId||null,
+      personaId:data.personaId||null,
+      scope:scope,
+      occurredAt:Number(data.occurredAt)||Date.now(),
+      syncedAt:Date.now(),
+      lastMentionedAt:0,
+      mentionCount:0,
+      active:data.active!==false,
+      allowProactive:data.allowProactive!==false
+    };
+    DB.memoryEntries.unshift(entry);
+  }
+  DB.memoryEntries=DB.memoryEntries.slice(0,500);
+  return entry;
+}
+function memoryEntryMatchesChat(entry,chatId){
+  const ch=viewChat(chatId);
+  if(!entry||entry.active===false||!ch) return false;
+  if(entry.scope==='session') return entry.chatId===chatId;
+  const contactId=ch.memberIds&&ch.memberIds[0]||null;
+  return entry.scope==='character'&&entry.contactId===contactId;
+}
+function memoryEntryRelevant(entry,contextText){
+  if(!entry) return false;
+  if(entry.sourceType==='manual') return true;
+  const hay=String(contextText||'').toLowerCase();
+  if(!hay) return false;
+  const words=(entry.keywords||[]).concat([entry.sourceLabel||'',entry.fact||'']).join(' ').toLowerCase()
+    .match(/[\u4e00-\u9fff]{2,8}|[a-z0-9]{2,20}/g)||[];
+  if(words.some(function(word){ return word.length>=2&&hay.indexOf(word)>=0; })) return true;
+  if(entry.sourceType==='novel_co_read') return /书|小说|剧情|章节|读者|共读|角色|主角/.test(hay);
+  if(entry.sourceType==='takeout_order') return /外卖|奶茶|咖啡|吃|喝|饭|甜点|订单|配送|商家/.test(hay);
+  if(entry.sourceType==='date'||entry.sourceType==='outing') return /见面|约会|出去|那天|上次|地点|一起/.test(hay);
+  if(entry.sourceType==='couple') return /情侣|我们|纪念日|任务|厨房|小家/.test(hay);
+  return false;
+}
 function memoryBlockForChat(chatId){
-  const out=[];
-  const dates=(DB.dates||[]).filter(function(x){ return x.boundChatId===chatId; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); }).slice(0,2);
-  dates.forEach(function(d){
-    const ms=(d.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-10);
-    if(ms.length) out.push('【你们在约会地点「'+sceneName(d)+'」经历过这些（同一会话记忆，别复述）】\n'+ms.map(function(m){ return (m.role==='me'?'对方':'你')+'：'+String(labelOf(m)).slice(0,70); }).join('\n'));
+  const ch=viewChat(chatId);
+  if(!ch) return '';
+  const recent=(ch.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-12).map(function(m){ return labelOf(m); }).join('\n');
+  const limit=Math.max(1,Math.min(8,Number(DB.memorySettings&&DB.memorySettings.crossLimit)||3));
+  const entries=(DB.memoryEntries||[]).filter(function(entry){
+    return memoryEntryMatchesChat(entry,chatId)&&memoryEntryRelevant(entry,recent);
+  }).sort(function(a,b){
+    return (Number(b.occurredAt)||0)-(Number(a.occurredAt)||0);
+  }).slice(0,limit);
+  window.__lastCrossMemoryIds=entries.map(function(entry){ return entry.id; });
+  return entries.map(function(entry){
+    const proactive=entry.allowProactive===false?'（可以理解这条事实，但不要主动提起，只有用户明确问到时才回答）':'';
+    const kind=entry.sourceType==='novel_co_read'?'书中内容，不是现实亲历':'现实经历';
+    return '【'+memorySourceLabel(entry.sourceType)+'｜'+kind+'】'+proactive+'\n- '+entry.fact;
+  }).join('\n');
+}
+function markCrossMemoryMentioned(text){
+  const ids=Array.isArray(window.__lastCrossMemoryIds)?window.__lastCrossMemoryIds:[];
+  if(!ids.length) return;
+  const reply=String(text||'');
+  let changed=false;
+  ids.forEach(function(id){
+    const entry=(DB.memoryEntries||[]).find(function(item){ return item.id===id; });
+    if(!entry) return;
+    const words=(entry.keywords||[]).concat([entry.sourceLabel||'',entry.fact||'']).join(' ')
+      .match(/[\u4e00-\u9fff]{2,8}|[a-z0-9]{2,20}/g)||[];
+    if(!words.some(function(word){ return word.length>=2&&reply.indexOf(word)>=0; })) return;
+    entry.lastMentionedAt=Date.now();
+    entry.mentionCount=Math.max(0,Number(entry.mentionCount)||0)+1;
+    changed=true;
   });
-  const outs=(DB.outings||[]).filter(function(o){ return (o.chatId===chatId||o.boundChatId===chatId)&&(o.steps||[]).length; }).sort(function(a,b){ return (b.updatedAt||0)-(a.updatedAt||0); }).slice(0,2);
-  outs.forEach(function(o){
-    const hist=(o.steps||[]).filter(function(st){ return st.type!=='meet'; }).slice(-12).map(function(st){
-      if(st.type==='you') return '对方：'+st.text;
-      if(st.type==='say') return '你：'+st.text;
-      if(st.type==='narr') return '旁白：'+st.text;
-      if(st.type==='turn') return '场景：'+((st.narr||[]).join(' ')+' '+(st.talk||[]).join(' ')).slice(0,180);
-      return '';
-    }).filter(Boolean).join('\n');
-    if(hist) out.push('【你们最近出门去过「'+(o.place||'外面')+'」（同一会话记忆，别复述）】\n'+hist);
-  });
-  const orders=(DB.takeout&&DB.takeout.orders||[]).filter(function(o){ return o.chatId===chatId; }).slice(-4);
-  if(orders.length) out.push('【这个会话里点过的外卖】\n'+orders.map(function(o){ return o.merchant+'：'+o.items.map(function(x){ return x.name+'×'+x.qty; }).join('、')+'，'+takeoutStatusLabel(o.status); }).join('\n'));
-  return out.join('\n');
+  if(changed) save();
 }
 /* ================= 突然来找你 ================= */
 const MEET_GAP=[Infinity,6*3600e3,3*3600e3,90*60e3,45*60e3,20*60e3];
@@ -16041,6 +16344,8 @@ function sheetDM(id){
   if(!d) return;
   d.unread=0;
   const c=d.cid? ct(d.cid) : null;
+  const dmBinding=c?wbBindings().find(function(binding){ return binding.contactId===c.id; }):null;
+  const dmChatId=dmBinding&&dmBinding.chatId||(c?(viewChats().filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ch.memberIds[0]===c.id; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); })[0]||{}).id:null);
   const draw=function(){
     const body=d.msgs.map(function(m){
       const me=m.role==='me';
@@ -16057,10 +16362,12 @@ function sheetDM(id){
       d.msgs.push({role:'me',text:t,ts:Date.now()}); save(); draw();
       if(!DB.api.key){ toast('填了 API Key 才能让对方回话'); return; }
       try{
-        const sys=c? promptOf(c,null,[],{}) + '\n【场景】你在微博私信里和对方聊天。一到两句，口语，不要用引号。'
+        const sys=c? promptOf(c,null,d.msgs.slice(-8),{format:'weibo',chatId:dmChatId,personaId:dmBinding&&dmBinding.personaId}) + '\n【场景】你在微博私信里和对方聊天。一到两句，口语，不要用引号。'
           : '你在扮演一个微博上的陌生人，正在私信对方。一到两句，口语，不要用引号。\n'+wbPersonaBlock();
         const out=await callModel([{role:'system',content:sys},{role:'user',content:t}]);
-        d.msgs.push({role:'ta',text:wbClean(out).replace(/[“”"「」]/g,''),ts:Date.now()});
+        const reply=wbClean(out).replace(/[“”"「」]/g,'');
+        markCrossMemoryMentioned(reply);
+        d.msgs.push({role:'ta',text:reply,ts:Date.now()});
         save(); draw();
       }catch(e){}
     };
@@ -16492,11 +16799,11 @@ async function outTurn(o,chosen){
     return '';
   }).filter(Boolean).join('\n');
   const mustMeet=!!meet && !o.cid && ((o.turn||0)+1)>=(o.meetAt||2);
-  const sys='你在写一段中文互动小说：用户一个人出门闲逛。'
+  const baseContext=meet?promptOf(meet,null,[],{format:'plain',chatId:o.chatId||o.boundChatId,personaId:o.persona})+'\n':'';
+  const sys=baseContext+'你在写一段中文互动小说：用户一个人出门闲逛。'
     +'\n【设定】日期：'+(o.day||'不详')+'；时间：'+o.slot+'；天气：'+o.weather+(o.place? ('；地点：'+o.place):'')
-    +(persona? '\n【用户是谁】'+personaFullText(persona).slice(0,500):'')
+    +(persona&&!meet? '\n【用户是谁】'+personaFullText(persona).slice(0,500):'')
     +(outWorldFlavor()? '\n【世界设定】'+outWorldFlavor():'')
-    +(o.chatId? '\n'+memoryBlockForChat(o.chatId):'')
     +'\n【已经发生的事】\n'+(hist||'（还没开始）')
     +'\n【这次的任务】'+(chosen? ('用户刚选了「'+chosen+'」。'):'')
     +(mustMeet? ('现在必须让「'+meet.name+'」出现，只能出现这一位，并写 Ta 的一句话（可以带动作，用两个英文单引号夹住）。')
@@ -17228,6 +17535,33 @@ function screenMall(){
       +'<button class="btn" data-buy="'+i+'" style="margin-top:6px">买</button></div></div></div>').join('')
     : '<div class="card"><div class="muted">还没有商品。点上面的「进场」。</div></div>');
 }/* ================= 订单动作 ================= */
+function takeoutOrderMemoryFact(o){
+  const items=(o&&o.items||[]).map(function(x){ return x.name+'×'+x.qty; }).join('、');
+  return '外卖订单'+(o&&o.orderNo?' #'+o.orderNo:'')+'：'+(o&&o.merchant||'商家')+'，'+items+(o&&o.note?'；备注：'+o.note:'');
+}
+function syncTakeoutOrderMemory(o,scope,chatId){
+  if(!o) return null;
+  const target=scope==='character'?'character':'session';
+  const contact=o.contactId?ct(o.contactId):null;
+  let targetChatId=chatId||o.chatId||(contact?chatOfContact(contact.id).id:null);
+  if(target==='character'&&!contact){ toast('这单没有绑定角色'); return null; }
+  if(target==='session'&&!targetChatId){ toast('这单没有绑定会话'); return null; }
+  const entry=syncMemoryFact({
+    sourceType:'takeout_order',
+    sourceId:o.id,
+    sourceLabel:o.merchant||'外卖订单',
+    fact:takeoutOrderMemoryFact(o),
+    keywords:(o.items||[]).map(function(x){ return x.name; }).concat([o.merchant,o.note]).filter(Boolean),
+    contactId:o.contactId||null,
+    chatId:targetChatId||null,
+    personaId:o.personaId||null,
+    scope:target,
+    occurredAt:o.createdAt,
+    allowProactive:true
+  });
+  save();
+  return entry;
+}
 function sheetOrderResult(o){
   const t=o.used||{};
   const line=(t.kind==='use'?'你用了它':t.kind==='gift'?'你把它送给了 Ta':t.kind==='open'?'你把它拆开了':'你把它转卖了');
@@ -17235,32 +17569,27 @@ function sheetOrderResult(o){
   sheet('<h3>'+esc(o.name)+'</h3>'
     +'<div class="muted" style="margin:6px 0 8px">'+esc(line)+'</div>'
     +'<div class="card" style="box-shadow:none;border:1px solid var(--line);font-size:calc(14px * var(--ui-font-scale,1));line-height:1.95">'+esc(t.text||'').replace(/\n/g,'<br>')+'</div>'
-    +'<button class="btn full" id="osChat">同步到某会话</button>'
-    +'<button class="btn full" id="osCt">同步到角色</button>'
+    +'<button class="btn full" id="osSync">同步这条记忆</button>'
     +'<button class="btn full" id="osBack">返回</button>');
   $('#osBack').onclick=function(){ closeSheet(); render(); };
-  $('#osChat').onclick=function(){
-    sheetPickChats('同步到哪条会话',1,function(ids){
-      const ch=ids[0]? chat(ids[0]) : null; if(!ch){ return; }
-      const store=coreStore();
-      if(store) store.commands.mergeSessionMemory(ch.id,[memLine],{persist:false});
-      else {
-        ch.mem=ch.mem||{ts:Date.now(),items:[]}; ch.mem.items=ch.mem.items||[];
-        if(ch.mem.items.indexOf(memLine)<0) ch.mem.items.push(memLine);
-        ch.mem.ts=Date.now();
-      }
-      save(); sheetOrderResult(o); toast('已同步到 '+chatName(ch));
+  $('#osSync').onclick=function(){
+    const c=ct(o.cid);
+    const targetChat=c?chatOfContact(c.id):null;
+    sheetMemorySyncChoice('同步这条记忆',memLine,{},function(scope){
+      syncMemoryFact({
+        sourceType:'manual',
+        sourceId:o.id,
+        fact:memLine,
+        keywords:[o.name,t.text||''],
+        contactId:o.cid||null,
+        chatId:targetChat&&targetChat.id||null,
+        personaId:DB.me.personaId,
+        scope:scope,
+        occurredAt:o.ts,
+        allowProactive:true
+      });
+      save(); render(); toast(scope==='character'?'已记成角色长期经历':'已记入当前会话');
     });
-  };
-  $('#osCt').onclick=function(){
-    const c=ct(o.cid); if(!c){ toast('这件没有关联角色'); return; }
-    const store=coreStore();
-    if(store) store.commands.addContactMemory(c.id,{id:uid(),text:memLine},{persist:false});
-    else {
-      c.memories=c.memories||[];
-      if(!c.memories.some(function(x){ return x.text===memLine; })) c.memories.push({id:uid(),text:memLine});
-    }
-    save(); sheetOrderResult(o); toast('已写进 '+c.name);
   };
 }
 function sheetOrder(o){
@@ -18094,6 +18423,7 @@ function sheetTakeoutOrder(orderId){
     +'<div class="to-order-route"><div class="route-line"><i></i><div><small>收货地址</small><b>'+esc(o.address&&o.address.name||'我')+' '+esc(o.address&&o.address.phone||'')+'</b><span>'+esc(o.address&&o.address.detail||'未填写')+'</span></div></div><div class="route-line"><i></i><div><small>配送骑手</small><b>'+esc(o.rider||'本机骑手')+'</b><span>'+esc(takeoutStatusLabel(o.status))+' · 点击下方查看完整进度</span></div></div></div>'
     +'<div class="takeout-timeline">'+timeline+'</div>'
     +'<div class="muted" style="margin:4px 0 8px">支付方式：'+esc(o.payment&&o.payment.label||'小手机钱包')+'</div>'
+    +'<button class="btn full" id="toSyncOrderMem">同步订单记忆</button>'
     +(o.source!=='contact'&&!o.sentToChat?'<button class="btn primary full" id="toSendOrder">发送订单到聊天</button>':'')
     +(o.status==='delivered'?'<button class="btn primary full" id="toConfirmReceipt">确认收货</button>':'')
     +(canRefund?'<button class="btn danger full" id="toRefund">申请退款</button>':'')
@@ -18102,6 +18432,12 @@ function sheetTakeoutOrder(orderId){
   $('#toOrderClose').onclick=closeSheet;
   $$('#sheetBox [data-toorderitem]').forEach(function(el){ el.onclick=function(){ sheetTakeoutOrderItem(o.id,Number(el.dataset.toorderitem)); }; });
   $('#toOrderChat').onclick=function(){ if(o.chatId&&chat(o.chatId)){ closeSheet(); go('chatroom',o.chatId); } };
+  $('#toSyncOrderMem').onclick=function(){
+    sheetMemorySyncChoice('同步外卖订单',takeoutOrderMemoryFact(o),{},function(scope){
+      const entry=syncTakeoutOrderMemory(o,scope,o.chatId);
+      if(entry){ closeSheet(); render(); toast(scope==='character'?'外卖已记成角色长期经历':'外卖已记入当前会话'); }
+    });
+  };
   const sendOrder=$('#toSendOrder');
   if(sendOrder) sendOrder.onclick=function(){
     takeoutPushOrderMessage(o,'外卖订单 #'+(o.orderNo||o.id)+'：'+takeoutStatusLabel(o.status));
@@ -18141,11 +18477,12 @@ async function takeoutRoleOrder(kind){
   if(DB.api.key){
     busy('Ta 正在看菜单，请稍后');
     try{
-      const sys=promptOf(ctx.contact,null,[],{format:'chat'})+'\n【任务】你刚决定点外卖。收货对象是：'+(orderedFor==='contact'?'你自己':orderedFor==='me'?'对方':'你和对方一起吃')+'。商品：'+picked.map(function(p){ return p.name; }).join('、')+'。只输出 JSON：{"message":"发给对方的一句话","note":"订单备注"}。备注必须完全符合你的人设、你和对方的关系及称呼习惯，不能 OOC，不能提 AI。';
+      const sys=promptOf(ctx.contact,null,[],{format:'chat',chatId:ctx.chat.id,personaId:ctx.personaId})+'\n【任务】你刚决定点外卖。收货对象是：'+(orderedFor==='contact'?'你自己':orderedFor==='me'?'对方':'你和对方一起吃')+'。商品：'+picked.map(function(p){ return p.name; }).join('、')+'。只输出 JSON：{"message":"发给对方的一句话","note":"订单备注"}。备注必须完全符合你的人设、你和对方的关系及称呼习惯，不能 OOC，不能提 AI。';
       const out=await callModel([{role:'system',content:sys},{role:'user',content:'只输出 JSON。'}]);
       const clean=regexOf(ctx.contact,out).trim(),data=npJSON(clean);
       if(data&&data.message) words=String(data.message).slice(0,120);
       if(data&&data.note) note=String(data.note).slice(0,160);
+      markCrossMemoryMentioned(words);
     }catch(e){ logErr('角色点外卖生成失败，使用本地句：'+e.message); }
     finally{ busyDone(); }
   }
@@ -18373,6 +18710,9 @@ window.addEventListener('nativepermissionchange',function(e){
     if(!e.detail&&window.NativeNotifications&&window.NativeNotifications.disableBackground) window.NativeNotifications.disableBackground();
   }catch(err){}
   toast(e.detail?'系统通知权限已开启':'系统通知权限未通过，已保留 App 内提醒');
+});
+window.addEventListener('bs:core-store-change',function(e){
+  try{ scheduleCoreStoreRefresh(e.detail||{}); }catch(err){ logErr('Store刷新失败：'+err.message); }
 });
 window.setInterval(function(){ try{ takeoutTickOrders(); }catch(e){ logErr('外卖状态轮询失败：'+e.message); } },3000);
 </script>
