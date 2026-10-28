@@ -1,9 +1,9 @@
 {
-  "version": "3.66",
-  "versionCode": 77,
-  "round": 77,
+  "version": "3.67",
+  "versionCode": 78,
+  "round": 78,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=77",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=78",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "核心实体迁移：微信角色、会话、消息、记忆、世界书与正则改由核心Store统一读写；UI保持原样，Prompt基线回归通过。"
+  "notes": "全量UI回归与状态复位：恢复重构前49个页面状态的DOM/事件一致性，修复正在输入卡死、增量消息气泡未绑定、导入覆盖旧字段与多处loading状态残留。"
 }

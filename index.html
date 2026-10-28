@@ -3109,6 +3109,7 @@ let toastTimer=null;
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400); }
 let busyN=0,busyTimer=null;
 function busy(text){ busyN++; const b=$('#busy'); if(b){ b.textContent=text||'正在处理，请稍后'; b.classList.add('on'); } clearTimeout(busyTimer); busyTimer=setTimeout(function(){ busyN=0; const x=$('#busy'); if(x) x.classList.remove('on'); },120000); }
+function busyStatus(text){ if(busyN<=0) return; const b=$('#busy'); if(b) b.textContent=text||'正在处理，请稍后'; }
 function busyDone(){ busyN=Math.max(0,busyN-1); if(!busyN){ clearTimeout(busyTimer); busyTimer=null; const b=$('#busy'); if(b) b.classList.remove('on'); } }
 let suppressTapUntil=0;
 function sheetRegen(title,onRegen,onDelete){
@@ -5154,6 +5155,22 @@ function setTyping(on,text){
   if(on){ if(!t.dataset.orig) t.dataset.orig=t.innerHTML; t.innerHTML='<span class="tip">'+esc(text||'对方正在输入…')+'</span>'; }
   else if(t.dataset.orig){ t.innerHTML=t.dataset.orig; delete t.dataset.orig; }
 }
+const boundChatBubbles=new WeakSet();
+function bindChatBubble(el){
+  if(!el||boundChatBubbles.has(el)) return;
+  boundChatBubbles.add(el);
+  const open=()=>sheetMsg(route.arg,el.dataset.bub);
+  el.onclick=e=>{
+    if(chatSelectChat===route.arg) return;
+    if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')||e.target.closest('[data-quote-msg]')) return;
+    open();
+  };
+  let tmr=null;
+  const stop=()=>{ if(tmr){ clearTimeout(tmr); tmr=null; } };
+  el.addEventListener('touchstart',()=>{ stop(); tmr=setTimeout(()=>{ tmr=null; open(); },450); },{passive:true});
+  el.addEventListener('touchend',stop);
+  el.addEventListener('touchmove',stop);
+}
 /* ================= 拍一拍 / 连发模式 ================= */
 function pokeTa(cid){
   const c=ct(cid); if(!c) return;
@@ -6011,6 +6028,8 @@ function appendMessageToOpenChat(ch,mm){
   if(!box) return false;
   const index=(ch.msgs||[]).findIndex(function(item){ return item.id===mm.id; });
   box.insertAdjacentHTML('beforeend',chatTimeSeparatorHTML(ch,index)+msgHTML(mm,ch,{active:false,ids:[]}));
+  const bubble=box.querySelector('[data-bub="'+String(mm.id).replace(/"/g,'\\"')+'"]');
+  bindChatBubble(bubble);
   requestAnimationFrame(scrollChatBottom);
   return true;
 }
@@ -6166,8 +6185,9 @@ async function aiTurn(opt){
       if(other){ await sleep(900); await aiTurn({chatId:ch.id,speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
     }
   }catch(e){
-    setTyping(false);
     toast('出错：'+e.message);
+  }finally{
+    setTyping(false);
   }
 }
 async function sendText(){
@@ -7071,7 +7091,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.66 · 第 77 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.67 · 第 78 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -11979,7 +11999,7 @@ function npGenerateBookChapters(bookId){
     try{
       for(let n=0;n<need;n++){
         const idx=(b.chapters||[]).length;
-        busy('正在写第 '+(idx+1)+' 章，请稍后');
+        busyStatus('正在写第 '+(idx+1)+' 章，请稍后');
         const prev=(b.chapters||[]).slice(-3).map(function(c){ return c.title+'：'+String(c.summary||'').slice(0,120); }).join('\n');
         const sys='你是中文网文作者。只输出 JSON，不聊天。章节要像真实连载：有开篇钩子、具体场景、动作和对话，结尾留钩子。不要写标题外的解释。'
           +(DB.np.stylePrompt? '\n【文风要求】'+DB.np.stylePrompt:'')
@@ -12683,19 +12703,7 @@ function bindScreenInner(){
     $$('[data-vtext]',s).forEach(el=>el.onclick=e=>{ e.stopPropagation(); const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.vtext); if(!m) return; patchChatMessage(m,{showText:!m.showText}); save(); render(); });
     $$('[data-rp]',s).forEach(el=>el.onclick=()=>{ const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.rp); if(!m) return;
       if(!m.opened){ patchChatMessage(m,{opened:true}); save(); toast('已领取 ¥'+m.amount); render(); } else toast('这个红包已经领过了'); });
-    $$('[data-bub]',s).forEach(el=>{
-      const open=()=>sheetMsg(route.arg, el.dataset.bub);
-      el.onclick=e=>{
-        if(chatSelectChat===route.arg) return;
-        if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')||e.target.closest('[data-quote-msg]')) return;
-        open();
-      };
-      let tmr=null;
-      const stop=()=>{ if(tmr){ clearTimeout(tmr); tmr=null; } };
-      el.addEventListener('touchstart',()=>{ stop(); tmr=setTimeout(()=>{ tmr=null; open(); }, 450); }, {passive:true});
-      el.addEventListener('touchend',stop);
-      el.addEventListener('touchmove',stop);
-    });
+    $$('[data-bub]',s).forEach(bindChatBubble);
     const replyQuoteClose=$('#replyQuoteClose');
     if(replyQuoteClose) replyQuoteClose.onclick=function(){ chatQuote=null; render(); };
     const chm=$('#chMenu'); if(chm) chm.onclick=()=>sheetChatMenu(chat(route.arg));
@@ -12950,7 +12958,9 @@ function bindScreenInner(){
         if(!w||!w.name) return;
         const ex=w.id? DB.worldbooks.find(function(x){ return x.id===w.id; }) : null;
         if(store){
-          store.commands.upsertWorldbook(Object.assign({id:(ex&&ex.id)||w.id||uid(),entries:[]},w),{persist:false});
+          const worldbook=Object.assign({},w,{id:(ex&&ex.id)||w.id||uid()});
+          if(!ex&&!Array.isArray(worldbook.entries)) worldbook.entries=[];
+          store.commands.upsertWorldbook(worldbook,{persist:false});
         }else if(ex){ Object.assign(ex,w); } else { DB.worldbooks.push(Object.assign({id:uid(),entries:[]},w)); }
         n++;
       });
@@ -12968,7 +12978,9 @@ function bindScreenInner(){
         if(!r||!r.pattern) return;
         const ex=r.id? DB.regexes.find(function(x){ return x.id===r.id; }) : null;
         if(store){
-          store.commands.upsertRegex(Object.assign({id:(ex&&ex.id)||r.id||uid(),flags:'g'},r),{persist:false});
+          const regex=Object.assign({},r,{id:(ex&&ex.id)||r.id||uid()});
+          if(!ex&&!regex.flags) regex.flags='g';
+          store.commands.upsertRegex(regex,{persist:false});
         }else if(ex){ Object.assign(ex,r); } else { DB.regexes.push(Object.assign({id:uid(),flags:'g'},r)); }
         n++;
       });
@@ -13679,8 +13691,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.66 · 第 77 轮';
-const BUILD_CODE=77;
+const BUILD='2026-10-28 · 3.67 · 第 78 轮';
+const BUILD_CODE=78;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -14457,7 +14469,19 @@ function sheetDateMenu(d){
     try{ await regenLastDateTurn(d); }finally{ busyDone(); }
   };
   const sc=$('#dmScene');
-  if(sc) sc.onclick=function(){ closeSheet(); if(!needKey()) return; busy('正在写场景，请稍后'); genDateScene(d).then(function(){ if(route.name==='dateroom') render(); }).catch(function(e){ toast('出错：'+e.message); }); };
+  if(sc) sc.onclick=async function(){
+    closeSheet();
+    if(!needKey()) return;
+    busy('正在写场景，请稍后');
+    try{
+      await genDateScene(d);
+      if(route.name==='dateroom') render();
+    }catch(e){
+      toast('出错：'+e.message);
+    }finally{
+      busyDone();
+    }
+  };
   const mm=$('#dmMall'); if(mm) mm.onclick=function(){ DB.mallCid=d.cid; save(); closeSheet(); go('mall'); };
   const de=$('#dmEnd');
   if(de) de.onclick=async function(){
