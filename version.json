@@ -1,9 +1,9 @@
 {
-  "version": "3.65",
-  "versionCode": 76,
-  "round": 76,
+  "version": "3.66",
+  "versionCode": 77,
+  "round": 77,
   "releasedAt": "2026-10-28",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=76",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=77",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "商业安全与只读数据层：剥离内置示例种子，Secret仅本地保存并脱敏，新增只读Store selector；保留时间戳、引用、主动消息和引号清理修复。"
+  "notes": "核心实体迁移：微信角色、会话、消息、记忆、世界书与正则改由核心Store统一读写；UI保持原样，Prompt基线回归通过。"
 }
