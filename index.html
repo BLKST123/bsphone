@@ -2397,7 +2397,7 @@ const DEF={
   contacts:[], groups:[], chats:[], worldbooks:[], regexes:[], regexGroups:[{id:'def',name:'默认分组'}],
   moments:[], momentCover:'', momentSeen:0,
   stickers:[], favorites:[], pics:[], galleryAlbums:[{id:'avatar',name:'头像',builtin:true},{id:'wallpaper',name:'壁纸',builtin:true},{id:'moments',name:'朋友圈背景',builtin:true}], galleryPics:[], galleryActive:'avatar', galleryMigrated:false, diary:[], novels:[], forum:[], books:[], readings:[],
-  memoryEntries:[], memorySettings:{crossLimit:3},
+  memoryEntries:[], memorySettings:{crossLimit:3,cooldownMin:30,globalMentionCap:8,sessionMentionCap:3},
   np:{tab:'home',genre:'推荐',tags:[],customGenres:['悬疑','幻想','都市','仙侠','校园','娱乐圈'],customTags:['强强','追妻火葬场','破镜重圆','先婚后爱','暗恋','双向救赎'],shelf:[],readers:[],messages:[],square:[],readerGroup:[],readerGroups:[],activeReaderGroupId:null,readerGroupsV1:false,groupName:'我的读者群',groupUnread:0,coReadPanel:{readingId:null,open:false},novelRegexes:[],stylePrompt:'',readingSeconds:0,todayKey:'',todaySeconds:0,demoSeeded:false,readerPrefs:{fontSize:17,lineHeight:2,theme:'paper'},author:{penName:'我',bio:'在这里写下你想讲的故事。',avatar:'我',bgImage:'',bgGray:0,bgVeil:35,fans:1,following:0,collections:0,tips:0,revenue:0,awards:[],awardPool:[],awardHistory:[],awardXp:0,achievementHistory:[],titles:['新人作者'],level:1,xp:0}},
   wb:{accounts:{},posts:[],trends:[],notifs:[],dms:[],following:[],viewed:[],drafts:[],bindings:[],bindingVersion:1,personaIds:[],castMode:'pick',cast:[],tab:'feed',sub:'rec',msgTab:'all',cat:'热门',feedTurn:0,userTab:{},me:{name:'',handle:'',fans:0,follow:0,bio:'',verified:'',views:0,status:'',level:6},newCount:0,newAt:0,hotSeen:0,seeded:false},
   bindingsVersion:1, logs:[], auto:true, lastRoute:null, ver:3
@@ -2435,6 +2435,24 @@ function viewContact(id){
 function viewGroups(){
   const store=readonlyStore();
   return store?store.selectors.selectGroups():(DB.groups||[]);
+}
+function viewWorldbooks(){
+  const store=readonlyStore();
+  return store?store.selectors.selectWorldbooks():(DB.worldbooks||[]);
+}
+function viewWorldbook(id){
+  return viewWorldbooks().find(function(w){ return w.id===id; })||null;
+}
+function viewRegexes(){
+  const store=readonlyStore();
+  return store?store.selectors.selectRegexes():(DB.regexes||[]);
+}
+function viewRegex(id){
+  return viewRegexes().find(function(r){ return r.id===id; })||null;
+}
+function viewRegexGroups(){
+  const store=readonlyStore();
+  return store?store.selectors.selectRegexGroups():(DB.regexGroups||[]);
 }
 function migrate(raw){
   const o=JSON.parse(JSON.stringify(DEF));
@@ -2541,8 +2559,11 @@ function fixAll(){
   DB.notify=Object.assign({items:[],lastBannerId:null},DB.notify||{});
   if(!Array.isArray(DB.notify.items)) DB.notify.items=[];
   DB.memoryEntries=Array.isArray(DB.memoryEntries)?DB.memoryEntries:[];
-  DB.memorySettings=Object.assign({crossLimit:3},DB.memorySettings||{});
+  DB.memorySettings=Object.assign({crossLimit:3,cooldownMin:30,globalMentionCap:8,sessionMentionCap:3},DB.memorySettings||{});
   DB.memorySettings.crossLimit=Math.max(1,Math.min(8,Number(DB.memorySettings.crossLimit)||3));
+  DB.memorySettings.cooldownMin=Math.max(1,Math.min(1440,Number(DB.memorySettings.cooldownMin)||30));
+  DB.memorySettings.globalMentionCap=Math.max(1,Math.min(99,Number(DB.memorySettings.globalMentionCap)||8));
+  DB.memorySettings.sessionMentionCap=Math.max(1,Math.min(20,Number(DB.memorySettings.sessionMentionCap)||3));
   DB.chats=Array.isArray(DB.chats)?DB.chats:[];
   const sessionSeq={};
   DB.chats.forEach(function(ch){
@@ -2564,6 +2585,7 @@ function fixAll(){
     }
     repairSplitChatQuoteMessages(ch);
   });
+  repairLegacyMemoryEntries();
   (DB.takeout.orders||[]).forEach(function(order){
     const ch=chat(order.chatId); if(!ch) return;
     (ch.msgs||[]).forEach(function(m){
@@ -3712,9 +3734,9 @@ function activePersona(){
 }
 function worldOf(c, chatMsgs){
   const ents=[];
-  const store=coreStore();
+  const ro=readonlyStore();
   const hay=(chatMsgs||[]).map(function(m){ return m.text||''; }).join('\n');
-  (c.worldIds||[]).forEach(id=>{ const w=store?store.read.worldbook(id):DB.worldbooks.find(x=>x.id===id); if(!w) return;
+  (c.worldIds||[]).forEach(id=>{ const w=ro?viewWorldbook(id):DB.worldbooks.find(x=>x.id===id); if(!w) return;
     (w.entries||[]).forEach(e=>{
       const keys=String(e.k||'').split(/[,，\s]+/).filter(Boolean);
       if(!keys.length){ ents.push(e.v); return; }
@@ -3744,8 +3766,8 @@ function memoryContextForCharacter(c,opt){
 }
 function regexOf(c, text){
   let out=text;
-  const store=coreStore();
-  (c.regexIds||[]).forEach(id=>{ const r=store?store.read.regex(id):DB.regexes.find(x=>x.id===id); if(!r||!r.pattern) return;
+  const ro=readonlyStore();
+  (c.regexIds||[]).forEach(id=>{ const r=ro?viewRegex(id):DB.regexes.find(x=>x.id===id); if(!r||!r.pattern) return;
     try{ out=out.replace(new RegExp(r.pattern, r.flags||'g'), r.replace||''); }catch(e){}
   });
   return out;
@@ -3772,7 +3794,11 @@ function promptOf(c, other, chatMsgs, opt){
   if(memoryContext.sessionSnapshot.length) p.push('【当前会话快照记忆】\n'+memoryContext.sessionSnapshot.map(m=>'- '+m).join('\n'));
   if(memoryContext.sessionDigest.length) p.push('【当前会话整理记忆】\n'+memoryContext.sessionDigest.map(m=>'- '+m).join('\n'));
   if(memoryContext.chatId&&(!opt||opt.includeCrossMemory!==false)){
-    const cross=memoryBlockForChat(memoryContext.chatId);
+    const cross=memoryBlockForChat(memoryContext.chatId,{
+      proactive:!!(opt&&opt.proactive),
+      explicitQuery:!!(opt&&opt.explicitQuery),
+      contextText:(chatMsgs||[]).map(function(m){ return labelOf(m); }).join('\n')
+    });
     if(cross) p.push('【同会话跨场景记忆（只按事实使用，不要照搬原话）】\n'+cross);
   }
   const worldMessages=(memoryContext.chat&&memoryContext.chat.msgs)||chatMsgs||[];
@@ -4130,7 +4156,7 @@ function scheduleCoreStoreRefresh(detail){
   coreRefreshTimer=setTimeout(function(){
     coreRefreshPending=false;
     if($('#sheet')&&$('#sheet').classList.contains('on')) return;
-    if(route.name==='home'||route.name==='wechat'||route.name==='chatroom'||route.name==='contactview'){
+    if(route.name==='home'||route.name==='wechat'||route.name==='chatroom'||route.name==='contactview'||route.name==='world'||route.name==='regex'){
       render();
     }
   },40);
@@ -5275,8 +5301,19 @@ function sheetNewGroup(){
 }/* ================= 页标输入状态 ================= */
 function setTyping(on,text){
   const t=$('.chatwrap .ttl'); if(!t) return;
-  if(on){ if(!t.dataset.orig) t.dataset.orig=t.innerHTML; t.innerHTML='<span class="tip">'+esc(text||'对方正在输入…')+'</span>'; }
-  else if(t.dataset.orig){ t.innerHTML=t.dataset.orig; delete t.dataset.orig; }
+  if(on){
+    if(!t.dataset.orig){
+      const ch=route.name==='chatroom'?chat(route.arg):null;
+      t.dataset.orig=ch?chatRoomTitleHTML(ch):t.innerHTML;
+    }
+    t.innerHTML='<span class="tip">'+esc(text||'对方正在输入…')+'</span>';
+  }else if(t.dataset.orig){
+    t.innerHTML=t.dataset.orig;
+    delete t.dataset.orig;
+  }else{
+    const ch=route.name==='chatroom'?chat(route.arg):null;
+    if(ch) t.innerHTML=chatRoomTitleHTML(ch);
+  }
 }
 const boundChatBubbles=new WeakSet();
 function bindChatBubble(el){
@@ -5420,7 +5457,7 @@ async function regenerateChatMessage(ch,m){
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(speaker,out);
     if(!clean) throw new Error('模型没有返回内容');
-    markCrossMemoryMentioned(clean);
+    markCrossMemoryMentioned(ch.id,clean);
     const plan=enforceBubblePlan(clean,1).map(function(item){ return Object.assign({},item,{text:cleanChatOutput(item.text,ch)}); });
     const parts=resolveVoicePlan(plan,speaker,false);
     if(!parts.length) throw new Error('没有生成出可替换的消息');
@@ -5540,16 +5577,17 @@ function sheetMemoryManager(chatId){
   if(!ch){ toast('会话不见了'); return; }
   const contactId=ch.memberIds&&ch.memberIds[0]||null;
   const entries=(DB.memoryEntries||[]).filter(function(entry){
-    return entry.scope==='session'?entry.chatId===chatId:entry.contactId===contactId;
+    return memoryEntryMatchesChat(entry,chatId);
   }).sort(function(a,b){ return (b.syncedAt||0)-(a.syncedAt||0); });
   const draw=function(){
     const list=(DB.memoryEntries||[]).filter(function(entry){
-      return entry.scope==='session'?entry.chatId===chatId:entry.contactId===contactId;
+      return memoryEntryMatchesChat(entry,chatId);
     }).sort(function(a,b){ return (b.syncedAt||0)-(a.syncedAt||0); });
     sheet('<h3>跨场景同步记忆</h3>'
       +'<div class="row" style="margin:6px 0 10px"><div class="grow muted">每次最多加入 '+DB.memorySettings.crossLimit+' 条相关记忆</div><button class="btn" data-memlimit="-1">−</button><b>'+DB.memorySettings.crossLimit+'</b><button class="btn" data-memlimit="1">＋</button></div>'
       +(list.length?list.map(function(entry){
-        return '<div class="card" style="box-shadow:none;border:1px solid var(--line)"><div class="row"><div class="grow"><b>'+esc(memorySourceLabel(entry.sourceType))+' · '+esc(entry.scope==='session'?'仅本会话':'角色长期')+'</b><div class="muted" style="margin-top:4px;line-height:1.7">'+esc(entry.fact)+'</div><div class="muted" style="margin-top:4px">提及 '+Number(entry.mentionCount||0)+' 次'+(entry.lastMentionedAt?' · 最近 '+shortTime(entry.lastMentionedAt):'')+'</div></div></div>'
+        const persona=(DB.me.personas||[]).find(function(item){ return item.id===entry.personaId; });
+        return '<div class="card" style="box-shadow:none;border:1px solid var(--line)"><div class="row"><div class="grow"><b>'+esc(memorySourceLabel(entry.sourceType))+' · '+esc(entry.scope==='session'?'仅本会话':'角色长期')+'</b><div class="muted" style="margin-top:4px;line-height:1.7">'+esc(entry.fact)+'</div><div class="muted" style="margin-top:4px">关联人设：'+esc(persona?persona.name:'待确认')+' · 提及 '+Number(entry.mentionCount||0)+' 次'+(entry.lastMentionedAt?' · 最近 '+shortTime(entry.lastMentionedAt):'')+'</div></div></div>'
           +'<div class="row" style="margin-top:8px"><button class="btn grow" data-memtoggle="'+entry.id+'">'+(entry.allowProactive===false?'恢复主动提及':'停止主动提及')+'</button><button class="btn danger" data-memdel="'+entry.id+'">删除</button></div></div>';
       }).join(''):'<div class="muted" style="padding:6px 0 14px">还没有同步记忆。</div>')
       +'<button class="btn full" id="memMgrBack">返回记忆整理</button>');
@@ -5827,8 +5865,11 @@ function screenChatRoom(){
   const isGroup=ch.type==='group';
   const selecting=chatSelectChat===ch.id;
   const body=chatBodyHTML(ch)||'<div class="empty">还没有消息，说点什么吧。</div>';
+  const activeRequest=chatRequestControllers.get(ch.id);
+  const normalTitle=chatRoomTitleHTML(ch);
+  const typingTitle=activeRequest?'<span class="tip">'+esc((activeRequest.speakerName||'对方')+' 正在输入…')+'</span>':normalTitle;
   return '<div class="chatwrap">'
-   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl">'+chatRoomTitleHTML(ch)+'</div>'
+   +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl"'+(activeRequest?' data-orig="'+esc(normalTitle)+'"':'')+'>'+typingTitle+'</div>'
      +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
    +(selecting
@@ -6293,7 +6334,7 @@ async function aiTurn(opt){
   if(!speaker) return;
   abortChatRequest(ch.id);
   const requestController=new AbortController();
-  chatRequestControllers.set(ch.id,{controller:requestController});
+  chatRequestControllers.set(ch.id,{controller:requestController,speakerName:contactDisplayName(speaker)||'对方'});
   const proactive=!!(opt&&opt.proactive);
   const offlineMode=!!ch.offlineMode;
   const offlineScene=String(ch.offlineScene||'你们此刻所在的地方').trim();
@@ -6316,7 +6357,8 @@ async function aiTurn(opt){
       format:'chat',
       chatId:ch.id,
       offline:offlineMode,
-      scene:offlineScene
+      scene:offlineScene,
+      proactive:proactive
     });
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
     if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
@@ -6352,7 +6394,7 @@ async function aiTurn(opt){
       if(!clean||!proactiveReplyRelevant(clean,proactiveStage)) clean=proactiveFallback(speaker,proactiveStage);
     }
     if(!clean) throw new Error('模型没有返回内容');
-    markCrossMemoryMentioned(clean);
+    markCrossMemoryMentioned(ch.id,clean);
     await sleep(Math.min(1600, 240 + clean.length*12));
     const t0=$('#typing'); if(t0) t0.remove();
     const badVoice=/设备不匹配|未配置.{0,6}(接口|语音)|接口.{0,6}未配置|不能发语音|发不了语音|没法发语音|不支持语音|语音功能.{0,6}(不可用|未配置)/;
@@ -7291,7 +7333,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.68 · 第 79 轮';
+const PROGRESS_UPDATED='2026-10-28 · 3.69 · 第 80 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -13906,8 +13948,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.68 · 第 79 轮';
-const BUILD_CODE=79;
+const BUILD='2026-10-28 · 3.69 · 第 80 轮';
+const BUILD_CODE=80;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -14504,7 +14546,7 @@ async function dateTurn(d,nudge){
     const out=await callModel([{role:'system',content:sys}].concat(history));
     const clean=regexOf(c,out);
     if(!clean) throw new Error('模型没有返回内容');
-    markCrossMemoryMentioned(clean);
+    markCrossMemoryMentioned(d.boundChatId||d.chatId,clean);
     await sleep(Math.min(1600,240+clean.length*12));
     const tt=$('#dtyping'); if(tt) tt.remove();
     const nt=await formatTurn(clean,c.name);
@@ -14761,12 +14803,14 @@ function syncMemoryFact(input){
     entry.fact=String(data.fact||entry.fact||'').trim();
     entry.sourceLabel=String(data.sourceLabel||entry.sourceLabel||'').trim();
     entry.personaId=data.personaId||entry.personaId||null;
+    entry.needsPersonaReview=entry.personaId?false:true;
     entry.chatId=data.chatId||entry.chatId||null;
     entry.contactId=data.contactId||entry.contactId||null;
     entry.scope=scope;
     entry.keywords=Array.isArray(data.keywords)?data.keywords.slice(0,20):entry.keywords||[];
     entry.occurredAt=Number(data.occurredAt||entry.occurredAt)||Date.now();
     entry.syncedAt=Date.now();
+    entry.sessionMentions=entry.sessionMentions&&typeof entry.sessionMentions==='object'?entry.sessionMentions:{};
     entry.active=data.active!==false;
     entry.allowProactive=data.allowProactive!==false;
   }else{
@@ -14780,11 +14824,13 @@ function syncMemoryFact(input){
       contactId:data.contactId||null,
       chatId:data.chatId||null,
       personaId:data.personaId||null,
+      needsPersonaReview:!data.personaId,
       scope:scope,
       occurredAt:Number(data.occurredAt)||Date.now(),
       syncedAt:Date.now(),
       lastMentionedAt:0,
       mentionCount:0,
+      sessionMentions:{},
       active:data.active!==false,
       allowProactive:data.allowProactive!==false
     };
@@ -14793,12 +14839,50 @@ function syncMemoryFact(input){
   DB.memoryEntries=DB.memoryEntries.slice(0,500);
   return entry;
 }
+function repairLegacyMemoryEntries(){
+  DB.memoryEntries=Array.isArray(DB.memoryEntries)?DB.memoryEntries:[];
+  DB.memoryEntries.forEach(function(entry){
+    if(!entry||typeof entry!=='object') return;
+    if(!entry.sessionMentions||typeof entry.sessionMentions!=='object') entry.sessionMentions={};
+    if(entry.personaId){
+      entry.needsPersonaReview=false;
+      return;
+    }
+    let personaId=null;
+    const ch=entry.chatId?chat(entry.chatId):null;
+    if(ch&&ch.personaId) personaId=ch.personaId;
+    if(!personaId&&entry.sourceType==='takeout_order'){
+      const order=(DB.takeout&&DB.takeout.orders||[]).find(function(item){ return item.id===entry.sourceId; });
+      if(order&&order.personaId) personaId=order.personaId;
+    }
+    if(!personaId&&entry.sourceType==='novel_co_read'){
+      const reading=(DB.readings||[]).find(function(item){ return item.id===entry.sourceId; });
+      if(reading&&reading.personaId) personaId=reading.personaId;
+    }
+    if(!personaId&&entry.sourceType==='date'){
+      const date=(DB.dates||[]).find(function(item){ return item.id===entry.sourceId; });
+      if(date&&date.personaId) personaId=date.personaId;
+    }
+    if(!personaId&&entry.sourceType==='outing'){
+      const outing=(DB.outings||[]).find(function(item){ return item.id===entry.sourceId; });
+      if(outing&&outing.persona) personaId=outing.persona;
+    }
+    if(personaId){
+      entry.personaId=personaId;
+      entry.needsPersonaReview=false;
+    }else{
+      entry.needsPersonaReview=true;
+    }
+  });
+}
 function memoryEntryMatchesChat(entry,chatId){
   const ch=viewChat(chatId);
   if(!entry||entry.active===false||!ch) return false;
   if(entry.scope==='session') return entry.chatId===chatId;
   const contactId=ch.memberIds&&ch.memberIds[0]||null;
-  return entry.scope==='character'&&entry.contactId===contactId;
+  const personaId=ch.personaId||DB.me&&DB.me.personaId||null;
+  return entry.scope==='character'&&entry.contactId===contactId&&
+    !!entry.personaId&&entry.personaId===personaId&&entry.needsPersonaReview!==true;
 }
 function memoryEntryRelevant(entry,contextText){
   if(!entry) return false;
@@ -14814,24 +14898,47 @@ function memoryEntryRelevant(entry,contextText){
   if(entry.sourceType==='couple') return /情侣|我们|纪念日|任务|厨房|小家/.test(hay);
   return false;
 }
-function memoryBlockForChat(chatId){
+function memoryEntryExplicitlyAsked(entry,userText){
+  const q=String(userText||'').trim();
+  if(!q) return false;
+  const asks=/上次|那家|那本|那个|记得|还记得|我们之前|当时|订单|共读|奶茶|外卖|书|约会|见面|后来/.test(q);
+  return asks&&memoryEntryRelevant(entry,q);
+}
+function memoryBlockForChat(chatId,options){
+  const opts=options||{};
+  window.__lastCrossMemoryIds=[];
+  window.__lastCrossMemoryChatId=chatId;
+  if(opts.proactive) return '';
   const ch=viewChat(chatId);
   if(!ch) return '';
   const recent=(ch.msgs||[]).filter(function(m){ return m.role!=='sys'; }).slice(-12).map(function(m){ return labelOf(m); }).join('\n');
+  const latestUser=(ch.msgs||[]).filter(function(m){ return m.role==='me'&&!m.recalled; }).slice(-1).map(function(m){ return labelOf(m); })[0]||'';
+  const contextText=String(opts.contextText||recent||'');
   const limit=Math.max(1,Math.min(8,Number(DB.memorySettings&&DB.memorySettings.crossLimit)||3));
+  const cooldownMs=Math.max(1,Number(DB.memorySettings&&DB.memorySettings.cooldownMin)||30)*60000;
+  const globalCap=Math.max(1,Number(DB.memorySettings&&DB.memorySettings.globalMentionCap)||8);
+  const sessionCap=Math.max(1,Number(DB.memorySettings&&DB.memorySettings.sessionMentionCap)||3);
+  const now=Date.now();
   const entries=(DB.memoryEntries||[]).filter(function(entry){
-    return memoryEntryMatchesChat(entry,chatId)&&memoryEntryRelevant(entry,recent);
+    if(!memoryEntryMatchesChat(entry,chatId)) return false;
+    const explicit=memoryEntryExplicitlyAsked(entry,latestUser)||!!opts.explicitQuery;
+    if(entry.allowProactive===false&&!explicit) return false;
+    if(!explicit&&entry.lastMentionedAt&&now-Number(entry.lastMentionedAt)<cooldownMs) return false;
+    if(!explicit&&Number(entry.mentionCount||0)>=globalCap) return false;
+    const sessionCount=Number(entry.sessionMentions&&entry.sessionMentions[chatId]||0);
+    if(!explicit&&sessionCount>=sessionCap) return false;
+    return memoryEntryRelevant(entry,contextText);
   }).sort(function(a,b){
     return (Number(b.occurredAt)||0)-(Number(a.occurredAt)||0);
   }).slice(0,limit);
   window.__lastCrossMemoryIds=entries.map(function(entry){ return entry.id; });
   return entries.map(function(entry){
-    const proactive=entry.allowProactive===false?'（可以理解这条事实，但不要主动提起，只有用户明确问到时才回答）':'';
+    const proactive=entry.allowProactive===false?'（用户明确问起后的回答资料，只回答当前问题，不要扩展到其他旧事）':'';
     const kind=entry.sourceType==='novel_co_read'?'书中内容，不是现实亲历':'现实经历';
     return '【'+memorySourceLabel(entry.sourceType)+'｜'+kind+'】'+proactive+'\n- '+entry.fact;
   }).join('\n');
 }
-function markCrossMemoryMentioned(text){
+function markCrossMemoryMentioned(chatId,text){
   const ids=Array.isArray(window.__lastCrossMemoryIds)?window.__lastCrossMemoryIds:[];
   if(!ids.length) return;
   const reply=String(text||'');
@@ -14844,6 +14951,8 @@ function markCrossMemoryMentioned(text){
     if(!words.some(function(word){ return word.length>=2&&reply.indexOf(word)>=0; })) return;
     entry.lastMentionedAt=Date.now();
     entry.mentionCount=Math.max(0,Number(entry.mentionCount)||0)+1;
+    entry.sessionMentions=entry.sessionMentions&&typeof entry.sessionMentions==='object'?entry.sessionMentions:{};
+    if(chatId) entry.sessionMentions[chatId]=Math.max(0,Number(entry.sessionMentions[chatId])||0)+1;
     changed=true;
   });
   if(changed) save();
@@ -16366,7 +16475,7 @@ function sheetDM(id){
           : '你在扮演一个微博上的陌生人，正在私信对方。一到两句，口语，不要用引号。\n'+wbPersonaBlock();
         const out=await callModel([{role:'system',content:sys},{role:'user',content:t}]);
         const reply=wbClean(out).replace(/[“”"「」]/g,'');
-        markCrossMemoryMentioned(reply);
+        markCrossMemoryMentioned(dmChatId,reply);
         d.msgs.push({role:'ta',text:reply,ts:Date.now()});
         save(); draw();
       }catch(e){}
@@ -16390,7 +16499,7 @@ function importJSON(cb){
 }
 function sheetBig(html){ sheet(html); $('#sheetBox').classList.add('big'); }
 function screenWorldBooks(){
-  const ws=DB.worldbooks||[];
+  const ws=viewWorldbooks();
   return '<div class="pad" style="padding-top:0">'
     +wxTop('世界书',clearBtn('world')+'<button class="ic2" data-newworld="1">＋</button>')
     +'<div class="lrow" data-sysworld="1"><div class="av" style="background:#8e8e93">锁</div><div class="mi"><div class="t1">系统规则（内置）</div><div class="t2">永久绑定 · 不可删除</div></div><div class="rt"><span class="chev">›</span></div></div>'
@@ -16405,7 +16514,7 @@ function screenWorldBooks(){
 }
 function sheetWorldEdit(id){
   DB.worldbooks=DB.worldbooks||[];
-  const w=id? JSON.parse(JSON.stringify(DB.worldbooks.find(function(x){ return x.id===id; })||{})) : {id:'',name:'',entries:[]};
+  const w=id? JSON.parse(JSON.stringify(viewWorldbook(id)||{})) : {id:'',name:'',entries:[]};
   if(!w.entries) w.entries=[];
   const isNew=!id;
   const readEntries=function(){
@@ -16455,10 +16564,10 @@ function regexGroups(){
   if(!DB.regexGroups.some(function(g){ return g.id==='def'; })) DB.regexGroups.unshift({id:'def',name:'默认分组'});
   DB.regexes=DB.regexes||[];
   DB.regexes.forEach(function(r){ if(!r.groupId) r.groupId='def'; });
-  return DB.regexGroups;
+  return viewRegexGroups();
 }
 function screenRegexList(){
-  const rs=DB.regexes||[]; const gs=regexGroups();
+  const rs=viewRegexes(); const gs=regexGroups();
   DB.ui.rxOpen=DB.ui.rxOpen||{def:true};
   let body='';
   gs.forEach(function(g){
@@ -16486,7 +16595,7 @@ function screenRegexList(){
 }
 function sheetRegexEdit(id,groupId){
   const gs=regexGroups();
-  const r=id? JSON.parse(JSON.stringify(DB.regexes.find(function(x){ return x.id===id; })||{})) : {id:'',name:'',pattern:'',replace:'',flags:'g',groupId:groupId||'def'};
+  const r=id? JSON.parse(JSON.stringify(viewRegex(id)||{})) : {id:'',name:'',pattern:'',replace:'',flags:'g',groupId:groupId||'def'};
   if(!r.groupId) r.groupId=groupId||'def';
   const isNew=!id;
   sheetBig('<h3>'+(isNew? '新建正则':'编辑正则')+'</h3>'
@@ -18482,7 +18591,7 @@ async function takeoutRoleOrder(kind){
       const clean=regexOf(ctx.contact,out).trim(),data=npJSON(clean);
       if(data&&data.message) words=String(data.message).slice(0,120);
       if(data&&data.note) note=String(data.note).slice(0,160);
-      markCrossMemoryMentioned(words);
+      markCrossMemoryMentioned(ctx.chat.id,words);
     }catch(e){ logErr('角色点外卖生成失败，使用本地句：'+e.message); }
     finally{ busyDone(); }
   }
