@@ -3163,9 +3163,27 @@ const pick=a=>a[rnd(a.length)];
 let toastTimer=null;
 function toast(m){ const t=$('#toast'); t.textContent=m; t.classList.add('on'); clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('on'),2400); }
 let busyN=0,busyTimer=null;
+const actionLocks=new Set();
 function busy(text){ busyN++; const b=$('#busy'); if(b){ b.textContent=text||'正在处理，请稍后'; b.classList.add('on'); } clearTimeout(busyTimer); busyTimer=setTimeout(function(){ busyN=0; const x=$('#busy'); if(x) x.classList.remove('on'); },120000); }
 function busyStatus(text){ if(busyN<=0) return; const b=$('#busy'); if(b) b.textContent=text||'正在处理，请稍后'; }
 function busyDone(){ busyN=Math.max(0,busyN-1); if(!busyN){ clearTimeout(busyTimer); busyTimer=null; const b=$('#busy'); if(b) b.classList.remove('on'); } }
+function actionLocked(key){ return actionLocks.has(String(key||'')); }
+function syncActionButtons(key){
+  if(key==='weibo:refresh'){
+    const top=$('#wbTopRefresh'); if(top) top.disabled=actionLocked(key);
+    const feed=$('#wbFeedRefresh'); if(feed) feed.disabled=actionLocked(key);
+    $$('[data-wbrefresh]').forEach(function(el){ el.disabled=actionLocked(key); });
+  }
+}
+function actionStart(key,text){
+  key=String(key||''); if(!key) return true;
+  if(actionLocks.has(key)){ toast('正在处理，请稍候'); return false; }
+  actionLocks.add(key); busy(text||'正在处理，请稍后'); syncActionButtons(key); return true;
+}
+function actionEnd(key){
+  key=String(key||''); if(!key||!actionLocks.has(key)) return;
+  actionLocks.delete(key); busyDone(); syncActionButtons(key);
+}
 let suppressTapUntil=0;
 function sheetRegen(title,onRegen,onDelete){
   sheetSmall('<h3>'+title+'</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">不满意可以重新生成，或者直接删除。</div>'
@@ -3305,6 +3323,11 @@ function enhanceEditors(root){
     };
   });
 }
+const sheetBackStack=[];
+function pushSheetBack(open,back){
+  if($('#sheet').classList.contains('on')&&typeof back==='function') sheetBackStack.push(back);
+  try{ open(); }catch(e){ if(sheetBackStack.length) sheetBackStack.pop(); throw e; }
+}
 function sheet(html){ const b=$('#sheetBox'); const sh=$('#sheet'); b.classList.remove('sm','full','fixed','wbuser-full','wbd-detail','npg-sheet'); sh.classList.remove('fullsheet','wbd-detail-sheet'); sh.style.background=''; sh.style.backgroundImage=''; sh.style.backgroundColor=''; sh.style.backgroundSize=''; sh.style.backgroundPosition=''; sh.style.backgroundRepeat=''; b.innerHTML=html; sh.classList.add('on'); enhanceEditors(b); bindRegen(b); syncGlobalBack(); }
 function sheetFull(html){ sheet(html); $('#sheetBox').classList.add('full'); $('#sheet').classList.add('fullsheet'); }
 function sheetFixed(html){ sheet(html); $('#sheetBox').classList.add('full','fixed'); }
@@ -3321,7 +3344,11 @@ function sheetPageBackground(key){
   sh.style.backgroundRepeat='no-repeat';
   return true;
 }
-function closeSheet(){ $('#sheet').classList.remove('on','fullsheet'); syncGlobalBack(); }
+function closeSheet(){
+  const back=sheetBackStack.pop();
+  $('#sheet').classList.remove('on','fullsheet'); syncGlobalBack();
+  if(back){ try{ back(); }catch(e){ console.error('sheet back failed',e); } }
+}
 $('#sheet').addEventListener('click',e=>{ if(e.target.id==='sheet') closeSheet(); });
 document.addEventListener('click',function(e){
   const hit=e.target.closest?e.target.closest('button,.lrow,.np-card,.np-chip,.tab,.app,.home-widget,.hcollage-slot,.mi[data-mgo],.wbic,.ic2,[data-go],[data-mgo],[data-nptab],[data-wtab],[data-openreading],[data-homepage]'):null;
@@ -4245,6 +4272,7 @@ function scheduleCoreStoreRefresh(detail){
 function go(name,arg,wtabTo){
   restoreFullscreenIntent();
   const from=route.name;
+  if(from!==name||String(route.arg||'')!==String(arg||'')) sheetBackStack.length=0;
   if(from==='chatroom'&&(name!=='chatroom'||String(arg||'')!==String(route.arg||''))) abortChatRequest(route.arg);
   if(from==='soul'&&name!=='soul') soulPauseActive();
   if(from==='settings'&&name!=='settings') settingsReturnScroll=$('#screen').scrollTop;
@@ -4898,7 +4926,7 @@ function appHTML(a){
 }
 function unreadWB(){ const w=wbDB(); return (w.notifs||[]).filter(function(n){ return !n.read; }).length + (w.dms||[]).reduce(function(s2,d){ return s2+(d.unread||0); },0); }
 function chatUnread(){ return viewChats().reduce((s,c)=>s+(c.unread||0),0); }
-function totalUnread(){ return chatUnread()+soulPendingCount(); }
+function totalUnread(){ return chatUnread()+soulPendingCount()+momentNewCount(); }
 /* ================= 微信：壳 ================= */
 function ensureDefaultGroup(){
   DB.groups=DB.groups||[];
@@ -5039,7 +5067,7 @@ function screenContactView(){
     +'<div class="lrow" data-chatwith="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">发消息</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-editct="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">编辑资料</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +((c.generatedPhotos||[]).length?'<div class="lrow" data-aiphoto-contact="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">AI 照片</div><div class="t2">'+c.generatedPhotos.length+' 张 · 永久绑定这个角色</div></div><div class="rt"><span class="chev">›</span></div></div>':'')
-    +'<div class="lrow" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">绑定正则</div><div class="t2">'+(nB?nB+' 条':'未绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" data-bindregex="'+c.id+'" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">绑定正则</div><div class="t2">'+(nB?nB+' 条':'未绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'</div>'
     +'<div class="card"><div class="muted">朋友圈频率</div><div class="kv"><span>发朋友圈</span><b>'+lv(f.post)+'</b></div><div class="kv"><span>点赞</span><b>'+lv(f.like)+'</b></div><div class="kv"><span>评论</span><b>'+lv(f.comment)+'</b></div><div class="kv"><span>回复</span><b>'+lv(f.reply)+'</b></div></div>'
     +'<div class="card"><div class="muted">世界书 '+nW+' 本</div>'
@@ -5250,7 +5278,18 @@ function saveContact(){
 }
 /* ---- 绑定正则 ---- */
 function sheetRegex(){
-  const v=route.edit;
+  const fromContactView=route.name==='contactview';
+  const source=fromContactView?ct(route.arg):route.edit;
+  if(!source) return;
+  const v=fromContactView?Object.assign({},source,{regexIds:(source.regexIds||[]).slice()}):source;
+  v.regexIds=v.regexIds||[];
+  const commit=function(){
+    if(fromContactView){
+      const store=coreStore(),cp={regexIds:v.regexIds.slice()};
+      if(store) store.commands.patchContact(v.id,cp,{persist:false}); else Object.assign(source,cp);
+      save();
+    }else flushEdit();
+  };
   const draw=()=>{
     const rows=(DB.regexes||[]).map(r=>'<div class="lrow" data-rx="'+r.id+'">'+avBox({icon:'pen'})
       +'<div class="mi"><div class="t1">'+esc(r.name||'未命名')+'</div><div class="t2 ell">'+esc(r.pattern||'')+' → '+esc(r.replace||'')+'</div></div>'
@@ -5277,7 +5316,7 @@ function sheetRegex(){
       if(store) store.commands.upsertRegex(r,{persist:false}); else DB.regexes.push(r);
       v.regexIds.push(r.id); save(); draw(); toast('已新建并绑定');
     };
-    $('#rxOk').onclick=()=>{ flushEdit(); closeSheet(); render(); };
+    $('#rxOk').onclick=()=>{ commit(); closeSheet(); render(); };
   };
   draw();
 }
@@ -6318,8 +6357,11 @@ function openNotification(id){
   const item=(DB.notify.items||[]).find(function(x){ return x.id===id; }); if(!item) return;
   item.read=true; save();
   dismissAppNotice(id);
-  if(item.wtab) wtab=item.wtab;
-  if(item.route) go(item.route,item.arg||null);
+  const params=item.params||{};
+  if(item.wtab||params.wtab) wtab=item.wtab||params.wtab;
+  if(item.route==='date'&&item.arg&&(DB.dates||[]).some(function(d){ return d.id===item.arg; })) go('dateroom',item.arg);
+  else if(item.route==='dateroom'&&item.arg&&!(DB.dates||[]).some(function(d){ return d.id===item.arg; })) go('date',null);
+  else if(item.route) go(item.route,item.arg||null);
 }
 function renderStatusCenter(){
   const root=$('#statusCenter'); if(!root) return;
@@ -6869,7 +6911,11 @@ function sheetPost(who){
     $('#p_img').onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='image/*';
       i.onchange=()=>{ if(!i.files[0]) return; readImage(i.files[0],900,url=>{ v.images.push(url); draw(); }); }; i.click(); };
     $('#p_imgurl').onclick=()=>{ const u=window.prompt('图片网址（https:// 开头）'); if(u) { v.images.push(u.trim()); draw(); } };
-    $('#p_who').onclick=()=>sheetWho(v,draw);
+    $('#p_who').onclick=()=>{
+      v.text=String($('#p_txt')&&$('#p_txt').value||'');
+      v.place=String($('#p_place')&&$('#p_place').value||'');
+      sheetWho(v,draw);
+    };
     $('#pOk').onclick=()=>{
       v.text=($('#p_txt').value||'').trim(); v.place=($('#p_place').value||'').trim();
       if(!v.text&&!v.images.length){ toast('写点字或加张图'); return; }
@@ -6954,7 +7000,9 @@ function addNotif(text){
   DB.notifs=DB.notifs||[];
   const item={id:uid(),text,ts:Date.now(),read:false};
   DB.notifs.unshift(item);
-  emitNotification({app:'weibo',title:'朋友圈',body:String(text||'').slice(0,140),route:'weibo',arg:null,dedupeKey:'moment-notice:'+item.id});
+  save();
+  emitNotification({app:'wechat',title:'朋友圈',body:String(text||'').slice(0,140),route:'wechat',wtab:'moments',params:{wtab:'moments'},resourceId:item.id,dedupeKey:'moment-notice:'+item.id});
+  if(route.name==='home'||route.name==='wechat') render();
 }
 function authorName(p){ return p.by==='me'? '你' : ((ct(p.by)||{}).name||'某人'); }
 async function genPost(c){
@@ -7439,7 +7487,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-30 · 3.76 · 第 87 轮';
+const PROGRESS_UPDATED='2026-10-30 · 3.77 · 第 88 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -13294,6 +13342,7 @@ function bindScreenInner(){
   const wbTopRefresh=$('#wbTopRefresh');
   if(wbTopRefresh) wbTopRefresh.onclick=wbRefresh;
   $$('[data-wbrefresh]',s).forEach(el=>el.onclick=wbRefresh);
+  syncActionButtons('weibo:refresh');
   const wbClear=$('#wbClear');
   if(wbClear) wbClear.onclick=function(){ const w=wbDB(); (w.notifs||[]).forEach(function(n){ n.read=true; }); save(); render(); toast('已全部已读'); };
   const wbReadAll=$('#wbReadAll');
@@ -14062,8 +14111,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-30 · 3.76 · 第 87 轮';
-const BUILD_CODE=87;
+const BUILD='2026-10-30 · 3.77 · 第 88 轮';
+const BUILD_CODE=88;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -15120,7 +15169,7 @@ async function meetTick(){
       if(store) store.commands.patchContact(c.id,{lastMeet:Date.now()},{persist:false}); else c.lastMeet=Date.now();
       save();
       if(route.name==='date'||route.name==='dateroom'||route.name==='home'||route.name==='wechat') render();
-      emitNotification({app:'date',title:contactDisplayName(c),body:invite?('约你今晚在'+place+'见面'):('来找你了：'+place),route:'date',arg:d.id,dedupeKey:'date-invite:'+d.id});
+      emitNotification({app:'date',title:contactDisplayName(c),body:invite?('约你今晚在'+place+'见面'):('来找你了：'+place),route:'dateroom',arg:d.id,resourceId:d.id,dedupeKey:'date-invite:'+d.id});
       toast(invite? (c.name+' 约你今晚在'+place+'见面') : (c.name+' 来找你了：'+place));
     }catch(e){ logErr('突然来访生成失败（已跳过）：'+e.message); }
     break;
@@ -15908,10 +15957,11 @@ function wbMeHTML(){
 }
 async function wbRefresh(){
   if(!needKey()) return;
+  const actionKey='weibo:refresh';
+  if(!actionStart(actionKey,'正在刷新微博，请稍后')) return;
   const w=wbDB();
-  if(w.tab==='discover'){
-    busy('正在刷新热搜和帖子，请稍后');
-    try{
+  try{
+    if(w.tab==='discover'){
       w.trends=await wbGenTrends();
       w.hotSeen=0;
       let hot=[];
@@ -15923,13 +15973,10 @@ async function wbRefresh(){
         try{ await wbGenBatchComments(hot); }catch(e){ logErr('热搜评论生成失败：'+e.message); }
       }
       save(); render(); wbScheduleNewCountClear(); toast(hot.length? '热搜和帖子已更新':'热搜已更新');
-    }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
-    return;
-  }
-  const mode=w.sub||'rec';
-  if(mode==='follow' && !wbCast().length){ toast('还没有可选角色'); return; }
-  busy('正在刷新微博，请稍后');
-  try{
+      return;
+    }
+    const mode=w.sub||'rec';
+    if(mode==='follow' && !wbCast().length){ toast('还没有可选角色'); return; }
     if(!w.following.length) w.following=wbCast().map(function(c){ return c.id; });
     const posts=await wbGenFeed(mode);
     if(!posts.length){ toast('这次没刷出内容'); return; }
@@ -15946,7 +15993,7 @@ async function wbRefresh(){
     }
     try{ await wbGenBatchComments(posts); }catch(e){ logErr('微博评论生成失败：'+e.message); }
     save(); render(); wbScheduleNewCountClear();
-  }catch(e){ toast('出错：'+e.message); }finally{ busyDone(); }
+  }catch(e){ toast('出错：'+e.message); }finally{ actionEnd(actionKey); }
 }
 function screenWeibo(){
   const w=wbDB();
@@ -16253,9 +16300,9 @@ function sheetWbUserEdit(cid){
   $('#wu_ok').onclick=function(){
     c.wbName=String($('#wu_name').value||'').trim()||c.name;
     c.wbBio=String($('#wu_bio').value||'').trim();
-    save(); closeSheet(); sheetWbUser(cid); toast('主页已保存');
+    save(); closeSheet(); render(); toast('主页已保存');
   };
-  $('#wu_back').onclick=function(){ closeSheet(); sheetWbUser(cid); };
+  $('#wu_back').onclick=closeSheet;
 }
 function sheetWbUser(cid,initTab){
   const isStranger=String(cid).indexOf('s:')===0;
@@ -16309,14 +16356,16 @@ function sheetWbUser(cid,initTab){
     $('#sheetBox').classList.add('wbuser-full');
     bindWbSheetPosts();
     const back=$('#wbUserBack'); if(back) back.onclick=closeSheet;
-    const edit=$('#wbUserEdit'); if(edit) edit.onclick=function(){ sheetWbUserEdit(cid); };
+    const edit=$('#wbUserEdit'); if(edit) edit.onclick=function(){
+      pushSheetBack(function(){ sheetWbUserEdit(cid); },function(){ sheetWbUser(cid,tab); });
+    };
     $$('#sheetBox [data-wbustab]').forEach(function(el){ el.onclick=function(){ tab=el.dataset.wbustab; if(w.userTab) w.userTab[cid]=tab; save(); draw(); }; });
     $$('#sheetBox [data-wbimgview]').forEach(function(el){ el.onclick=function(){ sheet('<img src="'+esc(el.dataset.wbimgview)+'" style="width:100%;border-radius:14px"><button class="btn full" id="wbImgClose">关闭</button>'); $('#wbImgClose').onclick=closeSheet; }; });
     const f=$('#wbUserFollow'); if(f) f.onclick=function(){ const i=w.following.indexOf(cid); if(i>=0) w.following.splice(i,1); else w.following.push(cid); save(); sheetWbUser(cid,tab); };
     const dm=$('#wbUserDm'); if(dm) dm.onclick=function(){
       let d=w.dms.find(function(x){ return x.cid===cid; });
       if(!d){ d={id:uid(),cid:cid,name:c.name,msgs:[],unread:0}; w.dms.unshift(d); }
-      save(); closeSheet(); sheetDM(d.id);
+      save(); pushSheetBack(function(){ sheetDM(d.id); },function(){ sheetWbUser(cid,'dm'); });
     };
     $('#wbUserClose').onclick=closeSheet;
   };
@@ -16365,7 +16414,11 @@ function sheetWbDetail(pid){
     $('#wbdBack').onclick=closeSheet;
     $('#wbdMore').onclick=function(){ sheetWbMore(pid); };
     const fu=$('#wbdFollow'); if(fu) fu.onclick=function(){ const i=w.following.indexOf(a.key); if(i>=0) w.following.splice(i,1); else w.following.push(a.key); save(); draw(); };
-    $$('#sheetBox [data-wbopenuser]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); sheetWbUser(el.dataset.wbopenuser); }; });
+    $$('#sheetBox [data-wbopenuser]').forEach(function(el){ el.onclick=function(ev){
+      ev.stopPropagation();
+      const cid=el.dataset.wbopenuser;
+      pushSheetBack(function(){ sheetWbUser(cid); },function(){ sheetWbDetail(pid); });
+    }; });
     $$('#sheetBox [data-trend]').forEach(function(el){ el.onclick=function(){ sheetTrend(el.dataset.trend); }; });
     $$('#sheetBox [data-wbd-reply]').forEach(function(el){ el.onclick=function(){ const c=all[Number(el.dataset.wbdReply)]; if(!c) return; replyTo=c.name; const i=$('#wbd_input'); if(i){ i.placeholder='回复 @'+replyTo; i.focus(); } }; });
     $$('#sheetBox [data-wbd-del]').forEach(function(el){ el.onclick=function(){ const i=Number(el.dataset.wbdDel); if(i>=0){ all.splice(i,1); save(); if(route.name==='weibo') render(); draw(); } }; });
@@ -16492,7 +16545,9 @@ function sheetWbCompose(id){
       ts:Date.now(),likes:0,reposts:0,liked:false,comments:[],repostOf:null,img:0,source:'来自 微博网页版'});
     w.posts.unshift(post);
     if(wbDraftEditing) w.drafts=w.drafts.filter(function(x){ return x.id!==wbDraftEditing; });
-    save(); closeSheet(); render(); toast('已发布');
+    w.tab='feed'; w.sub='rec'; w.cat='实时';
+    save(); closeSheet(); render(); toast('已发布，已切到实时');
+    requestAnimationFrame(function(){ const body=$('.wxbody'); if(body) body.scrollTop=0; });
     wbReactToUserPost(post).catch(function(e){ logErr(e.message); });
   };
 }
@@ -16510,7 +16565,9 @@ function sheetWbRepost(pid){
       comments:[],repostOf:{name:p.author.name,text:String(p.text||'').slice(0,160)},img:0,source:'来自 微博网页版'});
     w.posts.unshift(np);
     p.reposts=(p.reposts||0)+1;
-    save(); closeSheet(); render(); toast('已转发');
+    w.tab='feed'; w.sub='rec'; w.cat='实时';
+    save(); closeSheet(); render(); toast('已转发，已切到实时');
+    requestAnimationFrame(function(){ const body=$('.wxbody'); if(body) body.scrollTop=0; });
     wbReactToUserPost(np).catch(function(e){ logErr(e.message); });
   };
 }
@@ -16570,6 +16627,8 @@ function sheetDM(id){
   const d=w.dms.find(function(x){ return x.id===id; });
   if(!d) return;
   d.unread=0;
+  save();
+  if(route.name==='weibo') render();
   const c=d.cid? ct(d.cid) : null;
   const dmBinding=c?wbBindings().find(function(binding){ return binding.contactId===c.id; }):null;
   const dmChatId=dmBinding&&dmBinding.chatId||(c?(viewChats().filter(function(ch){ return ch.type==='private'&&ch.memberIds&&ch.memberIds[0]===c.id; }).sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); })[0]||{}).id:null);
@@ -16580,9 +16639,10 @@ function sheetDM(id){
     }).join('');
     sheetBig('<h3>'+esc(d.name)+'</h3><div class="wbdmlist">'+body+'</div>'
       +'<div class="row wbcin"><input id="dm_in" class="grow" placeholder="回复…"><button class="wbic pri" id="dm_go">'+ic('arrow',18)+'</button></div>'
-      +'<button class="btn full danger" id="dmClear">清空这段私信</button>');
+      +'<button class="btn full" id="dmClose">关闭</button><button class="btn full danger" id="dmClear">清空这段私信</button>');
     const box=$('.wbdmlist'); if(box) box.scrollTop=box.scrollHeight;
     $('#dmClear').onclick=function(){ if(!d.msgs.length) return; d.msgs=[]; save(); draw(); };
+    $('#dmClose').onclick=closeSheet;
     $('#dm_go').onclick=async function(){
       const t=String($('#dm_in').value||'').trim();
       if(!t) return;
@@ -18415,7 +18475,9 @@ function screenTakeout(){
     body=all.length? all.map(function(o){
       const items=(o.items||[]).map(function(x){ return x.name+' ×'+x.qty; }).join('、');
       const canTrack=['placed','confirmed','preparing','delivering','delivered'].indexOf(o.status)>=0;
-      return '<div class="takeout-order" data-toorder="'+o.id+'"><div class="row"><div class="grow"><b>'+esc(o.merchant)+'</b><div class="muted" style="margin-top:5px">'+esc(items)+'</div></div><div class="rt"><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span><b>'+money(o.total)+'</b></div></div><div class="takeout-progress"><i style="width:'+Math.max(8,Math.min(100,(takeoutStatusRank(o.status)+1)*20))+'%"></i></div><div class="muted" style="margin-top:7px">'+shortTime(o.createdAt)+' · '+esc(o.source==='contact'?'角色下单':'我下单')+' · '+esc(takeoutRecipientLabel(o.orderedFor,ctx))+'</div>'+(canTrack?'<div class="tk-live">状态会自动更新，并继续发送到对应聊天</div>':'')+'</div>';
+      const syncText=o.source==='contact'?'角色下单':(o.sentToChat?'已同步到微信':'未同步到微信');
+      const liveText=canTrack?(o.sentToChat?'状态会自动更新，并继续发送到对应聊天':'进入订单详情可手动发送；发送后状态更新会继续同步'):'';
+      return '<div class="takeout-order" data-toorder="'+o.id+'"><div class="row"><div class="grow"><b>'+esc(o.merchant)+'</b><div class="muted" style="margin-top:5px">'+esc(items)+'</div></div><div class="rt"><span class="tk-status '+o.status+'">'+esc(takeoutStatusLabel(o.status))+'</span><b>'+money(o.total)+'</b></div></div><div class="takeout-progress"><i style="width:'+Math.max(8,Math.min(100,(takeoutStatusRank(o.status)+1)*20))+'%"></i></div><div class="muted" style="margin-top:7px">'+shortTime(o.createdAt)+' · '+esc(o.source==='contact'?'角色下单':'我下单')+' · '+esc(takeoutRecipientLabel(o.orderedFor,ctx))+' · '+esc(syncText)+'</div>'+(liveText?'<div class="tk-live">'+esc(liveText)+'</div>':'')+'</div>';
     }).join('') : '<div class="empty">当前人设和当前会话还没有外卖订单。</div>';
   }else{
     const addr=takeoutAddressFor(ctx.personaId);
@@ -18601,7 +18663,7 @@ function sheetTakeoutCheckout(rows){
       +'<div class="checkout-product-list">'+rows.map(function(r){ return '<div class="takeout-checkout-line"><span>'+esc(r.product.name)+' ×'+r.qty+'<small>'+esc(r.product.specText||r.spec||'')+'</small></span><b>'+money(Number(r.product.price||0)*Number(r.qty||1))+'</b></div>'; }).join('')+'</div>'
       +'<textarea id="toOrderNote" maxlength="160" placeholder="给 Ta 的订单备注，角色会看到">'+esc(note)+'</textarea>'
       +'<div class="kv"><span>包装费</span><b>¥2.00</b></div><div class="kv"><span>配送费</span><b>¥3.00</b></div><div class="kv total"><span>合计</span><b>'+money(total+5)+'</b></div>'
-      +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">下单后会依次经历商家接单、制作、配送和送达；每次状态变化都会向聊天发送新的订单气泡。</div>'
+      +'<div class="muted" style="margin:6px 0 10px;line-height:1.7">下单后会依次经历商家接单、制作、配送和送达。用户订单默认不自动占聊天；手动发送后，后续状态变化会继续同步到聊天。</div>'
       +'<button class="btn primary full" id="toPlaceOrder">提交订单</button><button class="btn full" id="toCheckoutPay">'+esc(takeoutPaymentLabel(ctx.personaId))+' · 换支付方式</button><button class="btn full" id="toCheckoutClose">取消</button>');
     $('#toCheckoutClose').onclick=closeSheet;
     $('#toCheckoutAddr').onclick=function(){
@@ -18610,7 +18672,10 @@ function sheetTakeoutCheckout(rows){
       sheetTakeoutChooseAddress(recipient,function(){ draw(); });
     };
     $$('#sheetBox [data-tocheckoutrecipient]').forEach(function(el){ el.onclick=function(){ const noteEl=$('#toOrderNote'); if(noteEl) note=String(noteEl.value||'').slice(0,160); recipient=el.dataset.tocheckoutrecipient; rows.forEach(function(r){ r.beneficiary=recipient; if(r.cartId){ const c=DB.takeout.carts.find(function(x){ return x.id===r.cartId; }); if(c) c.beneficiary=recipient; } }); DB.takeout.beneficiary=recipient; save(); draw(); }; });
-    $('#toCheckoutPay').onclick=function(){ closeSheet(); sheetTakeoutPayment(); };
+    $('#toCheckoutPay').onclick=function(){
+      const noteEl=$('#toOrderNote'); if(noteEl) note=String(noteEl.value||'').slice(0,160);
+      pushSheetBack(function(){ sheetTakeoutPayment(); },draw);
+    };
     $('#toPlaceOrder').onclick=function(){
       const current=takeoutAddressFor(ctx.personaId,recipient,ctx.contact&&ctx.contact.id);
       note=String($('#toOrderNote')&&$('#toOrderNote').value||'').trim().slice(0,160);
@@ -18650,8 +18715,9 @@ function sheetTakeoutOrder(orderId){
     +'<div class="to-order-route"><div class="route-line"><i></i><div><small>收货地址</small><b>'+esc(o.address&&o.address.name||'我')+' '+esc(o.address&&o.address.phone||'')+'</b><span>'+esc(o.address&&o.address.detail||'未填写')+'</span></div></div><div class="route-line"><i></i><div><small>配送骑手</small><b>'+esc(o.rider||'本机骑手')+'</b><span>'+esc(takeoutStatusLabel(o.status))+' · 点击下方查看完整进度</span></div></div></div>'
     +'<div class="takeout-timeline">'+timeline+'</div>'
     +'<div class="muted" style="margin:4px 0 8px">支付方式：'+esc(o.payment&&o.payment.label||'小手机钱包')+'</div>'
+    +(o.source!=='contact'&&!o.sentToChat?'<div class="takeout-warning" style="margin-bottom:8px">这单还没有同步到微信，不会自动占用聊天；发送后会继续同步配送状态。</div>':'')
     +'<button class="btn full" id="toSyncOrderMem">同步订单记忆</button>'
-    +(o.source!=='contact'&&!o.sentToChat?'<button class="btn primary full" id="toSendOrder">发送订单到聊天</button>':'')
+    +(o.source!=='contact'&&!o.sentToChat?'<button class="btn primary full" id="toSendOrder">发送订单到微信</button>':'')
     +(o.status==='delivered'?'<button class="btn primary full" id="toConfirmReceipt">确认收货</button>':'')
     +(canRefund?'<button class="btn danger full" id="toRefund">申请退款</button>':'')
     +(o.status==='placed'?'<button class="btn full" id="toCancelOrder">取消订单</button>':'')
