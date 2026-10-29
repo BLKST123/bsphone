@@ -2572,6 +2572,8 @@ function fixAll(){
     if(ch.unread===undefined) ch.unread=0;
     if(ch.offlineMode===undefined) ch.offlineMode=false;
     if(ch.offlineScene===undefined) ch.offlineScene='';
+    if(ch.proactiveOn===undefined) ch.proactiveOn=false;
+    if(ch.proactiveIntervalSec===undefined) ch.proactiveIntervalSec=0;
     if(ch.type==='private'&&ch.memberIds[0]){
       const cid=ch.memberIds[0];
       sessionSeq[cid]=(sessionSeq[cid]||0)+1;
@@ -3493,7 +3495,7 @@ function syncAppHeight(){
   const vvOffset=vv?Math.max(0,Math.round(vv.offsetTop||0)):0;
   const visualKb=Math.max(0,fullH-vvH-vvOffset);
   const keyboard=Math.max(visualKb,nativeKbHeight());
-  const h=keyboard>120?Math.max(1,fullH-keyboard):vvH;
+  const h=vvH;
   document.documentElement.style.setProperty('--app-h',h+'px');
   document.documentElement.style.setProperty('--kb-h',keyboard+'px');
   document.body.classList.toggle('keyboard',keyboard>120);
@@ -3657,7 +3659,7 @@ function nextChatSessionNo(id){
 function newPrivateChat(id,label){
   const n=nextChatSessionNo(id);
   const c=ct(id);
-  const ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),sessionNo:n,sessionLabel:String(label||'').trim()||('会话 '+n),personaId:DB.me&&DB.me.personaId||null,offlineMode:false,offlineScene:'',baseMemorySnapshot:((c&&c.memories)||[]).map(function(m){ return m.text; }).filter(Boolean),mem:{ts:0,items:[]}};
+  const ch={id:uid(),type:'private',memberIds:[id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),sessionNo:n,sessionLabel:String(label||'').trim()||('会话 '+n),personaId:DB.me&&DB.me.personaId||null,offlineMode:false,offlineScene:'',baseMemorySnapshot:((c&&c.memories)||[]).map(function(m){ return m.text; }).filter(Boolean),mem:{ts:0,items:[]},proactiveOn:false,proactiveIntervalSec:0};
   const store=coreStore();
   if(store) store.commands.createChat(ch,{persist:false}); else DB.chats.push(ch);
   return ch;
@@ -3817,7 +3819,7 @@ function promptOf(c, other, chatMsgs, opt){
     p.push(FMT[fmt]);
   }
   p.push('【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。');
-  p.push('【活人感】你会困、会走神、会有点小情绪。句子长短不齐，偶尔只回两三个字；不要每次都问问题；不要重复上一句说过的说法。');
+  p.push('【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。');
   return p.join('\n');
 }
 function contextHistory(messages, fallback){
@@ -3833,6 +3835,7 @@ function normBase(u){
   let s=String(u||'').trim().replace(/\/+$/,'');
   s=s.replace(/\/chat\/completions$/i,'');
   s=s.replace(/\/completions$/i,'');
+  s=s.replace(/\/(?:pricing|console|dashboard|models)$/i,'');
   return s;
 }
 function isVersioned(b){ return /\/v\d+$/i.test(b) || /compatible-mode\/v\d+$/i.test(b); }
@@ -3848,18 +3851,104 @@ function modelCandidates(base){
 }
 function apiFriendly(status,msg){
   if(status===401||status===403) return 'API Key 无效或没有权限，请到设置里检查';
-  if(status===404) return '接口地址不对，请检查 API 地址；DeepSeek 一般填到 /v1 这一层';
+  if(status===404) return '接口地址不对，请检查 API 地址；大多数中转站填到 /v1 这一层';
   if(status===429) return '接口请求太频繁，先等一会儿再试';
   if(status>=500) return '接口暂时不稳定（'+status+'），已经自动重试一次';
   return msg||('接口返回 '+status);
+}
+function nativeHttpAvailable(){ return !!(window.NativeHttp&&typeof window.NativeHttp.request==='function'&&typeof window.NativeHttp.cancel==='function'); }
+const nativeHttpPending=new Map();
+function nativeRequest(method,url,key,body,signal){
+  if(!nativeHttpAvailable()) return null;
+  return new Promise(function(resolve,reject){
+    let requestId='',settled=false,onAbort=null;
+    const cleanup=function(){
+      if(requestId) nativeHttpPending.delete(requestId);
+      if(signal&&onAbort) signal.removeEventListener('abort',onAbort);
+    };
+    const rejectOnce=function(error){
+      if(settled) return;
+      settled=true; cleanup(); reject(error);
+    };
+    const resolveOnce=function(value){
+      if(settled) return;
+      settled=true; cleanup(); resolve(value);
+    };
+    onAbort=function(){
+      if(settled) return;
+      try{ window.NativeHttp.cancel(requestId); }catch(e){}
+      const error=new Error('请求已取消');
+      error.name='AbortError';
+      rejectOnce(error);
+    };
+    try{
+      requestId=String(window.NativeHttp.request(
+        String(method||'GET'),String(url||''),String(key||''),String(body||'')
+      )||'');
+    }catch(e){
+      rejectOnce(new Error('App 原生网络通道启动失败：'+(e&&e.message||e)));
+      return;
+    }
+    if(!requestId){
+      rejectOnce(new Error('App 原生网络通道没有返回请求编号'));
+      return;
+    }
+    nativeHttpPending.set(requestId,{resolve:resolveOnce,reject:rejectOnce,settled:function(){ return settled; }});
+    if(signal){
+      if(signal.aborted){ onAbort(); return; }
+      signal.addEventListener('abort',onAbort,{once:true});
+    }
+  });
+}
+window.BSNativeHttp={
+  resolve:function(requestId,raw){
+    const pending=nativeHttpPending.get(String(requestId||''));
+    if(!pending||pending.settled()) return false;
+    let result={};
+    try{ result=JSON.parse(String(raw||'')); }
+    catch(e){ pending.reject(new Error('App 原生网络通道返回格式错误')); return false; }
+    pending.resolve(result);
+    return true;
+  }
+};
+function parseSseChatText(text){
+  let full='';
+  String(text||'').split(/\r?\n/).forEach(function(line){
+    const raw=line.trim(); if(!raw.startsWith('data:')) return;
+    const payload=raw.slice(5).trim(); if(!payload||payload==='[DONE]') return;
+    try{
+      const j=JSON.parse(payload);
+      const delta=j.choices&&j.choices[0]&&j.choices[0].delta&&j.choices[0].delta.content;
+      if(delta) full+=delta;
+    }catch(e){}
+  });
+  return full.trim();
+}
+function chatTextFromResponse(txt,status,ok){
+  let j={}; try{ j=JSON.parse(txt||''); }catch(e){}
+  if(!ok){
+    const raw=(j.error&&(j.error.message||j.error))||txt||('接口返回 '+status);
+    const err=new Error(apiFriendly(status,String(raw).slice(0,180)));
+    err.status=status; throw err;
+  }
+  const out=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
+  if(!out) throw new Error('接口没有返回内容');
+  return out.trim();
 }
 async function rawCall(ep,messages,signal){
   const stream=!!DB.api.stream;
   const body={model:DB.api.model||'deepseek-chat',messages,temperature:Number(DB.api.temp)||0.9,stream:stream};
   if(Number(DB.api.maxTokens)>0) body.max_tokens=Number(DB.api.maxTokens);
+  const payload=JSON.stringify(body);
+  if(nativeHttpAvailable()){
+    const nativePayload=JSON.stringify(Object.assign({},body,{stream:false}));
+    const native=await nativeRequest('POST',ep,DB.api.key||'',nativePayload,signal);
+    if(!native) throw new Error('App 原生网络通道不可用');
+    return chatTextFromResponse(native.body,native.status,native.ok);
+  }
   let r;
   try{
-    r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(DB.api.key||'')},body:JSON.stringify(body),signal:signal});
+    r=await fetch(ep,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+(DB.api.key||'')},body:payload,signal:signal});
   }catch(e){
     try{
       r=await fetch('/api/chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({endpoint:ep,key:DB.api.key,model:DB.api.model,messages,maxTokens:body.max_tokens||0,stream:stream}),signal:signal});
@@ -3886,15 +3975,7 @@ async function rawCall(ep,messages,signal){
     if(full.trim()) return full.trim();
     throw new Error('流式接口没有返回内容');
   }
-  const txt=await r.text(); let j={}; try{ j=JSON.parse(txt); }catch(e){}
-  if(!r.ok){
-    const raw=(j.error&&(j.error.message||j.error))||('接口返回 '+r.status);
-    const err=new Error(apiFriendly(r.status,raw));
-    err.status=r.status; throw err;
-  }
-  const out=j.choices&&j.choices[0]&&j.choices[0].message&&j.choices[0].message.content;
-  if(!out) throw new Error('接口没有返回内容');
-  return out.trim();
+  return chatTextFromResponse(await r.text(),r.status,r.ok);
 }
 async function callModel(messages,options){
   const base=normBase(DB.api.base||DB.api.endpoint);
@@ -4009,7 +4090,7 @@ function enforceBubblePlan(text,n){
   while(plan.length<n){
     let idx=0;
     for(let i=1;i<plan.length;i++){ if(plan[i].text.length>plan[idx].text.length) idx=i; }
-    if(plan[idx].text.length<=1||!plan[idx].voiceSafe) break;
+    if(plan[idx].text.length<=1) break;
     const parts=splitBubbleText(plan[idx].text);
     if(parts.length<2) break;
     const sourceKind=plan[idx].kind;
@@ -4899,7 +4980,7 @@ function sheetNewChat(){
   $('#newGroup').onclick=()=>sheetPick('选择群成员（可多选）',9,(ids,name)=>{
     if(ids.length<2){ toast('群聊至少要两位联系人'); return; }
     const gname=name|| (ids.map(i=>{const c=ct(i);return c?c.name:'?';}).slice(0,3).join('、')+(ids.length>3?'等':''));
-    const ch={id:uid(),type:'group',name:gname,memberIds:ids,msgs:[],unread:0,lastTs:Date.now(),created:Date.now()};
+    const ch={id:uid(),type:'group',name:gname,memberIds:ids,msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),proactiveOn:false,proactiveIntervalSec:0};
     const store=coreStore();
     if(store) store.commands.createChat(ch,{persist:false}); else DB.chats.push(ch);
     save(); closeSheet(); go('chatroom',ch.id);
@@ -5117,8 +5198,8 @@ function screenContactEdit(){
     +row2('绑定世界书', (v.worldIds.length? v.worldIds.length+' 本':'未绑定'), 'data-bindworld')
     +row2('好友分组', grp? grp.name : '未分组', 'data-pickgroup')
     +row2('朋友圈发送频率', lv(v.freq.post)+' · 赞'+lv(v.freq.like)+' · 评'+lv(v.freq.comment)+' · 回'+lv(v.freq.reply), 'data-freq')
-    +row2('主动发消息间隔', autoIntervalText(autoIntervalSec(v))+(v.autoOn===false?'（已关闭）':''), 'data-auto')
-    +row2('主动发消息', (v.autoOn===false? '已关闭，只有你先开口才回':'开启中'), 'data-autoon')
+    +row2('角色基础主动间隔', autoIntervalText(autoIntervalSec(v))+(v.autoOn===false?'（总开关已关闭）':''), 'data-auto')
+    +row2('主动消息总开关', (v.autoOn===false? '已关闭，所有会话都不会主动发':'已开启，仍需在每个会话里单独开启'), 'data-autoon')
     +row2('角色发语音', voiceModeLabel(v.voiceFreq)+'（点一下切换）', 'data-voicefreq')
     +row2('线下见面频率', (Number(v.meetFreq||0)===0? '不会突然来找你' : ('等级 '+Math.min(5,Number(v.meetFreq)||0)+' · 会突然出现在你面前')), 'data-meet')
     +'</div>'
@@ -5161,7 +5242,7 @@ function saveContact(){
   else{
     data.id=uid(); data.created=Date.now();
     if(store) store.commands.upsertContact(data,{persist:false}); else DB.contacts.push(data);
-    const ch={id:uid(),type:'private',memberIds:[data.id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now()};
+    const ch={id:uid(),type:'private',memberIds:[data.id],msgs:[],unread:0,lastTs:Date.now(),created:Date.now(),proactiveOn:false,proactiveIntervalSec:0};
     if(data.opener) ch.msgs.push({id:uid(),role:'ta',from:data.id,type:'text',text:data.opener,ts:Date.now()});
     if(store) store.commands.createChat(ch,{persist:false}); else DB.chats.push(ch);
   }
@@ -5314,6 +5395,15 @@ function setTyping(on,text){
     const ch=route.name==='chatroom'?chat(route.arg):null;
     if(ch) t.innerHTML=chatRoomTitleHTML(ch);
   }
+}
+function waitForUiPaint(){
+  return new Promise(function(resolve){
+    if(typeof requestAnimationFrame==='function'){
+      requestAnimationFrame(function(){ setTimeout(resolve,0); });
+    }else{
+      setTimeout(resolve,0);
+    }
+  });
 }
 const boundChatBubbles=new WeakSet();
 function bindChatBubble(el){
@@ -5612,7 +5702,8 @@ function sheetChatMenu(ch){
   sheet('<h3>'+esc(chatName(ch))+'</h3>'
     +(isGroup? '<button class="btn full" id="cmMembers">群成员</button>':'')
     +'<button class="btn full" id="cmRange">每次回复句数（'+ch.replyMin+'-'+ch.replyMax+' 个气泡）</button>'
-    +'<button class="btn full" id="cmAuto">'+(ch.memberIds.every(function(id){ const c=ct(id); return c&&c.autoOn===false; })? '打开 Ta 的主动发消息':'关闭 Ta 的主动发消息')+'</button>'
+    +'<button class="btn full" id="cmAuto">本会话主动发消息：'+(ch.proactiveOn===true?'开':'关')+'</button>'
+    +'<button class="btn full" id="cmAutoGap">本会话主动间隔：'+(Number(ch.proactiveIntervalSec)>0?autoIntervalText(Number(ch.proactiveIntervalSec)):'跟随角色默认')+'</button>'
     +'<button class="btn full" id="cmVoice">角色发语音：'+voiceModeLabel(Math.max.apply(null,ch.memberIds.map(function(id){ return voiceModeOf(ct(id)); }).concat([0])))+'</button>'
     +(isGroup? '' : '<button class="btn full" id="cmEdit">编辑角色信息</button>')
     +(isGroup? '' : '<button class="btn full" id="cmMeetMode">聊天模式：'+(ch.offlineMode?'线下面对面':'线上微信')+'</button>')
@@ -5645,11 +5736,14 @@ function sheetChatMenu(ch){
   const cst=$('#cmSettle'); if(cst) cst.onclick=()=>{ closeSheet(); sheetSettle(ch); };
   const au=$('#cmAuto');
   if(au) au.onclick=()=>{
-    const off=ch.memberIds.every(function(id){ const c=ct(id); return c&&c.autoOn===false; });
+    const next=ch.proactiveOn!==true;
     const store=coreStore();
-    ch.memberIds.forEach(function(id){ const c=ct(id); if(c){ if(store) store.commands.patchContact(id,{autoOn:off? true : false},{persist:false}); else c.autoOn=off? true : false; } });
-    save(); closeSheet(); render(); toast(off? '已打开主动发消息':'已关闭主动发消息');
+    const patch={proactiveOn:next,lastAuto:next?Date.now():(ch.lastAuto||0),lastProactiveAt:next?Date.now():(ch.lastProactiveAt||0)};
+    if(store) store.commands.patchChat(ch.id,patch,{persist:false}); else Object.assign(ch,patch);
+    save(); closeSheet(); render(); toast(next?'本会话已开启主动发消息':'本会话已关闭主动发消息');
   };
+  const cag=$('#cmAutoGap');
+  if(cag) cag.onclick=()=>{ closeSheet(); sheetChatAutoGap(ch); };
   const cv=$('#cmVoice');
   if(cv) cv.onclick=()=>{
     const now=Math.max.apply(null,ch.memberIds.map(function(id){ return voiceModeOf(ct(id)); }).concat([0]));
@@ -5694,6 +5788,23 @@ function sheetReplyRange(ch){
     $('#rrOk').onclick=function(){ save(); closeSheet(); render(); };
   };
   draw();
+}
+function sheetChatAutoGap(ch){
+  if(!ch) return;
+  const presets=[0,1800,3600,10800,21600,43200];
+  sheet('<h3>本会话主动间隔</h3>'
+    +'<div class="muted" style="margin:6px 0 12px;line-height:1.8">只影响这个会话。选择“跟随角色默认”时会使用角色编辑页里的基础间隔。</div>'
+    +presets.map(function(sec){ return '<button class="btn full" data-chat-auto-gap="'+sec+'">'+(sec?autoIntervalText(sec):'跟随角色默认')+'</button>'; }).join('')
+    +'<button class="btn full" id="cagCancel">取消</button>');
+  $$('#sheetBox [data-chat-auto-gap]').forEach(function(el){
+    el.onclick=function(){
+      const store=coreStore();
+      const patch={proactiveIntervalSec:Number(el.dataset.chatAutoGap)||0,lastAuto:Date.now()};
+      if(store) store.commands.patchChat(ch.id,patch,{persist:false}); else Object.assign(ch,patch);
+      save(); closeSheet(); render(); toast(Number(el.dataset.chatAutoGap)>0?'本会话间隔：'+autoIntervalText(Number(el.dataset.chatAutoGap)):'已改为跟随角色默认');
+    };
+  });
+  $('#cagCancel').onclick=closeSheet;
 }
 /* ================= 会话 ================= */
 let curChatId=null, autoLock=0, chatSelectChat=null, chatSelectIds=[], chatQuote=null;
@@ -6282,26 +6393,16 @@ function pushMsg(chatId,m,quiet){
 }
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));/* ---- AI 回合 ---- */
 function proactiveFallback(speaker,stage){
-  const lines=stage===0?[
-    '怎么不理我了？我刚刚是不是惹你生气了？唔……对不起嘛，你理理我好不好。',
-    '你那边怎么没动静了？是不是我哪句话说得不对，别不说话。'
-  ]:stage===1?[
-    '还是说已经睡了，或者还在忙？到底怎么了嘛，有事我们好好说，别不理我。',
-    '怎么一直没回我？你是在忙还是不想理我，告诉我一声好不好。'
-  ]:[
-    '我先不闹你了。看到消息记得回我一声，好不好。',
-    '不逼你现在回，等你忙完看到我再说。'
-  ];
-  return pick(lines);
+  return '';
 }
 function proactiveReplyRelevant(text,stage){
-  const t=String(text||'');
-  const common=/(不理|不回|没回|理我|生气|对不起|抱歉|睡了|在忙|忙完|看到.*回|怎么了|发生什么|好好说|不说话|没动静|不想理)/;
-  if(!common.test(t)) return false;
-  if(stage>=2&&/(你刚才|你这话|你说|问到|答|接话|续|剧情)/.test(t)) return false;
+  const t=String(text||'').trim();
+  if(!t||t.length>800) return false;
+  if(/(?:^|\n)\s*(?:用户|对方|你|User)\s*[:：]/i.test(t)) return false;
+  if(/^(?:好的|可以|行|嗯|哦|知道了)[。！？!?\s]*$/.test(t)) return false;
   return true;
 }
-function sanitizeProactiveReply(text,speaker){
+function sanitizeProactiveReply(text,speaker,limit){
   let t=String(text||'')
     .replace(/\r/g,'')
     .replace(/```[a-z]*\n?/gi,'')
@@ -6319,10 +6420,10 @@ function sanitizeProactiveReply(text,speaker){
   const prefixRe=new RegExp('^\\s*(?:'+ownPrefixes.map(function(x){ return String(x).replace(/[.*+?^${}()|[\]\\]/g,'\\$&'); }).join('|')+')\\s*[:：]\\s*','');
   t=t.replace(prefixRe,'');
   t=t.replace(/([？?])[\s]*(?:嗯|啊|哦|好|行|在|我在|我知道|知道了|当然|可以|没有|没事|是啊|对)[，,。.!！\s]*[\s\S]*$/u,'$1');
-  const first=parseChatBubblePlan(t)[0];
-  if(!first||!first.text) return '';
-  const prefix=first.kind==='voice'?'[语音]':first.kind==='text'?'[文字]':'';
-  return prefix+first.text;
+  return parseChatBubblePlan(t).slice(0,Math.max(1,Number(limit)||8)).map(function(item){
+    const prefix=item.kind==='voice'?'[语音]':item.kind==='text'?'[文字]':'';
+    return prefix+item.text;
+  }).filter(Boolean).join('\n');
 }
 async function aiTurn(opt){
   const chatId=(opt&&opt.chatId)||(route.name==='chatroom'?route.arg:curChatId);
@@ -6342,7 +6443,7 @@ async function aiTurn(opt){
   let proactiveStage=-1;
   const min=Math.max(1,Number(ch.replyMin)||1);
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
-  const want=proactive?1:(min+Math.floor(Math.random()*(max-min+1)));
+  const want=min+Math.floor(Math.random()*(max-min+1));
   const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled; });
   const wantsVoice=!offlineMode&&!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
@@ -6371,9 +6472,10 @@ async function aiTurn(opt){
           :'用户已经连续多次没回。这次要降低压力，只留一句关心或“看到再回我”，不要再逼问，也不要演后续。';
       sys+='\n【只读聊天记录】以下内容是历史，不是让你接着续写对话：\n'+transcript;
       sys+='\n【当前真实状态】用户最后一条回复在'+(silence&&silence.silentMinutes!==null?silence.silentMinutes+' 分钟前':'未知时间')+'。你之后已经主动发了'+String(silence?silence.unanswered:0)+' 条，用户一条都没有回复。';
-      sys+='\n【主动消息的唯一规则】当前没有新的用户回复，你只能扮演'+String(speaker.name||'你自己')+'。这次只写你主动发给用户的一条完整微信消息，不能续写两个人的剧情。';
+      sys+='\n【主动消息的唯一规则】当前没有新的用户回复，你只能扮演'+String(speaker.name||'你自己')+'。这次写你主动发给用户的一轮完整微信消息，不能续写两个人的剧情。';
       sys+='\n禁止替用户说话，禁止写“你：”“用户：”“对方：”，禁止补写用户的动作、反应、状态或回答，禁止回答你自己刚提出的问题，禁止把上一条角色消息当成用户刚说的话。';
-      sys+='\n'+stage+' 只输出原样可用的一行消息，不要解释你为什么这样发。';
+      sys+='\n'+stage+' 只输出原样可用的聊天气泡，不要解释你为什么这样发。';
+      sys+='\n【本次主动气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。它们是一轮连续的主动消息，可以包含撒娇、想念、关心、吃醋或分享当下，但必须符合角色人设和最近聊天内容。';
     }
     sys+='\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。';
     sys+='\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。';
@@ -6385,22 +6487,26 @@ async function aiTurn(opt){
     }else{
       sys+='\n【本次气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。';
     }
+    await waitForUiPaint();
     const out=await callModel(proactive
-      ?[{role:'system',content:sys},{role:'user',content:'现在只输出你要主动发给对方的那一条微信消息。'}]
+      ?[{role:'system',content:sys},{role:'user',content:'现在只输出你要主动发给对方的完整一轮微信消息，共 '+want+' 个气泡，每个气泡单独一行，不要等对方回复。'}]
       :[{role:'system',content:sys}].concat(history),{signal:requestController.signal});
     let clean=regexOf(speaker, out);
     if(proactive){
-      clean=sanitizeProactiveReply(clean,speaker);
+      clean=sanitizeProactiveReply(clean,speaker,want);
       if(!clean||!proactiveReplyRelevant(clean,proactiveStage)) clean=proactiveFallback(speaker,proactiveStage);
     }
-    if(!clean) throw new Error('模型没有返回内容');
+    if(!clean){
+      if(proactive) return;
+      throw new Error('模型没有返回内容');
+    }
     markCrossMemoryMentioned(ch.id,clean);
     await sleep(Math.min(1600, 240 + clean.length*12));
     const t0=$('#typing'); if(t0) t0.remove();
     const badVoice=/设备不匹配|未配置.{0,6}(接口|语音)|接口.{0,6}未配置|不能发语音|发不了语音|没法发语音|不支持语音|语音功能.{0,6}(不可用|未配置)/;
     const planned=offlineMode
       ? [{text:clean,kind:'text',voiceSafe:false}]
-      : enforceBubblePlan(clean,proactive?1:want);
+      : enforceBubblePlan(clean,want);
     const plan=planned.map(function(item){
       const text=badVoice.test(item.text)?'好，我发给你。':cleanChatOutput(item.text,ch);
       return Object.assign({},item,{text:text});
@@ -7333,7 +7439,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-28 · 3.69 · 第 80 轮';
+const PROGRESS_UPDATED='2026-10-30 · 3.76 · 第 87 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -7739,12 +7845,20 @@ async function fetchModelList(){
   let msg='';
   for(const u of modelCandidates(base)){
     try{
-      const r=await fetch(u,{headers:{'Authorization':'Bearer '+key}});
-      if(!r.ok){
-        if(r.status===401||r.status===403){ msg='Key 不对，或这个 Key 没有权限（'+r.status+'）'; break; }
-        msg='接口返回 '+r.status; continue;
+      let status=0,ok=false,text='';
+      if(nativeHttpAvailable()){
+        const native=await nativeRequest('GET',u,key,'');
+        if(!native) throw new Error('App 原生网络通道不可用');
+        status=Number(native.status)||0; ok=!!native.ok; text=String(native.body||'');
+      }else{
+        const r=await fetch(u,{headers:{'Authorization':'Bearer '+key}});
+        status=r.status; ok=r.ok; text=await r.text();
       }
-      const j=await r.json();
+      if(!ok){
+        if(status===401||status===403){ msg='Key 不对，或这个 Key 没有权限（'+status+'）'; break; }
+        msg='接口返回 '+status; continue;
+      }
+      let j={}; try{ j=JSON.parse(text); }catch(e){ msg='模型列表不是有效 JSON'; continue; }
       const ids=(j.data||j.models||[]).map(x=>x.id||x.name).filter(Boolean).sort();
       if(!ids.length){ msg='拉到了，但里面没有模型名'; continue; }
       DB.api.base=normBase(base); DB.api.endpoint=''; DB.api.modelList=ids;
@@ -13739,10 +13853,15 @@ function bindScreen(){ try{ bindScreenInner(); }catch(e){ logErr('bindScreen 出
 /* ================= 主动行为 ================= */
 let autoTickBusy=false;
 function autoGapOfChat(ch){
+  if(!ch||ch.proactiveOn!==true) return Infinity;
   let gap=Infinity;
+  const own=Number(ch.proactiveIntervalSec);
+  if(Number.isFinite(own)&&own>0){
+    gap=Math.max(AUTO_INTERVAL_MIN_SEC,Math.min(AUTO_INTERVAL_MAX_SEC,own))*1000;
+  }
   (ch.memberIds||[]).forEach(function(id){
     const c=ct(id);
-    if(c&&c.autoOn!==false) gap=Math.min(gap,autoIntervalMs(c));
+    if(c&&c.autoOn!==false&&own<=0) gap=Math.min(gap,autoIntervalMs(c));
   });
   return gap;
 }
@@ -13805,11 +13924,6 @@ async function autoTick(){
     cands.sort(function(a,b){ return (a.lastAuto||a.lastTs||0)-(b.lastAuto||b.lastTs||0); });
     const target=cands[0];
     target.lastAuto=now;
-    const cc=ct(target.memberIds[0]);
-    if(cc&&Math.random()<0.35){
-      await taPokeUser(target,cc);
-      return;
-    }
     if(!DB.api.key) return;
     try{
       await aiTurn({chatId:target.id,proactive:true,nudge:'你自己主动找对方说话。注意：对方还没有回你，所以绝对不要自问自答，也不要说「好的」「可以」「那就这样」这种像是在回应自己的话。只写你自己这一条，不能补写用户的台词、动作或反应。换一个新的点：说说你正在做的事、你刚想到的事，或者想对方了。'});
@@ -13948,8 +14062,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-28 · 3.69 · 第 80 轮';
-const BUILD_CODE=80;
+const BUILD='2026-10-30 · 3.76 · 第 87 轮';
+const BUILD_CODE=87;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -13968,6 +14082,10 @@ async function runCheckupUI(){
   add('页面版本', true, BUILD);
   const ua=navigator.userAgent||'';
   add('运行方式', true, location.protocol+'  '+(/wv|Capacitor|Android.*Version\/4/.test(ua)? '（手机 App 里）':'（浏览器）'));
+  add('安卓原生接口通道', nativeHttpAvailable(), nativeHttpAvailable()?'已启用，直连中转站不受网页跨域限制':'当前是浏览器模式，部分中转站会被跨域限制');
+  const bootAssertions=window.BSBootAssertions||{};
+  add('Store 启动断言', bootAssertions.coreStore===true&&bootAssertions.readonlyStore===true, bootAssertions.coreStore===true&&bootAssertions.readonlyStore===true?'BSCoreStore / BSReadonlyStore 均已就绪':'核心数据层缺失或未就绪');
+  add('原生网络异步取消', !nativeHttpAvailable()||!!(window.BSNativeHttp&&window.NativeHttp&&typeof window.NativeHttp.cancel==='function'), nativeHttpAvailable()?'requestId 异步回调 / AbortSignal / 原生 disconnect 已接入':'浏览器模式不需要');
   add('存储方式', IDB.ok, IDB.ok? '大容量本地数据库' : '浏览器小仓库（约 5MB，人会满）');
   add('数据用量', true, fmtSize(dataSize()));
   const needFns=['screenHome','screenWechat','screenChatRoom','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','showAppNotice','autoIntervalSec','resolveVoicePlan','regenerateChatMessage','sheetMessageBranches','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
@@ -18830,6 +18948,17 @@ window.setInterval(function(){ try{ takeoutTickOrders(); }catch(e){ logErr('外�
 if(window.BSCreateReadonlyStore){
   window.BSReadonlyStore=window.BSCreateReadonlyStore(function(){ return DB; });
   window.BSReadonlyStore.markReady();
+}
+window.BSBootAssertions=Object.freeze({
+  coreStore:!!(window.BSCoreStore&&window.BSCoreStore.ready()),
+  readonlyStore:!!(window.BSReadonlyStore&&window.BSReadonlyStore.ready()),
+  nativeAsync:!nativeHttpAvailable()||!!(window.BSNativeHttp&&typeof window.NativeHttp.cancel==='function')
+});
+if(!window.BSBootAssertions.coreStore||!window.BSBootAssertions.readonlyStore){
+  console.error('BS startup assertion failed',window.BSBootAssertions);
+  setTimeout(function(){
+    try{ toast('启动检查失败：核心数据层未加载'); }catch(e){}
+  },0);
 }
 </script>
 </body>

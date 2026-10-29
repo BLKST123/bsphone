@@ -1,0 +1,9 @@
+{
+  "version": "3.76",
+  "versionCode": 87,
+  "round": 87,
+  "releasedAt": "2026-10-30",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=87",
+  "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+  "notes": "复检修复：APK 补齐 Store 数据文件，安卓原生网络改为异步可取消，恢复请求超时与页面响应，并加入启动断言和资源完整性门禁。"
+}
