@@ -1,0 +1,9 @@
+{
+  "version": "3.78",
+  "versionCode": 89,
+  "round": 89,
+  "releasedAt": "2026-10-30",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=89",
+  "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+  "notes": "合并复检修复：人设记忆隔离、重生成上下文、通知源已读与深链、联系人/商城来源路由、外卖防重复、Prompt 前缀缓存、历史滑窗、Token usage、指数退避与本机 Key 加密。"
+}

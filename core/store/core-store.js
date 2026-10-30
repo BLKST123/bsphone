@@ -157,6 +157,11 @@
       const item = typeof memory === "string"
         ? { id: idFactory("memory"), text: String(memory).trim() }
         : Object.assign({}, memory || {});
+      const options = commandOptions || {};
+      if (!item.personaId && options.personaId) item.personaId = options.personaId;
+      if (!item.chatId && options.chatId) item.chatId = options.chatId;
+      if (!item.scope) item.scope = options.scope || "character";
+      if (!item.personaId) item.needsPersonaReview = true;
       if (!item.text) return null;
       if (!item.id) item.id = idFactory("memory");
       if (!list.some(function (existing) { return existing.id === item.id || existing.text === item.text; })) {
@@ -170,10 +175,29 @@
       if (!contact) return { contact: null, added: 0 };
       const list = ensureContactMemories(contact);
       let added = 0;
+      const options = commandOptions || {};
       (Array.isArray(memories) ? memories : []).forEach(function (memory) {
         const text = String(typeof memory === "string" ? memory : memory && memory.text || "").trim();
-        if (!text || list.some(function (existing) { return String(existing.text || "").trim() === text; })) return;
-        list.push({ id: memory && memory.id || idFactory("memory"), text: text });
+        if (!text) return;
+        const source = typeof memory === "string" ? { text: text } : Object.assign({}, memory || {});
+        const personaId = source.personaId || options.personaId || null;
+        const scope = source.scope || options.scope || "character";
+        const chatId = source.chatId || options.chatId || null;
+        const duplicate = list.some(function (existing) {
+          return String(existing.text || "").trim() === text
+            && (existing.personaId || null) === personaId
+            && (existing.scope || "character") === scope
+            && (existing.chatId || null) === chatId;
+        });
+        if (duplicate) return;
+        list.push(Object.assign({}, source, {
+          id: source.id || idFactory("memory"),
+          text: text,
+          personaId: personaId,
+          scope: scope,
+          chatId: scope === "session" ? chatId : source.chatId || null,
+          needsPersonaReview: !personaId
+        }));
         added += 1;
       });
       record("mergeContactMemories", { contactId: contactId, added: added }, contact, (commandOptions || {}).persist);
