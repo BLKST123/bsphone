@@ -534,8 +534,10 @@ body.keyboard #phone{height:var(--app-h,100dvh)}
 body.keyboard .sheet{height:var(--app-h,100dvh);bottom:auto}
 body.keyboard .sheet .box{min-height:0!important;max-height:calc(var(--app-h,100dvh) - 10px);padding-bottom:12px}
 body.keyboard .sheet .box.full,body.keyboard .sheet .box.full.fixed{height:var(--app-h,100dvh);min-height:0!important;max-height:var(--app-h,100dvh)}
+body.keyboard #cssArea{height:clamp(104px,calc(var(--app-h,100dvh) - 320px),180px)!important;min-height:104px!important;max-height:180px!important}
 body.keyboard .bigedit-ov{height:var(--app-h,100dvh);bottom:auto}
 body.keyboard .bigedit-box{min-height:0!important;max-height:calc(var(--app-h,100dvh) - 12px)}
+body.keyboard .np-co-panel{bottom:var(--kb-h,0px);height:min(48dvh,calc(var(--app-h,100dvh) - 60px));min-height:260px}
 #screen{scroll-padding-top:72px;scroll-padding-bottom:calc(var(--kb-h,0px) + 24px)}
 .sheet .box{scroll-padding-top:60px;scroll-padding-bottom:calc(var(--kb-h,0px) + 24px)}
 input,textarea{scroll-margin-top:74px;scroll-margin-bottom:calc(var(--kb-h,0px) + 26px)}
@@ -2569,6 +2571,16 @@ function fixAll(){
   DB.memorySettings.cooldownMin=Math.max(1,Math.min(1440,Number(DB.memorySettings.cooldownMin)||30));
   DB.memorySettings.globalMentionCap=Math.max(1,Math.min(99,Number(DB.memorySettings.globalMentionCap)||8));
   DB.memorySettings.sessionMentionCap=Math.max(1,Math.min(20,Number(DB.memorySettings.sessionMentionCap)||3));
+  DB.contacts=Array.isArray(DB.contacts)?DB.contacts:[];
+  DB.contacts.forEach(function(c){
+    c.memories=Array.isArray(c.memories)?c.memories:[];
+    c.memories=c.memories.map(function(memory){
+      if(typeof memory==='string') memory={id:uid(),text:memory};
+      if(!memory.id) memory.id=uid();
+      if(!memory.personaId){ memory.needsPersonaReview=true; memory.scope=memory.scope||'character'; }
+      return memory;
+    });
+  });
   DB.chats=Array.isArray(DB.chats)?DB.chats:[];
   const sessionSeq={};
   DB.chats.forEach(function(ch){
@@ -2589,6 +2601,9 @@ function fixAll(){
         const c=(DB.contacts||[]).find(function(x){ return x.id===cid; });
         ch.baseMemorySnapshot=contactLongTermMemories(c,ch.personaId,ch.id).map(function(m){ return m.text; }).filter(Boolean);
         ch.baseMemoryPersonaId=ch.personaId||null;
+        ch.baseMemoryNeedsReview=false;
+      }else if(ch.baseMemorySnapshot.length&&(!ch.baseMemoryPersonaId||ch.baseMemoryPersonaId!==ch.personaId)){
+        ch.baseMemoryNeedsReview=true;
       }
     }
     repairSplitChatQuoteMessages(ch);
@@ -3601,20 +3616,21 @@ function syncAppHeight(){
   const vvH=vv?Math.max(1,Math.round(vv.height)):fullH;
   const vvOffset=vv?Math.max(0,Math.round(vv.offsetTop||0)):0;
   const visualKb=Math.max(0,fullH-vvH-vvOffset);
-  const keyboard=Math.max(visualKb,nativeKbHeight());
-  const h=vvH;
+  const nativeKb=nativeKbHeight();
+  const keyboard=Math.max(visualKb,nativeKb);
+  let h=vvH;
+  if(visualKb<=80&&nativeKb>80) h=Math.max(280,fullH-nativeKb);
   document.documentElement.style.setProperty('--app-h',h+'px');
   document.documentElement.style.setProperty('--kb-h',keyboard+'px');
   document.body.classList.toggle('keyboard',keyboard>120);
 }
 window.addEventListener('nativekeyboardchange',function(e){
   nativeKeyboardHeight=Math.max(0,Number(e.detail)||0);
-  syncAppHeight();
+  [0,60,160,300].forEach(function(ms){ setTimeout(syncAppHeight,ms); });
 });
 function bringInputAboveKeyboard(el){
   if(!el||!el.matches||!el.matches('input,textarea')) return;
-  const kb=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--kb-h'))||0;
-  const vh=Math.max(1,window.innerHeight-kb);
+  const vh=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-h'))||Math.max(1,window.innerHeight);
   const r=el.getBoundingClientRect();
   const safeBottom=vh-18, safeTop=10;
   if(r.bottom<=safeBottom&&r.top>=safeTop) return;
@@ -3626,10 +3642,26 @@ function bringInputAboveKeyboard(el){
     try{ el.scrollIntoView({block:'center',behavior:'smooth'}); }catch(e){}
   }
 }
+function keepSheetActionVisible(el,actionSelector){
+  if(!el||el.id!=='cssArea') return;
+  const box=el.closest('#sheetBox');
+  const action=box&&box.querySelector(actionSelector);
+  if(!box||!action) return;
+  const appH=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-h'))||window.innerHeight;
+  const r=action.getBoundingClientRect();
+  if(r.bottom>appH-8) box.scrollTop+=Math.ceil(r.bottom-appH+12);
+}
+function keepSoulActionVisible(){
+  const start=$('#soulStart'), screen=$('#screen');
+  if(!start||!screen) return;
+  const appH=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--app-h'))||window.innerHeight;
+  const r=start.getBoundingClientRect();
+  if(r.bottom>appH-8) screen.scrollTop+=Math.ceil(r.bottom-appH+12);
+}
 document.addEventListener('focusin',function(e){
   const el=e.target;
   if(!el||!el.matches||!el.matches('input,textarea')) return;
-  [0,60,160,300,480,720,980].forEach(function(ms){ setTimeout(function(){ syncAppHeight(); bringInputAboveKeyboard(el); },ms); });
+  [0,60,160,300,480,720,980].forEach(function(ms){ setTimeout(function(){ syncAppHeight(); bringInputAboveKeyboard(el); keepSheetActionVisible(el,'#cssSave'); if(el.id==='soulDesire') keepSoulActionVisible(); },ms); });
 });
 document.addEventListener('focusout',function(e){ if(e.target&&e.target.matches&&e.target.matches('input,textarea')) setTimeout(syncAppHeight,180); });
 function tickStatus(){ const t=$('#stTime'); if(!t) return; const d=simNow(route.name==='chatroom'?route.arg:null); t.textContent=String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
@@ -3886,12 +3918,13 @@ function memoryContextForCharacter(c,opt){
   const chatId=opt&&opt.chatId||null;
   const ch=chatId?chat(chatId):null;
   const personaId=promptPersonaId(chatId,opt);
+  const snapshotSafe=!!(ch&&personaId&&!ch.baseMemoryNeedsReview&&ch.baseMemoryPersonaId===personaId);
   return {
     chatId:chatId,
     chat:ch,
     personaId:personaId,
     roleLongTerm:memoryTextList(contactLongTermMemories(c,personaId,chatId)),
-    sessionSnapshot:memoryTextList(ch&&ch.baseMemorySnapshot),
+    sessionSnapshot:snapshotSafe?memoryTextList(ch&&ch.baseMemorySnapshot):[],
     sessionDigest:memoryTextList(ch&&ch.mem&&ch.mem.items)
   };
 }
@@ -3907,11 +3940,13 @@ function promptBundleOf(c, other, chatMsgs, opt){
   const stable=[],semi=[],dynamic=[], me=DB.me||{};
   const store=coreStore();
   const memoryContext=memoryContextForCharacter(c,opt);
-  const explicitPersona=!!(opt&&Object.prototype.hasOwnProperty.call(opt,'personaId')&&opt.personaId);
+  const personaProvided=!!(opt&&Object.prototype.hasOwnProperty.call(opt,'personaId'));
+  const personaRequested=personaProvided?String(opt.personaId||''):'';
   const targetPersonaId=memoryContext.personaId;
   const chosenPersona=targetPersonaId?(store?store.read.persona(targetPersonaId):(DB.me.personas||[]).find(function(x){ return x.id===targetPersonaId; })):null;
-  const personaMissing=!!targetPersonaId&&!chosenPersona;
-  const per=chosenPersona?personaFullText(chosenPersona):(explicitPersona||targetPersonaId?'':activePersona());
+  const personaMissing=!!personaRequested&&!chosenPersona;
+  const personaUnbound=personaProvided&&!personaRequested&&!chosenPersona;
+  const per=chosenPersona?personaFullText(chosenPersona):(personaProvided||targetPersonaId?'':activePersona());
   const fmt=(opt&&opt.format)||'plain';
   const offline=!!(opt&&opt.offline);
   stable.push('你在扮演「'+c.name+'」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。');
@@ -3923,6 +3958,7 @@ function promptBundleOf(c, other, chatMsgs, opt){
   if(me.name) stable.push('用户的名字是「'+me.name+'」。');
   if(c.callMe) stable.push('你称呼用户为「'+c.callMe+'」。');
   if(per) stable.push('【用户的人设（你要当成事实）】'+per);
+  else if(personaUnbound) semi.push('【用户人设未绑定】当前会话明确没有绑定用户人设。不要套用全局启用的人设。');
   else if(personaMissing) semi.push('【用户人设缺失】当前绑定的用户人设已不存在。不要猜测或套用其他人设；请提示用户重新绑定。');
   if(memoryContext.roleLongTerm.length) stable.push('【角色长期记忆（跨会话事实）】\n'+memoryContext.roleLongTerm.map(m=>'- '+m).join('\n'));
   if(memoryContext.sessionSnapshot.length) semi.push('【当前会话快照记忆】\n'+memoryContext.sessionSnapshot.map(m=>'- '+m).join('\n'));
@@ -4584,6 +4620,13 @@ function back(){
   const map={chatroom:'wechat',contactview:'wechat',appearance:'settings',progress:'settings'};
   go(map[route.name]||'home');
 }
+window.BSAndroidBack=function(){
+  try{
+    if($('#sheet')&&$('#sheet').classList.contains('on')){ closeSheet(); return true; }
+    if(route.name!=='home'){ back(); return true; }
+    return false;
+  }catch(e){ logErr('系统返回处理失败：'+e.message); return false; }
+};
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
@@ -5305,6 +5348,7 @@ function screenContactView(){
   const c=viewContact(route.arg);
   if(!c) return emptyState('找不到这位联系人','可能已经被删掉了。','回微信','backwx');
   const f=c.freq||{}, nB=(c.regexIds||[]).length, nW=(c.worldIds||[]).length;
+  const pM=(c.memories||[]).filter(function(m){ return !m.personaId||m.needsPersonaReview; }).length;
   const grp=viewGroups().find(g=>g.id===c.groupId);
   return '<div class="mecard">'+avBox(c,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(contactDisplayName(c))+(c.demo?'<span class="demo-note">示例</span>':'')+'</div>'
     +'<div class="muted">'+esc([c.gender,c.age?c.age+'岁':'',c.identity].filter(Boolean).join(' · ')||'没有填基本资料')+'</div>'+(c.source==='soul'?'<div class="soul-source-chip" style="margin-left:0">来源：灵魂匹配</div>':'')+'</div></div>'
@@ -5313,7 +5357,7 @@ function screenContactView(){
     +'<div class="lrow" data-chatwith="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">发消息</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'<div class="lrow" data-editct="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">编辑资料</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +((c.generatedPhotos||[]).length?'<div class="lrow" data-aiphoto-contact="'+c.id+'" style="padding-left:0;padding-right:0"><div class="mi"><div class="t1">AI 照片</div><div class="t2">'+c.generatedPhotos.length+' 张 · 永久绑定这个角色</div></div><div class="rt"><span class="chev">›</span></div></div>':'')
-    +'<div class="lrow" data-bindregex="'+c.id+'" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">绑定正则</div><div class="t2">'+(nB?nB+' 条':'未绑定')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
+    +'<div class="lrow" data-bindregex="'+c.id+'" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">绑定正则</div><div class="t2">'+(nB?nB+' 条':'未绑定')+(pM?' · '+pM+' 条记忆待确认人设':'')+'</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'</div>'
     +'<div class="card"><div class="muted">朋友圈频率</div><div class="kv"><span>发朋友圈</span><b>'+lv(f.post)+'</b></div><div class="kv"><span>点赞</span><b>'+lv(f.like)+'</b></div><div class="kv"><span>评论</span><b>'+lv(f.comment)+'</b></div><div class="kv"><span>回复</span><b>'+lv(f.reply)+'</b></div></div>'
     +'<div class="card"><div class="muted">世界书 '+nW+' 本</div>'
@@ -5431,6 +5475,17 @@ function flushEdit(){
   }
   save();
 }
+function contactMemoryDefaultPersonaId(){
+  const sourceChat=contactEditSource&&contactEditSource.name==='chatroom'?chat(contactEditSource.arg):null;
+  return sourceChat&&sourceChat.personaId||DB.me&&DB.me.personaId||null;
+}
+function contactMemoryPersonaOptions(selected){
+  return '<option value="">待确认人设</option>'+(DB.me.personas||[]).map(function(p){ return '<option value="'+p.id+'"'+(String(selected||'')===String(p.id)?' selected':'')+'>'+esc(p.name||p.id)+'</option>'; }).join('');
+}
+function contactMemoryRowHTML(memory){
+  memory=memory||{};
+  return '<div class="card" data-mem="'+esc(memory.id||uid())+'" style="box-shadow:none;border:1px solid var(--line);margin:8px 0"><input class="grow mem-in" value="'+esc(memory.text||'')+'" placeholder="比如：她怕黑"><div class="row" style="margin-top:7px;gap:7px"><select class="mem-persona grow">'+contactMemoryPersonaOptions(memory.personaId)+'</select><button class="btn danger delMem">删</button></div></div>';
+}
 function screenContactEdit(){
   const id=route.arg, c=id? viewContact(id):null;
   let v;
@@ -5478,7 +5533,8 @@ function screenContactEdit(){
     +row2('线下见面频率', (Number(v.meetFreq||0)===0? '不会突然来找你' : ('等级 '+Math.min(5,Number(v.meetFreq)||0)+' · 会突然出现在你面前')), 'data-meet')
     +'</div>'
     +'<div class="card"><div class="row"><b class="grow">记忆（Ta记得的事）</b><button class="btn" id="addMem">加一条</button></div>'
-    +'<div id="memList">'+(v.memories||[]).map(m=>'<div class="row" data-mem="'+m.id+'"><input class="grow mem-in" value="'+esc(m.text)+'" style="margin-top:10px" placeholder="比如：她怕黑"><button class="btn danger delMem">删</button></div>').join('')+'</div></div>'
+    +((v.memories||[]).some(function(m){return !m.personaId||m.needsPersonaReview;})?'<div class="takeout-warning" style="margin:8px 0">有旧记忆没有确认归属人设。请逐条选择；未确认前不会进入任何角色 Prompt。<button class="btn full" id="confirmLegacyMem" style="margin-top:7px">全部归到当前人设</button></div>':'')
+    +'<div id="memList">'+(v.memories||[]).map(contactMemoryRowHTML).join('')+'</div></div>'
     +'<button class="btn primary full" id="saveContact">保存</button>'
     +(c? '<button class="btn full danger" id="clearMsgs">清空Ta的聊天记录</button>' : '')
     +'</div>';
@@ -5490,12 +5546,11 @@ function readContactForm(){
   const v=route.edit||{};
   const av=($('#c_avatar')&&$('#c_avatar').value.trim())||v.avatar||'';
   const oldMemById={}; (v.memories||[]).forEach(function(m){ if(m&&m.id) oldMemById[m.id]=m; });
-  const sourceChat=contactEditSource&&contactEditSource.name==='chatroom'?chat(contactEditSource.arg):null;
-  const fallbackPersonaId=sourceChat&&sourceChat.personaId||DB.me&&DB.me.personaId||null;
-  const mem=$$('#memList .row').map(function(r){
+  const mem=$$('#memList [data-mem]').map(function(r){
     const old=oldMemById[r.dataset.mem]||{};
     const text=($('.mem-in',r).value||'').trim();
-    const personaId=old.personaId||fallbackPersonaId||null;
+    const select=r.querySelector('.mem-persona');
+    const personaId=select?String(select.value||'')||null:(old.personaId||null);
     return Object.assign({},old,{id:r.dataset.mem||uid(),text:text,personaId:personaId,needsPersonaReview:!personaId});
   }).filter(m=>m.text);
   return Object.assign({},v,{
@@ -5892,6 +5947,7 @@ function sheetChatMemory(ch){
   const items=(mem&&mem.items)||[];
   sheet('<h3>自动保存记忆</h3>'
     +'<div class="muted" style="margin:6px 0 10px;line-height:1.8">把这段会话里发生的事、你的喜好和厌恶整理成几条记忆。可以先只存在这段会话里，也可以同步给角色（以后新开对话也记得）。</div>'
+    +(ch.baseMemoryNeedsReview?'<div class="takeout-warning">这份旧会话快照的人设归属无法确认，已暂停进入 Prompt。<button class="btn full" id="memSnapshotReview" style="margin-top:7px">按当前会话人设重建快照</button></div>':'')
     +(items.length? '<div class="card" style="box-shadow:none;border:1px solid var(--line)"><div class="muted">上次整理：'+shortTime(mem.ts)+'</div>'
         +items.map(function(x){ return '<div style="margin-top:6px;line-height:1.7">· '+esc(x)+'</div>'; }).join('')+'</div>'
       : '')
@@ -5901,6 +5957,12 @@ function sheetChatMemory(ch){
     +(ch.type==='group'? '<div class="muted" style="margin-top:8px">群聊只能存在这段会话里，不能同步给单个角色。</div>':'')
     +'<button class="btn full" id="memClose">关闭</button>');
   $('#memClose').onclick=closeSheet;
+  const snapshotReview=$('#memSnapshotReview'); if(snapshotReview) snapshotReview.onclick=function(){
+    const c=ch.type==='group'?null:ct(ch.memberIds[0]);
+    if(!c){ toast('找不到角色'); return; }
+    ch.baseMemorySnapshot=contactLongTermMemories(c,ch.personaId,ch.id).map(function(m){return m.text;}).filter(Boolean);
+    ch.baseMemoryPersonaId=ch.personaId||null; ch.baseMemoryNeedsReview=false; save(); sheetChatMemory(ch); toast('会话快照已按当前人设重建');
+  };
   $('#memGo').onclick=async function(){
     if(!needKey()) return;
     const c=ch.type==='group'? null : ct(ch.memberIds[0]);
@@ -7809,7 +7871,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-30 · 3.78 · 第 89 轮';
+const PROGRESS_UPDATED='2026-10-30 · 3.79 · 第 90 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -13402,7 +13464,16 @@ function bindScreenInner(){
   if(route.name==='contactedit'){
     const up=$('#c_avUp'); if(up) up.onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='image/*';
       i.onchange=()=>{ if(!i.files[0]) return; nextRatio=1; readImage(i.files[0],400,url=>{ route.edit.avatar=url; const a=$('#c_avatar'); if(a) a.value=''; const box=$('.avatar',s); if(box) box.innerHTML='<img src="'+url+'">'; toast('头像已换'); }); }; i.click(); };
-    const am=$('#addMem'); if(am) am.onclick=()=>$('#memList').insertAdjacentHTML('beforeend','<div class="row" data-mem="'+uid()+'"><input class="grow mem-in" style="margin-top:10px" placeholder="比如：她说她怕黑"><button class="btn danger delMem">删</button></div>');
+    const am=$('#addMem'); if(am) am.onclick=function(){
+      const id=uid(); $('#memList').insertAdjacentHTML('beforeend',contactMemoryRowHTML({id:id,personaId:contactMemoryDefaultPersonaId()}));
+      const row=$('#memList [data-mem="'+id+'"]'); const del=row&&row.querySelector('.delMem'); if(del) del.onclick=function(){ row.remove(); };
+    };
+    const confirmLegacy=$('#confirmLegacyMem'); if(confirmLegacy) confirmLegacy.onclick=function(){
+      const pid=contactMemoryDefaultPersonaId();
+      if(!pid){ toast('先在用户人设里选择一个当前人设'); return; }
+      $$('#memList .mem-persona').forEach(function(sel){ sel.value=pid; });
+      toast('已选择：'+((DB.me.personas||[]).find(function(p){return p.id===pid;})||{}).name);
+    };
     $$('.delMem',s).forEach(b=>b.onclick=()=>b.parentElement.remove());
     $('#saveContact').onclick=saveContact;
     const cm=$('#clearMsgs'); if(cm) cm.onclick=()=>{ const ch=DB.chats.find(x=>x.type==='private'&&x.memberIds[0]===route.edit.id);
@@ -14439,8 +14510,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-30 · 3.78 · 第 89 轮';
-const BUILD_CODE=89;
+const BUILD='2026-10-30 · 3.79 · 第 90 轮';
+const BUILD_CODE=90;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -16776,11 +16847,11 @@ function sheetWbDetail(pid){
       const cid=el.dataset.wbopenuser;
       pushSheetBack(function(){ sheetWbUser(cid); },function(){ sheetWbDetail(pid); });
     }; });
-    $$('#sheetBox [data-trend]').forEach(function(el){ el.onclick=function(){ sheetTrend(el.dataset.trend); }; });
+    $$('#sheetBox [data-trend]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); pushSheetBack(function(){ sheetTrend(el.dataset.trend); },function(){ sheetWbDetail(pid); }); }; });
     $$('#sheetBox [data-wbd-reply]').forEach(function(el){ el.onclick=function(){ const c=all[Number(el.dataset.wbdReply)]; if(!c) return; replyTo=c.name; const i=$('#wbd_input'); if(i){ i.placeholder='回复 @'+replyTo; i.focus(); } }; });
     $$('#sheetBox [data-wbd-del]').forEach(function(el){ el.onclick=function(){ const i=Number(el.dataset.wbdDel); if(i>=0){ all.splice(i,1); save(); if(route.name==='weibo') render(); draw(); } }; });
     $$('#sheetBox [data-wbd-like]').forEach(function(el){ el.onclick=function(){ const c=all[Number(el.dataset.wbdLike)]; if(!c) return; c.likes=(Number(c.likes)||0)+1; save(); draw(); }; });
-    $$('#sheetBox [data-wbdact]').forEach(function(el){ el.onclick=function(){ const k=el.dataset.wbdact; if(k==='repost'){ sheetWbRepost(pid); } else if(k==='cmt'){ const i=$('#wbd_input'); if(i) i.focus(); } else if(k==='like'){ wbToggleLike(pid); draw(); } }; });
+    $$('#sheetBox [data-wbdact]').forEach(function(el){ el.onclick=function(){ const k=el.dataset.wbdact; if(k==='repost'){ pushSheetBack(function(){ sheetWbRepost(pid); },function(){ sheetWbDetail(pid); }); } else if(k==='cmt'){ const i=$('#wbd_input'); if(i) i.focus(); } else if(k==='like'){ wbToggleLike(pid); draw(); } }; });
     $('#wbd_go').onclick=async function(){
       const t=String($('#wbd_input').value||'').trim(); if(!t) return;
       all.push({id:uid(),name:wbMeName(),text:t,likes:0,by:'me',replyTo:replyTo,ts:Date.now()});
