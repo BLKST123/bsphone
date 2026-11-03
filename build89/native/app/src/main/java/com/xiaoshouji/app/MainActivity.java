@@ -5,9 +5,12 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.Insets;
 import android.graphics.Rect;
 import android.net.Uri;
 import android.os.Build;
@@ -17,8 +20,12 @@ import android.provider.MediaStore;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebResourceResponse;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowInsets;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
+import android.view.WindowMetrics;
+import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
@@ -53,7 +60,7 @@ public class MainActivity extends Activity {
     private NativeHttp nativeHttp;
     private ValueCallback<Uri[]> filePathCallback;
     private boolean appVisible = true;
-    private boolean immersive = true;
+    private boolean immersive = false;
     private volatile int keyboardHeight = 0;
     private final Map<String, NativeRequest> nativeRequests = new ConcurrentHashMap<>();
     private final AtomicLong nativeRequestSequence = new AtomicLong();
@@ -62,7 +69,8 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-        applyImmersive(true);
+        configureDisplayCutout();
+        applyImmersive(false);
 
         webView = new WebView(this);
         webView.setBackgroundColor(0xFFFFFFFF);
@@ -178,11 +186,18 @@ public class MainActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        if (webView != null && webView.canGoBack()) {
-            webView.goBack();
+        if (hideKeyboardIfVisible()) return;
+        if (webView == null) {
+            moveTaskToBack(true);
             return;
         }
-        moveTaskToBack(true);
+        webView.evaluateJavascript(
+                "(function(){try{return !!(window.BSAndroidBack&&window.BSAndroidBack());}catch(e){return false;}})()",
+                value -> {
+                    if ("true".equals(value)) return;
+                    if (webView != null && webView.canGoBack()) webView.goBack();
+                    else moveTaskToBack(true);
+                });
     }
 
     @Override
@@ -216,11 +231,48 @@ public class MainActivity extends Activity {
                 "window.dispatchEvent(new CustomEvent('nativepermissionchange',{detail:" + granted + "}));", null));
     }
 
+    private boolean hideKeyboardIfVisible() {
+        if (keyboardHeight <= 0 || webView == null) return false;
+        try {
+            InputMethodManager input = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
+            if (input != null) input.hideSoftInputFromWindow(webView.getWindowToken(), 0);
+            webView.clearFocus();
+            return true;
+        } catch (Exception ignored) {
+            return false;
+        }
+    }
+
+    private void configureDisplayCutout() {
+        WindowManager.LayoutParams attrs = getWindow().getAttributes();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            attrs.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_ALWAYS;
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            attrs.layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
+        }
+        getWindow().setAttributes(attrs);
+    }
+
     private void applyImmersive(boolean enabled) {
         immersive = enabled;
         runOnUiThread(() -> {
+            Window window = getWindow();
             View decor = getWindow().getDecorView();
-            if (enabled) {
+            window.setStatusBarColor(Color.TRANSPARENT);
+            window.setNavigationBarColor(Color.TRANSPARENT);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                window.setDecorFitsSystemWindows(!enabled);
+                WindowInsetsController controller = window.getInsetsController();
+                if (controller != null) {
+                    if (enabled) {
+                        controller.hide(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+                        controller.setSystemBarsBehavior(WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
+                    } else {
+                        controller.show(WindowInsets.Type.statusBars() | WindowInsets.Type.navigationBars());
+                        controller.setSystemBarsBehavior(WindowInsetsController.BEHAVIOR_DEFAULT);
+                    }
+                }
+            } else if (enabled) {
                 decor.setSystemUiVisibility(
                         View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                                 | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
@@ -231,6 +283,9 @@ public class MainActivity extends Activity {
             } else {
                 decor.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE);
             }
+            decor.setFitsSystemWindows(!enabled);
+            if (webView != null) webView.setFitsSystemWindows(!enabled);
+            decor.requestApplyInsets();
         });
     }
 
@@ -398,6 +453,27 @@ public class MainActivity extends Activity {
             try {
                 String safe = String.valueOf(name == null ? "BS小手机备份.txt" : name)
                         .replace('/', '_').replace('\\', '_');
+                String safeMime = mime == null || mime.trim().isEmpty() ? "application/octet-stream" : mime;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, safe);
+                    values.put(MediaStore.MediaColumns.MIME_TYPE, safeMime);
+                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/BS小手机");
+                    values.put(MediaStore.MediaColumns.IS_PENDING, 1);
+                    Uri uri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+                    if (uri == null) return "ERROR:无法创建下载文件";
+                    try (OutputStream output = getContentResolver().openOutputStream(uri, "w")) {
+                        if (output == null) return "ERROR:无法打开下载文件";
+                        output.write(String.valueOf(text == null ? "" : text).getBytes(StandardCharsets.UTF_8));
+                        output.flush();
+                    }
+                    ContentValues done = new ContentValues();
+                    done.put(MediaStore.MediaColumns.IS_PENDING, 0);
+                    getContentResolver().update(uri, done, null, null);
+                    String shown = "Downloads/BS小手机/" + safe;
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "已导出到 " + shown, Toast.LENGTH_LONG).show());
+                    return shown;
+                }
                 File root = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
                 if (root == null) root = getFilesDir();
                 File dir = new File(root, "BS小手机");
@@ -421,8 +497,47 @@ public class MainActivity extends Activity {
         }
 
         @JavascriptInterface
-        public void setFullscreen(boolean enabled) {
+        public boolean setFullscreen(boolean enabled) {
             applyImmersive(enabled);
+            return true;
+        }
+
+        @JavascriptInterface
+        public String getFullscreenStatus() {
+            try {
+                JSONObject out = new JSONObject();
+                View decor = getWindow().getDecorView();
+                int[] decorLocation = new int[2];
+                int[] webLocation = new int[2];
+                decor.getLocationOnScreen(decorLocation);
+                out.put("enabled", immersive);
+                out.put("decorTop", decorLocation[1]);
+                int screenHeight = decor.getHeight();
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    WindowMetrics metrics = getWindowManager().getCurrentWindowMetrics();
+                    Rect bounds = metrics.getBounds();
+                    screenHeight = bounds.height();
+                    Insets status = metrics.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.statusBars());
+                    Insets nav = metrics.getWindowInsets().getInsetsIgnoringVisibility(WindowInsets.Type.navigationBars());
+                    out.put("statusBarInset", status.top);
+                    out.put("navigationBarInset", nav.bottom);
+                    WindowInsets rootInsets = decor.getRootWindowInsets();
+                    out.put("statusBarVisible", rootInsets != null && rootInsets.isVisible(WindowInsets.Type.statusBars()));
+                    out.put("navigationBarVisible", rootInsets != null && rootInsets.isVisible(WindowInsets.Type.navigationBars()));
+                }
+                out.put("screenHeight", screenHeight);
+                if (webView != null) {
+                    webView.getLocationOnScreen(webLocation);
+                    out.put("webTop", webLocation[1]);
+                    out.put("webHeight", webView.getHeight());
+                } else {
+                    out.put("webTop", -1);
+                    out.put("webHeight", 0);
+                }
+                return out.toString();
+            } catch (Exception error) {
+                return "{\"enabled\":" + immersive + ",\"error\":\"" + error.getClass().getSimpleName() + "\"}";
+            }
         }
     }
 

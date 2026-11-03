@@ -1,0 +1,60 @@
+:root{
+  --bs-grid:4px;
+  --bs-space-1:4px;
+  --bs-space-2:8px;
+  --bs-space-3:12px;
+  --bs-space-4:16px;
+  --bs-space-5:20px;
+  --bs-space-6:24px;
+  --bs-space-7:32px;
+  --bs-space-8:40px;
+  --bs-space-9:48px;
+  --bs-space-10:56px;
+  --bs-space-11:64px;
+  --bs-page-inline:16px;
+  --bs-page-block:16px;
+  --bs-nav-height:48px;
+  --bs-tabbar-height:56px;
+  --bs-touch-target:44px;
+  --bs-control-height:44px;
+  --bs-primary-button-height:48px;
+  --bs-list-row-min:64px;
+  --bs-avatar-sm:36px;
+  --bs-avatar-md:40px;
+  --bs-avatar-lg:48px;
+  --bs-radius-control:14px;
+  --bs-radius-button:15px;
+  --bs-radius-card:18px;
+  --bs-radius-sheet:24px;
+  --bs-font-large-title:calc(18px * var(--ui-font-scale,1));
+  --bs-font-page-title:calc(17px * var(--ui-font-scale,1));
+  --bs-font-body:calc(14px * var(--ui-font-scale,1));
+  --bs-font-caption:calc(11px * var(--ui-font-scale,1));
+  --bs-font-tab:calc(12px * var(--ui-font-scale,1));
+  --bs-font-weight-bold:700;
+  --bs-font-weight-semibold:600;
+  --bs-safe-left:env(safe-area-inset-left,0px);
+  --bs-safe-right:env(safe-area-inset-right,0px);
+  --bs-safe-top:env(safe-area-inset-top,0px);
+  --bs-safe-bottom:env(safe-area-inset-bottom,0px);
+  --bs-motion-page:320ms;
+  --bs-motion-sheet:280ms;
+  --bs-motion-press:100ms;
+  --bs-motion-feedback:180ms;
+  --bs-ease-standard:cubic-bezier(.22,1,.36,1);
+  --bs-surface:var(--card);
+  --bs-text-primary:var(--fg);
+  --bs-text-secondary:var(--fg2);
+  --bs-accent:var(--accent);
+  --bs-danger:var(--danger);
+  --bs-warning:#ff9500;
+  --bs-success:#188652;
+}
+
+.bs-touch-target{min-width:var(--bs-touch-target);min-height:var(--bs-touch-target);display:inline-flex;align-items:center;justify-content:center}
+.bs-safe-inline{padding-left:calc(var(--bs-page-inline) + var(--bs-safe-left));padding-right:calc(var(--bs-page-inline) + var(--bs-safe-right))}
+.bs-card-surface{background:var(--bs-surface);border-radius:var(--bs-radius-card);padding:var(--bs-space-4)}
+.bs-primary-action{min-height:var(--bs-primary-button-height);border-radius:var(--bs-radius-button)}
+.bs-secondary-action{min-height:var(--bs-control-height);border-radius:var(--bs-radius-control)}
+.bs-page-title{font-size:var(--bs-font-page-title);font-weight:var(--bs-font-weight-semibold);line-height:1.25;letter-spacing:0}
+.bs-body-copy{font-size:var(--bs-font-body);line-height:1.5}

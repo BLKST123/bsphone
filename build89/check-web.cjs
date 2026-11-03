@@ -15,10 +15,17 @@ for (const ref of new Set(localRefs)) {
 }
 for (const required of [
   "core/store/core-store.js",
-  "core/store/readonly-store.js"
+  "core/store/readonly-store.js",
+  "core/prompts/sysworld-v2.js"
 ]) {
   assert.ok(fs.existsSync(path.join(publicRoot, required)), `missing store file: ${required}`);
 }
+const tokensSource = path.resolve(__dirname, "..", "core", "design", "tokens.json");
+assert.ok(fs.existsSync(tokensSource), "missing design tokens source");
+const tokens = JSON.parse(fs.readFileSync(tokensSource, "utf8"));
+assert.equal(tokens.meta.grid, 4, "design grid must remain 4pt based");
+assert.equal(tokens.layout.navHeight, 48, "navigation height token mismatch");
+assert.equal(tokens.layout.touchTarget, 44, "touch target token mismatch");
 const scripts = [...html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi)]
   .map((match) => match[1])
   .filter((code) => code.trim());
@@ -35,11 +42,11 @@ for (const marker of [
   "window.BSNativeHttp",
   "nativeHttpAvailable()",
   "chatTextFromResponse",
-  "const BUILD_CODE=89",
   "window.BSBootAssertions"
 ]) {
   if (!html.includes(marker)) throw new Error(`missing marker: ${marker}`);
 }
+if (!/const BUILD_CODE=\d+/.test(html)) throw new Error("missing marker: BUILD_CODE");
 const normBaseSource = html.match(/function normBase\(u\)\{[\s\S]*?\n\}/)?.[0];
 const isVersionedSource = html.match(/function isVersioned\(b\)\{[\s\S]*?\n\}/)?.[0];
 const chatCandidatesSource = html.match(/function chatCandidates\(base\)\{[\s\S]*?\n\}/)?.[0];

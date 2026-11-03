@@ -5,7 +5,7 @@ const crypto = require('node:crypto');
 const root = path.resolve(__dirname, '..');
 const source = root;
 const target = path.join(__dirname, 'native', 'app', 'src', 'main', 'assets', 'public');
-const files = [
+const requiredFiles = [
   'index.html',
   'sw.js',
   'version.json',
@@ -13,8 +13,16 @@ const files = [
   'icon-192.png',
   'icon-512.png',
   'core/store/core-store.js',
-  'core/store/readonly-store.js'
+  'core/store/readonly-store.js',
+  'core/prompts/sysworld-v2.js'
 ];
+const sourceHtmlText = fs.readFileSync(path.join(source, 'index.html'), 'utf8');
+const referencedFiles = [...sourceHtmlText.matchAll(/(?:src|href)=["']([^"']+)["']/gi)]
+  .map(match => match[1].trim())
+  .filter(ref => ref && !/^(?:data:|blob:|https?:|javascript:|#)/i.test(ref))
+  .map(ref => decodeURIComponent(ref.split(/[?#]/)[0]))
+  .filter(Boolean);
+const files = [...new Set(requiredFiles.concat(referencedFiles))];
 
 for (const relative of files) {
   const from = path.join(source, relative);
@@ -34,5 +42,6 @@ console.log(JSON.stringify({
   files: files.length,
   indexBytes: targetHtml.length,
   indexSha256: hash(targetHtml),
-  storeFiles: files.filter(file => file.startsWith('core/store/'))
+  storeFiles: files.filter(file => file.startsWith('core/store/')),
+  promptFiles: files.filter(file => file.startsWith('core/prompts/'))
 }, null, 2));

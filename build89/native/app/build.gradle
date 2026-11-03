@@ -9,8 +9,8 @@ android {
     applicationId "com.xiaoshouji.app"
     minSdk 22
     targetSdk 34
-    versionCode 89
-    versionName "3.78"
+    versionCode 90
+    versionName "3.79"
   }
 
   buildTypes {
