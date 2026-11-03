@@ -3,8 +3,8 @@
   "versionCode": 90,
   "round": 90,
   "releasedAt": "2026-11-03",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=90-r2",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=90-r3",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "cacheKey": "bsphone-v90-20261103-r2",
-  "notes": "3.79 Build90 打回复检：原生全屏、系统返回、P1 生成链路与清空确认闭环；网页导航改为网络优先，静态资源保留离线缓存。"
+  "cacheKey": "bsphone-v90-20261103-r3",
+  "notes": "3.79 Build90 会话分组：默认分组、多标签过滤、长按会话菜单与移动分组；原生全屏、系统返回、P1 生成链路和缓存同步保留。"
 }
