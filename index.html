@@ -20380,6 +20380,11 @@ window.addEventListener('bs:core-store-change',function(e){
   try{ scheduleCoreStoreRefresh(e.detail||{}); }catch(err){ logErr('Store刷新失败：'+err.message); }
 });
 window.setInterval(function(){ try{ takeoutTickOrders(); }catch(e){ logErr('外卖状态轮询失败：'+e.message); } },3000);
+if('serviceWorker' in navigator && !window.NativeDisplay && (location.protocol==='https:'||['localhost','127.0.0.1'].indexOf(location.hostname)>=0)){
+  window.addEventListener('load',function(){
+    navigator.serviceWorker.register('./sw.js').catch(function(e){ logErr('离线缓存注册失败：'+e.message); });
+  },{once:true});
+}
 </script>
 <script src="./core/store/readonly-store.js"></script>
 <script>

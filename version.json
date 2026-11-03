@@ -2,8 +2,9 @@
   "version": "3.79",
   "versionCode": 90,
   "round": 90,
-  "releasedAt": "2026-10-30",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=90",
+  "releasedAt": "2026-11-03",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=90-r2",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "notes": "真机复检修复：聊天输入条跟随键盘缩短、系统返回键逐级处理、旧快照与旧记忆迁移、微博二级弹层返回栈；保留手动外卖同步方案和 3.78 全部修复。"
+  "cacheKey": "bsphone-v90-20261103-r2",
+  "notes": "3.79 Build90 打回复检：原生全屏、系统返回、P1 生成链路与清空确认闭环；网页导航改为网络优先，静态资源保留离线缓存。"
 }
