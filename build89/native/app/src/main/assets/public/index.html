@@ -2291,6 +2291,12 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
   padding-right:calc(var(--safe-right) + var(--page-gutter));
   border-radius:0;
 }
+.lrow[data-openchat]{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
+.chatwrap.chat-wall{background-size:cover;background-position:center;background-repeat:no-repeat}
+#sheetBox.chatgroup-sheet{height:66dvh;min-height:66dvh;max-height:66dvh;overflow-y:auto}
+.cg-icon{width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex:none}
+.cg-color{width:44px;height:44px;border-radius:50%;border:2px solid transparent;padding:0;cursor:pointer}
+.cg-iconbtn{width:44px;height:44px;min-width:44px;border-radius:12px;border:1px solid var(--line);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 </style>
 <link rel="stylesheet" href="./core/design/shell.css">
 <style id="userCustomCss"></style>
@@ -2454,14 +2460,20 @@ function viewGroups(){
   return store?store.selectors.selectGroups():(DB.groups||[]);
 }
 function viewChatGroups(){
-  return Array.isArray(DB.chatGroups)?DB.chatGroups:(DB.chatGroups=[]);
+  const all=Array.isArray(DB.chatGroups)?DB.chatGroups:(DB.chatGroups=[]);
+  const personaId=(DB.me&&DB.me.personaId)||null;
+  return all.filter(function(g){ return g.id==='all'||!g.personaId||g.personaId===personaId; });
 }
 function chatGroupById(id){
   return viewChatGroups().find(function(g){ return g.id===id; })||viewChatGroups().find(function(g){ return g.id==='all'; })||null;
 }
+function chatGroupSelectionId(){
+  const current=chatGroupById(DB.ui&&DB.ui.chatGroup);
+  return current?current.id:'all';
+}
 function viewChatsInGroup(id){
   const all=viewChats();
-  const groupId=id||(DB.ui&&DB.ui.chatGroup)||'all';
+  const groupId=id||chatGroupSelectionId();
   if(groupId==='all') return all;
   return all.filter(function(ch){ return Array.isArray(ch.groupIds)&&ch.groupIds.indexOf(groupId)>=0; });
 }
@@ -2736,6 +2748,8 @@ function fixAll(){
     g.name=String(g.name||'未命名分组').slice(0,24);
     g.color=String(g.color||'#8e8e93');
     g.icon=String(g.icon||'users');
+    g.note=String(g.note||'').slice(0,120);
+    if(g.id!=='all'&&!g.personaId) g.personaId=(DB.me&&DB.me.personaId)||null;
     if(g.id==='all') g.builtin=true;
   });
   DB.ui=DB.ui||{};
@@ -3559,7 +3573,7 @@ function pushSheetBack(open,back){
   if($('#sheet').classList.contains('on')&&typeof back==='function') sheetBackStack.push(back);
   try{ open(); }catch(e){ if(sheetBackStack.length) sheetBackStack.pop(); throw e; }
 }
-function sheet(html){ const b=$('#sheetBox'); const sh=$('#sheet'); b.classList.remove('sm','full','fixed','wbuser-full','wbd-detail','npg-sheet'); sh.classList.remove('fullsheet','wbd-detail-sheet'); sh.style.background=''; sh.style.backgroundImage=''; sh.style.backgroundColor=''; sh.style.backgroundSize=''; sh.style.backgroundPosition=''; sh.style.backgroundRepeat=''; b.innerHTML=html; sh.classList.add('on'); enhanceEditors(b); bindRegen(b); syncGlobalBack(); }
+function sheet(html){ const b=$('#sheetBox'); const sh=$('#sheet'); b.classList.remove('sm','full','fixed','wbuser-full','wbd-detail','npg-sheet','chatgroup-sheet'); sh.classList.remove('fullsheet','wbd-detail-sheet'); sh.style.background=''; sh.style.backgroundImage=''; sh.style.backgroundColor=''; sh.style.backgroundSize=''; sh.style.backgroundPosition=''; sh.style.backgroundRepeat=''; b.innerHTML=html; sh.classList.add('on'); enhanceEditors(b); bindRegen(b); syncGlobalBack(); }
 function sheetFull(html){ sheet(html); $('#sheetBox').classList.add('full'); $('#sheet').classList.add('fullsheet'); }
 function sheetFixed(html){ sheet(html); $('#sheetBox').classList.add('full','fixed'); }
 function sheetSmall(html){ sheet(html); $('#sheetBox').classList.add('sm'); }
@@ -3575,7 +3589,7 @@ function sheetPageBackground(key){
   sh.style.backgroundRepeat='no-repeat';
   return true;
 }
-function hideSheetDom(){ $('#sheet').classList.remove('on','fullsheet'); syncGlobalBack(); }
+function hideSheetDom(){ $('#sheet').classList.remove('on','fullsheet'); document.querySelectorAll('[data-openchat],[data-cgselect]').forEach(function(el){ el._bsLongPress=false; el._bsGroupLongPress=false; }); syncGlobalBack(); }
 function closeSheetAll(){ sheetBackStack.length=0; hideSheetDom(); const box=$('#sheetBox'); if(box) box.innerHTML=''; }
 function closeSheet(){
   const back=sheetBackStack.pop();
@@ -4927,6 +4941,21 @@ function bindChatRowMenu(el){
   el.addEventListener('pointercancel',cancel);
   el.addEventListener('pointerleave',cancel);
 }
+function bindChatGroupRowMenu(el){
+  if(!el||el.dataset.groupMenuBound==='1') return;
+  el.dataset.groupMenuBound='1';
+  let timer=null,startX=0,startY=0;
+  const cancel=function(){ if(timer){ clearTimeout(timer); timer=null; } };
+  el.addEventListener('contextmenu',function(e){ e.preventDefault(); });
+  el.addEventListener('pointerdown',function(e){
+    if(e.button!==undefined&&e.button!==0) return;
+    if(e.target.closest('[data-cgedit]')) return;
+    cancel(); startX=e.clientX; startY=e.clientY;
+    timer=setTimeout(function(){ timer=null; el._bsGroupLongPress=true; pushSheetBack(function(){ sheetChatGroupEditor(el.dataset.cgselect); },function(){ sheetChatGroups(); }); },500);
+  },{passive:true});
+  el.addEventListener('pointermove',function(e){ if(timer&&(Math.abs(e.clientX-startX)>8||Math.abs(e.clientY-startY)>8)) cancel(); },{passive:true});
+  el.addEventListener('pointerup',cancel); el.addEventListener('pointercancel',cancel); el.addEventListener('pointerleave',cancel);
+}
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
@@ -5527,35 +5556,56 @@ function ensureDefaultGroup(){
 const CHAT_GROUP_COLORS=['#8e8e93','#ff3b30','#ff9500','#ffcc00','#34c759','#00c7be','#5856d6','#af52de'];
 const CHAT_GROUP_ICONS=['users','home','heart','star','book','music','pin','bell','wrench','sparkles','globe','smile'];
 function chatGroupIcon(g){ return g&&CHAT_GROUP_ICONS.indexOf(g.icon)>=0?g.icon:'users'; }
+function openChatGroupSheet(html){
+  sheet(html);
+  const box=$('#sheetBox');
+  if(box) box.classList.add('chatgroup-sheet');
+}
+function confirmChatGroupDelete(id){
+  const g=chatGroupById(id);
+  if(!g||g.id==='all') return;
+  sheetSmall('<h3>解散「'+esc(g.name)+'」？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">只会删除这个分组标签，聊天记录、会话、备注和默认分组都不会被删除。</div><button class="btn danger full" id="cgDeleteYes">确认解散</button><button class="btn full" id="cgDeleteNo">取消</button>');
+  $('#cgDeleteNo').onclick=function(){ sheetChatGroupEditor(id); };
+  $('#cgDeleteYes').onclick=function(){
+    DB.chatGroups=(DB.chatGroups||[]).filter(function(group){ return group.id!==id; });
+    (DB.chats||[]).forEach(function(ch){ if(Array.isArray(ch.groupIds)&&ch.groupIds.indexOf(id)>=0) patchChatGroupIds(ch,ch.groupIds.filter(function(x){ return x!==id; })); });
+    if(DB.ui.chatGroup===id) DB.ui.chatGroup='all';
+    save(); closeSheet(); render(); toast('分组已解散，聊天记录仍保留');
+  };
+}
 function sheetChatGroups(){
   const draw=function(){
-    const current=chatGroupById(DB.ui&&DB.ui.chatGroup)||chatGroupById('all');
-    sheetBig('<h3>会话分组</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。</div>'
+    const current=chatGroupById(chatGroupSelectionId())||chatGroupById('all');
+    openChatGroupSheet('<h3>会话分组</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。</div>'
       +viewChatGroups().map(function(g){
         const active=current&&current.id===g.id;
-        return '<div class="lrow" data-cgselect="'+esc(g.id)+'"'+(active?' style="background:color-mix(in srgb,var(--deep) 8%,transparent)"':'')+'><span style="width:12px;height:12px;border-radius:50%;background:'+esc(g.color||'#8e8e93')+';display:inline-block;flex:none"></span><div class="mi"><div class="t1">'+esc(g.name)+'</div><div class="t2">'+chatGroupCount(g.id)+' 个会话'+(g.id==='all'?' · 全部会话':'')+'</div></div><div class="rt"><button class="ic2" data-cgedit="'+esc(g.id)+'" title="编辑分组">'+ic('pen',17)+'</button>'+(active?'<span class="chev">✓</span>':'<span class="chev">›</span>')+'</div></div>';
+        return '<div class="lrow" data-cgselect="'+esc(g.id)+'"'+(active?' style="background:color-mix(in srgb,var(--deep) 8%,transparent)"':'')+'><span class="cg-icon" style="background:'+esc(g.color||'#8e8e93')+'">'+ic(chatGroupIcon(g),17)+'</span><div class="mi"><div class="t1">'+esc(g.name)+'</div><div class="t2">'+chatGroupCount(g.id)+' 个会话'+(g.id==='all'?' · 全部会话':'')+(g.note?' · '+esc(g.note):'')+'</div></div><div class="rt"><button class="ic2" data-cgedit="'+esc(g.id)+'" title="编辑分组">'+ic('pen',17)+'</button>'+(active?'<span class="chev">✓</span>':'<span class="chev">›</span>')+'</div></div>';
       }).join('')
+      +(current&&current.id!=='all'?'<button class="btn danger full" id="cgDisband">解散当前会话分组</button>':'')
       +'<button class="btn primary full" id="cgNew" style="margin-top:10px">＋ 新建会话分组</button><button class="btn full" id="cgClose">关闭</button>');
-    $$('#sheetBox [data-cgselect]').forEach(function(el){ el.onclick=function(ev){ if(ev.target.closest('[data-cgedit]')) return; DB.ui.chatGroup=el.dataset.cgselect; save(); closeSheet(); render(); }; });
-    $$('#sheetBox [data-cgedit]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); sheetChatGroupEditor(el.dataset.cgedit); }; });
-    $('#cgNew').onclick=function(){ sheetChatGroupEditor(null); };
+    $$('#sheetBox [data-cgselect]').forEach(function(el){ el.onclick=function(ev){ if(ev.target.closest('[data-cgedit]')||el._bsGroupLongPress){ el._bsGroupLongPress=false; return; } DB.ui.chatGroup=el.dataset.cgselect; save(); closeSheet(); render(); }; bindChatGroupRowMenu(el); });
+    $$('#sheetBox [data-cgedit]').forEach(function(el){ el.onclick=function(ev){ ev.stopPropagation(); pushSheetBack(function(){ sheetChatGroupEditor(el.dataset.cgedit); },function(){ sheetChatGroups(); }); }; });
+    $('#cgNew').onclick=function(){ pushSheetBack(function(){ sheetChatGroupEditor(null); },function(){ sheetChatGroups(); }); };
+    const disband=$('#cgDisband'); if(disband) disband.onclick=function(){ confirmChatGroupDelete(current.id); };
     $('#cgClose').onclick=closeSheet;
   };
   draw();
 }
 function sheetChatGroupEditor(id){
   const existing=id?chatGroupById(id):null;
-  const state={id:existing?existing.id:'cg_'+uid(),name:existing?existing.name:'',color:existing?existing.color:'#8e8e93',icon:existing?chatGroupIcon(existing):'users',builtin:!!(existing&&existing.builtin)};
+  const state={id:existing?existing.id:'cg_'+uid(),name:existing?existing.name:'',note:existing?existing.note||'':'',color:existing?existing.color:'#8e8e93',icon:existing?chatGroupIcon(existing):'users',builtin:!!(existing&&existing.builtin),personaId:(existing&&existing.personaId)||(DB.me&&DB.me.personaId)||null};
   const draw=function(){
-    sheetBig('<h3>'+(existing?'编辑会话分组':'新建会话分组')+'</h3>'
+    openChatGroupSheet('<h3>'+(existing?'编辑会话分组':'新建会话分组')+'</h3>'
       +'<input id="cgName" value="'+esc(state.name)+'" placeholder="分组名称" style="margin-bottom:10px">'
-      +'<div class="muted" style="margin:6px 0 8px">颜色</div><div class="wbtips">'+CHAT_GROUP_COLORS.map(function(c){ return '<span class="wbtip" data-cgcolor="'+c+'" style="background:'+c+';min-width:28px;height:28px;color:transparent;'+(state.color===c?'outline:2px solid var(--fg);outline-offset:2px':'')+'">'+c+'</span>'; }).join('')+'</div>'
-      +'<div class="muted" style="margin:12px 0 8px">图标</div><div class="wbtips">'+CHAT_GROUP_ICONS.map(function(k){ return '<button class="wbic" data-cgicon="'+k+'" title="'+k+'" style="'+(state.icon===k?'background:var(--deep);color:#fff':'')+'">'+ic(k,18)+'</button>'; }).join('')+'</div>'
+      +'<input id="cgNote" value="'+esc(state.note)+'" placeholder="分组备注（只在分组详情显示）" style="margin-bottom:10px">'
+      +'<div class="muted" style="margin:6px 0 8px">颜色</div><div class="wbtips">'+CHAT_GROUP_COLORS.map(function(c){ return '<button class="cg-color" data-cgcolor="'+c+'" title="'+c+'" aria-label="选择颜色" style="background:'+c+';'+(state.color===c?'border-color:var(--fg);outline:2px solid var(--fg);outline-offset:2px':'')+'"></button>'; }).join('')+'</div>'
+      +'<div class="muted" style="margin:12px 0 8px">图标</div><div class="wbtips">'+CHAT_GROUP_ICONS.map(function(k){ return '<button class="cg-iconbtn" data-cgicon="'+k+'" title="'+k+'" style="'+(state.icon===k?'background:var(--deep);color:#fff':'')+'">'+ic(k,18)+'</button>'; }).join('')+'</div>'
       +'<button class="btn primary full" id="cgSave">保存</button>'
       +(existing?'<button class="btn full" id="cgMembers">管理会话</button>':'')
       +(existing&&!state.builtin?'<button class="btn danger full" id="cgDelete">解散这个分组</button>':'')
       +'<button class="btn full" id="cgBack">返回分组</button>');
     $('#cgName').oninput=function(){ state.name=String(this.value||''); };
+    $('#cgNote').oninput=function(){ state.note=String(this.value||''); };
     $$('#sheetBox [data-cgcolor]').forEach(function(el){ el.onclick=function(){ state.color=el.dataset.cgcolor; draw(); }; });
     $$('#sheetBox [data-cgicon]').forEach(function(el){ el.onclick=function(){ state.icon=el.dataset.cgicon; draw(); }; });
     $('#cgSave').onclick=function(){
@@ -5564,23 +5614,15 @@ function sheetChatGroupEditor(id){
       const nameConflict=viewChatGroups().some(function(g){ return g.id!==state.id&&g.name===name; });
       if(nameConflict){ toast('已经有同名分组'); return; }
       state.name=name.slice(0,24);
+      state.note=String($('#cgNote').value||'').trim().slice(0,120);
       const group=existing||{id:state.id,builtin:false};
       Object.assign(group,state); group.builtin=!!state.builtin;
       if(!existing) DB.chatGroups.push(group);
-      save(); closeSheet(); sheetChatGroups();
+      save(); if(sheetBackStack.length) closeSheet(); else sheetChatGroups();
     };
-    const members=$('#cgMembers'); if(members) members.onclick=function(){ sheetChatGroupMembers(state.id); };
-    const del=$('#cgDelete'); if(del) del.onclick=function(){
-      sheetSmall('<h3>解散「'+esc(state.name)+'」？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">只会删除这个分组标签，聊天记录、会话、备注和默认分组都不会被删除。</div><button class="btn danger full" id="cgDeleteYes">确认解散</button><button class="btn full" id="cgDeleteNo">取消</button>');
-      $('#cgDeleteNo').onclick=function(){ sheetChatGroupEditor(state.id); };
-      $('#cgDeleteYes').onclick=function(){
-        DB.chatGroups=(DB.chatGroups||[]).filter(function(g){ return g.id!==state.id; });
-        (DB.chats||[]).forEach(function(ch){ if(Array.isArray(ch.groupIds)&&ch.groupIds.indexOf(state.id)>=0) patchChatGroupIds(ch,ch.groupIds.filter(function(x){ return x!==state.id; })); });
-        if(DB.ui.chatGroup===state.id) DB.ui.chatGroup='all';
-        save(); closeSheet(); render(); toast('分组已解散，聊天记录仍保留');
-      };
-    };
-    $('#cgBack').onclick=function(){ sheetChatGroups(); };
+    const members=$('#cgMembers'); if(members) members.onclick=function(){ pushSheetBack(function(){ sheetChatGroupMembers(state.id); },function(){ sheetChatGroupEditor(state.id); }); };
+    const del=$('#cgDelete'); if(del) del.onclick=function(){ confirmChatGroupDelete(state.id); };
+    $('#cgBack').onclick=function(){ if(sheetBackStack.length) closeSheet(); else sheetChatGroups(); };
   };
   draw();
 }
@@ -5588,11 +5630,11 @@ function sheetChatGroupMembers(id){
   const g=chatGroupById(id); if(!g) return;
   const draw=function(){
     const chats=viewChats().slice().sort(function(a,b){ return (b.lastTs||0)-(a.lastTs||0); });
-    sheetBig('<h3>'+esc(g.name)+' · 管理会话</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">'+(g.id==='all'?'默认分组始终包含全部会话，不能移除。':'勾选即加入分组，取消勾选即移出；不会删除聊天记录。')+'</div>'
+    openChatGroupSheet('<h3>'+esc(g.name)+' · 管理会话</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">'+(g.id==='all'?'默认分组始终包含全部会话，不能移除。':'勾选即加入分组，取消勾选即移出；不会删除聊天记录。')+'</div>'
       +(chats.length?chats.map(function(ch){ const on=g.id==='all'||(ch.groupIds||[]).indexOf(g.id)>=0; return '<div class="lrow" data-cgchat="'+esc(ch.id)+'"><div class="mi"><div class="t1">'+esc(chatName(ch))+'</div><div class="t2">'+esc((ch.msgs&&ch.msgs.length?ch.msgs[ch.msgs.length-1].text:'还没有消息'))+'</div></div><div class="rt">'+(g.id==='all'?'<span class="chev">全部</span>':'<span class="chev">'+(on?'✓':'○')+'</span>')+'</div></div>'; }).join(''):'<div class="empty">还没有会话。</div>')
       +'<button class="btn full" id="cgmBack">返回分组</button>');
     $$('#sheetBox [data-cgchat]').forEach(function(el){ el.onclick=function(){ if(g.id==='all') return; const ch=chat(el.dataset.cgchat); if(!ch) return; const ids=Array.isArray(ch.groupIds)?ch.groupIds.slice():[]; const i=ids.indexOf(g.id); if(i>=0) ids.splice(i,1); else ids.push(g.id); patchChatGroupIds(ch,ids); save(); draw(); }; });
-    $('#cgmBack').onclick=function(){ sheetChatGroupEditor(g.id); };
+    $('#cgmBack').onclick=function(){ if(sheetBackStack.length) closeSheet(); else sheetChatGroupEditor(g.id); };
   };
   draw();
 }
@@ -5600,11 +5642,11 @@ function sheetChatGroupPickForChat(ch){
   if(!ch) return;
   const draw=function(){
     const groups=viewChatGroups();
-    sheetBig('<h3>移动到会话分组</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">一个会话可以同时属于多个分组；默认分组始终包含全部会话。</div>'
-      +groups.map(function(g){ const on=g.id==='all'||(ch.groupIds||[]).indexOf(g.id)>=0; return '<div class="lrow" data-cgpchat="'+esc(g.id)+'"><span style="width:12px;height:12px;border-radius:50%;background:'+esc(g.color||'#8e8e93')+';display:inline-block;flex:none"></span><div class="mi"><div class="t1">'+esc(g.name)+'</div><div class="t2">'+chatGroupCount(g.id)+' 个会话'+(g.id==='all'?' · 全部会话':'')+'</div></div><div class="rt"><span class="chev">'+(on?'✓':'○')+'</span></div></div>'; }).join('')
+    openChatGroupSheet('<h3>移动到会话分组</h3><div class="muted" style="margin:0 0 10px;line-height:1.7">一个会话可以同时属于多个分组；默认分组始终包含全部会话。</div>'
+      +groups.map(function(g){ const on=g.id==='all'||(ch.groupIds||[]).indexOf(g.id)>=0; return '<div class="lrow" data-cgpchat="'+esc(g.id)+'"><span class="cg-icon" style="background:'+esc(g.color||'#8e8e93')+'">'+ic(chatGroupIcon(g),17)+'</span><div class="mi"><div class="t1">'+esc(g.name)+'</div><div class="t2">'+chatGroupCount(g.id)+' 个会话'+(g.id==='all'?' · 全部会话':'')+(g.note?' · '+esc(g.note):'')+'</div></div><div class="rt"><span class="chev">'+(on?'✓':'○')+'</span></div></div>'; }).join('')
       +'<button class="btn full" id="cgpChatBack">返回</button>');
     $$('#sheetBox [data-cgpchat]').forEach(function(el){ el.onclick=function(){ const gid=el.dataset.cgpchat; if(gid==='all') return; const ids=(ch.groupIds||[]).slice(); const i=ids.indexOf(gid); if(i>=0) ids.splice(i,1); else ids.push(gid); patchChatGroupIds(ch,ids); save(); draw(); }; });
-    $('#cgpChatBack').onclick=function(){ sheetChatMenu(ch); };
+    $('#cgpChatBack').onclick=function(){ if(sheetBackStack.length) closeSheet(); else sheetChatMenu(ch); };
   };
   draw();
 }
@@ -5650,8 +5692,8 @@ function screenWechat(){
 }
 /* ---- 消息 ---- */
 function wxMsgs(){
-  const current=chatGroupById(DB.ui&&DB.ui.chatGroup);
-  const list=[...viewChatsInGroup(current&&current.id)].sort((a,b)=>(b.lastTs||0)-(a.lastTs||0));
+  const current=chatGroupById(chatGroupSelectionId());
+  const list=[...viewChatsInGroup(current&&current.id)].sort((a,b)=>(Number(!!b.pinned)-Number(!!a.pinned))||((b.lastTs||0)-(a.lastTs||0)));
   return wxTop('微信',clearBtn('wxMsgs')+'<button class="ic2" data-chatgroup="1" title="会话分组">'+ic('users',18)+'</button><button class="ic2" data-act="newchat">＋</button>')
     + (list.length? list.map(chRow).join('') : '<div class="empty">'+(current&&current.id!=='all'?'这个分组里还没有会话':'还没有会话。<br>点右上角 ＋ 发起私聊或群聊。')+'</div>');
 }
@@ -5659,7 +5701,7 @@ function chRow(ch){
   const last=ch.msgs[ch.msgs.length-1];
   const c=viewContact(ch.memberIds[0]);
   return '<div class="lrow" data-openchat="'+ch.id+'">'+ (ch.type==='group'? avBox({icon:'users'}) : avBox(c))
-    +'<div class="mi"><div class="t1">'+esc(chatName(ch))+(ch.source==='soul'?'<span class="soul-source-chip">灵魂匹配</span>':'')+'</div><div class="t2">'+esc(preview(last))+'</div></div>'
+    +'<div class="mi"><div class="t1">'+(ch.pinned?ic('pin',13)+' ':'')+esc(chatName(ch))+(ch.source==='soul'?'<span class="soul-source-chip">灵魂匹配</span>':'')+'</div><div class="t2">'+esc(preview(last))+'</div></div>'
     +'<div class="rt"><div class="tm">'+shortTime(ch.lastTs)+'</div>'+(ch.unread?'<div class="ub">'+(ch.unread>99?'99+':ch.unread)+'</div>':'')+'</div></div>';
 }
 function preview(m){
@@ -6652,6 +6694,18 @@ function sheetChatUsage(chatId){
   }
   $('#chatUsageClose').onclick=closeSheet;
 }
+function sheetChatBackground(ch){
+  if(!ch) return;
+  const pics=(DB.galleryPics||[]).slice().sort(function(a,b){ return (b.ts||0)-(a.ts||0); }).slice(0,30);
+  sheet('<h3>聊天背景</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">背景只对当前会话生效；可以清除恢复默认。</div>'
+    +(pics.length?'<div class="wbpicgrid">'+pics.map(function(p,i){ return '<button class="style-preview" data-chatwall="'+esc(p.url)+'" title="使用这张背景" style="border:0;padding:0;background-image:url(\''+esc(p.url)+'\');background-size:cover;background-position:center"></button>'; }).join('')+'</div>':'<div class="empty" style="padding:12px">相册里还没有可选背景。</div>')
+    +'<label class="btn full" style="display:flex;align-items:center;justify-content:center">从相册选择<input id="chatWallFile" type="file" accept="image/*" style="display:none"></label>'
+    +'<button class="btn full" id="chatWallClear">清除当前聊天背景</button><button class="btn full" id="chatWallClose">取消</button>');
+  $$('#sheetBox [data-chatwall]').forEach(function(el){ el.onclick=function(){ ch.chatWall=el.dataset.chatwall; save(); closeSheet(); render(); toast('聊天背景已更换'); }; });
+  $('#chatWallFile').onchange=function(){ const f=this.files&&this.files[0]; if(!f) return; readImage(f,1400,function(url){ ch.chatWall=url; save(); closeSheet(); render(); toast('聊天背景已更换'); }); };
+  $('#chatWallClear').onclick=function(){ ch.chatWall=''; save(); closeSheet(); render(); toast('聊天背景已恢复默认'); };
+  $('#chatWallClose').onclick=closeSheet;
+}
 function sheetChatMenu(ch){
   if(!ch) return;
   const isGroup=ch.type==='group';
@@ -6672,6 +6726,9 @@ function sheetChatMenu(ch){
     +(isGroup? '' : '<button class="btn full" id="cmPoke">拍一拍后缀</button>')
     +'<button class="btn full" id="cmSettle">连发模式'+(Number(ch.settle)? ('（'+ch.settle+' 秒）'):'（关）')+'</button>'
     +'<button class="btn full" id="cmGroups">移动到会话分组</button>'
+    +'<button class="btn full" id="cmPin">'+(ch.pinned?'取消置顶':'置顶会话')+'</button>'
+    +'<button class="btn full" id="cmReadState">'+(Number(ch.unread||0)>0?'标记为已读':'标记为未读')+'</button>'
+    +'<button class="btn full" id="cmBg">聊天背景</button>'
     +'<button class="btn full" id="cmClear">清空聊天记录</button>'
     +'<button class="btn full danger" id="cmDel">删除这个会话</button>'
     +'<button class="btn full" id="cmCancel">取消</button>');
@@ -6695,7 +6752,10 @@ function sheetChatMenu(ch){
   if(csel) csel.onclick=function(){ closeSheet(); chatSelectionStart(ch); };
   const cpk=$('#cmPoke'); if(cpk) cpk.onclick=()=>{ closeSheet(); sheetPoke(ch); };
   const cst=$('#cmSettle'); if(cst) cst.onclick=()=>{ closeSheet(); sheetSettle(ch); };
-  const cg=$('#cmGroups'); if(cg) cg.onclick=()=>{ closeSheet(); sheetChatGroupPickForChat(ch); };
+  const cg=$('#cmGroups'); if(cg) cg.onclick=()=>{ pushSheetBack(function(){ sheetChatGroupPickForChat(ch); },function(){ sheetChatMenu(ch); }); };
+  const cpin=$('#cmPin'); if(cpin) cpin.onclick=function(){ const store=coreStore(); const next=!ch.pinned; if(store) store.commands.patchChat(ch.id,{pinned:next},{persist:false}); else ch.pinned=next; save(); closeSheet(); render(); toast(next?'会话已置顶':'已取消置顶'); };
+  const cread=$('#cmReadState'); if(cread) cread.onclick=function(){ const store=coreStore(); const next=Number(ch.unread||0)>0?0:1; if(store) store.commands.patchChat(ch.id,{unread:next},{persist:false}); else ch.unread=next; save(); closeSheet(); render(); toast(next?'已标为未读':'已标为已读'); };
+  const cbg=$('#cmBg'); if(cbg) cbg.onclick=function(){ pushSheetBack(function(){ sheetChatBackground(ch); },function(){ sheetChatMenu(ch); }); };
   const au=$('#cmAuto');
   if(au) au.onclick=()=>{
     const next=ch.proactiveOn!==true;
@@ -6947,7 +7007,7 @@ function screenChatRoom(){
   const activeRequest=chatRequestControllers.get(ch.id);
   const normalTitle=chatRoomTitleHTML(ch);
   const typingTitle=activeRequest?'<span class="tip">'+esc((activeRequest.speakerName||'对方')+' 正在输入…')+'</span>':normalTitle;
-  return '<div class="chatwrap">'
+  return '<div class="chatwrap'+(ch.chatWall?' chat-wall':'')+'"'+(ch.chatWall?' style="background-image:url(\''+String(ch.chatWall).replace(/"/g,'%22')+'\')"':'')+'>'
    +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl"'+(activeRequest?' data-orig="'+esc(normalTitle)+'"':'')+'>'+typingTitle+'</div>'
      +'<div class="act">'+chatUsageChipHTML(ch.id)+'<button class="link" id="chMenu">⋯</button></div></div>'
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
@@ -15443,7 +15503,7 @@ async function runCheckupUI(){
   add('本地数据结构', missData.length===0, missData.length? ('异常：'+missData.join('、')) : needData.length+' 项正常');
   const chatGroupList=Array.isArray(DB.chatGroups)?DB.chatGroups:[];
   const chatGroupAll=chatGroupList.find(function(g){ return g.id==='all'&&g.builtin===true; });
-  const chatGroupSelection=DB.ui&&DB.ui.chatGroup;
+  const chatGroupSelection=chatGroupSelectionId();
   const chatGroupBad=chatGroupList.filter(function(g){ return !g.id||!g.name||(!g.builtin&&g.id==='all'); });
   add('会话分组', !!chatGroupAll&&!!chatGroupList.find(function(g){ return g.id===chatGroupSelection; })&&chatGroupBad.length===0, chatGroupList.length+' 个分组 · 当前 '+(chatGroupSelection||'未选择')+' · 默认分组'+(chatGroupAll?'正常':'异常'));
   const exactStates=[['约会',DB.dateBinding],['外卖',DB.takeout&&DB.takeout.binding],['时钟',DB.clock&&DB.clock.binding],['日记',DB.diaryBinding],['出门',DB.outBinding]].map(function(x){ return [x[0],normalizeExactBinding(x[1])]; });
