@@ -4085,6 +4085,71 @@ function contactLongTermMemories(c,personaId,chatId){
     return memory.personaId===personaId;
   });
 }
+function memoryItemUserEdited(item){
+  if(!item) return false;
+  if(item.userEdited===true) return true;
+  return (DB.memoryVersions||[]).some(function(version){ return version&&version.memoryId===item.id&&version.changeType==='user-edited'; });
+}
+function currentMessageIdSet(ch){
+  return new Set(((ch&&ch.msgs)||[]).filter(function(message){ return message&&message.id&&message.status!=='deleted'; }).map(function(message){ return message.id; }));
+}
+function activeTurnBranches(ch){
+  const list=(ch&&ch.msgs)||[];
+  const positions={};
+  list.forEach(function(message,index){ if(message&&message.id) positions[message.id]=index; });
+  const states=ch&&ch.turnBranches||{};
+  const out=[];
+  Object.keys(states).forEach(function(turnId){
+    const state=states[turnId];
+    if(!state||!Array.isArray(state.branches)) return;
+    const branch=state.branches.find(function(item){ return item&&item.id===state.activeBranchId; });
+    if(!branch||!Array.isArray(branch.messages)||!branch.messages.length) return;
+    const indexes=branch.messages.map(function(message){ return message&&positions[message.id]; }).filter(function(index){ return index!==undefined; });
+    if(indexes.length!==branch.messages.length) return;
+    out.push({turnId:String(turnId),branch:branch,start:Math.min.apply(null,indexes)});
+  });
+  return out.sort(function(a,b){ return a.start-b.start; });
+}
+const pendingTurnMemoryContexts=new Map();
+function pendingTurnMemoryForChat(ch){
+  return ch&&pendingTurnMemoryContexts.get(ch.id)||null;
+}
+function currentTurnBranchMemoryIds(ch){
+  const pending=pendingTurnMemoryForChat(ch);
+  if(pending) return new Set((pending.memoryItemIds||[]).map(String));
+  const active=activeTurnBranches(ch);
+  if(!active.length) return null;
+  const ids=new Set();
+  active.forEach(function(entry){ (entry.branch.memoryItemIds||[]).forEach(function(id){ ids.add(String(id)); }); });
+  return ids;
+}
+function currentLegacyMemItems(ch){
+  const pending=pendingTurnMemoryForChat(ch);
+  if(pending) return memoryTextList(pending.legacyMemItems);
+  const active=activeTurnBranches(ch);
+  if(!active.length) return memoryTextList(ch&&ch.mem&&ch.mem.items);
+  const out=[];
+  active.forEach(function(entry){
+    memoryTextList(entry.branch&&entry.branch.legacyMemItems).forEach(function(item){ if(out.indexOf(item)<0) out.push(item); });
+  });
+  return out;
+}
+function autoMemoryIdsForMessages(ch,messages,includeUnsourced){
+  const visible=new Set((Array.isArray(messages)?messages:[]).filter(Boolean).map(function(message){ return message.id; }).filter(Boolean));
+  return (DB.memoryItems||[]).filter(function(item){
+    if(!item||item.sessionId!==ch.id||item.type!=='auto'||item.active===false||(item.status||'active')!=='active') return false;
+    const sources=Array.isArray(item.sourceMessageIds)?item.sourceMessageIds.filter(Boolean):[];
+    if(sources.length) return sources.every(function(id){ return visible.has(id); });
+    return !!includeUnsourced;
+  }).map(function(item){ return item.id; });
+}
+function memoryScopeIdForChat(ch){
+  const pending=pendingTurnMemoryForChat(ch);
+  if(pending) return 'turn:'+pending.turnId+':'+pending.branchId;
+  const active=activeTurnBranches(ch);
+  const latest=active.length?active[active.length-1]:null;
+  return latest?('turn:'+latest.turnId+':'+latest.branch.id):memoryBranchId(ch);
+}
 function memoryContextForCharacter(c,opt){
   const chatId=opt&&opt.chatId||null;
   const ch=chatId?chat(chatId):null;
@@ -4093,8 +4158,10 @@ function memoryContextForCharacter(c,opt){
   const snapshotSafe=!!(ch&&personaId&&!ch.baseMemoryNeedsReview&&ch.baseMemoryPersonaId===personaId);
   const roleLongTerm=memoryTextList(contactLongTermMemories(c,personaId,chatId));
   const sessionSnapshot=snapshotSafe?memoryTextList(ch&&ch.baseMemorySnapshot):[];
-  const sessionDigest=memoryTextList(ch&&ch.mem&&ch.mem.items);
+  const sessionDigest=currentLegacyMemItems(ch);
   const legacyTexts=new Set(roleLongTerm.concat(sessionSnapshot,sessionDigest));
+  const currentMessageIds=currentMessageIdSet(ch);
+  const turnBranchMemoryIds=currentTurnBranchMemoryIds(ch);
   const memorySettings=DB.memorySettings||{};
   const openConflictByMemory=new Set();
   (DB.memoryConflicts||[]).filter(function(conflict){ return conflict&&(conflict.status||'open')==='open'; }).forEach(function(conflict){
@@ -4109,7 +4176,15 @@ function memoryContextForCharacter(c,opt){
     if(item.userPersonaId&&personaId&&item.userPersonaId!==personaId) return false;
     if(item.sessionId&&chatId&&item.sessionId!==chatId) return false;
     if(item.sessionId&&!chatId) return false;
-    if(item.branchId&&chatId&&item.branchId!==branchId) return false;
+    if(item.type!=='auto'&&item.branchId&&chatId&&item.branchId!==branchId) return false;
+    if(item.type==='auto'&&!memoryItemUserEdited(item)){
+      const sources=Array.isArray(item.sourceMessageIds)?item.sourceMessageIds.filter(Boolean):[];
+      if(sources.length){
+        if(!sources.every(function(id){ return currentMessageIds.has(id); })) return false;
+      }else if(turnBranchMemoryIds&&!turnBranchMemoryIds.has(String(item.id))){
+        return false;
+      }
+    }
     const text=String(item.plainText||'').trim();
     return !!text&&!legacyTexts.has(text);
   }).sort(function(a,b){
@@ -4142,7 +4217,7 @@ function regexOf(c, text){
   return out;
 }
 function promptBundleOf(c, other, chatMsgs, opt){
-  const stable=[],semi=[],dynamic=[], me=DB.me||{};
+  const stable=[],semi=[],memory=[],dynamic=[], me=DB.me||{};
   const store=coreStore();
   const v2=window.BSSysWorldV2;
   const fmt=(opt&&opt.format)||'plain';
@@ -4169,12 +4244,12 @@ function promptBundleOf(c, other, chatMsgs, opt){
   if(per) stable.push('【用户的人设（你要当成事实）】'+per);
   else if(personaUnbound) semi.push('【用户人设未绑定】当前会话明确没有绑定用户人设。不要套用全局启用的人设。');
   else if(personaMissing) semi.push('【用户人设缺失】当前绑定的用户人设已不存在。不要猜测或套用其他人设；请提示用户重新绑定。');
-  if(memoryContext.roleLongTerm.length) stable.push('【角色长期记忆（跨会话事实）】\n'+memoryContext.roleLongTerm.map(m=>'- '+m).join('\n'));
-  if(memoryContext.sessionSnapshot.length) semi.push('【当前会话快照记忆】\n'+memoryContext.sessionSnapshot.map(m=>'- '+m).join('\n'));
-  if(memoryContext.sessionDigest.length) semi.push('【当前会话整理记忆】\n'+memoryContext.sessionDigest.map(m=>'- '+m).join('\n'));
-  if(memoryContext.structured.length) semi.push('【记忆中心（过去记忆，不是用户当前发言）】\n'+memoryContext.structured.map(m=>'- '+m).join('\n'));
+  if(memoryContext.roleLongTerm.length) memory.push('【角色长期记忆（跨会话事实）】\n'+memoryContext.roleLongTerm.map(m=>'- '+m).join('\n'));
+  if(memoryContext.sessionSnapshot.length) memory.push('【当前会话快照记忆】\n'+memoryContext.sessionSnapshot.map(m=>'- '+m).join('\n'));
+  if(memoryContext.sessionDigest.length) memory.push('【当前会话整理记忆】\n'+memoryContext.sessionDigest.map(m=>'- '+m).join('\n'));
+  if(memoryContext.structured.length) memory.push('【记忆中心（过去记忆，不是用户当前发言）】\n'+memoryContext.structured.map(m=>'- '+m).join('\n'));
   const reverseContext=(opt&&opt.chatId)?reversePendingContext(opt.chatId):'';
-  if(reverseContext) semi.push(reverseContext);
+  if(reverseContext) memory.push(reverseContext);
   const worldMessages=(memoryContext.chat&&memoryContext.chat.msgs)||chatMsgs||[];
   const worldParts=worldPartsOf(c,worldMessages);
   if(worldParts.always.length) stable.push('【世界设定】\n'+worldParts.always.map(w=>'- '+w).join('\n'));
@@ -4186,7 +4261,7 @@ function promptBundleOf(c, other, chatMsgs, opt){
       contextText:(chatMsgs||[]).map(function(m){ return labelOf(m); }).join('\n'),
       requestId:opt&&opt.requestId||null
     });
-    if(cross) dynamic.push('【同会话跨场景记忆（只按事实使用，不要照搬原话）】\n'+cross);
+    if(cross) memory.push('【同会话跨场景记忆（只按事实使用，不要照搬原话）】\n'+cross);
   }
   if(worldParts.triggered.length) semi.push('【世界设定·本轮触发】\n'+worldParts.triggered.map(w=>'- '+w).join('\n'));
   if(other&&other.length) semi.push('【群聊】群里有：'+other.join('、')+'。你只说自己这一条，不要替别人说话，不要在开头写自己的名字。');
@@ -4205,11 +4280,11 @@ function promptBundleOf(c, other, chatMsgs, opt){
   semi.push('【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。');
   semi.push('【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。');
   dynamic.push('现在的时间是：'+dateCN(opt&&opt.chatId)+' '+hhmm(null,opt&&opt.chatId)+'。');
-  return {stable:stable.join('\n'),semi:semi.join('\n'),dynamic:dynamic.join('\n'),personaId:targetPersonaId,personaMissing:personaMissing,taskType:taskType||null};
+  return {stable:stable.join('\n'),semi:semi.join('\n'),memory:memory.join('\n'),dynamic:dynamic.join('\n'),personaId:targetPersonaId,personaMissing:personaMissing,taskType:taskType||null};
 }
 function promptOf(c, other, chatMsgs, opt){
   const bundle=promptBundleOf(c,other,chatMsgs,opt);
-  return [bundle.stable,bundle.semi,bundle.dynamic].filter(Boolean).join('\n');
+  return [bundle.stable,bundle.semi,bundle.memory,bundle.dynamic].filter(Boolean).join('\n');
 }
 function contextHistory(messages, fallback){
   const list=Array.isArray(messages)?messages:[];
@@ -4258,8 +4333,12 @@ function buildCachedMessages(bundle,history,options){
   if(bundle&&bundle.semi) messages.push({role:'system',content:bundle.semi});
   const trimmed=trimHistoryMessages(history,opts);
   messages.push.apply(messages,trimmed);
+  const memory=bundle&&bundle.memory?String(bundle.memory).trim():'';
+  const dynamicInstruction=String(opts.dynamicInstruction||'').trim();
   const environment=bundle&&bundle.dynamic?String(bundle.dynamic).trim():'';
   const finalUser=String(opts.finalUser||'').trim();
+  if(memory) messages.push({role:'system',content:'[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n'+memory});
+  if(dynamicInstruction) messages.push({role:'system',content:dynamicInstruction});
   if(environment) messages.push({role:'system',content:'[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n'+environment});
   if(finalUser) messages.push({role:'user',content:finalUser});
   return messages;
@@ -6323,9 +6402,21 @@ function turnBranchState(ch,turnId){
 function turnBranchSnapshot(ch,start){
   return jsonSafeCopy((ch.msgs||[]).slice(Math.max(0,Number(start)||0)));
 }
+function turnBranchMemorySnapshot(ch,includeUnsourced,messages){
+  const list=Array.isArray(messages)?messages:(ch.msgs||[]);
+  return {memoryItemIds:autoMemoryIdsForMessages(ch,list,!!includeUnsourced),legacyMemItems:includeUnsourced?jsonSafeCopy((ch.mem&&ch.mem.items)||[]):[]};
+}
+function ensureTurnBranchMemory(ch,branch){
+  if(!branch||typeof branch!=='object') return branch;
+  const original=branch.label==='原始版本';
+  if(!Array.isArray(branch.memoryItemIds)) branch.memoryItemIds=autoMemoryIdsForMessages(ch,branch.messages||[],original);
+  if(!Array.isArray(branch.legacyMemItems)) branch.legacyMemItems=original?jsonSafeCopy((ch.mem&&ch.mem.items)||[]):[];
+  return branch;
+}
 function turnBranchCurrent(ch,turnId,start){
   const state=turnBranchState(ch,turnId);
   const active=state.branches.find(function(branch){ return branch&&branch.id===state.activeBranchId; })||null;
+  state.branches.forEach(function(branch){ ensureTurnBranchMemory(ch,branch); });
   if(active) active.messages=turnBranchSnapshot(ch,start);
   return state;
 }
@@ -6334,6 +6425,7 @@ function chooseTurnBranch(ch,anchor,branchId){
   const state=turnBranchCurrent(ch,info.turnId,info.start);
   const target=state.branches.find(function(branch){ return branch&&branch.id===branchId; });
   if(!target||!Array.isArray(target.messages)) return false;
+  ensureTurnBranchMemory(ch,target);
   state.activeBranchId=target.id;
   const next=(ch.msgs||[]).slice(0,info.start).concat(jsonSafeCopy(target.messages));
   const branchesSnapshot=jsonSafeCopy(ch.turnBranches);
@@ -6377,32 +6469,36 @@ async function regenerateUserTurn(ch,anchor,info){
     busy('正在按整组消息重新生成');
     const state=turnBranchCurrent(ch,info.turnId,info.start);
     if(!state.branches.length){
-      const original={id:'turnbranch_'+uid(),label:'原始版本',createdAt:Date.now(),messages:turnBranchSnapshot(ch,info.start)};
+      const original=Object.assign({id:'turnbranch_'+uid(),label:'原始版本',createdAt:Date.now(),messages:turnBranchSnapshot(ch,info.start)},turnBranchMemorySnapshot(ch,true));
       state.branches.push(original); state.activeBranchId=original.id;
     }
     const newBranchId='turnbranch_'+uid();
     const prefix=(ch.msgs||[]).slice(0,info.start);
     const group=jsonSafeCopy(info.group);
+    const nextPath=prefix.concat(group);
+    pendingTurnMemoryContexts.set(ch.id,{turnId:info.turnId,branchId:newBranchId,memoryItemIds:autoMemoryIdsForMessages(ch,nextPath,false),legacyMemItems:[]});
     const store=coreStore();
     if(store&&store.commands){
-      store.commands.replaceMessages(ch.id,prefix.concat(group),{persist:false});
+      store.commands.replaceMessages(ch.id,nextPath,{persist:false});
       store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches)},{persist:false});
-    }else ch.msgs=prefix.concat(group);
+    }else ch.msgs=nextPath;
     saveNow(); render();
     await aiTurn({chatId:ch.id,silentErrors:true,nudge:'这次是对用户连续消息组「'+info.group.map(labelOf).join(' / ')+'」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'});
     const nextTail=(ch.msgs||[]).slice(info.start);
     if(nextTail.length<=group.length) throw new Error('没有生成新的角色回复');
     const latestState=turnBranchState(ch,info.turnId);
-    latestState.branches.push({id:newBranchId,label:'重新生成 '+(latestState.branches.length),createdAt:Date.now(),messages:jsonSafeCopy(nextTail)});
+    latestState.branches.push(Object.assign({id:newBranchId,label:'重新生成 '+(latestState.branches.length),createdAt:Date.now(),messages:jsonSafeCopy(nextTail)},turnBranchMemorySnapshot(ch,false)));
     latestState.activeBranchId=newBranchId;
+    pendingTurnMemoryContexts.delete(ch.id);
     if(store&&store.commands) store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches),lastTs:Date.now()},{persist:false});
     saveNow(); render(); toast('已重新生成整组，旧内容保留在聊天分支');
   }catch(e){
+    pendingTurnMemoryContexts.delete(ch.id);
     const store=coreStore();
     if(store&&store.commands){ store.commands.replaceMessages(ch.id,beforeMessages,{persist:false}); store.commands.patchChat(ch.id,{turnBranches:beforeBranches},{persist:false}); }
     else{ ch.msgs=beforeMessages; ch.turnBranches=beforeBranches; }
     saveNow(); render(); toast('重新生成失败，已恢复原消息与分支');
-  }finally{ busyDone(); }
+  }finally{ pendingTurnMemoryContexts.delete(ch.id); busyDone(); }
 }function sheetMessageBranches(ch,m){
   if(!ch||!m) return;
   ensureMessageVariant(m);
@@ -6506,11 +6602,21 @@ function memoryItemTimeText(item,ch){
 function memoriesForChat(ch,includeInactive){
   if(!ch) return [];
   const branch=memoryBranchId(ch);
+  const scope=memoryScopeIdForChat(ch);
+  const visible=currentMessageIdSet(ch);
   const charIds=new Set((ch.memberIds||[]).map(String));
   return (DB.memoryItems||[]).filter(function(item){
     if(!item) return false;
     if(!includeInactive&&(item.status==='deleted'||item.status==='archived')) return false;
-    if(item.sessionId&&(item.sessionId!==ch.id||String(item.branchId||'main')!==branch)) return false;
+    if(item.sessionId&&item.sessionId!==ch.id) return false;
+    if(item.sessionId&&item.type==='auto'){
+      const sources=Array.isArray(item.sourceMessageIds)?item.sourceMessageIds.filter(Boolean):[];
+      if(sources.length){
+        if(!sources.every(function(id){ return visible.has(id); })) return false;
+      }else if(!memoryItemUserEdited(item)&&String(item.branchId||'main')!==scope&&String(item.branchId||'main')!==branch){
+        return false;
+      }
+    }else if(item.sessionId&&String(item.branchId||'main')!==branch) return false;
     if(!item.sessionId&&item.charId&&charIds.size&&!charIds.has(String(item.charId))) return false;
     if(!item.sessionId&&!item.charId&&item.userPersonaId&&ch.personaId&&item.userPersonaId!==ch.personaId) return false;
     return true;
@@ -6557,15 +6663,15 @@ function updateMemoryItem(item,patch,changeType){
   if(next.sessionId!==undefined){ item.sessionId=next.sessionId||null; item.branchId=next.sessionId?(next.branchId||'main'):null; }
   if(next.charId!==undefined) item.charId=next.charId||null;
   if(next.userPersonaId!==undefined) item.userPersonaId=next.userPersonaId||null;
-  if(next.plainText!==undefined){ memoryWriteVersion(item,next.plainText,changeType||'user-edited','memory-center'); }
+  if(next.plainText!==undefined){ item.userEdited=true; memoryWriteVersion(item,next.plainText,changeType||'user-edited','memory-center'); }
   else item.updatedAt=Date.now();
   save();
   return item;
 }
 function memoryPendingSelection(ch,options){
   const opt=options||{};
-  const branch=memoryBranchId(ch);
-  const messages=(ch.msgs||[]).filter(function(message){ return message.role!=='sys'&&message.status!=='deleted'&&String(message.branchId||'main')===branch; });
+  const branch=memoryScopeIdForChat(ch);
+  const messages=(ch.msgs||[]).filter(function(message){ return message.role!=='sys'&&message.status!=='deleted'; });
   const cursor=(DB.memoryCursors||[]).find(function(item){ return item&&item.sessionId===ch.id&&String(item.branchId||'main')===branch; });
   let startIndex=0;
   if(opt.mode!=='recent'&&cursor&&cursor.lastSummarizedMessageId){
@@ -6573,6 +6679,17 @@ function memoryPendingSelection(ch,options){
     if(index>=0) startIndex=index+1;
   }else if(opt.mode==='recent'){
     startIndex=Math.max(0,messages.length-Math.max(2,(Number(opt.recentTurns)||10)*4));
+  }else{
+    const positions={};
+    messages.forEach(function(message,index){ positions[message.id]=index; });
+    let lastIndex=-1;
+    (DB.memoryItems||[]).forEach(function(item){
+      if(!item||item.sessionId!==ch.id||item.type!=='auto'||item.active===false||(item.status||'active')!=='active') return;
+      const sources=Array.isArray(item.sourceMessageIds)?item.sourceMessageIds.filter(Boolean):[];
+      if(!sources.length||!sources.every(function(id){ return positions[id]!==undefined; })) return;
+      sources.forEach(function(id){ lastIndex=Math.max(lastIndex,positions[id]); });
+    });
+    if(lastIndex>=0) startIndex=lastIndex+1;
   }
   const selected=messages.slice(startIndex);
   const turnIds=Array.from(new Set(selected.map(function(message){ return message.turnId||message.messageGroupId||message.id; }).filter(Boolean)));
@@ -7679,8 +7796,9 @@ async function aiTurn(opt){
       requestId:requestId
     });
     let sys=promptBundle.semi;
+    let dynamicInstruction='';
     if((ch.msgs||[]).some(function(m){ return m.type==='takeout'; })) sys+='\n【外卖订单识别】同一订单号始终是同一单，后续订单气泡只是配送状态变化，绝不能理解成多件商品或多个订单。不同订单号才是不同订单。订单备注是用户或角色留给你的话，要在回复里自然回应。';
-    if(opt&&opt.nudge) sys+='\n【这次的特别要求】'+opt.nudge;
+    if(opt&&opt.nudge) dynamicInstruction='【这次的特别要求】'+opt.nudge;
     if(proactive){
       proactiveStage=silence&&silence.unanswered===0?0:silence&&silence.unanswered===1?1:2;
       const stage=proactiveStage===0
@@ -7709,7 +7827,7 @@ async function aiTurn(opt){
     const historyForApi=history.slice();
     let finalUserText=proactive?'现在只输出你要主动发给对方的完整一轮微信消息，共 '+want+' 个气泡，每个气泡单独一行，不要等对方回复。':'';
     if(!proactive&&historyForApi.length&&historyForApi[historyForApi.length-1].role==='user') finalUserText=historyForApi.pop().content;
-    const requestMessages=buildCachedMessages({stable:promptBundle.stable,semi:sys,dynamic:promptBundle.dynamic},historyForApi,{finalUser:finalUserText});
+    const requestMessages=buildCachedMessages({stable:promptBundle.stable,semi:sys,memory:promptBundle.memory,dynamic:promptBundle.dynamic},historyForApi,{finalUser:finalUserText,dynamicInstruction:dynamicInstruction});
     const out=await callModel(requestMessages,{signal:requestController.signal,chatId:ch.id,requestId:requestId,task:'chat'});
     let clean=regexOf(speaker, out);
     if(proactive){
