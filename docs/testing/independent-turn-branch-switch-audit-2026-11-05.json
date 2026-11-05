@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-05T09:28:54.020Z",
+  "checkedAt": "2026-11-05T09:37:23.237Z",
   "tests": {
     "freshConsecutiveMessagesRecognized": true,
     "firstSwitchUpdatesDisplayedMessages": true,
@@ -12,16 +12,16 @@
     "freshGroup": {
       "beforeReload": [
         {
-          "id": "mw3cfrgmshn8",
+          "id": "mw3cqoctcl7v",
           "text": "新消息甲",
-          "turnId": "turn_mw3cfrgmelqx",
-          "messageGroupId": "group_mw3cfrgm6gva"
+          "turnId": "turn_mw3cqoct38yf",
+          "messageGroupId": "group_mw3cqoct53h4"
         },
         {
-          "id": "mw3cfrgny93j",
+          "id": "mw3cqoctlr94",
           "text": "新消息乙",
-          "turnId": "turn_mw3cfrgmelqx",
-          "messageGroupId": "group_mw3cfrgm6gva"
+          "turnId": "turn_mw3cqoct38yf",
+          "messageGroupId": "group_mw3cqoct53h4"
         }
       ],
       "confirm": "重新生成这一组？\n将重新打包：\n新消息甲 新消息乙\n\n原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。\n重新生成取消"
@@ -31,17 +31,17 @@
       "ids": [
         "u1",
         "u2",
-        "mw3cft07zglv"
+        "mw3cqpu20si3"
       ],
       "texts": [
         "一组一",
         "一组二",
         "新版回复"
       ],
-      "activeId": "turnbranch_mw3cfsqfph0q",
+      "activeId": "turnbranch_mw3cqpkb9vti",
       "branches": [
         {
-          "id": "turnbranch_mw3cfsqfd172",
+          "id": "turnbranch_mw3cqpkbxp8l",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -57,12 +57,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw3cfsqfph0q",
+          "id": "turnbranch_mw3cqpkb9vti",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw3cft07zglv"
+            "mw3cqpu20si3"
           ],
           "texts": [
             "一组一",
@@ -86,10 +86,10 @@
         "原始回复",
         "原始后续"
       ],
-      "activeId": "turnbranch_mw3cfsqfd172",
+      "activeId": "turnbranch_mw3cqpkbxp8l",
       "branches": [
         {
-          "id": "turnbranch_mw3cfsqfd172",
+          "id": "turnbranch_mw3cqpkbxp8l",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -105,12 +105,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw3cfsqfph0q",
+          "id": "turnbranch_mw3cqpkb9vti",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw3cft07zglv"
+            "mw3cqpu20si3"
           ],
           "texts": [
             "一组一",
@@ -127,17 +127,17 @@
       "ids": [
         "u1",
         "u2",
-        "mw3cft07zglv"
+        "mw3cqpu20si3"
       ],
       "texts": [
         "一组一",
         "一组二",
         "新版回复"
       ],
-      "activeId": "turnbranch_mw3cfsqfph0q",
+      "activeId": "turnbranch_mw3cqpkb9vti",
       "branches": [
         {
-          "id": "turnbranch_mw3cfsqfd172",
+          "id": "turnbranch_mw3cqpkbxp8l",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -153,12 +153,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw3cfsqfph0q",
+          "id": "turnbranch_mw3cqpkb9vti",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw3cft07zglv"
+            "mw3cqpu20si3"
           ],
           "texts": [
             "一组一",
@@ -176,7 +176,7 @@
   "errors": [],
   "ok": true,
   "evidenceMeta": {
-    "checkedAt": "2026-11-05T09:28:57.232Z",
+    "checkedAt": "2026-11-05T09:37:26.043Z",
     "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
     "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
     "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",

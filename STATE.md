@@ -5,17 +5,20 @@
 - 页面：2026-11-05 · 3.81 · 第 92 轮
 - Android：3.81 / versionCode 92
 - Service Worker：`bsphone-v92-20261105-r1`
-- 源码 SHA-256：`0A0E0C3E77BDF22F3C4AD78870D0BBBD1F59263A3248F22504FA45167E941268`
-- Release APK SHA-256：`40E0DDA009DC720A720B61A5DA2B559C2E05F9E694F277A33C5C126486544BCC`
+- 源码提交：`506cc919139ce3060eb1c5b3b9aef04d31a116a0`
+- 源码 SHA-256：`F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4`
+- Debug APK SHA-256：`E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC`
+- Release APK SHA-256：`8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B`
 
 ## 当前阶段
 
-- 连续 user 消息组整组重 roll 已完成返修。
-- P0-1：真实新消息在 pushMsg/core-store 源头生成 turnId/messageGroupId。
-- P0-2：分支切换先更新 activeBranchId，再原子保存消息与分支状态。
-- QA-381-02：环境时间改为 system 环境块，最后一条 user 只包含真实输入。
-- 真机使用实际 touchstart 450ms 长按路径复检通过。
-- 真机 Debug 验证后已覆盖安装回 Release，应用数据保留。
+- 连续 user 消息组整组重 roll 已完成打回重修。
+- 真实 `pushMsg/sendText` 新消息即时生成 `turnId/messageGroupId`。
+- core-store append 增加底层元数据兜底。
+- 分支切换先更新 `activeBranchId`，再保存完整 `turnBranches` 与消息。
+- 环境时间改为 system 环境块，最后一条 user 只包含真实输入。
+- 桌面独立复检、真机实际 touchstart 后等待 520ms（覆盖 450ms 阈值）的长按、导出、分组、数据管理全部通过。
+- 真机 Debug 验证后已用 `adb install -r` 覆盖安装回 Release；设备内 APK 回拉哈希与发布候选一致，应用数据保留。
 
 ## 尚未完成
 
@@ -30,7 +33,11 @@
 
 - `docs/testing/independent-turn-reroll-audit-2026-11-05.json`
 - `docs/testing/independent-turn-branch-switch-audit-2026-11-05.json`
+- `docs/testing/qa-turn-reroll-independent-2026-11-05.json`
 - `docs/testing/qa-turn-branch-switch-ui-2026-11-05.json`
 - `docs/testing/qa-turn-reroll-multi-2026-11-05.json`
 - `docs/testing/round114-phone-turn-reroll.json`
+- `docs/testing/round115-phone-release-final-2026-11-05.json`
+- `docs/testing/round115-phone-release-final-logcat-2026-11-05.txt`
+- `docs/testing/round115-core-assertions-2026-11-05.log`
 - `docs/testing/build92-native-release-rework-2026-11-05.log`

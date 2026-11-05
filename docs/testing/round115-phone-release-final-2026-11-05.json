@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T09:40:17.519Z",
+  "device": {
+    "serial": "3B665K02PNH00000",
+    "model": "PMK110",
+    "android": "16",
+    "resolution": "1272x2772"
+  },
+  "evidence": {
+    "version": "3.81",
+    "versionCode": 92,
+    "firstInstallTime": "2026-10-20 23:07:55",
+    "ceDataInode": "2120975",
+    "sourceCommit": "506cc919139ce3060eb1c5b3b9aef04d31a116a0",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "cacheKey": "bsphone-v92-20261105-r1",
+    "installedApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "remotePath": "/data/app/~~TOLUrF6QT6Igh4cAlKHe1w==/com.xiaoshouji.app-2CxJVt539Js2-SJozhruVg==/base.apk"
+  },
+  "checks": {
+    "targetDeviceConnected": "PASS",
+    "releaseVersionAndCode": "PASS",
+    "installedApkMatchesReleaseCandidate": "PASS",
+    "dataRetainedAfterOverwriteInstall": "PASS",
+    "releaseColdLaunch": "PASS",
+    "processAlive": "PASS",
+    "webViewRootPresent": "PASS",
+    "screenshotCaptured": "PASS",
+    "screenshotBytes": 2885649,
+    "screenshotAttempts": 1,
+    "noCrashOrAnrInLogcat": "PASS"
+  },
+  "launch": [
+    "Starting: Intent { cmp=com.xiaoshouji.app/.MainActivity }",
+    "Status: ok",
+    "LaunchState: COLD",
+    "Activity: com.xiaoshouji.app/.MainActivity",
+    "TotalTime: 207",
+    "WaitTime: 214",
+    "Complete"
+  ],
+  "artifacts": {
+    "installedApk": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round115-installed-release.apk",
+    "screenshot": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round115-release-final-home.png",
+    "uiDump": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round115-release-final-window.xml",
+    "logcat": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round115-phone-release-final-logcat-2026-11-05.txt"
+  }
+}
