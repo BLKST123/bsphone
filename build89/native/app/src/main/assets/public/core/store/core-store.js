@@ -61,6 +61,27 @@
       return contact.memories;
     }
 
+    function completeMessageMeta(chat, list, target) {
+      if (!target || typeof target !== "object") return target;
+      const last = list.length > 1 ? list[list.length - 2] : null;
+      if (!target.branchId) target.branchId = chat.branchId || "main";
+      if (!target.status) target.status = "active";
+      if (target.variantIndex === undefined) target.variantIndex = 0;
+      if (target.hiddenFromChat === undefined) target.hiddenFromChat = false;
+      if (target.parentMessageId === undefined) target.parentMessageId = last && last.id || null;
+      if (!target.messageGroupId) {
+        if (last && last.role === target.role && last.messageGroupId) target.messageGroupId = last.messageGroupId;
+        else target.messageGroupId = idFactory("group");
+      }
+      if (!target.turnId) {
+        if (last && last.role === target.role && last.turnId) target.turnId = last.turnId;
+        else if (target.role === "me" || !last || !last.turnId) target.turnId = idFactory("turn");
+        else target.turnId = last.turnId;
+      }
+      if (!target.variantGroupId) target.variantGroupId = target.id;
+      return target;
+    }
+
     function ensureSessionMemory(chat) {
       if (!chat) return null;
       if (!chat.mem || typeof chat.mem !== "object") chat.mem = {};
@@ -274,6 +295,7 @@
         ts: now()
       }, message);
       list.push(target);
+      completeMessageMeta(chat, list, target);
       if (message.touchLastTs !== false && (commandOptions || {}).touchLastTs !== false) chat.lastTs = now();
       return record("appendMessage", {
         chatId: chatId,
@@ -292,6 +314,7 @@
           ts: now() + index
         }, message);
         list.push(target);
+        completeMessageMeta(chat, list, target);
         return target;
       });
       if (appended.length) {

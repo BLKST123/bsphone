@@ -1,0 +1,89 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T09:29:05.803Z",
+  "source": {
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4"
+  },
+  "checks": {
+    "uiSwitchToOriginal": true,
+    "uiSwitchToFirstNew": true,
+    "activeMatchesDisplayedBranch": true,
+    "persistedMatchesDisplayed": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "orig": {
+    "active": "turnbranch_mw3cfyc6hnqf",
+    "ids": [
+      "u1",
+      "u2",
+      "a1",
+      "a2",
+      "u3",
+      "a3"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "old1",
+      "old2",
+      "later-u",
+      "later-a"
+    ]
+  },
+  "new1": {
+    "active": "turnbranch_mw3cfyc6uizf",
+    "ids": [
+      "u1",
+      "u2",
+      "mw3cfz0r64pc"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ],
+    "branchIds": [
+      {
+        "id": "turnbranch_mw3cfyc6hnqf",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw3cfyc6uizf",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw3cfz39cgo3",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "persisted": {
+    "active": "turnbranch_mw3cfyc6uizf",
+    "ids": [
+      "u1",
+      "u2",
+      "mw3cfz0r64pc"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "branchRows": [
+    "原始版本 · 当前old1✓",
+    "重新生成 1new-1›",
+    "重新生成 2new-2›"
+  ],
+  "errors": [],
+  "evidence": {
+    "checkedAt": "2026-11-05T09:29:05.807Z",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r1"
+  }
+}

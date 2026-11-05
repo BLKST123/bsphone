@@ -1,0 +1,18 @@
+﻿BS小手机 3.81 / Build 92 REWORK BUILD CHECK
+time=2026-11-05 17:31:18
+source=C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\index.html
+sourceSha256=F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4
+prepareAssets=PASS files=16
+checkWeb=PASS
+gradleAssembleDebug=PASS
+gradleAssembleRelease=PASS
+phoneDebugInstall=PASS dataPreserved=true
+phoneReleaseRestore=PASS dataPreserved=true
+installedVersion=3.81/92
+debugApk=C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\build89\native\app\build\outputs\apk\debug\app-debug.apk
+debugApkSha256=E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC
+releaseApk=C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\build89\native\app\build\outputs\apk\release\app-release.apk
+releaseApkSha256=8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B
+publicApk=C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\BS小手机.apk
+publicApkSha256=8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B
+cacheKey=bsphone-v92-20261105-r1

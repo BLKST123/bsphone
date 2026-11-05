@@ -1,10 +1,10 @@
-{
-  "version": "3.79",
-  "versionCode": 90,
-  "round": 90,
-  "releasedAt": "2026-11-03",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=90-r4",
-  "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "cacheKey": "bsphone-v90-20261103-r4",
-  "notes": "3.79 Build90 会话分组复检返工：2/3 屏分组管理、图标与备注、44px 命中区、长按分组、返回栈、置顶/已读/聊天背景、人设隔离与备份回放。"
+﻿{
+    "version":  "3.81",
+    "versionCode":  92,
+    "round":  92,
+    "releasedAt":  "2026-11-05",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=92-r1",
+    "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+    "cacheKey":  "bsphone-v92-20261105-r1",
+    "notes":  "3.81 Build92：微信连续 user 消息组整组重新生成、旧尾部聊天分支保留与切换；包含 3.80 的分组语义纠偏、数据管理与 QA 修复。"
 }

@@ -2293,7 +2293,25 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 }
 .lrow[data-openchat]{user-select:none;-webkit-user-select:none;-webkit-touch-callout:none}
 .chatwrap.chat-wall{background-size:cover;background-position:center;background-repeat:no-repeat}
+.dm-page{padding:14px 16px 32px}
+.dm-storage{background:linear-gradient(145deg,color-mix(in srgb,var(--theme-rose-soft) 58%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--theme-rose-deep) 18%,var(--line));border-radius:20px;padding:16px;margin-bottom:16px}
+.dm-storage-top{display:flex;align-items:flex-start;gap:12px}.dm-storage-main{flex:1;min-width:0}.dm-storage-main b{display:block;font-size:calc(18px * var(--ui-font-scale,1))}.dm-storage-main .num{font-size:calc(28px * var(--ui-font-scale,1));font-weight:720;line-height:1.25;color:var(--deep);margin-top:8px}.dm-storage-main .mini{margin-top:4px}
+.dm-refresh{width:44px;height:44px;min-width:44px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.dm-usage-list{margin-top:14px;display:grid;gap:8px}.dm-usage-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}.dm-usage-row b,.dm-usage-row span{font-size:calc(11px * var(--ui-font-scale,1))}.dm-usage-row span{color:var(--fg2)}.dm-usage-bar{grid-column:1/-1;height:5px;border-radius:99px;background:color-mix(in srgb,var(--line) 58%,transparent);overflow:hidden}.dm-usage-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--theme-rose-deep),var(--deep))}
+.dm-section-title{font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2);font-weight:650;margin:18px 4px 8px;letter-spacing:.02em}
+.dm-card{width:100%;min-height:64px;display:flex;align-items:center;gap:12px;padding:12px 14px;margin:8px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);text-align:left;cursor:pointer;box-shadow:0 3px 12px rgba(112,90,101,.045)}
+.dm-card:active{transform:scale(.985)}
+.dm-card .dm-icon{width:38px;height:38px;min-width:38px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:color-mix(in srgb,var(--theme-rose-soft) 74%,var(--card));color:var(--deep)}
+.dm-card .dm-copy{flex:1;min-width:0}.dm-card .dm-copy b{display:block;font-size:calc(14px * var(--ui-font-scale,1));line-height:1.35}.dm-card .dm-copy small{display:block;color:var(--fg2);font-size:calc(10.5px * var(--ui-font-scale,1));line-height:1.45;margin-top:3px;white-space:normal}
+.dm-card .dm-side{flex:none;color:var(--fg2);font-size:calc(10.5px * var(--ui-font-scale,1))}
+.dm-card.danger{border-color:color-mix(in srgb,#c47484 38%,var(--line));background:color-mix(in srgb,#fff1f3 64%,var(--card));color:var(--danger)}.dm-card.danger .dm-icon{background:color-mix(in srgb,#ffdce2 78%,var(--card));color:var(--danger)}
+.dm-danger-wrap{margin-top:22px;padding-top:4px;border-top:1px solid color-mix(in srgb,var(--danger) 24%,var(--line))}
+.dm-file-name{display:flex;align-items:center;gap:8px;margin:8px 0 14px}.dm-file-name input{flex:1;min-width:0}.dm-file-name span{font-size:calc(14px * var(--ui-font-scale,1));color:var(--fg2);flex:none}
 #sheetBox.chatgroup-sheet{height:66dvh;min-height:66dvh;max-height:66dvh;overflow-y:auto}
+#sheetBox.chatgroup-editor-sheet{height:88dvh;min-height:88dvh;max-height:88dvh}
+#sheetBox.chatgroup-sheet button{min-width:44px;min-height:44px}
+#sheetBox.chatgroup-sheet .ic2{width:44px;height:44px;min-width:44px;min-height:44px;padding:0;display:inline-flex;align-items:center;justify-content:center}
+#sheetBox.chatgroup-sheet .lrow{min-height:64px}
 .cg-icon{width:30px;height:30px;border-radius:9px;display:inline-flex;align-items:center;justify-content:center;color:#fff;flex:none}
 .cg-color{width:44px;height:44px;border-radius:50%;border:2px solid transparent;padding:0;cursor:pointer}
 .cg-iconbtn{width:44px;height:44px;min-width:44px;border-radius:12px;border:1px solid var(--line);background:transparent;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
@@ -2460,9 +2478,8 @@ function viewGroups(){
   return store?store.selectors.selectGroups():(DB.groups||[]);
 }
 function viewChatGroups(){
-  const all=Array.isArray(DB.chatGroups)?DB.chatGroups:(DB.chatGroups=[]);
-  const personaId=(DB.me&&DB.me.personaId)||null;
-  return all.filter(function(g){ return g.id==='all'||!g.personaId||g.personaId===personaId; });
+  if(!Array.isArray(DB.chatGroups)) DB.chatGroups=[];
+  return DB.chatGroups;
 }
 function chatGroupById(id){
   return viewChatGroups().find(function(g){ return g.id===id; })||viewChatGroups().find(function(g){ return g.id==='all'; })||null;
@@ -2749,7 +2766,6 @@ function fixAll(){
     g.color=String(g.color||'#8e8e93');
     g.icon=String(g.icon||'users');
     g.note=String(g.note||'').slice(0,120);
-    if(g.id!=='all'&&!g.personaId) g.personaId=(DB.me&&DB.me.personaId)||null;
     if(g.id==='all') g.builtin=true;
   });
   DB.ui=DB.ui||{};
@@ -4242,8 +4258,10 @@ function buildCachedMessages(bundle,history,options){
   if(bundle&&bundle.semi) messages.push({role:'system',content:bundle.semi});
   const trimmed=trimHistoryMessages(history,opts);
   messages.push.apply(messages,trimmed);
-  const dynamic=[bundle&&bundle.dynamic?String(bundle.dynamic).trim():'',String(opts.finalUser||'').trim()].filter(Boolean).join('\n\n');
-  if(dynamic) messages.push({role:'user',content:dynamic});
+  const environment=bundle&&bundle.dynamic?String(bundle.dynamic).trim():'';
+  const finalUser=String(opts.finalUser||'').trim();
+  if(environment) messages.push({role:'system',content:'[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n'+environment});
+  if(finalUser) messages.push({role:'user',content:finalUser});
   return messages;
 }
 /* ---- 接口地址工具：客户只填到 /v1 这一层就行 ---- */
@@ -4867,7 +4885,7 @@ function render(){
   const oldNovelScroll=route.name==='novelchapter'&&s.querySelector('.np-body')?s.querySelector('.np-body').scrollTop:0;
   const R={home:screenHome,wechat:screenWechat,chatroom:screenChatRoom,contactedit:screenContactEdit,
     contactview:screenContactView,novel:screenNovel,novelbook:screenNovelBook,novelchapter:screenNovelChapter,read:screenRead,diary:screenDiary,forum:screenForum,
-    gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,progress:screenProgress,
+    gallery:screenGallery,appearance:screenAppearance,settings:screenSettings,datamanage:screenDataManage,progress:screenProgress,
     hang:screenHang,mall:screenMall,shop:screenTaobao,takeout:screenTakeout,clock:screenClock,couple:screenCouple,soul:screenSoul,music:screenMusic,checkup:screenCheckup,
     date:screenDate,dateroom:screenDateRoom,out:screenOut,outnew:screenOutNew,outroom:screenOutRoom,world:screenWorldBooks,regex:screenRegexList,weibo:screenWeibo}[route.name]||screenHome;
   const noNav=(route.name==='home'||route.name==='wechat'||route.name==='chatroom'
@@ -4915,7 +4933,7 @@ function back(){
   if(route.name==='dateroom'){ go('date'); return; }
   if(route.name==='outroom'){ go('out'); return; }
   if(route.name==='checkup'){ go('settings'); return; }
-  const map={chatroom:'wechat',contactview:'wechat',appearance:'settings',progress:'settings'};
+  const map={chatroom:'wechat',contactview:'wechat',appearance:'settings',datamanage:'settings',progress:'settings'};
   go(map[route.name]||'home');
 }
 window.BSAndroidBack=function(){
@@ -4959,7 +4977,7 @@ function bindChatGroupRowMenu(el){
 function restoreLastRoute(){
   const lr=DB.lastRoute;
   if(!lr||!lr.name) return;
-  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','date','dateroom','out','outnew','outroom','shop','takeout','clock','couple','soul','music','weibo','world','regex','appearance','settings','progress','contactview','mall'];
+  const allow=['wechat','chatroom','novel','novelbook','novelchapter','read','diary','forum','gallery','hang','date','dateroom','out','outnew','outroom','shop','takeout','clock','couple','soul','music','weibo','world','regex','appearance','settings','datamanage','progress','contactview','mall'];
   if(allow.indexOf(lr.name)<0) return;
   if(lr.name==='chatroom'&&!chat(lr.arg)) return;
   if(lr.name==='dateroom'&&!dateById(lr.arg)) return;
@@ -4971,7 +4989,7 @@ function restoreLastRoute(){
   if(lr.wtab) wtab=lr.wtab;
 }
 function navBar(name){
-  const titles={chatroom:'',contactedit:'联系人',contactview:'',novel:'小说',read:'一起看小说',diary:'日记',forum:'论坛',gallery:'相册',appearance:'外观',settings:'设置',progress:'开发进度',checkup:'自检',date:'约会',dateroom:'',out:'出门',outnew:'',outroom:'',world:'世界书',regex:'正则',weibo:''};
+  const titles={chatroom:'',contactedit:'联系人',contactview:'',novel:'小说',read:'一起看小说',diary:'日记',forum:'论坛',gallery:'相册',appearance:'外观',settings:'设置',datamanage:'数据管理',progress:'开发进度',checkup:'自检',date:'约会',dateroom:'',out:'出门',outnew:'',outroom:'',world:'世界书',regex:'正则',weibo:''};
   return '<div class="nav"><button class="back">‹ 返回</button><div class="ttl">'+esc(titles[name]||'')+'</div><div class="act"></div></div>';
 }
 function emptyState(t,m,btn,fn){
@@ -5556,10 +5574,10 @@ function ensureDefaultGroup(){
 const CHAT_GROUP_COLORS=['#8e8e93','#ff3b30','#ff9500','#ffcc00','#34c759','#00c7be','#5856d6','#af52de'];
 const CHAT_GROUP_ICONS=['users','home','heart','star','book','music','pin','bell','wrench','sparkles','globe','smile'];
 function chatGroupIcon(g){ return g&&CHAT_GROUP_ICONS.indexOf(g.icon)>=0?g.icon:'users'; }
-function openChatGroupSheet(html){
+function openChatGroupSheet(html,extraClass){
   sheet(html);
   const box=$('#sheetBox');
-  if(box) box.classList.add('chatgroup-sheet');
+  if(box){ box.classList.remove('chatgroup-editor-sheet'); box.classList.add('chatgroup-sheet'); if(extraClass) box.classList.add(extraClass); }
 }
 function confirmChatGroupDelete(id){
   const g=chatGroupById(id);
@@ -5593,7 +5611,7 @@ function sheetChatGroups(){
 }
 function sheetChatGroupEditor(id){
   const existing=id?chatGroupById(id):null;
-  const state={id:existing?existing.id:'cg_'+uid(),name:existing?existing.name:'',note:existing?existing.note||'':'',color:existing?existing.color:'#8e8e93',icon:existing?chatGroupIcon(existing):'users',builtin:!!(existing&&existing.builtin),personaId:(existing&&existing.personaId)||(DB.me&&DB.me.personaId)||null};
+  const state={id:existing?existing.id:'cg_'+uid(),name:existing?existing.name:'',note:existing?existing.note||'':'',color:existing?existing.color:'#8e8e93',icon:existing?chatGroupIcon(existing):'users',builtin:!!(existing&&existing.builtin)};
   const draw=function(){
     openChatGroupSheet('<h3>'+(existing?'编辑会话分组':'新建会话分组')+'</h3>'
       +'<input id="cgName" value="'+esc(state.name)+'" placeholder="分组名称" style="margin-bottom:10px">'
@@ -5603,7 +5621,7 @@ function sheetChatGroupEditor(id){
       +'<button class="btn primary full" id="cgSave">保存</button>'
       +(existing?'<button class="btn full" id="cgMembers">管理会话</button>':'')
       +(existing&&!state.builtin?'<button class="btn danger full" id="cgDelete">解散这个分组</button>':'')
-      +'<button class="btn full" id="cgBack">返回分组</button>');
+      +'<button class="btn full" id="cgBack">返回分组</button>','chatgroup-editor-sheet');
     $('#cgName').oninput=function(){ state.name=String(this.value||''); };
     $('#cgNote').oninput=function(){ state.note=String(this.value||''); };
     $$('#sheetBox [data-cgcolor]').forEach(function(el){ el.onclick=function(){ state.color=el.dataset.cgcolor; draw(); }; });
@@ -6280,7 +6298,112 @@ function applyMessageVariant(m,index){
   patchChatMessage(m,patch,{removeKeys:removeKeys});
   return true;
 }
-function sheetMessageBranches(ch,m){
+function chatUserTurnInfo(ch,anchor){
+  if(!ch||!anchor) return null;
+  const list=ch.msgs||[];
+  const index=list.findIndex(function(item){ return item&&item.id===anchor.id; });
+  if(index<0||anchor.role!=='me') return null;
+  const groupKey=function(item){ return String(item&&(item.messageGroupId||item.turnId||item.id)||''); };
+  const key=groupKey(anchor);
+  let start=index,end=index;
+  while(start>0&&list[start-1]&&list[start-1].role==='me'&&groupKey(list[start-1])===key) start--;
+  while(end+1<list.length&&list[end+1]&&list[end+1].role==='me'&&groupKey(list[end+1])===key) end++;
+  const group=list.slice(start,end+1);
+  const turnId=String(anchor.turnId||group[0]&&group[0].turnId||key);
+  return {start:start,end:end,key:key,turnId:turnId,group:group,allText:group.every(function(item){ return (item.type||'text')==='text'&&item.status!=='deleted'; })};
+}
+function turnBranchState(ch,turnId){
+  if(!ch.turnBranches||typeof ch.turnBranches!=='object') ch.turnBranches={};
+  const key=String(turnId||'main');
+  if(!ch.turnBranches[key]||typeof ch.turnBranches[key]!=='object') ch.turnBranches[key]={activeBranchId:null,branches:[]};
+  const state=ch.turnBranches[key];
+  if(!Array.isArray(state.branches)) state.branches=[];
+  return state;
+}
+function turnBranchSnapshot(ch,start){
+  return jsonSafeCopy((ch.msgs||[]).slice(Math.max(0,Number(start)||0)));
+}
+function turnBranchCurrent(ch,turnId,start){
+  const state=turnBranchState(ch,turnId);
+  const active=state.branches.find(function(branch){ return branch&&branch.id===state.activeBranchId; })||null;
+  if(active) active.messages=turnBranchSnapshot(ch,start);
+  return state;
+}
+function chooseTurnBranch(ch,anchor,branchId){
+  const info=chatUserTurnInfo(ch,anchor); if(!info) return false;
+  const state=turnBranchCurrent(ch,info.turnId,info.start);
+  const target=state.branches.find(function(branch){ return branch&&branch.id===branchId; });
+  if(!target||!Array.isArray(target.messages)) return false;
+  state.activeBranchId=target.id;
+  const next=(ch.msgs||[]).slice(0,info.start).concat(jsonSafeCopy(target.messages));
+  const branchesSnapshot=jsonSafeCopy(ch.turnBranches);
+  const store=coreStore();
+  if(store&&store.commands){
+    store.commands.patchChat(ch.id,{turnBranches:branchesSnapshot,lastTs:Date.now()},{persist:false});
+    store.commands.replaceMessages(ch.id,next,{persist:false});
+  }else{
+    ch.msgs=next; ch.lastTs=Date.now();
+  }
+  saveNow(); return true;
+}
+function sheetUserTurnBranches(ch,anchor){
+  const info=chatUserTurnInfo(ch,anchor); if(!info) return;
+  const state=turnBranchState(ch,info.turnId);
+  const branches=state.branches||[];
+  sheet('<h3>聊天分支</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。</div>'
+    +(branches.length?branches.map(function(branch,index){
+      const first=branch.messages&&branch.messages.find(function(item){ return item.role!=='me'; })||branch.messages&&branch.messages[0]||{};
+      const active=branch.id===state.activeBranchId;
+      return '<button class="lrow '+(active?'branch-current':'')+'" data-turnbranch="'+esc(branch.id)+'"><div class="mi"><div class="t1">'+esc(branch.label||('第 '+(index+1)+' 版'))+(active?' · 当前':'')+'</div><div class="t2">'+esc(quoteSnippet(labelOf(first),150))+'</div></div><div class="rt"><span class="chev">'+(active?'✓':'›')+'</span></div></button>';
+    }).join(''):'<div class="empty">还没有可切换的回复分支。</div>')
+    +'<button class="btn full" id="turnBranchBack">返回</button>');
+  $$('#sheetBox [data-turnbranch]').forEach(function(el){ el.onclick=function(){ const branchId=el.dataset.turnbranch; if(chooseTurnBranch(ch,anchor,branchId)){ closeSheet(); render(); toast('已切换分支'); } }; });
+  $('#turnBranchBack').onclick=closeSheet;
+}
+function sheetRegenerateUserTurn(ch,anchor){
+  const info=chatUserTurnInfo(ch,anchor);
+  if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
+  if(!info.allText){ toast('这组里有图片或卡片，整组重新生成只支持纯文本消息'); return; }
+  const text=info.group.map(function(item){ return labelOf(item); }).join('\n');
+  sheetSmall('<h3>重新生成这一组？</h3><div class="muted" style="margin:8px 0 10px;line-height:1.75">将重新打包：<br>'+esc(quoteSnippet(text,260))+'<br><br>原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。</div><button class="btn primary full" id="regTurnYes">重新生成</button><button class="btn full" id="regTurnNo">取消</button>');
+  $('#regTurnNo').onclick=closeSheet;
+  $('#regTurnYes').onclick=function(){ closeSheet(); regenerateUserTurn(ch,anchor,info).catch(function(){}); };
+}
+async function regenerateUserTurn(ch,anchor,info){
+  if(!ch||!info||!needKey()) return;
+  const beforeMessages=jsonSafeCopy(ch.msgs||[]);
+  const beforeBranches=jsonSafeCopy(ch.turnBranches||{});
+  try{
+    busy('正在按整组消息重新生成');
+    const state=turnBranchCurrent(ch,info.turnId,info.start);
+    if(!state.branches.length){
+      const original={id:'turnbranch_'+uid(),label:'原始版本',createdAt:Date.now(),messages:turnBranchSnapshot(ch,info.start)};
+      state.branches.push(original); state.activeBranchId=original.id;
+    }
+    const newBranchId='turnbranch_'+uid();
+    const prefix=(ch.msgs||[]).slice(0,info.start);
+    const group=jsonSafeCopy(info.group);
+    const store=coreStore();
+    if(store&&store.commands){
+      store.commands.replaceMessages(ch.id,prefix.concat(group),{persist:false});
+      store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches)},{persist:false});
+    }else ch.msgs=prefix.concat(group);
+    saveNow(); render();
+    await aiTurn({chatId:ch.id,silentErrors:true,nudge:'这次是对用户连续消息组「'+info.group.map(labelOf).join(' / ')+'」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'});
+    const nextTail=(ch.msgs||[]).slice(info.start);
+    if(nextTail.length<=group.length) throw new Error('没有生成新的角色回复');
+    const latestState=turnBranchState(ch,info.turnId);
+    latestState.branches.push({id:newBranchId,label:'重新生成 '+(latestState.branches.length),createdAt:Date.now(),messages:jsonSafeCopy(nextTail)});
+    latestState.activeBranchId=newBranchId;
+    if(store&&store.commands) store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches),lastTs:Date.now()},{persist:false});
+    saveNow(); render(); toast('已重新生成整组，旧内容保留在聊天分支');
+  }catch(e){
+    const store=coreStore();
+    if(store&&store.commands){ store.commands.replaceMessages(ch.id,beforeMessages,{persist:false}); store.commands.patchChat(ch.id,{turnBranches:beforeBranches},{persist:false}); }
+    else{ ch.msgs=beforeMessages; ch.turnBranches=beforeBranches; }
+    saveNow(); render(); toast('重新生成失败，已恢复原消息与分支');
+  }finally{ busyDone(); }
+}function sheetMessageBranches(ch,m){
   if(!ch||!m) return;
   ensureMessageVariant(m);
   sheet('<h3>选择分支</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">同一条消息保留了你生成过的版本。选择后会原位覆盖当前显示，不会新增消息。</div>'
@@ -6348,16 +6471,15 @@ function sheetMsg(chatId,msgId){
     +'<div style="margin-top:6px;white-space:pre-wrap">'+esc(text)+'</div></div>'
     +'<button class="btn full" id="mvCopy">复制文字</button>'
     +'<button class="btn full" id="mvQuote">引用这条</button>'
-    +(!mine? '<button class="btn full" id="mvRegen">重新生成这条</button>':'')
-    +(Array.isArray(m.variants)&&m.variants.length>1? '<button class="btn full" id="mvBranches">选择分支（'+m.variants.length+' 版）</button>':'')
+    +(mine? '<button class="btn full" id="mvRegenGroup">重新生成整个连续组</button><button class="btn full" id="mvTurnBranches">聊天分支</button>':'')
     +'<button class="btn full" id="mvFav">收藏这条</button>'
     +(mine? '<button class="btn full" id="mvBack">撤回这条</button>':'')
     +'<button class="btn full danger" id="mvDel">删除这条</button>'
     +'<button class="btn full" id="mvCancel">取消</button>');
   $('#mvCopy').onclick=()=>{ try{ navigator.clipboard.writeText(text); toast('已复制'); }catch(e){ toast('复制不了，手动选中试试'); } closeSheet(); };
   $('#mvQuote').onclick=function(){ chatQuote=quoteFromMessage(ch,m); closeSheet(); render(); toast('已引用这条消息'); };
-  const rg=$('#mvRegen'); if(rg) rg.onclick=function(){ regenerateChatMessage(ch,m).catch(function(){}); };
-  const mb=$('#mvBranches'); if(mb) mb.onclick=function(){ sheetMessageBranches(ch,m); };
+  const rgg=$('#mvRegenGroup'); if(rgg) rgg.onclick=function(){ sheetRegenerateUserTurn(ch,m); };
+  const mtb=$('#mvTurnBranches'); if(mtb) mtb.onclick=function(){ sheetUserTurnBranches(ch,m); };
   $('#mvFav').onclick=()=>{ DB.favorites=DB.favorites||[]; DB.favorites.unshift({id:uid(),who:who,text:text,ts:m.ts}); save(); closeSheet(); toast('已收藏'); };
   const bk=$('#mvBack');
   if(bk) bk.onclick=()=>{ const original=labelOf(m); const known=Math.random()<0.5; patchChatMessage(m,{type:'text',recalled:{text:original,known:known},text:'你撤回了一条消息'},{removeKeys:['url','title','amount']}); save(); closeSheet(); render(); toast('已撤回'); if(ch&&DB.api.key) scheduleReply(ch,'对方刚撤回了一条消息。'+(known? ('你瞥到了撤回前的内容：「'+original+'」。你可以问一句、调侃，或者装作没看见。') : '你没看清撤回前的内容。你可以问一句，或者装作没看见。')+'不要自问自答。'); };
@@ -6989,12 +7111,7 @@ function chatTimeSeparatorHTML(ch,index){
 function chatBodyHTML(ch){
   return (ch.msgs||[]).map(function(m,index){ return chatTimeSeparatorHTML(ch,index)+msgHTML(m,ch); }).join('');
 }
-function chatUsageChipHTML(chatId){
-  const usage=latestApiUsage(chatId);
-  if(!usage||!usage.available) return '';
-  const label=usage.cached>0?('缓存 '+usage.cached):('Token '+(usage.input+usage.output));
-  return '<button class="chat-usage-chip'+(usage.cached>0?' hit':'')+'" id="chatUsageChip" title="'+esc('本次消耗：'+usage.input+' 输入 / '+usage.output+' 输出，缓存命中：'+usage.cached+' Tokens')+'">'+ic(usage.cached>0?'sparkles':'clock',12)+'<span>'+esc(label)+'</span></button>';
-}
+
 function screenChatRoom(){
   const liveChat=chat(route.arg);
   if(!liveChat) return emptyState('会话不见了','它可能被删掉了。','回微信','backwx');
@@ -7009,7 +7126,7 @@ function screenChatRoom(){
   const typingTitle=activeRequest?'<span class="tip">'+esc((activeRequest.speakerName||'对方')+' 正在输入…')+'</span>':normalTitle;
   return '<div class="chatwrap'+(ch.chatWall?' chat-wall':'')+'"'+(ch.chatWall?' style="background-image:url(\''+String(ch.chatWall).replace(/"/g,'%22')+'\')"':'')+'>'
    +'<div class="nav"><button class="back">‹ 微信</button><div class="ttl"'+(activeRequest?' data-orig="'+esc(normalTitle)+'"':'')+'>'+typingTitle+'</div>'
-     +'<div class="act">'+chatUsageChipHTML(ch.id)+'<button class="link" id="chMenu">⋯</button></div></div>'
+     +'<div class="act"><button class="link" id="chMenu">⋯</button></div></div>'
    +'<div class="chatlist'+(selecting?' selecting':'')+'" id="msgs">'+body+'</div>'
    +(selecting
      ? '<div class="chat-selectbar"><button class="cbtn" id="chatSelAll" title="全选">'+ic('check',18)+'</button><span>已选 '+chatSelectIds.length+' 条</span><button class="btn primary" id="chatSelMigrate">迁移到新会话</button><button class="btn" id="chatSelCancel">取消</button></div>'
@@ -7433,12 +7550,35 @@ function appendMessageToOpenChat(ch,mm){
   requestAnimationFrame(scrollChatBottom);
   return true;
 }
-function pushMsg(chatId,m,quiet){
+function inferChatMessageMeta(ch,role,seed){
+  const list=ch&&Array.isArray(ch.msgs)?ch.msgs:[];
+  const last=list.length?list[list.length-1]:null;
+  const meta={
+    branchId:String(ch&&ch.branchId||'main'),
+    status:'active',
+    variantIndex:0,
+    hiddenFromChat:false,
+    parentMessageId:last&&last.id||null
+  };
+  if(last&&last.role===role&&last.turnId&&last.messageGroupId){
+    meta.turnId=last.turnId;
+    meta.messageGroupId=last.messageGroupId;
+  }else if(role==='me'||!last||!last.turnId){
+    meta.turnId='turn_'+uid();
+    meta.messageGroupId='group_'+uid();
+  }else{
+    meta.turnId=last.turnId;
+    meta.messageGroupId='group_'+uid();
+  }
+  return Object.assign(meta,seed||{});
+}function pushMsg(chatId,m,quiet){
   const ch=chat(chatId); if(!ch) return null;
-  const mm=Object.assign({id:uid(),ts:Date.now()},m);
+  const seed=Object.assign({id:uid(),ts:Date.now()},m||{});
+  let mm=inferChatMessageMeta(ch,seed.role,seed);
+  if(!mm.variantGroupId) mm.variantGroupId=mm.id;
   if(mm.simTs===undefined) mm.simTs=simNow(chatId).getTime();
   const store=coreStore();
-  if(store) store.commands.appendMessage(chatId,mm,{persist:false,touchLastTs:false});
+  if(store) mm=store.commands.appendMessage(chatId,mm,{persist:false,touchLastTs:false})||mm;
   else ch.msgs.push(mm);
   const patch={lastTs:Date.now(),unread:Number(ch.unread)||0,unansweredAuto:Math.max(0,Number(ch.unansweredAuto)||0),lastAuto:ch.lastAuto,lastUserAt:ch.lastUserAt,lastProactiveAt:ch.lastProactiveAt};
   if(mm.role==='me'){
@@ -7612,7 +7752,7 @@ async function aiTurn(opt){
       if(other){ await sleep(900); await aiTurn({chatId:ch.id,speaker:other,nudge:'群里刚有人说话了，你插一句嘴，一两句就行。'}); }
     }
   }catch(e){
-    if(e.name!=='AbortError') toast('出错：'+e.message);
+    if(e.name!=='AbortError'&&!(opt&&opt.silentErrors)) toast('出错：'+e.message);
   }finally{
     const active=chatRequestControllers.get(ch.id);
     if(active&&active.controller===requestController) chatRequestControllers.delete(ch.id);
@@ -8434,7 +8574,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-10-30 · 3.79 · 第 90 轮';
+const PROGRESS_UPDATED='2026-11-05 · 3.81 · 第 92 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -8654,7 +8794,7 @@ async function imageGenerateAndSend(chatId,contactId,personaId,kind,userText,cus
   let gallery=old?DB.galleryPics.find(function(x){ return x.id===old.galleryId; }):null;
   if(!gallery){
     imageEnsureAlbum();
-    gallery=galleryAddPic('ai_generated',url);
+    gallery=galleryAddPic('ai_generated',url,{source:'ai-generated'});
   }else{
     gallery.url=url;gallery.ts=Date.now();gallerySyncPics();
   }
@@ -8989,7 +9129,225 @@ function sheetReverseRecords(){
   };
   draw();
 }
-function screenSettings(){
+function dmSafeSize(value){
+  try{ return new Blob([JSON.stringify(value||null)]).size; }
+  catch(e){ try{ return JSON.stringify(value||null).length; }catch(_){ return 0; } }
+}
+function dmUsageRows(){
+  const pick=function(keys){ const out={}; keys.forEach(function(key){ if(DB[key]!==undefined) out[key]=DB[key]; }); return dmSafeSize(out); };
+  const rows=[
+    ['微信',pick(['contacts','chats','chatGroups'])],
+    ['小说',pick(['novels','books','readings','np'])],
+    ['微博',pick(['wb'])],
+    ['论坛',pick(['forum'])],
+    ['约会与出门',pick(['dates','outings','dateBinding','outBinding','dateCid','outState'])],
+    ['查岗',pick(['hang','checkSnapshots'])],
+    ['外卖',pick(['takeout'])],
+    ['网购',pick(['packages','orders','cartMe','cartTa','tbItems','shopItems'])],
+    ['情侣空间',pick(['coupleSpaces'])],
+    ['灵魂匹配',pick(['soul'])],
+    ['音乐',pick(['music'])],
+    ['相册',pick(['galleryPics','pics','galleryAlbums','stickers','favorites'])],
+    ['日记',pick(['diary'])],
+    ['主题与外观',pick(['ui'])],
+    ['设置、缓存与其它',pick(['api','audio','imageGen','apiLib','memoryItems','memoryVersions','memoryCursors','memoryConflicts','logs','usageHistory'])]
+  ];
+  const total=rows.reduce(function(sum,row){ return sum+row[1]; },0);
+  return {total:total,rows:rows};
+}
+function dmCard(id,icon,title,desc,side,danger){
+  return '<button class="dm-card'+(danger?' danger':'')+'" id="'+id+'" type="button"><span class="dm-icon">'+ic(icon,19)+'</span><span class="dm-copy"><b>'+esc(title)+'</b><small>'+esc(desc)+'</small></span><span class="dm-side">'+esc(side||'')+'</span></button>';
+}
+function screenDataManage(){
+  const report=dmUsageRows();
+  const max=Math.max(1,...report.rows.map(function(row){ return row[1]; }));
+  return '<div class="dm-page">'
+    +'<section class="dm-storage"><div class="dm-storage-top"><div class="dm-storage-main"><b>存储空间</b><div class="num">'+esc(fmtSize(report.total))+'</div><div class="mini">应用内数据估算 · 更新于 '+esc(new Date().toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'}))+'</div></div><button class="dm-refresh" id="dmRefresh" type="button" title="刷新统计" aria-label="刷新统计">'+ic('refresh',18)+'</button></div>'
+      +'<div class="dm-usage-list">'+report.rows.map(function(row){ return '<div class="dm-usage-row"><b>'+esc(row[0])+'</b><span>'+esc(fmtSize(row[1]))+'</span><div class="dm-usage-bar"><i style="width:'+Math.max(2,Math.min(100,row[1]/max*100))+'%"></i></div></div>'; }).join('')+'</div></section>'
+    +'<div class="dm-section-title">优化与清理</div>'
+    +dmCard('dmOptimize','chat','优化消息数据','去重相同头像资源，保留消息、顺序和历史头像','')
+    +dmCard('dmCompress','image','压缩图片','只处理用户上传的大图，先预览再确认','')
+    +dmCard('dmClearImages','image','清理本地图片','清除本机缓存副本，不删除消息和相册源图','')
+    +dmCard('dmClearVoice','speaker','清理语音缓存','保留文字与记忆，下次播放时重新生成','')
+    +'<div class="dm-section-title">导出与导入</div>'
+    +dmCard('exp','doc','导出所有数据','全部业务数据和本地资产数据，生成 JSON','JSON')
+    +dmCard('expLight','doc','导出轻量数据','聊天、角色卡、用户人设、世界书、正则','JSON')
+    +dmCard('imp','arrow','导入数据','支持 JSON 导入，导入前预览并可回滚','JSON / ZIP')
+    +'<div class="dm-danger-wrap"><div class="dm-section-title">危险操作</div>'
+    +dmCard('wipe','trash','清除所有数据','删除全部本地业务数据和 API Key，需要两次确认','全部',true)
+    +'</div></div>';
+}
+function dmDefaultFileName(){
+  const d=new Date();
+  return 'BS小手机_'+d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate()+'_'+String(d.getHours()).padStart(2,'0')+':'+String(d.getMinutes()).padStart(2,'0');
+}
+function dmFileNameError(name){
+  const base=String(name||'').trim().replace(/\.json$/i,'');
+  if(!base) return '请填写文件名称';
+  if(base.length>90) return '文件名称太长';
+  if(/[\\/]/.test(base)) return '文件名称不能包含路径分隔符';
+  return '';
+}
+function sheetManagedExport(mode){
+  const light=mode==='light';
+  sheetSmall('<h3>文件名称</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">'+(light?'导出轻量数据':'导出所有数据')+'会保存为 JSON。文件名使用当前手机现实时间，可手动修改。</div>'
+    +'<div class="dm-file-name"><input id="dmExportName" value="'+esc(dmDefaultFileName())+'" maxlength="90" autocomplete="off"><span>.json</span></div>'
+    +'<button class="btn primary full" id="dmExportStart">导出</button><button class="btn full" id="dmExportCancel">取消</button>');
+  $('#dmExportCancel').onclick=closeSheet;
+  $('#dmExportStart').onclick=function(){
+    const base=String($('#dmExportName').value||'').trim().replace(/\.json$/i,'');
+    const error=dmFileNameError(base);
+    if(error){ toast(error); return; }
+    closeSheet();
+    exportManagedJson(mode,base);
+  };
+}
+async function buildLightBackupPackage(){
+  const full=exportableDbSnapshot();
+  const me=full.me||{};
+  const data={
+    schemaVersion:Number(full.schemaVersion)||SCHEMA_VERSION,
+    contacts:full.contacts||[],
+    chats:full.chats||[],
+    chatGroups:full.chatGroups||[],
+    worldbooks:full.worldbooks||[],
+    regexes:full.regexes||[],
+    me:{personas:me.personas||[],personaId:me.personaId||null}
+  };
+  const checksum=await backupChecksumText(JSON.stringify(data));
+  return {
+    format:'BS小手机备份',
+    formatVersion:1,
+    manifest:{
+      schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
+      appVersion:backupAppVersion(),
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:92,
+      exportedAt:new Date().toISOString(),
+      platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
+      includesApiKey:false,
+      checksumAlgorithm:checksum.algorithm,
+      scope:'light',
+      counts:backupDataCounts(data)
+    },
+    checksums:{data:checksum.value,algorithm:checksum.algorithm},
+    data:data
+  };
+}
+async function exportManagedJson(mode,name){
+  try{
+    const pkg=mode==='light'?await buildLightBackupPackage():await buildBackupPackage();
+    const base=String(name||dmDefaultFileName()).trim().replace(/\.json$/i,'')||dmDefaultFileName();
+    const finalName=base+'.json';
+    const saved=await saveTextFile(finalName,'application/json',JSON.stringify(pkg,null,2));
+    if(saved&&saved.native&&saved.finalName&&saved.finalName!==finalName) toast('已导出 '+saved.finalName);
+    return saved;
+  }catch(e){ toast('导出失败：'+(e&&e.message||e)); return false; }
+}
+function exportLight(){ sheetManagedExport('light'); }
+function dmConfirm(title,desc,yes,fn,danger){
+  sheetSmall('<h3>'+esc(title)+'</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">'+esc(desc)+'</div><button class="'+(danger?'btn danger':'btn primary')+' full" id="dmConfirmYes">'+esc(yes)+'</button><button class="btn full" id="dmConfirmNo">取消</button>');
+  $('#dmConfirmNo').onclick=closeSheet;
+  $('#dmConfirmYes').onclick=function(){ closeSheet(); fn(); };
+}
+function dmOptimizeMessageDataNow(){
+  const before=dmSafeSize(DB.chats||[]);
+  const seen={}; let refs=0;
+  (DB.chats||[]).forEach(function(ch){
+    (ch.msgs||[]).forEach(function(m){
+      ['avatarSnapshot','senderAvatar','msgAvatar'].forEach(function(key){
+        const value=m&&m[key];
+        if(typeof value!=='string'||value.indexOf('data:image/')!==0) return;
+        if(seen[value]){ m[key]=seen[value]; refs++; }
+        else { seen[value]='avatar-ref:'+Object.keys(seen).length; m[key]=seen[value]; }
+      });
+    });
+  });
+  saveNow();
+  const after=dmSafeSize(DB.chats||[]);
+  render();
+  toast(refs?('已优化 '+refs+' 处重复头像引用，节省约 '+fmtSize(Math.max(0,before-after))):'没有发现需要优化的重复头像');
+}
+function dmCompressDataUrl(url){
+  return new Promise(function(resolve,reject){
+    const img=new Image();
+    img.onload=function(){
+      try{
+        const max=2048;
+        let w=img.width||1,h=img.height||1;
+        if(Math.max(w,h)>max){ const scale=max/Math.max(w,h); w=Math.max(1,Math.round(w*scale)); h=Math.max(1,Math.round(h*scale)); }
+        const cv=document.createElement('canvas'); cv.width=w; cv.height=h;
+        const ctx=cv.getContext('2d'); ctx.fillStyle='#fff'; ctx.fillRect(0,0,w,h); ctx.drawImage(img,0,0,w,h);
+        resolve(cv.toDataURL('image/webp',0.82));
+      }catch(e){ reject(e); }
+    };
+    img.onerror=function(){ reject(new Error('图片读取失败')); };
+    img.src=url;
+  });
+}
+function dmCompressCandidates(){
+  return (DB.galleryPics||[]).filter(function(item){
+    const url=String(item&&item.url||'');
+    return url.indexOf('data:image/')===0&&url.indexOf('data:image/gif')!==0&&(item.source==='upload'||item.userUploaded===true)&&url.length>700000;
+  });
+}
+function dmCompressImagesFlow(){
+  const items=dmCompressCandidates();
+  if(!items.length){ toast('没有符合条件的大图。只处理用户上传、超过 512KB 的静态图片'); return; }
+  const before=items.reduce(function(sum,item){ return sum+dmSafeSize(item.url); },0);
+  dmConfirm('压缩图片？','将处理 '+items.length+' 张用户上传图片，长边最大 2048px，WebP 质量 82。预计不会处理 AI 原图、动图和主题原图。原大小约 '+fmtSize(before)+'。','开始压缩',async function(){
+    toast('正在压缩图片…');
+    let changed=0,saved=0;
+    for(const item of items){
+      try{ const out=await dmCompressDataUrl(item.url); if(out&&out.length<item.url.length){ saved+=item.url.length-out.length; item.url=out; item.compressedAt=Date.now(); changed++; } }catch(e){}
+    }
+    gallerySyncPics(); saveNow(); render();
+    toast(changed?('已压缩 '+changed+' 张，节省约 '+fmtSize(saved)):'压缩失败，原图已保留');
+  });
+}
+function dmClearLocalImagesFlow(){
+  let count=0,bytes=0;
+  (DB.chats||[]).forEach(function(ch){ (ch.msgs||[]).forEach(function(m){ if(!m||m.type!=='image') return; ['cacheUrl','localUrl','localCache','blobUrl'].forEach(function(key){ if(m[key]!==undefined){ bytes+=dmSafeSize(m[key]); delete m[key]; count++; } }); }); });
+  if(DB.mediaCache&&DB.mediaCache.images){ bytes+=dmSafeSize(DB.mediaCache.images); DB.mediaCache.images={}; count++; }
+  dmConfirm('清理本地图片？','只清理本机图片缓存，不删除聊天消息、相册源图、用户上传原图和订单实体。已识别 '+(count||0)+' 项缓存，约 '+fmtSize(bytes)+'。','清理缓存',function(){ saveNow(); render(); toast(count?('已清理 '+count+' 项图片缓存'):'没有可清理的本地图片缓存'); });
+}
+function dmClearVoiceCacheFlow(){
+  let count=0,bytes=0;
+  (DB.chats||[]).forEach(function(ch){ (ch.msgs||[]).forEach(function(m){ if(m&&m.type==='voice'&&m.url&&(String(m.url).indexOf('blob:')===0||String(m.url).indexOf('data:audio')===0)){ bytes+=dmSafeSize(m.url); delete m.url; m.voiceCacheCleared=true; count++; } }); });
+  if(DB.mediaCache&&DB.mediaCache.audio){ bytes+=dmSafeSize(DB.mediaCache.audio); DB.mediaCache.audio={}; count++; }
+  dmConfirm('清理语音缓存？','只删除本地语音缓存，不删除文字消息、人设和记忆。下次播放会重新生成；产生 API 消耗时会另行提示。已识别 '+count+' 项，约 '+fmtSize(bytes)+'。','清理语音',function(){ saveNow(); render(); toast(count?('已清理 '+count+' 项语音缓存'):'没有可清理的语音缓存'); });
+}
+function dmClearAllFlow(){
+  sheetSmall('<h3>清除所有数据？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">将删除角色、人设、世界书、聊天、记忆、相册、订单、小说、论坛、音乐、情侣空间、外观和全部 API Key。APK 和已导出的文件不会删除。</div><button class="btn primary full" id="dmClearExportFirst">先导出所有数据</button><button class="btn danger full" id="dmClearNext">继续清除</button><button class="btn full" id="dmClearCancel">取消</button>');
+  $('#dmClearCancel').onclick=closeSheet;
+  $('#dmClearExportFirst').onclick=function(){ closeSheet(); sheetManagedExport('full'); };
+  $('#dmClearNext').onclick=function(){
+    sheetSmall('<h3>最后确认</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">清除后当前手机数据将回到初始状态。系统会先创建一次性本地快照；若执行失败会尝试恢复。</div><button class="btn danger full" id="dmClearFinal">确认清除所有数据</button><button class="btn full" id="dmClearBack">返回</button>');
+    $('#dmClearBack').onclick=dmClearAllFlow;
+    $('#dmClearFinal').onclick=function(){ closeSheet(); dmClearAllNow(); };
+  };
+}
+async function dmClearAllNow(){
+  const previous=jsonSafeCopy(DB);
+  try{
+    flushSave();
+    await clearSecureApiKey();
+    try{ localStorage.removeItem(KEY); localStorage.removeItem(OLDKEY); localStorage.removeItem(KEY+'_enc'); localStorage.removeItem(KEY+'_obf'); }catch(e){}
+    if(IDB.ok){ await idbSet('db',jsonSafeCopy(DEF)).catch(function(){}); }
+    DB=JSON.parse(JSON.stringify(DEF)); DB.ui.demoSeeded=true; DB.np.demoSeeded=true;
+    saveNow(); applyTheme(); closeSheetAll(); go('home'); toast('所有本地数据已清除');
+  }catch(e){ DB=previous; fixAll(); saveNow(); applyTheme(); render(); toast('清除失败，已恢复本地快照'); }
+}
+function bindDataManageScreen(){
+  const refresh=$('#dmRefresh'); if(refresh) refresh.onclick=render;
+  const optimize=$('#dmOptimize'); if(optimize) optimize.onclick=function(){ dmConfirm('优化消息数据？','只去重相同的头像资源引用，不删除消息、不改变顺序、不改变历史头像视觉效果。','开始优化',dmOptimizeMessageDataNow); };
+  const compress=$('#dmCompress'); if(compress) compress.onclick=dmCompressImagesFlow;
+  const clearImages=$('#dmClearImages'); if(clearImages) clearImages.onclick=dmClearLocalImagesFlow;
+  const clearVoice=$('#dmClearVoice'); if(clearVoice) clearVoice.onclick=dmClearVoiceCacheFlow;
+  const exp=$('#exp'); if(exp) exp.onclick=function(){ sheetManagedExport('full'); };
+  const expLight=$('#expLight'); if(expLight) expLight.onclick=exportLight;
+  const imp=$('#imp'); if(imp) imp.onclick=function(){ const input=document.createElement('input'); input.type='file'; input.accept='.json,application/json'; input.onchange=function(){ if(input.files&&input.files[0]) importAll(input.files[0]); }; input.click(); };
+  const wipe=$('#wipe'); if(wipe) wipe.onclick=dmClearAllFlow;
+}function screenSettings(){
   const af=DB.audio.provider||'minimax';
   const contextSteps=[10,20,50,100,200,500,null];
   const contextState=contextLimitState();
@@ -9060,8 +9418,7 @@ function screenSettings(){
   +'<div class="row" style="margin-top:9px"><span class="mini">音量</span><input id="clickVol" type="range" min="0" max="1" step="0.05" value="'+esc(DB.ui.clickVolume)+'" class="grow"><button class="btn" id="clickTest">试听</button></div></div>'
   +'<div class="card"><b>后台与通知</b><div class="row" style="margin-top:8px"><div class="grow"><b>后台消息推送</b><div class="muted">页面在后台时，用浏览器系统通知提醒。需要浏览器允许通知。</div></div><button class="btn" id="pushToggle">'+(DB.ui.pushEnabled?'开':'关')+'</button></div>'
   +'<div class="lrow" data-settingsview="logs" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">后台日志</div><div class="t2">自动记录最近错误、语音和接口记录，可复制</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
-  +'<div class="card"><b>数据管理</b><div class="muted" style="margin:6px 0 10px">当前数据约 '+fmtSize(dataSize())+'　·　存储方式：'+(IDB.ok? '本地数据库（大容量）':'浏览器小仓库（约 5MB，容易满）')+'</div>'
-  +'<button class="btn full" id="exp">导出全部数据</button><button class="btn full" id="imp">导入备份</button><button class="btn full danger" id="wipe">清空所有数据</button></div>'
+  +'<div class="card" data-settings-bubble="false"><button class="settings-head" id="dataManageOpen" type="button"><span class="si">'+ic('grid',18)+'</span><span class="sg"><b>数据管理</b><small>存储空间、优化清理、导出导入与清除所有数据</small></span><span class="chev">›</span></button><div class="muted" style="margin-top:8px">当前数据约 '+fmtSize(dataSize())+'　·　存储方式：'+(IDB.ok? '本地数据库（大容量）':'浏览器小仓库（约 5MB，容易满）')+'</div></div>'
   +'<div class="card"><b>自检</b><div class="muted" style="margin:8px 0 12px;line-height:1.8">全面检查页面、按钮、数据结构和接口。哪里不对，报告会直接写出来。</div><div class="lrow" data-go="checkup" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">开始全面自检</div><div class="t2">所有板块、功能、接口和按钮</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="lrow" data-settingsview="update" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">版本与更新</div><div class="t2">检查网页和 APK 是否有新版本</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
   +'<div class="card"><div class="lrow" data-settingsview="about" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">关于小手机</div><div class="t2">版本、设备、存储和接口状态</div></div><div class="rt"><span class="chev">›</span></div></div></div>'
@@ -9436,7 +9793,7 @@ function backupDataCounts(data){
 }
 function backupAppVersion(){
   const match=String(typeof BUILD==='string'?BUILD:'').match(/(\d+\.\d+)/);
-  return match?match[1]:'3.79';
+  return match?match[1]:'3.81';
 }
 function backupHashFallback(text){
   let hash=2166136261;
@@ -9463,7 +9820,7 @@ async function buildBackupPackage(snapshot){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:90,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:92,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -9475,14 +9832,7 @@ async function buildBackupPackage(snapshot){
     data:data
   };
 }
-async function exportAll(){
-  try{
-    const pkg=await buildBackupPackage();
-    const stamp=new Date();
-    const name='bsphone-backup-'+stamp.getFullYear()+String(stamp.getMonth()+1).padStart(2,'0')+String(stamp.getDate()).padStart(2,'0')+'-'+String(stamp.getHours()).padStart(2,'0')+String(stamp.getMinutes()).padStart(2,'0')+'.json';
-    return saveTextFile(name,'application/json',JSON.stringify(pkg,null,2));
-  }catch(e){ toast('导出失败：'+e.message); return false; }
-}
+function exportAll(){ sheetManagedExport('full'); }
 function fileDateStamp(){
   const d=new Date();
   return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
@@ -9491,16 +9841,17 @@ function saveTextFile(name,mime,text){
   try{
     if(window.NativeExport&&typeof window.NativeExport.saveFile==='function'){
       const result=String(window.NativeExport.saveFile(String(name||'BS小手机备份.json'),String(mime||'application/json'),String(text||'')));
-      if(result&&result.indexOf('ERROR:')!==0){ toast('已导出到 '+result); return true; }
+      if(result&&result.indexOf('ERROR:')!==0){ const finalName=result.split(/[\\/]/).pop()||String(name||''); toast('已导出到 '+result); return {ok:true,native:true,path:result,finalName:finalName}; }
     }
   }catch(e){}
+  const requested=String(name||'BS小手机备份.json');
   const blob=new Blob([String(text||'')],{type:String(mime||'application/octet-stream')});
   const url=URL.createObjectURL(blob),a=document.createElement('a');
-  a.href=url; a.download=String(name||'BS小手机备份.json'); a.style.display='none';
+  a.href=url; a.download=requested; a.style.display='none';
   document.body.appendChild(a); a.click(); a.remove();
   setTimeout(function(){ URL.revokeObjectURL(url); },1200);
-  toast('备份已开始下载');
-  return true;
+  toast('已导出 '+requested);
+  return {ok:true,native:false,path:requested,finalName:requested};
 }
 function readBackupFile(file){
   if(file&&typeof file.text==='function') return file.text();
@@ -9564,12 +9915,12 @@ function backupCountRows(counts){
 }
 function showBackupImportPreview(){
   if(!pendingBackupImport) return;
-  const pkg=pendingBackupImport.pkg,m=pkg.manifest||{},verify=pendingBackupImport.verification;
+  const pkg=pendingBackupImport.pkg,m=pkg.manifest||{},verify=pendingBackupImport.verification,isLight=String(m.scope||'')==='light';
   const verifyText=verify.status==='verified'?'完整性校验通过':verify.status==='legacy'?'旧版备份，将在导入时自动迁移':verify.status==='unavailable'?'当前设备无法复算校验值，请确认文件来源':'校验失败';
   sheetFull('<h3>导入备份</h3><div class="muted" style="margin:6px 0 12px;line-height:1.75">'+esc(pendingBackupImport.sourceName)+'<br>'+esc(verifyText)+'</div>'
     +'<div class="card" style="box-shadow:none"><div class="kv"><span>版本</span><b>'+esc(String(m.appVersion||'未知'))+' · '+esc(String(m.buildNumber||0))+'</b></div><div class="kv"><span>数据版本</span><b>'+esc(String(m.schemaVersion||'未知'))+'</b></div><div class="kv"><span>导出时间</span><b>'+esc(m.exportedAt?shortTime(m.exportedAt):'未记录')+'</b></div><div class="kv"><span>来源</span><b>'+esc(m.platform||'未知')+'</b></div></div>'
     +'<div class="card" style="box-shadow:none"><b>将导入</b>'+backupCountRows(m.counts||backupDataCounts(pkg.data))+'</div>'
-    +'<div class="muted" style="line-height:1.7">替换会先保留当前数据用于失败回滚；合并只追加不冲突的内容，同 ID 以当前数据为准。接口密钥不会从备份导入，当前设备已保存的密钥会保留。</div>'
+    +'<div class="muted" style="line-height:1.7">'+(isLight?'轻量备份的“替换”只替换聊天、角色卡、用户人设、世界书和正则，其它模块保留当前数据。':'替换会先保留当前数据用于失败回滚；合并只追加不冲突的内容，同 ID 以当前数据为准。')+'接口密钥不会从备份导入，当前设备已保存的密钥会保留。</div>'
     +'<button class="btn primary full" id="backupImportReplace">替换当前数据</button><button class="btn full" id="backupImportMerge">合并未冲突内容</button><button class="btn full" id="backupImportCancel">取消</button>');
   $('#backupImportCancel').onclick=function(){ pendingBackupImport=null; closeSheet(); };
   $('#backupImportMerge').onclick=function(){ applyImportedBackup('merge'); };
@@ -9619,7 +9970,15 @@ function applyImportedBackup(mode){
   try{
     const incoming=sanitizeImportedTree(pendingBackupImport.pkg.data);
     validateImportedSnapshot(incoming);
-    let next=mode==='merge'?mergeBackupData(previous,incoming):Object.assign(JSON.parse(JSON.stringify(DEF)),incoming);
+    const isLight=String(pendingBackupImport.pkg.manifest&&pendingBackupImport.pkg.manifest.scope||'')==='light';
+    let next;
+    if(isLight&&mode!=='merge'){
+      next=jsonSafeCopy(previous);
+      ['contacts','chats','chatGroups','worldbooks','regexes'].forEach(function(key){ if(Array.isArray(incoming[key])) next[key]=jsonSafeCopy(incoming[key]); });
+      if(incoming.me) next.me=Object.assign({},next.me||{},jsonSafeCopy(incoming.me));
+    }else{
+      next=mode==='merge'?mergeBackupData(previous,incoming):Object.assign(JSON.parse(JSON.stringify(DEF)),incoming);
+    }
     next=preserveLocalApiSecrets(next,previous);
     DB=next;
     fixAll();
@@ -9734,9 +10093,9 @@ function npPickPageWall(key){
 function galleryAlbums(){ return DB.galleryAlbums||[]; }
 function galleryItems(albumId){ return (DB.galleryPics||[]).filter(function(x){ return x.albumId===albumId; }); }
 function gallerySyncPics(){ DB.pics=(DB.galleryPics||[]).map(function(x){ return x.url; }); }
-function galleryAddPic(albumId,url){
+function galleryAddPic(albumId,url,opts){
   DB.galleryPics=DB.galleryPics||[];
-  const item={id:uid(),albumId:albumId||'wallpaper',url:url,ts:Date.now()};
+  const item={id:uid(),albumId:albumId||'wallpaper',url:url,ts:Date.now(),source:opts&&opts.source||'unknown',userUploaded:!!(opts&&opts.userUploaded)};
   DB.galleryPics.unshift(item); gallerySyncPics(); save(); return item;
 }
 function galleryRemovePic(id){
@@ -13354,7 +13713,7 @@ function sheetReaderAvatar(readerId,groupId){
     $('#readerAvatarClear').onclick=function(){ r.avatar=''; r.avatarMode='none'; save(); draw(); toast('已使用默认头像'); };
     $('#readerAvatarUpload').onclick=function(){
       const input=document.createElement('input'); input.type='file'; input.accept='image/*';
-      input.onchange=function(){ if(!input.files[0]) return; readImage(input.files[0],900,function(url){ const item=galleryAddPic('avatar',url); r.avatar=item.url; r.avatarMode='custom'; save(); draw(); toast('头像已更新'); }); };
+      input.onchange=function(){ if(!input.files[0]) return; readImage(input.files[0],900,function(url){ const item=galleryAddPic('avatar',url,{source:'upload',userUploaded:true}); r.avatar=item.url; r.avatarMode='custom'; save(); draw(); toast('头像已更新'); }); };
       input.click();
     };
     $$('#sheetBox [data-ravatar]').forEach(function(el){ el.onclick=function(){ const item=(DB.galleryPics||[]).find(function(x){ return x.id===el.dataset.ravatar; }); if(!item) return; r.avatar=item.url; r.avatarMode='custom'; save(); draw(); toast('头像已更新'); }; });
@@ -14431,7 +14790,7 @@ function bindScreenInner(){
       say.onfocus=function(){ setTimeout(scrollChatBottom,240); };
     }
     const sd=$('#send'); if(sd) sd.onclick=sendText;
-    const usageChip=$('#chatUsageChip'); if(usageChip) usageChip.onclick=function(){ sheetChatUsage(route.arg); };
+
     const pb=$('#plusBtn'); if(pb) pb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='plus') hidePanel(); else showPanel(panelPlus(),'plus'); };
     const sb=$('#stkBtn'); if(sb) sb.onclick=()=>{ const p=$('#panel'); if(p&&p.style.display==='block'&&p.dataset.kind==='stk') hidePanel(); else showPanel(panelStickers(),'stk'); };
     const ci=$('#chInfo'); if(ci) ci.onclick=()=>sheetMembers(chat(route.arg));
@@ -15145,12 +15504,9 @@ function bindScreenInner(){
       $('#demoDelYes').onclick=function(){ removeDemoData(); DB.ui.demoSeeded=true; DB.ui.demoPics=[]; DB.np.demoSeeded=true; save(); closeSheet(); render(); toast('示例内容已移除'); };
       $('#demoDelNo').onclick=closeSheet;
     };
-    $('#exp').onclick=exportAll;
-    $('#imp').onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='.json,application/json';
-      i.onchange=()=>{ if(i.files[0]) importAll(i.files[0]); }; i.click(); };
-    $('#wipe').onclick=()=>{ sheetSmall('<h3>清空所有数据？</h3><div class="muted" style="margin:8px 0 14px">联系人、聊天、朋友圈都会没。先导出备份。</div><button class="btn danger full" id="wpYes">确认清空</button><button class="btn full" id="wpNo">算了</button>');
-      $('#wpYes').onclick=()=>{ localStorage.removeItem(KEY); DB=JSON.parse(JSON.stringify(DEF)); DB.ui.demoSeeded=true; DB.np.demoSeeded=true; save(); applyTheme(); closeSheet(); go('home'); toast('已清空'); }; $('#wpNo').onclick=closeSheet; };
+    const dataManageOpen=$('#dataManageOpen'); if(dataManageOpen) dataManageOpen.onclick=()=>go('datamanage');
   }
+  if(route.name==='datamanage'){ bindDataManageScreen(); }
   if(route.name==='appearance'){
     $$('[data-theme-id]',s).forEach(el=>el.onclick=()=>{ DB.ui.theme=el.dataset.themeId; DB.ui.themeWall=true; DB.ui.customWall=''; save(); applyTheme(); render(); toast('已应用 '+((THEMES[DB.ui.theme]||{}).name||'主题')); });
     $$('[data-style-id]',s).forEach(el=>el.onclick=()=>{ DB.ui.themeStyle=el.dataset.styleId; save(); applyTheme(); render(); toast('已应用 '+((STYLES[DB.ui.themeStyle]||{}).name||'材质')); });
@@ -15198,7 +15554,7 @@ function bindScreenInner(){
       };
     };
     $('#picUp').onclick=()=>{ const i=document.createElement('input'); i.type='file'; i.accept='image/*';
-      i.onchange=()=>{ if(i.files[0]) readImage(i.files[0],1600,url=>{ galleryAddPic(DB.galleryActive||'wallpaper',url); render(); }); }; i.click(); };
+      i.onchange=()=>{ if(i.files[0]) readImage(i.files[0],1600,url=>{ galleryAddPic(DB.galleryActive||'wallpaper',url,{source:'upload',userUploaded:true}); render(); }); }; i.click(); };
     $$('[data-gpic]',s).forEach(el=>el.onclick=()=>{ const item=(DB.galleryPics||[]).find(function(x){ return x.id===el.dataset.gpic; }); if(!item) return; const p=item.url;
       const activeId=DB.galleryActive||'wallpaper'; const activeAlbum=(DB.galleryAlbums||[]).find(function(x){ return x.id===activeId; })||{name:'当前图集'};
       sheet('<img src="'+esc(p)+'" style="width:100%;border-radius:14px">'+(item.albumId!==activeId?'<button class="btn full" id="movePic">移到「'+esc(activeAlbum.name)+'」</button>':'')+'<button class="btn full" id="useAvatar">设为我的头像</button><button class="btn full" id="useWall">设为壁纸</button><button class="btn full" id="useCover">设为朋友圈封面</button><button class="btn full danger" id="delPic">删掉这张</button>');
@@ -15466,8 +15822,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-10-30 · 3.79 · 第 90 轮';
-const BUILD_CODE=90;
+const BUILD='2026-11-05 · 3.81 · 第 92 轮';
+const BUILD_CODE=92;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -15495,7 +15851,7 @@ async function runCheckupUI(){
   const waitForPageLayout=function(){
     return new Promise(function(resolve){ requestAnimationFrame(function(){ requestAnimationFrame(function(){ setTimeout(resolve,280); }); }); });
   };
-  const needFns=['screenHome','screenWechat','screenChatRoom','viewChatsInGroup','sheetChatGroups','sheetChatGroupEditor','sheetChatGroupMembers','sheetChatGroupPickForChat','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','showAppNotice','autoIntervalSec','resolveVoicePlan','regenerateChatMessage','sheetMessageBranches','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
+  const needFns=['screenHome','screenWechat','screenChatRoom','viewChatsInGroup','sheetChatGroups','sheetChatGroupEditor','sheetChatGroupMembers','sheetChatGroupPickForChat','screenNovel','screenNovelBook','screenNovelChapter','screenNovelSquare','screenNovelRankPage','screenNovelMe','screenSettings','screenProgress','screenAppearance','screenHang','hangEnsureState','sheetHangBinding','sheetHangScene','screenMall','screenTaobao','screenTakeout','sheetTakeoutCheckout','takeoutTickOrders','screenDate','sheetExactBinding','prepareDateScene','dateEnsureMsgIds','sheetDateBranch','regenLastDateTurn','screenOut','outEnsureStepIds','sheetOutBranch','regenLastOutTurn','screenWeibo','sheetWbCast','sheetWbBindingTrace','wbReactToUserPost','wbReactLikeUserPost','wbReactRepostUserPost','screenForum','screenGallery','screenDiary','screenClock','clockEnsureItems','clockResolveItem','clockCreateItem','sheetClockWheel','coupleEnsure','coupleSpaceFor','sheetCoupleBinding','generateCoupleDiary','generateCoupleTask','completeCoupleTask','advanceCoupleCooking','startCoupleCompatibility','startCoupleChallenge','sheetCoupleAdopt','careCoupleAdopted','screenCouple','soulEnsure','screenSoul','startSoulMatch','soulCompleteMatch','soulCreateFriendRequest','soulProcessRetries','sheetSoulRequests','soulAcceptRequest','soulRejectRequest','musicEnsure','musicEnsureAudio','musicPlayTrack','musicImportFiles','musicParseLRC','musicGenerateTaComment','sheetMusicBinding','screenMusic','imageEnsure','imageRequest','imageGenerateAndSend','imageIntentKind','sheetImageApiSettings','sheetImageGenerate','sheetImageDetail','hasInPageBack','syncGlobalBack','emitNotification','showAppNotice','autoIntervalSec','resolveVoicePlan','regenerateChatMessage','sheetMessageBranches','sheetRegenerateUserTurn','regenerateUserTurn','sheetUserTurnBranches','synthesizeVoice','aiTurn','npAddMessage','npEnsureNovelWorldbooks','npNovelWorldEntries','npBindNovelWorldbook','sheetNpNovelWorldbookLibrary','npParseNovelText','npCreateImportedBook','npChipEditorHTML','npBindChipEditor','npWorldBlock'];
   const missFns=needFns.filter(function(k){ try{ return eval('typeof '+k)!=='function'; }catch(e){ return true; } });
   add('核心功能函数', missFns.length===0, missFns.length? ('缺少：'+missFns.join('、')) : needFns.length+' 项存在');
   const needData=['contacts','chats','groups','moments','diary','forum','pics','books','readings','checkins','dates','outings','orders'];
@@ -15593,7 +15949,7 @@ async function runCheckupUI(){
     ['home',null,'桌面'],['wechat',null,'微信'],['chatroom',firstChat,'聊天'],['contactview',firstContact,'联系人'],
     ['contactedit',firstContact,'联系人编辑'],['novel',null,'小说'],['novelbook',firstBook&&firstBook.id,'书籍'],
     ['novelchapter',firstBook&&firstChapter?(firstBook.id+'|'+firstChapter.id):null,'章节'],['read',firstRead,'共读'],
-    ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],['progress',null,'开发进度'],
+    ['diary',null,'日记'],['forum',null,'论坛'],['gallery',null,'相册'],['appearance',null,'外观'],['settings',null,'设置'],['datamanage',null,'数据管理'],['progress',null,'开发进度'],
     ['hang',null,'查岗'],['mall',null,'商城'],['shop',null,'网购'],['takeout',null,'外卖'],['checkup',null,'自检'],
     ['clock',null,'时钟'],['couple',null,'情侣空间'],['soul',null,'灵魂匹配'],['music',null,'音乐'],
     ['date',null,'约会'],['dateroom',firstDate,'约会房间'],['out',null,'出门'],['outnew',null,'准备出门'],['outroom',firstOut,'出门房间'],

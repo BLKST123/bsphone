@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T09:26:03.816Z",
+  "checks": {
+    "default_group_all_personas_worldlines": "PASS",
+    "custom_groups_global_visible": "PASS",
+    "members_include_other_persona": "PASS",
+    "cross_persona_membership_allowed": "PASS",
+    "custom_group_cross_persona_chats": "PASS",
+    "active_persona_does_not_change_group": "PASS",
+    "groups_visible_after_persona_switch": "PASS",
+    "manager_all_buttons_44": "PASS",
+    "editor_sheet_taller": "PASS",
+    "editor_actions_initially_visible": "PASS",
+    "same_char_memory_isolation": "PASS",
+    "no_token_chip": "PASS",
+    "no_technical_copy_in_chat": "PASS",
+    "usage_still_in_more_menu": "PASS"
+  },
+  "failures": [],
+  "errors": [],
+  "source": {
+    "indexSha256": "0A0E0C3E77BDF22F3C4AD78870D0BBBD1F59263A3248F22504FA45167E941268"
+  }
+}

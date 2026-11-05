@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T09:29:25.972Z",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r1"
+  },
+  "checks": {
+    "wholeGroupReroll": "PASS",
+    "oldTailArchived": "PASS",
+    "branchSwitch": "PASS",
+    "failureRollback": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "after": {
+    "ids": [
+      "u114a",
+      "u114b",
+      "mw3bx3yk4yl3",
+      "mw3bx4alqlvd"
+    ],
+    "texts": "第一句\n第二句\n真机新回复一\n真机新回复二",
+    "branches": 2,
+    "active": "turnbranch_mw3bx3io2jk6",
+    "originalCount": 6,
+    "originalTexts": [
+      "第一句",
+      "第二句",
+      "旧回复一",
+      "旧回复二",
+      "后续用户消息",
+      "后续角色回复"
+    ]
+  },
+  "restored": {
+    "ids": [
+      "u114a",
+      "u114b",
+      "a114a",
+      "a114b",
+      "u114c",
+      "a114c"
+    ],
+    "texts": "第一句\n第二句\n旧回复一\n旧回复二\n后续用户消息\n后续角色回复"
+  },
+  "errors": []
+}

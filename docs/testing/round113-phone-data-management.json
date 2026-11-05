@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T09:31:05.742Z",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r1"
+  },
+  "checks": {
+    "dataManagementPage": "PASS",
+    "nineCards": "PASS",
+    "hitTargets44": "PASS",
+    "lightExport": "PASS",
+    "lightManifest": "PASS",
+    "clearTwoStep": "PASS",
+    "systemBackToSettings": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "pageInfo": {
+    "route": "datamanage",
+    "order": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cards": [
+      {
+        "id": "dmRefresh",
+        "w": 43.99998474121094,
+        "h": 44.000003814697266
+      },
+      {
+        "id": "dmOptimize",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmCompress",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearImages",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearVoice",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "exp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "expLight",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "imp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "wipe",
+        "w": 331.4285888671875,
+        "h": 64
+      }
+    ]
+  },
+  "remoteDir": "/storage/emulated/0/Download/BS小手机",
+  "remoteFile": "BS小手机轻量真机_2026-11-5_173103.json",
+  "size": 1626666,
+  "backRoute": "settings",
+  "errors": []
+}

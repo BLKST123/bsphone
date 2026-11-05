@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T09:30:56.232Z",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r1"
+  },
+  "checks": {
+    "twoThirds": "PASS",
+    "hitTargets44": "PASS",
+    "groupLongPress": "PASS",
+    "systemBackStack": "PASS",
+    "longPressTapRecovery": "PASS",
+    "menuItems": "PASS",
+    "iconsAndNotes": "PASS",
+    "userSelectNone": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "manager": {
+    "ratio": 0.6599984217171717,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n＋ 新建会话分组关闭"
+  },
+  "targets": {
+    "color": 44.000003814697266,
+    "icon": 44.000003814697266
+  },
+  "created": {
+    "id": "cg_mw3byyqju7te",
+    "builtin": false,
+    "name": "真机测试分组",
+    "note": "真机备注",
+    "color": "#34c759",
+    "icon": "home"
+  },
+  "base": {
+    "select": "none",
+    "buttons": [
+      false,
+      true,
+      false
+    ]
+  },
+  "oneBack": {
+    "on": true,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n真机测试分组\n0 个会话 · 真机备注\n›\n＋ 新建会话分组关闭"
+  },
+  "afterTap": {
+    "route": "chatroom",
+    "arg": "ch112",
+    "say": true
+  },
+  "errors": []
+}

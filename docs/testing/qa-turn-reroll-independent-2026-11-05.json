@@ -1,0 +1,30 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T09:20:03.739Z",
+  "source": {
+    "indexSha256": "0A0E0C3E77BDF22F3C4AD78870D0BBBD1F59263A3248F22504FA45167E941268"
+  },
+  "checks": {
+    "second_user_start_resolves_same_group": "PASS",
+    "confirmation_mentions_whole_group_and_old_tail": "PASS",
+    "whole_group_preserved_from_second_message": "PASS",
+    "old_tail_removed_from_current": "PASS",
+    "old_tail_archived": "PASS",
+    "new_reply_active": "PASS",
+    "old_branch_tail_not_in_actual_prompt": "PASS",
+    "whole_group_visible_in_actual_prompt": "PASS",
+    "environment_not_mixed_into_user_role": "PASS",
+    "no_branch_or_version_badge_in_chat": "PASS",
+    "switch_to_original_restores_tail": "PASS",
+    "switched_branch_persists_after_reload": "PASS",
+    "non_text_group_does_not_call_model": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": [],
+  "promptMeta": {
+    "messageCount": 7,
+    "lastRole": "user",
+    "lastContent": "第二句"
+  }
+}

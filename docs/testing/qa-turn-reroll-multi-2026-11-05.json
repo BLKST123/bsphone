@@ -1,0 +1,160 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T09:29:14.175Z",
+  "evidence": {
+    "checkedAt": "2026-11-05T09:29:14.176Z",
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4",
+    "debugApkSha256": "E9C1AC3C5BCAC9503982EBD4E93766D579A8B920953A2B47FFD448F0FCA030FC",
+    "releaseApkSha256": "8A263FD43D5F7E2F1E35C7269DDC863FB387AC61ACDDE86520F6E8F7B186BD9B",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r1"
+  },
+  "source": {
+    "indexSha256": "F64060C831F6212E9CDC340B4ACFE81251E0EADEED26AEECAD3042DCAC817AB4"
+  },
+  "checks": {
+    "twoRerollsCreateThreeBranches": true,
+    "noDuplicatesInCurrent": true,
+    "secondRerollActiveNew": true,
+    "switchOriginalRestoresTail": true,
+    "switchFirstNewRestoresFirstNew": true,
+    "persistedAfterReload": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "first": {
+    "branches": [
+      {
+        "id": "turnbranch_mw3cg5ch7zv7",
+        "label": "原始版本",
+        "texts": [
+          "A",
+          "B",
+          "old1",
+          "old2",
+          "later-u",
+          "later-a"
+        ]
+      },
+      {
+        "id": "turnbranch_mw3cg5chr8se",
+        "label": "重新生成 1",
+        "texts": [
+          "A",
+          "B",
+          "new-1"
+        ]
+      }
+    ],
+    "active": "turnbranch_mw3cg5chr8se",
+    "ids": [
+      "u1",
+      "u2",
+      "mw3cg60mulyw"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "second": {
+    "branches": [
+      {
+        "id": "turnbranch_mw3cg5ch7zv7",
+        "label": "原始版本",
+        "texts": [
+          "A",
+          "B",
+          "old1",
+          "old2",
+          "later-u",
+          "later-a"
+        ]
+      },
+      {
+        "id": "turnbranch_mw3cg5chr8se",
+        "label": "重新生成 1",
+        "texts": [
+          "A",
+          "B",
+          "new-1"
+        ]
+      },
+      {
+        "id": "turnbranch_mw3cg639xl5l",
+        "label": "重新生成 2",
+        "texts": [
+          "A",
+          "B",
+          "new-2"
+        ]
+      }
+    ],
+    "active": "turnbranch_mw3cg639xl5l",
+    "ids": [
+      "u1",
+      "u2",
+      "mw3cg6de0g3l"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-2"
+    ],
+    "calls": 2
+  },
+  "switched": {
+    "ok1": true,
+    "ok2": true,
+    "afterOrig": {
+      "active": "turnbranch_mw3cg5ch7zv7",
+      "ids": [
+        "u1",
+        "u2",
+        "a1",
+        "a2",
+        "u3",
+        "a3"
+      ],
+      "texts": [
+        "A",
+        "B",
+        "old1",
+        "old2",
+        "later-u",
+        "later-a"
+      ]
+    },
+    "afterNew": {
+      "active": "turnbranch_mw3cg5chr8se",
+      "ids": [
+        "u1",
+        "u2",
+        "mw3cg60mulyw"
+      ],
+      "texts": [
+        "A",
+        "B",
+        "new-1"
+      ]
+    },
+    "firstNewId": "turnbranch_mw3cg5chr8se"
+  },
+  "persisted": {
+    "active": "turnbranch_mw3cg5chr8se",
+    "ids": [
+      "u1",
+      "u2",
+      "mw3cg60mulyw"
+    ],
+    "branches": 3,
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "errors": []
+}
