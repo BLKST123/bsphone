@@ -9,9 +9,15 @@
 - 分支切换必须先更新目标 `activeBranchId`，再保存消息与完整 `turnBranches` 映射。
 - 动态时间只能进入 system 环境块，最后一条 user 消息只包含用户真实输入。
 - 生成失败必须保持原消息和原分支快照不变。
+- 自动总结记忆只在 `sourceMessageIds` 全部仍处于当前消息路径时注入；无来源旧摘要由 turn branch 的快照隔离。
+- 手动、核心、用户已修正记忆保持跨分支可用；旧分支自动记忆只在对应旧分支激活时恢复。
+- Prompt 固定顺序：stable → semi → history → memory → 本轮指令 → environment → final user。
+- 重 roll nudge 不得写入 semi；记忆不得伪装成 user。
+- Build92 返修使用 Service Worker 缓存键 `bsphone-v92-20261105-r2`。
 
 ## CURRENT
 
 - 消息级 turn/group 归属由 `pushMsg` 与 `core-store.appendMessage(s)` 双重兜底。
 - 聊天分支快照存放于 `chat.turnBranches[turnId]`，随 chats 进入备份。
+- turn branch 可选保存 `memoryItemIds` 与 `legacyMemItems`，旧数据在使用时安全补齐。
 - 连续组整组重 roll 仅支持纯文本组；非文本组不调用文本模型。

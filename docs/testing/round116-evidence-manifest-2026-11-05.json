@@ -1,0 +1,369 @@
+{
+  "ok": true,
+  "generatedAt": "2026-11-05T10:30:17.520Z",
+  "artifactEvidence": {
+    "recordedAt": "2026-11-05T10:30:17.443Z",
+    "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  },
+  "tests": [
+    {
+      "file": "qa-chat-turn-reroll-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 19,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "independent-turn-reroll-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "independent-turn-branch-switch-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 6,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-turn-reroll-independent-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 14,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-turn-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-turn-reroll-multi-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-prompt-layers-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "independent-turn-memory-branch-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-turn-memory-prompt-fix-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 13,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-turn-auto-memory-branch-fix-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-phone-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round101-phone-export.json",
+      "ok": true,
+      "presentChecks": 10,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round112-phone-batch3-fix.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round113-phone-data-management.json",
+      "ok": true,
+      "presentChecks": 8,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round114-phone-turn-reroll.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round97-full-page-ui.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round108-p1-recheck.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round109-service-worker.json",
+      "ok": true,
+      "presentChecks": 6,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-data-management-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 17,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "qa-independent-batch3-recheck.json",
+      "ok": true,
+      "presentChecks": 14,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round111-batch3-redteam-fix.json",
+      "ok": true,
+      "presentChecks": 13,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    },
+    {
+      "file": "round115-phone-release-final-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 11,
+      "failedChecks": 0,
+      "artifactEvidence": {
+        "recordedAt": "2026-11-05T10:30:17.443Z",
+        "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+        "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+        "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+        "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+        "version": "3.81",
+        "versionCode": 92,
+        "cacheKey": "bsphone-v92-20261105-r2"
+      }
+    }
+  ],
+  "errors": []
+}

@@ -1,0 +1,389 @@
+﻿===== _round114_phone_turn_reroll_test.cjs =====
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T10:23:17.128Z",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  },
+  "checks": {
+    "wholeGroupReroll": "PASS",
+    "oldTailArchived": "PASS",
+    "branchSwitch": "PASS",
+    "failureRollback": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "after": {
+    "ids": [
+      "u114a",
+      "u114b",
+      "mw3dudjtto0d"
+    ],
+    "texts": "第一句\n第二句\n真机新回复一 真机新回复二",
+    "branches": 2,
+    "active": "turnbranch_mw3dud34jcga",
+    "originalCount": 6,
+    "originalTexts": [
+      "第一句",
+      "第二句",
+      "旧回复一",
+      "旧回复二",
+      "后续用户消息",
+      "后续角色回复"
+    ]
+  },
+  "restored": {
+    "ids": [
+      "u114a",
+      "u114b",
+      "a114a",
+      "a114b",
+      "u114c",
+      "a114c"
+    ],
+    "texts": "第一句\n第二句\n旧回复一\n旧回复二\n后续用户消息\n后续角色回复"
+  },
+  "errors": []
+}
+EXIT=0
+===== _qa_phone_branch_switch_ui_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-05T10:23:28.253Z",
+  "checks": {
+    "uiSwitchToOriginalContent": true,
+    "uiSwitchToFirstNewContent": true,
+    "activeMatchesTarget": true,
+    "originalSwitchActiveMatchesTarget": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "orig": {
+    "active": "turnbranch_mw3dul0xg5gc",
+    "ids": [
+      "uqa1",
+      "uqa2",
+      "aqa1",
+      "aqa2",
+      "uqa3",
+      "aqa3"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "old1",
+      "old2",
+      "later-u",
+      "later-a"
+    ],
+    "branches": [
+      {
+        "id": "turnbranch_mw3dul0xg5gc",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw3dul0xw9pt",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw3dulgnzbt9",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "new1": {
+    "active": "turnbranch_mw3dul0xw9pt",
+    "ids": [
+      "uqa1",
+      "uqa2",
+      "mw3duldl1big"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ],
+    "branches": [
+      {
+        "id": "turnbranch_mw3dul0xg5gc",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw3dul0xw9pt",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw3dulgnzbt9",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "target": "turnbranch_mw3dul0xw9pt",
+  "rowsBefore": [
+    "原始版本 · 当前old1✓",
+    "重新生成 1new-1›",
+    "重新生成 2new-2›"
+  ],
+  "errors": []
+}
+EXIT=0
+===== _round101_phone_export_test.cjs =====
+[R101] 真机导出 -> BS小手机_2026-11-5_18_08.json 26780195 bytes
+[R101] manifest -> 3.81 / Build 92 / schema 4
+[R101] 全部断言通过
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T10:23:36.266Z",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  },
+  "checks": {
+    "dataManagementPage": "PASS",
+    "nineCards": "PASS",
+    "hitTargets44": "PASS",
+    "settingsExportClick": "PASS",
+    "filenameDialog": "PASS",
+    "publicDownloadsDirectory": "PASS",
+    "manifestReadable": "PASS",
+    "noApiKeyInManifest": "PASS",
+    "build92": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "before": {
+    "build": "2026-11-05 · 3.81 · 第 92 轮",
+    "code": 92,
+    "contacts": 2,
+    "chats": 4
+  },
+  "dmPage": {
+    "route": "datamanage",
+    "order": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cards": [
+      {
+        "id": "dmRefresh",
+        "w": 44.00001907348633,
+        "h": 44.000003814697266
+      },
+      {
+        "id": "dmOptimize",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmCompress",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearImages",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearVoice",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "exp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "expLight",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "imp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "wipe",
+        "w": 331.4285888671875,
+        "h": 64
+      }
+    ]
+  },
+  "remoteDir": "/storage/emulated/0/Download/BS小手机",
+  "remoteFile": "BS小手机_2026-11-5_18_08.json",
+  "size": 26780195,
+  "manifest": {
+    "schemaVersion": 4,
+    "appVersion": "3.81",
+    "buildNumber": 92
+  },
+  "runtimeErrors": [],
+  "consoleErrors": []
+}
+EXIT=0
+===== _round112_phone_batch3_fix_test.cjs =====
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T10:23:47.721Z",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  },
+  "checks": {
+    "twoThirds": "PASS",
+    "hitTargets44": "PASS",
+    "groupLongPress": "PASS",
+    "systemBackStack": "PASS",
+    "longPressTapRecovery": "PASS",
+    "menuItems": "PASS",
+    "iconsAndNotes": "PASS",
+    "userSelectNone": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "manager": {
+    "ratio": 0.6599984217171717,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n＋ 新建会话分组关闭"
+  },
+  "targets": {
+    "color": 44.000003814697266,
+    "icon": 44.000003814697266
+  },
+  "created": {
+    "id": "cg_mw3dux5iyaaa",
+    "builtin": false,
+    "name": "真机测试分组",
+    "note": "真机备注",
+    "color": "#34c759",
+    "icon": "home"
+  },
+  "base": {
+    "select": "none",
+    "buttons": [
+      false,
+      true,
+      false
+    ]
+  },
+  "oneBack": {
+    "on": true,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n真机测试分组\n0 个会话 · 真机备注\n›\n＋ 新建会话分组关闭"
+  },
+  "afterTap": {
+    "route": "chatroom",
+    "arg": "ch112",
+    "say": true
+  },
+  "errors": []
+}
+EXIT=0
+===== _round113_phone_data_management_test.cjs =====
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-05T10:23:55.836Z",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  },
+  "checks": {
+    "dataManagementPage": "PASS",
+    "nineCards": "PASS",
+    "hitTargets44": "PASS",
+    "lightExport": "PASS",
+    "lightManifest": "PASS",
+    "clearTwoStep": "PASS",
+    "systemBackToSettings": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "pageInfo": {
+    "route": "datamanage",
+    "order": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cards": [
+      {
+        "id": "dmRefresh",
+        "w": 43.99998474121094,
+        "h": 44.000003814697266
+      },
+      {
+        "id": "dmOptimize",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmCompress",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearImages",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearVoice",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "exp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "expLight",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "imp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "wipe",
+        "w": 331.4285888671875,
+        "h": 64
+      }
+    ]
+  },
+  "remoteDir": "/storage/emulated/0/Download/BS小手机",
+  "remoteFile": "BS小手机轻量真机_2026-11-5_182353.json",
+  "size": 1629520,
+  "backRoute": "settings",
+  "errors": []
+}
+EXIT=0
+SUMMARY ALL PASS

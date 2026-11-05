@@ -1,0 +1,88 @@
+{
+  "ok": true,
+  "checks": {
+    "sheetTwoThirds": "PASS",
+    "iconsVisible": "PASS",
+    "notes": "PASS",
+    "hitTargets44": "PASS",
+    "groupLongPress": "PASS",
+    "crossPersonaGroupsGlobal": "PASS",
+    "directDisband": "PASS",
+    "systemBackStack": "PASS",
+    "userSelectNone": "PASS",
+    "longPressTapRecovery": "PASS",
+    "menuPinReadBackground": "PASS",
+    "backupRoundtrip": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "managerHeight": {
+    "ratio": 0.6599896327014217,
+    "height": 557.03125
+  },
+  "targetSize": {
+    "color": [
+      44,
+      44
+    ],
+    "icon": [
+      44,
+      44
+    ]
+  },
+  "created": {
+    "id": "cg_mw3ejidb2l7z",
+    "builtin": false,
+    "name": "家人",
+    "note": "只有家里人",
+    "color": "#34c759",
+    "icon": "home"
+  },
+  "base": {
+    "userSelect": "none",
+    "webkitUserSelect": "none"
+  },
+  "backOne": {
+    "sheet": true,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n家人\n0 个会话 · 只有家里人\n›\n其他人设的分组\n0 个会话\n›\n＋ 新建会话分组关闭",
+    "route": "wechat"
+  },
+  "afterTap": {
+    "route": "chatroom",
+    "arg": "ch111",
+    "say": true
+  },
+  "roundtrip": {
+    "imported": true,
+    "verification": {
+      "ok": true,
+      "status": "verified",
+      "algorithm": "SHA-256"
+    },
+    "groupId": "cg_mw3ejidb2l7z",
+    "group": {
+      "name": "家人",
+      "note": "只有家里人",
+      "color": "#34c759",
+      "icon": "home"
+    },
+    "chats": [
+      {
+        "id": "ch111",
+        "groupIds": [
+          "cg_mw3ejidb2l7z"
+        ]
+      }
+    ]
+  },
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-05T10:30:17.443Z",
+    "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  }
+}

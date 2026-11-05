@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "checkedAt": "2026-11-05T09:26:03.600Z",
+  "checkedAt": "2026-11-05T10:27:40.741Z",
   "checks": {
     "settings_entry_visible": "PASS",
     "route_datamanage": "PASS",
@@ -21,5 +21,15 @@
     "no_runtime_errors": "PASS"
   },
   "failures": [],
-  "errors": []
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-05T10:30:17.443Z",
+    "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  }
 }

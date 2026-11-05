@@ -11,20 +11,20 @@
   "first": {
     "probe": "v1",
     "keys": [
-      "bsphone-v92-20261105-r1"
+      "bsphone-v92-20261105-r2"
     ],
     "count": 10,
     "urls": [
       "/",
-      "/index.html",
       "/manifest.webmanifest",
-      "/icon-192.png",
+      "/index.html",
       "/icon-512.png",
       "/core/design/tokens.css",
       "/core/design/shell.css",
       "/core/store/core-store.js",
       "/core/store/readonly-store.js",
-      "/core/prompts/sysworld-v2.js"
+      "/core/prompts/sysworld-v2.js",
+      "/icon-192.png"
     ]
   },
   "second": {
@@ -37,5 +37,15 @@
     "screen": true,
     "text": "小记\n09:30\n今天 · 晴 · 19°C\n一\n二\n三\n四\n五\n六\n日\n今天也要\n慢一点，也没关系。\n日记\n外卖\n微信\n小说\n相册\n微博\n今日一句\n慢慢做好\n"
   },
-  "errors": []
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-05T10:30:17.443Z",
+    "sourceCommit": "fa358f461d2f87f858ccef4174a063bc1f2b434b",
+    "indexSha256": "5099E7921F441F402E096296A131A289D5F66691AED7A5AC722D1130666034ED",
+    "debugApkSha256": "A5DFFDB099B96C6DF2BB796DD0DB54CBD2237394AD56564AFDDBE53D943FBC63",
+    "releaseApkSha256": "6016BD519FEC58BA6F49E80BBE83D558385C909AB53BB20212F95A0A7BB4C95A",
+    "version": "3.81",
+    "versionCode": 92,
+    "cacheKey": "bsphone-v92-20261105-r2"
+  }
 }
