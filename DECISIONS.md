@@ -13,7 +13,10 @@
 - 手动、核心、用户已修正记忆保持跨分支可用；旧分支自动记忆只在对应旧分支激活时恢复。
 - Prompt 固定顺序：stable → semi → history → memory → 本轮指令 → environment → final user。
 - 重 roll nudge 不得写入 semi；记忆不得伪装成 user。
-- Build92 返修使用 Service Worker 缓存键 `bsphone-v92-20261105-r2`。
+- Build93 使用 Service Worker 缓存键 `bsphone-v93-20261106-r1`。
+- 编辑并重新生成必须创建新的 user message_id，旧 user/char/后续消息进入旧分支；turnId 不增加。
+- 从这里创建新分支保留到当前 user 消息，当前气泡之后的内容进入旧分支；该操作不调用模型。
+- 角色消息“忘记这条”必须两次确认，并清理当前聊天、分支快照、来源记忆与记忆游标；订单/相册/收藏实体不自动删除。
 
 ## CURRENT
 

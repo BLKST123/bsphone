@@ -1,0 +1,1026 @@
+﻿===== _qa_chat_turn_reroll_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:17:30.013Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T05:17:30.014Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "checks": {
+    "user_group_menu_has_regenerate": "PASS",
+    "regenerate_confirm_visible": "PASS",
+    "whole_user_group_preserved": "PASS",
+    "old_tail_not_in_current": "PASS",
+    "old_tail_archived": "PASS",
+    "new_reply_active": "PASS",
+    "environment_not_mixed_into_user_role": "PASS",
+    "environment_in_system_context": "PASS",
+    "active_branch_pointed_to_new": "PASS",
+    "turn_branch_menu_available": "PASS",
+    "branch_list_visible": "PASS",
+    "switch_back_to_original_branch": "PASS",
+    "switch_updates_active_branch_id": "PASS",
+    "generation_failure_rolls_back": "PASS",
+    "turn_branches_in_backup": "PASS",
+    "turn_branches_persist_reload": "PASS",
+    "real_sendtext_messages_form_one_group": "PASS",
+    "char_single_regenerate_removed": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": []
+}
+EXIT=0
+===== _independent_turn_reroll_audit_2026-11-05.cjs =====
+{
+  "checkedAt": "2026-11-06T05:17:34.214Z",
+  "sourceSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+  "tests": {
+    "newMessagesFormOneGroupWithoutReload": true,
+    "secondOrThirdBubbleOpensGroupMenu": true,
+    "confirmNamesWholeGroup": true,
+    "promptContainsAllGroup": true,
+    "promptExcludesOldReplyAndTail": true,
+    "repeatedSwitchNoDuplicate": true,
+    "switchToOriginalPersistsReload": true,
+    "nontextGroupBlocked": true,
+    "chatPageNoVersionBadge": true
+  },
+  "evidence": {
+    "checkedAt": "2026-11-06T05:17:40.269Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "errors": [],
+  "ok": true
+}
+EXIT=0
+===== _independent_turn_branch_switch_audit_2026-11-05.cjs =====
+{
+  "checkedAt": "2026-11-06T05:17:43.158Z",
+  "tests": {
+    "freshConsecutiveMessagesRecognized": true,
+    "firstSwitchUpdatesDisplayedMessages": true,
+    "firstSwitchUpdatesActiveBranch": true,
+    "menuCheckmarkMatchesDisplayedMessages": true,
+    "switchBackRestoresGeneratedBranch": true,
+    "switchBackDoesNotOverwriteNewBranchSnapshot": true
+  },
+  "evidence": {
+    "freshGroup": {
+      "beforeReload": [
+        {
+          "id": "mw4iwlh3v6ar",
+          "text": "新消息甲",
+          "turnId": "turn_mw4iwlh3s5o2",
+          "messageGroupId": "group_mw4iwlh35dyl"
+        },
+        {
+          "id": "mw4iwlh45i1z",
+          "text": "新消息乙",
+          "turnId": "turn_mw4iwlh3s5o2",
+          "messageGroupId": "group_mw4iwlh35dyl"
+        }
+      ],
+      "confirm": "重新生成这一组？\n将重新打包：\n新消息甲 新消息乙\n\n原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。\n重新生成取消"
+    },
+    "initial": {
+      "label": "initial",
+      "ids": [
+        "u1",
+        "u2",
+        "mw4iwn7dk8pt"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "新版回复"
+      ],
+      "activeId": "turnbranch_mw4iwmx482jw",
+      "branches": [
+        {
+          "id": "turnbranch_mw4iwmx4ef1m",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw4iwmx482jw",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw4iwn7dk8pt"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    },
+    "afterSwitchOriginal": {
+      "label": "afterSwitchOriginal",
+      "ids": [
+        "u1",
+        "u2",
+        "old1",
+        "oldlater"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "原始回复",
+        "原始后续"
+      ],
+      "activeId": "turnbranch_mw4iwmx4ef1m",
+      "branches": [
+        {
+          "id": "turnbranch_mw4iwmx4ef1m",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw4iwmx482jw",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw4iwn7dk8pt"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    },
+    "branchMenuBefore": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n原始回复\n›\n重新生成 1 · 当前\n新版回复\n✓\n返回",
+    "branchMenuAfter": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本 · 当前\n原始回复\n✓\n重新生成 1\n新版回复\n›\n返回",
+    "afterSwitchBackNew": {
+      "label": "afterSwitchBackNew",
+      "ids": [
+        "u1",
+        "u2",
+        "mw4iwn7dk8pt"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "新版回复"
+      ],
+      "activeId": "turnbranch_mw4iwmx482jw",
+      "branches": [
+        {
+          "id": "turnbranch_mw4iwmx4ef1m",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw4iwmx482jw",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw4iwn7dk8pt"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    }
+  },
+  "screenshots": {
+    "freshGroup": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\docs\\testing\\independent-fresh-group-confirm-2026-11-05.png",
+    "branchMismatch": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\docs\\testing\\independent-branch-mismatch-2026-11-05.png"
+  },
+  "errors": [],
+  "ok": true,
+  "evidenceMeta": {
+    "checkedAt": "2026-11-06T05:17:46.736Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  }
+}
+EXIT=0
+===== _qa_turn_reroll_independent_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:17:55.197Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T05:17:55.198Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "source": {
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439"
+  },
+  "checks": {
+    "second_user_start_resolves_same_group": "PASS",
+    "confirmation_mentions_whole_group_and_old_tail": "PASS",
+    "whole_group_preserved_from_second_message": "PASS",
+    "old_tail_removed_from_current": "PASS",
+    "old_tail_archived": "PASS",
+    "new_reply_active": "PASS",
+    "old_branch_tail_not_in_actual_prompt": "PASS",
+    "whole_group_visible_in_actual_prompt": "PASS",
+    "environment_not_mixed_into_user_role": "PASS",
+    "no_branch_or_version_badge_in_chat": "PASS",
+    "switch_to_original_restores_tail": "PASS",
+    "switched_branch_persists_after_reload": "PASS",
+    "non_text_group_does_not_call_model": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": [],
+  "promptMeta": {
+    "messageCount": 8,
+    "lastRole": "user",
+    "lastContent": "第二句"
+  }
+}
+EXIT=0
+===== _qa_turn_branch_switch_ui_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:18:04.850Z",
+  "source": {
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439"
+  },
+  "checks": {
+    "uiSwitchToOriginal": true,
+    "uiSwitchToFirstNew": true,
+    "activeMatchesDisplayedBranch": true,
+    "persistedMatchesDisplayed": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "orig": {
+    "active": "turnbranch_mw4iwz9r61dg",
+    "ids": [
+      "u1",
+      "u2",
+      "a1",
+      "a2",
+      "u3",
+      "a3"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "old1",
+      "old2",
+      "later-u",
+      "later-a"
+    ]
+  },
+  "new1": {
+    "active": "turnbranch_mw4iwz9r64u8",
+    "ids": [
+      "u1",
+      "u2",
+      "mw4ix05sjyn8"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ],
+    "branchIds": [
+      {
+        "id": "turnbranch_mw4iwz9r61dg",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw4iwz9r64u8",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw4ix0g5aktf",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "persisted": {
+    "active": "turnbranch_mw4iwz9r64u8",
+    "ids": [
+      "u1",
+      "u2",
+      "mw4ix05sjyn8"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "branchRows": [
+    "原始版本 · 当前old1✓",
+    "重新生成 1new-1›",
+    "重新生成 2new-2›"
+  ],
+  "errors": [],
+  "evidence": {
+    "checkedAt": "2026-11-06T05:18:04.854Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  }
+}
+EXIT=0
+===== _qa_turn_reroll_multi_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:18:11.956Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T05:18:11.957Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "source": {
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439"
+  },
+  "checks": {
+    "twoRerollsCreateThreeBranches": true,
+    "noDuplicatesInCurrent": true,
+    "secondRerollActiveNew": true,
+    "switchOriginalRestoresTail": true,
+    "switchFirstNewRestoresFirstNew": true,
+    "persistedAfterReload": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "first": {
+    "branches": [
+      {
+        "id": "turnbranch_mw4ix5ma1f17",
+        "label": "原始版本",
+        "texts": [
+          "A",
+          "B",
+          "old1",
+          "old2",
+          "later-u",
+          "later-a"
+        ]
+      },
+      {
+        "id": "turnbranch_mw4ix5makn58",
+        "label": "重新生成 1",
+        "texts": [
+          "A",
+          "B",
+          "new-1"
+        ]
+      }
+    ],
+    "active": "turnbranch_mw4ix5makn58",
+    "ids": [
+      "u1",
+      "u2",
+      "mw4ix6ider70"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "second": {
+    "branches": [
+      {
+        "id": "turnbranch_mw4ix5ma1f17",
+        "label": "原始版本",
+        "texts": [
+          "A",
+          "B",
+          "old1",
+          "old2",
+          "later-u",
+          "later-a"
+        ]
+      },
+      {
+        "id": "turnbranch_mw4ix5makn58",
+        "label": "重新生成 1",
+        "texts": [
+          "A",
+          "B",
+          "new-1"
+        ]
+      },
+      {
+        "id": "turnbranch_mw4ix6n7f45g",
+        "label": "重新生成 2",
+        "texts": [
+          "A",
+          "B",
+          "new-2"
+        ]
+      }
+    ],
+    "active": "turnbranch_mw4ix6n7f45g",
+    "ids": [
+      "u1",
+      "u2",
+      "mw4ix6x1ec2m"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-2"
+    ],
+    "calls": 2
+  },
+  "switched": {
+    "ok1": true,
+    "ok2": true,
+    "afterOrig": {
+      "active": "turnbranch_mw4ix5ma1f17",
+      "ids": [
+        "u1",
+        "u2",
+        "a1",
+        "a2",
+        "u3",
+        "a3"
+      ],
+      "texts": [
+        "A",
+        "B",
+        "old1",
+        "old2",
+        "later-u",
+        "later-a"
+      ]
+    },
+    "afterNew": {
+      "active": "turnbranch_mw4ix5makn58",
+      "ids": [
+        "u1",
+        "u2",
+        "mw4ix6ider70"
+      ],
+      "texts": [
+        "A",
+        "B",
+        "new-1"
+      ]
+    },
+    "firstNewId": "turnbranch_mw4ix5makn58"
+  },
+  "persisted": {
+    "active": "turnbranch_mw4ix5makn58",
+    "ids": [
+      "u1",
+      "u2",
+      "mw4ix6ider70"
+    ],
+    "branches": 3,
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ]
+  },
+  "errors": []
+}
+EXIT=0
+===== _qa_prompt_layers_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:18:16.735Z",
+  "source": {
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439"
+  },
+  "checks": {
+    "memoryPresent": true,
+    "nudgePresent": true,
+    "environmentPresent": true,
+    "finalUserOnly": true,
+    "memoryAfterHistory": true,
+    "nudgeAfterHistory": true,
+    "environmentAfterHistory": true
+  },
+  "failures": [],
+  "indices": {
+    "memIndex": 3,
+    "nudgeIndex": 4,
+    "envIndex": 5,
+    "finalIndex": 6
+  },
+  "messages": [
+    {
+      "i": 0,
+      "role": "system",
+      "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择"
+    },
+    {
+      "i": 1,
+      "role": "system",
+      "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标"
+    },
+    {
+      "i": 2,
+      "role": "user",
+      "head": "第一句"
+    },
+    {
+      "i": 3,
+      "role": "system",
+      "head": "[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n【记忆中心（过去记忆，不是用户当前发言）】\n- 用户对花生过敏"
+    },
+    {
+      "i": 4,
+      "role": "system",
+      "head": "【这次的特别要求】这次是对用户连续消息组「第一句 / 第二句」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
+    },
+    {
+      "i": 5,
+      "role": "system",
+      "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+    },
+    {
+      "i": 6,
+      "role": "user",
+      "head": "第二句"
+    }
+  ],
+  "errors": []
+}
+EXIT=0
+===== _independent_turn_memory_branch_audit_2026-11-05.cjs =====
+{
+  "tests": {
+    "oldStructuredMemoryExcludedFromNewBranch": true,
+    "oldSessionDigestExcludedFromNewBranch": true,
+    "newBranchStillGenerated": true
+  },
+  "evidence": {
+    "hasOldStructuredMemory": false,
+    "hasOldDigest": false,
+    "currentTexts": [
+      "同一组甲",
+      "同一组乙",
+      "新分支回复"
+    ]
+  },
+  "errors": []
+}
+EXIT=0
+===== _qa_turn_auto_memory_branch_fix_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:18:26.968Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T05:18:26.969Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "checks": {
+    "autoSummaryCreated": true,
+    "newBranchExcludesAutoSummary": true,
+    "newBranchStillGenerated": true,
+    "originalKeepsSummary": true,
+    "freshDropsLegacySummary": true,
+    "oldBranchRestoresAutoSummary": true,
+    "oldBranchOldTailRestored": true
+  },
+  "failures": [],
+  "created": {
+    "id": "memory_mw4ixhpo6n1y",
+    "type": "auto",
+    "sourceMessageIds": [
+      "au1",
+      "au2",
+      "aa1",
+      "aa2"
+    ],
+    "plainText": "旧自动摘要：角色后来已经搬到另一座城市"
+  },
+  "currentTexts": [
+    "自动组甲",
+    "自动组乙",
+    "旧自动回复",
+    "旧自动后续",
+    "旧自动分支恢复回复"
+  ],
+  "captured": [
+    [
+      {
+        "role": "system",
+        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+      },
+      {
+        "role": "user",
+        "head": "用户：自动组甲\n用户：自动组乙\n角色：旧自动回复\n角色：旧自动后续"
+      }
+    ],
+    [
+      {
+        "role": "system",
+        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+      },
+      {
+        "role": "system",
+        "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
+      },
+      {
+        "role": "user",
+        "head": "自动组甲"
+      },
+      {
+        "role": "system",
+        "head": "【这次的特别要求】这次是对用户连续消息组「自动组甲 / 自动组乙」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
+      },
+      {
+        "role": "system",
+        "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+      },
+      {
+        "role": "user",
+        "head": "自动组乙"
+      }
+    ],
+    [
+      {
+        "role": "system",
+        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+      },
+      {
+        "role": "system",
+        "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
+      },
+      {
+        "role": "user",
+        "head": "自动组甲"
+      },
+      {
+        "role": "user",
+        "head": "自动组乙"
+      },
+      {
+        "role": "assistant",
+        "head": "旧自动回复"
+      },
+      {
+        "role": "assistant",
+        "head": "旧自动后续"
+      },
+      {
+        "role": "system",
+        "head": "[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n【记忆中心（过去记忆，不是用户当前发言）】\n- 旧自动摘要：角色后来已经搬到另一座城市"
+      },
+      {
+        "role": "system",
+        "head": "【这次的特别要求】验证自动摘要旧分支恢复"
+      },
+      {
+        "role": "system",
+        "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+      }
+    ]
+  ],
+  "errors": []
+}
+EXIT=0
+===== _qa_wechat_message_edit_branch_2026-11-06.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T05:18:35.039Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T05:18:35.041Z",
+    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
+    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
+    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
+    "version": "3.82",
+    "versionCode": 93,
+    "cacheKey": "bsphone-v93-20261106-r1"
+  },
+  "checks": {
+    "user_menu_required_order": "PASS",
+    "user_menu_44_targets": "PASS",
+    "editor_prefilled": "PASS",
+    "editor_hint_exact": "PASS",
+    "editor_44_targets": "PASS",
+    "edited_new_message_ids": "PASS",
+    "edited_same_turn_no_new_turn": "PASS",
+    "edited_same_message_group": "PASS",
+    "edited_old_tail_archived": "PASS",
+    "edited_new_branch_active": "PASS",
+    "edited_prompt_clean": "PASS",
+    "edited_ui_zero_marker": "PASS",
+    "edited_state_reset": "PASS",
+    "edit_failure_rollback": "PASS",
+    "create_branch_confirm_copy": "PASS",
+    "create_branch_truncates_current": "PASS",
+    "create_branch_archives_old_tail": "PASS",
+    "create_branch_no_model_call": "PASS",
+    "create_branch_switch_back": "PASS",
+    "char_menu_order": "PASS",
+    "forget_two_step_copy": "PASS",
+    "forget_removes_message_memory": "PASS",
+    "forget_state_reset": "PASS",
+    "delete_two_step_not_immediate": "PASS",
+    "no_runtime_errors": "PASS",
+    "no_console_errors": "PASS"
+  },
+  "failures": [],
+  "menuOrder": [
+    "重新生成整个连续组",
+    "重新编辑并生成",
+    "从这里创建新分支",
+    "聊天分支",
+    "复制文字",
+    "引用这条",
+    "收藏这条",
+    "撤回这条",
+    "删除这条",
+    "取消"
+  ],
+  "menuBoxes": [
+    {
+      "id": "mvRegenGroup",
+      "w": 354,
+      "h": 44,
+      "text": "重新生成整个连续组"
+    },
+    {
+      "id": "mvEditGroup",
+      "w": 354,
+      "h": 44,
+      "text": "重新编辑并生成"
+    },
+    {
+      "id": "mvCreateBranch",
+      "w": 354,
+      "h": 44,
+      "text": "从这里创建新分支"
+    },
+    {
+      "id": "mvTurnBranches",
+      "w": 354,
+      "h": 44,
+      "text": "聊天分支"
+    },
+    {
+      "id": "mvCopy",
+      "w": 354,
+      "h": 44,
+      "text": "复制文字"
+    },
+    {
+      "id": "mvQuote",
+      "w": 354,
+      "h": 44,
+      "text": "引用这条"
+    },
+    {
+      "id": "mvFav",
+      "w": 354,
+      "h": 44,
+      "text": "收藏这条"
+    },
+    {
+      "id": "mvBack",
+      "w": 354,
+      "h": 44,
+      "text": "撤回这条"
+    },
+    {
+      "id": "mvDel",
+      "w": 354,
+      "h": 44,
+      "text": "删除这条"
+    },
+    {
+      "id": "mvCancel",
+      "w": 354,
+      "h": 44,
+      "text": "取消"
+    }
+  ],
+  "editorBoxes": [
+    {
+      "id": "editGroupGo",
+      "w": 358,
+      "h": 44,
+      "text": "保存并重新生成"
+    },
+    {
+      "id": "editGroupNo",
+      "w": 358,
+      "h": 44,
+      "text": "取消"
+    }
+  ],
+  "edited": {
+    "ids": [
+      "message_mw4ixmkvcjhg",
+      "message_mw4ixmkvnn35",
+      "message_mw4ixmkv72d9",
+      "mw4ixmvuujb4"
+    ],
+    "texts": [
+      "新甲",
+      "新乙",
+      "新丙",
+      "编辑后新回复"
+    ],
+    "userTexts": [
+      "新甲",
+      "新乙",
+      "新丙"
+    ],
+    "turnIds": [
+      "t1"
+    ],
+    "groups": [
+      "group_mw4ixmkvk1si"
+    ],
+    "active": "turnbranch_mw4ixmkvr0ov",
+    "freshId": "turnbranch_mw4ixmkvr0ov",
+    "originalTexts": [
+      "第一句",
+      "第二句",
+      "旧回复一",
+      "旧回复二",
+      "后续用户",
+      "后续角色"
+    ],
+    "freshTexts": [
+      "新甲",
+      "新乙",
+      "新丙",
+      "编辑后新回复"
+    ],
+    "prompt": [
+      {
+        "role": "system",
+        "content": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不是用户发言。\n5. 只使用当前会话、当前角色、当前世界线和当前分支提供的事实，不引用其它会话隐私。\n6. 角色必须遵守角色卡、世界书、关系状态和当前场景；可以保留缺点、脾气、犹豫和误解，不要强行温柔或说教。\n7. 不重复上一轮的开场、句式和模板；句子长短、停顿、用词要随情境变化。\n8. 不写“第一人称·多少字”“情绪名|数值|目标”这类模板提示，除非当前 schema 明确要求 JSON 字段。\n9. 文本类任务输出纯文本；JSON 类任务只输出合法 JSON，不加 Markdown 代码围栏。\n10. 如果当前信息不足，宁可留白或写自然的不确定，不要编造另一条会话的记忆。\n\n【文本任务额外规则】\n- 不使用【旁白】【对白】【第一人称】等标题，除非 taskType 明确要求结构化字段。\n- 不复制用户整段话，不把环境时间当作用户说过的话。\n- 角色说话不加引号、不加“角色名：”前缀。\n- 不输出完整歌词、内部 ID、密钥、真实地址或真实账号信息。\n\n【JSON 任务额外规则】\n- 严格输出合法 JSON。\n- 字段缺一不可，但值要自然、具体、有情境。\n- 不把 JSON 字段名写进角色台词。\n- 不输出额外解释。\n你在扮演「角色」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。\n用户的名字是「我」。\n【用户的人设（你要当成事实）】姓名/称呼：用户"
+      },
+      {
+        "role": "system",
+        "content": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。\n【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。\n【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。\n【本次气泡数量】本次必须正好输出 3 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。"
+      },
+      {
+        "role": "user",
+        "content": "新甲"
+      },
+      {
+        "role": "user",
+        "content": "新乙"
+      },
+      {
+        "role": "system",
+        "content": "【这次的特别要求】这次是用户编辑后的连续消息组「新甲 / 新乙 / 新丙」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
+      },
+      {
+        "role": "system",
+        "content": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+      },
+      {
+        "role": "user",
+        "content": "新丙"
+      }
+    ],
+    "busy": false,
+    "sheet": false
+  },
+  "rollback": {
+    "sameM": true,
+    "sameB": true
+  },
+  "branchConfirm": "从这里创建新分支？\n当前气泡之后的内容会进入旧分支；新分支保留到这里，之后可以继续发送。旧分支仍可从「聊天分支」切回。\n创建新分支取消",
+  "branchResult": {
+    "texts": [
+      "分支甲",
+      "分支乙"
+    ],
+    "ids": [
+      "bu1",
+      "bu2"
+    ],
+    "active": "turnbranch_mw4ixnorzskl",
+    "branches": [
+      {
+        "id": "turnbranch_mw4ixnori5cb",
+        "label": "原始版本",
+        "texts": [
+          "分支甲",
+          "分支乙",
+          "分支旧回复",
+          "分支后续",
+          "分支后续回复"
+        ]
+      },
+      {
+        "id": "turnbranch_mw4ixnorzskl",
+        "label": "新分支 1",
+        "texts": [
+          "分支甲",
+          "分支乙"
+        ]
+      }
+    ],
+    "calls": 1
+  },
+  "restoredBranch": {
+    "texts": [
+      "分支甲",
+      "分支乙",
+      "分支旧回复",
+      "分支后续",
+      "分支后续回复"
+    ],
+    "active": "turnbranch_mw4ixnori5cb",
+    "originalId": "turnbranch_mw4ixnori5cb"
+  },
+  "forgetFirst": "忘记这条？\n会从当前聊天流、当前上下文和角色对这段对话的记忆中移除。订单、相册、收藏等实体不会自动删除；用量统计保留，但内容不再用于对话。\n要被忘记的角色话\n继续取消",
+  "forgetSecond": "再次确认忘记\n确认后，这条角色消息不会出现在当前聊天或后续上下文里。\n确认忘记取消",
+  "forgotten": {
+    "texts": [
+      "忘记测试"
+    ],
+    "memoryStatus": "deleted",
+    "memorySources": [
+      "fa1"
+    ],
+    "legacy": [],
+    "usage": 1,
+    "sheet": false,
+    "branchHas": false,
+    "cursorLast": "fu1"
+  },
+  "deleteFirst": "删除这条消息？\n它只会从当前聊天流移除，不会删除收藏、订单或相册实体。\n继续取消",
+  "deleteSecond": "再次确认删除\n删除后不会在当前聊天流显示，这会作用于当前这一条。\n永久删除取消",
+  "errors": [],
+  "consoleErrors": []
+}
+EXIT=0
+SUMMARY ALL PASS
