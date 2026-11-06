@@ -1,0 +1,746 @@
+{
+  "ok": true,
+  "checks": {
+    "desktopPages": 33,
+    "narrowPages": 33,
+    "noHorizontalOverflow": "PASS",
+    "headersAtScreenEdges": "PASS",
+    "noClippedButtons": "PASS",
+    "detailBackButtons": "PASS",
+    "returnNavigationWorks": "PASS",
+    "noRuntimeErrors": "PASS",
+    "darkMode": "PASS"
+  },
+  "desktop": [
+    {
+      "name": "home",
+      "dark": true,
+      "route": "home",
+      "textLength": 64,
+      "overflow": 0,
+      "back": false,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "wechat",
+      "dark": true,
+      "route": "wechat",
+      "textLength": 19,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "chatroom",
+      "dark": true,
+      "route": "chatroom",
+      "textLength": 15,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactedit",
+      "dark": true,
+      "route": "contactedit",
+      "textLength": 157,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactview",
+      "dark": true,
+      "route": "contactview",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novel",
+      "dark": true,
+      "route": "novel",
+      "textLength": 184,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelbook",
+      "dark": true,
+      "route": "novelbook",
+      "textLength": 122,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelchapter",
+      "dark": true,
+      "route": "novelchapter",
+      "textLength": 83,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "read",
+      "dark": true,
+      "route": "read",
+      "textLength": 108,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "diary",
+      "dark": true,
+      "route": "diary",
+      "textLength": 73,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "forum",
+      "dark": true,
+      "route": "forum",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "gallery",
+      "dark": true,
+      "route": "gallery",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "appearance",
+      "dark": true,
+      "route": "appearance",
+      "textLength": 499,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "settings",
+      "dark": true,
+      "route": "settings",
+      "textLength": 213,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "datamanage",
+      "dark": true,
+      "route": "datamanage",
+      "textLength": 353,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "hang",
+      "dark": true,
+      "route": "hang",
+      "textLength": 127,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "date",
+      "dark": true,
+      "route": "date",
+      "textLength": 125,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "dateroom",
+      "dark": true,
+      "route": "dateroom",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "out",
+      "dark": true,
+      "route": "out",
+      "textLength": 42,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outnew",
+      "dark": true,
+      "route": "outnew",
+      "textLength": 49,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outroom",
+      "dark": true,
+      "route": "outroom",
+      "textLength": 31,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "checkup",
+      "dark": true,
+      "route": "checkup",
+      "textLength": 52,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "weibo",
+      "dark": true,
+      "route": "weibo",
+      "textLength": 38,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "takeout",
+      "dark": true,
+      "route": "takeout",
+      "textLength": 503,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "mall",
+      "dark": true,
+      "route": "mall",
+      "textLength": 63,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "shop",
+      "dark": true,
+      "route": "shop",
+      "textLength": 114,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "clock",
+      "dark": true,
+      "route": "clock",
+      "textLength": 158,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "couple",
+      "dark": true,
+      "route": "couple",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "soul",
+      "dark": true,
+      "route": "soul",
+      "textLength": 150,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "music",
+      "dark": true,
+      "route": "music",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "world",
+      "dark": true,
+      "route": "world",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "regex",
+      "dark": true,
+      "route": "regex",
+      "textLength": 101,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "progress",
+      "dark": true,
+      "route": "progress",
+      "textLength": 1347,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    }
+  ],
+  "narrow": [
+    {
+      "name": "home",
+      "dark": true,
+      "route": "home",
+      "textLength": 64,
+      "overflow": 0,
+      "back": false,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "wechat",
+      "dark": true,
+      "route": "wechat",
+      "textLength": 19,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "chatroom",
+      "dark": true,
+      "route": "chatroom",
+      "textLength": 15,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactedit",
+      "dark": true,
+      "route": "contactedit",
+      "textLength": 157,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactview",
+      "dark": true,
+      "route": "contactview",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novel",
+      "dark": true,
+      "route": "novel",
+      "textLength": 184,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelbook",
+      "dark": true,
+      "route": "novelbook",
+      "textLength": 122,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelchapter",
+      "dark": true,
+      "route": "novelchapter",
+      "textLength": 83,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "read",
+      "dark": true,
+      "route": "read",
+      "textLength": 108,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "diary",
+      "dark": true,
+      "route": "diary",
+      "textLength": 73,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "forum",
+      "dark": true,
+      "route": "forum",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "gallery",
+      "dark": true,
+      "route": "gallery",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "appearance",
+      "dark": true,
+      "route": "appearance",
+      "textLength": 499,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "settings",
+      "dark": true,
+      "route": "settings",
+      "textLength": 213,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "datamanage",
+      "dark": true,
+      "route": "datamanage",
+      "textLength": 353,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "hang",
+      "dark": true,
+      "route": "hang",
+      "textLength": 127,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "date",
+      "dark": true,
+      "route": "date",
+      "textLength": 125,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "dateroom",
+      "dark": true,
+      "route": "dateroom",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "out",
+      "dark": true,
+      "route": "out",
+      "textLength": 42,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outnew",
+      "dark": true,
+      "route": "outnew",
+      "textLength": 49,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outroom",
+      "dark": true,
+      "route": "outroom",
+      "textLength": 31,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "checkup",
+      "dark": true,
+      "route": "checkup",
+      "textLength": 52,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "weibo",
+      "dark": true,
+      "route": "weibo",
+      "textLength": 38,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "takeout",
+      "dark": true,
+      "route": "takeout",
+      "textLength": 503,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "mall",
+      "dark": true,
+      "route": "mall",
+      "textLength": 63,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "shop",
+      "dark": true,
+      "route": "shop",
+      "textLength": 114,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "clock",
+      "dark": true,
+      "route": "clock",
+      "textLength": 158,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "couple",
+      "dark": true,
+      "route": "couple",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "soul",
+      "dark": true,
+      "route": "soul",
+      "textLength": 150,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "music",
+      "dark": true,
+      "route": "music",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "world",
+      "dark": true,
+      "route": "world",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "regex",
+      "dark": true,
+      "route": "regex",
+      "textLength": 101,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "progress",
+      "dark": true,
+      "route": "progress",
+      "textLength": 1347,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    }
+  ],
+  "dark": true,
+  "darkAudit": {
+    "phoneDark": true,
+    "bodyDark": true,
+    "fg": "#f5f1f4",
+    "fg2": "#aaa4ab",
+    "navColor": "rgb(245, 241, 244)",
+    "inputColor": "rgb(245, 241, 244)",
+    "buttonColor": "rgb(245, 241, 244)",
+    "cardBg": "rgba(0, 0, 0, 0)",
+    "navBg": "rgba(255, 255, 255, 0.016)",
+    "overflow": 0
+  },
+  "backChecks": [
+    {
+      "name": "chatroom",
+      "before": "chatroom",
+      "after": "wechat",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "novelbook",
+      "before": "novelbook",
+      "after": "novel",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "dateroom",
+      "before": "dateroom",
+      "after": "date",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "outroom",
+      "before": "outroom",
+      "after": "out",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "settings",
+      "before": "settings",
+      "after": "home",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "datamanage",
+      "before": "datamanage",
+      "after": "settings",
+      "changed": true,
+      "found": true
+    }
+  ],
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-06T07:14:10.321Z",
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
+  }
+}

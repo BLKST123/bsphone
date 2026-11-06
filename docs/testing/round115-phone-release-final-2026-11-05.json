@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "checkedAt": "2026-11-06T05:31:12.939Z",
+  "checkedAt": "2026-11-06T07:13:36.221Z",
   "device": {
     "serial": "3B665K02PNH00000",
     "model": "PMK110",
@@ -8,17 +8,17 @@
     "resolution": "1272x2772"
   },
   "evidence": {
-    "version": "3.82",
-    "versionCode": 93,
+    "version": "3.83",
+    "versionCode": 94,
     "firstInstallTime": "2026-10-20 23:07:55",
     "ceDataInode": "2120975",
-    "sourceCommit": "3926a366fcae9169d665bd0a87131cf45096c21a",
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
-    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
-    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "cacheKey": "bsphone-v93-20261106-r1",
-    "installedApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "remotePath": "/data/app/~~ctuMcH_akZD2IjcrH-5d4w==/com.xiaoshouji.app-a0-DF0au-msyPP2dpgSS0A==/base.apk"
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "cacheKey": "bsphone-v94-20261106-r1",
+    "installedApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "remotePath": "/data/app/~~XQnYHfVA1Zj7J17IpmZt3A==/com.xiaoshouji.app-ZZQtzB9F6x7T3WREpl3YgA==/base.apk"
   },
   "checks": {
     "targetDeviceConnected": "PASS",
@@ -29,7 +29,7 @@
     "processAlive": "PASS",
     "webViewRootPresent": "PASS",
     "screenshotCaptured": "PASS",
-    "screenshotBytes": 2560266,
+    "screenshotBytes": 2561327,
     "screenshotAttempts": 1,
     "noCrashOrAnrInLogcat": "PASS"
   },
@@ -38,8 +38,8 @@
     "Status: ok",
     "LaunchState: COLD",
     "Activity: com.xiaoshouji.app/.MainActivity",
-    "TotalTime: 274",
-    "WaitTime: 282",
+    "TotalTime: 369",
+    "WaitTime: 376",
     "Complete"
   ],
   "artifacts": {
@@ -49,13 +49,13 @@
     "logcat": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round115-phone-release-final-logcat-2026-11-05.txt"
   },
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T05:33:19.470Z",
-    "sourceCommit": "3926a366fcae9169d665bd0a87131cf45096c21a",
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
-    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
-    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "version": "3.82",
-    "versionCode": 93,
-    "cacheKey": "bsphone-v93-20261106-r1"
+    "recordedAt": "2026-11-06T07:14:10.321Z",
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
   }
 }

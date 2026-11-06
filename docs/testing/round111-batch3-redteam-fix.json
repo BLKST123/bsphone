@@ -30,7 +30,7 @@
     ]
   },
   "created": {
-    "id": "cg_mw4iyw8xaou8",
+    "id": "cg_mw4myco77qhd",
     "builtin": false,
     "name": "家人",
     "note": "只有家里人",
@@ -58,7 +58,7 @@
       "status": "verified",
       "algorithm": "SHA-256"
     },
-    "groupId": "cg_mw4iyw8xaou8",
+    "groupId": "cg_mw4myco77qhd",
     "group": {
       "name": "家人",
       "note": "只有家里人",
@@ -69,20 +69,20 @@
       {
         "id": "ch111",
         "groupIds": [
-          "cg_mw4iyw8xaou8"
+          "cg_mw4myco77qhd"
         ]
       }
     ]
   },
   "errors": [],
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T05:33:19.470Z",
-    "sourceCommit": "3926a366fcae9169d665bd0a87131cf45096c21a",
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
-    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
-    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "version": "3.82",
-    "versionCode": 93,
-    "cacheKey": "bsphone-v93-20261106-r1"
+    "recordedAt": "2026-11-06T07:14:10.321Z",
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
   }
 }

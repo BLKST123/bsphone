@@ -1,17 +1,17 @@
 {
   "ok": true,
-  "checkedAt": "2026-11-06T05:18:11.956Z",
+  "checkedAt": "2026-11-06T07:09:20.087Z",
   "evidence": {
-    "checkedAt": "2026-11-06T05:18:11.957Z",
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
-    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
-    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "version": "3.82",
-    "versionCode": 93,
-    "cacheKey": "bsphone-v93-20261106-r1"
+    "checkedAt": "2026-11-06T07:09:20.088Z",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
   },
   "source": {
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439"
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331"
   },
   "checks": {
     "twoRerollsCreateThreeBranches": true,
@@ -26,7 +26,7 @@
   "first": {
     "branches": [
       {
-        "id": "turnbranch_mw4ix5ma1f17",
+        "id": "turnbranch_mw4mw352cq9m",
         "label": "原始版本",
         "texts": [
           "A",
@@ -38,7 +38,7 @@
         ]
       },
       {
-        "id": "turnbranch_mw4ix5makn58",
+        "id": "turnbranch_mw4mw3528mnv",
         "label": "重新生成 1",
         "texts": [
           "A",
@@ -47,11 +47,11 @@
         ]
       }
     ],
-    "active": "turnbranch_mw4ix5makn58",
+    "active": "turnbranch_mw4mw3528mnv",
     "ids": [
       "u1",
       "u2",
-      "mw4ix6ider70"
+      "mw4mw3sb33ev"
     ],
     "texts": [
       "A",
@@ -62,7 +62,7 @@
   "second": {
     "branches": [
       {
-        "id": "turnbranch_mw4ix5ma1f17",
+        "id": "turnbranch_mw4mw352cq9m",
         "label": "原始版本",
         "texts": [
           "A",
@@ -74,7 +74,7 @@
         ]
       },
       {
-        "id": "turnbranch_mw4ix5makn58",
+        "id": "turnbranch_mw4mw3528mnv",
         "label": "重新生成 1",
         "texts": [
           "A",
@@ -83,7 +83,7 @@
         ]
       },
       {
-        "id": "turnbranch_mw4ix6n7f45g",
+        "id": "turnbranch_mw4mw3uy1m5n",
         "label": "重新生成 2",
         "texts": [
           "A",
@@ -92,11 +92,11 @@
         ]
       }
     ],
-    "active": "turnbranch_mw4ix6n7f45g",
+    "active": "turnbranch_mw4mw3uy1m5n",
     "ids": [
       "u1",
       "u2",
-      "mw4ix6x1ec2m"
+      "mw4mw44zc7zw"
     ],
     "texts": [
       "A",
@@ -109,7 +109,7 @@
     "ok1": true,
     "ok2": true,
     "afterOrig": {
-      "active": "turnbranch_mw4ix5ma1f17",
+      "active": "turnbranch_mw4mw352cq9m",
       "ids": [
         "u1",
         "u2",
@@ -128,11 +128,11 @@
       ]
     },
     "afterNew": {
-      "active": "turnbranch_mw4ix5makn58",
+      "active": "turnbranch_mw4mw3528mnv",
       "ids": [
         "u1",
         "u2",
-        "mw4ix6ider70"
+        "mw4mw3sb33ev"
       ],
       "texts": [
         "A",
@@ -140,14 +140,14 @@
         "new-1"
       ]
     },
-    "firstNewId": "turnbranch_mw4ix5makn58"
+    "firstNewId": "turnbranch_mw4mw3528mnv"
   },
   "persisted": {
-    "active": "turnbranch_mw4ix5makn58",
+    "active": "turnbranch_mw4mw3528mnv",
     "ids": [
       "u1",
       "u2",
-      "mw4ix6ider70"
+      "mw4mw3sb33ev"
     ],
     "branches": 3,
     "texts": [
@@ -158,13 +158,13 @@
   },
   "errors": [],
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T05:33:19.470Z",
-    "sourceCommit": "3926a366fcae9169d665bd0a87131cf45096c21a",
-    "indexSha256": "B29BFD700BF6345E59A63295D388309B843F3087B60FFAAD27E3AEC33701D439",
-    "debugApkSha256": "27A66E50AB80B9A18883A986800F2FE8003C882BE726CAF99C53493449661798",
-    "releaseApkSha256": "8A1A61FD57941A3DA9226A213CA22ABAF0E15B3DC9E859DC8F6BF09CAA765EBA",
-    "version": "3.82",
-    "versionCode": 93,
-    "cacheKey": "bsphone-v93-20261106-r1"
+    "recordedAt": "2026-11-06T07:14:10.321Z",
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
   }
 }

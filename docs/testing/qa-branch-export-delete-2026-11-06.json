@@ -1,0 +1,168 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T07:09:59.667Z",
+  "evidence": {
+    "checkedAt": "2026-11-06T07:09:59.667Z",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
+  },
+  "checks": {
+    "branchActionsVisible": true,
+    "branchAction44": true,
+    "branchExportCaptured": true,
+    "deleteTwoStepCopy": true,
+    "nonActiveBranchDeleted": true
+  },
+  "failures": [],
+  "branchList": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n旧回复\n›\n导出\n删除\n新分支 1 · 当前\n一\n✓\n导出\n删除\n返回",
+  "actions": 2,
+  "delActions": 2,
+  "boxes": [
+    {
+      "w": 157,
+      "h": 44,
+      "text": "导出"
+    },
+    {
+      "w": 157,
+      "h": 44,
+      "text": "删除"
+    },
+    {
+      "w": 157,
+      "h": 44,
+      "text": "导出"
+    },
+    {
+      "w": 157,
+      "h": 44,
+      "text": "删除"
+    }
+  ],
+  "exported": {
+    "count": 1,
+    "name": "BS小手机_角色_原始版本_2026-11-06.json",
+    "payload": {
+      "format": "BS小手机聊天分支",
+      "formatVersion": 1,
+      "exportedAt": "2026-11-06T07:09:59.327Z",
+      "chat": {
+        "id": "be",
+        "name": "角色",
+        "type": "private",
+        "personaId": "p",
+        "worldlineId": "w"
+      },
+      "turn": {
+        "turnId": "t1",
+        "anchorMessageId": "u1"
+      },
+      "prefixMessages": [],
+      "branch": {
+        "id": "turnbranch_mw4mwynndj75",
+        "label": "原始版本",
+        "createdAt": 1793948999027,
+        "messages": [
+          {
+            "id": "u1",
+            "role": "me",
+            "type": "text",
+            "text": "一",
+            "ts": 1,
+            "turnId": "t1",
+            "messageGroupId": "g1",
+            "status": "active",
+            "branchId": "main",
+            "variantGroupId": "u1",
+            "variantIndex": 0,
+            "hiddenFromChat": false,
+            "parentMessageId": null
+          },
+          {
+            "id": "u2",
+            "role": "me",
+            "type": "text",
+            "text": "二",
+            "ts": 2,
+            "turnId": "t1",
+            "messageGroupId": "g1",
+            "status": "active",
+            "branchId": "main",
+            "variantGroupId": "u2",
+            "variantIndex": 0,
+            "hiddenFromChat": false,
+            "parentMessageId": "u1"
+          },
+          {
+            "id": "a1",
+            "role": "ta",
+            "from": "c",
+            "type": "text",
+            "text": "旧回复",
+            "ts": 3,
+            "turnId": "t1",
+            "messageGroupId": "ga1",
+            "status": "active",
+            "branchId": "main",
+            "variantGroupId": "a1",
+            "variantIndex": 0,
+            "hiddenFromChat": false,
+            "parentMessageId": "u2"
+          },
+          {
+            "id": "u3",
+            "role": "me",
+            "type": "text",
+            "text": "后续",
+            "ts": 4,
+            "turnId": "t2",
+            "messageGroupId": "g2",
+            "status": "active",
+            "branchId": "main",
+            "variantGroupId": "u3",
+            "variantIndex": 0,
+            "hiddenFromChat": false,
+            "parentMessageId": "a1"
+          }
+        ],
+        "memoryItemIds": [],
+        "legacyMemItems": [],
+        "kind": null
+      }
+    }
+  },
+  "firstDelete": "删除这个分支？\n只删除「原始版本」的历史快照，不影响其它分支和当前聊天。\n继续取消",
+  "secondDelete": "再次确认删除分支\n删除后不能再切回这个分支，但其它分支和原始聊天仍在。\n永久删除分支取消",
+  "afterDelete": {
+    "texts": [
+      "一",
+      "二"
+    ],
+    "active": "turnbranch_mw4mwynn1o8i",
+    "branches": [
+      {
+        "id": "turnbranch_mw4mwynn1o8i",
+        "label": "新分支 1",
+        "texts": [
+          "一",
+          "二"
+        ]
+      }
+    ]
+  },
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-06T07:14:10.321Z",
+    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
+    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
+    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
+    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
+    "version": "3.83",
+    "versionCode": 94,
+    "cacheKey": "bsphone-v94-20261106-r1"
+  }
+}
