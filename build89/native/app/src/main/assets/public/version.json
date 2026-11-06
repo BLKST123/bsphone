@@ -1,10 +1,10 @@
 {
-    "version":  "3.83",
-    "versionCode":  94,
-    "round":  94,
+    "version":  "3.84",
+    "versionCode":  95,
+    "round":  95,
     "releasedAt":  "2026-11-06",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=94-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=95-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v94-20261106-r1",
-    "notes":  "3.83 Build94：修复忘记这条的跨数据源记忆清理、普通删除活动分支快照、分支导出与删除、混合文本卡片组编辑选择，并消除44px命中区浮点抖动。"
+    "cacheKey":  "bsphone-v95-20261106-r1",
+    "notes":  "3.84 Build95：收紧忘记记忆作用域与短文本精确匹配，保留无关角色/会话记忆；修正混合组卡片相对位置；继续保留QA382分支、删除与Prompt修复。"
 }
