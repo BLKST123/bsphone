@@ -1,0 +1,75 @@
+{
+  "checkedAt": "2026-11-06T08:08:02.896Z",
+  "tests": {
+    "otherChatMemoryItemPreserved": true,
+    "otherContactMemoryPreserved": true,
+    "otherChatMemoryEntryPreserved": true,
+    "otherChatLegacyPreserved": true
+  },
+  "evidence": {
+    "memoryItems": [
+      {
+        "id": "m1",
+        "status": "deleted",
+        "plainText": "会话一摘要：好"
+      },
+      {
+        "id": "m2",
+        "status": "active",
+        "plainText": "会话二摘要：好"
+      },
+      {
+        "id": "legacy_contact_c2_cm2",
+        "status": "active",
+        "plainText": "角色二长期记忆：好"
+      },
+      {
+        "id": "legacy_digest_ch1_0_main",
+        "status": "active",
+        "plainText": "会话一：好"
+      },
+      {
+        "id": "legacy_digest_ch2_0_main",
+        "status": "active",
+        "plainText": "会话二：好"
+      }
+    ],
+    "contacts": [
+      {
+        "id": "c1",
+        "memories": []
+      },
+      {
+        "id": "c2",
+        "memories": [
+          "角色二长期记忆：好"
+        ]
+      }
+    ],
+    "entries": [
+      {
+        "id": "e2",
+        "active": true,
+        "fact": "会话二：好"
+      }
+    ],
+    "chat2mem": [
+      "会话二：好"
+    ],
+    "chat1Texts": [
+      "测试"
+    ]
+  },
+  "errors": [],
+  "ok": true,
+  "artifactEvidence": {
+    "recordedAt": "2026-11-06T08:16:29.348Z",
+    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
+    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
+    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
+    "version": "3.84",
+    "versionCode": 95,
+    "cacheKey": "bsphone-v95-20261106-r1"
+  }
+}

@@ -1,0 +1,281 @@
+{
+  "ok": true,
+  "generatedAt": "2026-11-06T08:16:29.415Z",
+  "artifactEvidence": {
+    "recordedAt": "2026-11-06T08:16:29.348Z",
+    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
+    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
+    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
+    "version": "3.84",
+    "versionCode": 95,
+    "cacheKey": "bsphone-v95-20261106-r1"
+  },
+  "tests": [
+    {
+      "file": "qa-chat-turn-reroll-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 19
+    },
+    {
+      "file": "independent-turn-reroll-audit-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 9
+    },
+    {
+      "file": "independent-turn-branch-switch-audit-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 6
+    },
+    {
+      "file": "qa-turn-reroll-independent-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 14
+    },
+    {
+      "file": "qa-turn-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 5
+    },
+    {
+      "file": "qa-turn-reroll-multi-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "qa-prompt-layers-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "independent-turn-memory-branch-audit-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 3
+    },
+    {
+      "file": "qa-turn-auto-memory-branch-fix-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "qa-wechat-message-edit-branch-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 26
+    },
+    {
+      "file": "independent-manual-branch-continue-audit-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 3
+    },
+    {
+      "file": "independent-mixed-group-edit-audit-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 2
+    },
+    {
+      "file": "independent-forget-memory-scope-audit-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 2
+    },
+    {
+      "file": "independent-forget-cross-scope-audit-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 4
+    },
+    {
+      "file": "qa-forget-branch-memory-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 6
+    },
+    {
+      "file": "qa-forget-substring-scope-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "qa-delete-branch-snapshot-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 3
+    },
+    {
+      "file": "qa-branch-export-delete-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 5
+    },
+    {
+      "file": "qa-mixed-group-edit-lifecycle-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "qa-phone-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 5
+    },
+    {
+      "file": "round101-phone-export.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 10
+    },
+    {
+      "file": "round112-phone-batch3-fix.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 9
+    },
+    {
+      "file": "round113-phone-data-management.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 8
+    },
+    {
+      "file": "round114-phone-turn-reroll.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 5
+    },
+    {
+      "file": "round117-phone-wechat-message-edit-branch.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 8
+    },
+    {
+      "file": "round118-phone-qa382.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 10
+    },
+    {
+      "file": "round119-phone-forget-scope.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 12
+    },
+    {
+      "file": "round97-full-page-ui.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 9
+    },
+    {
+      "file": "qa-r97-dark-2026-11-06.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 9
+    },
+    {
+      "file": "round108-p1-recheck.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 7
+    },
+    {
+      "file": "round109-service-worker.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 6
+    },
+    {
+      "file": "qa-data-management-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 17
+    },
+    {
+      "file": "qa-independent-batch3-recheck.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 14
+    },
+    {
+      "file": "round111-batch3-redteam-fix.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 13
+    },
+    {
+      "file": "round115-phone-release-final-2026-11-05.json",
+      "ok": true,
+      "failedChecks": 0,
+      "presentChecks": 11
+    }
+  ],
+  "logs": [
+    {
+      "file": "round119-final-core-qa383-2026-11-06.log",
+      "sha256": "F6E484B231E4256C494F9E34560B2635E61E7A0E46318524A0A8A6573614014B",
+      "bytes": 59413
+    },
+    {
+      "file": "round119-final-regression-suite-2026-11-06.log",
+      "sha256": "E9BB29E5E198BD0150FA14AE41915D4F82B0A897B553783AB2E5DDE7AABDF7AA",
+      "bytes": 30576
+    },
+    {
+      "file": "round119-phone-debug-suite-final-2026-11-06.log",
+      "sha256": "F940C6F7F57E69FBDAD66B668F1B40175DEB0A8AB6633D0C8E348F482B24EC7F",
+      "bytes": 32850
+    },
+    {
+      "file": "build95-native-build-2026-11-06.log",
+      "sha256": "E07B82ACD1329D9A9662A07D1B853A1C0F3779CFCA2DED8501B56DCB8FAE819C",
+      "bytes": 9012
+    },
+    {
+      "file": "round115-phone-release-final-logcat-2026-11-05.txt",
+      "sha256": "B83A5BE9F5BC6AE776060642133DF05E0D220748619162BB34892A994E0C898A",
+      "bytes": 105210
+    },
+    {
+      "file": "round119-debug-cdp-repro-2026-11-06.txt",
+      "sha256": "BD1BCADF8A0639BCC4C5A9B7DA985E29FBF69780E4583CBBE902EDCCD39345A3",
+      "bytes": 1141
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "round118-phone-branch-actions.png",
+      "sha256": "17D94B6CE7079D5BEF5BE84614318DBC902F267DF1B7C1B61420F8A9741B692E",
+      "bytes": 1370588
+    },
+    {
+      "file": "round118-phone-mixed-editor.png",
+      "sha256": "4D5EE354DFE80A9EBEB44E293E799D0D7C8B9DC2CDA30AF5A4376001D8AB5DE9",
+      "bytes": 1450771
+    },
+    {
+      "file": "round119-phone-forget-scope.png",
+      "sha256": "12604FF4FCBDF120A5B3915D806A9140930EFB17047B95797B9567C27C4E764C",
+      "bytes": 1851936
+    },
+    {
+      "file": "round115-release-final-home.png",
+      "sha256": "7FBCC469011A3AE59D60300242B0CDDBD2C34C6011090BDC16525B8897B9649D",
+      "bytes": 2559791
+    }
+  ],
+  "errors": []
+}

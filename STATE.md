@@ -2,13 +2,13 @@
 
 ## 当前版本
 
-- 页面：2026-11-06 · 3.83 · 第 94 轮
-- Android：3.83 / versionCode 94
-- Service Worker：`bsphone-v94-20261106-r1`
-- 源码提交：`b91d09ba934b8065efb6ec4c0baf72551c75bd38`
-- 源码 SHA-256：`9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331`
-- Debug APK SHA-256：`EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459`
-- Release APK SHA-256：`37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE`
+- 页面：2026-11-06 · 3.84 · 第 95 轮
+- Android：3.84 / versionCode 95
+- Service Worker：`bsphone-v95-20261106-r1`
+- 源码提交：`d9ffd7f2cc5eafbe62ab8add719599fc0a031059`
+- 源码 SHA-256：`FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126`
+- Debug APK SHA-256：`FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24`
+- Release APK SHA-256：`75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014`
 
 ## 当前阶段
 
@@ -24,6 +24,8 @@
 - 普通删除同步当前 active branch 快照；分支菜单补齐导出与二次确认删除。
 - 混合文字+图片/卡片组支持保留或移除后编辑/重生成，卡片不进入文字模型。
 - 44×44 命中区已加稳定边界，R101 复跑 44.0089。
+- QA-383：忘记记忆改为当前 chat/char 作用域 + sourceMessageIds 精确关联；短文本仅精确/已知摘要壳匹配，禁止全局子串删除。
+- 混合组保留模式保持非文本卡片原始相对位置；R113 测试统一 0.01 容差。
 - 微信消息菜单已补齐：编辑并重新生成、从当前消息创建新分支、角色消息忘记。
 - 编辑后生成新 user message_id，旧 user/char/后续进入旧分支；手动分支不调用模型。
 - 菜单按钮命中区统一达到 44×44；角色忘记进入记忆、上下文和分支快照清理流程。
@@ -46,13 +48,13 @@
 
 ## 最近证据
 
-- `docs/testing/round118-evidence-manifest-2026-11-06.json`
-- `docs/testing/round118-final-core-qa382-2026-11-06.log`
-- `docs/testing/round118-final-regression-suite-2026-11-06.log`
-- `docs/testing/round118-phone-debug-suite-final-2026-11-06.log`
-- `docs/testing/round118-phone-qa382.json`
-- `docs/testing/round118-phone-branch-actions.png`
-- `docs/testing/round118-phone-mixed-editor.png`
-- `docs/testing/build94-native-build-2026-11-06.log`
+- `docs/testing/round119-evidence-manifest-2026-11-06.json`
+- `docs/testing/round119-final-core-qa383-2026-11-06.log`
+- `docs/testing/round119-final-regression-suite-2026-11-06.log`
+- `docs/testing/round119-phone-debug-suite-final-2026-11-06.log`
+- `docs/testing/qa-forget-substring-scope-2026-11-06.json`
+- `docs/testing/independent-forget-cross-scope-audit-2026-11-06.json`
+- `docs/testing/round119-phone-forget-scope.json`
+- `docs/testing/round119-phone-forget-scope.png`
+- `docs/testing/build95-native-build-2026-11-06.log`
 - `docs/testing/round115-phone-release-final-2026-11-05.json`
-- `docs/testing/round115-phone-release-final-logcat-2026-11-05.txt`

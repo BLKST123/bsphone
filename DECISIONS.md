@@ -13,13 +13,14 @@
 - 手动、核心、用户已修正记忆保持跨分支可用；旧分支自动记忆只在对应旧分支激活时恢复。
 - Prompt 固定顺序：stable → semi → history → memory → 本轮指令 → environment → final user。
 - 重 roll nudge 不得写入 semi；记忆不得伪装成 user。
-- Build94 使用 Service Worker 缓存键 `bsphone-v94-20261106-r1`。
+- Build95 使用 Service Worker 缓存键 `bsphone-v95-20261106-r1`。
 - 编辑并重新生成必须创建新的 user message_id，旧 user/char/后续消息进入旧分支；turnId 不增加。
 - 从这里创建新分支保留到当前 user 消息，当前气泡之后的内容进入旧分支；该操作不调用模型。
-- 角色消息“忘记这条”必须两次确认，并清理当前聊天、全部分支快照、contact long-term memories、baseMemorySnapshot、branch legacy/memory ids、memoryEntries、chat digest 和记忆游标；订单/相册/收藏实体不自动删除。
+- 角色消息“忘记这条”必须两次确认，并按当前 chat/char 作用域清理当前聊天、分支快照、contact long-term memories、baseMemorySnapshot、branch legacy/memory ids、memoryEntries、chat digest 和记忆游标；订单/相册/收藏实体不自动删除。
+- 忘记匹配优先使用 sourceMessageIds；无来源摘要只能规范化完全相等或匹配明确的“摘要/快照/记忆/记得/事实/设定”前缀壳，禁止对短文本做任意子串扫描。
 - 普通删除必须同步当前 active branch snapshot，不得让分支预览或切换复活已删除消息。
 - 分支菜单必须提供导出和二次确认删除；当前 active 分支不能直接删除，必须先切换。
-- 混合文字+图片/卡片组必须提供“保留”或“从新分支移除”选择；卡片不进入文字模型。
+- 混合文字+图片/卡片组必须提供“保留”或“从新分支移除”选择；卡片不进入文字模型，保留模式下必须维持卡片原有相对位置。
 - 44×44 验收使用稳定像素边界，不接受以浮点抖动为由降低标准。
 
 ## CURRENT

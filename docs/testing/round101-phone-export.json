@@ -1,13 +1,13 @@
 {
   "ok": true,
   "evidence": {
-    "checkedAt": "2026-11-06T07:12:34.547Z",
-    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
-    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
-    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
-    "version": "3.83",
-    "versionCode": 94,
-    "cacheKey": "bsphone-v94-20261106-r1"
+    "checkedAt": "2026-11-06T08:11:56.716Z",
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
+    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
+    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
+    "version": "3.84",
+    "versionCode": 95,
+    "cacheKey": "bsphone-v95-20261106-r1"
   },
   "checks": {
     "dataManagementPage": "PASS",
@@ -18,12 +18,12 @@
     "publicDownloadsDirectory": "PASS",
     "manifestReadable": "PASS",
     "noApiKeyInManifest": "PASS",
-    "build94": "PASS",
+    "build95": "PASS",
     "noRuntimeErrors": "PASS"
   },
   "before": {
-    "build": "2026-11-06 · 3.83 · 第 94 轮",
-    "code": 94,
+    "build": "2026-11-06 · 3.84 · 第 95 轮",
+    "code": 95,
     "contacts": 2,
     "chats": 4
   },
@@ -48,64 +48,64 @@
       },
       {
         "id": "dmOptimize",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "dmCompress",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "dmClearImages",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "dmClearVoice",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "exp",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "expLight",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "imp",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       },
       {
         "id": "wipe",
-        "w": 331.4285888671875,
+        "w": 331.14288330078125,
         "h": 64
       }
     ]
   },
   "remoteDir": "/storage/emulated/0/Download/BS小手机",
-  "remoteFile": "BS小手机_2026-11-6_14_57.json",
-  "size": 26800740,
+  "remoteFile": "BS小手机_2026-11-6_15_56.json",
+  "size": 26800803,
   "manifest": {
     "schemaVersion": 4,
-    "appVersion": "3.83",
-    "buildNumber": 94
+    "appVersion": "3.84",
+    "buildNumber": 95
   },
   "runtimeErrors": [],
   "consoleErrors": [],
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T07:14:10.321Z",
-    "sourceCommit": "b91d09ba934b8065efb6ec4c0baf72551c75bd38",
-    "indexSha256": "9504BA72B4A6A1933FF7805ADF345862BF398B4340E23C1CB940A1FEAA369331",
-    "debugApkSha256": "EC5BC1CD728F0EA4AAD5956D31CB66F51DEA20B24CC71ACCB6CB8E42AFE32459",
-    "releaseApkSha256": "37CE74874C3584828EE92C84D6C284A8705A2AC09C053C6CF2FD69D4AB3681AE",
-    "version": "3.83",
-    "versionCode": 94,
-    "cacheKey": "bsphone-v94-20261106-r1"
+    "recordedAt": "2026-11-06T08:16:29.348Z",
+    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
+    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
+    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
+    "version": "3.84",
+    "versionCode": 95,
+    "cacheKey": "bsphone-v95-20261106-r1"
   }
 }

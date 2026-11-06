@@ -1,0 +1,77 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-06T08:08:00.323Z",
+  "source": {
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126"
+  },
+  "checks": {
+    "unrelatedContactKept": true,
+    "unrelatedMemoryKept": true,
+    "unrelatedChatMemKept": true,
+    "unrelatedBaseKept": true,
+    "unrelatedLegacyKept": true,
+    "unrelatedMemoryIdKept": true,
+    "forgottenTargetRemoved": true
+  },
+  "failures": [],
+  "result": {
+    "contact": [
+      "用户喜欢好吃的"
+    ],
+    "memories": [
+      {
+        "id": "keepMem",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "targetMem",
+        "text": "好",
+        "status": "deleted"
+      },
+      {
+        "id": "legacy_contact_c_keepContact",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "legacy_contact_c_targetContact",
+        "text": "好",
+        "status": "deleted"
+      },
+      {
+        "id": "legacy_digest_fc_0_main",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "legacy_digest_fc_1_main",
+        "text": "好",
+        "status": "deleted"
+      }
+    ],
+    "chatMem": [
+      "用户喜欢好吃的"
+    ],
+    "base": [
+      "用户喜欢好吃的"
+    ],
+    "legacy": [
+      "用户喜欢好吃的"
+    ],
+    "memoryIds": [
+      "keepMem"
+    ]
+  },
+  "errors": [],
+  "artifactEvidence": {
+    "recordedAt": "2026-11-06T08:16:29.348Z",
+    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
+    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
+    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
+    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
+    "version": "3.84",
+    "versionCode": 95,
+    "cacheKey": "bsphone-v95-20261106-r1"
+  }
+}
