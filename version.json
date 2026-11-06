@@ -1,10 +1,10 @@
 {
-    "version":  "3.82",
-    "versionCode":  93,
-    "round":  93,
+    "version":  "3.83",
+    "versionCode":  94,
+    "round":  94,
     "releasedAt":  "2026-11-06",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=93-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=94-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v93-20261106-r1",
-    "notes":  "3.82 Build93：微信消息菜单补齐编辑并重新生成、从当前消息创建分支、角色消息忘记；保留连续组重roll、旧分支记忆隔离与 Prompt 分层修复。"
+    "cacheKey":  "bsphone-v94-20261106-r1",
+    "notes":  "3.83 Build94：修复忘记这条的跨数据源记忆清理、普通删除活动分支快照、分支导出与删除、混合文本卡片组编辑选择，并消除44px命中区浮点抖动。"
 }

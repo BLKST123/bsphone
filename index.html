@@ -122,6 +122,10 @@ textarea{min-height:90px;resize:vertical;line-height:1.55}
 .wxtab{display:grid;grid-template-columns:repeat(4,1fr);flex:none;background:rgba(250,250,252,.96);backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px 0 calc(env(safe-area-inset-bottom) + 6px)}
 .lrow{display:flex;align-items:center;gap:12px;padding:11px 16px;cursor:pointer;border-bottom:1px solid var(--line)}
 .lrow:active{background:rgba(0,0,0,.04)}
+.branch-card{border-bottom:1px solid var(--line);padding-bottom:8px}
+.branch-card .lrow{border-bottom:0}
+.branch-actions{display:flex;gap:8px;padding:0 16px 2px}
+.branch-action-btn{flex:1;min-height:44px}
 .lrow .av{width:46px;height:46px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;font-size:calc(22px * var(--ui-font-scale,1));overflow:hidden;flex:none}
 .lrow .av img{width:100%;height:100%;object-fit:cover}
 .row>.av{width:46px;height:46px;border-radius:12px;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;flex:none;overflow:hidden;font-size:calc(17px * var(--ui-font-scale,1))}
@@ -2297,7 +2301,7 @@ html.portrait-fullscreen{overscroll-behavior:none;background:#161316}
 .dm-page{padding:14px 16px 32px}
 .dm-storage{background:linear-gradient(145deg,color-mix(in srgb,var(--theme-rose-soft) 58%,var(--card)),var(--card));border:1px solid color-mix(in srgb,var(--theme-rose-deep) 18%,var(--line));border-radius:20px;padding:16px;margin-bottom:16px}
 .dm-storage-top{display:flex;align-items:flex-start;gap:12px}.dm-storage-main{flex:1;min-width:0}.dm-storage-main b{display:block;font-size:calc(18px * var(--ui-font-scale,1))}.dm-storage-main .num{font-size:calc(28px * var(--ui-font-scale,1));font-weight:720;line-height:1.25;color:var(--deep);margin-top:8px}.dm-storage-main .mini{margin-top:4px}
-.dm-refresh{width:44px;height:44px;min-width:44px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.dm-refresh{width:44.01px;height:44.01px;min-width:44.01px;min-height:44.01px;border-radius:14px;border:1px solid var(--line);background:var(--card);color:var(--fg);display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
 .dm-usage-list{margin-top:14px;display:grid;gap:8px}.dm-usage-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:6px 12px;align-items:center}.dm-usage-row b,.dm-usage-row span{font-size:calc(11px * var(--ui-font-scale,1))}.dm-usage-row span{color:var(--fg2)}.dm-usage-bar{grid-column:1/-1;height:5px;border-radius:99px;background:color-mix(in srgb,var(--line) 58%,transparent);overflow:hidden}.dm-usage-bar i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--theme-rose-deep),var(--deep))}
 .dm-section-title{font-size:calc(12px * var(--ui-font-scale,1));color:var(--fg2);font-weight:650;margin:18px 4px 8px;letter-spacing:.02em}
 .dm-card{width:100%;min-height:64px;display:flex;align-items:center;gap:12px;padding:12px 14px;margin:8px 0;border:1px solid var(--line);border-radius:16px;background:var(--card);color:var(--fg);text-align:left;cursor:pointer;box-shadow:0 3px 12px rgba(112,90,101,.045)}
@@ -6439,6 +6443,42 @@ function chooseTurnBranch(ch,anchor,branchId){
   }
   saveNow(); return true;
 }
+function branchExportPayload(ch,info,branch){
+  return {
+    format:'BS小手机聊天分支',formatVersion:1,exportedAt:new Date().toISOString(),
+    chat:{id:ch.id,name:chatName(ch),type:ch.type||'private',personaId:ch.personaId||null,worldlineId:ch.worldlineId||null},
+    turn:{turnId:info.turnId,anchorMessageId:info.group&&info.group[0]&&info.group[0].id||null},
+    prefixMessages:jsonSafeCopy((ch.msgs||[]).slice(0,info.start)),
+    branch:{id:branch.id,label:branch.label||'',createdAt:branch.createdAt||null,messages:jsonSafeCopy(branch.messages||[]),memoryItemIds:jsonSafeCopy(branch.memoryItemIds||[]),legacyMemItems:jsonSafeCopy(branch.legacyMemItems||[]),kind:branch.kind||null}
+  };
+}
+function exportTurnBranch(ch,anchor,branchId){
+  const info=chatUserTurnInfo(ch,anchor); if(!info) return null;
+  const state=turnBranchState(ch,info.turnId); const branch=(state.branches||[]).find(function(item){ return item&&item.id===branchId; });
+  if(!branch) return null;
+  const payload=branchExportPayload(ch,info,branch);
+  const safe=String(branch.label||'分支').replace(/[\\/:*?"<>|\s]+/g,'_');
+  const chatSafe=String(chatName(ch)||'聊天').replace(/[\\/:*?"<>|\s]+/g,'_');
+  window.__lastBranchExport=payload;
+  return saveTextFile('BS小手机_'+chatSafe+'_'+safe+'_'+fileDateStamp()+'.json','application/json',JSON.stringify(payload,null,2));
+}
+function sheetDeleteTurnBranch(ch,anchor,branchId){
+  const info=chatUserTurnInfo(ch,anchor); if(!info) return;
+  const state=turnBranchState(ch,info.turnId); const branch=(state.branches||[]).find(function(item){ return item&&item.id===branchId; });
+  if(!branch) return; if(state.activeBranchId===branchId){ toast('先切换到其它分支再删除当前分支'); return; }
+  sheetSmall('<h3>删除这个分支？</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">只删除「'+esc(branch.label||'这个分支')+'」的历史快照，不影响其它分支和当前聊天。</div><button class="btn danger full msg-action-btn" id="branchDeleteNext">继续</button><button class="btn full msg-action-btn" id="branchDeleteNo">取消</button>');
+  $('#branchDeleteNo').onclick=closeSheet;
+  $('#branchDeleteNext').onclick=function(){
+    sheetSmall('<h3>再次确认删除分支</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">删除后不能再切回这个分支，但其它分支和原始聊天仍在。</div><button class="btn danger full msg-action-btn" id="branchDeleteConfirm">永久删除分支</button><button class="btn full msg-action-btn" id="branchDeleteFinalNo">取消</button>');
+    $('#branchDeleteFinalNo').onclick=closeSheet;
+    $('#branchDeleteConfirm').onclick=function(){
+      state.branches=(state.branches||[]).filter(function(item){ return item.id!==branchId; });
+      const store=coreStore(); const snapshot=jsonSafeCopy(ch.turnBranches||{});
+      if(store&&store.commands) store.commands.patchChat(ch.id,{turnBranches:snapshot,lastTs:Date.now()},{persist:false});
+      saveNow(); closeSheet(); render(); toast('已删除分支');
+    };
+  };
+}
 function sheetUserTurnBranches(ch,anchor){
   const info=chatUserTurnInfo(ch,anchor); if(!info) return;
   const state=turnBranchState(ch,info.turnId);
@@ -6447,22 +6487,61 @@ function sheetUserTurnBranches(ch,anchor){
     +(branches.length?branches.map(function(branch,index){
       const first=branch.messages&&branch.messages.find(function(item){ return item.role!=='me'; })||branch.messages&&branch.messages[0]||{};
       const active=branch.id===state.activeBranchId;
-      return '<button class="lrow '+(active?'branch-current':'')+'" data-turnbranch="'+esc(branch.id)+'"><div class="mi"><div class="t1">'+esc(branch.label||('第 '+(index+1)+' 版'))+(active?' · 当前':'')+'</div><div class="t2">'+esc(quoteSnippet(labelOf(first),150))+'</div></div><div class="rt"><span class="chev">'+(active?'✓':'›')+'</span></div></button>';
+      return '<div class="branch-card"><button class="lrow '+(active?'branch-current':'')+'" data-turnbranch="'+esc(branch.id)+'"><div class="mi"><div class="t1">'+esc(branch.label||('第 '+(index+1)+' 版'))+(active?' · 当前':'')+'</div><div class="t2">'+esc(quoteSnippet(labelOf(first),150))+'</div></div><div class="rt"><span class="chev">'+(active?'✓':'›')+'</span></div></button><div class="branch-actions"><button class="btn branch-action-btn" data-branch-export="'+esc(branch.id)+'">导出</button><button class="btn danger branch-action-btn" data-branch-delete="'+esc(branch.id)+'">删除</button></div></div>';
     }).join(''):'<div class="empty">还没有可切换的回复分支。</div>')
-    +'<button class="btn full" id="turnBranchBack">返回</button>');
+    +'<button class="btn full msg-action-btn" id="turnBranchBack">返回</button>');
   $$('#sheetBox [data-turnbranch]').forEach(function(el){ el.onclick=function(){ const branchId=el.dataset.turnbranch; if(chooseTurnBranch(ch,anchor,branchId)){ closeSheet(); render(); toast('已切换分支'); } }; });
+  $$('#sheetBox [data-branch-export]').forEach(function(el){ el.onclick=function(){ exportTurnBranch(ch,anchor,el.dataset.branchExport); }; });
+  $$('#sheetBox [data-branch-delete]').forEach(function(el){ el.onclick=function(){ sheetDeleteTurnBranch(ch,anchor,el.dataset.branchDelete); }; });
   $('#turnBranchBack').onclick=closeSheet;
 }
-function sheetRegenerateUserTurn(ch,anchor){
+function chatUserTurnTextMessages(info){
+  return (info&&Array.isArray(info.group)?info.group:[]).filter(function(item){ return (item.type||'text')==='text'&&item.status!=='deleted'; });
+}
+function mixedTurnGroupWithReplacements(info,replacements,mode){
+  if(!mode) return jsonSafeCopy(replacements||[]);
+  const out=[]; let inserted=false;
+  (info.group||[]).forEach(function(item){
+    if((item.type||'text')==='text'){
+      if(!inserted){ out.push.apply(out,jsonSafeCopy(replacements||[])); inserted=true; }
+    }else if(mode==='keep') out.push(jsonSafeCopy(item));
+  });
+  if(!inserted) out.push.apply(out,jsonSafeCopy(replacements||[]));
+  return out;
+}
+function sheetMixedGroupChoice(ch,anchor,action){
   const info=chatUserTurnInfo(ch,anchor);
   if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
-  if(!info.allText){ toast('这组里有图片或卡片，整组重新生成只支持纯文本消息'); return; }
-  const text=info.group.map(function(item){ return labelOf(item); }).join('\n');
-  sheetSmall('<h3>重新生成这一组？</h3><div class="muted" style="margin:8px 0 10px;line-height:1.75">将重新打包：<br>'+esc(quoteSnippet(text,260))+'<br><br>原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。</div><button class="btn primary full" id="regTurnYes">重新生成</button><button class="btn full" id="regTurnNo">取消</button>');
-  $('#regTurnNo').onclick=closeSheet;
-  $('#regTurnYes').onclick=function(){ closeSheet(); regenerateUserTurn(ch,anchor,info).catch(function(){}); };
+  if(!chatUserTurnTextMessages(info).length){ toast('这组没有可编辑文字'); return; }
+  sheetSmall('<h3>这组里有图片或卡片</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">文字部分可以继续编辑或重新生成；图片和卡片不会进入文字模型。请选择新分支是否保留它们。</div><button class="btn primary full msg-action-btn" id="mixedKeep">保留图片/卡片</button><button class="btn full msg-action-btn" id="mixedRemove">从新分支移除</button><button class="btn full msg-action-btn" id="mixedCancel">取消</button>');
+  $('#mixedCancel').onclick=closeSheet;
+  $('#mixedKeep').onclick=function(){ closeSheet(); if(action==='edit') sheetEditUserTurn(ch,anchor,'keep'); else sheetRegenerateUserTurn(ch,anchor,'keep'); };
+  $('#mixedRemove').onclick=function(){ closeSheet(); if(action==='edit') sheetEditUserTurn(ch,anchor,'remove'); else sheetRegenerateUserTurn(ch,anchor,'remove'); };
 }
-async function regenerateUserTurn(ch,anchor,info){
+function handleUserGroupAction(ch,anchor,action){
+  const info=chatUserTurnInfo(ch,anchor);
+  if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
+  if(!info.allText){
+    if(!chatUserTurnTextMessages(info).length){ toast('这组没有可编辑文字'); return; }
+    if(action==='edit') sheetEditUserTurn(ch,anchor,'keep'); else sheetRegenerateUserTurn(ch,anchor,'keep');
+    return;
+  }
+  if(action==='edit') sheetEditUserTurn(ch,anchor); else sheetRegenerateUserTurn(ch,anchor);
+}
+function sheetRegenerateUserTurn(ch,anchor,mixedMode){
+  const info=chatUserTurnInfo(ch,anchor);
+  if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
+  if(!info.allText&&!mixedMode){ toast('这组里有图片或卡片，请选择保留或移除'); return; }
+  const text=chatUserTurnTextMessages(info).map(function(item){ return labelOf(item); }).join('\n');
+  if(!text){ toast('这组没有可编辑文字'); return; }
+  const note=mixedMode?'这组里有图片或卡片。保留这些卡片/图片会留在新分支但不进入文字模型；也可以从新分支移除。':'';
+  const buttons=mixedMode?'<button class="btn primary full msg-action-btn" id="regTurnYes">保留并重新生成</button><button class="btn full msg-action-btn" id="regTurnRemove">移除并重新生成</button>':'<button class="btn primary full msg-action-btn" id="regTurnYes">重新生成</button>';
+  sheetSmall('<h3>重新生成这一组？</h3><div class="muted" style="margin:8px 0 10px;line-height:1.75">将重新打包：<br>'+esc(quoteSnippet(text,260))+'<br><br>'+esc(note)+'原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。</div>'+buttons+'<button class="btn full msg-action-btn" id="regTurnNo">取消</button>');
+  $('#regTurnNo').onclick=closeSheet;
+  $('#regTurnYes').onclick=function(){ closeSheet(); regenerateUserTurn(ch,anchor,info,mixedMode||undefined).catch(function(){}); };
+  const rm=$('#regTurnRemove'); if(rm) rm.onclick=function(){ closeSheet(); regenerateUserTurn(ch,anchor,info,'remove').catch(function(){}); };
+}
+async function regenerateUserTurn(ch,anchor,info,mixedMode){
   if(!ch||!info||!needKey()) return;
   const beforeMessages=jsonSafeCopy(ch.msgs||[]);
   const beforeBranches=jsonSafeCopy(ch.turnBranches||{});
@@ -6473,9 +6552,10 @@ async function regenerateUserTurn(ch,anchor,info){
       const original=Object.assign({id:'turnbranch_'+uid(),label:'原始版本',createdAt:Date.now(),messages:turnBranchSnapshot(ch,info.start)},turnBranchMemorySnapshot(ch,true));
       state.branches.push(original); state.activeBranchId=original.id;
     }
+    const textMessages=chatUserTurnTextMessages(info);
+    const group=mixedTurnGroupWithReplacements(info,textMessages,mixedMode);
     const newBranchId='turnbranch_'+uid();
     const prefix=(ch.msgs||[]).slice(0,info.start);
-    const group=jsonSafeCopy(info.group);
     const nextPath=prefix.concat(group);
     pendingTurnMemoryContexts.set(ch.id,{turnId:info.turnId,branchId:newBranchId,memoryItemIds:autoMemoryIdsForMessages(ch,nextPath,false),legacyMemItems:[]});
     const store=coreStore();
@@ -6484,7 +6564,9 @@ async function regenerateUserTurn(ch,anchor,info){
       store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches)},{persist:false});
     }else ch.msgs=nextPath;
     saveNow(); render();
-    await aiTurn({chatId:ch.id,silentErrors:true,nudge:'这次是对用户连续消息组「'+info.group.map(labelOf).join(' / ')+'」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'});
+    const turnOpt={chatId:ch.id,silentErrors:true,nudge:'这次是对用户连续消息组「'+textMessages.map(labelOf).join(' / ')+'」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'};
+    if(mixedMode) turnOpt.historyFilter=function(message){ return (message.type||'text')==='text'; };
+    await aiTurn(turnOpt);
     const nextTail=(ch.msgs||[]).slice(info.start);
     if(nextTail.length<=group.length) throw new Error('没有生成新的角色回复');
     const latestState=turnBranchState(ch,info.turnId);
@@ -6500,7 +6582,8 @@ async function regenerateUserTurn(ch,anchor,info){
     else{ ch.msgs=beforeMessages; ch.turnBranches=beforeBranches; }
     saveNow(); render(); toast('重新生成失败，已恢复原消息与分支');
   }finally{ pendingTurnMemoryContexts.delete(ch.id); busyDone(); }
-}function sheetMessageBranches(ch,m){
+}
+function sheetMessageBranches(ch,m){
   if(!ch||!m) return;
   ensureMessageVariant(m);
   sheet('<h3>选择分支</h3><div class="muted" style="margin:6px 0 10px;line-height:1.7">同一条消息保留了你生成过的版本。选择后会原位覆盖当前显示，不会新增消息。</div>'
@@ -6566,25 +6649,24 @@ function ensureOriginalTurnBranch(ch,info){
   }
   return state;
 }
-function sheetEditUserTurn(ch,anchor){
+function sheetEditUserTurn(ch,anchor,mixedMode){
   const info=chatUserTurnInfo(ch,anchor);
   if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
-  if(!info.allText){ toast('整组编辑只支持纯文本消息'); return; }
-  const text=info.group.map(function(item){ return labelOf(item); }).join('\n');
+  if(!info.allText&&!mixedMode){ toast('这组里有图片或卡片，请选择保留或移除'); return; }
+  const text=chatUserTurnTextMessages(info).map(function(item){ return labelOf(item); }).join('\n');
+  const mixedNote=mixedMode?'这组里有图片或卡片。保留这些卡片/图片会留在新分支但不进入文字模型；也可以从新分支移除。':'换行会拆成多个气泡；保存后会生成新的 user 版本，原角色回复进入旧分支。';
+  const buttons=mixedMode?'<button class="btn primary full msg-action-btn" id="editGroupGo">保留并重新生成</button><button class="btn full msg-action-btn" id="editGroupRemove">移除并重新生成</button>':'<button class="btn primary full msg-action-btn" id="editGroupGo">保存并重新生成</button>';
+  const cancelId=mixedMode?'mvCancel':'editGroupNo';
   sheetFull('<h3>编辑并重新生成</h3>'
-    +'<div class="muted" style="margin:6px 0 10px;line-height:1.75">换行会拆成多个气泡；保存后会生成新的 user 版本，原角色回复进入旧分支。</div>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.75">'+esc(mixedNote)+'</div>'
     +'<textarea id="editGroupText" style="min-height:240px;resize:vertical" placeholder="写你要说的话">'+esc(text)+'</textarea>'
-    +'<button class="btn primary full msg-action-btn" id="editGroupGo">保存并重新生成</button>'
-    +'<button class="btn full msg-action-btn" id="editGroupNo">取消</button>');
-  $('#editGroupNo').onclick=closeSheet;
-  $('#editGroupGo').onclick=function(){
-    const lines=String($('#editGroupText').value||'').replace(/\r\n/g,'\n').split('\n').map(function(line){ return String(line||'').trim(); }).filter(Boolean);
-    if(!lines.length){ toast('先写一点内容'); return; }
-    closeSheet();
-    editUserTurnAndRegenerate(ch,anchor,info,lines).catch(function(){});
-  };
+    +buttons+'<button class="btn full msg-action-btn" id="'+cancelId+'">取消</button>');
+  $('#'+cancelId).onclick=closeSheet;
+  const go=function(mode){ const lines=String($('#editGroupText').value||'').replace(/\r\n/g,'\n').split('\n').map(function(line){ return String(line||'').trim(); }).filter(Boolean); if(!lines.length){ toast('先写一点内容'); return; } closeSheet(); editUserTurnAndRegenerate(ch,anchor,info,lines,mode).catch(function(){}); };
+  $('#editGroupGo').onclick=function(){ go(mixedMode||undefined); };
+  const rm=$('#editGroupRemove'); if(rm) rm.onclick=function(){ go('remove'); };
 }
-async function editUserTurnAndRegenerate(ch,anchor,info,lines){
+async function editUserTurnAndRegenerate(ch,anchor,info,lines,mixedMode){
   if(!ch||!info||!lines.length||!needKey()) return;
   const beforeMessages=jsonSafeCopy(ch.msgs||[]);
   const beforeBranches=jsonSafeCopy(ch.turnBranches||{});
@@ -6601,7 +6683,7 @@ async function editUserTurnAndRegenerate(ch,anchor,info,lines){
       parent=id;
       return message;
     });
-    const nextPath=prefix.concat(editedGroup);
+    const nextPath=prefix.concat(mixedTurnGroupWithReplacements(info,editedGroup,mixedMode));
     const newBranchId='turnbranch_'+uid();
     pendingTurnMemoryContexts.set(ch.id,{turnId:info.turnId,branchId:newBranchId,memoryItemIds:autoMemoryIdsForMessages(ch,nextPath,false),legacyMemItems:[]});
     const store=coreStore();
@@ -6610,7 +6692,9 @@ async function editUserTurnAndRegenerate(ch,anchor,info,lines){
       store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches)},{persist:false});
     }else ch.msgs=nextPath;
     saveNow(); render();
-    await aiTurn({chatId:ch.id,silentErrors:true,nudge:'这次是用户编辑后的连续消息组「'+lines.join(' / ')+'」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'});
+    const editOpt={chatId:ch.id,silentErrors:true,nudge:'这次是用户编辑后的连续消息组「'+lines.join(' / ')+'」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'};
+    if(mixedMode) editOpt.historyFilter=function(message){ return (message.type||'text')==='text'; };
+    await aiTurn(editOpt);
     const nextTail=(ch.msgs||[]).slice(info.start);
     if(nextTail.length<=editedGroup.length) throw new Error('没有生成新的角色回复');
     const latestState=turnBranchState(ch,info.turnId);
@@ -6673,8 +6757,10 @@ function deleteMessageTwoStep(ch,msgId){
     $('#delFinalNo').onclick=closeSheet;
     $('#delConfirm').onclick=function(){
       const store=coreStore();
-      if(store) store.commands.deleteMessage(ch.id,msgId,{persist:false});
-      else ch.msgs=ch.msgs.filter(function(item){ return item.id!==msgId; });
+      const branches=jsonSafeCopy(ch.turnBranches||{});
+      Object.keys(branches).forEach(function(turnId){ const state=branches[turnId]; if(!state||!Array.isArray(state.branches)) return; const active=state.branches.find(function(branch){ return branch&&branch.id===state.activeBranchId; }); if(active&&Array.isArray(active.messages)) active.messages=active.messages.filter(function(item){ return item.id!==msgId; }); });
+      if(store){ store.commands.deleteMessage(ch.id,msgId,{persist:false}); store.commands.patchChat(ch.id,{turnBranches:branches},{persist:false}); }
+      else { ch.msgs=ch.msgs.filter(function(item){ return item.id!==msgId; }); ch.turnBranches=branches; }
       saveNow(); closeSheet(); render(); toast('已删除');
     };
   };
@@ -6690,26 +6776,49 @@ function sheetForgetCharMessage(ch,m){
     $('#forgetConfirm').onclick=function(){ forgetCharMessage(ch,m); };
   };
 }
+function forbiddenTextMatches(value,msgId,text){
+  const raw=String(value||'');
+  return raw.indexOf(String(msgId||''))>=0 || (!!text&&raw.indexOf(String(text))>=0);
+}
 function forgetCharMessage(ch,m){
-  const msgId=m.id,text=labelOf(m);
+  const msgId=m.id,text=String(labelOf(m)||'').trim();
   const store=coreStore();
   if(store) store.commands.deleteMessage(ch.id,msgId,{persist:false});
   else ch.msgs=(ch.msgs||[]).filter(function(item){ return item.id!==msgId; });
+  const deletedMemoryIds=new Set();
+  (DB.memoryItems||[]).forEach(function(item){
+    if(!item) return;
+    const sources=Array.isArray(item.sourceMessageIds)?item.sourceMessageIds:[];
+    if(sources.indexOf(msgId)>=0||forbiddenTextMatches(item.plainText,msgId,text)){ deletedMemoryIds.add(String(item.id)); item.status='deleted'; item.deletedAt=Date.now(); item.deletedReason='forgotten-message'; }
+  });
+  (DB.contacts||[]).forEach(function(contact){
+    if(!contact||!Array.isArray(contact.memories)) return;
+    contact.memories=contact.memories.filter(function(memory){ return !forbiddenTextMatches(memory&&memory.text,msgId,text); });
+  });
+  (DB.memoryEntries||[]).forEach(function(entry){
+    if(!entry) return;
+    if(String(entry.sourceId||'')===String(msgId)||forbiddenTextMatches(entry.fact,msgId,text)||forbiddenTextMatches(entry.sourceLabel,msgId,text)){ entry.active=false; entry.forgottenAt=Date.now(); }
+  });
+  DB.memoryEntries=(DB.memoryEntries||[]).filter(function(entry){ return !(entry&&entry.forgottenAt); });
   const branches=jsonSafeCopy(ch.turnBranches||{});
   Object.keys(branches).forEach(function(turnId){
     const state=branches[turnId]; if(!state||!Array.isArray(state.branches)) return;
-    state.branches.forEach(function(branch){ if(branch&&Array.isArray(branch.messages)) branch.messages=branch.messages.filter(function(item){ return item.id!==msgId; }); });
-  });
-  (DB.memoryItems||[]).forEach(function(item){
-    if(item&&Array.isArray(item.sourceMessageIds)&&item.sourceMessageIds.indexOf(msgId)>=0){ item.status='deleted'; item.deletedAt=Date.now(); item.deletedReason='forgotten-message'; }
+    state.branches.forEach(function(branch){
+      if(!branch) return;
+      if(Array.isArray(branch.messages)) branch.messages=branch.messages.filter(function(item){ return item.id!==msgId; });
+      if(Array.isArray(branch.legacyMemItems)) branch.legacyMemItems=branch.legacyMemItems.filter(function(item){ return !forbiddenTextMatches(item,msgId,text); });
+      if(Array.isArray(branch.memoryItemIds)) branch.memoryItemIds=branch.memoryItemIds.filter(function(id){ return !deletedMemoryIds.has(String(id)); });
+    });
   });
   (DB.memoryCursors||[]).forEach(function(cursor){
-    if(cursor&&cursor.lastSummarizedMessageId===msgId){ const last=(ch.msgs||[]).slice().reverse().find(function(item){ return item&&item.status!=='deleted'; }); cursor.lastSummarizedMessageId=last&&last.id||null; }
+    if(cursor&&cursor.sessionId===ch.id&&cursor.lastSummarizedMessageId===msgId){ const last=(ch.msgs||[]).slice().reverse().find(function(item){ return item&&item.status!=='deleted'; }); cursor.lastSummarizedMessageId=last&&last.id||null; }
   });
   const mem=ch.mem||{ts:Date.now(),items:[]};
-  mem.items=(Array.isArray(mem.items)?mem.items:[]).filter(function(item){ return String(item||'')!==String(text||''); });
-  if(store) store.commands.patchChat(ch.id,{turnBranches:branches,mem:{ts:mem.ts||Date.now(),items:mem.items}},{persist:false});
-  else { ch.turnBranches=branches; ch.mem={ts:mem.ts||Date.now(),items:mem.items}; }
+  mem.items=(Array.isArray(mem.items)?mem.items:[]).filter(function(item){ return !forbiddenTextMatches(item,msgId,text); });
+  const snapshot=Array.isArray(ch.baseMemorySnapshot)?ch.baseMemorySnapshot.filter(function(item){ return !forbiddenTextMatches(item,msgId,text); }):[];
+  if(store) store.commands.patchChat(ch.id,{turnBranches:branches,mem:{ts:Date.now(),items:mem.items},baseMemorySnapshot:snapshot},{persist:false});
+  else { ch.turnBranches=branches; ch.mem={ts:Date.now(),items:mem.items}; ch.baseMemorySnapshot=snapshot; }
+  window.__lastForgetCleanup={msgId,text,deletedMemoryIds:Array.from(deletedMemoryIds),contactMemories:false,memoryEntries:(DB.memoryEntries||[]).length};
   saveNow(); closeSheet(); render(); toast('已忘记这条');
 }
 
@@ -6742,8 +6851,8 @@ function sheetMsg(chatId,msgId){
     +'<button class="btn full msg-action-btn" id="mvCancel">取消</button>');
   $('#mvCopy').onclick=()=>{ try{ navigator.clipboard.writeText(text); toast('已复制'); }catch(e){ toast('复制不了，手动选中试试'); } closeSheet(); };
   $('#mvQuote').onclick=function(){ chatQuote=quoteFromMessage(ch,m); closeSheet(); render(); toast('已引用这条'); };
-  const rgg=$('#mvRegenGroup'); if(rgg) rgg.onclick=function(){ sheetRegenerateUserTurn(ch,m); };
-  const meg=$('#mvEditGroup'); if(meg) meg.onclick=function(){ sheetEditUserTurn(ch,m); };
+  const rgg=$('#mvRegenGroup'); if(rgg) rgg.onclick=function(){ handleUserGroupAction(ch,m,'regen'); };
+  const meg=$('#mvEditGroup'); if(meg) meg.onclick=function(){ handleUserGroupAction(ch,m,'edit'); };
   const mcb=$('#mvCreateBranch'); if(mcb) mcb.onclick=function(){ sheetCreateTurnBranch(ch,m); };
   const mtb=$('#mvTurnBranches'); if(mtb) mtb.onclick=function(){ sheetUserTurnBranches(ch,m); };
   const mfg=$('#mvForget'); if(mfg) mfg.onclick=function(){ sheetForgetCharMessage(ch,m); };
@@ -7944,11 +8053,12 @@ async function aiTurn(opt){
   const min=Math.max(1,Number(ch.replyMin)||1);
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
   const want=min+Math.floor(Math.random()*(max-min+1));
-  const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled; });
+  const historyFilter=opt&&typeof opt.historyFilter==='function'?opt.historyFilter:null;
+  const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled&&(!historyFilter||historyFilter(m)); });
   const wantsVoice=!offlineMode&&!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
-    const recent=contextHistory(ch.msgs.filter(m=>m.role!=='sys'),proactive?18:24);
+    const recent=contextHistory(ch.msgs.filter(function(m){ return m.role!=='sys'&&(!historyFilter||historyFilter(m)); }),proactive?18:24);
     const history=proactive?[]:recent.map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
     const transcript=proactive?recent.map(function(m){
       return '['+chatTimeLabel(ch,m)+'] '+(m.role==='me'?'用户':'你')+'：'+messageContextLabel(m);
@@ -8859,7 +8969,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-06 · 3.82 · 第 93 轮';
+const PROGRESS_UPDATED='2026-11-06 · 3.83 · 第 94 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -9506,7 +9616,7 @@ async function buildLightBackupPackage(){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:93,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:94,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -10105,7 +10215,7 @@ async function buildBackupPackage(snapshot){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:93,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:94,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -16107,8 +16217,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-06 · 3.82 · 第 93 轮';
-const BUILD_CODE=93;
+const BUILD='2026-11-06 · 3.83 · 第 94 轮';
+const BUILD_CODE=94;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
