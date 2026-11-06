@@ -1,10 +1,10 @@
 {
-    "version":  "3.81",
-    "versionCode":  92,
-    "round":  92,
-    "releasedAt":  "2026-11-05",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=92-r2",
+    "version":  "3.82",
+    "versionCode":  93,
+    "round":  93,
+    "releasedAt":  "2026-11-06",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=93-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v92-20261105-r2",
-    "notes":  "3.81 Build92 r2：微信连续 user 消息组整组重新生成、旧尾部聊天分支保留与切换；修复旧分支记忆隔离与 Prompt 分层，包含 3.80 的分组语义纠偏、数据管理与 QA 修复。"
+    "cacheKey":  "bsphone-v93-20261106-r1",
+    "notes":  "3.82 Build93：微信消息菜单补齐编辑并重新生成、从当前消息创建分支、角色消息忘记；保留连续组重roll、旧分支记忆隔离与 Prompt 分层修复。"
 }

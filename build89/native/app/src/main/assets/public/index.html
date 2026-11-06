@@ -1828,6 +1828,7 @@ html,body{max-width:100%;overflow-x:hidden;-webkit-text-size-adjust:100%;text-si
 .sheet .box,.sheet .box.full,.bigedit-box{max-width:100%;box-sizing:border-box}
 .sheet .box .row{flex-wrap:wrap}
 .sheet .box button.btn{max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.35}
+#sheetBox .msg-action-btn{min-height:44px}
 .sheet .box input,.sheet .box select,.sheet .box textarea{min-width:0;max-width:100%}
 @media (max-width:380px){
   .pad{padding-left:16px;padding-right:16px}
@@ -6557,36 +6558,202 @@ async function regenerateChatMessage(ch,m){
     busyDone();
   }
 }
+function ensureOriginalTurnBranch(ch,info){
+  const state=turnBranchCurrent(ch,info.turnId,info.start);
+  if(!state.branches.length){
+    const original=Object.assign({id:'turnbranch_'+uid(),label:'原始版本',createdAt:Date.now(),messages:turnBranchSnapshot(ch,info.start)},turnBranchMemorySnapshot(ch,true));
+    state.branches.push(original); state.activeBranchId=original.id;
+  }
+  return state;
+}
+function sheetEditUserTurn(ch,anchor){
+  const info=chatUserTurnInfo(ch,anchor);
+  if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
+  if(!info.allText){ toast('整组编辑只支持纯文本消息'); return; }
+  const text=info.group.map(function(item){ return labelOf(item); }).join('\n');
+  sheetFull('<h3>编辑并重新生成</h3>'
+    +'<div class="muted" style="margin:6px 0 10px;line-height:1.75">换行会拆成多个气泡；保存后会生成新的 user 版本，原角色回复进入旧分支。</div>'
+    +'<textarea id="editGroupText" style="min-height:240px;resize:vertical" placeholder="写你要说的话">'+esc(text)+'</textarea>'
+    +'<button class="btn primary full msg-action-btn" id="editGroupGo">保存并重新生成</button>'
+    +'<button class="btn full msg-action-btn" id="editGroupNo">取消</button>');
+  $('#editGroupNo').onclick=closeSheet;
+  $('#editGroupGo').onclick=function(){
+    const lines=String($('#editGroupText').value||'').replace(/\r\n/g,'\n').split('\n').map(function(line){ return String(line||'').trim(); }).filter(Boolean);
+    if(!lines.length){ toast('先写一点内容'); return; }
+    closeSheet();
+    editUserTurnAndRegenerate(ch,anchor,info,lines).catch(function(){});
+  };
+}
+async function editUserTurnAndRegenerate(ch,anchor,info,lines){
+  if(!ch||!info||!lines.length||!needKey()) return;
+  const beforeMessages=jsonSafeCopy(ch.msgs||[]);
+  const beforeBranches=jsonSafeCopy(ch.turnBranches||{});
+  try{
+    busy('正在生成编辑后的回复');
+    const state=ensureOriginalTurnBranch(ch,info);
+    const prefix=(ch.msgs||[]).slice(0,info.start);
+    const now=Date.now();
+    const groupId='group_'+uid();
+    let parent=prefix.length?prefix[prefix.length-1].id:null;
+    const editedGroup=lines.map(function(text,index){
+      const id='message_'+uid();
+      const message={id:id,role:'me',type:'text',text:text,ts:now+index,turnId:info.turnId,messageGroupId:groupId,branchId:'main',status:'active',variantGroupId:id,parentMessageId:parent,editedFromMessageIds:info.group.map(function(item){ return item.id; })};
+      parent=id;
+      return message;
+    });
+    const nextPath=prefix.concat(editedGroup);
+    const newBranchId='turnbranch_'+uid();
+    pendingTurnMemoryContexts.set(ch.id,{turnId:info.turnId,branchId:newBranchId,memoryItemIds:autoMemoryIdsForMessages(ch,nextPath,false),legacyMemItems:[]});
+    const store=coreStore();
+    if(store&&store.commands){
+      store.commands.replaceMessages(ch.id,nextPath,{persist:false});
+      store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches)},{persist:false});
+    }else ch.msgs=nextPath;
+    saveNow(); render();
+    await aiTurn({chatId:ch.id,silentErrors:true,nudge:'这次是用户编辑后的连续消息组「'+lines.join(' / ')+'」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。'});
+    const nextTail=(ch.msgs||[]).slice(info.start);
+    if(nextTail.length<=editedGroup.length) throw new Error('没有生成新的角色回复');
+    const latestState=turnBranchState(ch,info.turnId);
+    latestState.branches.push(Object.assign({id:newBranchId,label:'编辑后生成 '+(latestState.branches.length),kind:'edit',editFromMessageIds:info.group.map(function(item){return item.id;}),createdAt:Date.now(),messages:jsonSafeCopy(nextTail)},turnBranchMemorySnapshot(ch,false)));
+    latestState.activeBranchId=newBranchId;
+    pendingTurnMemoryContexts.delete(ch.id);
+    if(store&&store.commands) store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches),lastTs:Date.now()},{persist:false});
+    saveNow(); render(); toast('已用新的消息继续');
+  }catch(e){
+    pendingTurnMemoryContexts.delete(ch.id);
+    const store=coreStore();
+    if(store&&store.commands){ store.commands.replaceMessages(ch.id,beforeMessages,{persist:false}); store.commands.patchChat(ch.id,{turnBranches:beforeBranches},{persist:false}); }
+    else{ ch.msgs=beforeMessages; ch.turnBranches=beforeBranches; }
+    saveNow(); render(); toast('编辑后生成失败，已恢复原消息与分支');
+  }finally{ pendingTurnMemoryContexts.delete(ch.id); busyDone(); }
+}
+function sheetCreateTurnBranch(ch,anchor){
+  const info=chatUserTurnInfo(ch,anchor);
+  if(!info){ toast('这组消息已经变化，请重新打开菜单'); return; }
+  const index=(ch.msgs||[]).findIndex(function(item){ return item&&item.id===anchor.id; });
+  if(index<0){ toast('这条消息不见了'); return; }
+  sheetSmall('<h3>从这里创建新分支？</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">当前气泡之后的内容会进入旧分支；新分支保留到这里，之后可以继续发送。旧分支仍可从「聊天分支」切回。</div>'
+    +'<button class="btn primary full msg-action-btn" id="branchFromYes">创建新分支</button><button class="btn full msg-action-btn" id="branchFromNo">取消</button>');
+  $('#branchFromNo').onclick=closeSheet;
+  $('#branchFromYes').onclick=function(){ closeSheet(); createTurnBranchFromMessage(ch,anchor,info); };
+}
+function createTurnBranchFromMessage(ch,anchor,info){
+  if(!ch||!info) return;
+  const beforeMessages=jsonSafeCopy(ch.msgs||[]);
+  const beforeBranches=jsonSafeCopy(ch.turnBranches||{});
+  try{
+    const index=(ch.msgs||[]).findIndex(function(item){ return item&&item.id===anchor.id; });
+    if(index<0) throw new Error('这条消息不见了');
+    const state=ensureOriginalTurnBranch(ch,info);
+    const newBranchId='turnbranch_'+uid();
+    const prefix=(ch.msgs||[]).slice(0,index+1);
+    const newTail=jsonSafeCopy((ch.msgs||[]).slice(info.start,index+1));
+    const newBranch=Object.assign({id:newBranchId,label:'新分支 '+state.branches.length,kind:'manual',createdAt:Date.now(),messages:newTail},turnBranchMemorySnapshot(ch,false,prefix));
+    state.branches.push(newBranch); state.activeBranchId=newBranchId;
+    const store=coreStore();
+    if(store&&store.commands){
+      store.commands.patchChat(ch.id,{turnBranches:jsonSafeCopy(ch.turnBranches),lastTs:Date.now()},{persist:false});
+      store.commands.replaceMessages(ch.id,prefix,{persist:false});
+    }else{ ch.turnBranches=jsonSafeCopy(ch.turnBranches); ch.msgs=prefix; ch.lastTs=Date.now(); }
+    saveNow(); render(); toast('已创建新分支');
+  }catch(e){
+    const store=coreStore();
+    if(store&&store.commands){ store.commands.replaceMessages(ch.id,beforeMessages,{persist:false}); store.commands.patchChat(ch.id,{turnBranches:beforeBranches},{persist:false}); }
+    else{ ch.msgs=beforeMessages; ch.turnBranches=beforeBranches; }
+    saveNow(); render(); toast('创建分支失败，已恢复原消息与分支');
+  }
+}
+function deleteMessageTwoStep(ch,msgId){
+  const m=(ch.msgs||[]).find(function(item){ return item&&item.id===msgId; });
+  if(!m) return;
+  sheetSmall('<h3>删除这条消息？</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">它只会从当前聊天流移除，不会删除收藏、订单或相册实体。</div><button class="btn danger full msg-action-btn" id="delNext">继续</button><button class="btn full msg-action-btn" id="delNo">取消</button>');
+  $('#delNo').onclick=closeSheet;
+  $('#delNext').onclick=function(){
+    sheetSmall('<h3>再次确认删除</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">删除后不会在当前聊天流显示，这会作用于当前这一条。</div><button class="btn danger full msg-action-btn" id="delConfirm">永久删除</button><button class="btn full msg-action-btn" id="delFinalNo">取消</button>');
+    $('#delFinalNo').onclick=closeSheet;
+    $('#delConfirm').onclick=function(){
+      const store=coreStore();
+      if(store) store.commands.deleteMessage(ch.id,msgId,{persist:false});
+      else ch.msgs=ch.msgs.filter(function(item){ return item.id!==msgId; });
+      saveNow(); closeSheet(); render(); toast('已删除');
+    };
+  };
+}
+function sheetForgetCharMessage(ch,m){
+  if(!ch||!m) return;
+  const text=labelOf(m);
+  sheetSmall('<h3>忘记这条？</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">会从当前聊天流、当前上下文和角色对这段对话的记忆中移除。订单、相册、收藏等实体不会自动删除；用量统计保留，但内容不再用于对话。</div><div class="card" style="box-shadow:none;border:1px solid var(--line);white-space:pre-wrap">'+esc(quoteSnippet(text,180))+'</div><button class="btn danger full msg-action-btn" id="forgetNext">继续</button><button class="btn full msg-action-btn" id="forgetNo">取消</button>');
+  $('#forgetNo').onclick=closeSheet;
+  $('#forgetNext').onclick=function(){
+    sheetSmall('<h3>再次确认忘记</h3><div class="muted" style="margin:8px 0 12px;line-height:1.75">确认后，这条角色消息不会出现在当前聊天或后续上下文里。</div><button class="btn danger full msg-action-btn" id="forgetConfirm">确认忘记</button><button class="btn full msg-action-btn" id="forgetFinalNo">取消</button>');
+    $('#forgetFinalNo').onclick=closeSheet;
+    $('#forgetConfirm').onclick=function(){ forgetCharMessage(ch,m); };
+  };
+}
+function forgetCharMessage(ch,m){
+  const msgId=m.id,text=labelOf(m);
+  const store=coreStore();
+  if(store) store.commands.deleteMessage(ch.id,msgId,{persist:false});
+  else ch.msgs=(ch.msgs||[]).filter(function(item){ return item.id!==msgId; });
+  const branches=jsonSafeCopy(ch.turnBranches||{});
+  Object.keys(branches).forEach(function(turnId){
+    const state=branches[turnId]; if(!state||!Array.isArray(state.branches)) return;
+    state.branches.forEach(function(branch){ if(branch&&Array.isArray(branch.messages)) branch.messages=branch.messages.filter(function(item){ return item.id!==msgId; }); });
+  });
+  (DB.memoryItems||[]).forEach(function(item){
+    if(item&&Array.isArray(item.sourceMessageIds)&&item.sourceMessageIds.indexOf(msgId)>=0){ item.status='deleted'; item.deletedAt=Date.now(); item.deletedReason='forgotten-message'; }
+  });
+  (DB.memoryCursors||[]).forEach(function(cursor){
+    if(cursor&&cursor.lastSummarizedMessageId===msgId){ const last=(ch.msgs||[]).slice().reverse().find(function(item){ return item&&item.status!=='deleted'; }); cursor.lastSummarizedMessageId=last&&last.id||null; }
+  });
+  const mem=ch.mem||{ts:Date.now(),items:[]};
+  mem.items=(Array.isArray(mem.items)?mem.items:[]).filter(function(item){ return String(item||'')!==String(text||''); });
+  if(store) store.commands.patchChat(ch.id,{turnBranches:branches,mem:{ts:mem.ts||Date.now(),items:mem.items}},{persist:false});
+  else { ch.turnBranches=branches; ch.mem={ts:mem.ts||Date.now(),items:mem.items}; }
+  saveNow(); closeSheet(); render(); toast('已忘记这条');
+}
+
 function sheetMsg(chatId,msgId){
   const ch=chat(chatId); if(!ch) return;
   const m=ch.msgs.find(x=>x.id===msgId); if(!m||m.role==='sys') return;
   const mine=m.role==='me';
   const text=labelOf(m), who=mine? '我' : ((ct(m.from)||{}).name||'');
+  let actions='';
+  if(mine){
+    actions+='<button class="btn full msg-action-btn" id="mvRegenGroup">重新生成整个连续组</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvEditGroup">重新编辑并生成</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvCreateBranch">从这里创建新分支</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvTurnBranches">聊天分支</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvCopy">复制文字</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvQuote">引用这条</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvFav">收藏这条</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvBack">撤回这条</button>';
+  }else{
+    actions+='<button class="btn full msg-action-btn" id="mvCopy">复制文字</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvQuote">引用这条</button>';
+    if((m.type||'text')==='text') actions+='<button class="btn full" id="mvForget">忘记这条</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvFav">收藏这条</button>';
+  }
+  actions+='<button class="btn full danger msg-action-btn" id="mvDel">删除这条</button>';
   sheet('<h3>这条消息</h3>'
     +'<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:0 0 10px"><div class="muted">'+esc(who)+'</div>'
     +'<div style="margin-top:6px;white-space:pre-wrap">'+esc(text)+'</div></div>'
-    +'<button class="btn full" id="mvCopy">复制文字</button>'
-    +'<button class="btn full" id="mvQuote">引用这条</button>'
-    +(mine? '<button class="btn full" id="mvRegenGroup">重新生成整个连续组</button><button class="btn full" id="mvTurnBranches">聊天分支</button>':'')
-    +'<button class="btn full" id="mvFav">收藏这条</button>'
-    +(mine? '<button class="btn full" id="mvBack">撤回这条</button>':'')
-    +'<button class="btn full danger" id="mvDel">删除这条</button>'
-    +'<button class="btn full" id="mvCancel">取消</button>');
+    +actions
+    +'<button class="btn full msg-action-btn" id="mvCancel">取消</button>');
   $('#mvCopy').onclick=()=>{ try{ navigator.clipboard.writeText(text); toast('已复制'); }catch(e){ toast('复制不了，手动选中试试'); } closeSheet(); };
-  $('#mvQuote').onclick=function(){ chatQuote=quoteFromMessage(ch,m); closeSheet(); render(); toast('已引用这条消息'); };
+  $('#mvQuote').onclick=function(){ chatQuote=quoteFromMessage(ch,m); closeSheet(); render(); toast('已引用这条'); };
   const rgg=$('#mvRegenGroup'); if(rgg) rgg.onclick=function(){ sheetRegenerateUserTurn(ch,m); };
+  const meg=$('#mvEditGroup'); if(meg) meg.onclick=function(){ sheetEditUserTurn(ch,m); };
+  const mcb=$('#mvCreateBranch'); if(mcb) mcb.onclick=function(){ sheetCreateTurnBranch(ch,m); };
   const mtb=$('#mvTurnBranches'); if(mtb) mtb.onclick=function(){ sheetUserTurnBranches(ch,m); };
+  const mfg=$('#mvForget'); if(mfg) mfg.onclick=function(){ sheetForgetCharMessage(ch,m); };
   $('#mvFav').onclick=()=>{ DB.favorites=DB.favorites||[]; DB.favorites.unshift({id:uid(),who:who,text:text,ts:m.ts}); save(); closeSheet(); toast('已收藏'); };
   const bk=$('#mvBack');
   if(bk) bk.onclick=()=>{ const original=labelOf(m); const known=Math.random()<0.5; patchChatMessage(m,{type:'text',recalled:{text:original,known:known},text:'你撤回了一条消息'},{removeKeys:['url','title','amount']}); save(); closeSheet(); render(); toast('已撤回'); if(ch&&DB.api.key) scheduleReply(ch,'对方刚撤回了一条消息。'+(known? ('你瞥到了撤回前的内容：「'+original+'」。你可以问一句、调侃，或者装作没看见。') : '你没看清撤回前的内容。你可以问一句，或者装作没看见。')+'不要自问自答。'); };
-  $('#mvDel').onclick=()=>{
-    const store=coreStore();
-    if(store) store.commands.deleteMessage(chatId,msgId,{persist:false});
-    else ch.msgs=ch.msgs.filter(x=>x.id!==msgId);
-    save(); closeSheet(); render(); toast('已删除');
-  };
+  $('#mvDel').onclick=()=>deleteMessageTwoStep(ch,msgId);
   $('#mvCancel').onclick=closeSheet;
 }
+
 const memorySummaryLocks=new Set();
 function memoryBranchId(ch){ return String(ch&&ch.branchId||'main'); }
 function memoryItemLabel(item){
@@ -8692,7 +8859,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-05 · 3.81 · 第 92 轮';
+const PROGRESS_UPDATED='2026-11-06 · 3.82 · 第 93 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -9339,7 +9506,7 @@ async function buildLightBackupPackage(){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:92,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:93,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -9938,7 +10105,7 @@ async function buildBackupPackage(snapshot){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:92,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:93,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -15940,8 +16107,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-05 · 3.81 · 第 92 轮';
-const BUILD_CODE=92;
+const BUILD='2026-11-06 · 3.82 · 第 93 轮';
+const BUILD_CODE=93;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
