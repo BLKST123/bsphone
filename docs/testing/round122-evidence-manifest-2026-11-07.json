@@ -1,0 +1,458 @@
+{
+  "ok": true,
+  "generatedAt": "2026-11-07T10:27:33.194Z",
+  "artifactEvidence": {
+    "sourceCommit": "8f8a249f83494815311d8eb2cda34e6e6862bec2",
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+    "debugApkSha256": "E88115A380025A404F529B5B291F9FA113CF96BE065FDBDE55D5A30288B0D21E",
+    "releaseApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+    "releaseZipSha256": "F7AF762E2F7AB2CDA68174E7669319A94D4CF8F09C1C4256380F3176ECFF3D94",
+    "version": "3.87",
+    "versionCode": 98,
+    "cacheKey": "bsphone-v98-20261107-r1"
+  },
+  "report": {
+    "file": "BS小手机_3.87_Build98_微信我的模块与卡包返修_完整报告_2026-11-07.md",
+    "bytes": 15285,
+    "sha256": "236BEC4693634AB240657287E0CDFE3EC5193D9DBBB67A02674949633348A9E7"
+  },
+  "tests": [
+    {
+      "file": "qa-wechat-message-edit-branch-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 26,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-chat-turn-reroll-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 19,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-turn-reroll-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-turn-branch-switch-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 6,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-turn-reroll-independent-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 14,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-turn-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-turn-reroll-multi-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-prompt-layers-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-turn-memory-branch-audit-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-turn-auto-memory-branch-fix-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-manual-branch-continue-audit-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-mixed-group-edit-audit-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 2,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-forget-memory-scope-audit-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 2,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-forget-branch-memory-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 6,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-delete-branch-snapshot-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-branch-export-delete-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-mixed-group-edit-lifecycle-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-forget-substring-scope-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-forget-cross-scope-audit-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 4,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-forget-group-member-scope-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-forget-group-branch-scope-2026-11-06.json",
+      "ok": true,
+      "presentChecks": 13,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-forget-group-remark-scope-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round121-image-branch-hidden-zip-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round122-wechat-mine-suite.json",
+      "ok": true,
+      "presentChecks": 17,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-card-unbind-wallet-adjust-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-r97-light-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-r97-dark-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round108-p1-recheck.json",
+      "ok": true,
+      "presentChecks": 7,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round109-service-worker.json",
+      "ok": true,
+      "presentChecks": 6,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-data-management-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 17,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-independent-batch3-recheck.json",
+      "ok": true,
+      "presentChecks": 14,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round111-batch3-redteam-fix.json",
+      "ok": true,
+      "presentChecks": 13,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-hidden-prompt-audit-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 2,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-image-turn-branch-sync-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 2,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "independent-zip-asset-checksum-audit-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 1,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round117-phone-wechat-message-edit-branch.json",
+      "ok": true,
+      "presentChecks": 8,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round114-phone-turn-reroll.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "qa-phone-branch-switch-ui-2026-11-05.json",
+      "ok": true,
+      "presentChecks": 5,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round101-phone-export.json",
+      "ok": true,
+      "presentChecks": 10,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round112-phone-batch3-fix.json",
+      "ok": true,
+      "presentChecks": 9,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round113-phone-data-management.json",
+      "ok": true,
+      "presentChecks": 8,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round119-phone-forget-scope.json",
+      "ok": true,
+      "presentChecks": 12,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round120-phone-forget-group-scope.json",
+      "ok": true,
+      "presentChecks": 3,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round118-phone-qa382.json",
+      "ok": true,
+      "presentChecks": 10,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round121-phone-image-branch-hidden-zip.json",
+      "ok": true,
+      "presentChecks": 0,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round122-phone-wechat-mine-suite.json",
+      "ok": true,
+      "presentChecks": 15,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round122-phone-release-final-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 11,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round122-release-package-audit-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 10,
+      "failedChecks": 0,
+      "failures": 0
+    },
+    {
+      "file": "round122-online-publish-2026-11-07.json",
+      "ok": true,
+      "presentChecks": 10,
+      "failedChecks": 0,
+      "failures": 0
+    }
+  ],
+  "logs": [
+    {
+      "file": "build98-native-build-2026-11-07.log",
+      "bytes": 4703,
+      "sha256": "5CEB189F925A7A9AD7766D535B710019EFC6C0FF0F31DB8B09BA007E517941E1"
+    },
+    {
+      "file": "round122-final-core-2026-11-07.log",
+      "bytes": 1579,
+      "sha256": "EC53AEF89E8CDCC54D2DA1703F18E219C795298F731D8C18810D258AE666ADC8"
+    },
+    {
+      "file": "round122-final-regression-suite-2026-11-07.log",
+      "bytes": 632,
+      "sha256": "0B453CF152D5DD071D127A703B22D427EA9BCB3EC8996962A74C56A5113E03AC"
+    },
+    {
+      "file": "round122-phone-debug-suite-final-2026-11-07.log",
+      "bytes": 797,
+      "sha256": "EF3087CBD89CB1CE908E290738060373060EE75C330883DB4D6E492BE38F2DCF"
+    },
+    {
+      "file": "round122-independent-audits-2026-11-07.log",
+      "bytes": 513,
+      "sha256": "0ECE9B3A70E916CA41124A807AB2FE8A63008820CAB09F5A63034242AC22D861"
+    },
+    {
+      "file": "round122-phone-release-final-logcat-2026-11-07.txt",
+      "bytes": 114441,
+      "sha256": "68D4774F500B1144B068E0B14BADFF0D209255F5214DA489A4D7A4FB0BFF7EEE"
+    }
+  ],
+  "screenshots": [
+    {
+      "file": "round122-phone-wechat-mine.png",
+      "bytes": 1595339,
+      "sha256": "5BC8D2BEA66051BA628CC5B46C60AAB43C4BE5C07A93AE74DCE51AEF095EE733"
+    },
+    {
+      "file": "round122-phone-persona.png",
+      "bytes": 1474092,
+      "sha256": "501953570DC404A27D8DC33F18A0AE76A335B058F92B85597CDD710AE5820323"
+    },
+    {
+      "file": "round122-phone-cards.png",
+      "bytes": 1372642,
+      "sha256": "21AB3B8714D20E376D479DA7F877FB94989871C895219365E2D9CAEAE2AA5A17"
+    },
+    {
+      "file": "round122-release-final-home.png",
+      "bytes": 2560326,
+      "sha256": "495A8706BCF4DC5DBEEE7414F09E617E49716E0004D05B19D2A24ED909CB8778"
+    },
+    {
+      "file": "round121-phone-image-branch.png",
+      "bytes": 1389376,
+      "sha256": "7ED38939375C6963E70E942E69A5FA9B545CB9AB9C33788977CB2D4B6E696F3A"
+    },
+    {
+      "file": "round121-phone-hidden-content.png",
+      "bytes": 1339982,
+      "sha256": "A80566C369B258FBD6CC096AA1B094CCCF89DF114D90B208CEE039018C4FD707"
+    },
+    {
+      "file": "round121-phone-image-branch-hidden-zip.png",
+      "bytes": 1794319,
+      "sha256": "A711C569A695C7C3919DFF103E957EA4706FB65B6419AAAC8C49BCA694A9226D"
+    },
+    {
+      "file": "round118-phone-branch-actions.png",
+      "bytes": 1368646,
+      "sha256": "E57E04B343D59F39B923E77996109E914913AA2F63DF2F4AA920A6EE014AD237"
+    },
+    {
+      "file": "round118-phone-mixed-editor.png",
+      "bytes": 1450709,
+      "sha256": "6AA8E2C27232AFD598A6ED2EA264A84837E4329938DBC242B0E2504975278E73"
+    },
+    {
+      "file": "round119-phone-forget-scope.png",
+      "bytes": 1845345,
+      "sha256": "1F378B191E3791B858E03C8DF8C84DB213514258225AD7104D819707E83AE451"
+    },
+    {
+      "file": "round120-phone-forget-group-scope.png",
+      "bytes": 1854388,
+      "sha256": "A448360EB6CF3AB53D4539380682F6A039204D09E0B8323C8D32A06D1ADF549C"
+    }
+  ],
+  "releaseArtifacts": {
+    "apk": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\BS小手机.apk",
+    "zip": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\BS小手机_3.87_Build98_release.zip"
+  },
+  "errors": []
+}

@@ -1,89 +1,78 @@
 {
-    "ok":  true,
-    "checks":  {
-                   "sheetTwoThirds":  "PASS",
-                   "iconsVisible":  "PASS",
-                   "notes":  "PASS",
-                   "hitTargets44":  "PASS",
-                   "groupLongPress":  "PASS",
-                   "crossPersonaGroupsGlobal":  "PASS",
-                   "directDisband":  "PASS",
-                   "systemBackStack":  "PASS",
-                   "userSelectNone":  "PASS",
-                   "longPressTapRecovery":  "PASS",
-                   "menuPinReadBackground":  "PASS",
-                   "backupRoundtrip":  "PASS",
-                   "noRuntimeErrors":  "PASS"
-               },
-    "managerHeight":  {
-                          "ratio":  0.6599896327014217,
-                          "height":  557.03125
-                      },
-    "targetSize":  {
-                       "color":  [
-                                     44,
-                                     44
-                                 ],
-                       "icon":  [
-                                    44,
-                                    44
-                                ]
-                   },
-    "created":  {
-                    "id":  "cg_mw5x9le7xrst",
-                    "builtin":  false,
-                    "name":  "家人",
-                    "note":  "只有家里人",
-                    "color":  "#34c759",
-                    "icon":  "home"
-                },
-    "base":  {
-                 "userSelect":  "none",
-                 "webkitUserSelect":  "none"
-             },
-    "backOne":  {
-                    "sheet":  true,
-                    "text":  "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n家人\n0 个会话 · 只有家里人\n›\n其他人设的分组\n0 个会话\n›\n＋ 新建会话分组关闭",
-                    "route":  "wechat"
-                },
-    "afterTap":  {
-                     "route":  "chatroom",
-                     "arg":  "ch111",
-                     "say":  true
-                 },
-    "roundtrip":  {
-                      "imported":  true,
-                      "verification":  {
-                                           "ok":  true,
-                                           "status":  "verified",
-                                           "algorithm":  "SHA-256"
-                                       },
-                      "groupId":  "cg_mw5x9le7xrst",
-                      "group":  {
-                                    "name":  "家人",
-                                    "note":  "只有家里人",
-                                    "color":  "#34c759",
-                                    "icon":  "home"
-                                },
-                      "chats":  [
-                                    {
-                                        "id":  "ch111",
-                                        "groupIds":  [
-                                                         "cg_mw5x9le7xrst"
-                                                     ]
-                                    }
-                                ]
-                  },
-    "errors":  [
-
-               ],
-    "artifactEvidence":  {
-                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
-                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                             "version":  "3.86",
-                             "versionCode":  97,
-                             "cacheKey":  "bsphone-v97-20261107-r1"
-                         }
+  "ok": true,
+  "checks": {
+    "sheetTwoThirds": "PASS",
+    "iconsVisible": "PASS",
+    "notes": "PASS",
+    "hitTargets44": "PASS",
+    "groupLongPress": "PASS",
+    "crossPersonaGroupsGlobal": "PASS",
+    "directDisband": "PASS",
+    "systemBackStack": "PASS",
+    "userSelectNone": "PASS",
+    "longPressTapRecovery": "PASS",
+    "menuPinReadBackground": "PASS",
+    "backupRoundtrip": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "managerHeight": {
+    "ratio": 0.6599896327014217,
+    "height": 557.03125
+  },
+  "targetSize": {
+    "color": [
+      44,
+      44
+    ],
+    "icon": [
+      44,
+      44
+    ]
+  },
+  "created": {
+    "id": "cg_mw68oim4kbsw",
+    "builtin": false,
+    "name": "家人",
+    "note": "只有家里人",
+    "color": "#34c759",
+    "icon": "home"
+  },
+  "base": {
+    "userSelect": "none",
+    "webkitUserSelect": "none"
+  },
+  "backOne": {
+    "sheet": true,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n家人\n0 个会话 · 只有家里人\n›\n其他人设的分组\n0 个会话\n›\n＋ 新建会话分组关闭",
+    "route": "wechat"
+  },
+  "afterTap": {
+    "route": "chatroom",
+    "arg": "ch111",
+    "say": true
+  },
+  "roundtrip": {
+    "imported": true,
+    "verification": {
+      "ok": true,
+      "status": "verified",
+      "algorithm": "SHA-256"
+    },
+    "groupId": "cg_mw68oim4kbsw",
+    "group": {
+      "name": "家人",
+      "note": "只有家里人",
+      "color": "#34c759",
+      "icon": "home"
+    },
+    "chats": [
+      {
+        "id": "ch111",
+        "groupIds": [
+          "cg_mw68oim4kbsw"
+        ]
+      }
+    ]
+  },
+  "errors": []
 }

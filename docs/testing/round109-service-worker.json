@@ -1,52 +1,41 @@
 {
-    "ok":  true,
-    "checks":  {
-                   "registration":  "PASS",
-                   "cacheKey":  "PASS",
-                   "precache":  "PASS",
-                   "navigationNetworkFirst":  "PASS",
-                   "offlineFallback":  "PASS",
-                   "noRuntimeErrors":  "PASS"
-               },
-    "first":  {
-                  "probe":  "v1",
-                  "keys":  [
-                               "bsphone-v96-20261107-r1"
-                           ],
-                  "count":  10,
-                  "urls":  [
-                               "/",
-                               "/manifest.webmanifest",
-                               "/index.html",
-                               "/icon-192.png",
-                               "/icon-512.png",
-                               "/core/design/tokens.css",
-                               "/core/design/shell.css",
-                               "/core/store/core-store.js",
-                               "/core/store/readonly-store.js",
-                               "/core/prompts/sysworld-v2.js"
-                           ]
-              },
-    "second":  {
-                   "probe":  "v2",
-                   "title":  "BS小手机",
-                   "screen":  true
-               },
-    "offline":  {
-                    "title":  "BS小手机",
-                    "screen":  true,
-                    "text":  "小记\n09:30\n今天 · 晴 · 19°C\n一\n二\n三\n四\n五\n六\n日\n今天也要\n慢一点，也没关系。\n日记\n外卖\n微信\n小说\n相册\n微博\n今日一句\n慢慢做好\n"
-                },
-    "errors":  [
-
-               ],
-    "artifactEvidence":  {
-                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
-                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                             "version":  "3.86",
-                             "versionCode":  97,
-                             "cacheKey":  "bsphone-v97-20261107-r1"
-                         }
+  "ok": true,
+  "checks": {
+    "registration": "PASS",
+    "cacheKey": "PASS",
+    "precache": "PASS",
+    "navigationNetworkFirst": "PASS",
+    "offlineFallback": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "first": {
+    "probe": "v1",
+    "keys": [
+      "bsphone-v98-20261107-r1"
+    ],
+    "count": 10,
+    "urls": [
+      "/",
+      "/manifest.webmanifest",
+      "/index.html",
+      "/icon-192.png",
+      "/icon-512.png",
+      "/core/design/tokens.css",
+      "/core/design/shell.css",
+      "/core/store/core-store.js",
+      "/core/store/readonly-store.js",
+      "/core/prompts/sysworld-v2.js"
+    ]
+  },
+  "second": {
+    "probe": "v2",
+    "title": "BS小手机",
+    "screen": true
+  },
+  "offline": {
+    "title": "BS小手机",
+    "screen": true,
+    "text": "小记\n09:30\n今天 · 晴 · 19°C\n一\n二\n三\n四\n五\n六\n日\n今天也要\n慢一点，也没关系。\n日记\n外卖\n微信\n小说\n相册\n微博\n今日一句\n慢慢做好\n"
+  },
+  "errors": []
 }

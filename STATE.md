@@ -5,7 +5,7 @@
 - 页面：2026-11-07 · 3.87 · 第 98 轮
 - Android：3.87 / versionCode 98
 - Service Worker：`bsphone-v98-20261107-r1`
-- 源码提交：`待最终提交`
+- 源码提交：`8f8a249f83494815311d8eb2cda34e6e6862bec2`
 - 源码 SHA-256：`D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4`
 - Debug APK SHA-256：`E88115A380025A404F529B5B291F9FA113CF96BE065FDBDE55D5A30288B0D21E`
 - Release APK SHA-256：`9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513`
@@ -43,7 +43,7 @@
 - 菜单按钮命中区统一达到 44×44；角色忘记进入记忆、上下文和分支快照清理流程。
 - 桌面独立复检、真机实际 touchstart 后等待 520ms（覆盖 450ms 阈值）的长按、导出、分组、数据管理全部通过。
 - 真机 Debug 验证后已用 `adb install -r` 覆盖安装回 Release；设备内 APK 回拉哈希与发布候选一致，应用数据保留。
-- GitHub Pages 已发布到 main，线上 version/cacheKey/APK 哈希已验证为 3.86 / Build97。
+- GitHub Pages 已发布到 main，线上 version/cacheKey/APK 哈希已验证为 3.87 / Build98；Pages build 1348685543 为 built。
 
 ## 交付硬门槛
 
@@ -60,6 +60,7 @@
 ## 最近证据
 
 - `docs/testing/round122-evidence-manifest-2026-11-07.json`
+- `docs/testing/round122-online-publish-2026-11-07.json`
 - `docs/testing/round122-release-package-audit-2026-11-07.json`
 - `docs/testing/independent-card-unbind-wallet-adjust-2026-11-07.json`
 - `docs/testing/round122-final-core-2026-11-07.log`
