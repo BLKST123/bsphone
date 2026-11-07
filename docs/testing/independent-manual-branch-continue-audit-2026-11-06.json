@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-07T04:45:49.347Z",
+  "checkedAt": "2026-11-07T08:55:41.894Z",
   "tests": {
     "manualBranchAtSecondBubbleEndsAtSecond": true,
     "branchListHasExportDeleteActions": true,
@@ -24,7 +24,7 @@
         "旧回复",
         "后续"
       ],
-      "active": "turnbranch_mw5x7fkm7135"
+      "active": "turnbranch_mw664ruw22na"
     },
     "newAfter": {
       "texts": [
@@ -33,7 +33,7 @@
         "分支继续用户",
         "分支继续回复"
       ],
-      "active": "turnbranch_mw5x7fkm3avz",
+      "active": "turnbranch_mw664ruw6wik",
       "branches": [
         {
           "label": "原始版本",
@@ -57,15 +57,5 @@
     }
   },
   "errors": [],
-  "ok": true,
-  "artifactEvidence": {
-    "recordedAt": "2026-11-07T07:42:44.009Z",
-    "sourceCommit": "032b02e50c67b3e0629cc88527b8f767b33d231a",
-    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
-    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
-    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
-    "version": "3.85",
-    "versionCode": 96,
-    "cacheKey": "bsphone-v96-20261107-r1"
-  }
+  "ok": true
 }

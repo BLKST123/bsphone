@@ -1,10 +1,10 @@
-{
-    "version":  "3.85",
-    "versionCode":  96,
-    "round":  96,
+﻿{
+    "version":  "3.86",
+    "versionCode":  97,
+    "round":  97,
     "releasedAt":  "2026-11-07",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=96-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=97-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v96-20261107-r1",
-    "notes":  "3.85 Build96：群聊忘记严格按消息发送者 m.from 清理记忆，保留同群其它角色；混合卡片位置与短文本精确匹配修复继续保留。"
+    "cacheKey":  "bsphone-v97-20261107-r1",
+    "notes":  "3.86 Build97：图片重 roll/图片分支、隐藏内容恢复、ZIP+assets 归档与发布准备；群聊备注名忘记作用域修复。"
 }

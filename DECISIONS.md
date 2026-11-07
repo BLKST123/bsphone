@@ -1,4 +1,4 @@
-# BS 小手机 DECISIONS
+﻿# BS 小手机 DECISIONS
 
 ## LOCKED
 
@@ -13,12 +13,17 @@
 - 手动、核心、用户已修正记忆保持跨分支可用；旧分支自动记忆只在对应旧分支激活时恢复。
 - Prompt 固定顺序：stable → semi → history → memory → 本轮指令 → environment → final user。
 - 重 roll nudge 不得写入 semi；记忆不得伪装成 user。
-- Build96 使用 Service Worker 缓存键 `bsphone-v96-20261107-r1`。
+- Build97 使用 Service Worker 缓存键 `bsphone-v97-20261107-r1`。
 - 编辑并重新生成必须创建新的 user message_id，旧 user/char/后续消息进入旧分支；turnId 不增加。
 - 从这里创建新分支保留到当前 user 消息，当前气泡之后的内容进入旧分支；该操作不调用模型。
 - 角色消息“忘记这条”必须两次确认，并按当前 chat/char 作用域清理当前聊天、分支快照、contact long-term memories、baseMemorySnapshot、branch legacy/memory ids、memoryEntries、chat digest 和记忆游标；订单/相册/收藏实体不自动删除。
 - 忘记匹配优先使用 sourceMessageIds；无来源摘要只能规范化完全相等或匹配明确的“摘要/快照/记忆/记得/事实/设定”前缀壳，禁止对短文本做任意子串扫描。
 - 角色消息忘记的作用域以消息发送者 `m.from` 为准；群聊不得把全部成员当作同一清理对象，同群其它角色记忆必须保留。
+- 群聊摘要归属必须使用 `contactDisplayName`/remark 以及原名，不能只看 name/displayName。
+- 图片重 roll 必须在提示词编辑页确认后生成；新图替换原位，旧图进入图片分支，旧版本不可被静默覆盖。
+- 图片分支是独立全屏列表，支持恢复、导出、删除；正常聊天流不显示版本号。
+- 删除显示使用 `hiddenFromChat`，不进入 Prompt，可在聊天设置的已隐藏内容全屏页原位恢复。
+- 正式发布同时保留 ZIP + assets；ZIP 必须含 manifest、data、assets、checksums，原生保存必须支持分块写入。
 - 普通删除必须同步当前 active branch snapshot，不得让分支预览或切换复活已删除消息。
 - 分支菜单必须提供导出和二次确认删除；当前 active 分支不能直接删除，必须先切换。
 - 混合文字+图片/卡片组必须提供“保留”或“从新分支移除”选择；卡片不进入文字模型，保留模式下必须维持卡片原有相对位置。
@@ -30,3 +35,4 @@
 - 聊天分支快照存放于 `chat.turnBranches[turnId]`，随 chats 进入备份。
 - turn branch 可选保存 `memoryItemIds` 与 `legacyMemItems`，旧数据在使用时安全补齐。
 - 连续组整组重 roll 仅支持纯文本组；非文本组不调用文本模型。
+

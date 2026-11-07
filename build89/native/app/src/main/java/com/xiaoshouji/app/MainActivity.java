@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.webkit.MimeTypeMap;
 import android.webkit.WebResourceResponse;
 import android.view.View;
@@ -448,6 +449,142 @@ public class MainActivity extends Activity {
     }
 
     private class NativeExport {
+        private OutputStream pendingOutput = null;
+        private Uri pendingUri = null;
+        private String pendingPath = null;
+        private String pendingName = null;
+        private boolean pendingMedia = false;
+
+        private void resetPending() {
+            try { if (pendingOutput != null) pendingOutput.close(); } catch (Exception ignored) {}
+            pendingOutput = null;
+            pendingUri = null;
+            pendingPath = null;
+            pendingName = null;
+            pendingMedia = false;
+        }
+
+        @JavascriptInterface
+        public String beginBase64File(String name, String mime) {
+            resetPending();
+            try {
+                String safe = String.valueOf(name == null ? "BS小手机.bin" : name)
+                        .replace('/', '_').replace('\\', '_');
+                String safeMime = mime == null || mime.trim().isEmpty() ? "application/octet-stream" : mime;
+                pendingName = safe;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, safe);
+                    values.put(MediaStore.MediaColumns.MIME_TYPE, safeMime);
+                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/BS小手机");
+                    values.put(MediaStore.MediaColumns.IS_PENDING, 1);
+                    pendingUri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+                    if (pendingUri == null) return "ERROR:无法创建下载文件";
+                    pendingOutput = getContentResolver().openOutputStream(pendingUri, "w");
+                    pendingMedia = true;
+                } else {
+                    File root = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+                    if (root == null) root = getFilesDir();
+                    File dir = new File(root, "BS小手机");
+                    if (!dir.exists() && !dir.mkdirs()) return "ERROR:无法创建导出目录";
+                    File file = new File(dir, safe);
+                    pendingOutput = new FileOutputStream(file);
+                    pendingPath = file.getAbsolutePath();
+                    pendingMedia = false;
+                }
+                if (pendingOutput == null) return "ERROR:无法打开下载文件";
+                return "OK";
+            } catch (Exception error) {
+                return "ERROR:" + (error.getMessage() == null ? error.getClass().getSimpleName() : error.getMessage());
+            }
+        }
+
+        @JavascriptInterface
+        public String appendBase64(String base64) {
+            if (pendingOutput == null) return "ERROR:没有正在写入的文件";
+            try {
+                byte[] bytes = Base64.decode(String.valueOf(base64 == null ? "" : base64), Base64.DEFAULT);
+                pendingOutput.write(bytes);
+                return "OK";
+            } catch (Exception error) {
+                return "ERROR:" + (error.getMessage() == null ? error.getClass().getSimpleName() : error.getMessage());
+            }
+        }
+
+        @JavascriptInterface
+        public String finishBase64File() {
+            if (pendingOutput == null) return "ERROR:没有正在写入的文件";
+            try {
+                pendingOutput.flush();
+                pendingOutput.close();
+                pendingOutput = null;
+                if (pendingMedia && pendingUri != null) {
+                    ContentValues done = new ContentValues();
+                    done.put(MediaStore.MediaColumns.IS_PENDING, 0);
+                    getContentResolver().update(pendingUri, done, null, null);
+                    String shown = "Downloads/BS小手机/" + pendingName;
+                    final String finalShown = shown;
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "已导出到 " + finalShown, Toast.LENGTH_LONG).show());
+                    resetPending();
+                    return shown;
+                }
+                String path = pendingPath == null ? pendingName : pendingPath;
+                final String finalPath = path;
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "已导出到 " + finalPath, Toast.LENGTH_LONG).show());
+                resetPending();
+                return path;
+            } catch (Exception error) {
+                return "ERROR:" + (error.getMessage() == null ? error.getClass().getSimpleName() : error.getMessage());
+            }
+        }
+
+        @JavascriptInterface
+        public String abortBase64File() {
+            try { if (pendingOutput != null) pendingOutput.close(); } catch (Exception ignored) {}
+            try { if (pendingUri != null) getContentResolver().delete(pendingUri, null, null); } catch (Exception ignored) {}
+            resetPending();
+            return "OK";
+        }
+
+        @JavascriptInterface
+        public String saveBase64File(String name, String mime, String base64) {
+            try {
+                String safe = String.valueOf(name == null ? "BS小手机.bin" : name)
+                        .replace('/', '_').replace('\\', '_');
+                String safeMime = mime == null || mime.trim().isEmpty() ? "application/octet-stream" : mime;
+                byte[] bytes = Base64.decode(String.valueOf(base64 == null ? "" : base64), Base64.DEFAULT);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                    ContentValues values = new ContentValues();
+                    values.put(MediaStore.MediaColumns.DISPLAY_NAME, safe);
+                    values.put(MediaStore.MediaColumns.MIME_TYPE, safeMime);
+                    values.put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS + "/BS小手机");
+                    values.put(MediaStore.MediaColumns.IS_PENDING, 1);
+                    Uri uri = getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, values);
+                    if (uri == null) return "ERROR:无法创建下载文件";
+                    try (OutputStream output = getContentResolver().openOutputStream(uri, "w")) {
+                        if (output == null) return "ERROR:无法打开下载文件";
+                        output.write(bytes);
+                        output.flush();
+                    }
+                    ContentValues done = new ContentValues();
+                    done.put(MediaStore.MediaColumns.IS_PENDING, 0);
+                    getContentResolver().update(uri, done, null, null);
+                    String shown = "Downloads/BS小手机/" + safe;
+                    runOnUiThread(() -> Toast.makeText(MainActivity.this, "已导出到 " + shown, Toast.LENGTH_LONG).show());
+                    return shown;
+                }
+                File root = getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);
+                if (root == null) root = getFilesDir();
+                File dir = new File(root, "BS小手机");
+                if (!dir.exists() && !dir.mkdirs()) return "ERROR:无法创建导出目录";
+                File file = new File(dir, safe);
+                try (FileOutputStream output = new FileOutputStream(file)) { output.write(bytes); }
+                runOnUiThread(() -> Toast.makeText(MainActivity.this, "已导出到 " + file.getAbsolutePath(), Toast.LENGTH_LONG).show());
+                return file.getAbsolutePath();
+            } catch (Exception error) {
+                return "ERROR:" + (error.getMessage() == null ? error.getClass().getSimpleName() : error.getMessage());
+            }
+        }
         @JavascriptInterface
         public String saveFile(String name, String mime, String text) {
             try {
@@ -615,3 +752,5 @@ public class MainActivity extends Activity {
         }
     }
 }
+
+

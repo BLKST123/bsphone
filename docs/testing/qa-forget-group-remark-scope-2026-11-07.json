@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T08:56:30.885Z",
+  "source": {
+    "indexSha256": "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571"
+  },
+  "checks": {
+    "messageRemoved": true,
+    "senderContactMemoryCleared": true,
+    "senderMemoryCleared": true,
+    "chatMemNoRemark": true,
+    "baseNoRemark": true,
+    "legacyNoRemark": true,
+    "promptNoRemark": true
+  },
+  "failures": [],
+  "result": {
+    "texts": [
+      "群里说话"
+    ],
+    "chatMem": [],
+    "base": [],
+    "legacy": [],
+    "c1": [],
+    "m1": "deleted",
+    "promptJson": "{\"chatId\":\"gc\",\"chat\":{\"id\":\"gc\",\"type\":\"group\",\"name\":\"测试群\",\"personaId\":\"p\",\"worldlineId\":\"w\",\"branchId\":\"main\",\"memberIds\":[\"c1\",\"c2\"],\"unread\":0,\"lastTs\":2,\"created\":1,\"msgs\":[{\"id\":\"u1\",\"role\":\"me\",\"type\":\"text\",\"text\":\"群里说话\",\"ts\":1,\"turnId\":\"t1\",\"messageGroupId\":\"g1\",\"status\":\"active\",\"branchId\":\"main\",\"variantGroupId\":\"u1\",\"variantIndex\":0,\"hiddenFromChat\":false,\"parentMessageId\":null}],\"mem\":{\"ts\":1794041790693,\"items\":[]},\"baseMemorySnapshot\":[],\"turnBranches\":{\"t1\":{\"activeBranchId\":\"b1\",\"branches\":[{\"id\":\"b1\",\"label\":\"原始版本\",\"messages\":[],\"legacyMemItems\":[],\"memoryItemIds\":[]}]}},\"offlineMode\":false,\"offlineScene\":\"\",\"proactiveOn\":false,\"proactiveIntervalSec\":0,\"groupIds\":[]},\"personaId\":\"p\",\"roleLongTerm\":[],\"sessionSnapshot\":[],\"sessionDigest\":[],\"structured\":[]}"
+  },
+  "errors": []
+}
