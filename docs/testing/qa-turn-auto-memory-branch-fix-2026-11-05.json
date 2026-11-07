@@ -1,118 +1,131 @@
 {
-  "ok": true,
-  "checkedAt": "2026-11-07T08:55:37.094Z",
-  "evidence": {
-    "checkedAt": "2026-11-07T08:55:37.095Z",
-    "indexSha256": "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-    "debugApkSha256": "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-    "releaseApkSha256": "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-    "version": "3.86",
-    "versionCode": 97,
-    "cacheKey": "bsphone-v97-20261107-r1"
-  },
-  "checks": {
-    "autoSummaryCreated": true,
-    "newBranchExcludesAutoSummary": true,
-    "newBranchStillGenerated": true,
-    "originalKeepsSummary": true,
-    "freshDropsLegacySummary": true,
-    "oldBranchRestoresAutoSummary": true,
-    "oldBranchOldTailRestored": true
-  },
-  "failures": [],
-  "created": {
-    "id": "memory_mw664n33krow",
-    "type": "auto",
-    "sourceMessageIds": [
-      "au1",
-      "au2",
-      "aa1",
-      "aa2"
-    ],
-    "plainText": "旧自动摘要：角色后来已经搬到另一座城市"
-  },
-  "currentTexts": [
-    "自动组甲",
-    "自动组乙",
-    "旧自动回复",
-    "旧自动后续",
-    "旧自动分支恢复回复"
-  ],
-  "captured": [
-    [
-      {
-        "role": "system",
-        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
-      },
-      {
-        "role": "user",
-        "head": "用户：自动组甲\n用户：自动组乙\n角色：旧自动回复\n角色：旧自动后续"
-      }
-    ],
-    [
-      {
-        "role": "system",
-        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
-      },
-      {
-        "role": "system",
-        "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
-      },
-      {
-        "role": "user",
-        "head": "自动组甲"
-      },
-      {
-        "role": "system",
-        "head": "【这次的特别要求】这次是对用户连续消息组「自动组甲 / 自动组乙」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
-      },
-      {
-        "role": "system",
-        "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
-      },
-      {
-        "role": "user",
-        "head": "自动组乙"
-      }
-    ],
-    [
-      {
-        "role": "system",
-        "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
-      },
-      {
-        "role": "system",
-        "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
-      },
-      {
-        "role": "user",
-        "head": "自动组甲"
-      },
-      {
-        "role": "user",
-        "head": "自动组乙"
-      },
-      {
-        "role": "assistant",
-        "head": "旧自动回复"
-      },
-      {
-        "role": "assistant",
-        "head": "旧自动后续"
-      },
-      {
-        "role": "system",
-        "head": "[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n【记忆中心（过去记忆，不是用户当前发言）】\n- 旧自动摘要：角色后来已经搬到另一座城市"
-      },
-      {
-        "role": "system",
-        "head": "【这次的特别要求】验证自动摘要旧分支恢复"
-      },
-      {
-        "role": "system",
-        "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
-      }
-    ]
-  ],
-  "errors": []
+    "ok":  true,
+    "checkedAt":  "2026-11-07T08:55:37.094Z",
+    "evidence":  {
+                     "checkedAt":  "2026-11-07T08:55:37.095Z",
+                     "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
+                     "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
+                     "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                     "version":  "3.86",
+                     "versionCode":  97,
+                     "cacheKey":  "bsphone-v97-20261107-r1"
+                 },
+    "checks":  {
+                   "autoSummaryCreated":  true,
+                   "newBranchExcludesAutoSummary":  true,
+                   "newBranchStillGenerated":  true,
+                   "originalKeepsSummary":  true,
+                   "freshDropsLegacySummary":  true,
+                   "oldBranchRestoresAutoSummary":  true,
+                   "oldBranchOldTailRestored":  true
+               },
+    "failures":  [
+
+                 ],
+    "created":  {
+                    "id":  "memory_mw664n33krow",
+                    "type":  "auto",
+                    "sourceMessageIds":  [
+                                             "au1",
+                                             "au2",
+                                             "aa1",
+                                             "aa2"
+                                         ],
+                    "plainText":  "旧自动摘要：角色后来已经搬到另一座城市"
+                },
+    "currentTexts":  [
+                         "自动组甲",
+                         "自动组乙",
+                         "旧自动回复",
+                         "旧自动后续",
+                         "旧自动分支恢复回复"
+                     ],
+    "captured":  [
+                     [
+                         {
+                             "role":  "system",
+                             "head":  "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+                         },
+                         {
+                             "role":  "user",
+                             "head":  "用户：自动组甲\n用户：自动组乙\n角色：旧自动回复\n角色：旧自动后续"
+                         }
+                     ],
+                     [
+                         {
+                             "role":  "system",
+                             "head":  "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
+                         },
+                         {
+                             "role":  "user",
+                             "head":  "自动组甲"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "【这次的特别要求】这次是对用户连续消息组「自动组甲 / 自动组乙」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+                         },
+                         {
+                             "role":  "user",
+                             "head":  "自动组乙"
+                         }
+                     ],
+                     [
+                         {
+                             "role":  "system",
+                             "head":  "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。"
+                         },
+                         {
+                             "role":  "user",
+                             "head":  "自动组甲"
+                         },
+                         {
+                             "role":  "user",
+                             "head":  "自动组乙"
+                         },
+                         {
+                             "role":  "assistant",
+                             "head":  "旧自动回复"
+                         },
+                         {
+                             "role":  "assistant",
+                             "head":  "旧自动后续"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n【记忆中心（过去记忆，不是用户当前发言）】\n- 旧自动摘要：角色后来已经搬到另一座城市"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "【这次的特别要求】验证自动摘要旧分支恢复"
+                         },
+                         {
+                             "role":  "system",
+                             "head":  "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+                         }
+                     ]
+                 ],
+    "errors":  [
+
+               ],
+    "artifactEvidence":  {
+                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
+                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
+                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
+                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                             "version":  "3.86",
+                             "versionCode":  97,
+                             "cacheKey":  "bsphone-v97-20261107-r1"
+                         }
 }

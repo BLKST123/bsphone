@@ -5,7 +5,7 @@
 - 页面：2026-11-07 · 3.86 · 第 97 轮
 - Android：3.86 / versionCode 97
 - Service Worker：`bsphone-v97-20261107-r1`
-- 源码提交：`待最终提交`
+- 源码提交：`afa3bd405d58dfa42c6eadab69d56faf7189b484`
 - 源码 SHA-256：`3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571`
 - Debug APK SHA-256：`3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5`
 - Release APK SHA-256：`E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B`
@@ -36,6 +36,7 @@
 - 菜单按钮命中区统一达到 44×44；角色忘记进入记忆、上下文和分支快照清理流程。
 - 桌面独立复检、真机实际 touchstart 后等待 520ms（覆盖 450ms 阈值）的长按、导出、分组、数据管理全部通过。
 - 真机 Debug 验证后已用 `adb install -r` 覆盖安装回 Release；设备内 APK 回拉哈希与发布候选一致，应用数据保留。
+- GitHub Pages 已发布到 main，线上 version/cacheKey/APK 哈希已验证为 3.86 / Build97。
 
 ## 交付硬门槛
 
@@ -45,8 +46,9 @@
 - 每次交付红队和检查官的报告必须包含：设备、版本、哈希、断言结果、真机路径、日志和未完成边界。
 
 ## 尚未完成
+- 本轮请求的图片重 roll、图片分支、隐藏内容恢复、ZIP + assets、GitHub Pages 线上发布均已完成。
+- 其它未经本轮完整审计的 App 模块不自动视为完成。
 
-- GitHub Pages 线上发布
 
 ## 最近证据
 
@@ -62,6 +64,8 @@
 - `docs/testing/round121-phone-release-final-2026-11-07.json`
 - `docs/testing/round121-release-final-home.png`
 - `docs/testing/build97-native-build-2026-11-07.log`
+
+
 
 
 

@@ -1,60 +1,61 @@
 {
-  "ok": true,
-  "evidence": {
-    "checkedAt": "2026-11-07T04:48:58.761Z",
-    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
-    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
-    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
-    "version": "3.85",
-    "versionCode": 96,
-    "cacheKey": "bsphone-v96-20261107-r1"
-  },
-  "checks": {
-    "wholeGroupReroll": "PASS",
-    "oldTailArchived": "PASS",
-    "branchSwitch": "PASS",
-    "failureRollback": "PASS",
-    "noRuntimeErrors": "PASS"
-  },
-  "after": {
-    "ids": [
-      "u114a",
-      "u114b",
-      "mw5ws0x0pt0a"
-    ],
-    "texts": "第一句\n第二句\n真机新回复一 真机新回复二",
-    "branches": 2,
-    "active": "turnbranch_mw5ws0h7jbgl",
-    "originalCount": 6,
-    "originalTexts": [
-      "第一句",
-      "第二句",
-      "旧回复一",
-      "旧回复二",
-      "后续用户消息",
-      "后续角色回复"
-    ]
-  },
-  "restored": {
-    "ids": [
-      "u114a",
-      "u114b",
-      "a114a",
-      "a114b",
-      "u114c",
-      "a114c"
-    ],
-    "texts": "第一句\n第二句\n旧回复一\n旧回复二\n后续用户消息\n后续角色回复"
-  },
-  "errors": [],
-  "artifactEvidence": {
-    "recordedAt": "2026-11-07T07:42:44.009Z",
-    "sourceCommit": "032b02e50c67b3e0629cc88527b8f767b33d231a",
-    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
-    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
-    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
-    "version": "3.85",
-    "versionCode": 96,
-    "cacheKey": "bsphone-v96-20261107-r1"
-  }
+    "ok":  true,
+    "evidence":  {
+                     "checkedAt":  "2026-11-07T04:48:58.761Z",
+                     "indexSha256":  "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
+                     "debugApkSha256":  "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
+                     "releaseApkSha256":  "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
+                     "version":  "3.85",
+                     "versionCode":  96,
+                     "cacheKey":  "bsphone-v96-20261107-r1"
+                 },
+    "checks":  {
+                   "wholeGroupReroll":  "PASS",
+                   "oldTailArchived":  "PASS",
+                   "branchSwitch":  "PASS",
+                   "failureRollback":  "PASS",
+                   "noRuntimeErrors":  "PASS"
+               },
+    "after":  {
+                  "ids":  [
+                              "u114a",
+                              "u114b",
+                              "mw5ws0x0pt0a"
+                          ],
+                  "texts":  "第一句\n第二句\n真机新回复一 真机新回复二",
+                  "branches":  2,
+                  "active":  "turnbranch_mw5ws0h7jbgl",
+                  "originalCount":  6,
+                  "originalTexts":  [
+                                        "第一句",
+                                        "第二句",
+                                        "旧回复一",
+                                        "旧回复二",
+                                        "后续用户消息",
+                                        "后续角色回复"
+                                    ]
+              },
+    "restored":  {
+                     "ids":  [
+                                 "u114a",
+                                 "u114b",
+                                 "a114a",
+                                 "a114b",
+                                 "u114c",
+                                 "a114c"
+                             ],
+                     "texts":  "第一句\n第二句\n旧回复一\n旧回复二\n后续用户消息\n后续角色回复"
+                 },
+    "errors":  [
+
+               ],
+    "artifactEvidence":  {
+                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
+                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
+                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
+                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                             "version":  "3.86",
+                             "versionCode":  97,
+                             "cacheKey":  "bsphone-v97-20261107-r1"
+                         }
 }

@@ -1,51 +1,60 @@
 {
-  "ok": true,
-  "checkedAt": "2026-11-07T08:59:18.730Z",
-  "device": {
-    "serial": "3B665K02PNH00000",
-    "model": "PMK110",
-    "android": "16",
-    "resolution": "1272x2772"
-  },
-  "evidence": {
-    "version": "3.86",
-    "versionCode": 97,
-    "firstInstallTime": "2026-10-20 23:07:55",
-    "ceDataInode": "2120975",
-    "sourceCommit": "e6a1881d7702ecec818080b73d2f354850f7f0e2",
-    "indexSha256": "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-    "debugApkSha256": "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-    "releaseApkSha256": "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-    "cacheKey": "bsphone-v97-20261107-r1",
-    "installedApkSha256": "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-    "remotePath": "/data/app/~~DIlyCQXmuDOT_vsalGg3iQ==/com.xiaoshouji.app-6f16cRMh5jgn1l0WYSfW6A==/base.apk"
-  },
-  "checks": {
-    "targetDeviceConnected": "PASS",
-    "releaseVersionAndCode": "PASS",
-    "installedApkMatchesReleaseCandidate": "PASS",
-    "dataRetainedAfterOverwriteInstall": "PASS",
-    "releaseColdLaunch": "PASS",
-    "processAlive": "PASS",
-    "webViewRootPresent": "PASS",
-    "screenshotCaptured": "PASS",
-    "screenshotBytes": 2561147,
-    "screenshotAttempts": 1,
-    "noCrashOrAnrInLogcat": "PASS"
-  },
-  "launch": [
-    "Starting: Intent { cmp=com.xiaoshouji.app/.MainActivity }",
-    "Status: ok",
-    "LaunchState: COLD",
-    "Activity: com.xiaoshouji.app/.MainActivity",
-    "TotalTime: 266",
-    "WaitTime: 272",
-    "Complete"
-  ],
-  "artifacts": {
-    "installedApk": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-installed-release.apk",
-    "screenshot": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-release-final-home.png",
-    "uiDump": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-release-final-window.xml",
-    "logcat": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-phone-release-final-logcat-2026-11-07.txt"
-  }
+    "ok":  true,
+    "checkedAt":  "2026-11-07T08:59:18.730Z",
+    "device":  {
+                   "serial":  "3B665K02PNH00000",
+                   "model":  "PMK110",
+                   "android":  "16",
+                   "resolution":  "1272x2772"
+               },
+    "evidence":  {
+                     "version":  "3.86",
+                     "versionCode":  97,
+                     "firstInstallTime":  "2026-10-20 23:07:55",
+                     "ceDataInode":  "2120975",
+                     "sourceCommit":  "e6a1881d7702ecec818080b73d2f354850f7f0e2",
+                     "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
+                     "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
+                     "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                     "cacheKey":  "bsphone-v97-20261107-r1",
+                     "installedApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                     "remotePath":  "/data/app/~~DIlyCQXmuDOT_vsalGg3iQ==/com.xiaoshouji.app-6f16cRMh5jgn1l0WYSfW6A==/base.apk"
+                 },
+    "checks":  {
+                   "targetDeviceConnected":  "PASS",
+                   "releaseVersionAndCode":  "PASS",
+                   "installedApkMatchesReleaseCandidate":  "PASS",
+                   "dataRetainedAfterOverwriteInstall":  "PASS",
+                   "releaseColdLaunch":  "PASS",
+                   "processAlive":  "PASS",
+                   "webViewRootPresent":  "PASS",
+                   "screenshotCaptured":  "PASS",
+                   "screenshotBytes":  2561147,
+                   "screenshotAttempts":  1,
+                   "noCrashOrAnrInLogcat":  "PASS"
+               },
+    "launch":  [
+                   "Starting: Intent { cmp=com.xiaoshouji.app/.MainActivity }",
+                   "Status: ok",
+                   "LaunchState: COLD",
+                   "Activity: com.xiaoshouji.app/.MainActivity",
+                   "TotalTime: 266",
+                   "WaitTime: 272",
+                   "Complete"
+               ],
+    "artifacts":  {
+                      "installedApk":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-installed-release.apk",
+                      "screenshot":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-release-final-home.png",
+                      "uiDump":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-release-final-window.xml",
+                      "logcat":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-phone-release-final-logcat-2026-11-07.txt"
+                  },
+    "artifactEvidence":  {
+                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
+                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
+                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
+                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+                             "version":  "3.86",
+                             "versionCode":  97,
+                             "cacheKey":  "bsphone-v97-20261107-r1"
+                         }
 }

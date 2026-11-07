@@ -1,0 +1,15 @@
+{
+    "ok":  true,
+    "checkedAt":  "2026-11-07T09:06:30.7511323Z",
+    "url":  "https://blkst123.github.io/bsphone/version.json",
+    "status":  200,
+    "version":  "3.86",
+    "versionCode":  97,
+    "cacheKey":  "bsphone-v97-20261107-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=97-r1",
+    "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+    "bodySha256":  "BE977E22DAF4FC2530A0DC0BF6F1F45EDE8D76722FA407D22540E00B4061D275",
+    "onlineApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+    "localApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
+    "apkHashMatch":  true
+}
