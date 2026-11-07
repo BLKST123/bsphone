@@ -278,6 +278,7 @@ texts=["群里说话"]
 - WebView 根节点存在；
 - App 进程无 FATAL EXCEPTION / ANR；
 - Release smoke：9/9 PASS（报告入库后复跑）。
+- 过程说明：首次在沙箱内调用 ADB 时因 `Cannot mkdir '\.android': Permission denied` 失败；随后在授权后于沙箱外复跑 Release smoke，最终 9/9 PASS。失败原因是环境权限，不是 App 功能。
 - Final verification HEAD: `032b02e50c67b3e0629cc88527b8f767b33d231a`; business source HEAD remains `2e6a109f3948ed497b37b38852b6da900760c61a`.
 
 Debug/CDP 复现说明：
