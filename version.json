@@ -1,10 +1,10 @@
-﻿{
-    "version":  "3.86",
-    "versionCode":  97,
-    "round":  97,
+{
+    "version":  "3.87",
+    "versionCode":  98,
+    "round":  98,
     "releasedAt":  "2026-11-07",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=97-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=98-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v97-20261107-r1",
-    "notes":  "3.86 Build97：图片重 roll/图片分支、隐藏内容恢复、ZIP+assets 归档与发布准备；群聊备注名忘记作用域修复。"
+    "cacheKey":  "bsphone-v98-20261107-r1",
+    "notes":  "3.87 Build98：微信我的模块完整交付：用户人设库、钱包账单、银行卡卡包、资产、表情分组、收藏分类与恢复；群聊备注名图片/隐藏内容/ZIP/发布继续保留。"
 }

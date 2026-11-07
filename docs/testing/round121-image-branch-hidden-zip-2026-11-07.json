@@ -1,146 +1,135 @@
 {
-    "ok":  true,
-    "checkedAt":  "2026-11-07T08:56:35.506Z",
-    "source":  {
-                   "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571"
-               },
-    "setup":  {
-                  "build":  "2026-11-07 · 3.86 · 第 97 轮",
-                  "code":  97
-              },
-    "checks":  {
-                   "menu":  true,
-                   "editor":  true,
-                   "rerolled":  true,
-                   "branchUI":  true,
-                   "restoredImage":  true,
-                   "hidden":  true,
-                   "restoredHidden":  true,
-                   "zip":  true,
-                   "noErrors":  true
-               },
-    "menu":  {
-                 "hasReroll":  true,
-                 "hasBranch":  true,
-                 "hasDelete":  true,
-                 "text":  "这条消息\n角色一\n[发了一张图片]\n引用这条重 roll图片分支删除这条收藏这条取消"
-             },
-    "editor":  {
-                   "hasPrompt":  true,
-                   "prompt":  "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
-                   "hasAI":  true,
-                   "hasRef":  true
-               },
-    "rerolled":  {
-                     "versions":  2,
-                     "current":  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-                     "oldStill":  true,
-                     "active":  true,
-                     "recVersions":  2,
-                     "prompt":  "second prompt"
-                 },
-    "branchUI":  {
-                     "text":  "图片分支\n2 个版本 · 当前图不显示版本号\n关闭\n当前版本\n09:29\nsecond prompt\n恢复\n导出\n删除\n历史版本\n09:29\n自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。 first prompt 角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。 用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。 聊天里的照片请求：拍一下今天 全局画面要求：真实生活照片\n恢复\n导出\n删除\n恢复只会切换聊天里显示的图片，不删除其它版本；删除当前版本前先恢复一个历史版本。",
-                     "thumbs":  2,
-                     "restores":  2,
-                     "exports":  2,
-                     "deletes":  2,
-                     "versions":  [
-                                      {
-                                          "id":  "imgver_mw665wgf3rtv",
-                                          "url":  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-                                          "galleryId":  "mw665wgf1wrr",
-                                          "imageGenId":  "img_mw665w9ic21j",
-                                          "prompt":  "second prompt",
-                                          "customPrompt":  "second prompt",
-                                          "kind":  "selfie",
-                                          "userText":  "拍一下今天",
-                                          "model":  "gpt-image-1",
-                                          "createdAt":  1794041794959
-                                      },
-                                      {
-                                          "id":  "imgver_mw665w9i0cl3",
-                                          "url":  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-                                          "galleryId":  "mw665w9iju3p",
-                                          "imageGenId":  "img_mw665w9ic21j",
-                                          "prompt":  "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
-                                          "customPrompt":  "first prompt",
-                                          "kind":  "selfie",
-                                          "userText":  "拍一下今天",
-                                          "model":  "gpt-image-1",
-                                          "createdAt":  1794041794710
-                                      }
-                                  ]
-                 },
-    "restored":  {
-                     "url":  "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-                     "versionId":  "imgver_mw665w9i0cl3",
-                     "prompt":  "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
-                     "customPrompt":  "first prompt",
-                     "active":  true
-                 },
-    "hidden":  {
-                   "visible":  0,
-                   "hidden":  1,
-                   "promptHasCurrent":  false,
-                   "bodyHas":  false,
-                   "pageHas":  true,
-                   "restoreButtons":  1
-               },
-    "restoredHidden":  {
-                           "hidden":  false,
-                           "visible":  1,
-                           "dom":  true
-                       },
-    "zip":  {
-                "bytes":  125082,
-                "names":  [
-                              "data/snapshot.json",
-                              "data/settings.json",
-                              "data/characters.json",
-                              "data/user_personas.json",
-                              "data/chats.json",
-                              "data/messages.json",
-                              "data/branches.json",
-                              "data/usage.json",
-                              "data/memory_items.json",
-                              "data/memory_versions.json",
-                              "data/memory_settings.json",
-                              "data/model_settings.json",
-                              "data/novels.json",
-                              "data/forum.json",
-                              "data/couple_spaces.json",
-                              "data/orders.json",
-                              "data/appearance.json",
-                              "assets/images/asset-001-3694D250.jpg",
-                              "assets/images/asset-002-84967E28.png",
-                              "assets/audio/.keep",
-                              "assets/themes/.keep",
-                              "assets/wardrobe/.keep",
-                              "assets/manifest.json",
-                              "manifest.json",
-                              "checksums.json"
-                          ],
-                "hasManifest":  true,
-                "hasAssets":  true,
-                "hasChecksums":  true,
-                "manifestScope":  "full-zip-assets",
-                "assetCount":  5,
-                "checksumAlgorithm":  "SHA-256",
-                "importOk":  true,
-                "importStatus":  "verified",
-                "snapshotChats":  1
-            },
-    "errors":  [
-
-               ],
-    "artifactEvidence":  {
-                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
-                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                             "version":  "3.86",
-                             "versionCode":  97,
-                             "cacheKey":  "bsphone-v97-20261107-r1"
-                         }
+  "ok": true,
+  "checkedAt": "2026-11-07T10:05:34.781Z",
+  "source": {
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "setup": {
+    "build": "2026-11-07 · 3.87 · 第 98 轮",
+    "code": 98
+  },
+  "checks": {
+    "menu": true,
+    "editor": true,
+    "rerolled": true,
+    "branchUI": true,
+    "restoredImage": true,
+    "hidden": true,
+    "restoredHidden": true,
+    "zip": true,
+    "noErrors": true
+  },
+  "menu": {
+    "hasReroll": true,
+    "hasBranch": true,
+    "hasDelete": true,
+    "text": "这条消息\n角色一\n[发了一张图片]\n引用这条重 roll图片分支删除这条收藏这条取消"
+  },
+  "editor": {
+    "hasPrompt": true,
+    "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
+    "hasAI": true,
+    "hasRef": true
+  },
+  "rerolled": {
+    "versions": 2,
+    "current": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
+    "oldStill": true,
+    "active": true,
+    "recVersions": 2,
+    "prompt": "second prompt"
+  },
+  "branchUI": {
+    "text": "图片分支\n2 个版本 · 当前图不显示版本号\n关闭\n当前版本\n09:29\nsecond prompt\n恢复\n导出\n删除\n历史版本\n09:29\n自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。 first prompt 角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。 用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。 聊天里的照片请求：拍一下今天 全局画面要求：真实生活照片\n恢复\n导出\n删除\n恢复只会切换聊天里显示的图片，不删除其它版本；删除当前版本前先恢复一个历史版本。",
+    "thumbs": 2,
+    "restores": 2,
+    "exports": 2,
+    "deletes": 2,
+    "versions": [
+      {
+        "id": "imgver_mw68mmd3u00o",
+        "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
+        "galleryId": "mw68mmd3rfx0",
+        "imageGenId": "img_mw68mlrkntvc",
+        "prompt": "second prompt",
+        "customPrompt": "second prompt",
+        "kind": "selfie",
+        "userText": "拍一下今天",
+        "model": "gpt-image-1",
+        "createdAt": 1794045934263
+      },
+      {
+        "id": "imgver_mw68mlrkiolr",
+        "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
+        "galleryId": "mw68mlrkhqs4",
+        "imageGenId": "img_mw68mlrkntvc",
+        "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
+        "customPrompt": "first prompt",
+        "kind": "selfie",
+        "userText": "拍一下今天",
+        "model": "gpt-image-1",
+        "createdAt": 1794045933488
+      }
+    ]
+  },
+  "restored": {
+    "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
+    "versionId": "imgver_mw68mlrkiolr",
+    "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
+    "customPrompt": "first prompt",
+    "active": true
+  },
+  "hidden": {
+    "visible": 0,
+    "hidden": 1,
+    "promptHasCurrent": false,
+    "bodyHas": false,
+    "pageHas": true,
+    "restoreButtons": 1
+  },
+  "restoredHidden": {
+    "hidden": false,
+    "visible": 1,
+    "dom": true
+  },
+  "zip": {
+    "bytes": 125083,
+    "names": [
+      "data/snapshot.json",
+      "data/settings.json",
+      "data/characters.json",
+      "data/user_personas.json",
+      "data/chats.json",
+      "data/messages.json",
+      "data/branches.json",
+      "data/usage.json",
+      "data/memory_items.json",
+      "data/memory_versions.json",
+      "data/memory_settings.json",
+      "data/model_settings.json",
+      "data/novels.json",
+      "data/forum.json",
+      "data/couple_spaces.json",
+      "data/orders.json",
+      "data/appearance.json",
+      "assets/images/asset-001-3694D250.jpg",
+      "assets/images/asset-002-84967E28.png",
+      "assets/audio/.keep",
+      "assets/themes/.keep",
+      "assets/wardrobe/.keep",
+      "assets/manifest.json",
+      "manifest.json",
+      "checksums.json"
+    ],
+    "hasManifest": true,
+    "hasAssets": true,
+    "hasChecksums": true,
+    "manifestScope": "full-zip-assets",
+    "assetCount": 5,
+    "checksumAlgorithm": "SHA-256",
+    "importOk": true,
+    "importStatus": "verified",
+    "snapshotChats": 1
+  },
+  "errors": []
 }

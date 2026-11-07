@@ -1,0 +1,143 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T10:10:06.222Z",
+  "source": {
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "checks": {
+    "mine": true,
+    "persona": true,
+    "wallet": true,
+    "adjustment": true,
+    "cards": true,
+    "order": true,
+    "cardBill": true,
+    "detail": true,
+    "unbind": true,
+    "unboundBills": true,
+    "assets": true,
+    "stickers": true,
+    "favorites": true,
+    "personaRefs": true,
+    "noErrors": true
+  },
+  "mine": {
+    "text": "‹\n我的\n巡检用户\n已启用：巡检用户\n编辑资料\n用户人设库\n1 个\n钱包\n¥ 100.00\n卡包\n0 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n1 条\n设置\n接口、语音、备份\n›\n外观\n壁纸、深色\n›\n消息\n联系人\n朋友圈\n我的",
+    "hasCards": true,
+    "hasPersona": true
+  },
+  "persona": {
+    "full": true,
+    "editButtons": 1
+  },
+  "wallet": {
+    "full": true,
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 100.00\n收入 ¥0.00\n支出 ¥0.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。"
+  },
+  "walletResult": {
+    "history": 1,
+    "balance": 70,
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 70.00\n收入 ¥0.00\n支出 ¥30.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。"
+  },
+  "adjustment": {
+    "history": 2,
+    "balance": 120,
+    "totals": {
+      "income": 0,
+      "expense": 30
+    },
+    "type": "adjustment",
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 120.00\n收入 ¥0.00\n支出 ¥30.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。"
+  },
+  "cards": {
+    "count": 3,
+    "masks": [
+      "•••• 1111",
+      "•••• 2222",
+      "•••• 3333"
+    ],
+    "stack": 3,
+    "list": 3
+  },
+  "reordered": [
+    "mw688tnu3ra0",
+    "mw688t8aro22",
+    "mw688u79h34a"
+  ],
+  "dragOrder": [
+    "mw688t8aro22",
+    "mw688tnu3ra0",
+    "mw688u79h34a"
+  ],
+  "cardBill": {
+    "history": 3,
+    "balance": 120,
+    "rec": {
+      "id": "bill_mw688vsj1asd",
+      "type": "expense",
+      "amount": 15,
+      "note": "巡检卡账单",
+      "cardId": "mw688t8aro22",
+      "ts": 1794045293299,
+      "cardLabel": "巡检银行甲",
+      "cardTail": "1111",
+      "cardPattern": "经典卡面"
+    }
+  },
+  "detail": {
+    "hasUnbind": true,
+    "hasBills": true,
+    "text": "巡检银行甲\n•••• 1111 · 巡检用户\n返回\n经典卡面\n•••• 1111\n巡检银行甲\n巡检用户\n查看账单\n编辑卡面\n解绑银行卡\n最近账单\n巡检卡账单\n-¥15.00"
+  },
+  "unbound": {
+    "count": 2,
+    "history": 3,
+    "rec": {
+      "id": "bill_mw688vsj1asd",
+      "type": "expense",
+      "amount": 15,
+      "note": "巡检卡账单",
+      "cardId": "mw688t8aro22",
+      "ts": 1794045293299,
+      "cardLabel": "巡检银行甲",
+      "cardTail": "1111",
+      "cardPattern": "经典卡面",
+      "cardUnbound": true,
+      "cardUnboundAt": 1794045294131
+    },
+    "payment": {
+      "type": "wallet",
+      "label": "小手机钱包"
+    },
+    "text": "卡包\n2 张 · 长按卡片可拖动排序\n＋ 添加\n返回钱包\n经典卡面\n巡检银行乙\n•••• 2222\n经典卡面\n巡检银行丙\n•••• 3333\n巡检银行乙\n•••• 2222\n上移\n下移\n详情\n巡检银行丙\n•••• 3333\n上移\n下移\n详情\n卡号只显示尾号；卡面名称、颜色和图案由你设置。"
+  },
+  "unboundBills": {
+    "text": "账单明细\n3 笔 · 本地记录\n关闭\n巡检卡账单\n17:54 · 巡检银行甲 · 尾号1111 · 已解绑\n-¥15.00\n巡检余额调整\n17:54 · 零钱\n调整至 ¥120.00\n巡检账单\n17:54 · 零钱\n-¥30.00\n账单只保存在本机，不会向银行或支付机构发起真实交易。",
+    "hasPreserved": true,
+    "hasUnbound": true
+  },
+  "assets": {
+    "count": 1,
+    "total": 520000
+  },
+  "stickers": {
+    "count": 1,
+    "group": "default"
+  },
+  "favorites": {
+    "full": true,
+    "search": true,
+    "cats": 7
+  },
+  "personaRefs": {
+    "text": "这个人设正在被使用\n请先把以下引用迁移到其它人设：\n会话 · 巡检角色\n返回",
+    "back": true,
+    "personas": 1
+  },
+  "artifact": {
+    "screen": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-phone-wechat-mine.png",
+    "persona": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-phone-persona.png",
+    "cards": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-phone-cards.png"
+  },
+  "errors": []
+}

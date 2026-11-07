@@ -1,0 +1,304 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T10:05:40.219Z",
+  "source": {
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "setup": {
+    "build": "2026-11-07 · 3.87 · 第 98 轮",
+    "code": 98
+  },
+  "checks": {
+    "mine": true,
+    "personaPage": true,
+    "personaSave": true,
+    "wallet": true,
+    "walletAdjust": true,
+    "cards": true,
+    "cardOrder": true,
+    "cardBill": true,
+    "cardDetail": true,
+    "cardBillsView": true,
+    "unbind": true,
+    "unboundBills": true,
+    "assets": true,
+    "stickers": true,
+    "favorites": true,
+    "personaRef": true,
+    "noErrors": true
+  },
+  "mine": {
+    "text": "‹\n我的\n巡检用户\n已启用：巡检用户\n编辑资料\n用户人设库\n1 个\n钱包\n¥ 100.00\n卡包\n0 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n1 条\n设置\n接口、语音、备份\n›\n外观\n壁纸、深色\n›\n消息\n联系人\n朋友圈\n我的",
+    "hasCards": true,
+    "hasPersona": true
+  },
+  "personaPage": {
+    "full": true,
+    "text": "用户人设库\n这里是「你」的资料；每个已有会话保留自己的绑定人设\n＋ 新建\n关闭\n巡检用户 · 启用中\n姓名/称呼：巡检用户 性别：女 外貌：短发 性格：安静 与角色的关系：朋友 背景：测试背景\n编辑\n启用只影响新建会话和非聊天场景；已有会话不会偷偷改绑。删除被会话、情侣空间、外卖地址或小说引用的人设会被阻止。",
+    "editButtons": 1
+  },
+  "personaSaved": {
+    "count": 2,
+    "active": "p1",
+    "text": "新背景"
+  },
+  "walletPage": {
+    "full": true,
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 100.00\n收入 ¥0.00\n支出 ¥0.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。",
+    "balance": true,
+    "targets": [
+      {
+        "sel": "#wlCards",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "sel": "#wlClose",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "sel": "#wlBills",
+        "h": 44,
+        "w": 175
+      },
+      {
+        "sel": "#wlCards2",
+        "h": 44,
+        "w": 175
+      },
+      {
+        "sel": "#wlAdjust",
+        "h": 44,
+        "w": 358
+      },
+      {
+        "sel": "#wlAddBill",
+        "h": 44,
+        "w": 324
+      }
+    ]
+  },
+  "walletResult": {
+    "history": 1,
+    "balance": 125,
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 125.00\n收入 ¥25.00\n支出 ¥0.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。"
+  },
+  "adjustConfirm": {
+    "text": "确认调整余额？\n从 ¥125.00 调整为 ¥150.00，并写入一条余额调整账单。收入与支出统计不会因此改变。\n确认调整返回修改",
+    "confirm": true
+  },
+  "adjustment": {
+    "history": 2,
+    "balance": 150,
+    "totals": {
+      "income": 25,
+      "expense": 0
+    },
+    "type": "adjustment",
+    "note": "巡检余额调整",
+    "text": "钱包\n零钱与银行卡只保存在本机\n卡包\n关闭\n零钱余额\n¥ 150.00\n收入 ¥25.00\n支出 ¥0.00\n账单明细\n银行卡与卡包\n调整零钱余额\n记一笔\n收入\n支出\n零钱\n保存这笔\n余额和账单仅用于本地模拟，不在本机之外发起真实支付。"
+  },
+  "cardsBase": {
+    "count": 3,
+    "masks": [
+      "•••• 1111",
+      "•••• 2222",
+      "•••• 3333"
+    ],
+    "stack": 3,
+    "list": 3,
+    "targets": [
+      {
+        "key": "cardsNew",
+        "h": 44,
+        "w": 76.03125
+      },
+      {
+        "key": "cardsBack",
+        "h": 44,
+        "w": 85
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "mw68mpgkxrmc",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "mw68mpjse93d",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "card-action",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "key": "mw68mpmk35ff",
+        "h": 44,
+        "w": 59.5
+      }
+    ]
+  },
+  "grouped": {
+    "grouped1": "6222 0000 0000 1111",
+    "grouped2": "6222 0000 0000 2222",
+    "grouped3": "6222 0000 0000 3333"
+  },
+  "ids": [
+    "mw68mpgkxrmc",
+    "mw68mpjse93d",
+    "mw68mpmk35ff"
+  ],
+  "reordered": [
+    "mw68mpjse93d",
+    "mw68mpgkxrmc",
+    "mw68mpmk35ff"
+  ],
+  "dragDiag": {
+    "before": null,
+    "after": [
+      "mw68mpgkxrmc",
+      "mw68mpjse93d",
+      "mw68mpmk35ff"
+    ]
+  },
+  "dragOrder": [
+    "mw68mpgkxrmc",
+    "mw68mpjse93d",
+    "mw68mpmk35ff"
+  ],
+  "cardBill": {
+    "history": 3,
+    "balance": 150,
+    "totals": {
+      "income": 25,
+      "expense": 18
+    },
+    "rec": {
+      "id": "bill_mw68mqdj9zgg",
+      "type": "expense",
+      "amount": 18,
+      "note": "巡检卡账单",
+      "cardId": "mw68mpgkxrmc",
+      "ts": 1794045939463,
+      "cardLabel": "巡检银行甲",
+      "cardTail": "1111",
+      "cardPattern": "经典卡面"
+    }
+  },
+  "cardDetail": {
+    "text": "巡检银行甲\n•••• 1111 · 巡检用户\n返回\n经典卡面\n•••• 1111\n巡检银行甲\n巡检用户\n查看账单\n编辑卡面\n解绑银行卡\n最近账单\n巡检卡账单\n-¥18.00",
+    "hasBills": true,
+    "hasUnbind": true,
+    "targets": [
+      {
+        "sel": "#cdBack",
+        "h": 44,
+        "w": 59.5
+      },
+      {
+        "sel": "#cdBills",
+        "h": 44,
+        "w": 175
+      },
+      {
+        "sel": "#cdEdit",
+        "h": 44,
+        "w": 175
+      },
+      {
+        "sel": "#cdUnbind",
+        "h": 44,
+        "w": 358
+      }
+    ]
+  },
+  "cardBillsView": {
+    "full": true,
+    "text": "巡检银行甲 · 尾号1111 账单\n1 笔 · 本地记录\n关闭\n巡检卡账单\n18:05 · 巡检银行甲 · 尾号1111\n-¥18.00\n账单只保存在本机，不会向银行或支付机构发起真实交易。"
+  },
+  "unbound": {
+    "count": 2,
+    "history": 3,
+    "rec": {
+      "id": "bill_mw68mqdj9zgg",
+      "type": "expense",
+      "amount": 18,
+      "note": "巡检卡账单",
+      "cardId": "mw68mpgkxrmc",
+      "ts": 1794045939463,
+      "cardLabel": "巡检银行甲",
+      "cardTail": "1111",
+      "cardPattern": "经典卡面",
+      "cardUnbound": true,
+      "cardUnboundAt": 1794045939712
+    },
+    "payment": {
+      "type": "wallet",
+      "label": "小手机钱包"
+    },
+    "text": "卡包\n2 张 · 长按卡片可拖动排序\n＋ 添加\n返回钱包\n经典卡面\n巡检银行乙\n•••• 2222\n经典卡面\n巡检银行丙\n•••• 3333\n巡检银行乙\n•••• 2222\n上移\n下移\n详情\n巡检银行丙\n•••• 3333\n上移\n下移\n详情\n卡号只显示尾号；卡面名称、颜色和图案由你设置。"
+  },
+  "unboundBillsView": {
+    "text": "账单明细\n3 笔 · 本地记录\n关闭\n巡检卡账单\n18:05 · 巡检银行甲 · 尾号1111 · 已解绑\n-¥18.00\n巡检余额调整\n18:05 · 零钱\n调整至 ¥150.00\n巡检收入\n18:05 · 零钱\n+¥25.00\n账单只保存在本机，不会向银行或支付机构发起真实交易。",
+    "hasPreserved": true,
+    "hasUnbound": true
+  },
+  "assets": {
+    "count": 1,
+    "total": 520000,
+    "text": "资产\n合计估值 ¥520000.00 · 跟随当前人设\n＋ 加一项\n关闭\n巡检房产\n房产 · 持有中\n本地资产\n¥520000.00编辑删除\n房、车、店、公司等硬资产只是本地模拟展示，不会连接真实产权或交易系统。"
+  },
+  "stickerPage": {
+    "full": true,
+    "groups": 1,
+    "text": "表情包\n0 张 · 默认\n＋ 分组\n关闭\n默认\n重命名当前分组\n删除当前分组\n一行四个，往下滑就更多。点图片查看大图、改备注、移动分组或删除；箭头调整顺序。\n这个分组还没有表情包。\n＋ 添加表情包"
+  },
+  "stickerResult": {
+    "count": 1,
+    "group": "default",
+    "text": "表情包\n1 张 · 默认\n＋ 分组\n关闭\n默认\n重命名当前分组\n删除当前分组\n一行四个，往下滑就更多。点图片查看大图、改备注、移动分组或删除；箭头调整顺序。\n↑\n↓\n＋ 添加表情包"
+  },
+  "favPage": {
+    "full": true,
+    "search": true,
+    "cats": 7,
+    "text": "收藏\n1 条 · 原消息删除后仍保留收藏快照\n关闭\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n图片\n角色一 · 18:05\n收藏的图片\n回到原会话\n取消收藏"
+  },
+  "favSearch": {
+    "visible": 1
+  },
+  "refBlock": {
+    "text": "这个人设正在被使用\n请先把以下引用迁移到其它人设：\n会话 · 角色一\n返回",
+    "back": true,
+    "personas": 2
+  },
+  "errors": []
+}

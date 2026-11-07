@@ -1,131 +1,118 @@
 {
-    "ok":  true,
-    "checkedAt":  "2026-11-07T08:53:27.876Z",
-    "evidence":  {
-                     "checkedAt":  "2026-11-07T08:53:27.879Z",
-                     "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                     "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                     "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                     "version":  "3.86",
-                     "versionCode":  97,
-                     "cacheKey":  "bsphone-v97-20261107-r1"
-                 },
-    "checks":  {
-                   "targetRemoved":  true,
-                   "unrelatedCurrentContactKept":  true,
-                   "unrelatedCurrentMemoryKept":  true,
-                   "unrelatedChatMemKept":  true,
-                   "unrelatedBaseKept":  true,
-                   "unrelatedLegacyKept":  true,
-                   "unrelatedMemoryIdKept":  true,
-                   "otherContactKept":  true,
-                   "otherChatItemKept":  true,
-                   "otherChatEntryKept":  true,
-                   "otherChatLegacyKept":  true,
-                   "cursorMoved":  true
-               },
-    "failures":  [
-
-                 ],
-    "result":  {
-                   "chat1Texts":  [
-                                      "测试"
-                                  ],
-                   "c1mem":  [
-                                 "用户喜欢好吃的"
-                             ],
-                   "c1base":  [
-                                  "用户喜欢好吃的"
-                              ],
-                   "c1legacy":  [
-                                    "用户喜欢好吃的"
-                                ],
-                   "c1ids":  [
-                                 "keepMem"
-                             ],
-                   "c1contact":  [
-                                     "用户喜欢好吃的"
-                                 ],
-                   "c2mem":  [
-                                 "会话二：好"
-                             ],
-                   "c2contact":  [
-                                     "角色二长期记忆：好"
-                                 ],
-                   "memoryItems":  [
-                                       {
-                                           "id":  "keepMem",
-                                           "status":  "active",
-                                           "plainText":  "用户喜欢好吃的"
-                                       },
-                                       {
-                                           "id":  "targetMem",
-                                           "status":  "deleted",
-                                           "plainText":  "好"
-                                       },
-                                       {
-                                           "id":  "otherChatMem",
-                                           "status":  "active",
-                                           "plainText":  "会话二摘要：好"
-                                       },
-                                       {
-                                           "id":  "otherContactMem",
-                                           "status":  "active",
-                                           "plainText":  "角色二长期记忆：好"
-                                       },
-                                       {
-                                           "id":  "legacy_contact_c1_keepContact",
-                                           "status":  "active",
-                                           "plainText":  "用户喜欢好吃的"
-                                       },
-                                       {
-                                           "id":  "legacy_contact_c1_targetContact",
-                                           "status":  "deleted",
-                                           "plainText":  "好"
-                                       },
-                                       {
-                                           "id":  "legacy_contact_c2_otherContact",
-                                           "status":  "active",
-                                           "plainText":  "角色二长期记忆：好"
-                                       },
-                                       {
-                                           "id":  "legacy_digest_ch1_0_main",
-                                           "status":  "active",
-                                           "plainText":  "用户喜欢好吃的"
-                                       },
-                                       {
-                                           "id":  "legacy_digest_ch1_1_main",
-                                           "status":  "deleted",
-                                           "plainText":  "好"
-                                       },
-                                       {
-                                           "id":  "legacy_digest_ch2_0_main",
-                                           "status":  "active",
-                                           "plainText":  "会话二：好"
-                                       }
-                                   ],
-                   "entries":  [
-                                   {
-                                       "id":  "e2",
-                                       "active":  true,
-                                       "fact":  "会话二：好"
-                                   }
-                               ],
-                   "cursor1":  "u1"
-               },
-    "artifacts":  {
-                      "screenshot":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round119-phone-forget-scope.png"
-                  },
-    "errors":  [
-
-               ],
-    "artifactEvidence":  {
-                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
-                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                             "version":  "3.86",
-                             "versionCode":  97,
-                             "cacheKey":  "bsphone-v97-20261107-r1"
-                         }
+  "ok": true,
+  "checkedAt": "2026-11-07T10:09:00.966Z",
+  "evidence": {
+    "checkedAt": "2026-11-07T10:09:00.968Z",
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+    "debugApkSha256": "E88115A380025A404F529B5B291F9FA113CF96BE065FDBDE55D5A30288B0D21E",
+    "releaseApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+    "version": "3.87",
+    "versionCode": 98,
+    "cacheKey": "bsphone-v98-20261107-r1"
+  },
+  "checks": {
+    "targetRemoved": true,
+    "unrelatedCurrentContactKept": true,
+    "unrelatedCurrentMemoryKept": true,
+    "unrelatedChatMemKept": true,
+    "unrelatedBaseKept": true,
+    "unrelatedLegacyKept": true,
+    "unrelatedMemoryIdKept": true,
+    "otherContactKept": true,
+    "otherChatItemKept": true,
+    "otherChatEntryKept": true,
+    "otherChatLegacyKept": true,
+    "cursorMoved": true
+  },
+  "failures": [],
+  "result": {
+    "chat1Texts": [
+      "测试"
+    ],
+    "c1mem": [
+      "用户喜欢好吃的"
+    ],
+    "c1base": [
+      "用户喜欢好吃的"
+    ],
+    "c1legacy": [
+      "用户喜欢好吃的"
+    ],
+    "c1ids": [
+      "keepMem"
+    ],
+    "c1contact": [
+      "用户喜欢好吃的"
+    ],
+    "c2mem": [
+      "会话二：好"
+    ],
+    "c2contact": [
+      "角色二长期记忆：好"
+    ],
+    "memoryItems": [
+      {
+        "id": "keepMem",
+        "status": "active",
+        "plainText": "用户喜欢好吃的"
+      },
+      {
+        "id": "targetMem",
+        "status": "deleted",
+        "plainText": "好"
+      },
+      {
+        "id": "otherChatMem",
+        "status": "active",
+        "plainText": "会话二摘要：好"
+      },
+      {
+        "id": "otherContactMem",
+        "status": "active",
+        "plainText": "角色二长期记忆：好"
+      },
+      {
+        "id": "legacy_contact_c1_keepContact",
+        "status": "active",
+        "plainText": "用户喜欢好吃的"
+      },
+      {
+        "id": "legacy_contact_c1_targetContact",
+        "status": "deleted",
+        "plainText": "好"
+      },
+      {
+        "id": "legacy_contact_c2_otherContact",
+        "status": "active",
+        "plainText": "角色二长期记忆：好"
+      },
+      {
+        "id": "legacy_digest_ch1_0_main",
+        "status": "active",
+        "plainText": "用户喜欢好吃的"
+      },
+      {
+        "id": "legacy_digest_ch1_1_main",
+        "status": "deleted",
+        "plainText": "好"
+      },
+      {
+        "id": "legacy_digest_ch2_0_main",
+        "status": "active",
+        "plainText": "会话二：好"
+      }
+    ],
+    "entries": [
+      {
+        "id": "e2",
+        "active": true,
+        "fact": "会话二：好"
+      }
+    ],
+    "cursor1": "u1"
+  },
+  "artifacts": {
+    "screenshot": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round119-phone-forget-scope.png"
+  },
+  "errors": []
 }

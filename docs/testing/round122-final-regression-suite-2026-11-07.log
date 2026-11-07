@@ -1,0 +1,13 @@
+Round122 final regression suite
+checkedAt: 2026-11-07T10:14:10.026Z
+Light/dark JSON evidence: qa-r97-light-2026-11-07.json and qa-r97-dark-2026-11-07.json.
+
+01  PASS  _round97_full_page_ui_regression.cjs (light) — 33 desktop + 33 narrow
+02  PASS  _round108_p1_recheck_test.cjs
+03  PASS  _round109_sw_publish_test.cjs — cacheKey bsphone-v98-20261107-r1
+04  PASS  _qa_data_management_2026-11-05.cjs — 17/17
+05  PASS  _qa_independent_batch3_recheck.cjs — 14/14
+06  PASS  _round111_batch3_redteam_fix_test.cjs — 13/13
+07  PASS  _round97_full_page_ui_regression.cjs (dark) — 33 desktop + 33 narrow
+
+SUMMARY passed=7 failed=0

@@ -2,13 +2,14 @@
 
 ## 当前版本
 
-- 页面：2026-11-07 · 3.86 · 第 97 轮
-- Android：3.86 / versionCode 97
-- Service Worker：`bsphone-v97-20261107-r1`
-- 源码提交：`afa3bd405d58dfa42c6eadab69d56faf7189b484`
-- 源码 SHA-256：`3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571`
-- Debug APK SHA-256：`3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5`
-- Release APK SHA-256：`E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B`
+- 页面：2026-11-07 · 3.87 · 第 98 轮
+- Android：3.87 / versionCode 98
+- Service Worker：`bsphone-v98-20261107-r1`
+- 源码提交：`待最终提交`
+- 源码 SHA-256：`D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4`
+- Debug APK SHA-256：`E88115A380025A404F529B5B291F9FA113CF96BE065FDBDE55D5A30288B0D21E`
+- Release APK SHA-256：`9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513`
+- Release ZIP SHA-256：`F7AF762E2F7AB2CDA68174E7669319A94D4CF8F09C1C4256380F3176ECFF3D94`
 
 ## 当前阶段
 
@@ -19,7 +20,7 @@
 - 环境时间改为 system 环境块，最后一条 user 只包含真实输入。
 - 旧分支自动摘要和结构化记忆已按当前消息来源隔离；切回旧分支会恢复对应记忆。
 - 记忆块已移到历史之后、环境之前；重 roll nudge 已拆为独立本轮指令层。
-- 缓存键已更新为 `bsphone-v97-20261107-r1`，并重新构建 Debug/Release APK。
+- 缓存键已更新为 `bsphone-v98-20261107-r1`，并重新构建 Debug/Release APK。
 - QA-382 返修：忘记这条跨 contact/base snapshot/branch legacy/分支记忆 ID/memoryEntries/Prompt 清理。
 - 普通删除同步当前 active branch 快照；分支菜单补齐导出与二次确认删除。
 - 混合文字+图片/卡片组支持保留或移除后编辑/重生成，卡片不进入文字模型。
@@ -28,6 +29,12 @@
 - 混合组保留模式保持非文本卡片原始相对位置；R113 测试统一 0.01 容差。
 - QA-384：群聊忘记严格按消息发送者 m.from 清理；同群其它角色长期记忆、memoryItem、memoryEntry、chat/base/branch legacy 和 memory IDs 保留。
 - QA-385：群聊摘要识别 contactDisplayName/remark；备注名摘要与 Prompt 无残留。
+- 微信“我的”完整模块：用户人设库、钱包账单、银行卡卡包、资产、表情分组、收藏分类查询与原会话跳转全部为全屏页面并持久化。
+- 人设删除前检查会话/情侣空间/外卖地址/小说引用，被引用时阻止删除；启用人设同步微信我的资料和头像。
+- 卡包支持多卡叠放、详情账单、上移下移与长按拖动排序；卡号按 4 位分组输入，并且只展示尾号。
+- 银行卡解绑使用二次确认；解绑只移除卡面，历史账单保留原银行/尾号并标记“已解绑”，正在使用该卡的外卖支付安全降级为零钱。
+- 钱包保留“调整零钱余额”能力；调整写入独立 adjustment 账单，不计入收入/支出统计。
+- 银行卡账单不改动零钱余额；卡片支付与零钱账单分开归属。
 - 微信图片角色消息支持重 roll、提示词编辑、AI 编写、本次参考图、图片分支、恢复/导出/删除。
 - 删除显示进入 hiddenFromChat，已隐藏内容全屏页支持原位恢复，隐藏项不进入 Prompt。
 - 数据管理新增 ZIP + assets 发布级归档；原生桥支持分块写入大 ZIP。
@@ -52,18 +59,26 @@
 
 ## 最近证据
 
-- `docs/testing/round121-evidence-manifest-2026-11-07.json`
-- `docs/testing/round121-final-core-2026-11-07.log`
-- `docs/testing/round121-final-regression-suite-2026-11-07.log`
-- `docs/testing/round121-phone-debug-suite-final-2026-11-07.log`
+- `docs/testing/round122-evidence-manifest-2026-11-07.json`
+- `docs/testing/round122-release-package-audit-2026-11-07.json`
+- `docs/testing/independent-card-unbind-wallet-adjust-2026-11-07.json`
+- `docs/testing/round122-final-core-2026-11-07.log`
+- `docs/testing/round122-final-regression-suite-2026-11-07.log`
+- `docs/testing/round122-phone-debug-suite-final-2026-11-07.log`
 - `docs/testing/qa-forget-group-remark-scope-2026-11-07.json`
 - `docs/testing/round121-image-branch-hidden-zip-2026-11-07.json`
+- `docs/testing/round122-phone-wechat-mine-suite.json`
+- `docs/testing/round122-phone-cards.png`
+- `docs/testing/round122-phone-persona.png`
 - `docs/testing/round121-phone-image-branch-hidden-zip.json`
 - `docs/testing/round121-phone-image-branch.png`
 - `docs/testing/round121-phone-hidden-content.png`
-- `docs/testing/round121-phone-release-final-2026-11-07.json`
-- `docs/testing/round121-release-final-home.png`
-- `docs/testing/build97-native-build-2026-11-07.log`
+- `docs/testing/round122-phone-release-final-2026-11-07.json`
+- `docs/testing/round122-release-final-home.png`
+- `docs/testing/build98-native-build-2026-11-07.log`
+
+
+
 
 
 

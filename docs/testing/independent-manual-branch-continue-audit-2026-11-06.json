@@ -1,72 +1,61 @@
 {
-    "checkedAt":  "2026-11-07T08:55:41.894Z",
-    "tests":  {
-                  "manualBranchAtSecondBubbleEndsAtSecond":  true,
-                  "branchListHasExportDeleteActions":  true,
-                  "continueAfterManualBranchPersists":  true
-              },
-    "evidence":  {
-                     "branchMenu":  {
-                                        "texts":  [
-                                                      "一",
-                                                      "二"
-                                                  ],
-                                        "branchHiddenButtons":  [
-                                                                    "branchFromYes",
-                                                                    "branchFromNo"
-                                                                ]
-                                    },
-                     "branchList":  "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n旧回复\n›\n导出\n删除\n新分支 1 · 当前\n一\n✓\n导出\n删除\n返回",
-                     "origAfter":  {
-                                       "texts":  [
-                                                     "一",
-                                                     "二",
-                                                     "旧回复",
-                                                     "后续"
-                                                 ],
-                                       "active":  "turnbranch_mw664ruw22na"
-                                   },
-                     "newAfter":  {
-                                      "texts":  [
-                                                    "一",
-                                                    "二",
-                                                    "分支继续用户",
-                                                    "分支继续回复"
-                                                ],
-                                      "active":  "turnbranch_mw664ruw6wik",
-                                      "branches":  [
-                                                       {
-                                                           "label":  "原始版本",
-                                                           "texts":  [
-                                                                         "一",
-                                                                         "二",
-                                                                         "旧回复",
-                                                                         "后续"
-                                                                     ]
-                                                       },
-                                                       {
-                                                           "label":  "新分支 1",
-                                                           "texts":  [
-                                                                         "一",
-                                                                         "二",
-                                                                         "分支继续用户",
-                                                                         "分支继续回复"
-                                                                     ]
-                                                       }
-                                                   ]
-                                  }
-                 },
-    "errors":  [
-
-               ],
-    "ok":  true,
-    "artifactEvidence":  {
-                             "sourceCommit":  "afa3bd405d58dfa42c6eadab69d56faf7189b484",
-                             "indexSha256":  "3E80F5262A071CC1C7B34813D5674FB71863A04B92E6D599A9BB0D1D362E8571",
-                             "debugApkSha256":  "3D7594846B25DF5D2FFE42BD14DBEDB20A8CF9249B1367F211506252652A6BA5",
-                             "releaseApkSha256":  "E20B9C297F557CB99CCDA34F358EA72F884FCDD4CBBAE685FD6FB951FF1EEC1B",
-                             "version":  "3.86",
-                             "versionCode":  97,
-                             "cacheKey":  "bsphone-v97-20261107-r1"
-                         }
+  "checkedAt": "2026-11-07T10:04:32.292Z",
+  "tests": {
+    "manualBranchAtSecondBubbleEndsAtSecond": true,
+    "branchListHasExportDeleteActions": true,
+    "continueAfterManualBranchPersists": true
+  },
+  "evidence": {
+    "branchMenu": {
+      "texts": [
+        "一",
+        "二"
+      ],
+      "branchHiddenButtons": [
+        "branchFromYes",
+        "branchFromNo"
+      ]
+    },
+    "branchList": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n旧回复\n›\n导出\n删除\n新分支 1 · 当前\n一\n✓\n导出\n删除\n返回",
+    "origAfter": {
+      "texts": [
+        "一",
+        "二",
+        "旧回复",
+        "后续"
+      ],
+      "active": "turnbranch_mw68lb5vqlp7"
+    },
+    "newAfter": {
+      "texts": [
+        "一",
+        "二",
+        "分支继续用户",
+        "分支继续回复"
+      ],
+      "active": "turnbranch_mw68lb5v82v4",
+      "branches": [
+        {
+          "label": "原始版本",
+          "texts": [
+            "一",
+            "二",
+            "旧回复",
+            "后续"
+          ]
+        },
+        {
+          "label": "新分支 1",
+          "texts": [
+            "一",
+            "二",
+            "分支继续用户",
+            "分支继续回复"
+          ]
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "ok": true
 }

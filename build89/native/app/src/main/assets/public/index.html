@@ -7018,7 +7018,7 @@ function sheetMsg(chatId,msgId){
   const mfg=$('#mvForget'); if(mfg) mfg.onclick=function(){ sheetForgetCharMessage(ch,m); };
   const mir=$('#mvImageReroll'); if(mir) mir.onclick=function(){ closeSheet(); sheetImageReroll(ch,m); };
   const mib=$('#mvImageBranch'); if(mib) mib.onclick=function(){ closeSheet(); sheetImageBranch(ch,m.id); };
-  $('#mvFav').onclick=()=>{ DB.favorites=DB.favorites||[]; DB.favorites.unshift({id:uid(),who:who,text:text,ts:m.ts,type:m.type||'text'}); save(); closeSheet(); toast('已收藏'); };
+  $('#mvFav').onclick=()=>{ DB.favorites=DB.favorites||[]; DB.favorites.unshift({id:uid(),who:who,text:text,ts:m.ts,type:m.type||'text',category:favoriteCategory({type:m.type||'text'}),chatId:ch.id,msgId:m.id,source:'chat',snapshot:{type:m.type||'text',url:m.url||'',title:m.title||'',orderId:m.orderId||null}}); save(); closeSheet(); toast('已收藏'); };
   const bk=$('#mvBack');
   if(bk) bk.onclick=()=>{ const original=labelOf(m); const known=Math.random()<0.5; patchChatMessage(m,{type:'text',recalled:{text:original,known:known},text:'你撤回了一条消息'},{removeKeys:['url','title','amount']}); save(); closeSheet(); render(); toast('已撤回'); if(ch&&DB.api.key) scheduleReply(ch,'对方刚撤回了一条消息。'+(known? ('你瞥到了撤回前的内容：「'+original+'」。你可以问一句、调侃，或者装作没看见。') : '你没看清撤回前的内容。你可以问一句，或者装作没看见。')+'不要自问自答。'); };
   $('#mvDel').onclick=()=>deleteMessageTwoStep(ch,msgId);
@@ -8219,17 +8219,18 @@ async function aiTurn(opt){
   const max=Math.max(min,Number(ch.replyMax)||Math.max(3,min));
   const want=min+Math.floor(Math.random()*(max-min+1));
   const historyFilter=opt&&typeof opt.historyFilter==='function'?opt.historyFilter:null;
-  const lastUser=[].concat(ch.msgs||[]).reverse().find(function(m){ return m.role==='me'&&!m.recalled&&(!historyFilter||historyFilter(m)); });
+  const visibleMsgs=visibleChatMessages(ch);
+  const lastUser=[].concat(visibleMsgs).reverse().find(function(m){ return m.role==='me'&&!m.recalled&&(!historyFilter||historyFilter(m)); });
   const wantsVoice=!offlineMode&&!proactive&&!!(lastUser&&/(发.{0,5}语音|语音条|用语音|听.{0,4}声音|听听你|发条语音)/.test(labelOf(lastUser)));
   setTyping(true, ch.type==='group'? (speaker.name+' 正在输入…') : '对方正在输入…');
   try{
-    const recent=contextHistory(ch.msgs.filter(function(m){ return m.role!=='sys'&&(!historyFilter||historyFilter(m)); }),proactive?18:24);
+    const recent=contextHistory(visibleMsgs.filter(function(m){ return m.role!=='sys'&&(!historyFilter||historyFilter(m)); }),proactive?18:24);
     const history=proactive?[]:recent.map(m=>({role:m.role==='me'?'user':'assistant',content:messageContextLabel(m)}));
     const transcript=proactive?recent.map(function(m){
       return '['+chatTimeLabel(ch,m)+'] '+(m.role==='me'?'用户':'你')+'：'+messageContextLabel(m);
     }).join('\n'):'';
     const others=ch.type==='group'? members.filter(x=>x.id!==speaker.id).map(x=>x.name):[];
-    const promptBundle=promptBundleOf(speaker, others, ch.msgs.slice(-6), {
+    const promptBundle=promptBundleOf(speaker, others, visibleMsgs.slice(-6), {
       format:'chat',
       chatId:ch.id,
       offline:offlineMode,
@@ -8841,14 +8842,15 @@ async function autoMoments(){
 }
 /* ================= 我的 ================= */
 function wxMine(){
-  const me=DB.me||{}, w=meWallet();
-  return wxTop('我的',clearBtn('wxMine'))+'<div class="mecard">'+avBox(me,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(me.name||'我')+'</div>'
-    +'<div class="muted">'+esc(activePersona()? '已启用一个人设':'还没有写自己的人设')+'</div></div>'
+  const me=DB.me||{}, active=activePersonaObj(), view=active?Object.assign({},me,{name:active.name||me.name,avatar:active.avatar||me.avatar}):me, w=meWallet();
+  return wxTop('我的',clearBtn('wxMine'))+'<div class="mecard">'+avBox(view,'av')+'<div class="grow"><div style="font-size:calc(19px * var(--ui-font-scale,1));font-weight:600">'+esc(view.name||'我')+'</div>'
+    +'<div class="muted">'+esc(active? '已启用：'+(active.name||'未命名人设'):'还没有写自己的人设')+'</div></div>'
     +'<button class="btn" id="meEdit">编辑资料</button></div>'
     +'<div class="pad"><div class="mgrid">'
     +mi('persona','用户人设库',(me.personas||[]).length+' 个')
     +mi('wallet','钱包','¥ '+Number(w.balance||0).toFixed(2))
-    +mi('assets','资产','合计 ¥ '+money(assetTotal()))
+    +mi('cards','卡包',(w.cards||[]).length+' 张')
+    +mi('assets','资产','合计 '+money(assetTotal()))
     +mi('stickers','表情包',(DB.stickers||[]).length+' 张')
     +mi('star','收藏',(DB.favorites||[]).length+' 条')
     +'</div>'
@@ -8857,32 +8859,33 @@ function wxMine(){
     +'<div class="lrow" data-mgo="appearance" style="padding-left:0;padding-right:0;border-bottom:0"><div class="mi"><div class="t1">外观</div><div class="t2">壁纸、深色</div></div><div class="rt"><span class="chev">›</span></div></div>'
     +'</div></div>';
 }
-function mi(k,t,d){ return '<div class="mi" data-mgo="'+k+'"><div class="miic">'+ic(k,22)+'</div><div class="t">'+esc(t)+'</div><div class="d">'+esc(d)+'</div></div>'; }
+function mi(k,t,d){ return '<div class="mi" data-mgo="'+k+'"><div class="miic">'+ic(k==='cards'?'wallet':k,22)+'</div><div class="t">'+esc(t)+'</div><div class="d">'+esc(d)+'</div></div>'; }
 function sheetPersona(){
   const me=DB.me; me.personas=me.personas||[];
   const store=coreStore();
   const personas=store?store.read.personas():me.personas;
-  const rows=personas.map(p=>'<div class="lrow" data-ped="'+p.id+'">'
-    +'<div class="mi"><div class="t1">'+esc(p.name||'人设')+(me.personaId===p.id?' <span style="color:#07c160;font-size:calc(12px * var(--ui-font-scale,1))">· 启用中</span>':'')+'</div>'
-    +'<div class="t2 ell">'+esc(personaFullText(p).replace(/\n/g,' ').slice(0,60))+'</div></div>'
-    +'<div class="rt"><span class="chev">›</span></div></div>').join('');
-  sheet('<h3>用户人设库</h3>'
-    +'<div class="muted" style="margin-bottom:10px;line-height:1.7">这里是「你」的资料。想建多少个都行，点一个进去可以改、可以删。启用中的那个人设，所有角色都会读到。</div>'
-    +'<div style="max-height:34dvh;overflow-y:auto">'+(rows||'<div class="muted" style="padding:6px 0 16px">还没有人设，点下面的按钮建第一个。</div>')+'</div>'
-    +'<button class="btn primary full" id="pe_new">＋ 新建一个人设</button>'
-    +'<button class="btn full" id="peOk">完成</button>');
-  $$('#sheetBox [data-ped]').forEach(el=>el.onclick=()=>sheetPersonaEdit(el.dataset.ped));
-  $('#pe_new').onclick=()=>sheetPersonaEdit(null);
-  $('#peOk').onclick=()=>{ save(); closeSheet(); render(); };
+  const rows=personas.map(function(p,index){
+    return '<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:8px 0"><div class="row"><div class="av" style="width:48px;height:48px;border-radius:13px;overflow:hidden;flex:none">'+avatarOf(p)+'</div><div class="grow"><b>'+esc(p.name||('人设 '+(index+1)))+(me.personaId===p.id?' <span style="color:#07c160;font-size:calc(11px * var(--ui-font-scale,1))">· 启用中</span>':'')+'</b><div class="mini ell">'+esc(personaFullText(p).replace(/\n/g,' ').slice(0,80))+'</div></div><button class="btn" data-pedit="'+esc(p.id)+'" style="min-height:44px">编辑</button></div></div>';
+  }).join('');
+  sheetFull('<div class="row"><div class="grow"><h3>用户人设库</h3><div class="mini">这里是「你」的资料；每个已有会话保留自己的绑定人设</div></div><button class="btn" id="pe_new" style="min-height:44px">＋ 新建</button><button class="btn" id="peOk" style="min-height:44px">关闭</button></div>'
+    +(rows||'<div class="empty">还没有人设，点右上角新建。</div>')
+    +'<div class="card"><div class="muted" style="line-height:1.75">启用只影响新建会话和非聊天场景；已有会话不会偷偷改绑。删除被会话、情侣空间、外卖地址或小说引用的人设会被阻止。</div></div>');
+  $$('#sheetBox [data-pedit]').forEach(function(el){el.onclick=function(){sheetPersonaEdit(el.dataset.pedit);};});
+  $('#pe_new').onclick=function(){sheetPersonaEdit(null);};
+  $('#peOk').onclick=function(){save();closeSheet();render();};
 }
 function sheetPersonaEdit(id){
   const me=DB.me; me.personas=me.personas||[];
   const store=coreStore();
-  const p=id? (store?store.read.persona(id):me.personas.find(x=>x.id===id)) : {id:'',name:'',text:''};
+  const p=id?(store?store.read.persona(id):me.personas.find(function(x){return x.id===id;})):{id:'',name:'',text:''};
   if(!p) return;
-  sheetBig('<h3>'+(id?'编辑人设':'新建人设')+'</h3>'
-    +'<input id="ed_n" value="'+esc(p.name||'')+'" placeholder="姓名或称呼">'
-    +'<div class="row" style="margin-top:8px"><input id="ed_age" value="'+esc(p.age||'')+'" placeholder="年龄"><input id="ed_gender" value="'+esc(p.gender||'')+'" placeholder="性别"></div>'
+  const worlds=(store?store.read.worldbooks():DB.worldbooks)||[];
+  const selectedWorlds=new Set(p.worldIds||[]);
+  const worldOptions=worlds.map(function(w){return '<option value="'+esc(w.id)+'" '+(selectedWorlds.has(w.id)?'selected':'')+'>'+esc(w.name||'世界书')+'</option>';}).join('');
+  sheetFull('<div class="row"><div class="grow"><h3>'+(id?'编辑人设':'新建人设')+'</h3><div class="mini">头像、基础资料、背景和世界观绑定都属于这个人设</div></div><button class="btn" id="edBack" style="min-height:44px">返回</button></div>'
+    +'<div class="card" style="box-shadow:none"><div class="row"><div class="avatar" id="edAvatar" style="width:64px;height:64px;border-radius:16px;overflow:hidden">'+avatarOf(p)+'</div><div class="grow"><input id="ed_av" value="'+esc(String(p.avatar||'').startsWith('data:')?'':(p.avatar||''))+'" placeholder="头像网址"><button class="btn full" id="ed_avUp" style="margin-top:8px;min-height:44px">上传头像</button></div></div></div>'
+    +'<input id="ed_n" value="'+esc(p.name||'')+'" placeholder="姓名 / 称呼">'
+    +'<div class="row" style="margin-top:8px"><input id="ed_age" value="'+esc(p.age||'')+'" placeholder="年龄"><input id="ed_gender" value="'+esc(p.gender||'')+'" placeholder="性别 / 称呼"></div>'
     +'<input id="ed_identity" value="'+esc(p.identity||'')+'" placeholder="身份 / 职业" style="margin-top:8px">'
     +'<textarea id="ed_appearance" style="min-height:78px;margin-top:8px" placeholder="外貌、穿着、给人的第一印象">'+esc(p.appearance||'')+'</textarea>'
     +'<textarea id="ed_personality" style="min-height:78px;margin-top:8px" placeholder="性格、习惯、雷点、在意的事">'+esc(p.personality||'')+'</textarea>'
@@ -8890,52 +8893,56 @@ function sheetPersonaEdit(id){
     +'<textarea id="ed_bg" style="min-height:170px;margin-top:8px" placeholder="背景、经历、当前处境、重要设定">'+esc(p.background!==undefined?p.background:(p.text||''))+'</textarea>'
     +'<textarea id="ed_style" style="min-height:70px;margin-top:8px" placeholder="说话风格">'+esc(p.style||'')+'</textarea>'
     +'<textarea id="ed_notes" style="min-height:70px;margin-top:8px" placeholder="补充设定">'+esc(p.notes||'')+'</textarea>'
-    +'<button class="btn primary full" id="edOk">保存</button>'
-    +(id? '<button class="btn full" id="edUse">'+(me.personaId===id?'取消启用这个人设':'启用这个人设')+'</button>'
-      +'<button class="btn full danger" id="edDel">删除这个人设</button>' : '')
-    +'<button class="btn full" id="edBack">返回人设列表</button>');
+    +'<div class="card" style="box-shadow:none"><b>世界观绑定</b><div class="mini" style="margin-top:5px">可多选；不选表示跟随全局世界书。</div><select id="ed_worlds" multiple size="4" style="margin-top:8px;width:100%">'+worldOptions+'</select></div>'
+    +'<button class="btn primary full" id="edOk" style="min-height:44px">保存</button>'
+    +(id?'<button class="btn full" id="edUse" style="min-height:44px">'+(me.personaId===id?'取消启用':'启用这个人设')+'</button><button class="btn full danger" id="edDel" style="min-height:44px">删除这个人设</button>':'')
+    +'<button class="btn full" id="edBackBottom" style="min-height:44px">返回人设列表</button>');
+  const applyAvatar=function(url){ const box=$('#edAvatar'); if(box) box.innerHTML='<img src="'+esc(url)+'" style="width:100%;height:100%;object-fit:cover">'; };
+  $('#ed_avUp').onclick=function(){ const i=document.createElement('input');i.type='file';i.accept='image/*';i.onchange=function(){if(!i.files[0])return;readImage(i.files[0],500,function(url){$('#ed_av').value='';p.__editAvatar=url;applyAvatar(url);toast('头像已换');});};i.click(); };
   $('#edOk').onclick=function(){
-    const nm=($('#ed_n').value||'').trim()||'人设';
-    const bg=($('#ed_bg').value||'').trim();
-    const obj={name:nm,age:($('#ed_age').value||'').trim(),gender:($('#ed_gender').value||'').trim(),identity:($('#ed_identity').value||'').trim(),appearance:($('#ed_appearance').value||'').trim(),personality:($('#ed_personality').value||'').trim(),relation:($('#ed_relation').value||'').trim(),background:bg,style:($('#ed_style').value||'').trim(),notes:($('#ed_notes').value||'').trim(),text:bg};
-    if(!bg&&!obj.appearance&&!obj.personality&&!obj.relation&&!obj.notes){ toast('至少写一点人设内容'); return; }
-    if(id){
-      if(store) store.commands.upsertPersona(Object.assign({id:id},obj),{persist:false}); else Object.assign(p,obj);
-    }else{
-      const np=Object.assign({id:uid()},obj);
-      if(store) store.commands.upsertPersona(np,{persist:false}); else me.personas.push(np);
-      if(!me.personaId){
-        if(store) store.commands.setActivePersona(np.id,{persist:false}); else me.personaId=np.id;
-      }
-    }
-    save(); toast('已保存'); sheetPersona();
+    const nm=($('#ed_n').value||'').trim()||'人设',bg=($('#ed_bg').value||'').trim(),avatar=($('#ed_av').value||'').trim()||p.__editAvatar||p.avatar||'';
+    const obj={name:nm,avatar:avatar,age:($('#ed_age').value||'').trim(),gender:($('#ed_gender').value||'').trim(),identity:($('#ed_identity').value||'').trim(),appearance:($('#ed_appearance').value||'').trim(),personality:($('#ed_personality').value||'').trim(),relation:($('#ed_relation').value||'').trim(),background:bg,style:($('#ed_style').value||'').trim(),notes:($('#ed_notes').value||'').trim(),text:bg,worldIds:Array.from($('#ed_worlds').selectedOptions||[]).map(function(o){return o.value;})};
+    if(!bg&&!obj.appearance&&!obj.personality&&!obj.relation&&!obj.notes){toast('至少写一点人设内容');return;}
+    if(id){ if(store) store.commands.upsertPersona(Object.assign({id:id},obj),{persist:false});else Object.assign(p,obj); }
+    else { const np=Object.assign({id:uid()},obj);if(store)store.commands.upsertPersona(np,{persist:false});else me.personas.push(np);if(!me.personaId)setActivePersonaSafe(np.id); }
+    if(me.personaId===id&&store){const saved=store.read.persona(id);if(saved){me.name=saved.name||me.name;me.avatar=saved.avatar||me.avatar;}}
+    save();toast('已保存');sheetPersona();
   };
-  const u=$('#edUse'); if(u) u.onclick=function(){ const next=me.personaId===id?null:id; if(store) store.commands.setActivePersona(next,{persist:false}); else me.personaId=next; save(); sheetPersonaEdit(id); };
-  const d=$('#edDel'); if(d) d.onclick=function(){
-    if(store){
-      const personas=store.read.personas().filter(function(x){ return x.id!==id; });
-      store.commands.replacePersonas(personas,{persist:false});
-      if(me.personaId===id) store.commands.setActivePersona((personas[0]||{}).id||null,{persist:false});
-    }else{
-      me.personas=me.personas.filter(function(x){ return x.id!==id; });
-      if(me.personaId===id) me.personaId=(me.personas[0]||{}).id||null;
-    }
-    save(); sheetPersona();
-  };
-  $('#edBack').onclick=sheetPersona;
+  const u=$('#edUse'); if(u)u.onclick=function(){setActivePersonaSafe(me.personaId===id?null:id);sheetPersonaEdit(id);};
+  const d=$('#edDel'); if(d)d.onclick=function(){const refs=personaReferences(id);if(refs.length){sheetSmall('<h3>这个人设正在被使用</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">请先把以下引用迁移到其它人设：<br>'+esc(refs.slice(0,8).join('、'))+(refs.length>8?' 等':'')+'</div><button class="btn full" id="edRefBack">返回</button>');$('#edRefBack').onclick=function(){sheetPersonaEdit(id);};return;}sheetSmall('<h3>删除这个人设？</h3><div class="muted" style="margin:8px 0 14px">删除后不会影响其它人设，已绑定这个人的旧会话需要先迁移。确认删除？</div><button class="btn danger full" id="edDelYes">永久删除</button><button class="btn full" id="edDelNo">取消</button>');$('#edDelNo').onclick=function(){sheetPersonaEdit(id);};$('#edDelYes').onclick=function(){if(store){const list=store.read.personas().filter(function(x){return x.id!==id;});store.commands.replacePersonas(list,{persist:false});if(me.personaId===id)store.commands.setActivePersona((list[0]||{}).id||null,{persist:false});}else{me.personas=me.personas.filter(function(x){return x.id!==id;});if(me.personaId===id)me.personaId=(me.personas[0]||{}).id||null;}save();sheetPersona();toast('已删除');};};
+  $('#edBack').onclick=function(){sheetPersona();};$('#edBackBottom').onclick=function(){sheetPersona();};
 }
-function curPersona(){ const m=DB.me||{},store=coreStore(); return store?store.read.activePersona():((m.personas||[]).find(function(x){ return x.id===m.personaId; })||null); }
+function activePersonaObj(){
+  const me=DB.me||{},store=coreStore();
+  return store?store.read.activePersona():((me.personas||[]).find(function(x){ return x.id===me.personaId; })||null);
+}
+function setActivePersonaSafe(id){
+  const me=DB.me||{},store=coreStore(),persona=id?((store?store.read.personas():me.personas)||[]).find(function(x){ return x.id===id; }):null;
+  if(store) store.commands.setActivePersona(persona?persona.id:null,{persist:false}); else me.personaId=persona?persona.id:null;
+  if(persona){ me.name=persona.name||me.name||'我'; me.avatar=persona.avatar||me.avatar||''; }
+  save(); return persona;
+}
+function personaReferences(id){
+  const refs=[];
+  (DB.chats||[]).forEach(function(ch){ if(ch.personaId===id) refs.push('会话 · '+chatName(ch)); });
+  (DB.coupleSpaces||[]).forEach(function(space){ if(space&&space.personaId===id) refs.push('情侣空间 · '+(space.name||space.id)); });
+  (DB.books||[]).forEach(function(book){ if(book&&((book.personaIds||[]).indexOf(id)>=0||book.userPersonaId===id)) refs.push('小说 · '+(book.title||book.id)); });
+  let addresses=DB.takeout&&DB.takeout.addresses;
+  if(addresses&&!Array.isArray(addresses)) addresses=Object.keys(addresses).reduce(function(out,key){const value=addresses[key];return out.concat(Array.isArray(value)?value:(value?[value]:[]));},[]);
+  (addresses||[]).forEach(function(addr){ if(addr&&addr.personaId===id) refs.push('外卖地址 · '+(addr.label||addr.name||addr.id)); });
+  return refs;
+}function curPersona(){ const m=DB.me||{},store=coreStore(); return store?store.read.activePersona():((m.personas||[]).find(function(x){ return x.id===m.personaId; })||null); }
 function meWallet(){
   const p=curPersona();
   if(p){
     if(!p.wallet) p.wallet={balance:0,cards:[]};
     if(!p.wallet.cards) p.wallet.cards=[];
-    return p.wallet;
+    return walletEnsure(p.wallet);
   }
   const m=DB.me;
   if(!m.wallet) m.wallet={balance:0,cards:[]};
   if(!m.wallet.cards) m.wallet.cards=[];
-  return m.wallet;
+  return walletEnsure(m.wallet);
 }
 function meAssets(){
   const p=curPersona();
@@ -8946,99 +8953,234 @@ function meAssets(){
 function assetTotal(){
   return meAssets().reduce(function(s,x){ return s+(Number(x.value)||0); },0);
 }
-function sheetAssets(){
-  const list=meAssets();
-  const draw=function(){
-    sheet('<h3>资产</h3>'
-      +'<div class="muted" style="margin:6px 0 10px;line-height:1.8">房、车、店这些硬资产。它们跟着当前启用的人设走，换人设就是另一套。</div>'
-      +'<div class="kv"><span>合计估值</span><b>¥ '+money(assetTotal())+'</b></div>'
-      +(list.length? list.map(function(a){
-          return '<div class="card" style="box-shadow:none;border:1px solid var(--line)"><div class="row"><div class="grow"><div><b>'+esc(a.name||'资产')+'</b></div>'
-            +'<div class="muted" style="margin-top:4px">'+esc(a.note||'')+'</div></div>'
-            +'<div class="rt"><b>¥ '+money(a.value)+'</b><button class="btn danger" data-assetdel="'+a.id+'" style="margin-top:6px">删</button></div></div></div>';
-        }).join('') : '<div class="muted" style="padding:4px 0 12px">还没有资产。</div>')
-      +'<input id="as_name" placeholder="名称，比如：江边那套房子">'
-      +'<input id="as_val" placeholder="估值（元）" style="margin-top:8px">'
-      +'<input id="as_note" placeholder="备注（可选）" style="margin-top:8px">'
-      +'<button class="btn full" id="asAdd">加一项资产</button>'
-      +'<button class="btn primary full" id="asOk">完成</button>');
-    $$('#sheetBox [data-assetdel]').forEach(function(el){
-      el.onclick=function(){ const p=curPersona(); if(!p) return; p.assets=p.assets.filter(function(x){ return x.id!==el.dataset.assetdel; }); save(); draw(); };
-    });
-    $('#asAdd').onclick=function(){
-      const p=curPersona(); if(!p){ toast('先启用一个人设'); return; }
-      const n=($('#as_name').value||'').trim(); if(!n){ toast('写个名称'); return; }
-      p.assets=p.assets||[];
-      p.assets.push({id:uid(),name:n,value:Number($('#as_val').value)||0,note:($('#as_note').value||'').trim()});
-      save(); draw(); toast('已添加');
-    };
-    $('#asOk').onclick=function(){ save(); closeSheet(); render(); };
+function walletEnsure(w){
+  w=w||{balance:0,cards:[]};
+  if(!Array.isArray(w.cards)) w.cards=[];
+  if(!Array.isArray(w.history)) w.history=[];
+  w.cards.forEach(function(card,index){ if(card&&card.order===undefined) card.order=index; });
+  return w;
+}
+function walletCardSnapshot(card){
+  const no=String(card&&card.no||'').replace(/\s+/g,'');
+  return {cardId:card&&card.id||null,cardLabel:String(card&&card.bank||'银行卡').slice(0,40),cardTail:no.slice(-4),cardPattern:String(card&&card.pattern||'经典卡面')};
+}
+function walletCardBillLabel(card){
+  const snap=walletCardSnapshot(card||{});
+  return snap.cardLabel+(snap.cardTail?' · 尾号'+snap.cardTail:'');
+}
+function cardNumberGrouped(value){
+  const digits=String(value||'').replace(/\D/g,'').slice(0,19);
+  return (digits.match(/.{1,4}/g)||[]).join(' ');
+}
+function walletRecord(w,type,amount,note,cardId){
+  const value=Math.round(Math.max(0,Number(amount)||0)*100)/100; if(!value) return null;
+  const card=cardId?(w.cards||[]).find(function(x){return x.id===cardId;}):null;
+  if(cardId&&!card) return null;
+  const rec={id:'bill_'+uid(),type:type==='income'?'income':'expense',amount:value,note:String(note||'').slice(0,120),cardId:card?card.id:null,ts:Date.now()};
+  if(card) Object.assign(rec,walletCardSnapshot(card));
+  w.history=Array.isArray(w.history)?w.history:[]; w.history.unshift(rec);
+  if(!card) w.balance=Math.round((Number(w.balance||0)+(rec.type==='income'?value:-value))*100)/100;
+  return rec;
+}
+function walletAdjust(w,target,note){
+  const next=Math.round(Number(target)*100)/100;
+  if(!Number.isFinite(next)||next<0) return null;
+  const previous=Math.round(Number(w.balance||0)*100)/100;
+  const delta=Math.round((next-previous)*100)/100;
+  if(!delta) return null;
+  const rec={id:'bill_'+uid(),type:'adjustment',amount:Math.abs(delta),delta:delta,previousBalance:previous,balance:next,note:String(note||'余额调整').slice(0,120),cardId:null,ts:Date.now()};
+  w.history=Array.isArray(w.history)?w.history:[]; w.history.unshift(rec);
+  w.balance=next;
+  return rec;
+}
+function walletBillSource(rec,w){
+  if(!rec.cardId) return '零钱';
+  const card=(w.cards||[]).find(function(x){return x.id===rec.cardId;});
+  if(card) return walletCardBillLabel(card);
+  const label=rec.cardLabel||'原银行卡';
+  return label+(rec.cardTail?' · 尾号'+rec.cardTail:'')+(rec.cardUnbound||!card?' · 已解绑':'');
+}
+function walletUnbindCard(w,id){
+  const card=(w.cards||[]).find(function(x){return x.id===id;});
+  if(!card) return null;
+  const snap=walletCardSnapshot(card),now=Date.now();
+  (w.history||[]).forEach(function(rec){ if(rec.cardId===id){ Object.assign(rec,snap); rec.cardId=id; rec.cardUnbound=true; rec.cardUnboundAt=now; } });
+  w.cards=(w.cards||[]).filter(function(x){return x.id!==id;});
+  w.cards.forEach(function(x,index){x.order=index;});
+  const p=curPersona(),pid=p&&p.id;
+  if(pid&&DB.takeout&&DB.takeout.payments&&DB.takeout.payments[pid]&&DB.takeout.payments[pid].type==='card'&&DB.takeout.payments[pid].cardId===id){
+    DB.takeout.payments[pid]={type:'wallet',label:'小手机钱包'};
+  }
+  return card;
+}
+function walletCommit(w){
+  const p=curPersona(),store=coreStore();
+  if(store&&p&&p.wallet===w) store.commands.upsertPersona({id:p.id,wallet:w},{persist:false});
+  save();
+}
+function walletTotals(w){
+  const list=Array.isArray(w&&w.history)?w.history:[];
+  return {income:list.filter(function(x){return x.type==='income';}).reduce(function(s,x){return s+(Number(x.amount)||0);},0),expense:list.filter(function(x){return x.type==='expense';}).reduce(function(s,x){return s+(Number(x.amount)||0);},0)};
+}
+function sheetWalletBills(cardId){
+  const w=walletEnsure(meWallet());
+  const card=cardId?(w.cards||[]).find(function(x){return x.id===cardId;}):null;
+  if(cardId&&!card){ sheetWallet(); toast('这张银行卡已解绑，历史账单仍保留在钱包'); return; }
+  const list=(w.history||[]).filter(function(x){return !cardId||x.cardId===cardId;}).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
+  sheetFull('<div class="row"><div class="grow"><h3>'+(card?walletCardBillLabel(card)+' 账单':'账单明细')+'</h3><div class="mini">'+list.length+' 笔 · 本地记录</div></div><button class="btn" id="billsClose" style="min-height:44px">关闭</button></div>'
+    +(list.length?list.map(function(x){
+      const adjustment=x.type==='adjustment';
+      const amount=adjustment?'<b>调整至 '+money(x.balance)+'</b>':'<b style="color:'+(x.type==='income'?'#188652':'#c4545b')+'">'+(x.type==='income'?'+':'-')+money(x.amount)+'</b>';
+      return '<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:8px 0"><div class="row"><div class="grow"><b>'+esc(x.note||(adjustment?'余额调整':x.type==='income'?'收入':'支出'))+'</b><div class="mini">'+esc(shortTime(x.ts))+' · '+esc(walletBillSource(x,w))+'</div></div>'+amount+'</div></div>';
+    }).join(''):'<div class="empty">还没有账单记录。</div>')
+    +'<div class="muted" style="padding:4px 2px 16px;line-height:1.75">账单只保存在本机，不会向银行或支付机构发起真实交易。</div>');
+  $('#billsClose').onclick=function(){ if(cardId&&(w.cards||[]).some(function(x){return x.id===cardId;})) sheetCardDetail(cardId); else sheetWallet(); };
+}
+function sheetWalletAdjust(w){
+  const current=Math.round(Number(w.balance||0)*100)/100;
+  sheetSmall('<h3>调整零钱余额</h3><div class="muted" style="margin:6px 0 12px;line-height:1.7">当前余额 '+money(current)+'。保存后会生成一条“余额调整”账单，不计入收入或支出统计。</div><input id="wa_target" inputmode="decimal" value="'+esc(current.toFixed(2))+'" placeholder="调整后的余额"><input id="wa_note" value="余额调整" placeholder="备注（可选）" style="margin-top:8px"><button class="btn primary full" id="waNext" style="margin-top:10px;min-height:44px">下一步</button><button class="btn full" id="waCancel">取消</button>');
+  $('#waCancel').onclick=function(){sheetWallet();};
+  $('#waNext').onclick=function(){
+    const target=Math.round(Number($('#wa_target').value)*100)/100,note=String($('#wa_note').value||'').trim()||'余额调整';
+    if(!Number.isFinite(target)||target<0){toast('余额需要是 0 或更大的金额');return;}
+    if(target===current){toast('余额没有变化');return;}
+    sheetSmall('<h3>确认调整余额？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">从 '+money(current)+' 调整为 '+money(target)+'，并写入一条余额调整账单。收入与支出统计不会因此改变。</div><button class="btn primary full" id="waConfirm" style="min-height:44px">确认调整</button><button class="btn full" id="waBack">返回修改</button>');
+    $('#waBack').onclick=function(){sheetWalletAdjust(w);};
+    $('#waConfirm').onclick=function(){const rec=walletAdjust(w,target,note);if(!rec){toast('余额没有变化');sheetWallet();return;}walletCommit(w);sheetWallet();toast('余额已调整并记入账单');};
   };
-  draw();
+}
+function sheetAssets(){
+  const p=curPersona();
+  if(!p){toast('先启用一个人设');return;}
+  p.assets=Array.isArray(p.assets)?p.assets:[];const list=p.assets;
+  const draw=function(){
+    sheetFull('<div class="row"><div class="grow"><h3>资产</h3><div class="mini">合计估值 '+money(assetTotal())+' · 跟随当前人设</div></div><button class="btn" id="asNew" style="min-height:44px">＋ 加一项</button><button class="btn" id="asOk" style="min-height:44px">关闭</button></div>'
+      +(list.length?list.map(function(a){return '<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:8px 0"><div class="row"><div class="grow"><b>'+esc(a.name||'资产')+'</b><div class="mini">'+esc([a.kind||'资产',a.status||'持有中'].join(' · '))+'</div><div class="muted" style="margin-top:5px;line-height:1.6">'+esc(a.note||'')+'</div></div><div class="rt" style="text-align:right"><b>'+money(a.value)+'</b><button class="btn" data-aedit="'+esc(a.id)+'" style="margin-top:7px;min-height:44px">编辑</button><button class="btn danger" data-adel="'+esc(a.id)+'" style="margin-top:5px;min-height:44px">删除</button></div></div></div>';}).join(''):'<div class="empty">还没有资产，点右上角加一项。</div>')
+      +'<div class="muted" style="padding:4px 2px 16px;line-height:1.75">房、车、店、公司等硬资产只是本地模拟展示，不会连接真实产权或交易系统。</div>');
+    $('#asNew').onclick=function(){sheetAssetEdit(null);};$('#asOk').onclick=function(){save();closeSheet();render();};
+    $$('#sheetBox [data-aedit]').forEach(function(el){el.onclick=function(){sheetAssetEdit(el.dataset.aedit);};});
+    $$('#sheetBox [data-adel]').forEach(function(el){el.onclick=function(){const a=list.find(function(x){return x.id===el.dataset.adel;});if(!a)return;sheetSmall('<h3>删除这项资产？</h3><div class="muted" style="margin:8px 0 14px">只删除本地资产记录，不影响其它数据。</div><button class="btn danger full" id="asDelYes">删除</button><button class="btn full" id="asDelNo">取消</button>');$('#asDelNo').onclick=sheetAssets;$('#asDelYes').onclick=function(){p.assets=p.assets.filter(function(x){return x.id!==a.id;});save();sheetAssets();toast('已删除资产');};};});
+  };draw();
+}
+function sheetAssetEdit(id){
+  const p=curPersona();if(!p)return;p.assets=Array.isArray(p.assets)?p.assets:[];const a=id?p.assets.find(function(x){return x.id===id;}):{id:'',name:'',value:0,kind:'房产',status:'持有中',note:''};if(!a)return;
+  sheetFull('<div class="row"><div class="grow"><h3>'+(id?'编辑资产':'加一项资产')+'</h3><div class="mini">本地模拟资产卡</div></div><button class="btn" id="aeBack" style="min-height:44px">返回</button></div><input id="ae_name" value="'+esc(a.name||'')+'" placeholder="名称，比如：江边那套房子"><div class="row" style="margin-top:8px"><select id="ae_kind" class="grow">'+['房产','车辆','店铺','公司','其它'].map(function(x){return '<option '+(a.kind===x?'selected':'')+'>'+x+'</option>';}).join('')+'</select><select id="ae_status" class="grow">'+['持有中','出租中','闲置','已出售'].map(function(x){return '<option '+(a.status===x?'selected':'')+'>'+x+'</option>';}).join('')+'</select></div><input id="ae_val" value="'+esc(a.value||0)+'" placeholder="估值（元）" style="margin-top:8px"><textarea id="ae_note" style="min-height:100px;margin-top:8px" placeholder="备注">'+esc(a.note||'')+'</textarea><button class="btn primary full" id="aeSave" style="min-height:44px">保存</button>');
+  $('#aeBack').onclick=sheetAssets;$('#aeSave').onclick=function(){const n=String($('#ae_name').value||'').trim();if(!n){toast('写个名称');return;}const next={id:id||uid(),name:n,kind:$('#ae_kind').value,status:$('#ae_status').value,value:Number($('#ae_val').value)||0,note:String($('#ae_note').value||'').trim(),updatedAt:Date.now()};if(id)Object.assign(a,next);else p.assets.push(next);save();sheetAssets();toast('资产已保存');};
 }
 function sheetWallet(){
-  const w=meWallet();
-  const draw=()=>{
-    sheet('<h3>钱包</h3><div class="kv"><span>零钱余额</span><b>¥ '+Number(w.balance||0).toFixed(2)+'</b></div>'
-      +'<input id="wl_bal" value="'+esc(w.balance||0)+'" placeholder="改余额（仅保存在本机，随便填）" style="margin-top:10px">'
-      +'<button class="btn full" id="wl_set">保存余额</button>'
-      +'<div class="muted" style="margin:16px 0 6px">银行卡（本机）</div>'
-      +((w.cards||[]).length? (w.cards||[]).map(c=>'<div class="lrow"><div class="mi"><div class="t1">'+esc(c.bank||'银行')+'</div><div class="t2">'+esc(c.no||'')+'</div></div><div class="rt"><button class="btn danger" data-cardel="'+c.id+'">解绑</button></div></div>').join('') : '<div class="muted">还没有绑卡。</div>')
-      +'<div style="margin-top:12px"><input id="wl_bank" placeholder="银行名称，比如：招商银行"><input id="wl_no" placeholder="卡号" style="margin-top:8px;font-size:calc(14px * var(--ui-font-scale,1))"><div class="muted" style="margin-top:6px;font-size:calc(11.5px * var(--ui-font-scale,1));line-height:1.6">仅保存在本机，请勿填写现实卡号，保护好个人隐私</div><input id="wl_hold" placeholder="持卡人" style="margin-top:8px">'
-      +'<button class="btn full" id="wl_add">绑定这张卡</button></div>'
-      +'<button class="btn primary full" id="wlOk">完成</button>');
-    $('#wl_set').onclick=()=>{ w.balance=Number($('#wl_bal').value)||0; save(); draw(); };
-    $('#wl_add').onclick=()=>{ const b=($('#wl_bank').value||'').trim(); if(!b){ toast('填个银行名称'); return; }
-      w.cards=w.cards||[]; w.cards.push({id:uid(),bank:b,no:($('#wl_no').value||'').trim(),holder:($('#wl_hold').value||'').trim()}); save(); draw(); };
-    $$('#sheetBox [data-cardel]').forEach(el=>el.onclick=()=>{ w.cards=w.cards.filter(c=>c.id!==el.dataset.cardel); save(); draw(); });
-    $('#wlOk').onclick=()=>{ save(); closeSheet(); render(); };
+  const w=walletEnsure(meWallet());
+  const draw=function(){
+    const totals=walletTotals(w);
+    sheetFull('<div class="row"><div class="grow"><h3>钱包</h3><div class="mini">零钱与银行卡只保存在本机</div></div><button class="btn" id="wlCards" style="min-height:44px">卡包</button><button class="btn" id="wlClose" style="min-height:44px">关闭</button></div><div class="card" style="background:linear-gradient(145deg,#2f9d62,#1b6f49);color:#fff;box-shadow:none"><div class="mini" style="opacity:.78">零钱余额</div><div style="font-size:calc(32px * var(--ui-font-scale,1));font-weight:700;margin-top:5px">¥ '+Number(w.balance||0).toFixed(2)+'</div><div class="row" style="margin-top:14px"><div class="grow" style="opacity:.86">收入 '+money(totals.income)+'</div><div style="opacity:.86">支出 '+money(totals.expense)+'</div></div></div><div class="row" style="margin-top:10px;gap:8px"><button class="btn grow" id="wlBills" style="min-height:44px">账单明细</button><button class="btn grow" id="wlCards2" style="min-height:44px">银行卡与卡包</button></div><button class="btn full" id="wlAdjust" style="min-height:44px">调整零钱余额</button><div class="card" style="box-shadow:none"><b>记一笔</b><div class="row" style="margin-top:8px"><select id="wl_type" class="grow"><option value="income">收入</option><option value="expense">支出</option></select><select id="wl_card" style="width:140px"><option value="">零钱</option>'+((w.cards||[]).map(function(c){return '<option value="'+esc(c.id)+'">'+esc(c.bank||'银行卡')+(c.no?' · '+esc(String(c.no).replace(/\s+/g,'').slice(-4)):'')+'</option>';}).join(''))+'</select><input id="wl_amount" inputmode="decimal" placeholder="金额" style="width:110px"></div><input id="wl_note" placeholder="备注，比如：本月工资 / 买菜" style="margin-top:8px"><button class="btn primary full" id="wlAddBill" style="margin-top:8px;min-height:44px">保存这笔</button></div><div class="muted" style="line-height:1.75">余额和账单仅用于本地模拟，不在本机之外发起真实支付。</div>');
+    $('#wlClose').onclick=function(){walletCommit(w);closeSheet();render();};
+    $('#wlBills').onclick=function(){sheetWalletBills(null);};
+    $('#wlCards').onclick=function(){sheetCards();};
+    $('#wlCards2').onclick=function(){sheetCards();};
+    $('#wlAdjust').onclick=function(){sheetWalletAdjust(w);};
+    $('#wlAddBill').onclick=function(){const amount=Number($('#wl_amount').value)||0,note=String($('#wl_note').value||'').trim();if(!amount){toast('先填金额');return;}const cardId=$('#wl_card')&&$('#wl_card').value||null;if(!walletRecord(w,$('#wl_type').value,amount,note||($('#wl_type').value==='income'?'收入':'支出'),cardId)){toast('这张银行卡已不可用，请重新选择');draw();return;}walletCommit(w);draw();toast(cardId?'银行卡账单已记录':'账单已记录');};
   };
   draw();
 }
-function sheetStickers(){
-  DB.apiLib=DB.apiLib||[];
-  DB.stickers=DB.stickers||[];
-  const tiles=DB.stickers.map((s,i)=>'<img src="'+esc(s.url)+'" data-stk="'+i+'">').join('');
-  sheet('<h3>表情包</h3>'
-    +'<div class="muted" style="margin-bottom:8px;line-height:1.7">一行四个，往下滑就更多。点某一格可以看大图、改备注、删掉。</div>'
-    +'<div class="stkgrid">'+tiles+'</div>'
-    +(DB.stickers.length? '' : '<div class="muted" style="padding:4px 0 14px">还没有表情包。点下面的按钮加第一张。</div>')
-    +'<button class="btn primary full" id="st_add">＋ 添加表情包</button>'
-    +'<button class="btn full" id="stOk">完成</button>');
-  $$('#sheetBox [data-stk]').forEach(el=>el.onclick=()=>sheetStickerOne(Number(el.dataset.stk)));
-  $('#st_add').onclick=sheetStickerAdd;
-  $('#stOk').onclick=()=>{ save(); closeSheet(); render(); };
+function cardDisplay(card){const no=String(card&&card.no||'').replace(/\s+/g,'');return no.length>=4?'•••• '+no.slice(-4):(no||'未填写卡号');}
+function sheetCardDetail(id){
+  const w=walletEnsure(meWallet()),card=(w.cards||[]).find(function(x){return x.id===id;});if(!card)return;
+  const bills=(w.history||[]).filter(function(x){return x.cardId===id;});
+  sheetFull('<div class="row"><div class="grow"><h3>'+esc(card.bank||'银行卡')+'</h3><div class="mini">'+cardDisplay(card)+' · '+esc(card.holder||'持卡人未填写')+'</div></div><button class="btn" id="cdBack" style="min-height:44px">返回</button></div><div class="card" style="background:'+esc(card.color||'#2f6f9f')+';color:#fff;box-shadow:none"><div class="mini" style="opacity:.78">'+esc(card.pattern||'经典卡面')+'</div><div style="font-size:calc(25px * var(--ui-font-scale,1));letter-spacing:1px;margin-top:18px">'+esc(cardDisplay(card))+'</div><div class="row" style="margin-top:18px"><span>'+esc(card.bank||'银行卡')+'</span><span>'+esc(card.holder||'')+'</span></div></div><div class="row" style="margin-top:10px;gap:8px"><button class="btn grow" id="cdBills" style="min-height:44px">查看账单</button><button class="btn grow" id="cdEdit" style="min-height:44px">编辑卡面</button></div><button class="btn danger full" id="cdUnbind" style="min-height:44px">解绑银行卡</button>'+(bills.length?'<div class="card" style="box-shadow:none"><b>最近账单</b>'+bills.slice(0,5).map(function(x){return '<div class="kv"><span>'+esc(x.note||'银行卡账单')+'</span><b>'+(x.type==='adjustment'?'调整至 '+money(x.balance):(x.type==='income'?'+':'-')+money(x.amount))+'</b></div>';}).join('')+'</div>':'<div class="muted" style="padding:8px 0">这张卡暂时没有账单。</div>'));
+  $('#cdBack').onclick=sheetCards;$('#cdBills').onclick=function(){sheetWalletBills(id);};$('#cdEdit').onclick=function(){sheetCardEdit(id);};
+  $('#cdUnbind').onclick=function(){
+    sheetSmall('<h3>解绑这张银行卡？</h3><div class="muted" style="margin:8px 0 14px;line-height:1.8">'+esc(walletCardBillLabel(card))+'<br>解绑后卡面会移除，历史账单仍保留并标记“已解绑”；如果外卖支付正在使用这张卡，会安全改回小手机钱包。</div><button class="btn danger full" id="cuYes" style="min-height:44px">确认解绑</button><button class="btn full" id="cuNo">取消</button>');
+    $('#cuNo').onclick=function(){sheetCardDetail(id);};
+    $('#cuYes').onclick=function(){if(!walletUnbindCard(w,id)){toast('这张卡已经解绑');sheetCards();return;}walletCommit(w);sheetCards();toast('银行卡已解绑，历史账单已保留');};
+  };
 }
-function sheetStickerOne(i){
-  const s=DB.stickers[i]; if(!s) return;
-  sheet('<h3>表情包</h3>'
-    +'<div style="text-align:center;padding:6px 0 4px"><img src="'+esc(s.url)+'" style="max-width:62%;border-radius:14px"></div>'
-    +'<input id="so_note" value="'+esc(s.note||'')+'" placeholder="备注：这个表情是什么意思" style="margin-top:14px">'
-    +'<button class="btn primary full" id="soOk">保存备注</button>'
-    +'<button class="btn full" id="soBack">返回表情包列表</button>'
-    +'<button class="btn full danger" id="soDel">删除这个表情包</button>');
-  $('#soOk').onclick=()=>{ s.note=($('#so_note').value||'').trim(); save(); toast('备注已保存'); };
-  $('#soBack').onclick=sheetStickers;
-  $('#soDel').onclick=()=>{ DB.stickers.splice(i,1); save(); sheetStickers(); };
+function sheetCardEdit(id){
+  const w=walletEnsure(meWallet()),card=id?(w.cards||[]).find(function(x){return x.id===id;}):{id:'',bank:'',no:'',holder:'',color:'#2f6f9f',pattern:'经典卡面'};if(!card)return;
+  sheetFull('<div class="row"><div class="grow"><h3>'+(id?'编辑银行卡':'添加银行卡')+'</h3><div class="mini">只做本地模拟展示，不连接真实支付</div></div><button class="btn" id="ceBack" style="min-height:44px">返回</button></div><div class="card" style="box-shadow:none;border:1px solid var(--line);line-height:1.75;font-size:calc(12px * var(--ui-font-scale,1))">请勿填写真实卡号、有效期、CVV、短信验证码或身份证信息。本工具只做本地模拟展示，不会向银行或支付机构发起真实交易。你可以使用明显虚构的示例号码。请自行保护隐私。</div><input id="ce_bank" value="'+esc(card.bank||'')+'" placeholder="银行名称，比如：招商银行"><input id="ce_no" value="'+esc(cardNumberGrouped(card.no||''))+'" placeholder="卡号（示例：6222 0000 1234 5678）" inputmode="numeric" style="margin-top:8px"><div class="row" style="margin-top:8px"><input id="ce_holder" value="'+esc(card.holder||'')+'" placeholder="持卡人" class="grow"><select id="ce_color" style="width:110px"><option value="#2f6f9f" '+(card.color==='#2f6f9f'?'selected':'')+'>蓝</option><option value="#5d4b8c" '+(card.color==='#5d4b8c'?'selected':'')+'>紫</option><option value="#8b5e52" '+(card.color==='#8b5e52'?'selected':'')+'>棕</option><option value="#4c6b55" '+(card.color==='#4c6b55'?'selected':'')+'>绿</option></select></div><select id="ce_pattern" style="margin-top:8px">'+['经典卡面','磨砂','细纹','旅行'].map(function(x){return '<option '+(card.pattern===x?'selected':'')+'>'+x+'</option>';}).join('')+'</select><button class="btn primary full" id="ceSave" style="margin-top:10px;min-height:44px">保存银行卡</button>');
+  $('#ceBack').onclick=sheetCards;
+  $('#ce_no').addEventListener('input',function(){this.value=cardNumberGrouped(this.value);});
+  $('#ceSave').onclick=function(){const bank=String($('#ce_bank').value||'').trim();if(!bank){toast('先填银行名称');return;}const next={id:id||uid(),bank:bank,no:cardNumberGrouped($('#ce_no').value),holder:String($('#ce_holder').value||'').trim(),color:$('#ce_color').value,pattern:$('#ce_pattern').value,order:id?card.order:(w.cards.length||0)};if(id)Object.assign(card,next);else w.cards.push(next);walletCommit(w);sheetCards();toast('银行卡已保存');};
 }
-function sheetStickerAdd(){
-  sheet('<h3>添加表情包</h3>'
-    +'<div class="muted" style="margin-bottom:12px;line-height:1.7">从本机传一张（会让你先裁成正方形），或者直接填一个图片网址。</div>'
-    +'<button class="btn primary full" id="sa_up">从本机上传图片</button>'
-    +'<input id="sa_url" placeholder="图片网址（https:// 开头）" style="margin-top:16px">'
-    +'<button class="btn full" id="sa_ok">用这个网址</button>'
-    +'<button class="btn full" id="sa_back">返回表情包列表</button>');
-  $('#sa_up').onclick=()=>pickCropped(1,420,url=>{ DB.stickers.push({id:uid(),url,note:''}); save(); sheetStickers(); toast('已添加，记得写备注'); },'png');
-  $('#sa_ok').onclick=()=>{ const u=($('#sa_url').value||'').trim(); if(!u){ toast('先填个网址'); return; } DB.stickers.push({id:uid(),url:u,note:''}); save(); sheetStickers(); };
-  $('#sa_back').onclick=sheetStickers;
+function sheetCards(){
+  const w=walletEnsure(meWallet());const cards=(w.cards||[]).slice().sort(function(a,b){return (Number(a.order)||0)-(Number(b.order)||0);});const draw=function(){sheetFull('<div class="row"><div class="grow"><h3>卡包</h3><div class="mini">'+cards.length+' 张 · 长按卡片可拖动排序</div></div><button class="btn" id="cardsNew" style="min-height:44px">＋ 添加</button><button class="btn" id="cardsBack" style="min-height:44px">返回钱包</button></div>'+(cards.length?'<div id="cardStack" style="position:relative;min-height:'+(110+Math.max(0,cards.length-1)*8)+'px;margin:10px 0 14px">'+cards.map(function(c,i){return '<button data-cardid="'+esc(c.id)+'" data-cardindex="'+i+'" style="position:absolute;left:'+(i*7)+'px;right:'+(10+(i*7))+'px;top:'+(i*8)+'px;height:96px;border:0;border-radius:16px;background:'+esc(c.color||'#2f6f9f')+';color:#fff;text-align:left;padding:14px 18px;box-shadow:0 7px 17px rgba(0,0,0,.13);min-height:44px"><span style="display:block;font-size:calc(12px * var(--ui-font-scale,1));opacity:.8">'+esc(c.pattern||'经典卡面')+'</span><b style="display:block;font-size:calc(19px * var(--ui-font-scale,1));margin-top:12px">'+esc(c.bank||'银行卡')+'</b><span style="display:block;font-size:calc(11px * var(--ui-font-scale,1));opacity:.85;margin-top:4px">'+cardDisplay(c)+'</span></button>';}).join('')+'</div>'+cards.map(function(c,i){return '<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:7px 0"><div class="row"><div class="grow"><b>'+esc(c.bank||'银行卡')+'</b><div class="mini">'+cardDisplay(c)+'</div></div><button class="btn" data-cardup="'+esc(c.id)+'" '+(i===0?'disabled':'')+' style="min-height:44px">上移</button><button class="btn" data-carddown="'+esc(c.id)+'" '+(i===cards.length-1?'disabled':'')+' style="min-height:44px">下移</button><button class="btn" data-cardopen="'+esc(c.id)+'" style="min-height:44px">详情</button></div></div>';}).join(''):'<div class="empty">还没有银行卡，点右上角添加。</div>')+'<div class="muted" style="line-height:1.75;padding:4px 2px 16px">卡号只显示尾号；卡面名称、颜色和图案由你设置。</div>');$('#cardsNew').onclick=function(){sheetCardEdit(null);};$('#cardsBack').onclick=sheetWallet;$$('#sheetBox [data-cardopen]').forEach(function(el){el.onclick=function(){sheetCardDetail(el.dataset.cardopen);};});$$('#sheetBox [data-cardup]').forEach(function(el){el.onclick=function(){const i=cards.findIndex(function(x){return x.id===el.dataset.cardup;});if(i>0){const t=cards[i].order;cards[i].order=cards[i-1].order;cards[i-1].order=t;save();sheetCards();}};});$$('#sheetBox [data-carddown]').forEach(function(el){el.onclick=function(){const i=cards.findIndex(function(x){return x.id===el.dataset.carddown;});if(i>=0&&i<cards.length-1){const t=cards[i].order;cards[i].order=cards[i+1].order;cards[i+1].order=t;save();sheetCards();}};});const stack=$('#cardStack');if(stack){let timer=null;const finish=function(){if(timer){clearTimeout(timer);timer=null;}$$('#cardStack [data-cardid]').forEach(function(x){delete x.dataset.dragging;});};$$('[data-cardid]',stack).forEach(function(el){el.addEventListener('pointerdown',function(ev){finish();try{el.setPointerCapture(ev.pointerId);}catch(error){}timer=setTimeout(function(){if(el.isConnected){el.dataset.dragging='1';toast('拖动卡片调整顺序');}},520);});el.addEventListener('click',function(ev){if(el.dataset.dragging==='1'){ev.preventDefault();return;}sheetCardDetail(el.dataset.cardid);});});stack.addEventListener('pointermove',function(ev){const el=stack.querySelector('[data-cardid][data-dragging="1"]');if(!el)return;ev.preventDefault();const hit=document.elementFromPoint(ev.clientX,ev.clientY);const target=hit&&hit.closest&&hit.closest('[data-cardid]');if(!target||target===el||!stack.contains(target))return;const from=cards.findIndex(function(x){return x.id===el.dataset.cardid;}),to=cards.findIndex(function(x){return x.id===target.dataset.cardid;});if(from<0||to<0)return;const moved=cards.splice(from,1)[0];cards.splice(to,0,moved);cards.forEach(function(c,i){c.order=i;});save();sheetCards();});stack.addEventListener('pointerup',function(){setTimeout(finish,0);});stack.addEventListener('pointercancel',finish);}};draw();
 }
-function sheetFavs(){
+function stickerEnsure(){
+  DB.stickerGroups=Array.isArray(DB.stickerGroups)&&DB.stickerGroups.length?DB.stickerGroups:[{id:'default',name:'默认',builtin:true}];
+  if(!DB.stickerGroups.some(function(g){return g.id==='default';})) DB.stickerGroups.unshift({id:'default',name:'默认',builtin:true});
+  DB.stickers=Array.isArray(DB.stickers)?DB.stickers:[];
+  DB.stickers.forEach(function(s,i){if(!s.id)s.id='sticker_'+uid();if(!s.groupId)s.groupId='default';if(s.order===undefined)s.order=i;});
+  return DB.stickers;
+}
+function stickerGroupName(id){const g=(DB.stickerGroups||[]).find(function(x){return x.id===id;});return g?g.name:'默认';}
+function sheetStickers(groupId){
+  const stickers=stickerEnsure(),active=groupId||DB.stickerActiveGroup||'default';
+  const group=(DB.stickerGroups||[]).find(function(g){return g.id===active;})||DB.stickerGroups[0];
+  const list=stickers.filter(function(s){return active==='all'||s.groupId===group.id;}).sort(function(a,b){return (Number(a.order)||0)-(Number(b.order)||0);});
+  const tiles=list.map(function(s){return '<div style="position:relative"><img src="'+esc(s.url)+'" data-stk="'+esc(s.id)+'"><div class="row" style="gap:3px;margin-top:4px"><button class="btn" data-stup="'+esc(s.id)+'" style="min-height:44px;min-width:44px;flex:1">↑</button><button class="btn" data-stdown="'+esc(s.id)+'" style="min-height:44px;min-width:44px;flex:1">↓</button></div></div>';}).join('');
+  sheetFull('<div class="row"><div class="grow"><h3>表情包</h3><div class="mini">'+list.length+' 张 · '+esc(group.name)+'</div></div><button class="btn" id="stGroupNew" style="min-height:44px">＋ 分组</button><button class="btn" id="stOk" style="min-height:44px">关闭</button></div>'
+    +'<div class="row" style="gap:6px;overflow:auto;margin:2px 0 9px">'+DB.stickerGroups.map(function(g){return '<button class="btn '+(g.id===active?'primary':'')+'" data-stgroup="'+esc(g.id)+'" style="min-height:44px;flex:none">'+esc(g.name)+'</button>';}).join('')+'</div>'
+    +'<div class="row" style="gap:6px;margin-bottom:9px"><button class="btn" id="stGroupRename" style="min-height:44px">重命名当前分组</button><button class="btn danger" id="stGroupDelete" style="min-height:44px" '+(group.builtin?'disabled':'')+'>删除当前分组</button></div>'
+    +'<div class="muted" style="margin-bottom:8px;line-height:1.7">一行四个，往下滑就更多。点图片查看大图、改备注、移动分组或删除；箭头调整顺序。</div>'
+    +'<div class="stkgrid">'+(tiles||'<div class="empty">这个分组还没有表情包。</div>')+'</div>'
+    +'<button class="btn primary full" id="st_add" style="min-height:44px">＋ 添加表情包</button>');
+  $('#stOk').onclick=function(){save();closeSheet();render();};$('#st_add').onclick=function(){sheetStickerAdd(group.id);};
+  $$('#sheetBox [data-stgroup]').forEach(function(el){el.onclick=function(){DB.stickerActiveGroup=el.dataset.stgroup;sheetStickers(el.dataset.stgroup);};});
+  $$('#sheetBox [data-stk]').forEach(function(el){el.onclick=function(){sheetStickerOne(el.dataset.stk);};});
+  $$('#sheetBox [data-stup]').forEach(function(el){el.onclick=function(){const arr=stickers.filter(function(s){return s.groupId===group.id;}).sort(function(a,b){return (Number(a.order)||0)-(Number(b.order)||0);}),i=arr.findIndex(function(s){return s.id===el.dataset.stup;});if(i>0){const t=arr[i].order;arr[i].order=arr[i-1].order;arr[i-1].order=t;save();sheetStickers(group.id);}};});
+  $$('#sheetBox [data-stdown]').forEach(function(el){el.onclick=function(){const arr=stickers.filter(function(s){return s.groupId===group.id;}).sort(function(a,b){return (Number(a.order)||0)-(Number(b.order)||0);}),i=arr.findIndex(function(s){return s.id===el.dataset.stdown;});if(i>=0&&i<arr.length-1){const t=arr[i].order;arr[i].order=arr[i+1].order;arr[i+1].order=t;save();sheetStickers(group.id);}};});
+  $('#stGroupNew').onclick=function(){sheetSmall('<h3>新建表情分组</h3><input id="stgName" placeholder="分组名称"><button class="btn primary full" id="stgOk" style="margin-top:9px;min-height:44px">创建</button><button class="btn full" id="stgNo">取消</button>');$('#stgNo').onclick=function(){sheetStickers(group.id);};$('#stgOk').onclick=function(){const n=String($('#stgName').value||'').trim();if(!n){toast('先填名称');return;}DB.stickerGroups.push({id:'stg_'+uid(),name:n,builtin:false});DB.stickerActiveGroup=DB.stickerGroups[DB.stickerGroups.length-1].id;save();sheetStickers(DB.stickerActiveGroup);};};
+  $('#stGroupRename').onclick=function(){sheetSmall('<h3>重命名分组</h3><input id="stgName" value="'+esc(group.name)+'"><button class="btn primary full" id="stgOk" style="margin-top:9px;min-height:44px">保存</button><button class="btn full" id="stgNo">取消</button>');$('#stgNo').onclick=function(){sheetStickers(group.id);};$('#stgOk').onclick=function(){const n=String($('#stgName').value||'').trim();if(!n){toast('先填名称');return;}group.name=n;save();sheetStickers(group.id);};};
+  $('#stGroupDelete').onclick=function(){if(group.builtin){return;}sheetSmall('<h3>删除这个表情分组？</h3><div class="muted" style="margin:8px 0 14px">组内表情会移动到默认分组，不会被删除。</div><button class="btn danger full" id="stgDelYes" style="min-height:44px">删除分组</button><button class="btn full" id="stgDelNo">取消</button>');$('#stgDelNo').onclick=function(){sheetStickers(group.id);};$('#stgDelYes').onclick=function(){stickers.forEach(function(s){if(s.groupId===group.id)s.groupId='default';});DB.stickerGroups=DB.stickerGroups.filter(function(g){return g.id!==group.id;});DB.stickerActiveGroup='default';save();sheetStickers('default');};};
+}
+function sheetStickerOne(id){
+  const stickers=stickerEnsure(),s=stickers.find(function(x){return x.id===id;});if(!s)return;
+  sheetFull('<div class="row"><div class="grow"><h3>表情包</h3><div class="mini">'+esc(stickerGroupName(s.groupId))+'</div></div><button class="btn" id="soBack" style="min-height:44px">返回</button></div><div style="text-align:center;padding:6px 0 4px"><img src="'+esc(s.url)+'" style="max-width:62%;border-radius:14px"></div><input id="so_note" value="'+esc(s.note||'')+'" placeholder="备注：这个表情是什么意思" style="margin-top:14px"><select id="so_group" style="margin-top:8px">'+DB.stickerGroups.map(function(g){return '<option value="'+esc(g.id)+'" '+(s.groupId===g.id?'selected':'')+'>'+esc(g.name)+'</option>';}).join('')+'</select><button class="btn primary full" id="soOk" style="margin-top:9px;min-height:44px">保存</button><button class="btn full danger" id="soDel" style="min-height:44px">删除这个表情包</button>');
+  $('#soBack').onclick=function(){sheetStickers(s.groupId);};$('#soOk').onclick=function(){s.note=($('#so_note').value||'').trim();s.groupId=$('#so_group').value;save();toast('备注已保存');};$('#soDel').onclick=function(){sheetSmall('<h3>删除这个表情包？</h3><div class="muted" style="margin:8px 0 14px">只删除表情包，不影响聊天记录。</div><button class="btn danger full" id="soDelYes">删除</button><button class="btn full" id="soDelNo">取消</button>');$('#soDelNo').onclick=function(){sheetStickerOne(id);};$('#soDelYes').onclick=function(){DB.stickers=DB.stickers.filter(function(x){return x.id!==id;});save();sheetStickers(s.groupId);};};
+}
+function sheetStickerAdd(groupId){
+  sheetFull('<div class="row"><div class="grow"><h3>添加表情包</h3><div class="mini">'+esc(stickerGroupName(groupId||'default'))+'</div></div><button class="btn" id="sa_back" style="min-height:44px">返回</button></div><div class="muted" style="margin-bottom:12px;line-height:1.7">从本机传一张（会让你先裁成正方形），或者直接填一个图片网址。</div><button class="btn primary full" id="sa_up" style="min-height:44px">从本机上传图片</button><input id="sa_url" placeholder="图片网址（https:// 开头）" style="margin-top:16px"><button class="btn full" id="sa_ok" style="min-height:44px">用这个网址</button>');
+  const gid=groupId||'default';$('#sa_up').onclick=function(){pickCropped(1,420,function(url){stickerEnsure().push({id:'sticker_'+uid(),url:url,note:'',groupId:gid,order:DB.stickers.length});save();sheetStickers(gid);toast('已添加，记得写备注');},'png');};$('#sa_ok').onclick=function(){const u=($('#sa_url').value||'').trim();if(!u){toast('先填个网址');return;}stickerEnsure().push({id:'sticker_'+uid(),url:u,note:'',groupId:gid,order:DB.stickers.length});save();sheetStickers(gid);};$('#sa_back').onclick=function(){sheetStickers(gid);};
+}
+function favoriteCategory(f){
+  const t=String((f&&(f.category||f.type||f.kind))||'').toLowerCase();
+  if(t.indexOf('image')>=0||t.indexOf('图片')>=0) return '图片';
+  if(t.indexOf('link')>=0||t.indexOf('链接')>=0) return '链接';
+  if(t.indexOf('order')>=0||t.indexOf('订单')>=0||t.indexOf('takeout')>=0||t.indexOf('外卖')>=0) return '订单';
+  if(t.indexOf('location')>=0||t.indexOf('位置')>=0) return '位置';
+  if(t.indexOf('novel')>=0||t.indexOf('小说')>=0) return '小说';
+  return '消息';
+}
+function favoriteSourceDeleted(f){
+  if(!f||!f.chatId||!f.msgId) return false;
+  const ch=chat(f.chatId);return !ch||!(ch.msgs||[]).some(function(m){return m.id===f.msgId;});
+}
+function sheetFavs(filter){
   const fs=DB.favorites||[];
-  sheet('<h3>收藏</h3>'+(fs.length? fs.map(f=>'<div class="card" style="margin:8px 0;box-shadow:none;border:1px solid var(--line)"><div class="muted">'+esc(f.who)+' · '+shortTime(f.ts)+'</div><div style="margin-top:6px;white-space:pre-wrap">'+esc(f.text)+'</div><button class="btn full danger" data-fdel="'+f.id+'">取消收藏</button></div>').join('') : '<div class="muted">还没有收藏。聊天时点消息的收藏按钮就能收进来。</div>')
-    +'<button class="btn primary full" id="fvOk">完成</button>');
-  $$('#sheetBox [data-fdel]').forEach(el=>el.onclick=()=>{ DB.favorites=DB.favorites.filter(x=>x.id!==el.dataset.fdel); save(); sheetFavs(); });
-  $('#fvOk').onclick=()=>{ save(); closeSheet(); render(); };
-}/* ================= 设置 ================= */
+  const active=filter||'全部';
+  const cats=['全部','消息','图片','链接','订单','位置','小说'];
+  const list=fs.filter(function(f){return active==='全部'||favoriteCategory(f)===active;});
+  const draw=function(){
+    const rows=list.map(function(f){
+      const deleted=favoriteSourceDeleted(f);
+      return '<div class="card" style="box-shadow:none;border:1px solid var(--line);margin:8px 0">'
+        +'<div class="row"><div class="grow"><b>'+esc(favoriteCategory(f))+'</b>'
+        +'<div class="mini">'+esc(f.who||'我')+' · '+shortTime(f.ts)+(deleted?' · 原消息已删除':'')+'</div></div></div>'
+        +'<div class="muted" style="margin-top:7px;white-space:pre-wrap;line-height:1.7">'+esc(f.text||'')+'</div>'
+        +'<div class="row" style="margin-top:9px;gap:6px">'
+        +(f.chatId&&chat(f.chatId)?'<button class="btn grow" data-fjump="'+esc(f.id)+'" style="min-height:44px">回到原会话</button>':'')
+        +'<button class="btn danger" data-fdel="'+esc(f.id)+'" style="min-height:44px">取消收藏</button></div></div>';
+    }).join('');
+    sheetFull('<div class="row"><div class="grow"><h3>收藏</h3><div class="mini">'+list.length+' 条 · 原消息删除后仍保留收藏快照</div></div><button class="btn" id="fvOk" style="min-height:44px">关闭</button></div>'
+      +'<input id="fvSearch" placeholder="搜索收藏" style="margin:2px 0 9px">'
+      +'<div class="row" style="gap:6px;overflow:auto">'+cats.map(function(c){return '<button class="btn '+(c===active?'primary':'')+'" data-fcat="'+c+'" style="min-height:44px;flex:none">'+c+'</button>';}).join('')+'</div>'
+      +(rows||'<div class="empty">还没有收藏。聊天时点消息的收藏按钮就能收进来。</div>'));
+    $$('#sheetBox [data-fcat]').forEach(function(el){el.onclick=function(){sheetFavs(el.dataset.fcat);};});
+    $('#fvOk').onclick=function(){save();closeSheet();render();};
+    const fsSearch=$('#fvSearch');if(fsSearch)fsSearch.oninput=function(){const q=String(fsSearch.value||'').trim().toLowerCase();$$('#sheetBox .card').forEach(function(card){card.style.display=!q||String(card.innerText||'').toLowerCase().indexOf(q)>=0?'':'none';});};
+    $$('#sheetBox [data-fdel]').forEach(function(el){el.onclick=function(){DB.favorites=DB.favorites.filter(function(x){return x.id!==el.dataset.fdel;});save();sheetFavs(active);};});
+    $$('#sheetBox [data-fjump]').forEach(function(el){el.onclick=function(){const f=fs.find(function(x){return x.id===el.dataset.fjump;});if(f&&chat(f.chatId)){closeSheet();go('chatroom',f.chatId);}};});
+  };
+  draw();
+}
 const NP_READER_NAMING_RULE=`【读者网名规则】
 - 生成读者群发言、段评、章评、书荒评论或其它读者内容时，你可以按当前作品和语境自行创造真实网友网名，不要局限于系统示例或现有名单。
 - 网名要像真实平台用户：短、有生活气、有梗、有情绪，通常 2 到 14 个汉字；可以带数字或字母，但不要用“读者A”“用户123”这类模板名。
@@ -9134,7 +9276,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-07 · 3.86 · 第 97 轮';
+const PROGRESS_UPDATED='2026-11-07 · 3.87 · 第 98 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -9142,6 +9284,7 @@ const PROGRESS_GROUPS=[
     ['查岗','精确绑定会话/角色/人设；角色手机含微信、电话、相册、备忘录、地图、账单、微博、音乐、日历、搜索和设置；此刻动态为可点击 emoji 平面图，含 30–80 字内心与多来源情绪；支持隐身和随机被发现。'],
     ['小说世界书库','独立小说世界书模板，与全局世界书隔离；生成 3–8 本小说时选择并自动绑定；单本可复制自定义、换绑，删除模板会自动保留书籍副本。'],
     ['微信与联系人','多角色、多会话、会话记忆隔离、迁移消息、备注、朋友圈、群聊、红包/转账/文件/定位/语音等消息类型。'],
+    ['微信我的','用户人设库、钱包账单、银行卡卡包与排序、资产、表情分组、收藏分类搜索与原会话跳转。'],
     ['微博','精确/并集绑定、来源记录、发博评论私信热搜；绑定角色会自动点赞、评论和随机转发。'],
     ['小说主干','书籍/章节生成与自动发布、章节后台记忆、段评/章评、书荒广场、多读者群、收益、奖项、成就、刷新互动和消息红点。'],
     ['小说多读者群','永久总群、每书独立群、自定义群；成员、消息、未读和自动刷新按群隔离；支持拉人、解散、清空和删除；总群可跨作品讨论；发布与新增章节会一次加入 20 位以上读者。'],
@@ -9512,6 +9655,8 @@ function imageBranchRestore(ch,m,branch,versionId){
   const rec=imageMessageRecord(m);
   if(rec){ rec.activeImageVersionId=version.id; rec.galleryId=version.galleryId||rec.galleryId; rec.imageVersions=jsonSafeCopy(branch.versions); }
   patchChatMessage(m,imageVersionPatch(version,branch));
+  const branchSnapshot=patchMessageInTurnBranches(ch,m.id,imageVersionPatch(version,branch));
+  const store=coreStore(); if(store&&store.commands) store.commands.patchChat(ch.id,{turnBranches:branchSnapshot},{persist:false}); else ch.turnBranches=branchSnapshot;
   saveNow(); closeSheet(); render(); toast('已恢复到这个图片版本'); return true;
 }
 function imageBranchDeleteVersion(ch,m,branch,versionId){
@@ -9952,7 +10097,7 @@ async function buildLightBackupPackage(){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:97,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:98,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -10522,7 +10667,14 @@ async function parseZipBackup(file){
   const checksums=JSON.parse(decode('checksums.json'));
   const snapshotChecksum=await backupChecksumText(JSON.stringify(data),checksums.algorithm);
   if(snapshotChecksum.supported&&String(snapshotChecksum.value).toUpperCase()!==String(checksums.data||'').toUpperCase()) throw new Error('ZIP 数据校验失败');
-  return {format:'BS小手机备份',formatVersion:1,manifest:manifest,checksums:checksums,data:data};
+  const fileChecks=checksums.files||{};
+  const checksumFailures=[];
+  for(const name of Object.keys(fileChecks)){
+    if(!entries[name]){checksumFailures.push(name);continue;}
+    const actual=await backupChecksumBytes(entries[name]);
+    if(String(actual.value).toUpperCase()!==String(fileChecks[name]).toUpperCase()) checksumFailures.push(name);
+  }
+  return {format:'BS小手机备份',formatVersion:1,manifest:manifest,checksums:checksums,data:data,checksumFailures:checksumFailures};
 }let pendingBackupImport=null;
 function backupDataCounts(data){
   data=data||{};
@@ -10571,7 +10723,7 @@ async function buildBackupPackage(snapshot){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:97,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:98,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -10650,7 +10802,7 @@ async function buildZipBackupPackage(){
   const manifest={
     schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
     appVersion:backupAppVersion(),
-    buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:97,
+    buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:98,
     exportedAt:new Date().toISOString(),
     platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
     includesApiKey:false,
@@ -10820,13 +10972,14 @@ function normalizeBackupPackage(parsed){
     if(Number(parsed.formatVersion||0)!==1) throw new Error('暂不支持这份备份的格式版本');
     if(!parsed.manifest||!parsed.checksums) throw new Error('备份清单不完整');
     validateImportedSnapshot(parsed.data);
-    return {kind:'package',data:sanitizeImportedTree(parsed.data),manifest:parsed.manifest,checksums:parsed.checksums};
+    return {kind:'package',data:sanitizeImportedTree(parsed.data),manifest:parsed.manifest,checksums:parsed.checksums,checksumFailures:Array.isArray(parsed.checksumFailures)?parsed.checksumFailures:[]};
   }
   const data=sanitizeImportedTree(parsed);
   validateImportedSnapshot(data);
   return {kind:'legacy',data:data,manifest:{schemaVersion:Number(data.schemaVersion)||3,appVersion:'3.79',buildNumber:Number(data.ver)||0,exportedAt:'',platform:'旧版备份',includesApiKey:!!(data.api&&data.api.key),counts:backupDataCounts(data)},checksums:null};
 }
 async function verifyBackupPackage(pkg){
+  if(Array.isArray(pkg.checksumFailures)&&pkg.checksumFailures.length) return {ok:false,status:'mismatch',failures:pkg.checksumFailures.slice()};
   if(pkg.kind!=='package') return {ok:true,status:'legacy'};
   const algorithm=pkg.checksums.algorithm||pkg.manifest.checksumAlgorithm||'SHA-256';
   const actual=await backupChecksumText(JSON.stringify(pkg.data),algorithm);
@@ -15684,8 +15837,9 @@ function bindScreenInner(){
     if(k==='persona') sheetPersona();
     else if(k==='wallet') sheetWallet();
     else if(k==='assets') sheetAssets();
+    else if(k==='cards') sheetCards();
     else if(k==='stickers') sheetStickers();
-    else if(k==='favs') sheetFavs();
+    else if(k==='favs'||k==='star') sheetFavs();
     else go(k);
   });
   const meEdit=$('#meEdit'); if(meEdit) meEdit.onclick=sheetMe;
@@ -16758,8 +16912,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-07 · 3.86 · 第 97 轮';
-const BUILD_CODE=97;
+const BUILD='2026-11-07 · 3.87 · 第 98 轮';
+const BUILD_CODE=98;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -20949,8 +21103,8 @@ function takeoutActivePersona(){
 }
 function walletForPersona(personaId){
   const p=(DB.me.personas||[]).find(function(x){ return x.id===personaId; });
-  if(p){ p.wallet=p.wallet||{balance:0,cards:[]}; p.wallet.cards=p.wallet.cards||[]; return p.wallet; }
-  DB.me.wallet=DB.me.wallet||{balance:0,cards:[]}; DB.me.wallet.cards=DB.me.wallet.cards||[]; return DB.me.wallet;
+  if(p){ p.wallet=p.wallet||{balance:0,cards:[]}; p.wallet.cards=p.wallet.cards||[]; return walletEnsure(p.wallet); }
+  DB.me.wallet=DB.me.wallet||{balance:0,cards:[]}; DB.me.wallet.cards=DB.me.wallet.cards||[]; return walletEnsure(DB.me.wallet);
 }
 function takeoutActiveChat(){
   const t=DB.takeout||{};
@@ -21137,7 +21291,15 @@ function takeoutSetSelectedAddress(owner,ownerId,addressId){
   save();
 }
 function takeoutPaymentFor(personaId){
-  return DB.takeout.payments[personaId]||{type:'wallet',label:'小手机钱包'};
+  let payment=DB.takeout.payments[personaId]||{type:'wallet',label:'小手机钱包'};
+  if(payment.type==='card'){
+    const w=walletForPersona(personaId);
+    if(!(w.cards||[]).some(function(card){return card.id===payment.cardId;})){
+      payment={type:'wallet',label:'小手机钱包'};
+      DB.takeout.payments[personaId]=payment;
+    }
+  }
+  return payment;
 }
 function takeoutPaymentLabel(personaId){
   const p=takeoutPaymentFor(personaId);
@@ -21902,6 +22064,26 @@ if(!window.BSBootAssertions.coreStore||!window.BSBootAssertions.readonlyStore){
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

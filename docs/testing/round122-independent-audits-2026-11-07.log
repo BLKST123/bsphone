@@ -1,0 +1,11 @@
+Round122 independent audits
+checkedAt: 2026-11-07T10:14:10.026Z
+Release package audit verifies APK/assets/manifest/checksums and published APK hash.
+
+01  PASS  _independent_hidden_prompt_audit_2026-11-07.cjs
+02  PASS  _independent_image_turn_branch_sync_2026-11-07.cjs
+03  PASS  _independent_zip_asset_checksum_audit_2026-11-07.cjs
+04  PASS  _independent_card_unbind_wallet_adjust_2026-11-07.cjs
+05  PASS  _independent_release_zip_audit_2026-11-07.cjs — 17 ZIP entries / 15 checksums
+
+SUMMARY passed=5 failed=0
