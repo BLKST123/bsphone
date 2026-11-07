@@ -1,9 +1,9 @@
 {
   "ok": true,
-  "generatedAt": "2026-11-07T04:56:41.634Z",
+  "generatedAt": "2026-11-07T07:42:44.104Z",
   "artifactEvidence": {
-    "recordedAt": "2026-11-07T04:56:41.552Z",
-    "sourceCommit": "2e6a109f3948ed497b37b38852b6da900760c61a",
+    "recordedAt": "2026-11-07T07:42:44.009Z",
+    "sourceCommit": "032b02e50c67b3e0629cc88527b8f767b33d231a",
     "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
     "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
     "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
@@ -264,8 +264,8 @@
     },
     {
       "file": "round115-phone-release-final-logcat-2026-11-05.txt",
-      "sha256": "9D6F3A2FE6C8309E59F865C3C6FB95C9D3A0D72394A444327094FA125BF5CA61",
-      "bytes": 119708
+      "sha256": "304C0753E26734168CA11624B75EC1662F861A9B24930F7B819CA868D8139C4A",
+      "bytes": 106303
     },
     {
       "file": "round120-debug-cdp-repro-2026-11-07.txt",
@@ -296,8 +296,8 @@
     },
     {
       "file": "round115-release-final-home.png",
-      "sha256": "2A23340D34554281D3B5511D9563DA4020558A335B5ECFFD61CED2D59BC1C66A",
-      "bytes": 2561352
+      "sha256": "385C3B6811555A527D20D340145D4FB753AF8BB569506901E454DA6C4AC03CA2",
+      "bytes": 2560933
     }
   ],
   "errors": []

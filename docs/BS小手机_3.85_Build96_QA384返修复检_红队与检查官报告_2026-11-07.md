@@ -7,6 +7,7 @@
 - 产品交接包：`C:\Users\lenovo\Documents\ChatGPT\各种的\BS小手机_主队完整交接包_2026-11-05.zip`
 - 代码目录：`C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages`
 - 业务源码提交：`2e6a109f3948ed497b37b38852b6da900760c61a`
+- Final verification HEAD: `032b02e50c67b3e0629cc88527b8f767b33d231a` (report/evidence commit; index.html unchanged)
 - 版本：3.85 / Build 96
 - Service Worker：`bsphone-v96-20261107-r1`
 - 真机：OPPO PMK110 / Android 16 / 1272×2772
@@ -70,7 +71,7 @@
 | 6. 全量回归 | 运行 R97 亮/暗、R108、R109、数据管理、分组语义、批次 3 红队修复 | 全部 PASS；日志：`round120-final-regression-suite-2026-11-07.log` |
 | 7. 真机 Debug/CDP | 在真机跑 R117/R118/R119/R120/R114/R101/R112/R113 及分支切换，实际长按 520ms，覆盖 450ms 阈值 | 9 个真机脚本 PASS；截图：`round120-phone-forget-group-scope.png` |
 | 8. 恢复 Release | 使用 `adb install -r` 覆盖安装回 Release 3.85 / Build 96，未执行 `pm clear` | 设备内 APK 回拉哈希与 Release 候选一致 |
-| 9. Release 冷启动 | 检查版本、数据保留、冷启动、WebView 根节点、FATAL/ANR | 9/9 PASS；证据：`round115-phone-release-final-2026-11-05.json` |
+| 9. Release 冷启动 | 报告入库后再次运行 Release smoke，检查版本、数据保留、冷启动、WebView 根节点、FATAL/ANR | 9/9 PASS；最终验证 HEAD `032b02e50c67b3e0629cc88527b8f767b33d231a`；证据：`round115-phone-release-final-2026-11-05.json` |
 | 10. 证据归档 | 生成并校验 manifest、截图、日志、哈希绑定 | `round120-evidence-manifest-2026-11-07.json` 为 `ok=true`，38 个测试 JSON、6 个日志、5 张截图 |
 
 本轮的代码改动只在消息忘记的作用域与匹配逻辑，没有改动页面布局、图标尺寸、点击区域、Store 隔离接口或其它 App 的业务代码。
@@ -276,7 +277,8 @@ texts=["群里说话"]
 - Release 冷启动：`Status: ok`；
 - WebView 根节点存在；
 - App 进程无 FATAL EXCEPTION / ANR；
-- Release smoke：9/9 PASS。
+- Release smoke：9/9 PASS（报告入库后复跑）。
+- Final verification HEAD: `032b02e50c67b3e0629cc88527b8f767b33d231a`; business source HEAD remains `2e6a109f3948ed497b37b38852b6da900760c61a`.
 
 Debug/CDP 复现说明：
 
@@ -290,7 +292,8 @@ Debug/CDP 复现说明：
 - 测试 JSON：38 个
 - 日志：6 个
 - 截图：5 张
-- `sourceCommit=2e6a109f3948ed497b37b38852b6da900760c61a`
+- businessSourceCommit=`2e6a109f3948ed497b37b38852b6da900760c61a`
+- verificationSourceCommit=`032b02e50c67b3e0629cc88527b8f767b33d231a`
 - `indexSha256=5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6`
 - `debugApkSha256=9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375`
 - `releaseApkSha256=1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525`
@@ -354,3 +357,4 @@ Release 恢复与数据保留：PASS
 
 - `C:\Users\lenovo\Documents\ChatGPT\各种的\BS小手机_3.85_Build96_QA384返修复检_红队与检查官报告_2026-11-07.md`
 - `C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\docs\BS小手机_3.85_Build96_QA384返修复检_红队与检查官报告_2026-11-07.md`
+
