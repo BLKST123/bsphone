@@ -1,10 +1,10 @@
 {
-    "version":  "3.84",
-    "versionCode":  95,
-    "round":  95,
-    "releasedAt":  "2026-11-06",
-    "pageUrl":  "https://blkst123.github.io/bsphone/?v=95-r1",
+    "version":  "3.85",
+    "versionCode":  96,
+    "round":  96,
+    "releasedAt":  "2026-11-07",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=96-r1",
     "apkUrl":  "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-    "cacheKey":  "bsphone-v95-20261106-r1",
-    "notes":  "3.84 Build95：收紧忘记记忆作用域与短文本精确匹配，保留无关角色/会话记忆；修正混合组卡片相对位置；继续保留QA382分支、删除与Prompt修复。"
+    "cacheKey":  "bsphone-v96-20261107-r1",
+    "notes":  "3.85 Build96：群聊忘记严格按消息发送者 m.from 清理记忆，保留同群其它角色；混合卡片位置与短文本精确匹配修复继续保留。"
 }

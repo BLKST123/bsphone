@@ -6792,21 +6792,53 @@ function forbiddenTextMatches(value,msgId,text){
   const prefix=raw.slice(0,idx);
   return raw.slice(idx)===target&&/(?:摘要|快照|记忆|记得|事实|设定)：$/.test(prefix);
 }
+function forgottenChatWideTextMatches(value,msgId,text,ch,senderId){
+  if(!ch||ch.type!=='group') return forbiddenTextMatches(value,msgId,text);
+  const raw=normalizedMemoryText(value);
+  if(!raw) return false;
+  if(msgId&&raw===String(msgId)) return true;
+  const target=normalizedMemoryText(text);
+  if(!target) return false;
+  if(raw===target) return true;
+  const at=raw.indexOf(target);
+  if(at<0||raw.slice(at)!==target) return false;
+  const prefix=raw.slice(0,at);
+  if(!/(?:摘要|快照|记忆|记得|事实|设定)：$/.test(prefix)) return false;
+  const sender=ct(senderId)||{};
+  const senderNames=[sender.name,sender.displayName].filter(Boolean).map(String);
+  if(senderNames.some(function(name){ return prefix.indexOf(name)>=0; })) return true;
+  const otherNames=(ch.memberIds||[]).filter(function(id){ return String(id)!==String(senderId); }).map(function(id){ return ct(id); }).filter(Boolean).map(function(item){ return item.name||item.displayName; }).filter(Boolean).map(String);
+  if(otherNames.some(function(name){ return prefix.indexOf(name)>=0; })) return false;
+  return false;
+}
 function forgetCharMessage(ch,m){
   const msgId=m.id,text=String(labelOf(m)||'').trim();
   const store=coreStore();
   if(store) store.commands.deleteMessage(ch.id,msgId,{persist:false});
   else ch.msgs=(ch.msgs||[]).filter(function(item){ return item.id!==msgId; });
-  const currentMemberIds=new Set((ch.memberIds||[]).map(String));
+  const senderId=String(m.from||'').trim();
+  const senderScopeIds=new Set(senderId?[senderId]:[]);
   const currentPersona=ch.personaId||null;
+  const chatWideTextMatches=function(value){ return forgottenChatWideTextMatches(value,msgId,text,ch,senderId); };
+  const senderScoped=function(item){
+    if(!item) return false;
+    if(senderId&&(String(item.contactId||'')===senderId||String(item.charId||'')===senderId)) return true;
+    return false;
+  };
   const inCurrentChatScope=function(item){
     if(!item) return false;
     if(Array.isArray(item.sourceMessageIds)&&item.sourceMessageIds.indexOf(msgId)>=0) return true;
-    if(item.sessionId) return item.sessionId===ch.id;
-    if(item.chatId) return item.chatId===ch.id;
-    if(item.contactId) return currentMemberIds.has(String(item.contactId));
-    if(item.charId) return currentMemberIds.has(String(item.charId));
-    return false;
+    if(item.sessionId){
+      if(item.sessionId!==ch.id) return false;
+      if(item.contactId||item.charId) return senderScoped(item);
+      return ch.type!=='group';
+    }
+    if(item.chatId){
+      if(item.chatId!==ch.id) return false;
+      if(item.contactId||item.charId) return senderScoped(item);
+      return ch.type!=='group';
+    }
+    return senderScoped(item);
   };
   const inCurrentContactScope=function(memory){
     if(!memory) return false;
@@ -6824,7 +6856,7 @@ function forgetCharMessage(ch,m){
     }
   });
   (DB.contacts||[]).forEach(function(contact){
-    if(!contact||!currentMemberIds.has(String(contact.id))||!Array.isArray(contact.memories)) return;
+    if(!contact||!senderScopeIds.has(String(contact.id))||!Array.isArray(contact.memories)) return;
     contact.memories=contact.memories.filter(function(memory){ return !inCurrentContactScope(memory)||!forbiddenTextMatches(memory&&memory.text,msgId,text); });
   });
   (DB.memoryEntries||[]).forEach(function(entry){
@@ -6839,7 +6871,7 @@ function forgetCharMessage(ch,m){
     state.branches.forEach(function(branch){
       if(!branch) return;
       if(Array.isArray(branch.messages)) branch.messages=branch.messages.filter(function(item){ return item.id!==msgId; });
-      if(Array.isArray(branch.legacyMemItems)) branch.legacyMemItems=branch.legacyMemItems.filter(function(item){ return !forbiddenTextMatches(item,msgId,text); });
+      if(Array.isArray(branch.legacyMemItems)) branch.legacyMemItems=branch.legacyMemItems.filter(function(item){ return !chatWideTextMatches(item); });
       if(Array.isArray(branch.memoryItemIds)) branch.memoryItemIds=branch.memoryItemIds.filter(function(id){ return !deletedMemoryIds.has(String(id)); });
     });
   });
@@ -6847,11 +6879,11 @@ function forgetCharMessage(ch,m){
     if(cursor&&cursor.sessionId===ch.id&&cursor.lastSummarizedMessageId===msgId){ const last=(ch.msgs||[]).slice().reverse().find(function(item){ return item&&item.status!=='deleted'; }); cursor.lastSummarizedMessageId=last&&last.id||null; }
   });
   const mem=ch.mem||{ts:Date.now(),items:[]};
-  mem.items=(Array.isArray(mem.items)?mem.items:[]).filter(function(item){ return !forbiddenTextMatches(item,msgId,text); });
-  const snapshot=Array.isArray(ch.baseMemorySnapshot)?ch.baseMemorySnapshot.filter(function(item){ return !forbiddenTextMatches(item,msgId,text); }):[];
+  mem.items=(Array.isArray(mem.items)?mem.items:[]).filter(function(item){ return !chatWideTextMatches(item); });
+  const snapshot=Array.isArray(ch.baseMemorySnapshot)?ch.baseMemorySnapshot.filter(function(item){ return !chatWideTextMatches(item); }):[];
   if(store) store.commands.patchChat(ch.id,{turnBranches:branches,mem:{ts:Date.now(),items:mem.items},baseMemorySnapshot:snapshot},{persist:false});
   else { ch.turnBranches=branches; ch.mem={ts:Date.now(),items:mem.items}; ch.baseMemorySnapshot=snapshot; }
-  window.__lastForgetCleanup={msgId,text,deletedMemoryIds:Array.from(deletedMemoryIds),scopeMemberIds:Array.from(currentMemberIds),memoryEntries:(DB.memoryEntries||[]).length};
+  window.__lastForgetCleanup={msgId,text,senderId,deletedMemoryIds:Array.from(deletedMemoryIds),scopeMemberIds:Array.from(senderScopeIds),memoryEntries:(DB.memoryEntries||[]).length};
   saveNow(); closeSheet(); render(); toast('已忘记这条');
 }
 
@@ -9002,7 +9034,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-06 · 3.84 · 第 95 轮';
+const PROGRESS_UPDATED='2026-11-07 · 3.85 · 第 96 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -9649,7 +9681,7 @@ async function buildLightBackupPackage(){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:95,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:96,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -10248,7 +10280,7 @@ async function buildBackupPackage(snapshot){
     manifest:{
       schemaVersion:Number(data.schemaVersion)||SCHEMA_VERSION,
       appVersion:backupAppVersion(),
-      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:95,
+      buildNumber:typeof BUILD_CODE==='number'?BUILD_CODE:96,
       exportedAt:new Date().toISOString(),
       platform:(navigator.platform||'')+' · '+(location.protocol==='file:'?'APK':'Web'),
       includesApiKey:false,
@@ -16250,8 +16282,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-06 · 3.84 · 第 95 轮';
-const BUILD_CODE=95;
+const BUILD='2026-11-07 · 3.85 · 第 96 轮';
+const BUILD_CODE=96;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
