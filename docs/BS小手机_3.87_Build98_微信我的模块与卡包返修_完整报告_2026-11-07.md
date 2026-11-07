@@ -260,13 +260,13 @@
 
 ## 6. 截图证据
 
-![微信钱包](testing/round122-phone-wechat-mine.png)
+![微信钱包](assets/round122/round122-phone-wechat-mine.png)
 
-![用户人设库](testing/round122-phone-persona.png)
+![用户人设库](assets/round122/round122-phone-persona.png)
 
-![银行卡卡包与解绑后状态](testing/round122-phone-cards.png)
+![银行卡卡包与解绑后状态](assets/round122/round122-phone-cards.png)
 
-![Release 冷启动](testing/round122-release-final-home.png)
+![Release 冷启动](assets/round122/round122-release-final-home.png)
 
 截图对应文件：
 
@@ -395,6 +395,18 @@ Release 候选目录：
 - cacheKey：`bsphone-v98-20261107-r1`
 - 缺失项：0
 - 失败项：0
+
+### 9.1 线上可读证据
+
+- [微信“我的”桌面证据](assets/round122/evidence/round122-wechat-mine-suite.json)
+- [微信“我的”真机证据](assets/round122/evidence/round122-phone-wechat-mine-suite.json)
+- [Release smoke 证据](assets/round122/evidence/round122-phone-release-final-2026-11-07.json)
+- [Release ZIP 包审计](assets/round122/evidence/round122-release-package-audit-2026-11-07.json)
+- [银行卡解绑与余额调整独立审计](assets/round122/evidence/independent-card-unbind-wallet-adjust-2026-11-07.json)
+- [线上发布核验](assets/round122/evidence/round122-online-publish-2026-11-07.json)
+- [证据总清单](assets/round122/evidence/round122-evidence-manifest-2026-11-07.json)
+
+本地完整证据仍保留在 `docs/testing/`；Pages 发布时通过 `_config.yml` 排除该大目录，避免部署超时。
 
 ## 10. 未完成边界
 

@@ -1,0 +1,7 @@
+﻿title: BS小手机
+exclude:
+  - build87
+  - build88
+  - build89
+  - docs/testing
+  - "BS小手机_3.87_Build98_release.zip"

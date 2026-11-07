@@ -1,0 +1,76 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T10:24:23.246Z",
+  "pagesUrl": "https://blkst123.github.io/bsphone/",
+  "version": {
+    "version": "3.87",
+    "versionCode": 98,
+    "round": 98,
+    "releasedAt": "2026-11-07",
+    "pageUrl": "https://blkst123.github.io/bsphone/?v=98-r1",
+    "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+    "cacheKey": "bsphone-v98-20261107-r1",
+    "notes": "3.87 Build98：微信我的模块完整交付：用户人设库、钱包账单、银行卡卡包、资产、表情分组、收藏分类与恢复；群聊备注名图片/隐藏内容/ZIP/发布继续保留。"
+  },
+  "http": {
+    "version": 200,
+    "index": 200,
+    "sw": 200,
+    "apk": 200
+  },
+  "hashes": {
+    "localIndexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+    "onlineIndexSha256": "9E604C05B350B547843554E322AEC119CF80F1AD0B521585E5C2559BFC449EFA",
+    "localIndexNormalizedSha256": "92515556796919CC8A346DA9DAA2E55FF3DD3A369FB688F402A29C1CC3AA1F0D",
+    "onlineIndexNormalizedSha256": "92515556796919CC8A346DA9DAA2E55FF3DD3A369FB688F402A29C1CC3AA1F0D",
+    "localIndexBytes": 1847240,
+    "onlineIndexBytes": 1825263,
+    "localApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+    "onlineApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+    "onlineApkBytes": 549846
+  },
+  "pagesBuild": {
+    "url": "https://api.github.com/repos/BLKST123/bsphone/pages/builds/1348685543",
+    "status": "built",
+    "error": {
+      "message": null
+    },
+    "pusher": {
+      "login": "BLKST123",
+      "id": 333177471,
+      "node_id": "U_kgDOE9vifw",
+      "avatar_url": "https://avatars.githubusercontent.com/u/333177471?v=4",
+      "gravatar_id": "",
+      "url": "https://api.github.com/users/BLKST123",
+      "html_url": "https://github.com/BLKST123",
+      "followers_url": "https://api.github.com/users/BLKST123/followers",
+      "following_url": "https://api.github.com/users/BLKST123/following{/other_user}",
+      "gists_url": "https://api.github.com/users/BLKST123/gists{/gist_id}",
+      "starred_url": "https://api.github.com/users/BLKST123/starred{/owner}{/repo}",
+      "subscriptions_url": "https://api.github.com/users/BLKST123/subscriptions",
+      "organizations_url": "https://api.github.com/users/BLKST123/orgs",
+      "repos_url": "https://api.github.com/users/BLKST123/repos",
+      "events_url": "https://api.github.com/users/BLKST123/events{/privacy}",
+      "received_events_url": "https://api.github.com/users/BLKST123/received_events",
+      "type": "User",
+      "user_view_type": "public",
+      "site_admin": false
+    },
+    "commit": "8f8a249f83494815311d8eb2cda34e6e6862bec2",
+    "duration": 34841,
+    "created_at": "2026-11-07T10:01:59Z",
+    "updated_at": "2026-11-07T10:02:33Z"
+  },
+  "checks": {
+    "versionJsonHttp200": true,
+    "indexHttp200": true,
+    "swHttp200": true,
+    "apkHttp200": true,
+    "versionMatches": true,
+    "cacheKeyMatches": true,
+    "swCacheKeyMatches": true,
+    "normalizedIndexMatchesLocal": true,
+    "onlineApkMatchesLocal": true,
+    "pagesBuildBuilt": true
+  }
+}

@@ -1,6 +1,6 @@
 {
   "ok": true,
-  "generatedAt": "2026-11-07T10:27:33.194Z",
+  "generatedAt": "2026-11-07T10:41:16.314Z",
   "artifactEvidence": {
     "sourceCommit": "8f8a249f83494815311d8eb2cda34e6e6862bec2",
     "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
@@ -13,8 +13,8 @@
   },
   "report": {
     "file": "BS小手机_3.87_Build98_微信我的模块与卡包返修_完整报告_2026-11-07.md",
-    "bytes": 15285,
-    "sha256": "236BEC4693634AB240657287E0CDFE3EC5193D9DBBB67A02674949633348A9E7"
+    "bytes": 16167,
+    "sha256": "901D5FC9EB5E90FE5E5456E8BAF287CB763EB2D09AD610959AD1B8F4CB5B0681"
   },
   "tests": [
     {

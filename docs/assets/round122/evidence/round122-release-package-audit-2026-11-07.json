@@ -1,0 +1,47 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T10:11:24.020Z",
+  "zip": {
+    "path": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\BS小手机_3.87_Build98_release.zip",
+    "sha256": "F7AF762E2F7AB2CDA68174E7669319A94D4CF8F09C1C4256380F3176ECFF3D94",
+    "bytes": 1064236
+  },
+  "entries": 17,
+  "checksumsChecked": 15,
+  "mismatches": [],
+  "checks": {
+    "zipExists": true,
+    "manifestPresent": true,
+    "checksumsPresent": true,
+    "assetsIncluded": true,
+    "apkIncluded": true,
+    "allChecksumsMatch": true,
+    "manifestApkMatches": true,
+    "publishedApkMatches": true,
+    "versionMatches": true,
+    "cacheKeyMatches": true
+  },
+  "manifest": {
+    "format": "BS小手机发布归档",
+    "archiveVersion": 1,
+    "version": "3.87",
+    "versionCode": 98,
+    "buildNumber": 98,
+    "releasedAt": "2026-11-07",
+    "apk": "BS小手机_3.87_Build98.apk",
+    "apkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+    "includesApiKey": false,
+    "scope": "APK + web assets + data archive format",
+    "webAssets": "assets/public"
+  },
+  "version": {
+    "version": "3.87",
+    "versionCode": 98,
+    "round": 98,
+    "releasedAt": "2026-11-07",
+    "pageUrl": "https://blkst123.github.io/bsphone/?v=98-r1",
+    "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+    "cacheKey": "bsphone-v98-20261107-r1",
+    "notes": "3.87 Build98：微信我的模块完整交付：用户人设库、钱包账单、银行卡卡包、资产、表情分组、收藏分类与恢复；群聊备注名图片/隐藏内容/ZIP/发布继续保留。"
+  }
+}
