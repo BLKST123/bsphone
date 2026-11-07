@@ -1,14 +1,14 @@
 {
   "ok": true,
-  "checkedAt": "2026-11-06T08:06:37.816Z",
+  "checkedAt": "2026-11-07T04:44:51.540Z",
   "evidence": {
-    "checkedAt": "2026-11-06T08:06:37.817Z",
-    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
-    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
-    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
-    "version": "3.84",
-    "versionCode": 95,
-    "cacheKey": "bsphone-v95-20261106-r1"
+    "checkedAt": "2026-11-07T04:44:51.541Z",
+    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
+    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
+    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
+    "version": "3.85",
+    "versionCode": 96,
+    "cacheKey": "bsphone-v96-20261107-r1"
   },
   "checks": {
     "user_menu_required_order": "PASS",
@@ -129,10 +129,10 @@
   ],
   "edited": {
     "ids": [
-      "message_mw4oxquje5vv",
-      "message_mw4oxquj5hgu",
-      "message_mw4oxqujjipe",
-      "mw4oxr6w7srp"
+      "message_mw5x647h4lpu",
+      "message_mw5x647hb50n",
+      "message_mw5x647hfqbf",
+      "mw5x64i1tlwz"
     ],
     "texts": [
       "新甲",
@@ -149,10 +149,10 @@
       "t1"
     ],
     "groups": [
-      "group_mw4oxqujqww2"
+      "group_mw5x647hdwve"
     ],
-    "active": "turnbranch_mw4oxquj2odu",
-    "freshId": "turnbranch_mw4oxquj2odu",
+    "active": "turnbranch_mw5x647hb594",
+    "freshId": "turnbranch_mw5x647hb594",
     "originalTexts": [
       "第一句",
       "第二句",
@@ -214,10 +214,10 @@
       "bu1",
       "bu2"
     ],
-    "active": "turnbranch_mw4oxrse0x0a",
+    "active": "turnbranch_mw5x654dba0s",
     "branches": [
       {
-        "id": "turnbranch_mw4oxrsech1q",
+        "id": "turnbranch_mw5x654dvosz",
         "label": "原始版本",
         "texts": [
           "分支甲",
@@ -228,7 +228,7 @@
         ]
       },
       {
-        "id": "turnbranch_mw4oxrse0x0a",
+        "id": "turnbranch_mw5x654dba0s",
         "label": "新分支 1",
         "texts": [
           "分支甲",
@@ -246,8 +246,8 @@
       "分支后续",
       "分支后续回复"
     ],
-    "active": "turnbranch_mw4oxrsech1q",
-    "originalId": "turnbranch_mw4oxrsech1q"
+    "active": "turnbranch_mw5x654dvosz",
+    "originalId": "turnbranch_mw5x654dvosz"
   },
   "forgetFirst": "忘记这条？\n会从当前聊天流、当前上下文和角色对这段对话的记忆中移除。订单、相册、收藏等实体不会自动删除；用量统计保留，但内容不再用于对话。\n要被忘记的角色话\n继续取消",
   "forgetSecond": "再次确认忘记\n确认后，这条角色消息不会出现在当前聊天或后续上下文里。\n确认忘记取消",
@@ -270,13 +270,13 @@
   "errors": [],
   "consoleErrors": [],
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T08:16:29.348Z",
-    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
-    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
-    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
-    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
-    "version": "3.84",
-    "versionCode": 95,
-    "cacheKey": "bsphone-v95-20261106-r1"
+    "recordedAt": "2026-11-07T04:56:41.552Z",
+    "sourceCommit": "2e6a109f3948ed497b37b38852b6da900760c61a",
+    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
+    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
+    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
+    "version": "3.85",
+    "versionCode": 96,
+    "cacheKey": "bsphone-v96-20261107-r1"
   }
 }

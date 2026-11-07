@@ -1,0 +1,1073 @@
+﻿===== _round97_full_page_ui_regression.cjs =====
+[R97] 页面渲染 -> 桌面 33 · 窄屏 33 · 异常 0
+[R97] 详情页返回按钮 -> chatroom:true · novelbook:true · novelchapter:true · settings:true · dateroom:true · outroom:true · progress:true
+[R97] 返回链路 -> 6/6
+[R97] 全部断言通过
+{
+  "ok": true,
+  "checks": {
+    "desktopPages": 33,
+    "narrowPages": 33,
+    "noHorizontalOverflow": "PASS",
+    "headersAtScreenEdges": "PASS",
+    "noClippedButtons": "PASS",
+    "detailBackButtons": "PASS",
+    "returnNavigationWorks": "PASS",
+    "noRuntimeErrors": "PASS",
+    "darkMode": "NOT_RUN"
+  },
+  "desktop": [
+    {
+      "name": "home",
+      "dark": false,
+      "route": "home",
+      "textLength": 64,
+      "overflow": 0,
+      "back": false,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "wechat",
+      "dark": false,
+      "route": "wechat",
+      "textLength": 19,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "chatroom",
+      "dark": false,
+      "route": "chatroom",
+      "textLength": 15,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactedit",
+      "dark": false,
+      "route": "contactedit",
+      "textLength": 157,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactview",
+      "dark": false,
+      "route": "contactview",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novel",
+      "dark": false,
+      "route": "novel",
+      "textLength": 184,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelbook",
+      "dark": false,
+      "route": "novelbook",
+      "textLength": 122,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelchapter",
+      "dark": false,
+      "route": "novelchapter",
+      "textLength": 83,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "read",
+      "dark": false,
+      "route": "read",
+      "textLength": 108,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "diary",
+      "dark": false,
+      "route": "diary",
+      "textLength": 73,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "forum",
+      "dark": false,
+      "route": "forum",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "gallery",
+      "dark": false,
+      "route": "gallery",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "appearance",
+      "dark": false,
+      "route": "appearance",
+      "textLength": 498,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "settings",
+      "dark": false,
+      "route": "settings",
+      "textLength": 213,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "datamanage",
+      "dark": false,
+      "route": "datamanage",
+      "textLength": 353,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "hang",
+      "dark": false,
+      "route": "hang",
+      "textLength": 127,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "date",
+      "dark": false,
+      "route": "date",
+      "textLength": 125,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "dateroom",
+      "dark": false,
+      "route": "dateroom",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "out",
+      "dark": false,
+      "route": "out",
+      "textLength": 42,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outnew",
+      "dark": false,
+      "route": "outnew",
+      "textLength": 49,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outroom",
+      "dark": false,
+      "route": "outroom",
+      "textLength": 31,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "checkup",
+      "dark": false,
+      "route": "checkup",
+      "textLength": 52,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "weibo",
+      "dark": false,
+      "route": "weibo",
+      "textLength": 38,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "takeout",
+      "dark": false,
+      "route": "takeout",
+      "textLength": 503,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "mall",
+      "dark": false,
+      "route": "mall",
+      "textLength": 63,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "shop",
+      "dark": false,
+      "route": "shop",
+      "textLength": 114,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "clock",
+      "dark": false,
+      "route": "clock",
+      "textLength": 158,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "couple",
+      "dark": false,
+      "route": "couple",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "soul",
+      "dark": false,
+      "route": "soul",
+      "textLength": 150,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "music",
+      "dark": false,
+      "route": "music",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "world",
+      "dark": false,
+      "route": "world",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "regex",
+      "dark": false,
+      "route": "regex",
+      "textLength": 101,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "progress",
+      "dark": false,
+      "route": "progress",
+      "textLength": 1347,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    }
+  ],
+  "narrow": [
+    {
+      "name": "home",
+      "dark": false,
+      "route": "home",
+      "textLength": 64,
+      "overflow": 0,
+      "back": false,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "wechat",
+      "dark": false,
+      "route": "wechat",
+      "textLength": 19,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "chatroom",
+      "dark": false,
+      "route": "chatroom",
+      "textLength": 15,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactedit",
+      "dark": false,
+      "route": "contactedit",
+      "textLength": 157,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "contactview",
+      "dark": false,
+      "route": "contactview",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novel",
+      "dark": false,
+      "route": "novel",
+      "textLength": 184,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelbook",
+      "dark": false,
+      "route": "novelbook",
+      "textLength": 122,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "novelchapter",
+      "dark": false,
+      "route": "novelchapter",
+      "textLength": 83,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "read",
+      "dark": false,
+      "route": "read",
+      "textLength": 108,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "diary",
+      "dark": false,
+      "route": "diary",
+      "textLength": 73,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "forum",
+      "dark": false,
+      "route": "forum",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "gallery",
+      "dark": false,
+      "route": "gallery",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "appearance",
+      "dark": false,
+      "route": "appearance",
+      "textLength": 498,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "settings",
+      "dark": false,
+      "route": "settings",
+      "textLength": 213,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "datamanage",
+      "dark": false,
+      "route": "datamanage",
+      "textLength": 353,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "hang",
+      "dark": false,
+      "route": "hang",
+      "textLength": 127,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "date",
+      "dark": false,
+      "route": "date",
+      "textLength": 125,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "dateroom",
+      "dark": false,
+      "route": "dateroom",
+      "textLength": 56,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "out",
+      "dark": false,
+      "route": "out",
+      "textLength": 42,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outnew",
+      "dark": false,
+      "route": "outnew",
+      "textLength": 49,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "outroom",
+      "dark": false,
+      "route": "outroom",
+      "textLength": 31,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "checkup",
+      "dark": false,
+      "route": "checkup",
+      "textLength": 52,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "weibo",
+      "dark": false,
+      "route": "weibo",
+      "textLength": 38,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "takeout",
+      "dark": false,
+      "route": "takeout",
+      "textLength": 503,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "mall",
+      "dark": false,
+      "route": "mall",
+      "textLength": 63,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "shop",
+      "dark": false,
+      "route": "shop",
+      "textLength": 114,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "clock",
+      "dark": false,
+      "route": "clock",
+      "textLength": 158,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "couple",
+      "dark": false,
+      "route": "couple",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "soul",
+      "dark": false,
+      "route": "soul",
+      "textLength": 150,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "music",
+      "dark": false,
+      "route": "music",
+      "textLength": 74,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "world",
+      "dark": false,
+      "route": "world",
+      "textLength": 57,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "regex",
+      "dark": false,
+      "route": "regex",
+      "textLength": 101,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    },
+    {
+      "name": "progress",
+      "dark": false,
+      "route": "progress",
+      "textLength": 1347,
+      "overflow": 0,
+      "back": true,
+      "headerEdge": true,
+      "clipped": []
+    }
+  ],
+  "dark": false,
+  "darkAudit": null,
+  "backChecks": [
+    {
+      "name": "chatroom",
+      "before": "chatroom",
+      "after": "wechat",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "novelbook",
+      "before": "novelbook",
+      "after": "novel",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "dateroom",
+      "before": "dateroom",
+      "after": "date",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "outroom",
+      "before": "outroom",
+      "after": "out",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "settings",
+      "before": "settings",
+      "after": "home",
+      "changed": true,
+      "found": true
+    },
+    {
+      "name": "datamanage",
+      "before": "datamanage",
+      "after": "settings",
+      "changed": true,
+      "found": true
+    }
+  ],
+  "errors": []
+}
+EXIT=0
+===== _round108_p1_recheck_test.cjs =====
+[R108] weiboLayout={"sw":320,"cw":320,"wide":[]}
+[R108] selfcheck=通过 页面版本
+2026-11-07 · 3.85 · 第 96 轮
+通过 运行方式
+http: （浏览器）
+失败 安卓原生接口通道
+当前是浏览器模式，部分中转站会被跨域限制
+通过 Store 启动断言
+BSCoreStore / BSReadonlyStore 均已就绪
+通过 原生网络异步取消
+浏览器模式不需要
+通过 存储方式
+大容量本地数据库
+通过 数据用量
+28 KB
+通过 核心功能函数
+109 项存在
+通过 本地数据结构
+13 项正常
+通过 会话分组
+1 个分组 · 当前 all · 默认分组正常
+通过 精确绑定
+约会=未绑定 · 外卖=未绑定 · 时钟=未绑定 · 日记=未绑定 · 出门=未绑定
+失败 微博并集绑定
+0 个来源 · 生成内容保留独立来源记录
+通过 微博角色互动
+点赞 / 评论 / 随机转发已接入
+通过 灵魂匹配
+0 次匹配 · 0 条待处理申请 · 五分钟计时与好友迁移已接入
+通过 情侣空间
+0 份主空间 · 纪念日/日记/相簿/任务/做饭/互动/领养/小家/分支记忆已接入
+通过 音乐与一起听
+1 个歌单 · 0 首本地音乐 · 歌词/共同收藏/评论/历史已接入
+通过 图片生成
+未开启 · 生成/参考图/相册保存/角色绑定/重新生成已接入 · 0 张生成记录
+通过 小说世界书库
+0 套模板 · 0 本书已绑定 · 全局世界书 0 套
+通过 第二页图标布局
+查岗/网购 · 约会/出门 · 两列 52px
+通过 页标横向贴边
+左右贴边 正常 · 安全区内边距 正常 · phone 0-320 · bar 0-320
+通过 开发进度清单
+已经完成 13 · 部分完成 4 · 尚未完成 1
+失败 联系人
+0 位
+通过 会话
+0 个
+通过 作者 / 小说
+作者 我 · 书 0 本 · 读者 9 位
+通过 第 4 页 APP
+时钟 / 情侣空间 / 灵魂匹配 / 音乐
+通过 多时间方案
+1 个 · 当前 默认时间 · 2026/10/27 星期二 09:30
+通过 时钟
+2026/10/27 星期二 09:30
+失败 查岗精确绑定
+未绑定角色
+通过 查岗手机与动态
+11 个 App · 未查看手机 · 未生成动态 · stealth
+通过 消息通知气泡
+多气泡堆叠 · 当前保留 0 条记录
+通过 原生通知桥
+浏览器通知
+失败 后台消息保活
+网页端仅保留 App 内提醒
+通过 上下文参数
+历史 100 条 · Token 窗口 4000 · 输出 不限制 · 流式 关
+通过 Prompt 前缀缓存
+静态设定 → 半静态规则 → 滑窗历史 → 动态时间和最新输入
+通过 Token 用量解析
+0 次请求 · 缓存 0 Tokens
+通过 API Key 本机加密仓
+IndexedDB + 非导出 AES-GCM 密钥
+通过 语音接口
+未配置（语音气泡和转文字仍可用）
+通过 提示音
+内置：清铃
+通过 当前页按钮
+2 个按钮，全部已绑上动作
+通过 接口地址
+https://api.deepseek.com
+失败 API Key
+没填
+通过 模型
+deepseek-chat
+通过 拉取模型列表
+未配置 API Key，跳过
+通过 对话接口实测
+未配置 API Key，跳过
+通过 全部页面渲染
+33 个页面通过
+通过 全部页面按钮
+252 个按钮均有绑定或数据动作
+通过 运行错误
+没有报错
+复制这份报告
+报告里只有接口地址、模型名和错误信息，不会包含你的完整 Key。
+[R108] geometry={"route":"checkup","wtab":"msg","phone":{"x":0,"y":0,"width":320,"height":700,"top":0,"right":320,"bottom":700,"left":0},"bars":[{"cls":"nav","left":0.29663950204849243,"right":320.2966395020485,"width":320,"top":0}],"screen":{"clientWidth":320,"scrollWidth":320}}
+[R108] tasks={"forum":["这句我会记住，等下一更。"],"log":["forum_comment","music_comment","delivery_text","delivery_text","image_prompt"],"structured":["forum_comment","music_comment","delivery_text","delivery_text","image_prompt"],"beforeOrders":0,"afterOrders":1,"prompt":"自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\n一张角色此刻所在环境的第一视角或侧拍照片，让人能看见角色生活的真实空间、光线和日常物品。角色可以在画面边缘或背影出现。\n用户固定特征：测试人设；女；姓名/称呼：测试人设\n性别：女\n背景：喜欢雨天和热饮。。用户在照片中必须保持同一张脸。\n聊天里的照片请求：想看看你窗外\n全局画面要求：自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。"}
+{
+  "ok": true,
+  "checks": {
+    "fullscreenEntry": "PASS",
+    "visibleCopy": "PASS",
+    "checkupLayout": "PASS",
+    "clearConfirmations": "PASS",
+    "taskTypes": "PASS",
+    "orderGenerated": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "fullEntry": {
+    "text": "‹ 返回\n设置\n开发进度\n›\n全屏模式\n隐藏系统状态栏和导航栏，保持竖屏；再点一次退出\n进入全屏\n查岗与手机访问\n›\nAPI 接口设置\n›\n图片生成接口\n›\n上下文与输出\n›\nToken 总用量\n›\n语音朗读\n›\n角色自动活动\n›\n显示与字体\n›\n外观与美化\n›\n低性能模式\n›\n漂浮动画\n›\n消息提示音\n›\n点击音效\n›\n后台与通知\n›\n数据管理\n存储空间、优化清理、导出导入与清除所有数据\n›\n当前数据约 28 KB　·　存储方式：本地数据库（大容量）\n自检\n›\n版本与更新\n›\n关于小手机\n›\n免责声明\n›\n示例内容\n›\n上架模式\n›",
+    "rect": {
+      "x": 206.048583984375,
+      "y": 147.75,
+      "width": 81.609375,
+      "height": 44,
+      "top": 147.75,
+      "right": 287.657958984375,
+      "bottom": 191.75,
+      "left": 206.048583984375
+    },
+    "viewport": 700
+  },
+  "copyViolations": [],
+  "selfcheckText": "通过 页面版本\n2026-11-07 · 3.85 · 第 96 轮\n通过 运行方式\nhttp: （浏览器）\n失败 安卓原生接口通道\n当前是浏览器模式，部分中转站会被跨域限制\n通过 Store 启动断言\nBSCoreStore / BSReadonlyStore 均已就绪\n通过 原生网络异步取消\n浏览器模式不需要\n通过 存储方式\n大容量本地数据库\n通过 数据用量\n28 KB\n通过 核心功能函数\n109 项存在\n通过 本地数据结构\n13 项正常\n通过 会话分组\n1 个分组 · 当前 all · 默认分组正常\n通过 精确绑定\n约会=未绑定 · 外卖=未绑定 · 时钟=未绑定 · 日记=未绑定 · 出门=未绑定\n失败 微博并集绑定\n0 个来源 · 生成内容保留独立来源记录\n通过 微博角色互动\n点赞 / 评论 / 随机转发已接入\n通过 灵魂匹配\n0 次匹配 · 0 条待处理申请 · 五分钟计时与好友迁移已接入\n通过 情侣空间\n0 份主空间 · 纪念日/日记/相簿/任务/做饭/互动/领养/小家/分支记忆已接入\n通过 音乐与一起听\n1 个歌单 · 0 首本地音乐 · 歌词/共同收藏/评论/历史已接入\n通过 图片生成\n未开启 · 生成/参考图/相册保存/角色绑定/重新生成已接入 · 0 张生成记录\n通过 小说世界书库\n0 套模板 · 0 本书已绑定 · 全局世界书 0 套\n通过 第二页图标布局\n查岗/网购 · 约会/出门 · 两列 52px\n通过 页标横向贴边\n左右贴边 正常 · 安全区内边距 正常 · phone 0-320 · bar 0-320\n通过 开发进度清单\n已经完成 13 · 部分完成 4 · 尚未完成 1\n失败 联系人\n0 位\n通过 会话\n0 个\n通过 作者 / 小说\n作者 我 · 书 0 本 · 读者 9 位\n通过 第 4 页 APP\n时钟 / 情侣空间 / 灵魂匹配 / 音乐\n通过 多时间方案\n1 个 · 当前 默认时间 · 2026/10/27 星期二 09:30\n通过 时钟\n2026/10/27 星期二 09:30\n失败 查岗精确绑定\n未绑定角色\n通过 查岗手机与动态\n11 个 App · 未查看手机 · 未生成动态 · stealth\n通过 消息通知气泡\n多气泡堆叠 · 当前保留 0 条记录\n通过 原生通知桥\n浏览器通知\n失败 后台消息保活\n网页端仅保留 App 内提醒\n通过 上下文参数\n历史 100 条 · Token 窗口 4000 · 输出 不限制 · 流式 关\n通过 Prompt 前缀缓存\n静态设定 → 半静态规则 → 滑窗历史 → 动态时间和最新输入\n通过 Token 用量解析\n0 次请求 · 缓存 0 Tokens\n通过 API Key 本机加密仓\nIndexedDB + 非导出 AES-GCM 密钥\n通过 语音接口\n未配置（语音气泡和转文字仍可用）\n通过 提示音\n内置：清铃\n通过 当前页按钮\n2 个按钮，全部已绑上动作\n通过 接口地址\nhttps://api.deepseek.com\n失败 API Key\n没填\n通过 模型\ndeepseek-chat\n通过 拉取模型列表\n未配置 API Key，跳过\n通过 对话接口实测\n未配置 API Key，跳过\n通过 全部页面渲染\n33 个页面通过\n通过 全部页面按钮\n252 个按钮均有绑定或数据动作\n通过 运行错误\n没有报错\n复制这份报告\n报告里只有接口地址、模型名和错误信息，不会包含你的完整 Key。",
+  "clearCheck": {
+    "dateConfirm": true,
+    "dateCleared": true,
+    "viewedConfirm": true,
+    "viewedCleared": true,
+    "notifConfirm": true,
+    "notifCleared": true,
+    "dmConfirm": true,
+    "dmCleared": true,
+    "pageWallButton": true,
+    "pageWallConfirm": true
+  },
+  "taskCheck": {
+    "forum": [
+      "这句我会记住，等下一更。"
+    ],
+    "log": [
+      "forum_comment",
+      "music_comment",
+      "delivery_text",
+      "delivery_text",
+      "image_prompt"
+    ],
+    "structured": [
+      "forum_comment",
+      "music_comment",
+      "delivery_text",
+      "delivery_text",
+      "image_prompt"
+    ],
+    "beforeOrders": 0,
+    "afterOrders": 1,
+    "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\n一张角色此刻所在环境的第一视角或侧拍照片，让人能看见角色生活的真实空间、光线和日常物品。角色可以在画面边缘或背影出现。\n用户固定特征：测试人设；女；姓名/称呼：测试人设\n性别：女\n背景：喜欢雨天和热饮。。用户在照片中必须保持同一张脸。\n聊天里的照片请求：想看看你窗外\n全局画面要求：自然生活摄影，真实光影，轻微手机随手拍质感，不磨皮，不夸张美颜，不改变角色原有五官与用户脸型。"
+  },
+  "errors": []
+}
+EXIT=0
+===== _round109_sw_publish_test.cjs =====
+{
+  "ok": true,
+  "checks": {
+    "registration": "PASS",
+    "cacheKey": "PASS",
+    "precache": "PASS",
+    "navigationNetworkFirst": "PASS",
+    "offlineFallback": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "first": {
+    "probe": "v1",
+    "keys": [
+      "bsphone-v96-20261107-r1"
+    ],
+    "count": 10,
+    "urls": [
+      "/",
+      "/manifest.webmanifest",
+      "/index.html",
+      "/icon-192.png",
+      "/icon-512.png",
+      "/core/design/tokens.css",
+      "/core/design/shell.css",
+      "/core/store/core-store.js",
+      "/core/store/readonly-store.js",
+      "/core/prompts/sysworld-v2.js"
+    ]
+  },
+  "second": {
+    "probe": "v2",
+    "title": "BS小手机",
+    "screen": true
+  },
+  "offline": {
+    "title": "BS小手机",
+    "screen": true,
+    "text": "小记\n09:30\n今天 · 晴 · 19°C\n一\n二\n三\n四\n五\n六\n日\n今天也要\n慢一点，也没关系。\n日记\n外卖\n微信\n小说\n相册\n微博\n今日一句\n慢慢做好\n"
+  },
+  "errors": []
+}
+EXIT=0
+===== _qa_data_management_2026-11-05.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T04:47:20.185Z",
+  "checks": {
+    "settings_entry_visible": "PASS",
+    "route_datamanage": "PASS",
+    "nine_cards_order": "PASS",
+    "data_cards_hit_44": "PASS",
+    "storage_breakdown_visible": "PASS",
+    "full_export_name_dialog": "PASS",
+    "light_export_name_dialog": "PASS",
+    "light_package_scope": "PASS",
+    "light_package_only_expected": "PASS",
+    "compress_uploaded_image": "PASS",
+    "optimize_preserves_messages": "PASS",
+    "clear_voice_keeps_text": "PASS",
+    "clear_image_cache_keeps_message": "PASS",
+    "light_import_replace_preserves_other_modules": "PASS",
+    "clear_all_two_steps": "PASS",
+    "back_to_settings": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": []
+}
+EXIT=0
+===== _qa_independent_batch3_recheck.cjs =====
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T04:47:25.441Z",
+  "checks": {
+    "default_group_all_personas_worldlines": "PASS",
+    "custom_groups_global_visible": "PASS",
+    "members_include_other_persona": "PASS",
+    "cross_persona_membership_allowed": "PASS",
+    "custom_group_cross_persona_chats": "PASS",
+    "active_persona_does_not_change_group": "PASS",
+    "groups_visible_after_persona_switch": "PASS",
+    "manager_all_buttons_44": "PASS",
+    "editor_sheet_taller": "PASS",
+    "editor_actions_initially_visible": "PASS",
+    "same_char_memory_isolation": "PASS",
+    "no_token_chip": "PASS",
+    "no_technical_copy_in_chat": "PASS",
+    "usage_still_in_more_menu": "PASS"
+  },
+  "failures": [],
+  "errors": [],
+  "source": {
+    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6"
+  }
+}
+EXIT=0
+===== _round111_batch3_redteam_fix_test.cjs =====
+{
+  "ok": true,
+  "checks": {
+    "sheetTwoThirds": "PASS",
+    "iconsVisible": "PASS",
+    "notes": "PASS",
+    "hitTargets44": "PASS",
+    "groupLongPress": "PASS",
+    "crossPersonaGroupsGlobal": "PASS",
+    "directDisband": "PASS",
+    "systemBackStack": "PASS",
+    "userSelectNone": "PASS",
+    "longPressTapRecovery": "PASS",
+    "menuPinReadBackground": "PASS",
+    "backupRoundtrip": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "managerHeight": {
+    "ratio": 0.6599896327014217,
+    "height": 557.03125
+  },
+  "targetSize": {
+    "color": [
+      44,
+      44
+    ],
+    "icon": [
+      44,
+      44
+    ]
+  },
+  "created": {
+    "id": "cg_mw5x9le7xrst",
+    "builtin": false,
+    "name": "家人",
+    "note": "只有家里人",
+    "color": "#34c759",
+    "icon": "home"
+  },
+  "base": {
+    "userSelect": "none",
+    "webkitUserSelect": "none"
+  },
+  "backOne": {
+    "sheet": true,
+    "text": "会话分组\n默认分组始终包含全部会话；其它分组是筛选标签，一个会话可以同时属于多个分组。\n默认分组\n1 个会话 · 全部会话\n✓\n家人\n0 个会话 · 只有家里人\n›\n其他人设的分组\n0 个会话\n›\n＋ 新建会话分组关闭",
+    "route": "wechat"
+  },
+  "afterTap": {
+    "route": "chatroom",
+    "arg": "ch111",
+    "say": true
+  },
+  "roundtrip": {
+    "imported": true,
+    "verification": {
+      "ok": true,
+      "status": "verified",
+      "algorithm": "SHA-256"
+    },
+    "groupId": "cg_mw5x9le7xrst",
+    "group": {
+      "name": "家人",
+      "note": "只有家里人",
+      "color": "#34c759",
+      "icon": "home"
+    },
+    "chats": [
+      {
+        "id": "ch111",
+        "groupIds": [
+          "cg_mw5x9le7xrst"
+        ]
+      }
+    ]
+  },
+  "errors": []
+}
+EXIT=0
+SUMMARY ALL PASS

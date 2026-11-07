@@ -1,14 +1,14 @@
-# BS 小手机 STATE
+﻿# BS 小手机 STATE
 
 ## 当前版本
 
-- 页面：2026-11-06 · 3.84 · 第 95 轮
-- Android：3.84 / versionCode 95
-- Service Worker：`bsphone-v95-20261106-r1`
-- 源码提交：`d9ffd7f2cc5eafbe62ab8add719599fc0a031059`
-- 源码 SHA-256：`FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126`
-- Debug APK SHA-256：`FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24`
-- Release APK SHA-256：`75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014`
+- 页面：2026-11-07 · 3.85 · 第 96 轮
+- Android：3.85 / versionCode 96
+- Service Worker：`bsphone-v96-20261107-r1`
+- 源码提交：`2e6a109f3948ed497b37b38852b6da900760c61a`
+- 源码 SHA-256：`5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6`
+- Debug APK SHA-256：`9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375`
+- Release APK SHA-256：`1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525`
 
 ## 当前阶段
 
@@ -19,13 +19,14 @@
 - 环境时间改为 system 环境块，最后一条 user 只包含真实输入。
 - 旧分支自动摘要和结构化记忆已按当前消息来源隔离；切回旧分支会恢复对应记忆。
 - 记忆块已移到历史之后、环境之前；重 roll nudge 已拆为独立本轮指令层。
-- 缓存键升级为 r4，并重新构建 Debug/Release APK。
+- 缓存键已更新为 `bsphone-v96-20261107-r1`，并重新构建 Debug/Release APK。
 - QA-382 返修：忘记这条跨 contact/base snapshot/branch legacy/分支记忆 ID/memoryEntries/Prompt 清理。
 - 普通删除同步当前 active branch 快照；分支菜单补齐导出与二次确认删除。
 - 混合文字+图片/卡片组支持保留或移除后编辑/重生成，卡片不进入文字模型。
 - 44×44 命中区已加稳定边界，R101 复跑 44.0089。
 - QA-383：忘记记忆改为当前 chat/char 作用域 + sourceMessageIds 精确关联；短文本仅精确/已知摘要壳匹配，禁止全局子串删除。
 - 混合组保留模式保持非文本卡片原始相对位置；R113 测试统一 0.01 容差。
+- QA-384：群聊忘记严格按消息发送者 m.from 清理；同群其它角色长期记忆、memoryItem、memoryEntry、chat/base/branch legacy 和 memory IDs 保留。
 - 微信消息菜单已补齐：编辑并重新生成、从当前消息创建新分支、角色消息忘记。
 - 编辑后生成新 user message_id，旧 user/char/后续进入旧分支；手动分支不调用模型。
 - 菜单按钮命中区统一达到 44×44；角色忘记进入记忆、上下文和分支快照清理流程。
@@ -48,13 +49,14 @@
 
 ## 最近证据
 
-- `docs/testing/round119-evidence-manifest-2026-11-06.json`
-- `docs/testing/round119-final-core-qa383-2026-11-06.log`
-- `docs/testing/round119-final-regression-suite-2026-11-06.log`
-- `docs/testing/round119-phone-debug-suite-final-2026-11-06.log`
-- `docs/testing/qa-forget-substring-scope-2026-11-06.json`
-- `docs/testing/independent-forget-cross-scope-audit-2026-11-06.json`
-- `docs/testing/round119-phone-forget-scope.json`
-- `docs/testing/round119-phone-forget-scope.png`
-- `docs/testing/build95-native-build-2026-11-06.log`
+- `docs/testing/round120-evidence-manifest-2026-11-07.json`
+- `docs/testing/round120-final-core-qa384-2026-11-07.log`
+- `docs/testing/round120-final-regression-suite-2026-11-07.log`
+- `docs/testing/round120-phone-debug-suite-final-2026-11-07.log`
+- `docs/testing/qa-forget-group-member-scope-2026-11-06.json`
+- `docs/testing/qa-forget-group-branch-scope-2026-11-06.json`
+- `docs/testing/round120-phone-forget-group-scope.json`
+- `docs/testing/round120-phone-forget-group-scope.png`
+- `docs/testing/build96-native-build-2026-11-07.log`
 - `docs/testing/round115-phone-release-final-2026-11-05.json`
+

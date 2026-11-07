@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-11-06T08:06:56.526Z",
+  "checkedAt": "2026-11-07T04:45:09.686Z",
   "tests": {
     "freshConsecutiveMessagesRecognized": true,
     "firstSwitchUpdatesDisplayedMessages": true,
@@ -12,16 +12,16 @@
     "freshGroup": {
       "beforeReload": [
         {
-          "id": "mw4oy7quzi21",
+          "id": "mw5x6kqt2w1s",
           "text": "新消息甲",
-          "turnId": "turn_mw4oy7quwxkw",
-          "messageGroupId": "group_mw4oy7qu3j4x"
+          "turnId": "turn_mw5x6kqt7utf",
+          "messageGroupId": "group_mw5x6kqtql81"
         },
         {
-          "id": "mw4oy7quyz23",
+          "id": "mw5x6kquw0hz",
           "text": "新消息乙",
-          "turnId": "turn_mw4oy7quwxkw",
-          "messageGroupId": "group_mw4oy7qu3j4x"
+          "turnId": "turn_mw5x6kqt7utf",
+          "messageGroupId": "group_mw5x6kqtql81"
         }
       ],
       "confirm": "重新生成这一组？\n将重新打包：\n新消息甲 新消息乙\n\n原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。\n重新生成取消"
@@ -31,17 +31,17 @@
       "ids": [
         "u1",
         "u2",
-        "mw4oy9930s6h"
+        "mw5x6m0pb5eu"
       ],
       "texts": [
         "一组一",
         "一组二",
         "新版回复"
       ],
-      "activeId": "turnbranch_mw4oy8zb1qly",
+      "activeId": "turnbranch_mw5x6lqywjbz",
       "branches": [
         {
-          "id": "turnbranch_mw4oy8zbt1hc",
+          "id": "turnbranch_mw5x6lqyfwx7",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -57,12 +57,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw4oy8zb1qly",
+          "id": "turnbranch_mw5x6lqywjbz",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw4oy9930s6h"
+            "mw5x6m0pb5eu"
           ],
           "texts": [
             "一组一",
@@ -86,10 +86,10 @@
         "原始回复",
         "原始后续"
       ],
-      "activeId": "turnbranch_mw4oy8zbt1hc",
+      "activeId": "turnbranch_mw5x6lqyfwx7",
       "branches": [
         {
-          "id": "turnbranch_mw4oy8zbt1hc",
+          "id": "turnbranch_mw5x6lqyfwx7",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -105,12 +105,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw4oy8zb1qly",
+          "id": "turnbranch_mw5x6lqywjbz",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw4oy9930s6h"
+            "mw5x6m0pb5eu"
           ],
           "texts": [
             "一组一",
@@ -127,17 +127,17 @@
       "ids": [
         "u1",
         "u2",
-        "mw4oy9930s6h"
+        "mw5x6m0pb5eu"
       ],
       "texts": [
         "一组一",
         "一组二",
         "新版回复"
       ],
-      "activeId": "turnbranch_mw4oy8zb1qly",
+      "activeId": "turnbranch_mw5x6lqywjbz",
       "branches": [
         {
-          "id": "turnbranch_mw4oy8zbt1hc",
+          "id": "turnbranch_mw5x6lqyfwx7",
           "label": "原始版本",
           "ids": [
             "u1",
@@ -153,12 +153,12 @@
           ]
         },
         {
-          "id": "turnbranch_mw4oy8zb1qly",
+          "id": "turnbranch_mw5x6lqywjbz",
           "label": "重新生成 1",
           "ids": [
             "u1",
             "u2",
-            "mw4oy9930s6h"
+            "mw5x6m0pb5eu"
           ],
           "texts": [
             "一组一",
@@ -176,22 +176,22 @@
   "errors": [],
   "ok": true,
   "evidenceMeta": {
-    "checkedAt": "2026-11-06T08:06:59.394Z",
-    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
-    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
-    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
-    "version": "3.84",
-    "versionCode": 95,
-    "cacheKey": "bsphone-v95-20261106-r1"
+    "checkedAt": "2026-11-07T04:45:12.341Z",
+    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
+    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
+    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
+    "version": "3.85",
+    "versionCode": 96,
+    "cacheKey": "bsphone-v96-20261107-r1"
   },
   "artifactEvidence": {
-    "recordedAt": "2026-11-06T08:16:29.348Z",
-    "sourceCommit": "d9ffd7f2cc5eafbe62ab8add719599fc0a031059",
-    "indexSha256": "FFE0F569395573DE180883665B0679BC859DE28EA0762D3D5D7BC1236DB86126",
-    "debugApkSha256": "FFE0C30501D3EB77E5733618168196F253B4C7E0AE8C0E224E28FE75901CBC24",
-    "releaseApkSha256": "75AF7A5252C372F4F609811CF24694417EE7497037A0BD46E149A6188D8BB014",
-    "version": "3.84",
-    "versionCode": 95,
-    "cacheKey": "bsphone-v95-20261106-r1"
+    "recordedAt": "2026-11-07T04:56:41.552Z",
+    "sourceCommit": "2e6a109f3948ed497b37b38852b6da900760c61a",
+    "indexSha256": "5877A7ED428444681F7DD78276F94A2F92B0BC847502790427F63F8A23A6F4B6",
+    "debugApkSha256": "9CCC06BD7CBA2872BF9549AEB0CE4F6ED6AC15B26BEE35D47E9D7CD28726F375",
+    "releaseApkSha256": "1D77DEFF408A6A53A99E30EDA28E4AA6B2846860F808D584CABA2C45E6D82525",
+    "version": "3.85",
+    "versionCode": 96,
+    "cacheKey": "bsphone-v96-20261107-r1"
   }
 }
