@@ -1,6 +1,6 @@
 ﻿{
     "format":  "BS小手机 3.96 Build107 交付证据清单",
-    "generatedAt":  "2026-11-11T16:41:16.9056516+08:00",
+    "generatedAt":  "2026-11-11T16:47:18.9761466+08:00",
     "version":  "3.96",
     "versionCode":  107,
     "baseCommit":  "282d9cd",
@@ -12,33 +12,33 @@
     "items":  [
                   {
                       "path":  "docs/BS小手机_3.96_Build107_红队与检查官二次返修_完整报告_2026-11-11.md",
-                      "bytes":  9753,
-                      "sha256":  "C21E52F69764CCF2BACC07F663635CE5F2055BD12FACA39DAF52E1544433D11F"
+                      "bytes":  9985,
+                      "sha256":  "081B681FF1116BA82DBAC16B0E7CC67968CB99397F750192001F90463D1CEBDA"
                   },
                   {
                       "path":  "docs/testing/round142-full-regression-2026-11-11.log",
-                      "bytes":  117070,
-                      "sha256":  "C907CAB701C687DBBBAFC97FCA9C18A4A55B9C5E1C7B65BD5996C4E3489E1332"
+                      "bytes":  120019,
+                      "sha256":  "1F319AC1418C02BD589513EC5619862D49EFBC5042E3CE6343351132DEA1FBEF"
                   },
                   {
                       "path":  "docs/testing/round142-wechat-branch-regression-2026-11-11.log",
-                      "bytes":  52237,
-                      "sha256":  "E3E8A2D3234BB14BBFE11C04F2800E5363A372849CCB94D3B1FE2B2A5381D9A0"
+                      "bytes":  53023,
+                      "sha256":  "795BAD376068F017B6C2C9A2AE38311C4036DA43B0755BDF094E9A699D46C39B"
                   },
                   {
                       "path":  "docs/testing/round142-card-intent.json",
-                      "bytes":  4580,
-                      "sha256":  "A9BD9B5625E007A4C3BF3E04CABFEFAE8BC29367319A5273122BB8BD30C5800F"
+                      "bytes":  4760,
+                      "sha256":  "EA221CF0BF7074AA40646BA4E2AF2B3B13D0E5B088645523469DCF06ED5B5B5C"
                   },
                   {
                       "path":  "docs/testing/round142-phone-wechat-audit.json",
-                      "bytes":  2356,
-                      "sha256":  "DF2149F0A7E43C567AAA1E343ECB5579997806A00D26A649EB32ECD5F8F2CF61"
+                      "bytes":  2472,
+                      "sha256":  "080CCC3B873E8C9864116A97EBB071439014A80CD6DAB8D9EA21A6A74D2E9181"
                   },
                   {
                       "path":  "docs/testing/round142-phone-concurrency.json",
-                      "bytes":  1113,
-                      "sha256":  "D786E753B6FFEF649BEDF943BCAFD88EC9F35D2EB934DCE3E3554C2A94733C8C"
+                      "bytes":  1170,
+                      "sha256":  "1442539764C646D1534425EB92A2DF7BA390D925795F4DB8C8CE341C14BD1869"
                   },
                   {
                       "path":  "docs/testing/round142-phone-concurrency.png",
