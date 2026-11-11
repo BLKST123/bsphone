@@ -1,0 +1,263 @@
+{
+  "ok": true,
+  "checks": {
+    "names": true,
+    "typing": true,
+    "backgroundContinue": true,
+    "regenTiming": true,
+    "cards": true,
+    "menu": true,
+    "persona": true,
+    "favorites": true,
+    "wallpaper": true,
+    "widget": true,
+    "call": true,
+    "toast": true,
+    "noErrors": true
+  },
+  "errors": [],
+  "results": {
+    "names": {
+      "both": "项目会话",
+      "remarkOnly": "备注甲",
+      "sessionOnly": "项目会话",
+      "neither": "角色甲",
+      "autoLabel": "备注甲"
+    },
+    "typing": {
+      "before": "对方正在输入……",
+      "after": "对方正在输入……"
+    },
+    "backgroundContinue": {
+      "route": "home",
+      "types": [
+        "text"
+      ],
+      "texts": [
+        "我在后台回你"
+      ]
+    },
+    "regenDuring": {
+      "busy": true,
+      "typing": "对方正在输入……"
+    },
+    "regenAt3s": {
+      "busy": false,
+      "typing": "对方正在输入……"
+    },
+    "regenDone": {
+      "busy": false,
+      "typing": false,
+      "texts": [
+        "第一句",
+        "第二句",
+        "新的连续组回复"
+      ]
+    },
+    "cards": {
+      "types": [
+        "redpacket",
+        "transfer",
+        "takeout",
+        "order"
+      ],
+      "amounts": [
+        52,
+        200,
+        null,
+        39
+      ],
+      "takeoutOrders": [
+        {
+          "merchant": "甜品店",
+          "items": [
+            "草莓蛋糕",
+            "热奶茶"
+          ],
+          "source": "contact"
+        }
+      ],
+      "dom": {
+        "red": true,
+        "transfer": true,
+        "takeout": true,
+        "order": true,
+        "orderBg": "color(srgb 1 0.980392 0.988235 / 0.770431)",
+        "backdrop": "blur(18px)"
+      }
+    },
+    "menu": {
+      "headings": [
+        "会话外观",
+        "聊天方式",
+        "主动与记忆",
+        "生活联动",
+        "统计与诊断",
+        "会话管理"
+      ],
+      "ids": [
+        "cmBg",
+        "cmRange",
+        "cmVoice",
+        "cmMeetMode",
+        "cmPoke",
+        "cmSettle",
+        "cmAuto",
+        "cmAutoGap",
+        "cmMem",
+        "cmTakeout",
+        "cmUsage",
+        "cmPersonaBinding",
+        "cmEdit",
+        "cmSessionName",
+        "cmSelectMsgs",
+        "cmGroups",
+        "cmPin",
+        "cmReadState",
+        "cmHidden",
+        "cmClear",
+        "cmDel",
+        "cmCancel"
+      ],
+      "groups": 6
+    },
+    "personaBefore": {
+      "active": "p1",
+      "count": "1 张"
+    },
+    "personaHome": {
+      "enableButtons": 2,
+      "editButtons": 0,
+      "cardRows": 2
+    },
+    "personaAfter": {
+      "active": "p2",
+      "count": "0 张",
+      "personaTitle": "用户人设库"
+    },
+    "personaEditTitle": "编辑人设",
+    "favoriteUI": {
+      "voice": true,
+      "transcriptDisplay": "none",
+      "moreButtons": 2,
+      "moreTop": 270.390625,
+      "cardTop": 263.390625
+    },
+    "favoriteMenu": {
+      "jump": "回到原会话",
+      "remove": "取消收藏"
+    },
+    "favoriteJump": {
+      "route": "chatroom",
+      "arg": "typing",
+      "target": true,
+      "flash": true
+    },
+    "favoriteConfirm": {
+      "confirm": "取消收藏？",
+      "count": 2
+    },
+    "favoriteRemoved": {
+      "count": 1,
+      "exists": false
+    },
+    "wallpaper": {
+      "hasImage": true,
+      "natural": [
+        312,
+        640
+      ],
+      "imgRatio": 0.4875,
+      "wrapRatio": 0.4875,
+      "backgroundSize": "100% 100%"
+    },
+    "widgetGeometry": {
+      "before": {
+        "children": [
+          {
+            "x": 37.56223678588867,
+            "y": 78.08171081542969,
+            "w": 110.89935302734375,
+            "h": 139.83657836914062,
+            "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
+          },
+          {
+            "x": 142.61280822753906,
+            "y": 68.147216796875,
+            "w": 104.79823303222656,
+            "h": 135.70556640625,
+            "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
+          },
+          {
+            "x": 243.57955932617188,
+            "y": 81.43775939941406,
+            "w": 106.86468505859375,
+            "h": 137.12448120117188,
+            "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)"
+          }
+        ],
+        "grid": "94px 94px 94px",
+        "cardRect": {
+          "x": 20.011911392211914,
+          "y": 56,
+          "width": 350,
+          "height": 170,
+          "top": 56,
+          "right": 370.0119113922119,
+          "bottom": 226,
+          "left": 20.011911392211914
+        }
+      },
+      "after": {
+        "children": [
+          {
+            "x": 37.56223678588867,
+            "y": 78.08171081542969,
+            "w": 110.89935302734375,
+            "h": 139.83657836914062,
+            "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
+          },
+          {
+            "x": 142.61280822753906,
+            "y": 68.147216796875,
+            "w": 104.79823303222656,
+            "h": 135.70556640625,
+            "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
+          },
+          {
+            "x": 243.57955932617188,
+            "y": 81.43775939941406,
+            "w": 106.86468505859375,
+            "h": 137.12448120117188,
+            "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)"
+          }
+        ],
+        "grid": "94px 94px 94px",
+        "cardRect": {
+          "x": 20.011911392211914,
+          "y": 56,
+          "width": 350,
+          "height": 170,
+          "top": 56,
+          "right": 370.0119113922119,
+          "bottom": 226,
+          "left": 20.011911392211914
+        }
+      },
+      "equal": true,
+      "hasBgLayer": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")"
+    },
+    "call": {
+      "page": true,
+      "name": "备注甲",
+      "status": "正在等待对方接听…",
+      "end": true,
+      "actions": 3
+    },
+    "toast": {
+      "shown": true,
+      "hidden": true
+    }
+  }
+}

@@ -1,0 +1,112 @@
+{
+  "ok": true,
+  "errors": [],
+  "main": {
+    "title": "外观与美化",
+    "headerActions": [
+      ""
+    ],
+    "headerActionCount": 1,
+    "tabs": 6,
+    "tabRows": 1,
+    "tabTexts": [
+      "背景与壁纸",
+      "配色方案",
+      "全局材质",
+      "桌面图标",
+      "桌面小组件",
+      "自定义全局CSS"
+    ],
+    "appButtons": 19,
+    "themeCards": 9,
+    "materialCards": 8,
+    "iconButtons": 18,
+    "widgetRows": 16,
+    "refine": true,
+    "panes": 6,
+    "activePanes": 1,
+    "hasInternalScroll": false,
+    "screen": {
+      "scrollHeight": 1388,
+      "clientHeight": 800
+    },
+    "previewH": 344,
+    "reset": "恢复默认主题",
+    "footerTop": 1101,
+    "screenBottom": 844,
+    "previewText": "09:30\n92%\n微信\n相册\n小说\n示例档案\n@example\n示例短句\n示例地点\n时钟\n恢复默认主题"
+  },
+  "sub": {
+    "title": "微信背景",
+    "actions": [
+      {
+        "text": "从相册选择",
+        "w": 358,
+        "h": 48,
+        "top": 600,
+        "bottom": 648,
+        "visible": true
+      },
+      {
+        "text": "上传图片",
+        "w": 358,
+        "h": 48,
+        "top": 660,
+        "bottom": 708,
+        "visible": true
+      },
+      {
+        "text": "恢复该范围默认",
+        "w": 358,
+        "h": 48,
+        "top": 720,
+        "bottom": 768,
+        "visible": true
+      },
+      {
+        "text": "应用",
+        "w": 358,
+        "h": 48,
+        "top": 780,
+        "bottom": 828,
+        "visible": true
+      }
+    ],
+    "previewText": "09:30\n92%\n‹\n微信\n＋\n还没有会话。\n点右上角 ＋ 发起私聊或群聊。\n消息\n联系人\n朋友圈\n我的",
+    "previewH": 466,
+    "screenClass": "screen appearance-screen bs-route-enter appearance-subpage"
+  },
+  "iconEdit": {
+    "title": "编辑图标",
+    "album": true,
+    "upload": true,
+    "url": true,
+    "reset": true
+  },
+  "colorEdit": {
+    "title": "自定义配色",
+    "inputs": 3
+  },
+  "materialEdit": {
+    "title": "材质参数",
+    "sliders": 3
+  },
+  "widgetCount": 16,
+  "widgetEdit": {
+    "title": "编辑组件",
+    "bg": true,
+    "image": true,
+    "save": true
+  },
+  "cssEdit": {
+    "title": "应用全局CSS",
+    "textarea": true,
+    "apply": true
+  },
+  "card": {
+    "ok": true,
+    "bg": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")",
+    "size": "cover, cover",
+    "id": "e1794214231439798"
+  }
+}

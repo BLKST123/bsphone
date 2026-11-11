@@ -1,0 +1,106 @@
+{
+  "ok": true,
+  "evidence": {
+    "checkedAt": "2026-11-07T14:11:30.567Z",
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "debugApkSha256": "C39AD5C2B207597E25226D270F909622268116C43AF079711BDED419A69FBAF0",
+    "releaseApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "version": "3.88",
+    "versionCode": 99,
+    "cacheKey": "bsphone-v99-20261107-r1"
+  },
+  "checks": {
+    "dataManagementPage": "PASS",
+    "nineCards": "PASS",
+    "hitTargets44": "PASS",
+    "settingsExportClick": "PASS",
+    "filenameDialog": "PASS",
+    "publicDownloadsDirectory": "PASS",
+    "manifestReadable": "PASS",
+    "noApiKeyInManifest": "PASS",
+    "build96": "PASS",
+    "noRuntimeErrors": "PASS"
+  },
+  "before": {
+    "build": "2026-11-07 · 3.88 · 第 99 轮",
+    "code": 99,
+    "contacts": 2,
+    "chats": 5
+  },
+  "dmPage": {
+    "route": "datamanage",
+    "order": [
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true,
+      true
+    ],
+    "cards": [
+      {
+        "id": "dmRefresh",
+        "w": 44.008949279785156,
+        "h": 44.00893020629883
+      },
+      {
+        "id": "dmOptimize",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmCompress",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearImages",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmClearVoice",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "exp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "expLight",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "dmZip",
+        "w": 331.4285888671875,
+        "h": 75.58482360839844
+      },
+      {
+        "id": "imp",
+        "w": 331.4285888671875,
+        "h": 64
+      },
+      {
+        "id": "wipe",
+        "w": 331.4285888671875,
+        "h": 64
+      }
+    ]
+  },
+  "remoteDir": "/storage/emulated/0/Download/BS小手机",
+  "remoteFile": "BS小手机_2026-11-7_21_56.json",
+  "size": 26805616,
+  "manifest": {
+    "schemaVersion": 4,
+    "appVersion": "3.88",
+    "buildNumber": 99
+  },
+  "runtimeErrors": [],
+  "consoleErrors": []
+}

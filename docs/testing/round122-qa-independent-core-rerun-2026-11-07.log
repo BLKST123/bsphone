@@ -1,0 +1,29 @@
+﻿Round122 QA independent core rerun
+checkedAt: 2026-11-07T19:33:09.0489609+08:00
+PASS  _qa_wechat_message_edit_branch_2026-11-06.cjs  6.7s
+PASS  _qa_chat_turn_reroll_2026-11-05.cjs  6.6s
+PASS  _independent_turn_reroll_audit_2026-11-05.cjs  7.7s
+PASS  _independent_turn_branch_switch_audit_2026-11-05.cjs  6.8s
+PASS  _qa_turn_reroll_independent_2026-11-05.cjs  10.3s
+PASS  _qa_turn_branch_switch_ui_2026-11-05.cjs  9.0s
+PASS  _qa_turn_reroll_multi_2026-11-05.cjs  4.7s
+PASS  _qa_prompt_layers_2026-11-05.cjs  7.6s
+PASS  _independent_turn_memory_branch_audit_2026-11-05.cjs  4.2s
+PASS  _qa_turn_auto_memory_branch_fix_2026-11-05.cjs  4.3s
+PASS  _independent_manual_branch_continue_audit_2026-11-06.cjs  4.8s
+PASS  _independent_mixed_group_edit_audit_2026-11-06.cjs  4.5s
+PASS  _independent_forget_memory_scope_audit_2026-11-06.cjs  2.8s
+PASS  _qa_forget_branch_memory_2026-11-06.cjs  8.1s
+PASS  _qa_delete_branch_snapshot_2026-11-06.cjs  8.1s
+PASS  _qa_branch_export_delete_2026-11-06.cjs  3.8s
+PASS  _qa_mixed_group_edit_lifecycle_2026-11-06.cjs  4.7s
+PASS  _qa_forget_substring_scope_2026-11-06.cjs  6.4s
+PASS  _independent_forget_cross_scope_audit_2026-11-06.cjs  5.1s
+PASS  _qa_forget_group_member_scope_2026-11-06.cjs  4.5s
+PASS  _qa_forget_group_branch_scope_2026-11-06.cjs  6.0s
+PASS  _qa_forget_group_remark_scope_2026-11-07.cjs  5.8s
+PASS  _round121_image_branch_hidden_zip_test.cjs  5.1s
+PASS  _round122_wechat_mine_suite_test.cjs  6.0s
+FAIL  _independent_card_unbind_wallet_adjust_2026-11-07.cjs  0.1s
+
+SUMMARY passed=24 failed=1

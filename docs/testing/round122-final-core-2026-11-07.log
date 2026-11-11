@@ -1,0 +1,31 @@
+Round122 final core assertions
+checkedAt: 2026-11-07T10:14:10.026Z
+Execution mode: sequential Node assertions; each script exited 0 and wrote its own JSON evidence.
+
+01  PASS  _qa_wechat_message_edit_branch_2026-11-06.cjs
+02  PASS  _qa_chat_turn_reroll_2026-11-05.cjs
+03  PASS  _independent_turn_reroll_audit_2026-11-05.cjs
+04  PASS  _independent_turn_branch_switch_audit_2026-11-05.cjs
+05  PASS  _qa_turn_reroll_independent_2026-11-05.cjs
+06  PASS  _qa_turn_branch_switch_ui_2026-11-05.cjs
+07  PASS  _qa_turn_reroll_multi_2026-11-05.cjs
+08  PASS  _qa_prompt_layers_2026-11-05.cjs
+09  PASS  _independent_turn_memory_branch_audit_2026-11-05.cjs
+10  PASS  _qa_turn_auto_memory_branch_fix_2026-11-05.cjs
+11  PASS  _independent_manual_branch_continue_audit_2026-11-06.cjs
+12  PASS  _independent_mixed_group_edit_audit_2026-11-06.cjs
+13  PASS  _independent_forget_memory_scope_audit_2026-11-06.cjs
+14  PASS  _qa_forget_branch_memory_2026-11-06.cjs
+15  PASS  _qa_delete_branch_snapshot_2026-11-06.cjs
+16  PASS  _qa_branch_export_delete_2026-11-06.cjs
+17  PASS  _qa_mixed_group_edit_lifecycle_2026-11-06.cjs
+18  PASS  _qa_forget_substring_scope_2026-11-06.cjs
+19  PASS  _independent_forget_cross_scope_audit_2026-11-06.cjs
+20  PASS  _qa_forget_group_member_scope_2026-11-06.cjs
+21  PASS  _qa_forget_group_branch_scope_2026-11-06.cjs
+22  PASS  _qa_forget_group_remark_scope_2026-11-07.cjs
+23  PASS  _round121_image_branch_hidden_zip_test.cjs
+24  PASS  _round122_wechat_mine_suite_test.cjs
+25  PASS  _independent_card_unbind_wallet_adjust_audit_2026-11-07.cjs
+
+SUMMARY passed=25 failed=0

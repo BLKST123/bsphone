@@ -1,0 +1,67 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-09T14:54:48.037Z",
+  "source": {
+    "indexSha256": "4A1FACB7987931BBF547A95099EA6AA68EB7CE4F1BCAFA06D38CF35AA9E9B417"
+  },
+  "checks": {
+    "unrelatedContactKept": true,
+    "unrelatedMemoryKept": true,
+    "unrelatedChatMemKept": true,
+    "unrelatedBaseKept": true,
+    "unrelatedLegacyKept": true,
+    "unrelatedMemoryIdKept": true,
+    "forgottenTargetRemoved": true
+  },
+  "failures": [],
+  "result": {
+    "contact": [
+      "用户喜欢好吃的"
+    ],
+    "memories": [
+      {
+        "id": "keepMem",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "targetMem",
+        "text": "好",
+        "status": "deleted"
+      },
+      {
+        "id": "legacy_contact_c_keepContact",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "legacy_contact_c_targetContact",
+        "text": "好",
+        "status": "deleted"
+      },
+      {
+        "id": "legacy_digest_fc_0_main",
+        "text": "用户喜欢好吃的",
+        "status": "active"
+      },
+      {
+        "id": "legacy_digest_fc_1_main",
+        "text": "好",
+        "status": "deleted"
+      }
+    ],
+    "chatMem": [
+      "用户喜欢好吃的"
+    ],
+    "base": [
+      "用户喜欢好吃的"
+    ],
+    "legacy": [
+      "用户喜欢好吃的"
+    ],
+    "memoryIds": [
+      "keepMem"
+    ]
+  },
+  "errors": []
+}

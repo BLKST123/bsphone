@@ -1,0 +1,22 @@
+{
+  "ok": true,
+  "errors": [],
+  "before": {
+    "rows": 16,
+    "route": "appearance",
+    "scrollTop": 0,
+    "active": "widgets"
+  },
+  "after": {
+    "rows": 17,
+    "route": "appearance",
+    "active": "widgets",
+    "newRow": true,
+    "layoutNote": 1
+  },
+  "opened": {
+    "title": "编辑组件",
+    "hasPreview": true,
+    "hasBg": true
+  }
+}

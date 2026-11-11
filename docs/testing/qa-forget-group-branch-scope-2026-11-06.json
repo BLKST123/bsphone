@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-09T14:55:08.322Z",
+  "checks": {
+    "targetMessageRemoved": true,
+    "sameCharLongTermCleared": true,
+    "otherCharLongTermKept": true,
+    "sameCharChatMemCleared": true,
+    "otherCharChatMemKept": true,
+    "sameCharBaseCleared": true,
+    "otherCharBaseKept": true,
+    "sameCharLegacyCleared": true,
+    "otherCharLegacyKept": true,
+    "sameCharMemoryIdRemoved": true,
+    "otherCharMemoryIdKept": true,
+    "sameCharEntryRemoved": true,
+    "otherCharEntryKept": true
+  },
+  "failures": [],
+  "result": {
+    "texts": [
+      "群里说话"
+    ],
+    "chatMem": [
+      "角色二长期记忆：好"
+    ],
+    "base": [
+      "角色二长期记忆：好"
+    ],
+    "legacy": [
+      "角色二长期记忆：好"
+    ],
+    "memoryIds": [
+      "m2"
+    ],
+    "c1": [],
+    "c2": [
+      "角色二长期记忆：好"
+    ],
+    "m1": "deleted",
+    "m2": "active",
+    "e2": {
+      "id": "e2",
+      "sourceType": "manual",
+      "sourceId": "u1",
+      "scope": "session",
+      "chatId": "gc2",
+      "contactId": "c2",
+      "personaId": "p",
+      "fact": "角色二长期记忆：好",
+      "active": true,
+      "sessionMentions": {},
+      "needsPersonaReview": false
+    }
+  },
+  "errors": []
+}

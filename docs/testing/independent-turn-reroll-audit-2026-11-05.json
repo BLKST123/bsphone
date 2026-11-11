@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-11-07T14:14:01.853Z",
+  "sourceSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+  "tests": {
+    "newMessagesFormOneGroupWithoutReload": true,
+    "secondOrThirdBubbleOpensGroupMenu": true,
+    "confirmNamesWholeGroup": true,
+    "promptContainsAllGroup": true,
+    "promptExcludesOldReplyAndTail": true,
+    "repeatedSwitchNoDuplicate": true,
+    "switchToOriginalPersistsReload": true,
+    "nontextGroupBlocked": true,
+    "chatPageNoVersionBadge": true
+  },
+  "evidence": {
+    "checkedAt": "2026-11-07T14:14:06.160Z",
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "debugApkSha256": "C39AD5C2B207597E25226D270F909622268116C43AF079711BDED419A69FBAF0",
+    "releaseApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "version": "3.88",
+    "versionCode": 99,
+    "cacheKey": "bsphone-v99-20261107-r1"
+  },
+  "errors": [],
+  "ok": true
+}

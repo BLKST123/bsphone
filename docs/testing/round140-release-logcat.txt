@@ -1,0 +1,207 @@
+﻿--------- beginning of main
+11-10 03:29:52.624 16317 16317 I .xiaoshouji.app: isSwordfishLaunchAppEnabled_ 1 isSwordfishInstallAppEnabled_ 1
+11-10 03:29:52.624 16317 16317 E .xiaoshouji.app: Unknown bits set in runtime_flags: 0x40000000
+11-10 03:29:52.624 16317 16317 I .xiaoshouji.app: Using CollectorTypeCMC GC.
+11-10 03:29:52.627 16317 16317 E .xiaoshouji.app: Not starting debugger since process cannot load the jdwp agent.
+11-10 03:29:52.629 16317 16317 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-10 03:29:52.631 16317 16317 I OneTrace: Mark active for pid=16317? true
+11-10 03:29:52.631 16317 16317 D cutils-dev: otrace_set_tracing_enabled? true tag:0
+11-10 03:29:52.632 16317 16317 D cutils-dev: properties changed in otrace_seq_number_changed!
+11-10 03:29:52.656 16317 16317 D CompactWindowAppManager: initCompactApplicationInfo CompactMode: , NormalMode: 
+--------- beginning of system
+11-10 03:29:52.657 16317 16317 V Configuration: Updating configuration, locales updated from [] to [zh_CN_#Hans]
+11-10 03:29:52.658 16317 16317 D OplusScrollToTopManager: setIsInWhiteList false
+11-10 03:29:52.658 16317 16317 D OplusViewDebugManager: OplusViewDebugManager Constructor android.view.debug.OplusViewDebugManager@309f10b [mHasViewDebugProperty true] [mHasMsgDebugProperty false] [DEBUG false] [EXTRAINFOENABLE false] [LIGHT_OS false]
+11-10 03:29:52.659 16317 16317 E DynamicFramerate [AnimationConfigManager]: initAnimationConfig: disable collector because all items are not enabled, processName = com.xiaoshouji.app
+11-10 03:29:52.659 16317 16317 D CompatChangeReporter: Compat change id reported: 242716250; UID 10401; state: ENABLED
+11-10 03:29:52.660 16317 16317 W libc    : Access denied finding property "ro.odm.prev.product.name"
+11-10 03:29:52.661 16317 16317 W libc    : Access denied finding property "ro.vendor.oplus.gundam"
+11-10 03:29:52.662 16317 16317 D nativeloader: Configuring clns-9 for other apk /data/app/~~Rx06i3Cu-SR6O3Nvint-GQ==/com.xiaoshouji.app-zCnXC-8POivBPV2WxbeB0A==/base.apk. target_sdk_version=34, uses_libraries=, library_path=/data/app/~~Rx06i3Cu-SR6O3Nvint-GQ==/com.xiaoshouji.app-zCnXC-8POivBPV2WxbeB0A==/lib/arm64, permitted_path=/data:/mnt/expand:/data/user/0/com.xiaoshouji.app
+11-10 03:29:52.662 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006fa76a0428) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment: Currently set values for:
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment:   angle_gl_driver_selection_pkgs=[]
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment:   angle_gl_driver_selection_values=[]
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment: com.xiaoshouji.app is not listed in per-application setting
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment: ANGLE allowlist from config: 
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment: com.xiaoshouji.app is not listed in ANGLE allowlist or settings, returning default
+11-10 03:29:52.665 16317 16317 V GraphicsEnvironment: App is not on the allowlist for updatable production driver.
+11-10 03:29:52.665 16317 16317 D ResourcesManagerExtImpl: applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:-1
+11-10 03:29:52.665 16317 16317 D SurfaceSyncGroup: preCreateSurfaceSyncGroupTimerThread
+11-10 03:29:52.666 16317 16317 D OplusActivityManager: get AMS extension: android.os.BinderProxy@c6ea8a6
+11-10 03:29:52.667 16317 16317 I HWUI    : SupportApps size 0
+11-10 03:29:52.667 16317 16317 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-10 03:29:52.667 16317 16317 D ExtensionsLoader: Opened libSchedAssistExtImpl.so
+11-10 03:29:52.667 16317 16317 E SchedAssist: open sharedFd failed with error=No such file or directory
+11-10 03:29:52.668 16317 16317 E SchedAssist: open sharedFd failed with error=No such file or directory
+11-10 03:29:52.668 16317 16317 E SchedAssist: open sharedFd failed with error=Permission denied
+11-10 03:29:52.668 16317 16317 E SchedAssist: open sharedFd failed with error=Permission denied
+11-10 03:29:52.668 16317 20636 D OplusGraphicsEvent: OplusGraphicsEventListener create now!
+11-10 03:29:52.668 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006fa76a0a28) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.669 16317 16317 D ResourcesManagerExtImpl: applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+11-10 03:29:52.669 16317 20636 D OplusGraphicsEvent: addEventListener success!
+11-10 03:29:52.669 16317 20636 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-10 03:29:52.669 16317 20636 D ExtensionsLoader: Opened libSchedAssistExtImpl.so
+11-10 03:29:52.669 16317 20636 I DisplayManager: Choreographer implicitly registered for the refresh rate.
+11-10 03:29:52.669 16317 16317 D OplusScrollManager: hookActivity: ActivityInfo{5dd7683 com.xiaoshouji.app.MainActivity} mRTOptEnable false mStartScrollerSpringEnable false
+11-10 03:29:52.670 16317 20636 D colorx  : I can't find colorx layer , let's enumerate colorx layers first.
+11-10 03:29:52.671 16317 16317 E ashmem  : Pinning is deprecated since Android Q. Please use trim or other methods.
+11-10 03:29:52.672 16317 16317 D OplusPredictiveBackController: initPredictiveBackConfig for com.xiaoshouji.app.MainActivity@627ac2c initPredictiveBackConfig mShouldInterceptKeyEvent false
+11-10 03:29:52.672 16317 16317 D WindowOnBackDispatcher:  predictive settings is disabled for ApplicationInfo{b61e6f5 com.xiaoshouji.app}
+11-10 03:29:52.673 16317 20636 D MMUD    : mtk_memory_debug_init com.xiaoshouji.app 0xb400006f42b5d100
+11-10 03:29:52.673 16317 16317 I oplus.android.OplusFrameworkFactoryImpl: Unknow feature:IOplusTextViewRTLUtilForUG
+11-10 03:29:52.676 16317 16317 D DesktopModeFlags: Toggle override initialized to: OVERRIDE_UNSET
+11-10 03:29:52.677 16317 20636 D MTK_COMPILER_OPT: Conctrol flag is 0 for MTKInlineSIMD
+11-10 03:29:52.677 16317 20636 D MTK_COMPILER_OPT: Disable MTKInlineSIMD
+11-10 03:29:52.677 16317 20636 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-10 03:29:52.677 16317 20636 D ExtensionsLoader: Opened libeglextimpl.so
+11-10 03:29:52.678 16317 20636 D PreCache: [IPreCacheRus]loadRUSConfigs#102 failed to transact: -22 prc:com.xiaoshouji.app
+11-10 03:29:52.679 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006fa76a0d28) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.679 16317 16317 I WebViewFactory: Loading com.google.android.webview version 138.0.7204.179 (code 720417933)
+11-10 03:29:52.680 16317 16317 W .xiaoshouji.app: Failed to find entry 'classes.dex': Entry not found
+11-10 03:29:52.681 16317 16317 D nativeloader: InitLlndkLibrariesProduct: libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libapexsupport.so:libavf.so:libbinder_ndk.so:libc.so:libcgrouprc.so:libclang_rt.asan-aarch64-android.so:libclang_rt.asan-arm-android.so:libclang_rt.hwasan-aarch64-android.so:libcom.android.tethering.connectivity_native.so:libdl.so:libft2.so:liblog.so:libm.so:libmediandk.so:libnativewindow.so:libneuralnetworks.so:libselinux.so:libsync.so:libvendorsupport.so:libvndksupport.so:libvulkan.so
+11-10 03:29:52.681 16317 16317 D nativeloader: Configuring product-clns-10 for unbundled product apk /product/app/TrichromeLibrary64CN/TrichromeLibrary64CN.apk. target_sdk_version=35, uses_libraries=ALL, library_path=/product/app/WebViewGoogle64CN/lib/arm64:/product/app/WebViewGoogle64CN/WebViewGoogle64CN.apk!/lib/arm64-v8a:/product/app/TrichromeLibrary64CN/TrichromeLibrary64CN.apk!/lib/arm64-v8a:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/product/lib64:/system/product/lib64
+11-10 03:29:52.681 16317 16317 D nativeloader: Extending system_exposed_libraries: libapuwareapusys.mtk.so:libapuwareapusys_v2.mtk.so:libapuwarexrp.mtk.so:libapuwarexrp_v2.mtk.so:libapuwareutils.mtk.so:libapuwareutils_v2.mtk.so:libapuwarehmp.mtk.so:libapuwareaiste.mtk.so:libneuron_graph_delegate.mtk.so:libneuronusdk_adapter.mtk.so:libtflite_mtk.mtk.so:libarmnn_ndk.mtk.so:libcmdl_ndk.mtk.so:libnir_neon_driver_ndk.mtk.so:libmvpu_runtime.mtk.so:libmvpu_runtime_pub.mtk.so:libmvpu_engine_pub.mtk.so:libmvpu_pattern_pub.mtk.so:libmvpuop_mtk_cv.mtk.so:libmvpuop_mtk_nn.mtk.so:libmvpu_runtime_25.mtk.so:libmvpu_runtime_25_pub.mtk.so:libmvpu_engine_25_pub.mtk.so:libmvpu_pattern_25_pub.mtk.so:libmvpuop25_mtk_cv.mtk.so:libmvpuop25_mtk_nn.mtk.so:libmvpu_config.mtk.so:libmvpu_engine_30.mtk.so:libmvpu_pattern_30.mtk.so:libmvpu_cic_ci_compiler_30.mtk.so:libmvpu_runtime_30.mtk.so:libmvpu_clc_30_mvpu_debuginfo.mtk.so:libmvpu_clc_30_mvpu_elf.mtk.so:libmvpu_clc_30_mvpu_utility.mtk.so:libneuronservice_adapter.mtk.so:libneuron_sys_util.mtk.so:libmvpuop30_mtk_nn.mtk.so:libneuron
+11-10 03:29:52.681 16317 16317 D nativeloader: InitVndkspLibrariesProduct: VNDK is deprecated with product
+11-10 03:29:52.681 16317 16317 D ApplicationLoaders: Returning zygote-cached class loader: /system_ext/framework/androidx.window.extensions.jar
+11-10 03:29:52.682 16317 16317 D nativeloader: Configuring product-clns-11 for unbundled product apk /product/app/WebViewGoogle64CN/WebViewGoogle64CN.apk. target_sdk_version=35, uses_libraries=, library_path=/product/app/WebViewGoogle64CN/lib/arm64:/product/app/WebViewGoogle64CN/WebViewGoogle64CN.apk!/lib/arm64-v8a:/product/app/TrichromeLibrary64CN/TrichromeLibrary64CN.apk!/lib/arm64-v8a:/product/lib64:/system/product/lib64, permitted_path=/data:/mnt/expand:/product/lib64:/system/product/lib64
+11-10 03:29:52.695 16317 16317 I cr_WVCFactoryProvider: version=138.0.7204.179 (720417933) minSdkVersion=29 isBundle=false multiprocess=true packageId=2
+11-10 03:29:52.696 16317 16317 D nativeloader: Load /product/app/TrichromeLibrary64CN/TrichromeLibrary64CN.apk!/lib/arm64-v8a/libmonochrome_64.so using class loader ns product-clns-11 (caller=/product/app/WebViewGoogle64CN/WebViewGoogle64CN.apk): ok
+11-10 03:29:52.697 16317 16317 D nativeloader: Load /system/lib64/libwebviewchromium_plat_support.so using class loader ns product-clns-11 (caller=/product/app/WebViewGoogle64CN/WebViewGoogle64CN.apk): ok
+11-10 03:29:52.700 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006f3742b728) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.700 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006fa76a0728) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.702 16317 16317 I cr_LibraryLoader: Successfully loaded native library
+11-10 03:29:52.702 16317 16317 I cr_CachingUmaRecorder: Flushed 8 samples from 8 histograms, 0 samples were dropped.
+11-10 03:29:52.704 16317 16317 I cr_CombinedPProvider: #registerProvider() provider:WV.d9@1d7cadb isPolicyCacheEnabled:false policyProvidersSize:0
+11-10 03:29:52.704 16317 16317 I cr_PolicyProvider: #setManagerAndSource() 0
+11-10 03:29:52.706 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006f3742ba28) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.706 16317 16317 D WindowContextController: attachToDisplayArea  type = 2 ,displayId = 0 ,options = null ,mToken = android.window.WindowTokenClient@bde8524
+11-10 03:29:52.706 16317 16317 I .xiaoshouji.app: AssetManager2(0xb400006f96843028) locale list changing from [] to [zh-Hans-CN]
+11-10 03:29:52.711 16317 16317 I cr_CombinedPProvider: #linkNativeInternal() 1
+11-10 03:29:52.711 16317 16317 I cr_AppResProvider: #getApplicationRestrictionsFromUserManager() Bundle[EMPTY_PARCEL]
+11-10 03:29:52.711 16317 16317 I cr_PolicyProvider: #notifySettingsAvailable() 0
+11-10 03:29:52.711 16317 16317 I cr_CombinedPProvider: #onSettingsAvailable() 0
+11-10 03:29:52.711 16317 16317 I cr_CombinedPProvider: #flushPolicies()
+11-10 03:29:52.724 16317 20679 W GmsClient: unable to connect to service: com.google.android.gms.safetynet.service.START on com.google.android.gms
+11-10 03:29:52.729 16317 16317 W chromium: [WARNING:android_webview/browser/network_service/net_helpers.cc:143] HTTP Cache size is: 335544320
+11-10 03:29:52.734 16317 20679 D ContentResolverExt: reject package: com.xiaoshouji.app, restricted: 2
+11-10 03:29:52.734 16317 20679 W ServiceBindIntentUtils: Dynamic intent resolution failed: android.os.RemoteException: Failed to acquire ContentProviderClient
+11-10 03:29:52.734 16317 20679 W ServiceBindIntentUtils: Dynamic lookup for intent failed for action: com.google.android.gms.safebrowsing.SafeBrowsingService.START
+11-10 03:29:52.741 16317 20679 W GmsClient: unable to connect to service: com.google.android.gms.safebrowsing.SafeBrowsingService.START on com.google.android.gms
+11-10 03:29:52.752 16317 20679 W GmsClient: unable to connect to service: com.google.android.gms.usagereporting.service.START on com.google.android.gms
+11-10 03:29:52.752 16317 20727 E cr_PlatformSer-Internal: UsageReporting query failed
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: init sDebug to false, init sDebugIme to false, init sAlwaysOn to false
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: updateDebugToClass InputMethodManager.DEBUG = false
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: updateDebugToClass ImeFocusController.DEBUG = false
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: updateDebugToClass OnBackInvokedDispatcher.DEBUG = false
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: updateDebugToClass InsetsController.DEBUG = false
+11-10 03:29:52.758 16317 16317 D OplusInputMethodUtil: updateDebugToClass BaseInputConnection.DEBUG = false
+11-10 03:29:52.766 16317 16317 D nativeloader: Load libpowerhalwrap_jni.so using system ns (caller=/system_ext/framework/mediatek-framework.jar): ok
+11-10 03:29:52.766 16317 16317 I PowerHalWrapper: PowerHalWrapper.getInstance 
+11-10 03:29:52.766 16317 16317 I PowerHalWrapper: PowerHalWrapper.getInstance 
+11-10 03:29:52.766 16317 16317 I M-ProMotion: M-ProMotion is disabled
+11-10 03:29:52.766 16317 20713 W cr_media: BLUETOOTH_CONNECT permission is missing.
+11-10 03:29:52.768 16317 20745 D colorx  : I can't find colorx layer , let's enumerate colorx layers first.
+11-10 03:29:52.769 16317 20713 W cr_media: getBluetoothAdapter() requires BLUETOOTH permission
+11-10 03:29:52.769 16317 20713 W cr_media: registerBluetoothIntentsIfNeeded: Requires BLUETOOTH permission
+11-10 03:29:52.769 16317 16317 D ActivityThread: ComponentInfo{com.xiaoshouji.app/com.xiaoshouji.app.MainActivity} checkFinished=false 2
+11-10 03:29:52.769 16317 16317 D ResourcesManagerExtImpl: applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+11-10 03:29:52.769 16317 16317 V AutofillClientController: onActivityResumed()
+11-10 03:29:52.769 16317 16317 V AutofillClientController: onActivityPostResumed()
+11-10 03:29:52.769 16317 16317 V AutofillClientController: onActivityPostResumed(): Relayout fix enabled
+11-10 03:29:52.769 16317 16317 V AutofillClientController: forResume(): Not attempting refill.
+11-10 03:29:52.770 16317 20745 D MMUD    : mtk_memory_debug_init com.xiaoshouji.app 0xb400006e3020ddc0
+11-10 03:29:52.771 16317 16317 I SurfaceFactory: [static] sSurfaceFactory = com.mediatek.view.impl.SurfaceFactoryImpl@c33e7c8
+11-10 03:29:52.773 16317 20643 D MMUD    : get_leak_baseline 3246391296
+11-10 03:29:52.773 16317 20749 I PowerHalWrapper: PowerHalWrapper.getInstance 
+11-10 03:29:52.778 16317 16317 D WindowManager: Add to mViews: com.android.internal.policy.DecorView{1c2c56a I.E...... R.....ID 0,0-0,0 alpha=1.0 viewInfo = }[MainActivity],pkg= com.xiaoshouji.app
+11-10 03:29:52.779 16317 20636 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-10 03:29:52.780 16317 20636 D ExtensionsLoader: Opened libhwuiextimpl.so
+11-10 03:29:52.781 16317 20636 D skia    : setRusSupported enable 1
+11-10 03:29:52.782 16317 16317 D OplusAppWatchdog: monitor disabled
+11-10 03:29:52.784 16317 16317 D ViewRootImplExtImpl: onDisplayChanged -1 for VRI android.view.ViewRootImpl@bfce36
+11-10 03:29:52.784 16317 16317 D OplusScrollManager: hookActivity: ActivityInfo{5dd7683 com.xiaoshouji.app.MainActivity} mRTOptEnable false mStartScrollerSpringEnable false
+11-10 03:29:52.788 16317 20781 I CameraManagerExtImpl: packagename is com.xiaoshouji.app
+11-10 03:29:52.788 16317 20781 I OplusCameraManager: saveOpPackageName, mOpPackageName: com.xiaoshouji.app
+11-10 03:29:52.788 16317 16317 D ResourcesManagerExtImpl: applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:0
+11-10 03:29:52.788 16317 16317 E cr_PlatformSer-Internal: Unable to determine Safe Browsing user opt-in preference
+11-10 03:29:52.790 16317 16317 E OplusBracketLog: [OplusViewMirrorManager] updateHostViewRootIfNeeded, not support android.view.ViewRootImpl@bfce36
+11-10 03:29:52.790 16317 16317 I DynamicFramerate [AnimationInfoManager]: updatePixelSize: sPixelSize has been updated, process = com.xiaoshouji.app
+11-10 03:29:52.791 16317 16317 D WindowOnBackDispatcher:  predictive settings is disabled for ApplicationInfo{b61e6f5 com.xiaoshouji.app}
+11-10 03:29:52.791 16317 16317 D WindowOnBackDispatcher:  predictive settings is disabled for ApplicationInfo{b61e6f5 com.xiaoshouji.app}
+11-10 03:29:52.791 16317 16317 D ViewRootImplExtImpl: wrapConfigInfoIntoFlags rotation=0, smallestScreenWidthDp=0, isAutolayoutSwdpModified=false, residentWS=false, scenario=0, bounds=Rect(0, 0 - 1272, 2772), isFirstDraw=true, relayoutAsync=false, flags=0, newFlags=-694157312, title=com.xiaoshouji.app/com.xiaoshouji.app.MainActivity
+11-10 03:29:52.792 16317 20695 E cr_AwSupervisedUserDel: Unable to determine if restricted content blocking is required. Exception: com.google.android.gms.common.api.ApiException: 17: API: SafeBrowsing.API is not available on this device. Connection failed with: ConnectionResult{statusCode=API_UNAVAILABLE, resolution=null, message=null}
+11-10 03:29:52.793 16317 20745 D colorx  : I can't find colorx layer , let's enumerate colorx layers first.
+11-10 03:29:52.794 16317 20745 D MMUD    : mtk_memory_debug_init com.xiaoshouji.app 0xb400006e29c0d680
+11-10 03:29:52.795 16317 20781 I OplusCameraManagerGlobal: setClientInfo, packageName: com.xiaoshouji.app, uid: 10401, pid: 16317
+11-10 03:29:52.795 16317 20781 I OplusCameraManagerGlobal: Connecting to camera service
+11-10 03:29:52.795 16317 20781 I CameraManagerGlobal: Connecting to camera service
+11-10 03:29:52.797 16317 16317 D VRI[MainActivity]: relayoutWindow result, sizeChanged:true, surfaceControlChanged:true, transformHintChanged:false, mSurfaceSize:Point(1272, 2772), mLastSurfaceSize:Point(0, 0), mWidth:-1, mHeight:-1, requestedWidth:1272, requestedHeight:2772, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2122252032, tmpFrames:ClientWindowFrames{frame=[0,0][1272,2772] display=[0,0][1272,2772] parentFrame=[0,0][0,0]}, relayoutResult:3, relayoutAsync:false, mSyncSeqId:0
+11-10 03:29:52.797 16317 16317 W VRI[MainActivity]: updateBlastSurfaceIfNeeded, surfaceSize:Point(1272, 2772), lastSurfaceSize:Point(0, 0), format:-1, blastBufferQueue:null
+11-10 03:29:52.798 16317 16317 E .xiaoshouji.app: [perfctl] 16317 16317 FPSGO ver:7
+11-10 03:29:52.798 16317 16317 E .xiaoshouji.app: [perfctl] 1 1 1 0
+11-10 03:29:52.798 16317 16317 D BufferQueueConsumer: [](id:3fbd00000000,api:0,p:-1,c:16317) connect: controlledByApp=false
+11-10 03:29:52.799 16317 16317 D BufferQueueConsumer: [VRI[MainActivity]#0(BLAST Consumer)0](id:3fbd00000000,api:0,p:-1,c:16317) setMaxAcquiredBufferCount: 3
+11-10 03:29:52.799 16317 20745 D MTK_COMPILER_OPT: Conctrol flag is 0 for MTKInlineSIMD
+11-10 03:29:52.799 16317 20745 D MTK_COMPILER_OPT: Disable MTKInlineSIMD
+11-10 03:29:52.800 16317 20636 D Surface : setDisconnectFlag 0
+11-10 03:29:52.801 16317 16317 I SurfaceControl:  setExtendedRangeBrightness sc=Surface(name=com.xiaoshouji.app/com.xiaoshouji.app.MainActivity)/@0x5cc80d4,currentBufferRatio=1.0,desiredRatio=1.0
+11-10 03:29:52.802 16317 20695 E ActivityThread: Failed to find provider info for com.google.android.gms.fonts
+11-10 03:29:52.805 16317 20636 I GrallocExtra: gralloc_extra_query:is_SW3D 0
+11-10 03:29:52.813 16317 20695 E ActivityThread: Failed to find provider info for com.google.android.gms.fonts
+11-10 03:29:52.815 16317 20695 E ActivityThread: Failed to find provider info for com.google.android.gms.fonts
+11-10 03:29:52.815 16317 20695 E ActivityThread: Failed to find provider info for com.google.android.gms.fonts
+11-10 03:29:52.817 16317 20695 E ActivityThread: Failed to find provider info for com.google.android.gms.fonts
+11-10 03:29:52.822 16317 20636 I GrallocExtra: gralloc_extra_query:is_SW3D 0
+11-10 03:29:52.822 16317 20636 D BLASTBufferQueue: [VRI[MainActivity]#0](f:0,a:1) acquireNextBufferLocked size=1272x2772 mFrameNumber=1 applyTransaction=true mTimestamp=657145145120398(auto) mPendingTransactions.size=0 graphicBufferId=70080981368832 transform=0
+11-10 03:29:52.822 16317 20636 D VRI[MainActivity]: Received frameCommittedCallback lastAttemptedDrawFrameNum=1 didProduceBuffer=true syncBuffer=false
+11-10 03:29:52.822 16317 20636 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-10 03:29:52.822 16317 20636 D ExtensionsLoader: Opened libSchedAssistExtImpl.so
+11-10 03:29:52.823 16317 16317 D VRI[MainActivity]: draw finished. seqId=0
+11-10 03:29:52.824 16317 20809 D LibMBrainProxy: Init Paramters
+11-10 03:29:52.829 16317 16317 W VRI[MainActivity]: handleResized, msg:, frameChanged:false, configChanged:false, displayChanged:false, attachedFrameChanged:false, compatScaleChanged:false, pendingDragResizing=false
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: initFrameRateConfig: init with OplusDynamicFRTCConfig
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	levelsFor120hz: [120, 60]
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	thresholdsFor120hz: [300]
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	levelsFor90hz: [90, 45]
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	thresholdsFor90hz: [214]
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [FRTCConfigManager]: FRTCConfigManager: FRTC_CAPABILITY = 120, package name = com.xiaoshouji.app, WINDOW_ANIMATION_SPEED_RATE = 10, SCROLL_ANIMATION_SPEED_RATE = 20, PACKAGE_ENABLE = true
+11-10 03:29:52.832 16317 16317 I DynamicFramerate [DynamicFrameRateController]: init info: mPackageName = com.xiaoshouji.app, mIsEnabled = true
+11-10 03:29:52.839 16317 20636 D VRI[MainActivity]: Received frameCommittedCallback lastAttemptedDrawFrameNum=3 didProduceBuffer=false syncBuffer=false
+11-10 03:29:52.839 16317 16317 D VRI[MainActivity]: draw finished. seqId=0
+11-10 03:29:52.840 16317 16317 D VRI[MainActivity]: onFocusEvent true
+11-10 03:29:52.842 16317 16317 D InsetsController: hide(ime(), fromIme=false)
+11-10 03:29:52.842 16317 16317 I ImeTracker: com.xiaoshouji.app:e3a14ce0: onCancelled at PHASE_CLIENT_ALREADY_HIDDEN
+11-10 03:29:52.844 16317 20692 D CompatChangeReporter: Compat change id reported: 263076149; UID 10401; state: ENABLED
+11-10 03:29:52.854 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:52.854 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:52.864 16317 20726 D MediaCodecListExtImpl: mIsDisableAv1=false
+11-10 03:29:52.869 16317 20726 D MediaCodecListExtImpl: mIsDisableAv1=false
+11-10 03:29:52.869 16317 20726 D MediaCodecListExtImpl: mIsDisableAv1=false
+11-10 03:29:52.871 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:52.875 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:52.875 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:52.876 16317 20726 W VideoCapabilities: Unsupported mime image/vnd.android.heic
+11-10 03:29:53.122 16317 16317 D InsetsController: Setting requestedVisibleTypes to -12 (was -9)
+11-10 03:29:53.123 16317 20967 D OplusWindowManager: get WMS extension: android.os.BinderProxy@c5237b8
+11-10 03:29:53.125 16317 16317 D ViewRootImplExtImpl: wrapConfigInfoIntoFlags rotation=0, smallestScreenWidthDp=363, isAutolayoutSwdpModified=false, residentWS=false, scenario=0, bounds=Rect(0, 0 - 1272, 2772), isFirstDraw=false, relayoutAsync=true, flags=0, newFlags=1453337952, title=com.xiaoshouji.app/com.xiaoshouji.app.MainActivity
+11-10 03:29:53.125 16317 16317 D VRI[MainActivity]: relayoutWindow result, sizeChanged:false, surfaceControlChanged:false, transformHintChanged:false, mSurfaceSize:Point(1272, 2772), mLastSurfaceSize:Point(1272, 2772), mWidth:1272, mHeight:2772, requestedWidth:1272, requestedHeight:2772, transformHint:0, installOrientation:0, displayRotation:0, isSurfaceValid:true, attr.flag:-2122252032, tmpFrames:ClientWindowFrames{frame=[0,0][1272,2772] display=[0,0][1272,2772] parentFrame=[0,0][1272,2772]}, relayoutResult:0, relayoutAsync:true, mSyncSeqId:0
+11-10 03:29:53.125 16317 16317 W VRI[MainActivity]: updateBlastSurfaceIfNeeded, surfaceSize:Point(1272, 2772), lastSurfaceSize:Point(1272, 2772), format:-1, blastBufferQueue:android.graphics.BLASTBufferQueue@2e8acf7
+11-10 03:29:53.126 16317 16317 I SurfaceControl:  setExtendedRangeBrightness sc=Surface(name=com.xiaoshouji.app/com.xiaoshouji.app.MainActivity)/@0x5cc80d4,currentBufferRatio=1.0,desiredRatio=1.0
+11-10 03:29:53.138 16317 16317 W VRI[MainActivity]: handleResized abandoned!
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: initFrameRateConfig: init with OplusDynamicFRTCConfig
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	levelsFor120hz: [120, 60]
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	thresholdsFor120hz: [300]
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	levelsFor90hz: [90, 45]
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: 	thresholdsFor90hz: [214]
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [FRTCConfigManager]: FRTCConfigManager: FRTC_CAPABILITY = 120, package name = com.xiaoshouji.app, WINDOW_ANIMATION_SPEED_RATE = 10, SCROLL_ANIMATION_SPEED_RATE = 20, PACKAGE_ENABLE = true
+11-10 03:29:53.138 16317 16317 I DynamicFramerate [DynamicFrameRateController]: init info: mPackageName = com.xiaoshouji.app, mIsEnabled = true
+11-10 03:29:53.194 16317 16317 W Choreographer: Frame time is 0.107204 ms in the future!  Check that graphics HAL is generating vsync timestamps using the correct timebase.
+11-10 03:29:53.194 16317 20967 W Choreographer: Frame time is 0.085973 ms in the future!  Check that graphics HAL is generating vsync timestamps using the correct timebase.
+11-10 03:29:53.845 16317 20628 D OplusScrollToTopManager: com.xiaoshouji.app/com.xiaoshouji.app.MainActivity,This com.android.internal.policy.DecorView{1c2c56a V.E...... R....... 0,0-1272,2772 aid=0 alpha=1.0 viewInfo = }[MainActivity] change focus to true
+11-10 03:29:54.625 16317 20615 I .xiaoshouji.app: HeapTask is not gc_task
+11-10 03:29:54.642 16317 20967 W InteractionJankMonitor: Initializing without READ_DEVICE_CONFIG permission. enabled=false, interval=1, missedFrameThreshold=3, frameTimeThreshold=64, package=com.xiaoshouji.app
+11-10 03:29:57.624 16317 20615 I .xiaoshouji.app: HeapTask is not gc_task
+11-10 03:29:57.775 16317 20679 D ContentResolverExt: reject package: com.xiaoshouji.app, restricted: 2
+11-10 03:29:57.775 16317 20679 W ServiceBindIntentUtils: Dynamic intent resolution failed: android.os.RemoteException: Failed to acquire ContentProviderClient
+11-10 03:29:57.775 16317 20679 W ServiceBindIntentUtils: Dynamic lookup for intent failed for action: com.google.android.gms.common.telemetry.service.START
+11-10 03:29:57.787 16317 20679 W GmsClient: unable to connect to service: com.google.android.gms.common.telemetry.service.START on com.google.android.gms

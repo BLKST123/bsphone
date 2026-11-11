@@ -1,0 +1,18 @@
+{
+  "checkedAt": "2026-11-07T14:17:12.467Z",
+  "tests": {
+    "turnBranchImageVersionSynced": true,
+    "turnBranchImageBranchActiveSynced": true
+  },
+  "evidence": {
+    "currentUrl": "data:image/png;base64,AQ==",
+    "currentVersion": "iv2",
+    "currentCustom": "two",
+    "branchUrl": "data:image/png;base64,AQ==",
+    "branchVersion": "iv2",
+    "branchCustom": "two",
+    "branchActive": "iv2"
+  },
+  "errors": [],
+  "ok": true
+}

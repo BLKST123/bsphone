@@ -1,0 +1,62 @@
+{
+  "checkedAt": "2026-11-07T11:31:31.962Z",
+  "ids": [
+    "b",
+    "a",
+    "c"
+  ],
+  "points": [
+    {
+      "id": "b",
+      "left": 16,
+      "top": 110.0625,
+      "bottom": 206.0625
+    },
+    {
+      "id": "a",
+      "left": 23,
+      "top": 118.0625,
+      "bottom": 214.0625
+    },
+    {
+      "id": "c",
+      "left": 30,
+      "top": 126.0625,
+      "bottom": 222.0625
+    }
+  ],
+  "entered": {
+    "dragging": true,
+    "active": null,
+    "order": [
+      "b",
+      "a",
+      "c"
+    ]
+  },
+  "mid": {
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "dragging": false
+  },
+  "end": {
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "detail": true,
+    "text": "乙\n•••• 2222 · u\n返回\n细纹\n•••• 2222\n乙\nu\n查看账单\n编辑卡面\n解绑银行卡\n这张卡暂时没有账单。"
+  },
+  "artifact": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-card-touch-adjacent-detail-2026-11-07.png",
+  "checks": {
+    "entered": true,
+    "adjacent_touch_order": true,
+    "no_detail": false,
+    "no_errors": true
+  },
+  "errors": []
+}

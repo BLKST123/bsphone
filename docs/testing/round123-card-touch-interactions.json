@@ -1,0 +1,85 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:30:24.184Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "third_to_first": true,
+    "persisted": true,
+    "first_to_last": true,
+    "adjacent": true,
+    "cancel_restores": true,
+    "mouse_drag": true,
+    "no_pointer_cancel_for_drag": true,
+    "short_click_switches": true,
+    "touch_action_none": true,
+    "no_errors": true
+  },
+  "thirdToFirst": {
+    "armed": true,
+    "moveCount": 10,
+    "order": [
+      "c",
+      "a",
+      "b"
+    ],
+    "panel": false,
+    "cancels": 0
+  },
+  "persistedAfterReopen": [
+    "c",
+    "a",
+    "b"
+  ],
+  "firstToLast": {
+    "armed": true,
+    "moveCount": 10,
+    "order": [
+      "b",
+      "c",
+      "a"
+    ],
+    "panel": false,
+    "cancels": 0
+  },
+  "adjacent": {
+    "armed": true,
+    "moveCount": 10,
+    "order": [
+      "a",
+      "c",
+      "b"
+    ],
+    "panel": false,
+    "cancels": 0
+  },
+  "cancelled": {
+    "armed": true,
+    "moveCount": 10,
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "panel": false,
+    "cancels": 1
+  },
+  "mouseDrag": {
+    "moveCount": 10,
+    "order": [
+      "c",
+      "a",
+      "b"
+    ],
+    "panel": false
+  },
+  "shortClick": {
+    "selected": "b",
+    "panel": true,
+    "route": "{\"name\":\"home\",\"arg\":null}",
+    "touch": "none"
+  },
+  "artifact": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-card-touch-after.png",
+  "errors": []
+}

@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:16:45.068Z",
+  "checks": {
+    "settings_entry_visible": "PASS",
+    "route_datamanage": "PASS",
+    "nine_cards_order": "PASS",
+    "data_cards_hit_44": "PASS",
+    "storage_breakdown_visible": "PASS",
+    "full_export_name_dialog": "PASS",
+    "light_export_name_dialog": "PASS",
+    "light_package_scope": "PASS",
+    "light_package_only_expected": "PASS",
+    "compress_uploaded_image": "PASS",
+    "optimize_preserves_messages": "PASS",
+    "clear_voice_keeps_text": "PASS",
+    "clear_image_cache_keeps_message": "PASS",
+    "light_import_replace_preserves_other_modules": "PASS",
+    "clear_all_two_steps": "PASS",
+    "back_to_settings": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": []
+}

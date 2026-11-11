@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T13:29:02.654Z",
+  "start": {
+    "x": 44,
+    "y": 385
+  },
+  "target": {
+    "x": 44,
+    "y": 101
+  },
+  "points": [
+    {
+      "id": "a",
+      "left": 16,
+      "top": 98,
+      "bottom": 306
+    },
+    {
+      "id": "b",
+      "left": 16,
+      "top": 296,
+      "bottom": 360
+    },
+    {
+      "id": "c",
+      "left": 16,
+      "top": 350,
+      "bottom": 414
+    }
+  ],
+  "entered": {
+    "dragging": true,
+    "order": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  "mid": {
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "dragging": true
+  },
+  "end": {
+    "order": [
+      "c",
+      "a",
+      "b"
+    ],
+    "detail": false,
+    "text": "卡包\n添加银行卡\n返回钱包\n丙\n•••• 3333\n丙\n•••• •••• •••• 3333\nGOOD THRU\n••/••\nu\n甲\n•••• 1111\n甲\n•••• •••• •••• 1111\nGOOD THRU\n••/••\nu\n乙\n•••• 2222\n乙\n•••• •••• •••• 2222\nGOOD THRU\n••/••\nu"
+  },
+  "checks": {
+    "long_press_entered": true,
+    "touch_drag_to_top": true,
+    "no_detail_on_touch_drag": true,
+    "no_runtime_errors": true
+  },
+  "errors": []
+}

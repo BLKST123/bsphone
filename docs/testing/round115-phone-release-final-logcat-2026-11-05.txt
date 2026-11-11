@@ -1,0 +1,802 @@
+--------- beginning of main
+11-07 15:51:30.981  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.034 19239 19239 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-07 15:51:31.034 19239 19239 D ExtensionsLoader: Opened libguiextimpl.so
+11-07 15:51:31.034  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.035  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:31.036  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:31.037  1465  1465 D SensorFeature: write 38 bytes:650394793730025,650394804841136,3300,0
+11-07 15:51:31.042  1324  1800 D VRR [OTI]: handleIdle from 0 to 1
+11-07 15:51:31.042  1324  1800 I VRR [MVT]: requestFrameRateMode source: oti-hw, mode: {fps=60, modePtr={id=3, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}
+11-07 15:51:31.042  1324  1800 I VRR [MVT]: chooseFrameRateMode : {fps=60, modePtr={id=3, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}
+11-07 15:51:31.042  1324  1800 D VRR [RefreshRateDirector]: requestRefreshRateByOti update [ oti-hw, {fps=60, modePtr={id=3, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}} ]
+11-07 15:51:31.042  1324  1800 D VRR [RefreshRateDirector]: updateBestFrameRate [oti-hw, {fps=60, modePtr={id=3, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}]
+11-07 15:51:31.043  1324  1810 D SurfaceFlinger: VRR [SurfaceFlinger] setDesiredActiveMode: displayId: 4627039422300187648, renderRate: 60, vsyncRate: 60, event: 0
+11-07 15:51:31.043  1324  1810 D DisplayModeController: setDesiredMode 4627039422300187648 {mode={fps=60.00 Hz, modePtr={id=3, vsyncRate=60.00 Hz, peakRefreshRate=60.00 Hz}}, emitEvent=false, force=false}
+11-07 15:51:31.043  1324  1810 D Scheduler: frame_rate = 59, set halftime to 32ms
+11-07 15:51:31.043  1324  1810 I PowerHalWrapper: updateFps(): 60
+11-07 15:51:31.043  1324  1810 I mtkpower_client: perf_lock_acq, hdl:16, dur:0, num:4, pid:1324, tid:1810
+11-07 15:51:31.044  8962 14425 D ShellSubscriberWorkerThread: the first 8 bytes empty, and RestData length > 8 
+11-07 15:51:31.044  1324  1810 I mtkpower_client: ret_hdl:16
+11-07 15:51:31.049  1324  1324 I HWC2    : [0] setActiveConfigWithConstraints[3]
+11-07 15:51:31.050  1185 20653 I hwcomposer: [HWC] (0) Attribute: config:3, attr:1, value:1272  
+11-07 15:51:31.050  1185 20653 I hwcomposer: [HWC] (0) Attribute: config:3, attr:2, value:2772  
+11-07 15:51:31.050  1185 20653 I hwcomposer: [HWC] (0) Attribute: config:3, attr:3, value:16666667  
+11-07 15:51:31.050  1185 20653 I CwbService: CwbService::notifyConfigChange: width = 1272, height = 2772, vsync_period = 16666667
+11-07 15:51:31.050  1185 20653 I hwcomposer: [HWC] (0) Attribute: config:3, attr:3, value:16666667  
+11-07 15:51:31.050  1185 20653 D oplus-adfr2minfps: calculateMinfps(0):mADFR2MINFPSEnable = 1 ifChangeVsyncPeriod 2 return mMinfps = 60
+11-07 15:51:31.050  1185 20653 D oplus-adfr2minfps: updateMinfps minfps 60
+11-07 15:51:31.050  1185 20653 E hwcomposer: [HWCDisplay] setAutoMode setAutoMode(auto:fakeframe:minfps=0:1:60)  
+11-07 15:51:31.051  1185 20653 I hwcomposer: [HWCDisplay] (0 setActiveConfigWithConstraints():4982), config:3  
+11-07 15:51:31.051  1185 20653 I hwcomposer: [HWCDisplay] (0 setActiveConfigWithConstraints():5064), now 490979120932033, diff 2203077, estimated_applied_time 11111111 queued_size:0  
+11-07 15:51:31.060  1324  1800 I VRR [MVT]: request is same as current request, ignore it.
+11-07 15:51:31.060  1185  1266 I oplus-adfr2minfps: needChangeMinfps(0) mParamFromWhich 0 isOpenHistogram(0) Enable 1(debug-0:sensor-0:panelNit-1:gray-1), NeedUpdateMinfps 1(n-0:g-0:s-0:v-1:f-0), mPanelNit 94.000000(nitId-0:grayId-0:lastfpsId-8), mPowerMode(2 f 1) mRgbInfo 1(Sum-1.000000:Max-1.000000) fodstatus(0) sensorlux(0) isDark(0) fodDelay(0)-- frame_count(161713) mGapN 2 (frame_count mod mGapN) 1
+11-07 15:51:31.061  1185  1266 D oplus-adfr2minfps: calculateMinfps(0) mParamFromWhich 0: minfps = 1 mPanelNit = 94.000000
+11-07 15:51:31.061  1185  1266 D oplus-adfr2minfps: updateMinfps(0) 1
+11-07 15:51:31.061  1185  1266 E hwcomposer: [HWCDisplay] setAutoMode setAutoMode(auto:fakeframe:minfps=0:1:1)  
+11-07 15:51:31.062 19239 19239 D AVStageFactory: Opened liboplusavenhancements.so
+11-07 15:51:31.062 19239 19239 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:31.063 19239 19239 D AVStageUtils: Opened liboplusavenhancements.so
+11-07 15:51:31.063 19239 19239 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:31.063 19239 19239 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:31.063 19239 19239 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:31.063 19239 19239 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:31.065 19239 19239 D AVMediaServiceFactory: Opened liboplusavenhancements.so
+11-07 15:51:31.065 19239 19239 D AVMediaServiceFactory: createInstance(64bit): createExtendedMediaServiceFactory success!
+11-07 15:51:31.065 19239 19239 D AVNuFactory: Opened liboplusavenhancements.so
+11-07 15:51:31.065 19239 19239 D AVNuFactory: createInstance(64bit): createExtendedNuFactory success!
+11-07 15:51:31.065 19239 19239 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:31.065 19239 19239 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:31.065 19239 19239 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:31.066 19239 19239 D AVMediaServiceFactory: createInstance(64bit): createExtendedMediaServiceFactory success!
+11-07 15:51:31.066 19239 19239 D AVNuFactory: createInstance(64bit): createExtendedNuFactory success!
+11-07 15:51:31.066 19239 19239 D AVStageFactory: Opened liboplusavenhancements.so
+11-07 15:51:31.066 19239 19239 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:31.066 19239 19239 D AVStageUtils: Opened liboplusavenhancements.so
+11-07 15:51:31.066 19239 19239 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:31.066 19239 19239 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:31.071 19239 19239 E screencap: createInstance(64bit) : createExtendedFactory
+11-07 15:51:31.072 19239 19239 E screencap: createInstance(64bit) : createExtendedFactory
+11-07 15:51:31.072 19239 19239 E screencap: Opened libinputextensionsimpl.so
+11-07 15:51:31.072 19239 19239 E screencap: Opened libinputextensionsimpl.so
+11-07 15:51:31.075 19239 19239 W screencap: Thread Pool max thread count is 0. Cannot cache binder as linkToDeath cannot be implemented. serviceName: SurfaceFlingerAIDL
+11-07 15:51:31.075 19239 19239 W BpBinder: Linking to death on android.gui.ISurfaceComposer but there are no threads (yet?) listening to incoming transactions. See ProcessState::startThreadPool and ProcessState::setThreadPoolMaxThreadCount. Generally you should setup the binder threadpool before other initialization steps.
+11-07 15:51:31.076 19239 19239 W ProcessState: Extra binder thread started, but 0 threads requested. Do not use *startThreadPool when zero threads are requested.
+11-07 15:51:31.076  1324  1394 D SurfaceFlinger: captureDisplayById from pid 0 display 4627039422300187648
+11-07 15:51:31.080  1185  1831 I hwcomposer: [HWCDisplay] (0 updateAppliedConfigState():5260), applied config complete[idx:42238, config:3]  
+11-07 15:51:31.097 19239 19252 I GrallocExtra: gralloc_extra_query:is_SW3D 0
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_mm
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_mm-uncached
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_svp_page-uncached
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_prot_region
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_prot_page-uncached
+11-07 15:51:31.097 19239 19239 I DMABUFHEAPS: Using DMA-BUF heap named: mtk_wfd_page-uncached
+11-07 15:51:31.107  1324  1817 D skia    : findCacheMissInfo vsync 338460885, result 0
+11-07 15:51:31.108  1324  1817 D skia    : findCacheMissInfo vsync 338460893, result 0
+--------- beginning of system
+11-07 15:51:31.110  2022  2167 D VRR [OPlusRefreshRateService]: handleConfigIdChange physicalDisplayId: 4627039422300187648 configId: 3 renderPeriod: 16666667
+11-07 15:51:31.112  2022  2167 D VRR [OPlusGameStatusManager]: updateGameState mOSyncFeatureSwitch: false mIsGamePolicy: false
+11-07 15:51:31.112  2022  2167 D VRR [OPlusGameStatusManager]: updateGameAccelerationStatus pkgName: com.xiaoshouji.app mOSyncFeatureSwitch: false mIsGamePolicy: false mHeartStop: false mHasFlickerRisk: false mForceAcceleration: false mToastReady: false enable: false
+11-07 15:51:31.112  2022  2167 D VRR [OPlusExternalRefreshRateManager]: handleOtiHistSwitch false
+11-07 15:51:31.112  2022  2167 D VRR [OPlusSurfaceFlingerController]:  setOtiHistogramSwitch : false
+11-07 15:51:31.113  1324  3791 D OplusHistogram: switch config: 0
+11-07 15:51:31.134  1324  1324 I BufferQueueProducer: [com.xiaoshouji.app/com.xiaoshouji.app.MainActivity#176796](this:0xb4000071cbb5baf8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=86.52 dur=1017.11 max=44.13 min=10.12
+11-07 15:51:31.160  3879  5586 D CommonApp-575-10084: transport layer data is invalid
+11-07 15:51:31.161  3879  5586 D CommonApp-575-10401: cannot access server
+11-07 15:51:31.161  3879  5586 D CommonApp-575-10401: commonScoreStrategy scenarios low package
+11-07 15:51:31.225  1213  1262 I libPerfCtl: xgfGetFPS pid:4493 fps:-1
+11-07 15:51:31.249  2022 10503 D OplusNetKit: interface name from LP: [ccmni3]
+11-07 15:51:31.249  2022 10503 D OplusNetKit: interface name from LP: [ccmni1]
+11-07 15:51:31.249  2022 10503 D OplusNetKit: interface name from LP: [wlan0]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:31.250  2022 10503 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:31.259  1239  1292 D BatteryChargeControl: bcc get no support from charging protocol
+11-07 15:51:31.278  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:31.279  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:31.280  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.289  2022 10503 D OplusArpKit: sendGatewayMacAddress ifaceName=wlan0 gatewayMac=68:**:**:**:49:5f gatewayIp=192.168.10.***
+11-07 15:51:31.291  2022 17149 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:31.291  2022 17149 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:31.291  2022 17149 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:31.336  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.337  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:31.337  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:31.338  1465  1465 D SensorFeature: write 38 bytes:650395089756007,650395106422674,3301,0
+11-07 15:51:31.349  2022  2121 D osense.compress: com.tencent.mobileqq_u999 do shrink, target ratio = 94, final ratio = 100, cur ratio = 92
+11-07 15:51:31.443  3064  3272 I SystemUi--Statusbar: OplusNetworkSpeedControllExImpl-->updateNetworkSpeed: isConnected:true,isSwitchOn:true,isSuspend:false,isPause:false
+11-07 15:51:31.449  3064  3272 I SystemUi--Statusbar: OplusNetworkSpeedControllExImpl-->getTotalByte: totalRxBytes:34068128093,totalTxBytes:7424641324,loopbackTxBytes:2327856857,loopbackRxBytes:2327824744 ,totalBytes:36837087816
+11-07 15:51:31.483  1324  1324 I BufferQueueProducer: [StatusBar#96](this:0xb4000071b30672f8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=4.62 dur=2816.24 max=2162.33 min=10.88
+11-07 15:51:31.579  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:31.580  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:31.581  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.635  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.636  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:31.638  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:31.639  1465  1465 D SensorFeature: write 38 bytes:650395388976084,650395405642751,3302,0
+11-07 15:51:31.671  1189  1247 I OriginChannel: now system_time:650395440	pwm_rgb: system_time:650394738, lux:466, time_delta:11, pwm_turbo:1, bri:1355, r:20492, g:13487, b:8232, c:36279, algo:2, end:131072, ts:650394478509905	
+11-07 15:51:31.767  1185 20653 I hwcomposer: [HWCDisplay] (0 updateFps():4518), (type:1, mode:2) fps:67.709373,dur:1004.29,max:46.05,min:6.87  
+11-07 15:51:31.880  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:31.881  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:31.881  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.934  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:31.935  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:31.936  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:31.937  1465  1465 D SensorFeature: write 38 bytes:650395688361546,650395705028213,3303,0
+11-07 15:51:31.939  1189  1247 I OriginChannel: now system_time:650395709	pwm_rgb: system_time:650395440, lux:466, time_delta:16, pwm_turbo:1, bri:1355, r:20493, g:13512, b:8262, c:36311, algo:2, end:3302, ts:650395348554464	pwm_rgb: system_time:650395441, lux:466, time_delta:16, pwm_turbo:1, bri:1355, r:20472, g:13486, b:8253, c:36327, algo:2, end:3302, ts:650395365220464	pwm_rgb: system_time:650395441, lux:466, time_delta:16, pwm_turbo:1, bri:1355, r:20503, g:13529, b:8287, c:36320, algo:2, end:3302, ts:650395381886464	pwm_rgb: system_time:650395441, lux:466, time_delta:16, pwm_turbo:1, bri:1355, r:20512, g:13525, b:8275, c:36333, algo:2, end:3302, ts:650395398552464	pwm_rgb: system_time:650395441, lux:466, time_delta:16, pwm_turbo:1, bri:1355, r:20543, g:13535, b:8275, c:36390, algo:2, end:68838, ts:650395415218464	
+11-07 15:51:32.147  1324  1324 I BufferQueueProducer: [com.xiaoshouji.app/com.xiaoshouji.app.MainActivity#176796](this:0xb4000071cbb5baf8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=60.24 dur=1012.65 max=17.25 min=16.06
+11-07 15:51:32.174  1233  1250 I touch-main: N| [readTemper] read temperature 28872
+11-07 15:51:32.179  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:32.180  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:32.180  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.186  3879  5586 D CommonApp-575-10084: transport layer data is invalid
+11-07 15:51:32.186  3879  5586 D CommonApp-575-10401: cannot access server
+11-07 15:51:32.186  3879  5586 D CommonApp-575-10401: commonScoreStrategy only ul and bad retrans
+11-07 15:51:32.225  1213  1262 I libPerfCtl: xgfGetFPS pid:3064 fps:-1
+11-07 15:51:32.227  1213  1262 I libPerfCtl: xgfGetFPS pid:4493 fps:-1
+11-07 15:51:32.233  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.235  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:32.235  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:32.236  1465  1465 D SensorFeature: write 38 bytes:650395987661238,650396004327905,3304,0
+11-07 15:51:32.260  1239  1292 D BatteryChargeControl: bcc get no support from charging protocol
+11-07 15:51:32.301  2771  2776 D WifiHAL : WifiRequest::create vendor command to iface 40, vendor_id=0x1a11, subcmd=0x1200, res=0
+11-07 15:51:32.303  2771  2776 I WifiHAL : LLS RSP: data=0xb400007a01618020, len=3956
+11-07 15:51:32.303  2771  2776 I WifiHAL : LLS check_data_sanity: 1829: current_radio_stat->num_channels=13
+11-07 15:51:32.304  2771  2776 I WifiHAL : LLS check_data_sanity: 1829: current_radio_stat->num_channels=13
+11-07 15:51:32.304  2771  2776 I WifiHAL : LLS check_data_sanity: confirmed_size=3956, len=3956
+11-07 15:51:32.306  2022  2670 E WifiStaIfaceAidlImpl: getCachedScanData failed with service-specific exception: android.os.ServiceSpecificException:  (code 4)
+11-07 15:51:32.311  2022 10503 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)
+11-07 15:51:32.314  1239  1291 D vendor.oplus.hardware.charger-V11-service: ret_value:160, read content:,271,271,4088,4088,196,70,74,1,1,0,476,4663,73,1,4500,600,500,0,12,2250,12,0,1,0,2,0,0,0,1,6751,100,2985,4596,6626,3168,0,0,0,0,0,0,69.36,73,72.69,68.70,69.65,
+11-07 15:51:32.315  1239  1291 D vendor.oplus.hardware.charger-V11-service: gmtime: 2026-11-07-15-51-32
+11-07 15:51:32.315  1239  1291 D vendor.oplus.hardware.charger-V11-service: usb_online:1, ac_online:-2147483648, wireless_online:0
+11-07 15:51:32.317  2022 10503 E OplusArpPeer_euclid_psw:  OplusArpPeer close
+11-07 15:51:32.322  3879  3879 D VendorWifiService: onEvent event:9,action:1
+11-07 15:51:32.329  2022  2756 D ScorerUtils: isLowTraffic: txTputKBps=0, rxTputKBps=0
+11-07 15:51:32.333  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:32.334  2022  2756 D OplusWifiPower_TriggerCenter: mComponentCallback: wifistat
+11-07 15:51:32.334  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: oplus_wifi_network check inet by slow arp: /192.168.10.***
+11-07 15:51:32.335  2022  9358 D OplusNetKit: interface name from LP: [ccmni3]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: interface name from LP: [ccmni1]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: interface name from LP: [wlan0]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni3]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [ccmni1]
+11-07 15:51:32.335  2022  9358 D OplusNetKit: in getLpByInterface name from LP: [wlan0]
+11-07 15:51:32.341  2022  9358 D OplusArpPeer_euclid_psw: Do not fill sender ip
+11-07 15:51:32.353  3064  3368 D skia    : GrGpu::writePixels takes 1
+11-07 15:51:32.467  1507  2033 D ULogGuard: Monitoring: 13 threads, 0 requests, 0 time-bombs; 3 guards. ResetFlags = 0x7
+11-07 15:51:32.468  1189  1247 I OriginChannel: now system_time:650396237	pwm_rgb: system_time:650395709, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20525, g:13545, b:8275, c:36418, algo:2, end:131072, ts:650395614375685	
+11-07 15:51:32.477  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:32.478  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:32.479  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.533  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.535  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:32.537  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:32.538  1465  1465 D SensorFeature: write 38 bytes:650396287684623,650396304351290,3305,0
+11-07 15:51:32.626  2022  2052 I ActivityManager: Broadcasting: Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x400000 }
+11-07 15:51:32.628  2022  2052 I ActivityManager: Enqueued broadcast Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x400000 }: 0
+11-07 15:51:32.637  2896  8794 D OplusFileObserveService: onEvent() file = /storage/emulated/0/round115-release-final-home.png, event = 8
+11-07 15:51:32.640  2022  2052 W JobInfo : Job 'com.android.providers.media.module/com.android.providers.media.MediaService#-300' has a deadline with no functional constraints. The deadline won't improve job execution latency. Consider removing the deadline.
+11-07 15:51:32.640  2896  8794 W OplusFileObserveService: onEvent() CLOSE_WRITE file is not in root dirs, skip.
+11-07 15:51:32.644 19239 19239 W RefBase : RefBase: Explicit destruction, weak count = 0 (in 0x773f7e4ac8). Use sp<> to manage this object. Note - if weak count is 0, this leaks mRefs (weakref_impl).
+11-07 15:51:32.650 19239 19239 D RefBase :   #00 pc 000000000008c0e0  /apex/com.android.runtime/lib64/bionic/libc.so (__cxa_finalize+224) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:32.650 19239 19239 D RefBase :   #01 pc 0000000000090e84  /apex/com.android.runtime/lib64/bionic/libc.so (exit+36) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:32.650 19239 19239 D RefBase :   #02 pc 00000000000846cc  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+124) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:32.652  2022  2707 I ActivityManager: Broadcast completed: result=0
+11-07 15:51:32.654  2022  3282 I OplusExSystemServiceHelper: connected :com.android.providers.media.MediaService
+11-07 15:51:32.656  7244  9336 I MediaProvider: Begin Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService }
+11-07 15:51:32.685  7244  9336 W PermissionInjector: applyBatch in invalid type: 2
+11-07 15:51:32.697  7244  9336 W OplusAddVideoThumbnail: isInsertThumbnail2Video() the caller = com.android.providers.media.module,uri = content://media/external_primary/file/49148
+11-07 15:51:32.698  7244  9336 W OplusAddVideoThumbnail: isInsertThumbnail2Video() mimeType is not video 
+11-07 15:51:32.698  7244  9336 D MediaProvider: updateInternal cacheThumbnail uri = content://media/external_primary/file/49148,count = 1,retPending = 0
+11-07 15:51:32.698  7244  9336 W OplusThumbnailUtils: checkThumbnailExist() image thumbnail is exit!, uri = content://media/external_primary/file/49148
+11-07 15:51:32.704  7244  9336 I MediaProvider: End Intent { act=android.intent.action.MEDIA_SCANNER_SCAN_FILE dat=file:///... flg=0x1400010 cmp=com.android.providers.media.module/com.android.providers.media.MediaService }
+11-07 15:51:32.705  7244  9336 W OplusThumbnailUtils: checkThumbnailExist() image thumbnail is exit!, uri = content://media/external_primary/images/media/49148
+11-07 15:51:32.707  8593 19261 I ContextAware_DailyStatisticsRecorder: Increase context change count: dmp_change_count, value: 1
+11-07 15:51:32.712  7244  7405 D OplusThumbnailUtils: cacheThumbnail() cacheThumbnailByUri uri=content://media/external_primary/file/49148,priority=100,path=/storage/emulated/0/round115-release-final-home.png
+11-07 15:51:32.712  7244  7405 D OplusCacheThumbnail: cacheThumbnailByUri() filePath = /storage/emulated/0/round115-release-final-home.png ,uri = content://media/external_primary/file/49148
+11-07 15:51:32.734  1189  1247 I OriginChannel: now system_time:650396503	pwm_rgb: system_time:650396237, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20512, g:13519, b:8281, c:36355, algo:2, end:131072, ts:650395979393219	
+11-07 15:51:32.735  2022  2496 D FusionLightNextGen: process end reported = 1, mode: 1, cnt: 400155, lux 238.0, cct -1.0, r/g/b/c: 20503.0/13512.0/8269.0/36368.0, R/G/B: 238.0/239.0/227.0, bri 1355.0, match 0.69, ir 0.099399, conf 0.0, ts 650396328559003
+11-07 15:51:32.741  7244  7260 W FuseDaemon: Reducing the number of considered missed Gc histogram windows from 188 to 100
+11-07 15:51:32.779  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:32.780  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:32.780  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.780  1185  1198 I hwcomposer: [HWCDisplay] (0 updateFps():4518), (type:1, mode:2) fps:60.180660,dur:1013.61,max:18.02,min:14.84  
+11-07 15:51:32.785  5154 14394 E midasd  : getTotalFlipsFromSf mCurFrameCount: 17385414
+11-07 15:51:32.786  5154 14394 I midasd  : DisplayAgent updateDisplayDevInfo getRenderFps mFps:60 mRenderFps:60 mWidth:1272 mHeight:2772
+11-07 15:51:32.818  2022  2756 D OplusGtxController: no disable gtx lock hold, enable gtx
+11-07 15:51:32.819  2022  2756 D OplusGtxController: setGtxEnabled true fail.
+11-07 15:51:32.833  2022  2121 I resRelease: policy type is 2
+11-07 15:51:32.848  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:32.849  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:32.849  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:32.849  1465  1465 D SensorFeature: write 38 bytes:650396601627776,650396618294443,3306,0
+11-07 15:51:32.871  4493 19037 I .xiaoshouji.app: HeapTask is not gc_task
+11-07 15:51:32.874  3394  8810 W HapBridge: [quickjs_runtime.cpp][RunGC][236]: RunGC
+11-07 15:51:32.913  7244 19263 D OplusCacheThumbnail: CacheThumbnailTask run() fd = {ParcelFileDescriptor: java.io.FileDescriptor@42bff1} ,uri= content://media/external_primary/file/49148,mPath = null,caller = unknown
+11-07 15:51:32.927 19267 19267 D ExtensionsLoader: createInstance(64bit) : createExtendedFactory
+11-07 15:51:32.928 19267 19267 D ExtensionsLoader: Opened libguiextimpl.so
+11-07 15:51:32.940 19267 19267 D AVStageFactory: Opened liboplusavenhancements.so
+11-07 15:51:32.940 19267 19267 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:32.940 19267 19267 D AVStageUtils: Opened liboplusavenhancements.so
+11-07 15:51:32.940 19267 19267 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:32.940 19267 19267 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:32.941 19267 19267 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:32.941 19267 19267 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:32.941 19267 19267 D AVMediaServiceFactory: Opened liboplusavenhancements.so
+11-07 15:51:32.941 19267 19267 D AVMediaServiceFactory: createInstance(64bit): createExtendedMediaServiceFactory success!
+11-07 15:51:32.942 19267 19267 D AVNuFactory: Opened liboplusavenhancements.so
+11-07 15:51:32.942 19267 19267 D AVNuFactory: createInstance(64bit): createExtendedNuFactory success!
+11-07 15:51:32.942 19267 19267 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:32.942 19267 19267 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:32.942 19267 19267 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:32.942 19267 19267 D AVMediaServiceFactory: createInstance(64bit): createExtendedMediaServiceFactory success!
+11-07 15:51:32.942 19267 19267 D AVNuFactory: createInstance(64bit): createExtendedNuFactory success!
+11-07 15:51:32.942 19267 19267 D AVStageFactory: Opened liboplusavenhancements.so
+11-07 15:51:32.942 19267 19267 D AVStageFactory: createInstance(64bit): createVendorAVFactory success!
+11-07 15:51:32.942 19267 19267 D AVStageUtils: Opened liboplusavenhancements.so
+11-07 15:51:32.942 19267 19267 D AVStageUtils: createInstance(64bit): createVendorAVUtils success!
+11-07 15:51:32.942 19267 19267 D OplusUtils: OplusUtils [84]: 
+11-07 15:51:32.943 19267 19267 E app_process: createInstance(64bit) : createExtendedFactory
+11-07 15:51:32.944 19267 19267 E app_process: createInstance(64bit) : createExtendedFactory
+11-07 15:51:32.944 19267 19267 E app_process: Opened libinputextensionsimpl.so
+11-07 15:51:32.944 19267 19267 E app_process: Opened libinputextensionsimpl.so
+11-07 15:51:32.945 19267 19267 D AndroidRuntime: >>>>>> START com.android.internal.os.RuntimeInit uid 2000 <<<<<<
+11-07 15:51:32.952 19267 19267 I AndroidRuntime: Using default boot image
+11-07 15:51:32.952 19267 19267 I AndroidRuntime: Leaving lock profiling enabled
+11-07 15:51:32.954 19267 19267 I app_process: Using CollectorTypeCMC GC.
+11-07 15:51:32.954 19267 19267 I app_process: isSwordfishLaunchAppEnabled_ 1 isSwordfishInstallAppEnabled_ 1
+11-07 15:51:32.989 19068 19090 I ocessService0:0: HeapTask is not gc_task
+11-07 15:51:33.000  1189  1247 I OriginChannel: now system_time:650396769	pwm_rgb: system_time:650396503, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20506, g:13519, b:8262, c:36355, algo:2, end:3305, ts:650396261895003	pwm_rgb: system_time:650396503, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20503, g:13512, b:8269, c:36368, algo:2, end:3305, ts:650396278561003	pwm_rgb: system_time:650396503, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20525, g:13525, b:8275, c:36393, algo:2, end:3305, ts:650396295227003	pwm_rgb: system_time:650396503, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20540, g:13561, b:8296, c:36443, algo:2, end:3305, ts:650396311893003	pwm_rgb: system_time:650396503, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20518, g:13529, b:8278, c:36399, algo:2, end:68841, ts:650396328559003	
+11-07 15:51:33.005  4493 19067 D ContentResolverExt: reject package: com.xiaoshouji.app, restricted: 2
+11-07 15:51:33.005  4493 19067 W ServiceBindIntentUtils: Dynamic intent resolution failed: android.os.RemoteException: Failed to acquire ContentProviderClient
+11-07 15:51:33.005  4493 19067 W ServiceBindIntentUtils: Dynamic lookup for intent failed for action: com.google.android.gms.common.telemetry.service.START
+11-07 15:51:33.007  2022  3282 W ActivityManager: Unable to start service Intent { act=com.google.android.gms.common.telemetry.service.START xflg=0x4 pkg=com.google.android.gms mCallingUid=10401 } U=0: not found
+11-07 15:51:33.008  2022  2052 W ActivityManager: Unbind failed: could not find connection for android.os.BinderProxy@1d93cbd
+11-07 15:51:33.009  4493 19067 W GmsClient: unable to connect to service: com.google.android.gms.common.telemetry.service.START on com.google.android.gms
+11-07 15:51:33.025 18539 18553 I webview_service: HeapTask is not gc_task
+11-07 15:51:33.048 19267 19267 I app_process: isSwordfishLaunchAppEnabled_ 1 isSwordfishInstallAppEnabled_ 1
+11-07 15:51:33.048 19267 19267 D nativeloader: InitDefaultPublicLibraries for_preload=1: libandroid.so:libaaudio.so:libamidi.so:libbinder_ndk.so:libc.so:libcamera2ndk.so:libdl.so:libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libicu.so:libicui18n.so:libicuuc.so:libjnigraphics.so:liblog.so:libmediandk.so:libm.so:libnativehelper.so:libnativewindow.so:libOpenMAXAL.so:libOpenSLES.so:libRS.so:libstdc++.so:libsync.so:libvulkan.so:libwebviewchromium_plat_support.so:libz.so
+11-07 15:51:33.063 19267 19267 D nativeloader: Load libicu_jni.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+11-07 15:51:33.063 19267 19267 D app_process: u_setTimeZoneFilesDirectory("/apex/com.android.tzdata/etc/tz/versioned/9/icu") succeeded. 
+11-07 15:51:33.063 19267 19267 D app_process: I18n APEX ICU file found: /apex/com.android.i18n/etc/icu/icudt76l.dat
+11-07 15:51:33.067 19267 19267 D nativeloader: Load libjavacore.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+11-07 15:51:33.070 19267 19267 D nativeloader: Load libopenjdk.so using APEX ns com_android_art for caller /apex/com.android.art/javalib/core-oj.jar: ok
+11-07 15:51:33.075 19267 19267 W app_process: ClassLoaderContext shared library size mismatch. Expected=2, found=0 (PCL[]{PCL[/system/framework/android.test.base.jar*2789897741]#PCL[/system/framework/android.test.mock.jar*3361312393]} | PCL[])
+11-07 15:51:33.075 19267 19267 W app_process: ClassLoaderContext classpath size mismatch. expected=0, found=1 (PCL[]{PCL[/system/framework/android.test.runner.jar*895143020]#PCL[/system/framework/android.test.base.jar*2789897741]} | PCL[/system/framework/android.test.runner.jar*895143020])
+11-07 15:51:33.090  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:33.091  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:33.091  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.107 19267 19267 W libc    : Access denied finding property "ro.vendor.mtk.hbt_binfmt_misc_support"
+11-07 15:51:33.107 19267 19267 W libc    : Access denied finding property "ro.vendor.mtk.app32_boost_support"
+11-07 15:51:33.107 19267 19267 W libc    : Access denied finding property "ro.vendor.oplus.tango_binfmt_misc_support"
+11-07 15:51:33.107 19267 19267 W libc    : Access denied finding property "ro.vendor.oplus.otranslator_64only_chip"
+11-07 15:51:33.108 19267 19267 W libc    : Access denied finding property "ro.vendor.oplus.app32_boost_support"
+11-07 15:51:33.108 19267 19267 W libc    : Access denied finding property "ro.vendor.mtk.app32_boost_support"
+11-07 15:51:33.110 19267 19267 D nativeloader: Load libonetrace_jni.so using system ns (caller=/system/framework/oplus-framework.jar): ok
+11-07 15:51:33.111 19267 19267 D OplusTrace: register_android_os_OplusTrace
+11-07 15:51:33.124 19267 19267 D nativeloader: Load libframework-connectivity-tiramisu-jni.so using APEX ns com_android_tethering for caller /apex/com.android.tethering/javalib/framework-connectivity-t.jar: ok
+11-07 15:51:33.124 19267 19267 D AndroidRuntime: Calling main entry com.android.commands.uiautomator.Launcher
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.nfc.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.admin.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.database.sqlite is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.providers.calendar is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.power.feature.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.performance.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.contextualsearch.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.ondeviceintelligence.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.projection.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.companion is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.controls.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.text.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.providers.contactkeys.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.intentresolver is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.companion.virtualdevice.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.uprobestats.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.net.thread.platform.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.view.contentprotection.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.dreams is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.surfaceflinger.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.hardware.input is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.sdk is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.input.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.tracing is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.biometrics is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.view.contentcapture.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.job is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.content.res is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.net.platform.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.aconfig.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.server.app is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.speech.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.stats is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.hardware.biometrics is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.car.feature is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.adpf is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.location.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.settingslib.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.managedprovisioning.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.assist.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.net is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.settingslib.widget.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.camera.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.hardware.libsensor.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.jank is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.providers.settings is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.multiuser is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.power.optimization is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.calllogbackup is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.libvulkan.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.appfunctions.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.smartspace.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.providers.contacts.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.shell.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.aaudio is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.hardware.radio is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: suspend_service.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.media.midi is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.libcore.readonly is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.settingslib.widget.selectorwithwidgetpreference.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.notification is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.systemui.shared is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.jank is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.wearable is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.audio is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.chooser is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.compat is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.alarm is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.apex.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.quickaccesswallet is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.usage is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.accessibility is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app.supervision.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.utils is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.chre.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.content.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.media.codec is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.os is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.nfc.nci.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.app is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.security.keystore2 is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.crashrecovery.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.tradeinmode.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.hardware.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.telecom.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.settingslib.media.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.policy is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.media.audiopolicy is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.egg.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.compat.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.security is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.autofill is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.example.android.aconfig.demo.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.view.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.companion.virtual.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.aconfig_new_storage is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.feature.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.systemui is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.power.batterysaver is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.widget.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.editing.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.codec.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.powerstats is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.egl.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.media.audioserver is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.deviceidle is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.nfc is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.permission.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.voice.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.content.pm is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.power.hint is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.os is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.service.dreams is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.libgui.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.hardware.usb.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.provider is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.job is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.foldables.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.telephony.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.webkit is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.credentials.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.display.feature.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.notification is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.oplus.framework.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.appwidget.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.frameworks.sensorservice.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.window.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.adaptiveauth is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.net.wifi.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.media.tv.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.usb.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.os.vibrator is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.hardware.devicestate.feature.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.usage is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.server is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.wm.shell is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.view.inputmethod is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.graphics.hwui.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.server.backup is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: com.android.internal.pm.pkg.component.flags is mapped to system
+11-07 15:51:33.131 19267 19267 I AconfigPackage: android.view.accessibility is mapped to system
+11-07 15:51:33.132 19267 19267 I AconfigPackage: android.media.audio is mapped to system
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.server.am is mapped to system
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.media.playback.flags is mapped to system
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.settings.accessibility is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.settings.keyboard is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.settings.factory_reset is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.systemui.accessibility.accessibilitymenu is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.server.policy.feature.flags is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.settings.flags is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.settings.media_drm is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.launcher3 is mapped to system_ext
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.media.extractor.flags is mapped to com.android.media
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.media.mainline.flags is mapped to com.android.media
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.wifi.flags is mapped to com.android.wifi
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.adservices.ondevicepersonalization.flags is mapped to com.android.ondevicepersonalization
+11-07 15:51:33.132 19267 19267 I AconfigPackage: android.uprobestats.mainline.flags is mapped to com.android.uprobestats
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.net.ct.flags is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.net.flags is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: android.net.vcn is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.nearby.flags is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: android.net.http is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.net.thread.flags is mapped to com.android.tethering
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.ipsec.flags is mapped to com.android.ipsec
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.healthfitness.flags is mapped to com.android.healthfitness
+11-07 15:51:33.132 19267 19267 I AconfigPackage: android.provider.flags is mapped to com.android.configinfrastructure
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.server.deviceconfig is mapped to com.android.configinfrastructure
+11-07 15:51:33.132 19267 19267 I AconfigPackage: com.android.appsearch.flags is mapped to com.android.appsearch
+11-07 15:51:33.132 19267 19267 W AconfigPackage: failed to map some package from com.android.cellbroadcast.package.map: android.os.flagging.AconfigStorageReadException: ERROR_CANNOT_READ_STORAGE_FILE: Fail to mmap storage
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.adservices.flags is mapped to com.android.adservices
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.sdksandbox.flags is mapped to com.android.adservices
+11-07 15:51:33.133 19267 19267 I AconfigPackage: android.graphics.pdf.flags is mapped to com.android.mediaprovider
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.providers.media.flags is mapped to com.android.mediaprovider
+11-07 15:51:33.133 19267 19267 I AconfigPackage: android.graphics.pdf.flags.readonly is mapped to com.android.mediaprovider
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.devicelock.flags is mapped to com.android.devicelock
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.permission.flags is mapped to com.android.permission
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.permissioncontroller.flags is mapped to com.android.permission
+11-07 15:51:33.133 19267 19267 I AconfigPackage: android.os.profiling is mapped to com.android.profiling
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.os.statsd.flags is mapped to com.android.os.statsd
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.system.virtualmachine.flags is mapped to com.android.virt
+11-07 15:51:33.133 19267 19267 I AconfigPackage: android.media.swcodec.flags is mapped to com.android.media.swcodec
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.org.conscrypt.flags is mapped to com.android.conscrypt
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.uwb.flags is mapped to com.android.uwb
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.ranging.flags is mapped to com.android.uwb
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.art.flags is mapped to com.android.art
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.libcore is mapped to com.android.art
+11-07 15:51:33.133 19267 19267 I AconfigPackage: com.android.icu is mapped to com.android.i18n
+11-07 15:51:33.133 19267 19267 E FeatureFlagsImplExport: android.os.flagging.AconfigStorageReadException: ERROR_PACKAGE_NOT_FOUND: package android.xr cannot be found on the device
+11-07 15:51:33.135 19267 19267 W PlatformAconfigPackage: android.os.flagging.AconfigStorageReadException: ERROR_CANNOT_READ_STORAGE_FILE: Fail to mmap storage
+11-07 15:51:33.136 19267 19267 D UiAutomationConnection: Created on user UserHandle{0}
+11-07 15:51:33.136 19267 19267 I UiAutomation: Initialized for user 0 on display 0
+11-07 15:51:33.136 19267 19267 W UiAutomation: Created with deprecatead constructor, assumes DEFAULT_DISPLAY
+11-07 15:51:33.137  2022  2052 D AccessibilityManagerService: changeCurrentUserForTestAutomationIfNeededLocked(0): ignoring because device doesn't support visible background users
+11-07 15:51:33.138  2022  2052 I UiAutomationManager: Registering UiTestAutomationService (id=com.android.server.accessibility/UiAutomation, flags=0x0) when called by user 0
+11-07 15:51:33.138  2022  2052 V AccessibilityManagerService: onUserStateChangedLocked for user 0 with forceUpdate: false mEnabledServices = [] mCrashedServices = [] hasMagnificationConnection=false
+11-07 15:51:33.138  2022  2052 I AccessibilityManagerService: updateAccessibilityEnabledSettingLocked:true
+11-07 15:51:33.138  2022  2052 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+11-07 15:51:33.139  2022  2501 I GestureLog_OplusGestureObserver: updateSettings, needRegisterGesture:true, accessibilityEnabled:true, mTalkBackEnable:false, mTouchExplorationState:false, mThreePointersScreenshot:true, mThreePointersAreaScreenshot:true, mThreePointersSplitScreen:true, mTwoPointersSplitForTouchpad:true, mThreePointersFlashMemory:true, mThreePointersPreventGame:false, mTouchPadScreenshot:true, mInGameMode:false, mMultiPointersPreventRemoteControl:false, mExpandCastInputGestureSwitch:false, mSplitScreenEnable:true, mConfineMode:0x0, mSuperPowerEnter: false, mRepeatShowToast: false, mBreathModeOn: false, mUserSetupComplete: true
+11-07 15:51:33.139  2022  2501 D GestureLog_OplusGestureObserver: updateGlobalGestureObserver, gesture = 0x4, threeScreenshotEnable = true, threeAreaScreenshotEnable = true, threeSplitScreenEnable = true, threeTouchPadScreenshotEnable = true, twoSplitForTouchpad = false, mMultiPointersPreventRemoteControl=false, mExpandCastInputGestureSwitch=false, mThreePointersPreventGame=false, mInGame=false, phoneMode = 0 mThreePointersFlashMemory=true
+11-07 15:51:33.139  2022  2501 D GestureLog_OplusMultiGesturePolicy: registerGlobalGesture, return:10000004 has already registered!
+11-07 15:51:33.139  2022  2501 I GestureLog_OplusGestureObserver: updateSettings, needRegisterGesture:true, accessibilityEnabled:true, mTalkBackEnable:false, mTouchExplorationState:false, mThreePointersScreenshot:true, mThreePointersAreaScreenshot:true, mThreePointersSplitScreen:true, mTwoPointersSplitForTouchpad:true, mThreePointersFlashMemory:true, mThreePointersPreventGame:false, mTouchPadScreenshot:true, mInGameMode:false, mMultiPointersPreventRemoteControl:false, mExpandCastInputGestureSwitch:false, mSplitScreenEnable:true, mConfineMode:0x0, mSuperPowerEnter: false, mRepeatShowToast: false, mBreathModeOn: false, mUserSetupComplete: true
+11-07 15:51:33.139  2022  2501 D GestureLog_OplusGestureObserver: updateGlobalGestureObserver, gesture = 0x4, threeScreenshotEnable = true, threeAreaScreenshotEnable = true, threeSplitScreenEnable = true, threeTouchPadScreenshotEnable = true, twoSplitForTouchpad = false, mMultiPointersPreventRemoteControl=false, mExpandCastInputGestureSwitch=false, mThreePointersPreventGame=false, mInGame=false, phoneMode = 0 mThreePointersFlashMemory=true
+11-07 15:51:33.139  2022  2501 D GestureLog_OplusMultiGesturePolicy: registerGlobalGesture, return:10000004 has already registered!
+11-07 15:51:33.140  8593  8621 I metis_v2_SettingUtils: switchObserver, onChange: false uri:content://settings/secure/accessibility_enabled flags:32769
+11-07 15:51:33.140  8709  8784 I OplusGestureObserver:  onChange uri = content://settings/secure/accessibility_enabled
+11-07 15:51:33.142  2022  9358 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)
+11-07 15:51:33.143  2022  9358 E OplusArpPeer_euclid_psw:  OplusArpPeer close
+11-07 15:51:33.144  2022  2070 D CoreBackPreview:  return markWindowHasDrawn mComposed: false  mWaitTransition: false
+11-07 15:51:33.144  2022  2070 D ActivityTaskManager: Clearing startingData for activity=ActivityRecord{145351374 u0 com.android.launcher/.Launcher t5} mStartingData=null mStartingSurface=null
+11-07 15:51:33.146  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:33.146  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.146  2022  2022 I OplusBinderProxy: pb 10354->12602 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.146  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:33.147  2022  2022 I OplusBinderProxy: pb 10360->19866 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.147  2022  2022 I OplusBinderProxy: pb 10354->11595 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.147  2022  2022 I OplusBinderProxy: pb 99910386->19471 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.147  2022  2022 I OplusBinderProxy: pb 10360->8205 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.148  2022  2022 I OplusBinderProxy: pb 99910386->16313 desc:IAccessibilityManagerClient/3
+11-07 15:51:33.148  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:33.149  1465  1465 D SensorFeature: write 38 bytes:650396899373315,650396916039982,3307,0
+11-07 15:51:33.149  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:33.149  2022  2022 I OplusBinderProxy: pb 10354->12602 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.149  2022  2022 I OplusBinderProxy: pb 10360->19866 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.149  2022  2022 I OplusBinderProxy: pb 10354->11595 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.149  2022  2022 I OplusBinderProxy: pb 99910386->19471 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.149  2022  2022 I OplusBinderProxy: pb 10360->8205 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.150  2022  2022 I OplusBinderProxy: pb 99910386->16313 desc:IAccessibilityManagerClient/1
+11-07 15:51:33.151  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:33.151  2022  2022 I OplusBinderProxy: pb 10354->12602 desc:IAccessibilityManagerClient/4
+11-07 15:51:33.151  2022  2022 I OplusBinderProxy: pb 10354->11595 desc:IAccessibilityManagerClient/4
+11-07 15:51:33.151  2022  2022 I OplusBinderProxy: pb 99910386->19471 desc:IAccessibilityManagerClient/4
+11-07 15:51:33.152  2022  2022 I OplusBinderProxy: pb 99910386->16313 desc:IAccessibilityManagerClient/4
+11-07 15:51:33.154  2022  2022 D BatterySaverPolicy: accessibility changed to true, updating policy.
+11-07 15:51:33.155  2022  9358 D OplusArpPeer_euclid_psw: Do not fill sender ip
+11-07 15:51:33.156  2022  3429 V AccessibilityManagerService: onUserStateChangedLocked for user 0 with forceUpdate: false mEnabledServices = [] mCrashedServices = [] hasMagnificationConnection=false
+11-07 15:51:33.157  2022  3429 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+11-07 15:51:33.158  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:33.160  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:33.160  2022  2022 I OplusBinderProxy: pb 10354->12602 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.160  1324  1324 I BufferQueueProducer: [com.xiaoshouji.app/com.xiaoshouji.app.MainActivity#176796](this:0xb4000071cbb5baf8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=60.20 dur=1013.36 max=17.42 min=15.74
+11-07 15:51:33.160  2022  2022 I OplusBinderProxy: pb 10360->19866 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.161  2022  2022 I OplusBinderProxy: pb 10354->11595 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.161  2022  2022 I OplusBinderProxy: pb 99910386->19471 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.161  2022  2022 I OplusBinderProxy: pb 10360->8205 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.161  2022  2022 I OplusBinderProxy: pb 99910386->16313 desc:IAccessibilityManagerClient/2
+11-07 15:51:33.168  3064  3064 W OPLUS_LOG_LOAD: ==LOGS PROG INFO, prog(com.android.systemui) ==
+11-07 15:51:33.168  3064  3064 I SystemUi--NavBar: NavigationBarGestureExImpl-->oplusAllowSystemGestureIgnoringBarVisibility isOplusFlagAllowBackGestureIgnoreVisibilityState = false isGestureMisTouchPreventionEnable = true
+11-07 15:51:33.208  3879  5586 D CommonApp-575-10084: transport layer data is invalid
+11-07 15:51:33.208  3879  5586 D CommonApp-575-10401: cannot access server
+11-07 15:51:33.208  3879  5586 D CommonApp-575-10401: commonScoreStrategy only ul and bad retrans
+11-07 15:51:33.216  3879  3879 D RadioMessenger: handleMessage Request msgid 2311
+11-07 15:51:33.217  3879  3879 D RadioProxyJ[0]: [4778253]> getAllCellularCellInfo
+11-07 15:51:33.218 32670 32678 D subsys_daemon: Sending async request to service 1, msgId=1, dataLen=0
+11-07 15:51:33.218 32670 32678 D subsys_daemon: IPC TX: 00000000: eb 04 00 01 01 00 0a 00 00 00 00 00 00 00 00 00  | Total: 16 bytes
+11-07 15:51:33.221 32670 32687 D subsys_daemon: IPC RX: 00000000: eb 04 01 01 01 00 00 00 00 00 00 00 fa 00 00 00 0a 42 08 ed e3 80 b6 02 10 14 18 cc 03 20 01 28 84 b4 98 05 30 81 e8 b6 a2 a6 01 38 80 03 40 01 48 fe e7 19 50 28 5a 16 08 c0 f8 ff ff ff ff ff  | Total: 266 bytes (showing first 64)
+11-07 15:51:33.221 32670 32687 D IpcServiceManager: receive rsp msg 1 of service 1 from channel 0
+11-07 15:51:33.221 32670 32678 D IpcNasProxy: handleMessage msg is 4002
+11-07 15:51:33.221 32670 32678 D RadioProxy: getAllCellInfo : response cb for instance 0
+11-07 15:51:33.223  3879  4720 D SubsysRadioResponse: getAllCellularCellInfoResponse
+11-07 15:51:33.223  3879  4720 D SubsysRadioResponse: responseAllCellularCellInfo len:4
+11-07 15:51:33.224  3879  4720 D RadioProxyJ[0]: [4778253]< getAllCellularCellInfoResponse ******
+11-07 15:51:33.225  3879  3879 D MessengerResponseHandler: handleMessage Response msgid 281
+11-07 15:51:33.225  3879  3879 I OnnxMoveStateCollection: handleAllCellularCellInfo
+11-07 15:51:33.225  3879  3879 D RadioCellInfo: RadioCellInfo
+11-07 15:51:33.227  1213  1262 I libPerfCtl: xgfGetFPS pid:4493 fps:-1
+11-07 15:51:33.227  3879  5028 D MoveStateCollection:  mCurrentAccState == 4 mCurrentOnnxState <<< 0
+11-07 15:51:33.261  1239  1292 D BatteryChargeControl: bcc get no support from charging protocol
+11-07 15:51:33.266  1189  1247 I OriginChannel: now system_time:650397035	pwm_rgb: system_time:650396769, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20556, g:13558, b:8293, c:36434, algo:2, end:3306, ts:650396577723161	pwm_rgb: system_time:650396769, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20528, g:13519, b:8266, c:36386, algo:2, end:3306, ts:650396594389161	pwm_rgb: system_time:650396769, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13529, b:8287, c:36396, algo:2, end:3306, ts:650396611055161	pwm_rgb: system_time:650396769, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20518, g:13545, b:8269, c:36368, algo:2, end:3306, ts:650396627721161	pwm_rgb: system_time:650396769, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13548, b:8300, c:36415, algo:2, end:68842, ts:650396644387161	
+11-07 15:51:33.268  1551  1718 D AALLightSensor: oldLux=248 [SA:-1 LA:-1] newLux=248 (oriLux: 238)
+11-07 15:51:33.294 25771 25795 I oteguardservice: HeapTask is not gc_task
+11-07 15:51:33.331  8177  8202 I igitalwellbeing: HeapTask is not gc_task
+11-07 15:51:33.393  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:33.395  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:33.395  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.463  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.463  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:33.464  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:33.465  1465  1465 D SensorFeature: write 38 bytes:650397216511777,650397233178444,3308,0
+11-07 15:51:33.532  1189  1247 I OriginChannel: now system_time:650397301	pwm_rgb: system_time:650397035, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20512, g:13522, b:8262, c:36374, algo:2, end:3307, ts:650396876877612	pwm_rgb: system_time:650397035, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20515, g:13519, b:8259, c:36349, algo:2, end:3307, ts:650396893543612	pwm_rgb: system_time:650397035, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13532, b:8296, c:36383, algo:2, end:3307, ts:650396910209612	pwm_rgb: system_time:650397035, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20522, g:13516, b:8266, c:36336, algo:2, end:3307, ts:650396926875612	pwm_rgb: system_time:650397035, lux:467, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13545, b:8278, c:36377, algo:2, end:68843, ts:650396943541612	
+11-07 15:51:33.706  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:33.708  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:33.708  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.711  3064  3097 I ndroid.systemui: HeapTask is not gc_task
+11-07 15:51:33.756  1551  1879 D PQ_DBIServiceV2: [CRTC_116] NORMAL dump
+11-07 15:51:33.757  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper enable
+11-07 15:51:33.757  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.757  1185  1198 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 0, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.757  1185  1198 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 1/0, src(0, 0, 256, 2772), dst(256, 2772), fmt 0x3  
+11-07 15:51:33.757  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDumpEnable return 0
+11-07 15:51:33.757  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDump(), dpy 1, dst (256, 2772), dump_point 1, release_fence -1
+11-07 15:51:33.758  1185  1198 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseGetDispDump()
+11-07 15:51:33.758  1185  1198 D libcomposer_ext: DeviceImplAidl::ParseGetDispDump(), dpy 1, dst (256, 2772), dump_point 1
+11-07 15:51:33.758  1185  1198 I hwcomposer: [HWC] getDispDump(), client(1), dpy 1, (0,0,256,2772), (256, 2772), (1, 0), (-1), (-1), (0xb40000759e814e00)  
+11-07 15:51:33.758  1185  1198 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 1, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.758  1185  1198 I hwcomposer: [DISP_DUMP] setDumpBuf(), client(1), dpy(0), src(0, 0, 256, 2772), dst(256, 2772), (1, 0), -1, (-1), (0xb40000759e814e00)  
+11-07 15:51:33.760  1185  1198 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::NotifyDispDumpReady(), client_handle:1, buffer:0xb40000751d21bc80, fence:49, period16666667
+11-07 15:51:33.761  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDump suceed, curr_count: 364029, cwb_x = 0, mCurWidth = 256, buffer_allocId = 19, timeout 0
+11-07 15:51:33.761  1551  1879 D PQ_DBIServiceV2: [CRTC_116] wait notify
+11-07 15:51:33.762  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:33.761  1551  1551 D libcomposer_ext: ClientCallbackAidl::asyncPerform(15)
+11-07 15:51:33.762  1551  1551 D libcomposer_ext: ClientImplAidl::ParseNotifyDispDumpReady()
+11-07 15:51:33.762  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady() enter notify
+11-07 15:51:33.763  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:33.763  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait acquire_fence 43, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.763  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper disable
+11-07 15:51:33.763  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.763  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 0/1, src(0, 0, 1272, 2772), dst(1272, 2772), fmt 0x3  
+11-07 15:51:33.764  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:33.764  1465  1465 D SensorFeature: write 38 bytes:650397515830238,650397532496905,3309,0
+11-07 15:51:33.780  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait done acquire_fence 43, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.781  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, partial offset 0
+11-07 15:51:33.781  1551  1551 D PQ_ODDMRManager: [CRTC_116] from flash open temperature file /sys/class/fuelsummary/board_temp failed!
+11-07 15:51:33.784  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper enable
+11-07 15:51:33.785  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.785  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 0, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.785  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 1/0, src(0, 0, 256, 2772), dst(256, 2772), fmt 0x3  
+11-07 15:51:33.785  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDumpEnable return 0
+11-07 15:51:33.785  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDump(), dpy 1, dst (256, 2772), dump_point 1, release_fence -1
+11-07 15:51:33.786  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseGetDispDump()
+11-07 15:51:33.786  1185 20653 D libcomposer_ext: DeviceImplAidl::ParseGetDispDump(), dpy 1, dst (256, 2772), dump_point 1
+11-07 15:51:33.786  1185 20653 I hwcomposer: [HWC] getDispDump(), client(1), dpy 1, (256,0,512,2772), (256, 2772), (1, 0), (-1), (-1), (0xb40000759e813280)  
+11-07 15:51:33.786  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 1, src(256, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.786  1185 20653 I hwcomposer: [DISP_DUMP] setDumpBuf(), client(1), dpy(0), src(256, 0, 512, 2772), dst(256, 2772), (1, 0), -1, (-1), (0xb40000759e813280)  
+11-07 15:51:33.786  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDump suceed, curr_count: 364030, cwb_x = 256, mCurWidth = 256, buffer_allocId = 20, timeout 0
+11-07 15:51:33.786  1551  1879 D PQ_DBIServiceV2: [CRTC_116] wait notify
+11-07 15:51:33.794  1185 20653 I hwcomposer: [HWCDisplay] (0 updateFps():4518), (type:1, mode:2) fps:60.144962,dur:1014.22,max:18.75,min:15.37  
+11-07 15:51:33.795  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::NotifyDispDumpReady(), client_handle:1, buffer:0xb40000751d21c7c0, fence:49, period16666667
+11-07 15:51:33.797  1551  1551 D libcomposer_ext: ClientCallbackAidl::asyncPerform(15)
+11-07 15:51:33.798  1551  1551 D libcomposer_ext: ClientImplAidl::ParseNotifyDispDumpReady()
+11-07 15:51:33.798  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady() enter notify
+11-07 15:51:33.798  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.798  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper disable
+11-07 15:51:33.798  1189  1247 I OriginChannel: now system_time:650397567	pwm_rgb: system_time:650397301, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20550, g:13548, b:8281, c:36456, algo:2, end:3308, ts:650397192690996	pwm_rgb: system_time:650397301, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20540, g:13522, b:8272, c:36383, algo:2, end:3308, ts:650397209356996	pwm_rgb: system_time:650397301, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20553, g:13538, b:8269, c:36415, algo:2, end:3308, ts:650397226022996	pwm_rgb: system_time:650397301, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20568, g:13578, b:8318, c:36497, algo:2, end:3308, ts:650397242688996	pwm_rgb: system_time:650397301, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20572, g:13545, b:8284, c:36465, algo:2, end:68844, ts:650397259354996	
+11-07 15:51:33.798  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.798  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 0/1, src(0, 0, 1272, 2772), dst(1272, 2772), fmt 0x3  
+11-07 15:51:33.813  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait done acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.813  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, partial offset 1
+11-07 15:51:33.813  1551  1551 D PQ_ODDMRManager: [CRTC_116] from flash open temperature file /sys/class/fuelsummary/board_temp failed!
+11-07 15:51:33.819  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper enable
+11-07 15:51:33.819  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.820  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 0, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.820  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 1/0, src(0, 0, 256, 2772), dst(256, 2772), fmt 0x3  
+11-07 15:51:33.820  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDumpEnable return 0
+11-07 15:51:33.820  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDump(), dpy 1, dst (256, 2772), dump_point 1, release_fence -1
+11-07 15:51:33.820  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseGetDispDump()
+11-07 15:51:33.820  1185 20653 D libcomposer_ext: DeviceImplAidl::ParseGetDispDump(), dpy 1, dst (256, 2772), dump_point 1
+11-07 15:51:33.820  1185 20653 I hwcomposer: [HWC] getDispDump(), client(1), dpy 1, (512,0,768,2772), (256, 2772), (1, 0), (-1), (-1), (0xb40000759e813280)  
+11-07 15:51:33.820  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 1, src(512, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.820  1185 20653 I hwcomposer: [DISP_DUMP] setDumpBuf(), client(1), dpy(0), src(512, 0, 768, 2772), dst(256, 2772), (1, 0), -1, (-1), (0xb40000759e813280)  
+11-07 15:51:33.820  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDump suceed, curr_count: 364031, cwb_x = 512, mCurWidth = 256, buffer_allocId = 19, timeout 0
+11-07 15:51:33.820  1551  1879 D PQ_DBIServiceV2: [CRTC_116] wait notify
+11-07 15:51:33.827  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::NotifyDispDumpReady(), client_handle:1, buffer:0xb40000751d21c7c0, fence:49, period16666667
+11-07 15:51:33.828  1551  1551 D libcomposer_ext: ClientCallbackAidl::asyncPerform(15)
+11-07 15:51:33.828  1551  1551 D libcomposer_ext: ClientImplAidl::ParseNotifyDispDumpReady()
+11-07 15:51:33.828  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady() enter notify
+11-07 15:51:33.828  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.828  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper disable
+11-07 15:51:33.828  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.829  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 0/1, src(0, 0, 1272, 2772), dst(1272, 2772), fmt 0x3  
+11-07 15:51:33.847  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait done acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.848  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, partial offset 2
+11-07 15:51:33.848  1551  1551 D PQ_ODDMRManager: [CRTC_116] from flash open temperature file /sys/class/fuelsummary/board_temp failed!
+11-07 15:51:33.849  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper enable
+11-07 15:51:33.849  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.850  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 0, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.850  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 1/0, src(0, 0, 256, 2772), dst(256, 2772), fmt 0x3  
+11-07 15:51:33.850  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDumpEnable return 0
+11-07 15:51:33.851  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDump(), dpy 1, dst (256, 2772), dump_point 1, release_fence -1
+11-07 15:51:33.851  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseGetDispDump()
+11-07 15:51:33.851  1185 20653 D libcomposer_ext: DeviceImplAidl::ParseGetDispDump(), dpy 1, dst (256, 2772), dump_point 1
+11-07 15:51:33.851  1185 20653 I hwcomposer: [HWC] getDispDump(), client(1), dpy 1, (768,0,1024,2772), (256, 2772), (1, 0), (-1), (-1), (0xb40000759e813280)  
+11-07 15:51:33.851  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 1, src(768, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.852  1185 20653 I hwcomposer: [DISP_DUMP] setDumpBuf(), client(1), dpy(0), src(768, 0, 1024, 2772), dst(256, 2772), (1, 0), -1, (-1), (0xb40000759e813280)  
+11-07 15:51:33.852  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDump suceed, curr_count: 364032, cwb_x = 768, mCurWidth = 256, buffer_allocId = 20, timeout 0
+11-07 15:51:33.852  1551  1879 D PQ_DBIServiceV2: [CRTC_116] wait notify
+11-07 15:51:33.862  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::NotifyDispDumpReady(), client_handle:1, buffer:0xb40000751d21c7c0, fence:49, period16666667
+11-07 15:51:33.863  1551  1551 D libcomposer_ext: ClientCallbackAidl::asyncPerform(15)
+11-07 15:51:33.863  1551  1551 D libcomposer_ext: ClientImplAidl::ParseNotifyDispDumpReady()
+11-07 15:51:33.863  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady() enter notify
+11-07 15:51:33.864  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.875  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper disable
+11-07 15:51:33.875  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.875  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 0/1, src(0, 0, 1272, 2772), dst(1272, 2772), fmt 0x3  
+11-07 15:51:33.880  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait done acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.880  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, partial offset 3
+11-07 15:51:33.880  1551  1551 D PQ_ODDMRManager: [CRTC_116] from flash open temperature file /sys/class/fuelsummary/board_temp failed!
+11-07 15:51:33.895  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper enable
+11-07 15:51:33.895  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.895  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 0, src(0, 0, 256, 2772), dst(256, 2772), config 3  
+11-07 15:51:33.895  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 1/0, src(0, 0, 256, 2772), dst(256, 2772), fmt 0x3  
+11-07 15:51:33.896  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDumpEnable return 0
+11-07 15:51:33.896  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDump(), dpy 1, dst (248, 2772), dump_point 1, release_fence -1
+11-07 15:51:33.896  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseGetDispDump()
+11-07 15:51:33.896  1185 20653 D libcomposer_ext: DeviceImplAidl::ParseGetDispDump(), dpy 1, dst (248, 2772), dump_point 1
+11-07 15:51:33.896  1185 20653 I hwcomposer: [HWC] getDispDump(), client(1), dpy 1, (1024,0,1272,2772), (248, 2772), (1, 0), (-1), (-1), (0xb40000759e813280)  
+11-07 15:51:33.896  1185 20653 I hwcomposer: [DRMDEV] isSupportWbParams(), id_crtc 116, id_connector 34, dump_point 1, src(1024, 0, 248, 2772), dst(248, 2772), config 3  
+11-07 15:51:33.896  1185 20653 I hwcomposer: [DISP_DUMP] setDumpBuf(), client(1), dpy(0), src(1024, 0, 1272, 2772), dst(248, 2772), (1, 0), -1, (-1), (0xb40000759e813280)  
+11-07 15:51:33.896  1551  1879 D PQ_DBIServiceV2: [CRTC_116] getDispDump suceed, curr_count: 364033, cwb_x = 1024, mCurWidth = 248, buffer_allocId = 19, timeout 0
+11-07 15:51:33.896  1551  1879 D PQ_DBIServiceV2: [CRTC_116] wait notify
+11-07 15:51:33.911  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::NotifyDispDumpReady(), client_handle:1, buffer:0xb40000751d21c7c0, fence:49, period16666667
+11-07 15:51:33.911  1551  1551 D libcomposer_ext: ClientCallbackAidl::asyncPerform(15)
+11-07 15:51:33.911  1551  1551 D libcomposer_ext: ClientImplAidl::ParseNotifyDispDumpReady()
+11-07 15:51:33.911  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady() enter notify
+11-07 15:51:33.911  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.911  1551  1879 D PQ_DBIServiceV2: [CRTC_116] CWB dumper disable
+11-07 15:51:33.912  1551  1879 D libcomposer_ext: ClientImplAidl::getDispDumpEnable()
+11-07 15:51:33.913  1185 20653 I hwcomposer: [DISP_DUMP] setEnable(), client(1), dpy(0), enable 0/1, src(0, 0, 1272, 2772), dst(1272, 2772), fmt 0x3  
+11-07 15:51:33.929  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, wait done acquire_fence 40, buffer:0xb400007e69ab1a00, period:16666667
+11-07 15:51:33.929  1551  1551 D PQ_DBIServiceV2: [CRTC_116] NotifyDispDumpReady(), dpy 1, partial offset 4
+11-07 15:51:33.929  1551  1551 D PQ_ODDMRManager: [CRTC_116] from flash open temperature file /sys/class/fuelsummary/board_temp failed!
+11-07 15:51:33.931  2022  2066 D SensorServiceExtImpl: notifyApplicationLaunchStage processName=4493:10401, uid=10401, pid=4493, stage=0
+11-07 15:51:33.931  2022  2066 D SensorServiceExtImpl: setSensorInterceptStats uid=10401, hasStats=0
+11-07 15:51:33.944  1551  1879 D PQ_DBIServiceV2: [CRTC_116] cur_freq 5
+11-07 15:51:33.944  1551  1879 D PQ_DBIServiceV2: [CRTC_116] sleep 4813
+11-07 15:51:33.976  2022  9358 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)
+11-07 15:51:33.976  2022  9358 E OplusArpPeer_euclid_psw:  OplusArpPeer close
+11-07 15:51:33.986  2022  9358 D OplusArpPeer_euclid_psw: Do not fill sender ip
+11-07 15:51:34.006  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:34.007  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:34.008  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.029  3551  3686 W OPLUS_LOG_LOAD: ==LOGS PROG INFO, prog(com.oplus.camera) ==
+11-07 15:51:34.029  3551  3686 I APS_ALOG: flushRoutine g_immediateFlush=0 g_pendingCount=0 g_oobCount=0
+11-07 15:51:34.077  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.078  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:34.078  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:34.079  1465  1465 D SensorFeature: write 38 bytes:650397830920084,650397847586751,3310,0
+11-07 15:51:34.174  1324  1324 I BufferQueueProducer: [com.xiaoshouji.app/com.xiaoshouji.app.MainActivity#176796](this:0xb4000071cbb5baf8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=60.17 dur=1013.73 max=17.42 min=15.71
+11-07 15:51:34.181 19267 19267 W libc    : Access denied finding property "qemu.sf.lcd_density"
+11-07 15:51:34.181 19267 19267 W libc    : Access denied finding property "qemu.sf.lcd_density"
+11-07 15:51:34.181 19267 19267 W libc    : Access denied finding property "vendor.display.disable_rounded_corner"
+11-07 15:51:34.187  4493  4493 V AutofillManager: receiver results: flags=7 enabled=true, enabledForAugmentedOnly: false
+11-07 15:51:34.190  4493  4493 I cr_A11yState: Enabled accessibility services list updated. []
+11-07 15:51:34.190  4493  4493 D AutofillManager: Fill dialog is enabled:false, hints=[]
+11-07 15:51:34.191  4493  4493 V Application: getAutofillClient(): null on super, trying to find activity thread
+11-07 15:51:34.191  4493  4493 V Application: getAutofillClient(): found top resumed activity for android.app.Application@3bf1e94: com.xiaoshouji.app.MainActivity@627ac2c
+11-07 15:51:34.192  4493  4493 V AutofillManager: receiver results: flags=7 enabled=true, enabledForAugmentedOnly: false
+11-07 15:51:34.192  4493  4493 I cr_A11yState: Informing listeners of changes.
+11-07 15:51:34.193  4493  4493 I cr_A11yState: New AccessibilityState: State{isComplexUserInteractionServiceEnabled=false, isTouchExplorationEnabled=false, isPerformGesturesEnabled=false, isAnyAccessibilityServiceEnabled=false, isAccessibilityToolPresent=false, isTextShowPasswordEnabled=true, isOnlyAutofillRunning=false, isOnlyPasswordManagersEnabled=false, isKnownScreenReaderEnabled=false}
+11-07 15:51:34.201 19267 19267 W AccessibilityNodeInfoDumper: Fetch time: 19ms
+11-07 15:51:34.202  2896  8794 D OplusFileObserveService: onEvent() file = /storage/emulated/0/round115-release-final-window.xml, event = 8
+11-07 15:51:34.203  2896  8794 W OplusFileObserveService: onEvent() CLOSE_WRITE file is not in root dirs, skip.
+11-07 15:51:34.203  2022  3317 V AccessibilityManagerService: onUserStateChangedLocked for user 0 with forceUpdate: false mEnabledServices = [] mCrashedServices = [] hasMagnificationConnection=false
+11-07 15:51:34.204  2022  3317 I AccessibilityManagerService: updateAccessibilityEnabledSettingLocked:false
+11-07 15:51:34.206  2022  3317 W MagnificationConnectionManager: requestConnection duplicated request: connect=false, mConnectionState=DISCONNECTED
+11-07 15:51:34.206  2022  3317 D AccessibilityManagerService: restoreCurrentUserForTestAutomationIfNeededLocked(): ignoring because device doesn't support visible background users
+11-07 15:51:34.207  2022  2022 D AccessibilityManagerService: [updateInputFilter] flags = 0, mInputFilter=null, mHasInputFilter=false, mForceSetInputFilter=false
+11-07 15:51:34.207  2022  2070 D CoreBackPreview:  return markWindowHasDrawn mComposed: false  mWaitTransition: false
+11-07 15:51:34.207  2022  2070 D ActivityTaskManager: Clearing startingData for activity=ActivityRecord{145351374 u0 com.android.launcher/.Launcher t5} mStartingData=null mStartingSurface=null
+11-07 15:51:34.208  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:34.210  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:34.212  2022  2501 I GestureLog_OplusGestureObserver: updateSettings, needRegisterGesture:true, accessibilityEnabled:false, mTalkBackEnable:false, mTouchExplorationState:false, mThreePointersScreenshot:true, mThreePointersAreaScreenshot:true, mThreePointersSplitScreen:true, mTwoPointersSplitForTouchpad:true, mThreePointersFlashMemory:true, mThreePointersPreventGame:false, mTouchPadScreenshot:true, mInGameMode:false, mMultiPointersPreventRemoteControl:false, mExpandCastInputGestureSwitch:false, mSplitScreenEnable:true, mConfineMode:0x0, mSuperPowerEnter: false, mRepeatShowToast: false, mBreathModeOn: false, mUserSetupComplete: true
+11-07 15:51:34.212  2022  2501 D GestureLog_OplusGestureObserver: updateGlobalGestureObserver, gesture = 0x4, threeScreenshotEnable = true, threeAreaScreenshotEnable = true, threeSplitScreenEnable = true, threeTouchPadScreenshotEnable = true, twoSplitForTouchpad = false, mMultiPointersPreventRemoteControl=false, mExpandCastInputGestureSwitch=false, mThreePointersPreventGame=false, mInGame=false, phoneMode = 0 mThreePointersFlashMemory=true
+11-07 15:51:34.212  2022  2501 D GestureLog_OplusMultiGesturePolicy: registerGlobalGesture, return:10000004 has already registered!
+11-07 15:51:34.213  8709  8784 I OplusGestureObserver:  onChange uri = content://settings/secure/accessibility_enabled
+11-07 15:51:34.214  2022  2501 I GestureLog_OplusGestureObserver: updateSettings, needRegisterGesture:true, accessibilityEnabled:false, mTalkBackEnable:false, mTouchExplorationState:false, mThreePointersScreenshot:true, mThreePointersAreaScreenshot:true, mThreePointersSplitScreen:true, mTwoPointersSplitForTouchpad:true, mThreePointersFlashMemory:true, mThreePointersPreventGame:false, mTouchPadScreenshot:true, mInGameMode:false, mMultiPointersPreventRemoteControl:false, mExpandCastInputGestureSwitch:false, mSplitScreenEnable:true, mConfineMode:0x0, mSuperPowerEnter: false, mRepeatShowToast: false, mBreathModeOn: false, mUserSetupComplete: true
+11-07 15:51:34.214  2022  2501 D GestureLog_OplusGestureObserver: updateGlobalGestureObserver, gesture = 0x4, threeScreenshotEnable = true, threeAreaScreenshotEnable = true, threeSplitScreenEnable = true, threeTouchPadScreenshotEnable = true, twoSplitForTouchpad = false, mMultiPointersPreventRemoteControl=false, mExpandCastInputGestureSwitch=false, mThreePointersPreventGame=false, mInGame=false, phoneMode = 0 mThreePointersFlashMemory=true
+11-07 15:51:34.214  2022  2501 D GestureLog_OplusMultiGesturePolicy: registerGlobalGesture, return:10000004 has already registered!
+11-07 15:51:34.214  8593  8621 I metis_v2_SettingUtils: switchObserver, onChange: false uri:content://settings/secure/accessibility_enabled flags:32769
+11-07 15:51:34.218  2022  3317 D FlexibleTaskController: isFullToFlexibleAnimating: false
+11-07 15:51:34.219  2022  3317 D WindowManager: rotation(ROTATION_0) no changed  displayId = 0, lastOrientation = 1
+11-07 15:51:34.219 19267 19267 D AndroidRuntime: Shutting down VM
+11-07 15:51:34.220 19267 19317 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+11-07 15:51:34.220 19267 19295 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+11-07 15:51:34.220 19267 19301 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+11-07 15:51:34.221  2022  2022 W IPCThreadState: Sending oneway calls to frozen process.
+11-07 15:51:34.221 19267 19316 W IPCThreadState: call to talkWithDriver in joinThreadPool returned error: -9 (Bad file descriptor), FD: -1
+11-07 15:51:34.226  2022  2022 D BatterySaverPolicy: accessibility changed to false, updating policy.
+11-07 15:51:34.226 19267 19287 I app_process: HeapTask is not gc_task
+11-07 15:51:34.226  1213  1262 I libPerfCtl: xgfGetFPS pid:4493 fps:-1
+11-07 15:51:34.231  3879  5586 D CommonApp-575-10084: transport layer data is invalid
+11-07 15:51:34.231  3879  5586 D CommonApp-575-10401: commonScoreStrategy scenarios low package
+11-07 15:51:34.262  1239  1292 D BatteryChargeControl: bcc get no support from charging protocol
+11-07 15:51:34.320  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:34.321  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:34.322  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.329  1189  1247 I OriginChannel: now system_time:650398098	pwm_rgb: system_time:650397567, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20528, g:13532, b:8278, c:36390, algo:2, end:3309, ts:650397475169006	pwm_rgb: system_time:650397567, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20506, g:13529, b:8272, c:36383, algo:2, end:3309, ts:650397491835006	pwm_rgb: system_time:650397567, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13538, b:8284, c:36405, algo:2, end:3309, ts:650397508501006	pwm_rgb: system_time:650397567, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20497, g:13532, b:8250, c:36355, algo:2, end:3309, ts:650397525167006	pwm_rgb: system_time:650397567, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20522, g:13525, b:8281, c:36393, algo:2, end:68845, ts:650397541833006	
+11-07 15:51:34.330  2022  2496 D FusionLightNextGen: process end reported = 1, mode: 1, cnt: 400160, lux 238.4, cct -1.0, r/g/b/c: 20531.0/13538.0/8284.0/36405.0, R/G/B: 238.0/239.0/227.0, bri 1355.0, match 0.80, ir 0.099890, conf 0.0, ts 650397840133218
+11-07 15:51:34.337  2022  2078 W ProcessStats: Tracking association SourceState{afb634a com.coloros.remoteguardservice/10118 ImpFg #657048} whose proc state 5 is better than process ProcessState{a60fb7 com.oplus.safecenter/1000 pkg=com.oplus.safecenter} proc state 14 (5 skipped)
+11-07 15:51:34.365 18617 18629 I plus.safecenter: HeapTask is not gc_task
+11-07 15:51:34.376  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.377  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:34.378  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:34.378  1465  1465 D SensorFeature: write 38 bytes:650398130252623,650398146919290,3311,0
+11-07 15:51:34.414  3879  3879 D SubsysEventListenerManager-SubsysTelephonyCallback[1]: onSignalStrengthsChanged
+11-07 15:51:34.419  3879  5621 D CeLinkQoeService: notifyMosChange: eventid 3342436
+11-07 15:51:34.423  3064  3345 I SystemUi--Statusbar: MobileConnectionRepositoryImpl-->subId:1 isSoftSimCard:false slotId:1
+11-07 15:51:34.595  1189  1247 I OriginChannel: now system_time:650398364	pwm_rgb: system_time:650398098, lux:469, time_delta:16, pwm_turbo:1, bri:1355, r:20562, g:13558, b:8293, c:36481, algo:2, end:131072, ts:650397840133218	
+11-07 15:51:34.606  5108  5168 E horae   : 0: target_temp:28994, back:27461,back_1:27474,back_2:27539,back_charge:28218,back_charge_1:29613,frame:28255,frame_1:27562,frame_2:28323,front:28994,front_1:28958,front_2:28794, 18 1, +(529), 1 ,32138,32623,31800,32429,27100,32084,32573,31800,32342,27100,32216,32612,31800,32406,27100,32661,32838,32000,33144,27100,33204,33397,32700,33860,27100, algo:0
+11-07 15:51:34.619  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:34.620  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:34.620  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.676  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.677  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:34.678  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:34.679  1465  1465 D SensorFeature: write 38 bytes:650398430524700,650398447191367,3312,0
+11-07 15:51:34.707  2022  2121 D osense.compress: com.coloros.digitalwellbeing do shrink, target ratio = 46, final ratio = 100, cur ratio = 32
+11-07 15:51:34.806  1185 20653 I hwcomposer: [HWCDisplay] (0 updateFps():4518), (type:1, mode:2) fps:60.283272,dur:1011.89,max:18.53,min:14.40  
+11-07 15:51:34.807  2022  9358 E OplusArpPeer_euclid_psw: ARP read failure: android.system.ErrnoException: read failed: EAGAIN (Try again)
+11-07 15:51:34.807  2022  9358 E OplusArpPeer_euclid_psw:  OplusArpPeer close
+11-07 15:51:34.861  1189  1247 I OriginChannel: now system_time:650398630	pwm_rgb: system_time:650398364, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20543, g:13538, b:8287, c:36396, algo:2, end:3311, ts:650398105948602	pwm_rgb: system_time:650398364, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20518, g:13512, b:8272, c:36368, algo:2, end:3311, ts:650398122614602	pwm_rgb: system_time:650398364, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20550, g:13535, b:8278, c:36380, algo:2, end:3311, ts:650398139280602	pwm_rgb: system_time:650398364, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20537, g:13535, b:8287, c:36390, algo:2, end:3311, ts:650398155946602	pwm_rgb: system_time:650398364, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20534, g:13542, b:8290, c:36418, algo:2, end:68847, ts:650398172612602	
+11-07 15:51:34.920  1185 20653 D CwbService: normal mode or switch to doze from power off/doze suspend mode, mPowerMode = 2
+11-07 15:51:34.921  1185 20653 I CwbService: Configure changed, reconfig histogram mode: 0.
+11-07 15:51:34.921  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.975  1185 20653 D libcomposer_ext: DeviceImplAidl::DeviceClientContextAidl::ParseRequestPartialUpdateEnable()
+11-07 15:51:34.976  1185 20653 D CwbService: RGB value: 238, 239, 227, hist:0, 0, 0,  rgb_state: 1
+11-07 15:51:34.979  1465  1465 D SensorFeature: name=ssc_screenshot_info ,index = 22
+11-07 15:51:34.979  1465  1465 D SensorFeature: write 38 bytes:650398729700392,650398746367059,3313,0
+11-07 15:51:35.063 19267 19267 W RefBase : RefBase: Explicit destruction, weak count = 0 (in 0x7055fefac8). Use sp<> to manage this object. Note - if weak count is 0, this leaks mRefs (weakref_impl).
+11-07 15:51:35.068 19267 19267 D RefBase :   #00 pc 000000000008c0e0  /apex/com.android.runtime/lib64/bionic/libc.so (__cxa_finalize+224) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:35.068 19267 19267 D RefBase :   #01 pc 0000000000090e84  /apex/com.android.runtime/lib64/bionic/libc.so (exit+36) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:35.068 19267 19267 D RefBase :   #02 pc 00000000000846cc  /apex/com.android.runtime/lib64/bionic/libc.so (__libc_init+124) (BuildId: 606e619450c7c2bf3db238997d2b897d)
+11-07 15:51:35.126  1189  1247 I OriginChannel: now system_time:650398896	pwm_rgb: system_time:650398630, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20531, g:13545, b:8275, c:36418, algo:2, end:3312, ts:650398405090458	pwm_rgb: system_time:650398630, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20547, g:13555, b:8281, c:36412, algo:2, end:3312, ts:650398421756458	pwm_rgb: system_time:650398630, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20578, g:13568, b:8309, c:36471, algo:2, end:3312, ts:650398438422458	pwm_rgb: system_time:650398630, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20550, g:13552, b:8284, c:36446, algo:2, end:3312, ts:650398455088458	pwm_rgb: system_time:650398631, lux:468, time_delta:16, pwm_turbo:1, bri:1355, r:20565, g:13558, b:8293, c:36443, algo:2, end:68848, ts:650398471754458	
+11-07 15:51:35.188  1324  1324 I BufferQueueProducer: [com.xiaoshouji.app/com.xiaoshouji.app.MainActivity#176796](this:0xb4000071cbb5baf8,id:-1,api:0,p:-1,c:1324) queueBuffer: fps=60.19 dur=1013.43 max=17.35 min=15.98

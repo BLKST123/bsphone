@@ -1,0 +1,177 @@
+﻿[
+    {
+        "Index":  1,
+        "Test":  "_qa_wechat_message_edit_branch_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-01-_qa_wechat_message_edit_branch_2026-11-06.log",
+        "Bytes":  15290
+    },
+    {
+        "Index":  2,
+        "Test":  "_qa_chat_turn_reroll_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-02-_qa_chat_turn_reroll_2026-11-05.log",
+        "Bytes":  2754
+    },
+    {
+        "Index":  3,
+        "Test":  "_independent_turn_reroll_audit_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-03-_independent_turn_reroll_audit_2026-11-05.log",
+        "Bytes":  1986
+    },
+    {
+        "Index":  4,
+        "Test":  "_independent_turn_branch_switch_audit_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-04-_independent_turn_branch_switch_audit_2026-11-05.log",
+        "Bytes":  9388
+    },
+    {
+        "Index":  5,
+        "Test":  "_qa_turn_reroll_independent_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-05-_qa_turn_reroll_independent_2026-11-05.log",
+        "Bytes":  2894
+    },
+    {
+        "Index":  6,
+        "Test":  "_qa_turn_branch_switch_ui_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-06-_qa_turn_branch_switch_ui_2026-11-05.log",
+        "Bytes":  3748
+    },
+    {
+        "Index":  7,
+        "Test":  "_qa_turn_reroll_multi_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-07-_qa_turn_reroll_multi_2026-11-05.log",
+        "Bytes":  6428
+    },
+    {
+        "Index":  8,
+        "Test":  "_qa_prompt_layers_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-08-_qa_prompt_layers_2026-11-05.log",
+        "Bytes":  3364
+    },
+    {
+        "Index":  9,
+        "Test":  "_independent_turn_memory_branch_audit_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-09-_independent_turn_memory_branch_audit_2026-11-05.log",
+        "Bytes":  702
+    },
+    {
+        "Index":  10,
+        "Test":  "_qa_turn_auto_memory_branch_fix_2026-11-05.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-10-_qa_turn_auto_memory_branch_fix_2026-11-05.log",
+        "Bytes":  7662
+    },
+    {
+        "Index":  11,
+        "Test":  "_independent_manual_branch_continue_audit_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-11-_independent_manual_branch_continue_audit_2026-11-06.log",
+        "Bytes":  2482
+    },
+    {
+        "Index":  12,
+        "Test":  "_independent_mixed_group_edit_audit_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-12-_independent_mixed_group_edit_audit_2026-11-06.log",
+        "Bytes":  896
+    },
+    {
+        "Index":  13,
+        "Test":  "_independent_forget_memory_scope_audit_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-13-_independent_forget_memory_scope_audit_2026-11-06.log",
+        "Bytes":  1070
+    },
+    {
+        "Index":  14,
+        "Test":  "_qa_forget_branch_memory_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-14-_qa_forget_branch_memory_2026-11-06.log",
+        "Bytes":  1256
+    },
+    {
+        "Index":  15,
+        "Test":  "_qa_delete_branch_snapshot_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-15-_qa_delete_branch_snapshot_2026-11-06.log",
+        "Bytes":  1080
+    },
+    {
+        "Index":  16,
+        "Test":  "_qa_branch_export_delete_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-16-_qa_branch_export_delete_2026-11-06.log",
+        "Bytes":  8162
+    },
+    {
+        "Index":  17,
+        "Test":  "_qa_mixed_group_edit_lifecycle_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-17-_qa_mixed_group_edit_lifecycle_2026-11-06.log",
+        "Bytes":  10714
+    },
+    {
+        "Index":  18,
+        "Test":  "_qa_forget_substring_scope_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-18-_qa_forget_substring_scope_2026-11-06.log",
+        "Bytes":  2800
+    },
+    {
+        "Index":  19,
+        "Test":  "_independent_forget_cross_scope_audit_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-19-_independent_forget_cross_scope_audit_2026-11-06.log",
+        "Bytes":  2544
+    },
+    {
+        "Index":  20,
+        "Test":  "_qa_forget_group_member_scope_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-20-_qa_forget_group_member_scope_2026-11-06.log",
+        "Bytes":  994
+    },
+    {
+        "Index":  21,
+        "Test":  "_qa_forget_group_branch_scope_2026-11-06.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-21-_qa_forget_group_branch_scope_2026-11-06.log",
+        "Bytes":  2442
+    },
+    {
+        "Index":  22,
+        "Test":  "_qa_forget_group_remark_scope_2026-11-07.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-22-_qa_forget_group_remark_scope_2026-11-07.log",
+        "Bytes":  3102
+    },
+    {
+        "Index":  23,
+        "Test":  "_round121_image_branch_hidden_zip_test.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-23-_round121_image_branch_hidden_zip_test.log",
+        "Bytes":  16472
+    },
+    {
+        "Index":  24,
+        "Test":  "_round122_wechat_mine_suite_test.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-24-_round122_wechat_mine_suite_test.log",
+        "Bytes":  14528
+    },
+    {
+        "Index":  25,
+        "Test":  "_independent_card_unbind_wallet_adjust_audit_2026-11-07.cjs",
+        "ExitCode":  0,
+        "Log":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-core-25-_independent_card_unbind_wallet_adjust_audit_2026-11-07.log",
+        "Bytes":  4058
+    }
+]

@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T07:55:16.504Z",
+  "source": {
+    "indexSha256": "B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED"
+  },
+  "checks": {
+    "wallet_persisted": true,
+    "cards_persisted": true,
+    "assets_persisted": true,
+    "stickers_persisted": true,
+    "switch_persona_keeps_chat": true,
+    "no_errors": true
+  },
+  "initial": {
+    "balance": 125,
+    "cards": [
+      {
+        "bank": "持久银行",
+        "no": "6222 0000 0000 1234",
+        "order": 0
+      }
+    ],
+    "assets": [
+      {
+        "name": "持久资产",
+        "value": 12345
+      }
+    ],
+    "stickers": 1,
+    "chatPersona": "pp1"
+  },
+  "after": {
+    "active": "pp1",
+    "balance": 125,
+    "cards": [
+      {
+        "bank": "持久银行",
+        "no": "6222 0000 0000 1234",
+        "order": 0
+      }
+    ],
+    "assets": [
+      {
+        "name": "持久资产",
+        "value": 12345
+      }
+    ],
+    "stickers": 1,
+    "chatPersona": "pp1"
+  },
+  "switched": {
+    "active": "pp2",
+    "balance": 200,
+    "assets": 0,
+    "chatPersona": "pp1"
+  },
+  "errors": []
+}

@@ -1,0 +1,94 @@
+{
+  "ok": false,
+  "checkedAt": "2026-11-07T11:26:50.682Z",
+  "source": {
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "setup": {
+    "ids": [
+      "drag_a",
+      "drag_b",
+      "drag_c"
+    ]
+  },
+  "points": [
+    {
+      "id": "drag_a",
+      "left": 16,
+      "top": 110.0625,
+      "right": 364,
+      "bottom": 206.0625,
+      "w": 348,
+      "h": 96
+    },
+    {
+      "id": "drag_b",
+      "left": 23,
+      "top": 118.0625,
+      "right": 357,
+      "bottom": 214.0625,
+      "w": 334,
+      "h": 96
+    },
+    {
+      "id": "drag_c",
+      "left": 30,
+      "top": 126.0625,
+      "right": 350,
+      "bottom": 222.0625,
+      "w": 320,
+      "h": 96
+    }
+  ],
+  "start": {
+    "x": 58,
+    "y": 161.0625
+  },
+  "target": {
+    "x": 44,
+    "y": 113.0625
+  },
+  "hitBefore": "drag_c",
+  "hitTarget": "drag_a",
+  "before": [
+    "drag_a",
+    "drag_b",
+    "drag_c"
+  ],
+  "afterLongPress": {
+    "dragging": true,
+    "active": "drag_c"
+  },
+  "afterMove": {
+    "order": [
+      "drag_a",
+      "drag_c",
+      "drag_b"
+    ],
+    "dragging": false,
+    "detailOpen": false
+  },
+  "afterUp": {
+    "order": [
+      "drag_a",
+      "drag_c",
+      "drag_b"
+    ],
+    "details": [
+      "drag_a",
+      "drag_c",
+      "drag_b"
+    ],
+    "detailOpen": false,
+    "text": "卡包\n3 张 · 长按卡片可拖动排序\n＋ 添加\n返回钱包\n经典卡面\n拖动银行甲\n•••• 1111\n格纹\n拖动银行丙\n•••• 3333\n细纹\n拖动银行乙\n•••• 2222\n拖动银行甲\n•••• 1111\n上移\n下移\n详情\n拖动银行丙\n•••• 3333\n上移\n下移\n详情\n拖动银行乙\n•••• 2222\n上移\n下移\n详情\n卡号只显示尾号；卡面名称、颜色和图案由你设置。"
+  },
+  "checks": {
+    "hit_start_is_top_card": true,
+    "hit_target_is_first_card": true,
+    "long_press_entered": true,
+    "dragged_card_moved": false,
+    "no_detail_on_drag": true,
+    "no_runtime_errors": true
+  },
+  "errors": []
+}

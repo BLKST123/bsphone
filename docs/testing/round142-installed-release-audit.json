@@ -1,0 +1,16 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-11T16:32:38.4252370+08:00",
+    "package":  "com.xiaoshouji.app",
+    "versionName":  "3.96",
+    "versionCode":  107,
+    "firstInstallTime":  "2026-10-20 23:07:55",
+    "lastUpdateTime":  "2026-11-11 16:17:11",
+    "localApkSha256":  "FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53",
+    "installedApkSha256":  "FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53",
+    "foreground":  "Window{aff3cd8 u0 com.xiaoshouji.app/com.xiaoshouji.app.MainActivity}",
+    "focusOk":  true,
+    "fatalAnrJsErrorCount":  0,
+    "benignChromiumSeedSignatureErrors":  1,
+    "logcat":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round142-release-logcat.txt"
+}

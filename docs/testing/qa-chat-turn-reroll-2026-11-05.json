@@ -1,0 +1,36 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:13:59.680Z",
+  "evidence": {
+    "checkedAt": "2026-11-07T14:13:59.681Z",
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "debugApkSha256": "C39AD5C2B207597E25226D270F909622268116C43AF079711BDED419A69FBAF0",
+    "releaseApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "version": "3.88",
+    "versionCode": 99,
+    "cacheKey": "bsphone-v99-20261107-r1"
+  },
+  "checks": {
+    "user_group_menu_has_regenerate": "PASS",
+    "regenerate_confirm_visible": "PASS",
+    "whole_user_group_preserved": "PASS",
+    "old_tail_not_in_current": "PASS",
+    "old_tail_archived": "PASS",
+    "new_reply_active": "PASS",
+    "environment_not_mixed_into_user_role": "PASS",
+    "environment_in_system_context": "PASS",
+    "active_branch_pointed_to_new": "PASS",
+    "turn_branch_menu_available": "PASS",
+    "branch_list_visible": "PASS",
+    "switch_back_to_original_branch": "PASS",
+    "switch_updates_active_branch_id": "PASS",
+    "generation_failure_rolls_back": "PASS",
+    "turn_branches_in_backup": "PASS",
+    "turn_branches_persist_reload": "PASS",
+    "real_sendtext_messages_form_one_group": "PASS",
+    "char_single_regenerate_removed": "PASS",
+    "no_runtime_errors": "PASS"
+  },
+  "failures": [],
+  "errors": []
+}

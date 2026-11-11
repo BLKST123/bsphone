@@ -1,0 +1,61 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:14:31.704Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "memoryPresent": true,
+    "nudgePresent": true,
+    "environmentPresent": true,
+    "finalUserOnly": true,
+    "memoryAfterHistory": true,
+    "nudgeAfterHistory": true,
+    "environmentAfterHistory": true
+  },
+  "failures": [],
+  "indices": {
+    "memIndex": 3,
+    "nudgeIndex": 4,
+    "envIndex": 5,
+    "finalIndex": 6
+  },
+  "messages": [
+    {
+      "i": 0,
+      "role": "system",
+      "head": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择"
+    },
+    {
+      "i": 1,
+      "role": "system",
+      "head": "【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标"
+    },
+    {
+      "i": 2,
+      "role": "user",
+      "head": "第一句"
+    },
+    {
+      "i": 3,
+      "role": "system",
+      "head": "[MEMORY_CONTEXT — PAST FACTS, NOT USER SPEECH]\n【记忆中心（过去记忆，不是用户当前发言）】\n- 用户对花生过敏"
+    },
+    {
+      "i": 4,
+      "role": "system",
+      "head": "【这次的特别要求】这次是对用户连续消息组「第一句 / 第二句」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。"
+    },
+    {
+      "i": 5,
+      "role": "system",
+      "head": "[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。"
+    },
+    {
+      "i": 6,
+      "role": "user",
+      "head": "第二句"
+    }
+  ],
+  "errors": []
+}

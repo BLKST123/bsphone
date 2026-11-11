@@ -1,0 +1,26 @@
+BS小手机 3.84 / Build 95 Debug-CDP 真机复现路径
+日期: 2026-11-06
+设备: OPPO PMK110 / Android 16 / 1272x2772
+
+1. 安装 Debug 95
+adb install -r "C:\Users\lenovo\Documents\ChatGPT\各种的\_ghpages\build89\native\app\build\outputs\apk\debug\app-debug.apk"
+
+2. 启动应用
+adb shell am force-stop com.xiaoshouji.app
+adb shell am start -W -n com.xiaoshouji.app/.MainActivity
+
+3. 获取 WebView devtools socket 并转发
+adb shell cat /proc/net/unix | findstr webview_devtools_remote
+adb forward tcp:9444 localabstract:<socket-name>
+Invoke-WebRequest http://127.0.0.1:9444/json/version
+
+4. 运行真机 CDP 断言
+node _round117_phone_wechat_message_edit_branch_test.cjs
+node _round118_phone_qa382_test.cjs
+node _round119_phone_forget_scope_test.cjs
+
+5. 结束后恢复最终 Release
+adb install -r "C:\Users\lenovo\Documents\ChatGPT\各种的\_release_candidate_2026-11-06_Build95\BS小手机_3.84_Build95.apk"
+adb shell dumpsys package com.xiaoshouji.app | findstr /i "versionName versionCode firstInstallTime ceDataInode"
+
+本路径已实际执行；最终 Release smoke 记录见 round115-phone-release-final-2026-11-05.json。

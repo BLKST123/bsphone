@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:12:52.451Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "menu": {
+    "hasReroll": true,
+    "hasBranch": true,
+    "hasDelete": true
+  },
+  "rerolled": {
+    "versions": 2,
+    "oldKept": true,
+    "active": true
+  },
+  "branch": {
+    "thumbs": 2,
+    "restores": 2,
+    "exports": 2,
+    "deletes": 2
+  },
+  "restored": {
+    "version": "imgver_mw6gwuhlnt97",
+    "active": true,
+    "custom": "first phone prompt"
+  },
+  "hidden": {
+    "hidden": 1,
+    "visible": 0,
+    "page": true,
+    "restore": 1
+  },
+  "unhidden": {
+    "hidden": false,
+    "visible": 1
+  },
+  "zip": {
+    "bytes": 70210455,
+    "nameCount": 38,
+    "hasManifest": true,
+    "hasAssets": true,
+    "hasChecksums": true,
+    "saved": {
+      "ok": true,
+      "native": true,
+      "path": "Downloads/BS小手机/ROUND121_PHONE_ZIP.zip",
+      "finalName": "ROUND121_PHONE_ZIP.zip"
+    },
+    "remoteFile": "ROUND121_PHONE_ZIP.zip"
+  },
+  "artifact": {
+    "screenshot": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-phone-image-branch-hidden-zip.png",
+    "bytes": 1804251
+  },
+  "errors": []
+}

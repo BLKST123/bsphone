@@ -1,0 +1,167 @@
+{
+  "ok": false,
+  "checkedAt": "2026-11-07T13:33:14.787Z",
+  "source": {
+    "indexSha256": "C92F799CE8B6093FB0321232EF256F316D7F6ADA0A3CC67812D00F854EACAD76"
+  },
+  "checks": {
+    "personaReferences_couple_and_address_block": true,
+    "persona_delete_dom_blocks_couple_and_address": true,
+    "wallet_rejects_non_finite": true,
+    "asset_rejects_non_finite": false,
+    "persona_wallet_isolation": true,
+    "asset_has_role_and_worldline_fields": true,
+    "manual_profile_can_override_active_persona": true,
+    "card_stack_top_matches_first_order": true,
+    "sticker_group_delete_moves_to_default": true,
+    "favorite_deleted_snapshot_and_jump": true,
+    "card_privacy": true,
+    "no_runtime_errors": true
+  },
+  "evidence": {
+    "refs": {
+      "refsByFunction": [
+        "情侣空间 · 甲与角色",
+        "外卖地址簿 · 1 个地址",
+        "外卖支付 · 孤儿卡",
+        "外卖订单 · 1 笔订单"
+      ],
+      "dom": {
+        "hasReferenceBack": true,
+        "hasDeleteConfirm": false,
+        "text": "迁移人设\n关闭\n情侣空间\n甲与角色\n外卖地址簿\n1 个地址\n外卖支付\n孤儿卡\n外卖订单\n1 笔订单\n人设乙\n预览迁移取消"
+      },
+      "postDelete": {
+        "personaStillExists": true,
+        "coupleSpaceStillExists": true,
+        "addressStillExists": true,
+        "paymentStillExists": true,
+        "orderStillExists": true
+      },
+      "coupleSpaces": 1,
+      "addressItems": 1,
+      "orders": 1
+    },
+    "wallet": {
+      "balance": 100,
+      "balanceString": "100",
+      "balanceFinite": true,
+      "history": [],
+      "text": "钱包\n关闭\n零钱余额\n¥ 100.00\n收入 ¥0.00\n支出 ¥0.00\n账单\n银行卡\n调整余额\n记一笔\n收入\n支出\n零钱\n保存",
+      "toast": "金额无效"
+    },
+    "assetNumeric": {
+      "valueString": "undefined",
+      "finite": false,
+      "total": 0,
+      "totalString": "0",
+      "text": "加一项资产\n返回\n房产\n车辆\n店铺\n公司\n其它\n持有中\n出租中\n闲置\n已出售\n未关联\n保存"
+    },
+    "isolation": {
+      "p1": {
+        "balance": 101,
+        "assets": [
+          "甲资产"
+        ]
+      },
+      "p2": {
+        "balance": 202,
+        "assets": [
+          "乙资产"
+        ]
+      }
+    },
+    "assetForm": [
+      {
+        "id": "ae_name",
+        "placeholder": "名称",
+        "tag": "INPUT",
+        "value": ""
+      },
+      {
+        "id": "ae_kind",
+        "placeholder": "",
+        "tag": "SELECT",
+        "value": "房产"
+      },
+      {
+        "id": "ae_status",
+        "placeholder": "",
+        "tag": "SELECT",
+        "value": "持有中"
+      },
+      {
+        "id": "ae_val",
+        "placeholder": "估值",
+        "tag": "INPUT",
+        "value": ""
+      },
+      {
+        "id": "ae_worldline",
+        "placeholder": "",
+        "tag": "SELECT",
+        "value": ""
+      },
+      {
+        "id": "ae_chars",
+        "placeholder": "",
+        "tag": "SELECT",
+        "value": ""
+      },
+      {
+        "id": "ae_note",
+        "placeholder": "备注",
+        "tag": "TEXTAREA",
+        "value": ""
+      }
+    ],
+    "cardStackUi": {
+      "sorted": [
+        "ca",
+        "cb",
+        "cc"
+      ],
+      "topCard": "ca",
+      "stackCount": 3,
+      "cycleControls": 3,
+      "text": "卡包\n添加银行卡\n返回钱包\n银行甲\n•••• 1111\n银行甲\n•••• •••• •••• 1111\nGOOD THRU\n••/••\n甲\n银行乙\n•••• 2222\n银行乙\n•••• •••• •••• 2222\nGOOD THRU\n••/••\n甲\n银行丙\n•••• 3333\n银行丙\n•••• •••• •••• 3333\nGOOD THRU\n••/••\n甲"
+    },
+    "manualProfile": {
+      "storedName": "手动覆盖名",
+      "activeName": "手动覆盖名",
+      "beforeHasManual": false,
+      "beforeHasActive": true,
+      "afterHasManual": true,
+      "afterHasActive": false,
+      "afterText": "‹\n我的\n手动覆盖名\n编辑资料\n用户人设库\n1 个\n钱包\n¥ 100.00\n卡包\n0 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n0 条\n设置\n›\n外观\n›\n消息\n联系人\n朋友圈\n我的"
+    },
+    "stickerDelete": {
+      "groups": [
+        "default",
+        "g2"
+      ],
+      "stickers": [
+        {
+          "id": "s1",
+          "groupId": "default"
+        },
+        {
+          "id": "s2",
+          "groupId": "g2"
+        }
+      ],
+      "text": "表情包\n新建分组\n关闭\n默认\n组二\n重命名分组\n删除分组\n上移\n下移\n添加表情"
+    },
+    "favorite": {
+      "text": "收藏\n关闭\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n图片\n角色一 · 21:33 · 原消息已删除\n收藏快照\n回到原会话\n取消收藏",
+      "hasDeleted": true,
+      "hasJump": true
+    },
+    "cardPrivacy": {
+      "text": "卡包\n添加银行卡\n返回钱包\n审计银行\n•••• 1234\n审计银行\n•••• •••• •••• 1234\nGOOD THRU\n••/••\n甲",
+      "hasFull": false,
+      "hasTail": true
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,163 @@
+{
+  "checkedAt": "2026-11-07T13:29:12.294Z",
+  "start": {
+    "x": 44,
+    "y": 385
+  },
+  "target": {
+    "x": 44,
+    "y": 101
+  },
+  "style": {
+    "stackTouchAction": "none",
+    "cardTouchAction": "none",
+    "overflow": "auto"
+  },
+  "trace": [
+    {
+      "type": "pointerdown",
+      "target": "c",
+      "x": 44,
+      "y": 385
+    },
+    {
+      "type": "touchstart",
+      "target": "c",
+      "x": 44,
+      "y": 385
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 356.6000061035156
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 356.6000061035156
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 328.20001220703125
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 328.20001220703125
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 299.79998779296875
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 299.79998779296875
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 271.3999938964844
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 271.3999938964844
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 243
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 243
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 214.60000610351562
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 214.60000610351562
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 186.1999969482422
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 186.1999969482422
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 157.8000030517578
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 157.8000030517578
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 129.39999389648438
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 129.39999389648438
+    },
+    {
+      "type": "pointermove",
+      "target": "c",
+      "x": 44,
+      "y": 101
+    },
+    {
+      "type": "touchmove",
+      "target": "c",
+      "x": 44,
+      "y": 101
+    },
+    {
+      "type": "pointerup",
+      "target": "c",
+      "x": 44,
+      "y": 101
+    }
+  ],
+  "order": [
+    "c",
+    "a",
+    "b"
+  ],
+  "detail": false,
+  "scrollTop": 0
+}

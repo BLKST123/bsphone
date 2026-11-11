@@ -1,0 +1,17 @@
+{
+  "checkedAt": "2026-11-07T14:17:20.178Z",
+  "tests": {
+    "assetChecksumMismatchRejected": true
+  },
+  "evidence": {
+    "assetName": "assets/images/asset-001-02039E14.png",
+    "original": "6E340B9CFFB37A989CA544E6BB780A2C78901D3FB33738768511A30617AFA01D",
+    "changed": "DEADBEEF",
+    "parseOk": true,
+    "verified": false,
+    "status": "mismatch",
+    "assetCount": 5
+  },
+  "errors": [],
+  "ok": true
+}

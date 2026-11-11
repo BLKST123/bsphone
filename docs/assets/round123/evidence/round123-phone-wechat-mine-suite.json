@@ -1,0 +1,96 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:13:17.542Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "mine": true,
+    "wallet": true,
+    "cards": true,
+    "bills": true,
+    "continuous_touch": true,
+    "persisted": true,
+    "switch": true,
+    "no_errors": true
+  },
+  "mine": {
+    "text": "‹\n我的\n巡检用户\n编辑资料\n用户人设库\n2 个\n钱包\n¥ 100.00\n卡包\n3 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n0 条\n设置\n›\n外观\n›\n消息\n联系人\n朋友圈\n我的",
+    "hasCards": true
+  },
+  "wallet": {
+    "full": true,
+    "text": "钱包\n关闭\n零钱余额\n¥ 100.00\n收入 ¥0.00\n支出 ¥28.00\n账单\n银行卡\n调整余额\n记一笔\n收入\n支出\n零钱\n招商银行 · 1111\n中国银行 · 2222\n建设银行 · 3333\n保存",
+    "targets": [
+      {
+        "id": "#wlBills",
+        "h": 44.000003814697266
+      },
+      {
+        "id": "#wlCards2",
+        "h": 44.000003814697266
+      },
+      {
+        "id": "#wlAdjust",
+        "h": 44.000003814697266
+      },
+      {
+        "id": "#wlAddBill",
+        "h": 44.000003814697266
+      }
+    ]
+  },
+  "cards": {
+    "text": "卡包\n添加银行卡\n返回钱包\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n巡检用户\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n巡检用户\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n巡检用户",
+    "topCard": "a",
+    "sorted": [
+      "a",
+      "b",
+      "c"
+    ],
+    "cycles": 3,
+    "upDown": 0,
+    "touch": "none",
+    "chip": true,
+    "contactless": true,
+    "masked": "•••• •••• •••• 1111"
+  },
+  "bills": {
+    "panel": true,
+    "row": 1,
+    "route": "{\"name\":\"wechat\",\"arg\":null}",
+    "hasDetailButton": false
+  },
+  "billDetail": {
+    "inline": true,
+    "text": "类型\n支出\n金额\n¥28.00\n时间\n21:57\n备注\n咖啡",
+    "route": "{\"name\":\"wechat\",\"arg\":null}"
+  },
+  "drag": {
+    "order": [
+      "c",
+      "a",
+      "b"
+    ],
+    "panel": false,
+    "detail": false,
+    "cancels": 0
+  },
+  "persisted": [
+    "c",
+    "a",
+    "b"
+  ],
+  "switched": {
+    "selected": "b",
+    "panel": true,
+    "text": "卡包\n添加银行卡\n返回钱包\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n巡检用户\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n巡检用户\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n巡检用户\n账单\n暂无账单\n记一笔\n编辑银行卡\n解绑银行卡"
+  },
+  "artifacts": {
+    "wallet": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-phone-wallet.png",
+    "cards": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-phone-cards.png",
+    "bills": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-phone-card-bills.png",
+    "drag": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-phone-card-drag.png"
+  },
+  "errors": []
+}

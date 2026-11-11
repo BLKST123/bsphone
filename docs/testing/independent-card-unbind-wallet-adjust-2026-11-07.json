@@ -1,0 +1,86 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-09T14:55:53.397Z",
+  "source": {
+    "indexSha256": "4A1FACB7987931BBF547A95099EA6AA68EB7CE4F1BCAFA06D38CF35AA9E9B417"
+  },
+  "checks": {
+    "removed_card_only": true,
+    "history_preserved": true,
+    "payment_downgraded": true,
+    "totals_preserved": true,
+    "adjustment_recorded": true,
+    "store_command_used": true,
+    "ui_unbound_marker": true,
+    "no_full_card_number": true,
+    "no_runtime_errors": true
+  },
+  "evidence": {
+    "beforeTotals": {
+      "income": 50,
+      "expense": 10
+    },
+    "beforeHistory": 3,
+    "beforeWalletHistory": 2,
+    "removed": {
+      "id": "card_a",
+      "bank": "审计银行甲"
+    },
+    "afterUnbind": {
+      "cards": [
+        "card_b"
+      ],
+      "history": 3,
+      "walletHistory": 2,
+      "rec": {
+        "id": "bill_card",
+        "type": "expense",
+        "amount": 20,
+        "note": "卡账单",
+        "cardId": "card_a",
+        "cardLabel": "审计银行甲",
+        "cardTail": "1111",
+        "ts": 2,
+        "cardPattern": "经典卡面",
+        "cardUnbound": true,
+        "cardUnboundAt": 1794236153381
+      },
+      "payment": {
+        "type": "wallet",
+        "label": "小手机钱包"
+      },
+      "other": {
+        "id": "card_b",
+        "bank": "审计银行乙",
+        "no": "6222 0000 0000 2222",
+        "holder": "审计用户",
+        "color": "#4c6b55",
+        "pattern": "细纹",
+        "order": 0
+      },
+      "totals": {
+        "income": 50,
+        "expense": 10
+      }
+    },
+    "afterAdjust": {
+      "balance": 250,
+      "type": "adjustment",
+      "history": 3,
+      "cardHistory": 1,
+      "totals": {
+        "income": 50,
+        "expense": 10
+      }
+    },
+    "fallback": {
+      "type": "wallet",
+      "label": "小手机钱包"
+    },
+    "billsText": "‹\n账单\n卡账单\n1970/1/1 · 审计银行甲 · 尾号1111 · 已解绑\n-¥ 20.00"
+  },
+  "architecture": {
+    "walletCommitCommand": true
+  },
+  "errors": []
+}

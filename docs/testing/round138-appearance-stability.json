@@ -1,0 +1,58 @@
+{
+  "ok": true,
+  "errors": [],
+  "beforeTheme": {
+    "active": "colors",
+    "theme": "sakura",
+    "sameHeader": true,
+    "samePreview": true,
+    "sameTabs": true
+  },
+  "afterTheme": {
+    "theme": "yanwu",
+    "active": "yanwu",
+    "sameHeader": true,
+    "samePreview": true,
+    "sameTabs": true
+  },
+  "afterSwipe": {
+    "page": "materials",
+    "active": "materials",
+    "scroll": 0,
+    "samePreview": true
+  },
+  "base": "materials",
+  "afterVertical": {
+    "page": "materials",
+    "samePreview": true
+  },
+  "bottom": {
+    "scrollTop": 588,
+    "footerTop": 513,
+    "buttons": [
+      {
+        "text": "存档此次设置",
+        "top": 513,
+        "bottom": 561,
+        "w": 332,
+        "h": 48
+      },
+      {
+        "text": "导出主题",
+        "top": 573,
+        "bottom": 621,
+        "w": 332,
+        "h": 48
+      },
+      {
+        "text": "导入主题",
+        "top": 633,
+        "bottom": 681,
+        "w": 332,
+        "h": 48
+      }
+    ],
+    "screenBottom": 844,
+    "overflow": 0
+  }
+}

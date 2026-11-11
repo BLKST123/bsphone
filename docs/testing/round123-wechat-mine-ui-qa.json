@@ -1,0 +1,220 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:30:22.507Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "mine_clean": true,
+    "wallet_clean": true,
+    "wallet_rejects_invalid": true,
+    "cards_top_matches_first": true,
+    "cards_reference_art": true,
+    "cards_inline_bills": true,
+    "cards_switch": true,
+    "cards_edit_neutral": true,
+    "cards_unbind": true,
+    "assets_rejects_invalid": true,
+    "assets_association": true,
+    "refs_complete": true,
+    "migration_complete": true,
+    "manual_profile": true,
+    "sticker_clean": true,
+    "favorite_clean": true,
+    "no_banned_copy": true,
+    "no_errors": true
+  },
+  "mine": {
+    "text": "‹\n我的\n人设甲\n编辑资料\n用户人设库\n2 个\n钱包\n¥ 100.00\n卡包\n3 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n0 条\n设置\n›\n外观\n›\n消息\n联系人\n朋友圈\n我的",
+    "hasCards": true
+  },
+  "wallet": {
+    "text": "钱包\n关闭\n零钱余额\n¥ 100.00\n收入 ¥0.00\n支出 ¥88.00\n账单\n银行卡\n调整余额\n记一笔\n收入\n支出\n零钱\n招商银行 · 1111\n中国银行 · 2222\n建设银行 · 3333\n保存",
+    "full": true,
+    "buttons": [
+      {
+        "id": "#wlBills",
+        "h": 44
+      },
+      {
+        "id": "#wlCards2",
+        "h": 44
+      },
+      {
+        "id": "#wlAdjust",
+        "h": 44
+      },
+      {
+        "id": "#wlAddBill",
+        "h": 44
+      }
+    ]
+  },
+  "badWallet": {
+    "history": 1,
+    "balance": 100,
+    "toast": "金额无效"
+  },
+  "cards": {
+    "text": "卡包\n添加银行卡\n返回钱包\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n示例角色\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n示例角色\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n示例角色",
+    "sorted": [
+      "a",
+      "b",
+      "c"
+    ],
+    "topCard": "a",
+    "count": 3,
+    "cycles": 3,
+    "upDown": 0,
+    "chip": true,
+    "contactless": true,
+    "masked": "•••• •••• •••• 1111",
+    "touch": "none",
+    "displayText": "卡包\n添加银行卡\n返回钱包\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n示例角色\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n示例角色\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n示例角色"
+  },
+  "bills": {
+    "panel": true,
+    "hasBill": true,
+    "hasDetailButton": false,
+    "billRows": 1
+  },
+  "billInline": {
+    "detail": true,
+    "text": "类型\n支出\n金额\n¥88.00\n时间\n22:29\n备注\n咖啡",
+    "route": "{\"name\":\"wechat\",\"arg\":null}"
+  },
+  "switched": {
+    "selected": "b",
+    "panel": true,
+    "text": "卡包\n添加银行卡\n返回钱包\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n示例角色\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n示例角色\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n示例角色\n账单\n暂无账单\n记一笔\n编辑银行卡\n解绑银行卡"
+  },
+  "edit": {
+    "text": "编辑银行卡\n返回\n请勿填写真实卡号、有效期、CVV、短信验证码或身份证信息。本工具只做本地模拟展示，不会向银行或支付机构发起真实交易。你可以使用明显虚构的示例号码。请自行保护隐私。\n石墨\n银灰\n深墨\n暖灰\n哑光\n拉丝\n细砂\n保存银行卡",
+    "colors": [
+      "石墨",
+      "银灰",
+      "深墨",
+      "暖灰"
+    ],
+    "patterns": [
+      "哑光",
+      "拉丝",
+      "细砂"
+    ],
+    "hasPrivacy": true,
+    "hasBlue": false
+  },
+  "unbindConfirm": {
+    "text": "解绑这张银行卡？\n历史账单会保留。\n确认解绑取消",
+    "hasYes": true
+  },
+  "unbound": {
+    "count": 2,
+    "history": 1,
+    "unbound": true,
+    "payment": {
+      "type": "wallet",
+      "label": "小手机钱包"
+    }
+  },
+  "assets": {
+    "count": 1,
+    "value": 520000,
+    "worldlineId": "w2",
+    "characterIds": [
+      "c1",
+      "c2"
+    ],
+    "total": 520000,
+    "text": "资产\n加一项资产\n关闭\n江边房产\n房产 · 持有中\n周末住\n¥520000.00\n编辑\n删除"
+  },
+  "assetReject": {
+    "count": 0,
+    "toast": "估值无效"
+  },
+  "refs": [
+    "会话 · 角色一",
+    "情侣空间 · 人设甲 & 角色一",
+    "情侣空间 · 当前绑定",
+    "小说 · 旧城",
+    "外卖地址簿 · 1 个地址",
+    "外卖支付 · 小手机钱包",
+    "外卖订单 · 1 笔订单",
+    "外卖绑定 · 当前绑定"
+  ],
+  "migrationOpen": {
+    "missingEditor": false,
+    "hasBack": false,
+    "hasDelete": false,
+    "hasTarget": true,
+    "hasPreview": true,
+    "hasConfirm": true,
+    "text": "用户人设库\n新建人设\n关闭\n人设乙 启用中\n编辑",
+    "personas": [
+      "p2"
+    ]
+  },
+  "migration": {
+    "remaining": [
+      "p2"
+    ],
+    "oldRefs": [],
+    "newRefs": [
+      "会话 · 角色一",
+      "情侣空间 · 人设甲 & 角色一",
+      "情侣空间 · 当前绑定",
+      "小说 · 旧城",
+      "外卖地址簿 · 1 个地址",
+      "外卖支付 · 小手机钱包",
+      "外卖订单 · 1 笔订单",
+      "外卖绑定 · 当前绑定"
+    ],
+    "chatPersona": "p2",
+    "addressKeys": [
+      "p2"
+    ],
+    "paymentKeys": [
+      "p2"
+    ],
+    "orderPersona": "p2",
+    "spacePersona": "p2",
+    "bookPersonas": [
+      "p2"
+    ]
+  },
+  "profile": {
+    "me": "手动名",
+    "active": "手动名",
+    "text": "‹\n我的\n手动名\n编辑资料\n用户人设库\n1 个\n钱包\n¥ 1.00\n卡包\n0 张\n资产\n合计 ¥0.00\n表情包\n0 张\n收藏\n0 条\n设置\n›\n外观\n›\n消息\n联系人\n朋友圈\n我的"
+  },
+  "stickers": {
+    "text": "表情包\n新建分组\n关闭\n默认\n重命名分组\n删除分组\n暂无表情\n添加表情",
+    "full": true
+  },
+  "favs": {
+    "text": "收藏\n关闭\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n暂无收藏\n返回微信",
+    "full": true
+  },
+  "banned": [
+    "这里是「你」",
+    "只保存在本机",
+    "跟随当前人设",
+    "卡号只显示尾号",
+    "长按卡片可拖动排序",
+    "本地模拟资产卡",
+    "一行四个",
+    "点右上角",
+    "点击按钮即可",
+    "已启用："
+  ],
+  "errors": [],
+  "artifacts": {
+    "wallet": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-wallet.png",
+    "cards": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-cards.png",
+    "bills": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-card-bills.png",
+    "assets": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-assets.png",
+    "personas": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-personas.png",
+    "stickers": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-stickers.png",
+    "favorites": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-wechat-favorites.png"
+  }
+}

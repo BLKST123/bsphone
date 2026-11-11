@@ -1,0 +1,29 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-09T14:54:31.369Z",
+  "source": {
+    "indexSha256": "4A1FACB7987931BBF547A95099EA6AA68EB7CE4F1BCAFA06D38CF35AA9E9B417"
+  },
+  "checks": {
+    "currentMessageRemoved": true,
+    "branchSnapshotRemoved": true,
+    "sheetClosed": true
+  },
+  "failures": [],
+  "result": {
+    "currentIds": [
+      "du1",
+      "da2"
+    ],
+    "branchIds": [
+      "du1",
+      "da2"
+    ],
+    "branchTexts": [
+      "删除测试",
+      "保留的角色话"
+    ],
+    "sheet": false
+  },
+  "errors": []
+}

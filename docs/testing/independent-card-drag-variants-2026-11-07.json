@@ -1,0 +1,99 @@
+{
+  "checkedAt": "2026-11-07T11:31:33.566Z",
+  "setup": true,
+  "result": [
+    {
+      "steps": 1,
+      "start": {
+        "x": 58,
+        "y": 161.0625
+      },
+      "target": {
+        "x": 44,
+        "y": 113.0625
+      },
+      "entered": true,
+      "mid": [
+        "c",
+        "a",
+        "b"
+      ],
+      "end": [
+        "c",
+        "a",
+        "b"
+      ],
+      "detail": false
+    },
+    {
+      "steps": 2,
+      "start": {
+        "x": 58,
+        "y": 161.0625
+      },
+      "target": {
+        "x": 44,
+        "y": 113.0625
+      },
+      "entered": true,
+      "mid": [
+        "c",
+        "a",
+        "b"
+      ],
+      "end": [
+        "c",
+        "a",
+        "b"
+      ],
+      "detail": false
+    },
+    {
+      "steps": 5,
+      "start": {
+        "x": 58,
+        "y": 161.0625
+      },
+      "target": {
+        "x": 44,
+        "y": 113.0625
+      },
+      "entered": true,
+      "mid": [
+        "a",
+        "c",
+        "b"
+      ],
+      "end": [
+        "a",
+        "c",
+        "b"
+      ],
+      "detail": false
+    },
+    {
+      "steps": 12,
+      "start": {
+        "x": 58,
+        "y": 161.0625
+      },
+      "target": {
+        "x": 44,
+        "y": 113.0625
+      },
+      "entered": true,
+      "mid": [
+        "a",
+        "c",
+        "b"
+      ],
+      "end": [
+        "a",
+        "c",
+        "b"
+      ],
+      "detail": false
+    }
+  ],
+  "errors": []
+}

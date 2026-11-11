@@ -1,0 +1,104 @@
+{
+  "ok": true,
+  "errors": [],
+  "main": {
+    "viewport": {
+      "w": 363,
+      "h": 751,
+      "dpr": 3.5
+    },
+    "build": "2026-11-09 · 3.93 · 第 104 轮",
+    "buildCode": 104,
+    "title": "外观与美化",
+    "headers": [
+      ""
+    ],
+    "tabs": [
+      "背景与壁纸",
+      "配色方案",
+      "全局材质",
+      "桌面图标",
+      "桌面小组件",
+      "自定义全局CSS"
+    ],
+    "tabRows": 1,
+    "appButtons": 19,
+    "previewWrap": {
+      "x": 16,
+      "y": 92.00000762939453,
+      "width": 331.14288330078125,
+      "height": 344.0000305175781,
+      "bottom": 436.00003814697266
+    },
+    "preview": {
+      "x": 107.63839721679688,
+      "y": 98.00000762939453,
+      "width": 147.86607360839844,
+      "height": 320,
+      "bottom": 418.00000762939453
+    },
+    "previewHasStatus": true,
+    "reset": "恢复默认主题",
+    "backCount": 1,
+    "screen": {
+      "scrollHeight": 1387,
+      "clientHeight": 707
+    },
+    "hasInternalScroll": false,
+    "tabsTargetHeight": 44.000003814697266
+  },
+  "before": {
+    "rows": 18,
+    "active": "widgets",
+    "route": "appearance"
+  },
+  "after": {
+    "rows": 19,
+    "active": "widgets",
+    "route": "appearance",
+    "newRow": true
+  },
+  "target": {
+    "id": "e1794214231439798",
+    "pageIndex": 3
+  },
+  "editor": {
+    "title": "编辑组件",
+    "hasPreview": true,
+    "background": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+    "cardRect": {
+      "width": 329.4285888671875,
+      "height": 178.2857208251953
+    },
+    "backCount": 1,
+    "actions": [
+      {
+        "text": "更换背景图",
+        "height": 48.000003814697266
+      },
+      {
+        "text": "更换内容图片",
+        "height": 48.000003814697266
+      },
+      {
+        "text": "保存",
+        "height": 48.000003814697266
+      },
+      {
+        "text": "取消",
+        "height": 48.000003814697266
+      }
+    ]
+  },
+  "home": {
+    "found": true,
+    "hasBg": true,
+    "pseudo": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+    "rect": {
+      "x": 185.99107360839844,
+      "y": 213.71420288085938,
+      "width": 150.26792907714844,
+      "height": 150.2679443359375
+    }
+  }
+}

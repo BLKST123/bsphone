@@ -1,0 +1,180 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T07:55:21.697Z",
+  "source": {
+    "indexSha256": "B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED"
+  },
+  "checks": {
+    "orderAmount": true,
+    "takeoutAmount": true,
+    "tailAmount": true,
+    "commaAmount": true,
+    "redPositive": true,
+    "transferPositive": true,
+    "takeoutPositive": true,
+    "takeoutEtaPositive": true,
+    "orderPositive": true,
+    "futureBlocked": true,
+    "intentBlocked": true,
+    "conditionBlocked": true,
+    "askBlocked": true,
+    "negationBlocked": true,
+    "whoBlocked": true,
+    "pastBlocked": true,
+    "arrivedBlocked": true,
+    "noErrors": true
+  },
+  "result": {
+    "amounts": {
+      "order": 39,
+      "takeout": 68,
+      "tail": 200,
+      "comma": 1000,
+      "red": 52,
+      "transfer": 200
+    },
+    "positiveRed": {
+      "raw": "我给你发52元红包，收下买奶茶",
+      "kind": "redpacket",
+      "text": "52 我给你发52元红包，收下买奶茶",
+      "amount": 52,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "redpacket"
+      ],
+      "msgAmounts": [
+        52
+      ]
+    },
+    "positiveTransfer": {
+      "raw": "给你转200元，收下",
+      "kind": "transfer",
+      "text": "200 给你转200元，收下",
+      "amount": 200,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "transfer"
+      ],
+      "msgAmounts": [
+        200
+      ]
+    },
+    "positiveTakeout": {
+      "raw": "我给你点了外卖68元，不要香菜",
+      "kind": "takeout",
+      "text": "外卖 外卖68元 68 我给你点了外卖68元，不要香菜",
+      "amount": 68,
+      "ordersBefore": 0,
+      "ordersAfter": 1,
+      "msgTypes": [
+        "takeout"
+      ],
+      "msgAmounts": [
+        null
+      ]
+    },
+    "positiveTakeoutEta": {
+      "raw": "我给你点了一份外卖，预计20分钟到，68元",
+      "kind": "takeout",
+      "text": "外卖 外卖 68 我给你点了一份外卖，预计20分钟到，68元",
+      "amount": 68,
+      "ordersBefore": 0,
+      "ordersAfter": 1,
+      "msgTypes": [
+        "takeout"
+      ],
+      "msgAmounts": [
+        null
+      ]
+    },
+    "positiveOrder": {
+      "raw": "我给你下单了，订单号BS106，手机壳39元",
+      "kind": "order",
+      "text": "订单 订单商品 39 我给你下单了，订单号BS106，手机壳39元",
+      "amount": 39,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "order"
+      ],
+      "msgAmounts": [
+        39
+      ]
+    },
+    "negativeFuture": {
+      "raw": "明天给你发200元红包",
+      "kind": "auto",
+      "text": "明天给你发200元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeIntent": {
+      "raw": "我想给你发200元红包",
+      "kind": "auto",
+      "text": "我想给你发200元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeCondition": {
+      "raw": "如果我现在给你转账200元，你会收吗",
+      "kind": "auto",
+      "text": "如果我现在给你转账200元，你会收吗",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeAsk": {
+      "raw": "我给你点份外卖50元，你要吗",
+      "kind": "auto",
+      "text": "我给你点份外卖50元，你要吗",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeNegation": {
+      "raw": "没给你发52元红包",
+      "kind": "auto",
+      "text": "没给你发52元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeWho": {
+      "raw": "谁给你发52元红包了",
+      "kind": "auto",
+      "text": "谁给你发52元红包了",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativePast": {
+      "raw": "你之前那笔转账200元我收下了，别再转啦",
+      "kind": "auto",
+      "text": "你之前那笔转账200元我收下了，别再转啦",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeArrived": {
+      "raw": "外卖到了，我先吃啦",
+      "kind": "auto",
+      "text": "外卖到了，我先吃啦",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    }
+  },
+  "errors": []
+}

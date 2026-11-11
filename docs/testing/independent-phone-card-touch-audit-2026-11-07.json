@@ -1,0 +1,156 @@
+{
+  "ok": false,
+  "checkedAt": "2026-11-07T11:41:06.702Z",
+  "source": {
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "start": {
+    "x": 54.85714340209961,
+    "y": 189.68304443359375
+  },
+  "target": {
+    "x": 40.85714340209961,
+    "y": 141.68304443359375
+  },
+  "entered": {
+    "dragging": true,
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "style": {
+      "stack": "auto",
+      "card": "auto",
+      "sheetOverflow": "auto"
+    }
+  },
+  "continuous": {
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "detail": false,
+    "sheetText": "卡包\n3 张 · 长按卡片可拖动排序\n＋ 添加\n返回钱包\n经典卡面\n甲银行\n•••• 1111\n细纹\n乙银行\n•••• 2222\n格纹\n丙银行\n•••• 3333\n甲银行\n•••• 1111\n上移\n下移\n详情\n乙银行\n•••• 2222\n上移\n下移\n详情\n丙银行\n•••• 3333\n上移\n下移\n详情\n卡号只显示尾号；卡面名称、颜色和图案由你设置。",
+    "trace": [
+      {
+        "type": "pointerdown",
+        "target": "c",
+        "x": 54.857147216796875,
+        "y": 189.68304443359375
+      },
+      {
+        "type": "touchstart",
+        "target": "c",
+        "x": 54.857147216796875,
+        "y": 189.68304443359375
+      },
+      {
+        "type": "pointermove",
+        "target": "c",
+        "x": 53.4571418762207,
+        "y": 184.88304138183594
+      },
+      {
+        "type": "pointermove",
+        "target": "c",
+        "x": 52.05714797973633,
+        "y": 180.0830535888672
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 52.05714797973633,
+        "y": 180.0830535888672
+      },
+      {
+        "type": "pointercancel",
+        "target": "c",
+        "x": 0,
+        "y": 0
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 50.65714645385742,
+        "y": 175.28305053710938
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 49.25714874267578,
+        "y": 170.48306274414062
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 47.85714340209961,
+        "y": 165.68304443359375
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 46.4571418762207,
+        "y": 160.88304138183594
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 45.05714797973633,
+        "y": 156.0830535888672
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 43.65714645385742,
+        "y": 151.28305053710938
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 42.25714874267578,
+        "y": 146.48306274414062
+      },
+      {
+        "type": "touchmove",
+        "target": "c",
+        "x": 40.85714340209961,
+        "y": 141.68304443359375
+      },
+      {
+        "type": "touchend",
+        "target": "c",
+        "x": null,
+        "y": null
+      }
+    ],
+    "scrollTop": 0
+  },
+  "beforeSingle": [
+    "b",
+    "a",
+    "c"
+  ],
+  "single": {
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "detail": false,
+    "sheetText": "卡包\n3 张 · 长按卡片可拖动排序\n＋ 添加\n返回钱包\n经典卡面\n甲银行\n•••• 1111\n细纹\n乙银行\n•••• 2222\n格纹\n丙银行\n•••• 3333\n甲银行\n•••• 1111\n上移\n下移\n详情\n乙银行\n•••• 2222\n上移\n下移\n详情\n丙银行\n•••• 3333\n上移\n下移\n详情\n卡号只显示尾号；卡面名称、颜色和图案由你设置。"
+  },
+  "checks": {
+    "continuous_touch_reorders_to_top": false,
+    "continuous_touch_no_detail": true,
+    "single_move_reorders": true,
+    "single_move_no_detail": true,
+    "no_runtime_errors": true
+  },
+  "artifacts": {
+    "continuous": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-phone-card-touch-continuous-2026-11-07.png",
+    "single": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-phone-card-touch-single-move-2026-11-07.png"
+  },
+  "errors": []
+}

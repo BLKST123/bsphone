@@ -1,0 +1,94 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-10T10:07:09.125Z",
+  "device": {
+    "model": "OPPO PMK110",
+    "android": "16",
+    "viewport": "363x751"
+  },
+  "source": {
+    "indexSha256": "DEB0E6F36125548F4E725B71577CED52DF978F96F8A9DE2444CB3A8B80EFDC78"
+  },
+  "checks": {
+    "build": true,
+    "cards": true,
+    "touch44": true,
+    "menu": true,
+    "favorites": true,
+    "persona": true,
+    "safety": true,
+    "noErrors": true,
+    "toastHidden": true,
+    "privacySafe": true
+  },
+  "cards": {
+    "qq": "363x751",
+    "build": 106,
+    "types": 4,
+    "voice": {
+      "w": 44.19643020629883,
+      "h": 44.19643020629883
+    },
+    "video": {
+      "w": 44.19643020629883,
+      "h": 44.19643020629883
+    },
+    "more": {
+      "w": 44.19643020629883,
+      "h": 44.19643020629883
+    }
+  },
+  "menu": {
+    "groups": [
+      "会话外观",
+      "聊天方式",
+      "主动与记忆",
+      "生活联动",
+      "统计与诊断",
+      "会话管理"
+    ],
+    "all44": true
+  },
+  "fav": {
+    "voice": true,
+    "more": {
+      "w": 44.000003814697266,
+      "h": 44.000003814697266
+    },
+    "transcript": "none"
+  },
+  "personaPrecondition": {
+    "active": "p1",
+    "count": "1 张"
+  },
+  "personaHome": {
+    "use": 2,
+    "edit": 0
+  },
+  "personaAfter": {
+    "id": "p2",
+    "count": "0 张"
+  },
+  "restored": true,
+  "safety": {
+    "pastTransfer": null,
+    "arrivedTakeout": null,
+    "zero": null,
+    "invalidPush": null,
+    "ordersBefore": 1,
+    "ordersAfter": 1,
+    "fallback": [
+      {
+        "text": "[红包] 恭喜发财",
+        "kind": "auto",
+        "voiceSafe": true
+      }
+    ]
+  },
+  "finalScreenshot": {
+    "path": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round141-phone-final-synthetic.png",
+    "sha256": "E6CA1413221A581E7426B6A66D1114636F914510CE078DBE8AF9867BD4291334",
+    "bytes": 540516
+  },
+  "errors": []
+}

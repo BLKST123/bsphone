@@ -1,0 +1,4 @@
+﻿const fs=require('fs');const file='index.html';const raw=fs.readFileSync(file,'utf8');const crlf=raw.includes('\r\n');let s=raw.replace(/\r\n/g,'\n');
+s=s.replace("    const before=s.slice(Math.max(0,match.index-14),match.index);\n    const after=s.slice(re.lastIndex,Math.min(s.length,re.lastIndex+14));", "    const before=s.slice(Math.max(0,match.index-14),match.index).split(/[，,。；;！？!?]/).pop();\n    const after=s.slice(re.lastIndex,Math.min(s.length,re.lastIndex+14)).split(/[，,。；;！？!?]/)[0];");
+s=s.replace("if(/转账/.test(t)&&amount>0&&/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t))", "if(/转账|转给你|给你转|我给你转|打给你|给你打|转你/.test(t)&&amount>0&&/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t))");
+fs.writeFileSync(file,crlf?s.replace(/\n/g,'\r\n'):s,'utf8');console.log('amount clause and transfer inference patched');

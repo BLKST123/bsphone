@@ -1,0 +1,59 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:12:10.498Z",
+  "evidence": {
+    "checkedAt": "2026-11-07T14:12:10.501Z",
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "debugApkSha256": "C39AD5C2B207597E25226D270F909622268116C43AF079711BDED419A69FBAF0",
+    "releaseApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "version": "3.88",
+    "versionCode": 99,
+    "cacheKey": "bsphone-v99-20261107-r1"
+  },
+  "checks": {
+    "targetRemoved": true,
+    "sameCharCleared": true,
+    "otherMemberKept": true
+  },
+  "failures": [],
+  "result": {
+    "texts": [
+      "群里说话"
+    ],
+    "chatMem": [
+      "角色二长期记忆：好"
+    ],
+    "base": [
+      "角色二长期记忆：好"
+    ],
+    "legacy": [
+      "角色二长期记忆：好"
+    ],
+    "memoryIds": [
+      "m2"
+    ],
+    "c1": [],
+    "c2": [
+      "角色二长期记忆：好"
+    ],
+    "m1": "deleted",
+    "m2": "active",
+    "e2": {
+      "id": "e2",
+      "sourceType": "manual",
+      "sourceId": "u1",
+      "scope": "session",
+      "chatId": "pgc",
+      "contactId": "c2",
+      "personaId": "p",
+      "fact": "角色二长期记忆：好",
+      "active": true,
+      "sessionMentions": {},
+      "needsPersonaReview": false
+    }
+  },
+  "artifacts": {
+    "screenshot": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round120-phone-forget-group-scope.png"
+  },
+  "errors": []
+}

@@ -1,0 +1,25 @@
+{
+  "checkedAt": "2026-11-09T14:54:14.185Z",
+  "tests": {
+    "mixedGroupOffersKeepRemoveChoice": true,
+    "mixedGroupEditorOrRegenerateReachable": true
+  },
+  "evidence": {
+    "edit": {
+      "toast": [
+        ""
+      ],
+      "editor": true,
+      "choiceCopy": true
+    },
+    "regen": {
+      "toast": [
+        ""
+      ],
+      "confirm": true,
+      "choiceCopy": true
+    }
+  },
+  "errors": [],
+  "ok": true
+}

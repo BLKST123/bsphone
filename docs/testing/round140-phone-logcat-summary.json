@@ -1,0 +1,9 @@
+﻿{
+    "sourceAudit":  "round140-phone-wechat-audit.json",
+    "sourceReleaseLog":  "round140-release-logcat.txt",
+    "pageErrors":  0,
+    "releaseFatalAnrJsErrors":  0,
+    "releaseLogBytes":  28091,
+    "releaseHashMatch":  true,
+    "releaseFirstInstallPreserved":  true
+}

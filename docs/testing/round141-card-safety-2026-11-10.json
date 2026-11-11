@@ -1,0 +1,81 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T07:55:18.326Z",
+  "source": {
+    "indexSha256": "B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED"
+  },
+  "checks": {
+    "positiveRedpacket": true,
+    "positiveTransfer": true,
+    "positiveTakeout": true,
+    "positiveOrder": true,
+    "pastTransfer": true,
+    "pastRedpacket": true,
+    "arrivedTakeout": true,
+    "thirdPartyRedpacket": true,
+    "alreadyTakeout": true,
+    "negatedTransfer": true,
+    "zeroRedpacket": true,
+    "zeroTransfer": true,
+    "negativeTakeout": true,
+    "nanOrder": true,
+    "explicitInvalidFallback": true,
+    "invalidTakeoutNoEntity": true,
+    "invalidRedpacketNoMessage": true,
+    "noRuntimeErrors": true
+  },
+  "result": {
+    "positiveRedpacket": {
+      "kind": "redpacket",
+      "amount": 52
+    },
+    "positiveTransfer": {
+      "kind": "transfer",
+      "amount": 200
+    },
+    "positiveTakeout": {
+      "kind": "takeout",
+      "amount": 68,
+      "merchant": "甜品店",
+      "items": [
+        "草莓蛋糕",
+        "热奶茶"
+      ]
+    },
+    "positiveOrder": {
+      "kind": "order",
+      "amount": 39,
+      "merchant": "商城",
+      "items": [
+        "手机壳"
+      ],
+      "status": "已发货"
+    },
+    "pastTransfer": null,
+    "pastRedpacket": null,
+    "arrivedTakeout": null,
+    "thirdPartyRedpacket": null,
+    "alreadyTakeout": null,
+    "negatedTransfer": null,
+    "zeroRedpacket": null,
+    "zeroTransfer": null,
+    "negativeTakeout": null,
+    "nanOrder": null,
+    "explicitInvalidFallback": [
+      {
+        "text": "[红包] 恭喜发财",
+        "kind": "auto",
+        "voiceSafe": true
+      }
+    ],
+    "invalidTakeoutPush": {
+      "returned": null,
+      "ordersBefore": 0,
+      "ordersAfter": 0
+    },
+    "invalidRedpacketPush": {
+      "returned": null
+    }
+  },
+  "errors": []
+}

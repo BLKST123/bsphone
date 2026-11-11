@@ -1,0 +1,166 @@
+﻿{
+    "version":  "3.94",
+    "versionCode":  105,
+    "checkKey":  "bsphone-v105-20261110-r1",
+    "generatedAt":  "2026-11-10T03:47:21.0850626+08:00",
+    "files":  [
+                  {
+                      "path":  "index.html",
+                      "bytes":  2024896,
+                      "sha256":  "4BC33B602F783D034E93C791C5D9D79D291F477567A13CE72E944EE9409F35CB"
+                  },
+                  {
+                      "path":  "sw.js",
+                      "bytes":  2528,
+                      "sha256":  "3BF50240C6E91BC195D31CBC4D24321077F6F6711317588D5FBBC9DC40340D6A"
+                  },
+                  {
+                      "path":  "version.json",
+                      "bytes":  650,
+                      "sha256":  "08A6586E1EA1756BF9C093CB577B9DD7A45569E8D0B3B330CC8C5A9A3597A597"
+                  },
+                  {
+                      "path":  "BS小手机.apk",
+                      "bytes":  587972,
+                      "sha256":  "2B88953B4D85F6030BDB4497D9955C3C7D631F64CBCCCBFAF84D7CD7DD4E959D"
+                  },
+                  {
+                      "path":  "BS小手机_3.94_Build105_release.zip",
+                      "bytes":  1140392,
+                      "sha256":  "EB6E827030DC926A49DF8ABE614F40C65C3729DD1226150EB6DB33D0CBD83778"
+                  },
+                  {
+                      "path":  "docs/BS小手机_3.94_Build105_微信完整模块返修与组件卡底图回归_完整报告_2026-11-10.md",
+                      "bytes":  9482,
+                      "sha256":  "3DF5A837C3C3BA5B6D4F91BAFF5806CD1EC95F3D95B543C3E93E73D24A9E3C7F"
+                  },
+                  {
+                      "path":  "docs/testing/round140-full-regression-2026-11-10.log",
+                      "bytes":  108884,
+                      "sha256":  "F856D87F0DFFE91144585F2EDA87755ECF0E9624B7156C82949E8ED5078A1226"
+                  },
+                  {
+                      "path":  "docs/testing/round140-wechat-branch-regression-2026-11-10.log",
+                      "bytes":  52237,
+                      "sha256":  "336B6FC6EF25B112994D9C062AEAB409CEC9CDBA01A6AF58C7F0FF3000D0F529"
+                  },
+                  {
+                      "path":  "docs/testing/round140-wechat-module-fix.json",
+                      "bytes":  6217,
+                      "sha256":  "4EC5B601B896B88736B405254D59088BB01ABF37075D6A335794F7559B0548A7"
+                  },
+                  {
+                      "path":  "docs/testing/round140-widget-geometry.json",
+                      "bytes":  1823,
+                      "sha256":  "B0C6F6B41230F00BF8B2E155E0A67D4F5A318B0222DF8CDE52ED6A5D48F9DEAD"
+                  },
+                  {
+                      "path":  "docs/testing/round140-card-theme.json",
+                      "bytes":  2967,
+                      "sha256":  "869CB937BA99CAA5B761B2C4CCF06DEC231F04FD258E99956CC02600A20AB20F"
+                  },
+                  {
+                      "path":  "docs/testing/round140-gallery-wallpaper.json",
+                      "bytes":  136,
+                      "sha256":  "0467C634FB04B17C91A43FE82E1DAF69324F29FEADD23A6090A0E77F4CC50AEF"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-wechat-audit.json",
+                      "bytes":  259275,
+                      "sha256":  "EA2171F196EFFAB67DF6B74F526AFEEE0202B7E7C437375197AEB1053E5E40C8"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-logcat-summary.json",
+                      "bytes":  289,
+                      "sha256":  "CE22313CE6AF63DC6DC0B3CD56B83AEF73DB30E0FA3F9CA05746E8E6DD75B921"
+                  },
+                  {
+                      "path":  "docs/testing/round140-installed-release-audit.json",
+                      "bytes":  484,
+                      "sha256":  "E45D29D9EA701D8BD514232E3DFDDC9F1D084FEB42348DCF3CBB0FE1AECDF6CF"
+                  },
+                  {
+                      "path":  "docs/testing/round140-zip-verify.json",
+                      "bytes":  109,
+                      "sha256":  "ED652501BFB780FD453179F2A4E4FE199E4659B4DC436EC546AF8BB9FF98222D"
+                  },
+                  {
+                      "path":  "docs/testing/round140-wechat-cards.png",
+                      "bytes":  251648,
+                      "sha256":  "245CAD0F19A5516A16D134CE9CF5D00E5AF7DA580AB9505961F6A8ABFB4229FB"
+                  },
+                  {
+                      "path":  "docs/testing/round140-chat-menu-grouped.png",
+                      "bytes":  106546,
+                      "sha256":  "7E4DB7E704A6D4811FB4ED99395B1E6C6C284044AA0CCE7A2B8344A6F2373225"
+                  },
+                  {
+                      "path":  "docs/testing/round140-favorites-list.png",
+                      "bytes":  55193,
+                      "sha256":  "554AF49886F027FD55600AAE2A8EEF574D6E5DAB66DF6C8D3085ADB75AC5D4FF"
+                  },
+                  {
+                      "path":  "docs/testing/round140-favorites-menu.png",
+                      "bytes":  246528,
+                      "sha256":  "4257630478FF2DF563EB9282A6FF99F5BE51DCED2962BD8FAFA192971C5B6366"
+                  },
+                  {
+                      "path":  "docs/testing/round140-persona-library.png",
+                      "bytes":  23998,
+                      "sha256":  "88AB87A00E6C1B3F4B581E036F100EA17BDDFCDD82E51E9CCA53FA4C263F1920"
+                  },
+                  {
+                      "path":  "docs/testing/round140-call-placeholder.png",
+                      "bytes":  392033,
+                      "sha256":  "DF518A573FBCA57B46224CB8F0067DB23AEC970BD21A9C5CEC967DBB8B36B304"
+                  },
+                  {
+                      "path":  "docs/testing/round140-widget-sticker-bg.png",
+                      "bytes":  426958,
+                      "sha256":  "9BA54ECE409B6EE5820F9146536A1E6711BB466B1AD0FA7C0A7B8451143B24EE"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-wechat-cards.png",
+                      "bytes":  585428,
+                      "sha256":  "EF91E486C335E05A65058B662E0A17BE19DC45EF0FF488C8E92A8FC3F445844D"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-chat-menu.png",
+                      "bytes":  264215,
+                      "sha256":  "1833F5AFC07263947125A050E6D42CCE7F21318AD15F2C0017B0A8D72712C256"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-favorites.png",
+                      "bytes":  130019,
+                      "sha256":  "24CDE29EF4EB523758929066AFF5C61095592AFB0B03ED9A18EB6923C03963C3"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-persona.png",
+                      "bytes":  102434,
+                      "sha256":  "160FB6B679E217F849F1EB6F280A208496134177F4D8CF735983C8B5EEB3DA64"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-call.png",
+                      "bytes":  872432,
+                      "sha256":  "19CAFA70A19752536EAE6E609824978C594E60A942A7CCC87AB37045900A08CA"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-widget-bg.png",
+                      "bytes":  1071780,
+                      "sha256":  "BBDC18FAE172B09EEBF1A0B3F3AB6BD5DE9BBF355FE0924F4425A06105959430"
+                  },
+                  {
+                      "path":  "docs/testing/round140-phone-final-adb.png",
+                      "bytes":  2479522,
+                      "sha256":  "BDA1E53D6692B90C428902E268E7740362F3334BF4D26E89110E93EA34AB39F2"
+                  },
+                  {
+                      "path":  "docs/testing/round140-online-publish.json",
+                      "bytes":  742,
+                      "sha256":  "6991DA7241C2CF9AA37966BF737E4957A0008F19CB73A533F1003BAFDDF41B01"
+                  }
+              ],
+    "missing":  [
+
+                ]
+}

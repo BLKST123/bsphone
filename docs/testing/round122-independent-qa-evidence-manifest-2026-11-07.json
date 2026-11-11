@@ -1,0 +1,174 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T11:43:52.483Z",
+  "verdict": "REJECT",
+  "source": {
+    "version": "3.87",
+    "versionCode": 98,
+    "commit": "8f8a249f83494815311d8eb2cda34e6e6862bec2",
+    "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4"
+  },
+  "device": {
+    "model": "PMK110",
+    "android": "16",
+    "serial": "3B665K02PNH00000",
+    "finalInstall": "Release 3.87/98",
+    "installedApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513"
+  },
+  "artifacts": [
+    {
+      "id": "report-root",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\BS小手机_3.87_Build98_微信我的模块与卡包返修_独立QA复检报告_2026-11-07.md",
+      "exists": true,
+      "bytes": 23665,
+      "sha256": "DE0A4F56BA1B6755288AE43CF443F6F6B9F30B4791C1AD32C31D080471BF9232"
+    },
+    {
+      "id": "report-repo",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\BS小手机_3.87_Build98_微信我的模块与卡包返修_独立QA复检报告_2026-11-07.md",
+      "exists": true,
+      "bytes": 23665,
+      "sha256": "DE0A4F56BA1B6755288AE43CF443F6F6B9F30B4791C1AD32C31D080471BF9232"
+    },
+    {
+      "id": "main-desktop",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-wechat-mine-suite.json",
+      "exists": true,
+      "bytes": 9271,
+      "sha256": "7C04478BBC9833611FEA54D75BE6E18657BA5F41469B2E544D34235BD121EEFA"
+    },
+    {
+      "id": "main-phone",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-phone-wechat-mine-suite.json",
+      "exists": true,
+      "bytes": 5101,
+      "sha256": "25DF85EC31935E309D4D4282732B491B75988C46E3DDEBDE9817D45A650949CF"
+    },
+    {
+      "id": "image-desktop",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-image-branch-hidden-zip-2026-11-07.json",
+      "exists": true,
+      "bytes": 9555,
+      "sha256": "AB209B35E52809723EFCE68F9D525F32DBC1AC1FA6BCC25F06E9F3C0D111C645"
+    },
+    {
+      "id": "image-phone",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round121-phone-image-branch-hidden-zip.json",
+      "exists": true,
+      "bytes": 1224,
+      "sha256": "0A3ED42AB22E9E152863ECBB075DE7177B3F8C23A1E179A88ECD06FA39087A44"
+    },
+    {
+      "id": "card-unbind",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-card-unbind-wallet-adjust-2026-11-07.json",
+      "exists": true,
+      "bytes": 2178,
+      "sha256": "C54445EB6AF9BFCF8E39E8AEE5DCC5798B19E355764EC8C82FE75570D8CFFC0E"
+    },
+    {
+      "id": "persistence",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-persistence-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 1113,
+      "sha256": "37B7E166D6475CA888114CE53F1E3C13E07BFEB61CBA00520A2955B12885F2F6"
+    },
+    {
+      "id": "edge-audit",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-independent-edge-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 5610,
+      "sha256": "90BACA9B93CBF5D6E1E1B3FCEDFA66862CB36BF1B5B544F5BB0BA2C30EB9BE9D"
+    },
+    {
+      "id": "touch-phone",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-phone-card-touch-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 4160,
+      "sha256": "59CE2FC20E0B4473B1F63CE38BE7767439095CA4B7BF7840BE2EF43DB063E78B"
+    },
+    {
+      "id": "touch-phone-continuous",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-phone-card-touch-continuous-2026-11-07.png",
+      "exists": true,
+      "bytes": 1418459,
+      "sha256": "357F8967E0CBD7D6F46CA4364EAADD8C7660A7A6666565D21F547048B4199A02"
+    },
+    {
+      "id": "touch-phone-single",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\independent-phone-card-touch-single-move-2026-11-07.png",
+      "exists": true,
+      "bytes": 1419732,
+      "sha256": "EF74290A18AF7F190A70C0071752FF086C75E9D044FFA2E3C797A2EE18989504"
+    },
+    {
+      "id": "touch-phone-adjacent",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-phone-touch-adjacent-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 808,
+      "sha256": "96D5B47938189366D9EFE84062C8167A13B5EDA4BCFE27B9075B48BC89C37BA5"
+    },
+    {
+      "id": "manifest-audit",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-independent-manifest-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 20310,
+      "sha256": "B5386B708E430D4D9C7ED455889234EC608F41CB7ED21DB9E4C965E9A12D3B89"
+    },
+    {
+      "id": "release-package",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-release-package-audit-2026-11-07.json",
+      "exists": true,
+      "bytes": 1622,
+      "sha256": "CA8D2BC0E2F637CD339306C9D91D2E1187DD3F10BAA5F8676485770311377621"
+    },
+    {
+      "id": "online-publish",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-online-publish-2026-11-07.json",
+      "exists": true,
+      "bytes": 3165,
+      "sha256": "12A0524752A7525AAFD63CEE8CECCDF22CAF80F4B3469E55422F22A32A9F71ED"
+    },
+    {
+      "id": "core-rerun-log",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-qa-independent-core-rerun-2026-11-07.log",
+      "exists": true,
+      "bytes": 1570,
+      "sha256": "DE4C353B6C4BFAE40429DD3D4FF8216302C131C4533901402AAB4C1EEC174F86"
+    },
+    {
+      "id": "key-regression-log",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-qa-key-regression-rerun-2026-11-07.log",
+      "exists": true,
+      "bytes": 264,
+      "sha256": "A70E88C7E3C43FB2EA7A99D09B90D25B1E26D2FEC76DF6437624CDEB88228526"
+    },
+    {
+      "id": "r97-light",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\qa-r97-light-our-rerun-2026-11-07.json",
+      "exists": true,
+      "bytes": 14129,
+      "sha256": "7982D64A9D3FB6EA72D4A3E621383C8DE65AFE79D9780D9DF8D14CE7E5F5258E"
+    },
+    {
+      "id": "r97-dark",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\qa-r97-dark-our-rerun-2026-11-07.json",
+      "exists": true,
+      "bytes": 14362,
+      "sha256": "D248797240E1EAE50600E1F309634A5C92C14EFD84BD46A4B9197B6E62302C74"
+    },
+    {
+      "id": "installed-release-apk",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-qa-installed-release-final.apk",
+      "exists": true,
+      "bytes": 549846,
+      "sha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513"
+    },
+    {
+      "id": "online-apk",
+      "file": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round122-qa-online.apk",
+      "exists": true,
+      "bytes": 549846,
+      "sha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513"
+    }
+  ]
+}

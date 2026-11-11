@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:11:20.484Z",
+  "checks": {
+    "uiSwitchToOriginalContent": true,
+    "uiSwitchToFirstNewContent": true,
+    "activeMatchesTarget": true,
+    "originalSwitchActiveMatchesTarget": true,
+    "noErrors": true
+  },
+  "failures": [],
+  "orig": {
+    "active": "turnbranch_mw6gv5v6ajwa",
+    "ids": [
+      "uqa1",
+      "uqa2",
+      "aqa1",
+      "aqa2",
+      "uqa3",
+      "aqa3"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "old1",
+      "old2",
+      "later-u",
+      "later-a"
+    ],
+    "branches": [
+      {
+        "id": "turnbranch_mw6gv5v6ajwa",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw6gv5v6zqvt",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw6gv6afdzg0",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "new1": {
+    "active": "turnbranch_mw6gv5v6zqvt",
+    "ids": [
+      "uqa1",
+      "uqa2",
+      "mw6gv67ukksx"
+    ],
+    "texts": [
+      "A",
+      "B",
+      "new-1"
+    ],
+    "branches": [
+      {
+        "id": "turnbranch_mw6gv5v6ajwa",
+        "label": "原始版本"
+      },
+      {
+        "id": "turnbranch_mw6gv5v6zqvt",
+        "label": "重新生成 1"
+      },
+      {
+        "id": "turnbranch_mw6gv6afdzg0",
+        "label": "重新生成 2"
+      }
+    ]
+  },
+  "target": "turnbranch_mw6gv5v6zqvt",
+  "rowsBefore": [
+    "原始版本 · 当前old1✓",
+    "重新生成 1new-1›",
+    "重新生成 2new-2›"
+  ],
+  "errors": []
+}

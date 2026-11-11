@@ -1,0 +1,66 @@
+{
+  "ok": true,
+  "errors": [],
+  "before": {
+    "children": [
+      {
+        "text": "LOVE 01",
+        "w": 110.89935302734375,
+        "h": 139.83657836914062,
+        "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 02",
+        "w": 104.79823303222656,
+        "h": 135.70556640625,
+        "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 03",
+        "w": 106.86470031738281,
+        "h": 137.12448120117188,
+        "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)",
+        "position": "relative"
+      }
+    ],
+    "grid": "94px 94px 94px",
+    "card": {
+      "w": 350,
+      "h": 170
+    }
+  },
+  "after": {
+    "children": [
+      {
+        "text": "LOVE 01",
+        "w": 110.89935302734375,
+        "h": 139.83657836914062,
+        "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 02",
+        "w": 104.79823303222656,
+        "h": 135.70556640625,
+        "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 03",
+        "w": 106.86470031738281,
+        "h": 137.12448120117188,
+        "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)",
+        "position": "relative"
+      }
+    ],
+    "grid": "94px 94px 94px",
+    "card": {
+      "w": 350,
+      "h": 170
+    },
+    "bg": true,
+    "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")"
+  }
+}

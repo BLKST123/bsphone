@@ -1,0 +1,34 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:17:36.463Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "wallet_balance_finite": true,
+    "wallet_history_finite": true,
+    "asset_finite": true,
+    "asset_total_finite": true,
+    "totals_finite": true,
+    "export_finite": true,
+    "export_no_infinity": true,
+    "export_no_null_money": true,
+    "no_errors": true
+  },
+  "evidence": {
+    "balance": 0,
+    "amount": 0,
+    "asset": 0,
+    "total": 0,
+    "totals": {
+      "income": 0,
+      "expense": 0
+    },
+    "snapshotBalance": 0,
+    "snapshotAmount": 0,
+    "snapshotAsset": 0,
+    "hasInfinity": false,
+    "hasNullMoney": false
+  },
+  "errors": []
+}

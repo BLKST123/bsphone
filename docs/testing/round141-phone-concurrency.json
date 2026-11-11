@@ -1,0 +1,57 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T06:42:14.334Z",
+  "device": {
+    "model": "OPPO PMK110",
+    "android": "16",
+    "viewport": "363x751"
+  },
+  "source": {
+    "indexSha256": "DEB0E6F36125548F4E725B71577CED52DF978F96F8A9DE2444CB3A8B80EFDC78"
+  },
+  "checks": {
+    "sameChatReplacement": true,
+    "crossAEndsFirst": true,
+    "crossBFinishes": true,
+    "noRuntimeErrors": true
+  },
+  "sameBefore": {
+    "tip": "对方正在输入……",
+    "active": true
+  },
+  "sameAfterReplace": {
+    "tip": "对方正在输入……",
+    "title": "对方正在输入……",
+    "active": true
+  },
+  "sameFinal": {
+    "tip": "",
+    "active": false,
+    "texts": [
+      "same 回复2"
+    ]
+  },
+  "crossInitial": {
+    "tip": "对方正在输入……",
+    "aActive": true,
+    "bActive": true
+  },
+  "crossAfterA": {
+    "tip": "对方正在输入……",
+    "aActive": false,
+    "bActive": true
+  },
+  "crossFinal": {
+    "tip": "",
+    "title": "阿梨",
+    "aActive": false,
+    "bActive": false,
+    "aMsgs": [
+      "A 回复"
+    ],
+    "bMsgs": [
+      "B 回复"
+    ]
+  },
+  "errors": []
+}

@@ -1,0 +1,632 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T11:38:27.611Z",
+  "manifest": {
+    "ok": true,
+    "generatedAt": "2026-11-07T10:41:16.314Z",
+    "artifactEvidence": {
+      "sourceCommit": "8f8a249f83494815311d8eb2cda34e6e6862bec2",
+      "indexSha256": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "debugApkSha256": "E88115A380025A404F529B5B291F9FA113CF96BE065FDBDE55D5A30288B0D21E",
+      "releaseApkSha256": "9434AAD1E1ABE37EE127B4250A39B51F3DA3EA7CDFC9529FF508731563B9C513",
+      "releaseZipSha256": "F7AF762E2F7AB2CDA68174E7669319A94D4CF8F09C1C4256380F3176ECFF3D94",
+      "version": "3.87",
+      "versionCode": 98,
+      "cacheKey": "bsphone-v98-20261107-r1"
+    },
+    "counts": {
+      "tests": 49,
+      "logs": 6,
+      "screenshots": 11
+    }
+  },
+  "currentSource": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+  "missingArtifacts": [],
+  "artifactVerification": [
+    {
+      "file": "build98-native-build-2026-11-07.log",
+      "kind": "log",
+      "expected": "5CEB189F925A7A9AD7766D535B710019EFC6C0FF0F31DB8B09BA007E517941E1",
+      "currentHashMatch": true,
+      "committedHashMatch": false,
+      "current": "5CEB189F925A7A9AD7766D535B710019EFC6C0FF0F31DB8B09BA007E517941E1",
+      "committed": "9E5D7C39A2BEE76C84E22E50545E579B22C489D579877E6E092082351BA97B2A"
+    },
+    {
+      "file": "round122-final-core-2026-11-07.log",
+      "kind": "log",
+      "expected": "EC53AEF89E8CDCC54D2DA1703F18E219C795298F731D8C18810D258AE666ADC8",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "EC53AEF89E8CDCC54D2DA1703F18E219C795298F731D8C18810D258AE666ADC8",
+      "committed": "EC53AEF89E8CDCC54D2DA1703F18E219C795298F731D8C18810D258AE666ADC8"
+    },
+    {
+      "file": "round122-final-regression-suite-2026-11-07.log",
+      "kind": "log",
+      "expected": "0B453CF152D5DD071D127A703B22D427EA9BCB3EC8996962A74C56A5113E03AC",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "0B453CF152D5DD071D127A703B22D427EA9BCB3EC8996962A74C56A5113E03AC",
+      "committed": "0B453CF152D5DD071D127A703B22D427EA9BCB3EC8996962A74C56A5113E03AC"
+    },
+    {
+      "file": "round122-phone-debug-suite-final-2026-11-07.log",
+      "kind": "log",
+      "expected": "EF3087CBD89CB1CE908E290738060373060EE75C330883DB4D6E492BE38F2DCF",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "EF3087CBD89CB1CE908E290738060373060EE75C330883DB4D6E492BE38F2DCF",
+      "committed": "EF3087CBD89CB1CE908E290738060373060EE75C330883DB4D6E492BE38F2DCF"
+    },
+    {
+      "file": "round122-independent-audits-2026-11-07.log",
+      "kind": "log",
+      "expected": "0ECE9B3A70E916CA41124A807AB2FE8A63008820CAB09F5A63034242AC22D861",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "0ECE9B3A70E916CA41124A807AB2FE8A63008820CAB09F5A63034242AC22D861",
+      "committed": "0ECE9B3A70E916CA41124A807AB2FE8A63008820CAB09F5A63034242AC22D861"
+    },
+    {
+      "file": "round122-phone-release-final-logcat-2026-11-07.txt",
+      "kind": "log",
+      "expected": "68D4774F500B1144B068E0B14BADFF0D209255F5214DA489A4D7A4FB0BFF7EEE",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "68D4774F500B1144B068E0B14BADFF0D209255F5214DA489A4D7A4FB0BFF7EEE",
+      "committed": "68D4774F500B1144B068E0B14BADFF0D209255F5214DA489A4D7A4FB0BFF7EEE"
+    },
+    {
+      "file": "round122-phone-wechat-mine.png",
+      "kind": "screenshot",
+      "expected": "5BC8D2BEA66051BA628CC5B46C60AAB43C4BE5C07A93AE74DCE51AEF095EE733",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "A21D64DCFA686438CDE2555B0013E0B31F72658E78B00943A8DA60B3B565A683",
+      "committed": "5BC8D2BEA66051BA628CC5B46C60AAB43C4BE5C07A93AE74DCE51AEF095EE733"
+    },
+    {
+      "file": "round122-phone-persona.png",
+      "kind": "screenshot",
+      "expected": "501953570DC404A27D8DC33F18A0AE76A335B058F92B85597CDD710AE5820323",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "56CC4099A7EA59C4BFE21DD46868DC51FE07C1C3B421A12EA53718023F0D3E1E",
+      "committed": "501953570DC404A27D8DC33F18A0AE76A335B058F92B85597CDD710AE5820323"
+    },
+    {
+      "file": "round122-phone-cards.png",
+      "kind": "screenshot",
+      "expected": "21AB3B8714D20E376D479DA7F877FB94989871C895219365E2D9CAEAE2AA5A17",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "2BE98A6E8146935F6DB98CBC9F8C28A3E839B6E98939C43258FC8074D4610340",
+      "committed": "21AB3B8714D20E376D479DA7F877FB94989871C895219365E2D9CAEAE2AA5A17"
+    },
+    {
+      "file": "round122-release-final-home.png",
+      "kind": "screenshot",
+      "expected": "495A8706BCF4DC5DBEEE7414F09E617E49716E0004D05B19D2A24ED909CB8778",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "495A8706BCF4DC5DBEEE7414F09E617E49716E0004D05B19D2A24ED909CB8778",
+      "committed": "495A8706BCF4DC5DBEEE7414F09E617E49716E0004D05B19D2A24ED909CB8778"
+    },
+    {
+      "file": "round121-phone-image-branch.png",
+      "kind": "screenshot",
+      "expected": "7ED38939375C6963E70E942E69A5FA9B545CB9AB9C33788977CB2D4B6E696F3A",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "F021B35ED16C48CA0AA5630FAF79C3CC1A1A609E3BB678C8983DC06006B92C20",
+      "committed": "7ED38939375C6963E70E942E69A5FA9B545CB9AB9C33788977CB2D4B6E696F3A"
+    },
+    {
+      "file": "round121-phone-hidden-content.png",
+      "kind": "screenshot",
+      "expected": "A80566C369B258FBD6CC096AA1B094CCCF89DF114D90B208CEE039018C4FD707",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "3BC0E5148B13B12FC8CBE1B21F5CA62001D1FDE6CC85593E15FF6E2113C32C1C",
+      "committed": "A80566C369B258FBD6CC096AA1B094CCCF89DF114D90B208CEE039018C4FD707"
+    },
+    {
+      "file": "round121-phone-image-branch-hidden-zip.png",
+      "kind": "screenshot",
+      "expected": "A711C569A695C7C3919DFF103E957EA4706FB65B6419AAAC8C49BCA694A9226D",
+      "currentHashMatch": false,
+      "committedHashMatch": true,
+      "current": "E434BF5FBA621E63A49C452D7C579CBAEB131E09EAECCDA0E5144F09B10DBFCC",
+      "committed": "A711C569A695C7C3919DFF103E957EA4706FB65B6419AAAC8C49BCA694A9226D"
+    },
+    {
+      "file": "round118-phone-branch-actions.png",
+      "kind": "screenshot",
+      "expected": "E57E04B343D59F39B923E77996109E914913AA2F63DF2F4AA920A6EE014AD237",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "E57E04B343D59F39B923E77996109E914913AA2F63DF2F4AA920A6EE014AD237",
+      "committed": "E57E04B343D59F39B923E77996109E914913AA2F63DF2F4AA920A6EE014AD237"
+    },
+    {
+      "file": "round118-phone-mixed-editor.png",
+      "kind": "screenshot",
+      "expected": "6AA8E2C27232AFD598A6ED2EA264A84837E4329938DBC242B0E2504975278E73",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "6AA8E2C27232AFD598A6ED2EA264A84837E4329938DBC242B0E2504975278E73",
+      "committed": "6AA8E2C27232AFD598A6ED2EA264A84837E4329938DBC242B0E2504975278E73"
+    },
+    {
+      "file": "round119-phone-forget-scope.png",
+      "kind": "screenshot",
+      "expected": "1F378B191E3791B858E03C8DF8C84DB213514258225AD7104D819707E83AE451",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "1F378B191E3791B858E03C8DF8C84DB213514258225AD7104D819707E83AE451",
+      "committed": "1F378B191E3791B858E03C8DF8C84DB213514258225AD7104D819707E83AE451"
+    },
+    {
+      "file": "round120-phone-forget-group-scope.png",
+      "kind": "screenshot",
+      "expected": "A448360EB6CF3AB53D4539380682F6A039204D09E0B8323C8D32A06D1ADF549C",
+      "currentHashMatch": true,
+      "committedHashMatch": true,
+      "current": "A448360EB6CF3AB53D4539380682F6A039204D09E0B8323C8D32A06D1ADF549C",
+      "committed": "A448360EB6CF3AB53D4539380682F6A039204D09E0B8323C8D32A06D1ADF549C"
+    }
+  ],
+  "testSummary": {
+    "count": 49,
+    "missing": [],
+    "failedOk": [],
+    "nonCurrentSourceHash": [],
+    "noChecks": [
+      "round121-phone-image-branch-hidden-zip.json"
+    ]
+  },
+  "tests": [
+    {
+      "file": "qa-wechat-message-edit-branch-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 26,
+      "currentCheckCount": 26,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-chat-turn-reroll-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 19,
+      "currentCheckCount": 19,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-turn-reroll-audit-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-turn-branch-switch-audit-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 6,
+      "currentCheckCount": 6,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-turn-reroll-independent-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 14,
+      "currentCheckCount": 14,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-turn-branch-switch-ui-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 5,
+      "currentCheckCount": 5,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-turn-reroll-multi-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-prompt-layers-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "independent-turn-memory-branch-audit-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 3,
+      "currentCheckCount": 3,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-turn-auto-memory-branch-fix-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-manual-branch-continue-audit-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 3,
+      "currentCheckCount": 3,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-mixed-group-edit-audit-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 2,
+      "currentCheckCount": 2,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-forget-memory-scope-audit-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 2,
+      "currentCheckCount": 2,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-forget-branch-memory-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 6,
+      "currentCheckCount": 6,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-delete-branch-snapshot-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 3,
+      "currentCheckCount": 3,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-branch-export-delete-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 5,
+      "currentCheckCount": 5,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-mixed-group-edit-lifecycle-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-forget-substring-scope-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "independent-forget-cross-scope-audit-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 4,
+      "currentCheckCount": 4,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-forget-group-member-scope-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 3,
+      "currentCheckCount": 3,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-forget-group-branch-scope-2026-11-06.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 13,
+      "currentCheckCount": 13,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-forget-group-remark-scope-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "round121-image-branch-hidden-zip-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "round122-wechat-mine-suite.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 17,
+      "currentCheckCount": 17,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "independent-card-unbind-wallet-adjust-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "qa-r97-light-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-r97-dark-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round108-p1-recheck.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 7,
+      "currentCheckCount": 7,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round109-service-worker.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 6,
+      "currentCheckCount": 6,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-data-management-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 17,
+      "currentCheckCount": 17,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-independent-batch3-recheck.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 14,
+      "currentCheckCount": 14,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "round111-batch3-redteam-fix.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 13,
+      "currentCheckCount": 13,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-hidden-prompt-audit-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 2,
+      "currentCheckCount": 2,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-image-turn-branch-sync-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 2,
+      "currentCheckCount": 2,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "independent-zip-asset-checksum-audit-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 1,
+      "currentCheckCount": 1,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round117-phone-wechat-message-edit-branch.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 8,
+      "currentCheckCount": 8,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round114-phone-turn-reroll.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 5,
+      "currentCheckCount": 5,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "qa-phone-branch-switch-ui-2026-11-05.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 5,
+      "currentCheckCount": 5,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round101-phone-export.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 10,
+      "currentCheckCount": 10,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round112-phone-batch3-fix.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 9,
+      "currentCheckCount": 9,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round113-phone-data-management.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 8,
+      "currentCheckCount": 8,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round119-phone-forget-scope.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 12,
+      "currentCheckCount": 12,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round120-phone-forget-group-scope.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 3,
+      "currentCheckCount": 3,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round118-phone-qa382.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 10,
+      "currentCheckCount": 10,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round121-phone-image-branch-hidden-zip.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 0,
+      "currentCheckCount": 0,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "round122-phone-wechat-mine-suite.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 15,
+      "currentCheckCount": 15,
+      "sourceHash": "D3F4E538CC226F6361FC0B5DA50D29EF3A8FF36EC067A79D425F2F22DE2CCFB4",
+      "parseError": null
+    },
+    {
+      "file": "round122-phone-release-final-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 11,
+      "currentCheckCount": 11,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round122-release-package-audit-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 10,
+      "currentCheckCount": 10,
+      "sourceHash": null,
+      "parseError": null
+    },
+    {
+      "file": "round122-online-publish-2026-11-07.json",
+      "exists": true,
+      "ok": true,
+      "declaredPresentChecks": 10,
+      "currentCheckCount": 10,
+      "sourceHash": null,
+      "parseError": null
+    }
+  ]
+}

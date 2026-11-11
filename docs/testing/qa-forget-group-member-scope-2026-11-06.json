@@ -1,0 +1,25 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-09T14:55:02.256Z",
+  "source": {
+    "indexSha256": "4A1FACB7987931BBF547A95099EA6AA68EB7CE4F1BCAFA06D38CF35AA9E9B417"
+  },
+  "checks": {
+    "forgottenFromRemoved": true,
+    "sameCharMemoryRemoved": true,
+    "otherGroupMemberMemoryKept": true
+  },
+  "failures": [],
+  "result": {
+    "c1": [],
+    "c2": [
+      "角色二长期记忆：好"
+    ],
+    "m1": "deleted",
+    "m2": "active",
+    "texts": [
+      "群里说话"
+    ]
+  },
+  "errors": []
+}

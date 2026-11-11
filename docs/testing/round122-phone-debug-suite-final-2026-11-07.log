@@ -1,0 +1,17 @@
+Round122 phone debug suite
+checkedAt: 2026-11-07T10:14:10.026Z
+Device: OPPO PMK110 / Android 16 / 1272x2772; Debug installed with adb install -r; no pm clear.
+
+01  PASS  _round117_phone_wechat_message_edit_branch_test.cjs
+02  PASS  _round114_phone_turn_reroll_test.cjs
+03  PASS  _qa_phone_branch_switch_ui_2026-11-05.cjs
+04  PASS  _round101_phone_export_test.cjs
+05  PASS  _round112_phone_batch3_fix_test.cjs
+06  PASS  _round113_phone_data_management_test.cjs
+07  PASS  _round119_phone_forget_scope_test.cjs
+08  PASS  _round120_phone_forget_group_scope_test.cjs
+09  PASS  _round118_phone_qa382_test.cjs
+10  PASS  _round121_phone_image_branch_hidden_zip_test.cjs
+11  PASS  _round122_phone_wechat_mine_suite_test.cjs — multi-card + touch drag + unbind + bill retention
+
+SUMMARY passed=11 failed=0

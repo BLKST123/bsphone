@@ -1,0 +1,116 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T08:32:02.039Z",
+  "device": {
+    "model": "OPPO PMK110",
+    "android": "16",
+    "viewport": "363x751"
+  },
+  "source": {
+    "indexSha256": "B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED"
+  },
+  "checks": {
+    "build": true,
+    "cards": true,
+    "touch44": true,
+    "menu": true,
+    "favorites": true,
+    "persona": true,
+    "safety": true,
+    "noErrors": true,
+    "toastHidden": true,
+    "privacySafe": true
+  },
+  "cards": {
+    "qq": "363x751",
+    "build": 107,
+    "types": 4,
+    "voice": {
+      "w": 44.19643020629883,
+      "h": 44.19643020629883
+    },
+    "video": {
+      "w": 44.196414947509766,
+      "h": 44.19643020629883
+    },
+    "more": {
+      "w": 44.19643020629883,
+      "h": 44.19643020629883
+    }
+  },
+  "menu": {
+    "groups": [
+      "会话外观",
+      "聊天方式",
+      "主动与记忆",
+      "生活联动",
+      "统计与诊断",
+      "会话管理"
+    ],
+    "all44": true
+  },
+  "fav": {
+    "voice": true,
+    "more": {
+      "w": 44.000003814697266,
+      "h": 44.000003814697266
+    },
+    "transcript": "none"
+  },
+  "personaPrecondition": {
+    "active": "p1",
+    "count": "1 张"
+  },
+  "personaHome": {
+    "use": 2,
+    "edit": 0
+  },
+  "personaAfter": {
+    "id": "p2",
+    "count": "0 张"
+  },
+  "restored": true,
+  "safety": {
+    "pastTransfer": null,
+    "arrivedTakeout": null,
+    "zero": null,
+    "invalidPush": null,
+    "ordersBefore": 1,
+    "ordersAfter": 1,
+    "fallback": [
+      {
+        "text": "[红包] 恭喜发财",
+        "kind": "auto",
+        "voiceSafe": true
+      }
+    ],
+    "orderAmount": 39,
+    "takeoutAmount": 68,
+    "tailAmount": 200,
+    "commaAmount": 1000,
+    "positiveRed": {
+      "kind": "redpacket",
+      "amount": 52
+    },
+    "positiveTransfer": {
+      "kind": "transfer",
+      "amount": 200
+    },
+    "positiveTakeout": {
+      "kind": "takeout",
+      "amount": 68
+    },
+    "future": null,
+    "intent": null,
+    "condition": null,
+    "ask": null,
+    "negation": null,
+    "who": null
+  },
+  "finalScreenshot": {
+    "path": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round142-phone-final-synthetic.png",
+    "sha256": "A99DDEBA0998AE4754903FE6EBEC3BEA4D5B6AF5350C5A9712599F5D607AC294",
+    "bytes": 550069
+  },
+  "errors": []
+}

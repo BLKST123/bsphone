@@ -1,0 +1,187 @@
+{
+  "checkedAt": "2026-11-07T14:14:08.385Z",
+  "tests": {
+    "freshConsecutiveMessagesRecognized": true,
+    "firstSwitchUpdatesDisplayedMessages": true,
+    "firstSwitchUpdatesActiveBranch": true,
+    "menuCheckmarkMatchesDisplayedMessages": true,
+    "switchBackRestoresGeneratedBranch": true,
+    "switchBackDoesNotOverwriteNewBranchSnapshot": true
+  },
+  "evidence": {
+    "freshGroup": {
+      "beforeReload": [
+        {
+          "id": "mw6hiabvq7ux",
+          "text": "新消息甲",
+          "turnId": "turn_mw6hiabvxxh9",
+          "messageGroupId": "group_mw6hiabwb9pt"
+        },
+        {
+          "id": "mw6hiabwmu6t",
+          "text": "新消息乙",
+          "turnId": "turn_mw6hiabvxxh9",
+          "messageGroupId": "group_mw6hiabwb9pt"
+        }
+      ],
+      "confirm": "重新生成这一组？\n将重新打包：\n新消息甲 新消息乙\n\n原角色回复和后面的剧情会保留在旧分支，不覆盖，也不会进入新回复的上下文。\n重新生成取消"
+    },
+    "initial": {
+      "label": "initial",
+      "ids": [
+        "u1",
+        "u2",
+        "mw6hibwrh1qg"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "新版回复"
+      ],
+      "activeId": "turnbranch_mw6hibmnc21t",
+      "branches": [
+        {
+          "id": "turnbranch_mw6hibmntb7a",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw6hibmnc21t",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw6hibwrh1qg"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    },
+    "afterSwitchOriginal": {
+      "label": "afterSwitchOriginal",
+      "ids": [
+        "u1",
+        "u2",
+        "old1",
+        "oldlater"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "原始回复",
+        "原始后续"
+      ],
+      "activeId": "turnbranch_mw6hibmntb7a",
+      "branches": [
+        {
+          "id": "turnbranch_mw6hibmntb7a",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw6hibmnc21t",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw6hibwrh1qg"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    },
+    "branchMenuBefore": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n原始回复\n›\n导出\n删除\n重新生成 1 · 当前\n新版回复\n✓\n导出\n删除\n返回",
+    "branchMenuAfter": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本 · 当前\n原始回复\n✓\n导出\n删除\n重新生成 1\n新版回复\n›\n导出\n删除\n返回",
+    "afterSwitchBackNew": {
+      "label": "afterSwitchBackNew",
+      "ids": [
+        "u1",
+        "u2",
+        "mw6hibwrh1qg"
+      ],
+      "texts": [
+        "一组一",
+        "一组二",
+        "新版回复"
+      ],
+      "activeId": "turnbranch_mw6hibmnc21t",
+      "branches": [
+        {
+          "id": "turnbranch_mw6hibmntb7a",
+          "label": "原始版本",
+          "ids": [
+            "u1",
+            "u2",
+            "old1",
+            "oldlater"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "原始回复",
+            "原始后续"
+          ]
+        },
+        {
+          "id": "turnbranch_mw6hibmnc21t",
+          "label": "重新生成 1",
+          "ids": [
+            "u1",
+            "u2",
+            "mw6hibwrh1qg"
+          ],
+          "texts": [
+            "一组一",
+            "一组二",
+            "新版回复"
+          ]
+        }
+      ]
+    }
+  },
+  "screenshots": {
+    "freshGroup": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\docs\\testing\\independent-fresh-group-confirm-2026-11-05.png",
+    "branchMismatch": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\docs\\testing\\independent-branch-mismatch-2026-11-05.png"
+  },
+  "errors": [],
+  "ok": true,
+  "evidenceMeta": {
+    "checkedAt": "2026-11-07T14:14:11.413Z",
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "debugApkSha256": "C39AD5C2B207597E25226D270F909622268116C43AF079711BDED419A69FBAF0",
+    "releaseApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "version": "3.88",
+    "versionCode": 99,
+    "cacheKey": "bsphone-v99-20261107-r1"
+  }
+}

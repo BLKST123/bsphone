@@ -1,0 +1,61 @@
+{
+  "checkedAt": "2026-11-09T14:54:09.183Z",
+  "tests": {
+    "manualBranchAtSecondBubbleEndsAtSecond": true,
+    "branchListHasExportDeleteActions": true,
+    "continueAfterManualBranchPersists": true
+  },
+  "evidence": {
+    "branchMenu": {
+      "texts": [
+        "一",
+        "二"
+      ],
+      "branchHiddenButtons": [
+        "branchFromYes",
+        "branchFromNo"
+      ]
+    },
+    "branchList": "聊天分支\n这里保留同一组用户消息下的不同回复和后续。选择后会原位切换，不新增气泡。\n原始版本\n旧回复\n›\n导出\n删除\n新分支 1 · 当前\n一\n✓\n导出\n删除\n返回",
+    "origAfter": {
+      "texts": [
+        "一",
+        "二",
+        "旧回复",
+        "后续"
+      ],
+      "active": "turnbranch_mw9dtgewjs02"
+    },
+    "newAfter": {
+      "texts": [
+        "一",
+        "二",
+        "分支继续用户",
+        "分支继续回复"
+      ],
+      "active": "turnbranch_mw9dtgewrefn",
+      "branches": [
+        {
+          "label": "原始版本",
+          "texts": [
+            "一",
+            "二",
+            "旧回复",
+            "后续"
+          ]
+        },
+        {
+          "label": "新分支 1",
+          "texts": [
+            "一",
+            "二",
+            "分支继续用户",
+            "分支继续回复"
+          ]
+        }
+      ]
+    }
+  },
+  "errors": [],
+  "ok": true
+}

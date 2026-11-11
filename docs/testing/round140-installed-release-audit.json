@@ -1,0 +1,12 @@
+﻿{
+    "installedHash":  "2B88953B4D85F6030BDB4497D9955C3C7D631F64CBCCCBFAF84D7CD7DD4E959D",
+    "candidateHash":  "2B88953B4D85F6030BDB4497D9955C3C7D631F64CBCCCBFAF84D7CD7DD4E959D",
+    "hashMatch":  true,
+    "versionName":  true,
+    "versionCode":  true,
+    "firstInstallPreserved":  true,
+    "pid":  "16317",
+    "focus":  "mCurrentFocus=Window{ec9bb4b u0 com.xiaoshouji.app/com.xiaoshouji.app.MainActivity}",
+    "fatalAnrJsErrors":  0,
+    "logBytes":  28091
+}

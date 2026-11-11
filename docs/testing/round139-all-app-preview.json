@@ -1,0 +1,331 @@
+{
+  "ok": true,
+  "errors": [],
+  "cases": [
+    {
+      "key": "wechat",
+      "fn": "screenWechat",
+      "title": "微信背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 53,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "novel",
+      "fn": "screenNovelHome",
+      "title": "小说背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 129,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "diary",
+      "fn": "screenDiary",
+      "title": "日记背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 84,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "forum",
+      "fn": "screenForum",
+      "title": "论坛背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 41,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "gallery",
+      "fn": "screenGallery",
+      "title": "相册背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 72,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "hang",
+      "fn": "screenHang",
+      "title": "查岗背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 52,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "date",
+      "fn": "screenDate",
+      "title": "约会背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 158,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "out",
+      "fn": "screenOut",
+      "title": "出门背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 69,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "shop",
+      "fn": "screenTaobao",
+      "title": "网购背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 52,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "takeout",
+      "fn": "screenTakeout",
+      "title": "外卖背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 85,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "clock",
+      "fn": "screenClock",
+      "title": "时钟背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 201,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "couple",
+      "fn": "screenCouple",
+      "title": "情侣空间背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "soul",
+      "fn": "screenSoul",
+      "title": "灵魂匹配背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 210,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "music",
+      "fn": "screenMusic",
+      "title": "音乐背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 97,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "weibo",
+      "fn": "screenWeibo",
+      "title": "微博背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 64,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "world",
+      "fn": "screenWorldBooks",
+      "title": "世界书背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 90,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "regex",
+      "fn": "screenRegexList",
+      "title": "正则背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 113,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "settings",
+      "fn": "screenSettings",
+      "title": "设置背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 1883,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    }
+  ],
+  "note": "每个预览函数均注入 sentinel，并确认外观页实际调用对应真实 App 渲染函数，不是手绘预览。"
+}

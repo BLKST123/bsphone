@@ -1,0 +1,62 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:17:40.423Z",
+  "source": {
+    "indexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B"
+  },
+  "checks": {
+    "no_sheet_overflow": true,
+    "no_stack_overflow": true,
+    "cards_fit": true,
+    "buttons_44": true,
+    "dark_mode": true,
+    "no_errors": true
+  },
+  "evidence": {
+    "sheetOverflow": 0,
+    "stackOverflow": 0,
+    "cardWidths": [
+      296,
+      296,
+      296
+    ],
+    "buttons": [
+      {
+        "text": "添加银行卡",
+        "h": 44
+      },
+      {
+        "text": "返回钱包",
+        "h": 44
+      },
+      {
+        "text": "招商银行\n•••• 11",
+        "h": 208
+      },
+      {
+        "text": "中国银行\n•••• 22",
+        "h": 64
+      },
+      {
+        "text": "建设银行\n•••• 33",
+        "h": 64
+      },
+      {
+        "text": "咖啡\n22:17\n-¥2",
+        "h": 56
+      },
+      {
+        "text": "编辑银行卡",
+        "h": 44
+      },
+      {
+        "text": "解绑银行卡",
+        "h": 44
+      }
+    ],
+    "dark": true,
+    "text": "卡包\n添加银行卡\n返回钱包\n招商银行\n•••• 1111\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n示例角色\n中国银行\n•••• 2222\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n示例角色\n建设银行\n•••• 3333\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n示例角色\n账单\n咖啡\n22:17\n-¥20.00\n编辑银行卡\n解绑银行卡"
+  },
+  "artifact": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-cards-320-dark.png",
+  "errors": []
+}

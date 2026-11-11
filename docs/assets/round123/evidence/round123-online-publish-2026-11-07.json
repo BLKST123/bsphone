@@ -1,0 +1,51 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-07T14:25:03.317Z",
+  "pagesUrl": "https://blkst123.github.io/bsphone/",
+  "version": {
+    "version": "3.88",
+    "versionCode": 99,
+    "round": 99,
+    "releasedAt": "2026-11-07",
+    "pageUrl": "https://blkst123.github.io/bsphone/?v=99-r1",
+    "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
+    "cacheKey": "bsphone-v99-20261107-r1",
+    "notes": "3.88 Build99：微信我的模块 UI 返修：参考图卡面、堆叠切换、连续触摸拖动、账单内联展开；补齐人设迁移、金额边界与资产关联。"
+  },
+  "http": {
+    "version": 200,
+    "index": 200,
+    "sw": 200,
+    "apk": 200
+  },
+  "hashes": {
+    "localIndexSha256": "983560673A19449CF88226DDB837E97EE919694505E15255DD1489FFE011874B",
+    "onlineIndexSha256": "BA9AAB79152977C33FCE9CAA0915FAABC5A4B979E79CD35180217544CE31AE68",
+    "localIndexNormalizedSha256": "7287C3D9987D1AFFBF5240A4252F9A26CB27F0937E46E3581C816CF28EA8415B",
+    "onlineIndexNormalizedSha256": "7287C3D9987D1AFFBF5240A4252F9A26CB27F0937E46E3581C816CF28EA8415B",
+    "localIndexBytes": 1858671,
+    "onlineIndexBytes": 1836906,
+    "localApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "onlineApkSha256": "189BBCEB8DD989163372B386C50EDD99ECCD6E3594085F3A7274B06F606A4010",
+    "onlineApkBytes": 550446
+  },
+  "deployment": {
+    "id": 7622185887,
+    "sha": "af61775fa2d58052a47d8ca5c00b6d286c591b52",
+    "state": "success",
+    "environmentUrl": "https://blkst123.github.io/bsphone/",
+    "createdAt": "2026-11-07T14:07:05Z"
+  },
+  "checks": {
+    "versionJsonHttp200": true,
+    "indexHttp200": true,
+    "swHttp200": true,
+    "apkHttp200": true,
+    "versionMatches": true,
+    "cacheKeyMatches": true,
+    "swCacheKeyMatches": true,
+    "normalizedIndexMatchesLocal": true,
+    "onlineApkMatchesLocal": true,
+    "pagesDeploymentSuccess": true
+  }
+}

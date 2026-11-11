@@ -1,0 +1,20 @@
+﻿{
+    "checkedAt":  "2026-11-09T23:41:48.5417176+08:00",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=104-r1",
+    "version":  "3.93",
+    "versionCode":  104,
+    "cacheKey":  "bsphone-v104-20261109-r1",
+    "pageHash":  "BFB7ADB126B977519BAE00F040F95EED6B4C3EA43AB4FB7C9EC47045564D2277",
+    "pageHashMatchesLocal":  null,
+    "onlineApkHash":  "3ACAEEF7F68930CB7EF10AC5FF81BAA187F801969A85E311DEC12F5A121A93E3",
+    "localApkHash":  "3ACAEEF7F68930CB7EF10AC5FF81BAA187F801969A85E311DEC12F5A121A93E3",
+    "apkHashMatches":  true,
+    "pagesRun":  "https://github.com/BLKST123/bsphone/actions/runs/42643700025",
+    "onlineIndexHash":  "BFB7ADB126B977519BAE00F040F95EED6B4C3EA43AB4FB7C9EC47045564D2277",
+    "localIndexHash":  "4662C2B37057FD4026F8D266DDE94BB6031E07413D86EA6406A3E508DCC1088C",
+    "indexHashMatches":  false,
+    "localNormalizedIndexHash":  "29EB73A1C0FE88671F14729B5E51D907FB7CDB8777F4E3BCD1953428A0A20132",
+    "onlineNormalizedIndexHash":  "29EB73A1C0FE88671F14729B5E51D907FB7CDB8777F4E3BCD1953428A0A20132",
+    "normalizedIndexHashMatches":  true,
+    "onlineBuild104":  true
+}

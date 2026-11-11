@@ -1,0 +1,26 @@
+{
+  "checkedAt": "2026-11-09T14:54:21.723Z",
+  "tests": {
+    "characterMemoryRemoved": true,
+    "chatMessageRemoved": true
+  },
+  "evidence": {
+    "chatTexts": [
+      "你好"
+    ],
+    "memoryStatus": "deleted",
+    "contactMemories": [],
+    "baseSnapshot": [],
+    "legacy": [],
+    "memoryEntries": [],
+    "memoryText": "现在的时间是：2026/10/27 星期二 09:30。",
+    "leaks": {
+      "contact": false,
+      "snapshot": false,
+      "legacy": false,
+      "entry": false
+    }
+  },
+  "errors": [],
+  "ok": true
+}

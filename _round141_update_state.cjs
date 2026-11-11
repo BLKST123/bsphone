@@ -1,0 +1,15 @@
+﻿const fs=require('fs');
+let s=fs.readFileSync('STATE.md','utf8');
+const start=s.indexOf('## 当前版本'),end=s.indexOf('## 当前阶段');
+const header=`## 当前版本\n\n- 页面：2026-11-10 · 3.95 · 第 106 轮\n- Android：3.95 / versionCode 106\n- Service Worker：bsphone-v106-20261110-r1\n- 源码提交：3.95 Build106 返修提交（待最终发布记录）\n- 源码 SHA-256：DEB0E6F36125548F4E725B71577CED52DF978F96F8A9DE2444CB3A8B80EFDC78\n- QA Debug APK SHA-256：C741B232622699099D64F7FD6A838BB51891A3066A4021B984501D07799591E5\n- Release APK SHA-256：E2EC089809E0A22704AAAD86B286E3A05E956EF33055C109FC2A495A0925D9FB\n- Release ZIP SHA-256：F78B6997146C80C126BD77F721AA3EACA8748FF7840615DA7A16CA583878F0E3\n\n`;
+if(start<0||end<0)throw new Error('state header missing');s=s.slice(0,start)+header+s.slice(end);
+const ss=s.indexOf('## 当前阶段'),se=s.indexOf('- 3.90 / Build101',ss)-2;
+const stage=`## 当前阶段\n- 3.95 / Build106 完成红队与检查官返修：并发生成输入状态按当前会话同步；自然语言卡片兜底增加时态/状态/第三人称/否定保护；红包、转账、外卖、订单只接受有限正金额；非法卡片回退纯文本且不创建订单。\n- 公开仓库中的 3.94 敏感真机截图已从工作区删除，并进入 Git 历史清理流程；3.95 真机证据全部使用合成示例数据。\n- 真机 QA 脚本已改为显式设置并恢复启用人设，可重复执行；3.95 真机并发、卡片负例、收藏、人设和 44px 命中区复测通过。\n- 全量回归 24/24、微信历史分支回归 10/10、Release 3.95 / Build106 覆盖安装并保留原首装时间。\n`;
+if(ss<0||se<0)throw new Error('state stage missing');s=s.slice(0,ss)+stage+s.slice(se);
+s=s.replace('## 最近证据',`## 最近证据\n\n- \`docs/testing/round141-full-regression-2026-11-10.log\`\n- \`docs/testing/round141-wechat-branch-regression-2026-11-10.log\`\n- \`docs/testing/round141-card-safety-2026-11-10.json\`\n- \`docs/testing/round141-phone-wechat-audit.json\`\n- \`docs/testing/round141-phone-concurrency.json\`\n- \`docs/testing/round141-installed-release-audit.json\`\n- \`docs/testing/round141-zip-verify.json\``);
+s+=`\n\n## 2026-11-10 / 3.95 Build106 红队与检查官返修\n- 同一会话新请求接管旧请求、A/B 会话并发生成时，输入状态按当前会话的活动请求集合同步，旧请求结束不得清除新请求标题。\n- 自然语言结构化卡片兜底必须优先排除过去时、已收到、已送达、配送状态、第三人称、否定与劝阻语句。\n- 红包、转账、外卖、订单只接受有限正金额；零金额、负数、NaN、Infinity、缺金额一律回退纯文本。\n- 外卖非法金额不得调用 takeoutCreateOrder；订单非法金额不得生成业务快照。\n- 公开证据只允许合成示例数据；旧敏感截图必须从工作区和 Git 历史移除。\n- 真机 QA 脚本必须显式设置前置人设并在结束时恢复，不能依赖设备上次状态。\n- 版本固定为 3.95 / Build106，Service Worker 缓存键固定为 bsphone-v106-20261110-r1。\n`;
+fs.writeFileSync('STATE.md',s,'utf8');
+let d=fs.readFileSync('DECISIONS.md','utf8');
+d+=`\n\n## 2026-11-10 / 3.95 Build106 返修 LOCKED\n- 输入状态必须按当前 route 的活动请求同步；同一会话接管和跨会话并发时，只有当前会话自己的请求结束后才能恢复普通标题。\n- 自然语言卡片兜底是保守增强，不是猜测业务实体；过去时、状态更新、第三人称、否定和劝阻语句必须回退纯文本。\n- 红包、转账、外卖、订单金额必须有限且大于 0；非法金额不得生成卡片或订单实体。\n- 预览、测试和发布证据只使用合成示例姓名、角色、消息与 @example；不得提交主应用真实会话截图。\n- 真机脚本必须自设前置状态并在 finally 中恢复，保证可重复执行。\n- 版本固定为 3.95 / Build106，Service Worker 缓存键固定为 bsphone-v106-20261110-r1。\n`;
+fs.writeFileSync('DECISIONS.md',d,'utf8');
+console.log('state and decisions updated');

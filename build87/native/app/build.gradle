@@ -1,0 +1,33 @@
+apply plugin: "com.android.application"
+
+android {
+  namespace "com.xiaoshouji.app"
+  compileSdk 34
+  buildToolsVersion "34.0.0"
+
+  defaultConfig {
+    applicationId "com.xiaoshouji.app"
+    minSdk 22
+    targetSdk 34
+    versionCode 87
+    versionName "3.76"
+  }
+
+  buildTypes {
+    release {
+      minifyEnabled false
+      signingConfig signingConfigs.debug
+    }
+  }
+
+  compileOptions {
+    sourceCompatibility JavaVersion.VERSION_17
+    targetCompatibility JavaVersion.VERSION_17
+    encoding "UTF-8"
+  }
+
+  lint {
+    checkReleaseBuilds false
+    abortOnError false
+  }
+}

@@ -1,0 +1,13 @@
+﻿const fs=require('fs');
+let s=fs.readFileSync('STATE.md','utf8');const start=s.indexOf('## 当前版本'),end=s.indexOf('## 当前阶段');
+const header=`## 当前版本\n\n- 页面：2026-11-11 · 3.96 · 第 107 轮\n- Android：3.96 / versionCode 107\n- Service Worker：bsphone-v107-20261111-r1\n- 源码提交：干净公开仓库重建提交（待重建后补记）\n- 源码 SHA-256：B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED\n- QA Debug APK SHA-256：B705663E4817C9FA91CEB22337AAC65B8C29C416F8EA695751E7E6B0348403D8\n- Release APK SHA-256：FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53\n- Release ZIP SHA-256：6AE191606F9EAAC5D7FDCE48BE3BD50214ACDDF03D0A8999495FDC9390A6879A\n\n`;
+if(start<0||end<0)throw new Error('state header missing');s=s.slice(0,start)+header+s.slice(end);
+const ss=s.indexOf('## 当前阶段'),se=s.indexOf('- 3.90 / Build101',ss)-2;
+const stage=`## 当前阶段\n- 3.96 / Build107 完成第二轮返修：自然语言金额按货币上下文识别，订单号、尾号、预计分钟不再被当作金额；未来、意愿、条件、反问问句不生成卡片；真实外卖备注“不要香菜”可正常建单。\n- 并发测试改为事件等待，当前全量 25/25、微信历史 10/10 可重复通过。\n- ZIP 条目与 checksums 统一使用正斜杠；Release 包结构 17 entries、0 mismatch。\n- 公开仓库将重建为只含当前干净树的新仓库，清除旧 commit、旧 blob 和敏感词项；不再沿用旧公开历史。\n`;
+if(ss<0||se<0)throw new Error('state stage missing');s=s.slice(0,ss)+stage+s.slice(se);
+s=s.replace('## 最近证据',`## 最近证据\n\n- \`docs/testing/round142-full-regression-2026-11-11.log\`\n- \`docs/testing/round142-wechat-branch-regression-2026-11-11.log\`\n- \`docs/testing/round142-card-intent.json\`\n- \`docs/testing/round142-phone-wechat-audit.json\`\n- \`docs/testing/round142-phone-concurrency.json\`\n- \`docs/testing/round142-installed-release-audit.json\`\n- \`docs/testing/round142-zip-verify.json\``);
+s+=`\n\n## 2026-11-11 / 3.96 Build107 第二轮返修\n- 自然语言金额必须按货币标记、元/块单位和分句上下文识别；订单号、编号、尾号、预计分钟、日期时间不得作为金额。\n- 未来、意愿、条件、反事实、征求意见句不得生成红包/转账/外卖卡片，也不得创建本地订单实体。\n- “收下”只在缺少明确动作过去时的情况下允许正例；“不要香菜”等备注不得阻断已经完成的下单动作。\n- 并发测试使用活动请求轮询，不依赖固定 sleep。\n- Release ZIP 内条目和 checksums 使用同一组正斜杠原始名称。\n- 公开仓库使用干净树重建，旧公开 commit 不再作为交付历史保留。\n`;
+fs.writeFileSync('STATE.md',s,'utf8');
+let d=fs.readFileSync('DECISIONS.md','utf8');
+d+=`\n\n## 2026-11-11 / 3.96 Build107 第二轮返修 LOCKED\n- 金额解析优先货币符号和“元/块”，排除订单号、编号、尾号、预计时间、配送分钟和日期时间；无法确定唯一金额时回退纯文本。\n- 未来/意愿/条件/反事实/征求意见语义不得生成业务卡片或订单；否定判断必须绑定动作，不得误伤逗号后的订单备注。\n- 并发证据必须轮询活动请求状态，禁止用固定 sleep 决定产品结论。\n- ZIP 条目名称和 checksums 路径必须统一正斜杠。\n- 公开发布历史必须由干净树重建，隐私词表不写入报告、JSON 或提交信息。\n`;
+fs.writeFileSync('DECISIONS.md',d,'utf8');console.log('state and decisions updated');
