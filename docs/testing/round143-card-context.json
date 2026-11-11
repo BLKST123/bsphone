@@ -1,0 +1,175 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-11T11:21:34.141Z",
+  "source": {
+    "indexSha256": "EEF7186E58A3F38FBDA4DC1144B2759687E264AE3EE577F509DE11FF7243C43A"
+  },
+  "checks": {
+    "transferFee": true,
+    "redCoupon": true,
+    "redNote": true,
+    "takeoutFee": true,
+    "orderShipping": true,
+    "politeRed": true,
+    "noThanksRed": true,
+    "orderOral": true,
+    "redFutureNote": true,
+    "takeoutFutureNote": true,
+    "futureSoon": true,
+    "futureLater": true,
+    "futureNextWeek": true,
+    "futureAfterWork": true,
+    "futureNow": true,
+    "futureAsk": true,
+    "noErrors": true
+  },
+  "result": {
+    "transferFee": {
+      "kind": "transfer",
+      "amount": 200,
+      "orders": 0,
+      "types": [
+        "transfer"
+      ],
+      "texts": [
+        "200 我给你转200元，手续费2元"
+      ]
+    },
+    "redCoupon": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我给你发52元红包，另外有8元优惠券"
+      ]
+    },
+    "redNote": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我发52元红包，备注100"
+      ]
+    },
+    "takeoutFee": {
+      "kind": "takeout",
+      "amount": 68,
+      "orders": 1,
+      "types": [
+        "takeout"
+      ],
+      "texts": [
+        "我给你点了一份外卖68元，配送费3元"
+      ]
+    },
+    "orderShipping": {
+      "kind": "order",
+      "amount": 39,
+      "orders": 0,
+      "types": [
+        "order"
+      ],
+      "texts": [
+        "订单 订单商品 39 手机壳39元，运费3元，我给你下单了"
+      ]
+    },
+    "politeRed": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 不好意思，给你发52元红包"
+      ]
+    },
+    "noThanksRed": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 不用客气，给你发52元红包"
+      ]
+    },
+    "orderOral": {
+      "kind": "order",
+      "amount": 39,
+      "orders": 0,
+      "types": [
+        "order"
+      ],
+      "texts": [
+        "订单 订单商品 39 我给你下单了，手机壳39元"
+      ]
+    },
+    "redFutureNote": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我给你发52元红包，下次请我喝奶茶"
+      ]
+    },
+    "takeoutFutureNote": {
+      "kind": "takeout",
+      "amount": 68,
+      "orders": 1,
+      "types": [
+        "takeout"
+      ],
+      "texts": [
+        "我给你点了外卖68元，明天送到，不要香菜"
+      ]
+    },
+    "futureSoon": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureLater": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureNextWeek": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureAfterWork": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureNow": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureAsk": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    }
+  },
+  "errors": []
+}

@@ -1,0 +1,4 @@
+﻿const fs=require('fs');const file='index.html';const raw=fs.readFileSync(file,'utf8');const crlf=raw.includes('\r\n');let s=raw.replace(/\r\n/g,'\n');
+s=s.replace("if(/红包/.test(t)&&amount>0&&/(?:我给你(?:发|送|塞|包)?|给你(?:发|送|塞|包|转)|发给你|送你|塞给你|给你个|给你一个)/.test(t)) return parseStructuredChatCard('[红包] '+amount+'|'+t);", "if(/红包/.test(t)&&amount>0&&(/(?:我给你(?:发|送|塞|包)?|给你(?:发|送|塞|包|转)|发给你|送你|塞给你|给你个|给你一个)/.test(t)||/红包\\s*[¥￥]?\\s*\\d/.test(t))) return parseStructuredChatCard('[红包] '+amount+'|'+t);");
+s=s.replace("if(/转账|转给你|给你转|我给你转|打给你|给你打|转你/.test(t)&&amount>0&&/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t))", "if(/转账|转给你|给你转|我给你转|打给你|给你打|转你/.test(t)&&amount>0&&(/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t)||/转账\\s*[¥￥]?\\s*\\d/.test(t)))");
+fs.writeFileSync(file,crlf?s.replace(/\n/g,'\r\n'):s,'utf8');console.log('bare red/transfer amount inference patched');

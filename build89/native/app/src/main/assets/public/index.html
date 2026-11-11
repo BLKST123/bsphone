@@ -5251,11 +5251,12 @@ function chatCardAmount(text){
     if(match[1]) score+=100;
     if(match[3]) score+=80;
     if(/(金额|价格|一共|合计|付款|付了|花了|转账|红包|外卖|订单)/.test(before)) score+=20;
-    if(/(订单号|编号|尾号|卡号|电话|手机号|预计|分钟|小时|时间|日期|年份|年龄|次数|第|号)/.test(before)) score-=200;
-    if(/(订单号|编号|尾号|卡号|电话|手机号|分钟|小时|时间|日期|年份|年龄|次数|年|月|日|号)/.test(after)) score-=200;
+    if(/(红包|转账|外卖|订单|下单)/.test(after)) score+=20;
+    if(/(手续费|配送费|服务费|运费|优惠券|优惠|折扣|备注|订单号|编号|尾号|卡号|电话|手机号|预计|分钟|小时|时间|日期|年份|年龄|次数|第|号)/.test(before)) score-=300;
+    if(/(手续费|配送费|服务费|运费|优惠券|优惠|折扣|备注|订单号|编号|尾号|卡号|电话|手机号|分钟|小时|时间|日期|年份|年龄|次数|年|月|日|号)/.test(after)) score-=300;
     if(/[A-Za-z0-9]$/.test(before)&&!match[1]&&!match[3]) score-=200;
     if(score<=0) continue;
-    if(score>=bestScore){best=n;bestScore=score;}
+    if(score>bestScore){best=n;bestScore=score;}
   }
   return bestScore>0?Math.round(best*100)/100:0;
 }
@@ -5289,24 +5290,30 @@ function parseStructuredChatCard(raw){
   return {text:fields.join(' '),kind:'order',merchant:merchant,items:itemText.split(/[、,，]/).filter(Boolean),amount:amount,status:status,note:note,orderNo:'BS'+String(Date.now()).slice(-10),voiceSafe:false};
 }
 function chatCardBlockedContext(text){
-  const t=String(text||'');
+  const clauses=String(text||'').split(/[，,。；;！？!?]/).map(function(x){return x.trim();}).filter(Boolean);
+  const actionRe=/(?:给你(?:发|送|塞|包|转|点|叫)|我给你(?:发|送|塞|包|转|点|叫|下单)|我叫外卖|我叫了外卖|发给你|送你|塞给你|转给你|给你转账|给你下单|点给你|叫给你|帮你点|我来点|我点了|我下单了|下单了|给你买了)/;
+  let actionIndex=clauses.findIndex(function(c){return actionRe.test(c);});
+  if(actionIndex<0) actionIndex=0;
+  const action=clauses[actionIndex]||'';
   const pastOrStatus=/(?:之前|上次|昨天|前天|刚才|刚刚|已经|早就|收下了|收到|领了|领取了|到了|送达|配送中|骑手|别再|不要再|不想给|没给|没有给|不是给|别人|他给|她给|你给过我|你之前|谁给你)/;
-  const futureOrCondition=/(?:明天|下次|以后|稍后|等会|待会|准备|打算|想要|想给你|如果|要是|假如|反事实|会不会|要不要|可以吗|好吗|行吗|你会收吗|你要吗)/;
+  const futureOrCondition=/(?:明天|下次|以后|稍后|等会|待会|一会儿|晚点|下周|等我忙完|马上|准备|打算|想要|想给你|如果|要是|假如|反事实|会不会|要不要|可以吗|好吗|行吗|你会收吗|你要吗)/;
   const actionNegation=/(?:不要|别|不用|不想|没给|没有给|不).{0,6}(?:给|转|发|点|下单)/;
-  return pastOrStatus.test(t)||futureOrCondition.test(t)||actionNegation.test(t);
+  if(pastOrStatus.test(action)||futureOrCondition.test(action)||actionNegation.test(action)) return true;
+  for(let i=actionIndex;i<clauses.length;i++){ if(/(?:谁给你|要不要|你会收吗|可以吗|好吗|行吗|你要吗)/.test(clauses[i])) return true; }
+  return false;
 }
 function chatCardPastOrStatus(text){ return chatCardBlockedContext(text); }
 function inferStructuredChatCard(raw){
   const t=String(raw||'').trim();
   if(!t||t.length>220||chatCardBlockedContext(t)) return null;
   const amount=chatCardAmount(t);
-  if(/红包/.test(t)&&amount>0&&/(?:我给你(?:发|送|塞|包)?|给你(?:发|送|塞|包|转)|发给你|送你|塞给你|给你个|给你一个)/.test(t)) return parseStructuredChatCard('[红包] '+amount+'|'+t);
-  if(/转账|转给你|给你转|我给你转|打给你|给你打|转你/.test(t)&&amount>0&&/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t)) return parseStructuredChatCard('[转账] '+amount+'|'+t);
-  if(/外卖/.test(t)&&amount>0&&/(?:给你点|点给你|我给你点|给你叫|叫给你|帮你点|我来点|我点了|给你下单)/.test(t)){
+  if(/红包/.test(t)&&amount>0&&(/(?:我给你(?:发|送|塞|包)?|我发|我送|我塞|给你(?:发|送|塞|包|转)|发给你|送你|塞给你|给你个|给你一个)/.test(t)||/红包\s*[¥￥]?\s*\d/.test(t))) return parseStructuredChatCard('[红包] '+amount+'|'+t);
+  if(/转账|转给你|给你转|我给你转|打给你|给你打|转你/.test(t)&&amount>0&&(/(?:转给你|给你转|给你转账|我给你转|打给你|给你打|转账给你|转你)/.test(t)||/转账\s*[¥￥]?\s*\d/.test(t))) return parseStructuredChatCard('[转账] '+amount+'|'+t);
+  if(/外卖/.test(t)&&amount>0&&/(?:给你点|点给你|我给你点|给你叫|叫给你|帮你点|我来点|我点了|我叫外卖|我叫了外卖|给你下单)/.test(t)){
     const gm=t.match(/点了(?:一份|一份儿|个|份)?([^，。,.!?！？]{1,24})/);
     return parseStructuredChatCard('[外卖] 外卖|'+(gm&&gm[1]||'外卖一份')+'|'+amount+'|'+t);
   }
-  if(/订单/.test(t)&&amount>0&&/(?:给你下单|给你买了|我给你下单|我下单了)/.test(t)) return parseStructuredChatCard('[订单] 订单|订单商品|'+amount+'|'+t);
+  if(/(?:订单|下单)/.test(t)&&amount>0&&/(?:给你下单|给你买了|我给你下单|我下单了|下单了)/.test(t)) return parseStructuredChatCard('[订单] 订单|订单商品|'+amount+'|'+t);
   return null;
 }
 function parseChatBubblePlan(text){
@@ -10374,7 +10381,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-11 · 3.96 · 第 107 轮';
+const PROGRESS_UPDATED='2026-11-11 · 3.97 · 第 108 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -18106,8 +18113,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-11 · 3.96 · 第 107 轮';
-const BUILD_CODE=107;
+const BUILD='2026-11-11 · 3.97 · 第 108 轮';
+const BUILD_CODE=108;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
@@ -23258,6 +23265,8 @@ if(!window.BSBootAssertions.coreStore||!window.BSBootAssertions.readonlyStore){
 </script>
 </body>
 </html>
+
+
 
 
 

@@ -2,20 +2,19 @@
 
 ## 当前版本
 
-- 页面：2026-11-11 · 3.96 · 第 107 轮
-- Android：3.96 / versionCode 107
-- Service Worker：bsphone-v107-20261111-r1
-- 源码提交：干净公开仓库重建提交（待重建后补记）
-- 源码 SHA-256：B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED
-- QA Debug APK SHA-256：B705663E4817C9FA91CEB22337AAC65B8C29C416F8EA695751E7E6B0348403D8
-- Release APK SHA-256：FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53
-- Release ZIP SHA-256：6AE191606F9EAAC5D7FDCE48BE3BD50214ACDDF03D0A8999495FDC9390A6879A
+- 页面：2026-11-11 · 3.97 · 第 108 轮
+- Android：3.97 / versionCode 108
+- Service Worker：bsphone-v108-20261111-r1
+- 源码提交：本轮本地验收候选（待提交）
+- 源码 SHA-256：EEF7186E58A3F38FBDA4DC1144B2759687E264AE3EE577F509DE11FF7243C43A
+- Release APK SHA-256：AF816A20A8A26D739E0F11BD9E23BB5F189665DE12638AAC68A954CF6A2AC601
+- Release ZIP SHA-256：848C11AD251512BD6355381F9FDD756B055BDA1F73719F87EBE28D079D297E0B
 
 ## 当前阶段
-- 3.96 / Build107 完成第二轮返修：自然语言金额按货币上下文识别，订单号、尾号、预计分钟不再被当作金额；未来、意愿、条件、反问问句不生成卡片；真实外卖备注“不要香菜”可正常建单。
-- 并发测试改为事件等待，当前全量 25/25、微信历史 10/10 可重复通过。
-- ZIP 条目与 checksums 统一使用正斜杠；Release 包结构 17 entries、0 mismatch。
-- 公开仓库将重建为只含当前干净树的新仓库，清除旧 commit、旧 blob 和敏感词项；不再沿用旧公开历史。
+- 3.97 / Build108 完成第三轮卡片语义返修：主金额与手续费/运费/优惠/备注分句隔离；礼貌句、独立未来备注、已下单口语正例保留；未来承诺和条件反问继续回退纯文本。
+- 使用主应用同包名同签名覆盖更新，未清主应用数据；合成数据卡片测试在主机浏览器执行，真机完成 Release 安装、版本、前台 Activity、APK hash 与 logcat 验收。
+- 全量回归 26/26、微信历史分支 10/10；ZIP 17 entries、checksums 名称集合一致、反斜杠 0。
+- 当前公开仓库继续使用干净树；私密词表扫描 0 命中。
 
 - 3.90 / Build101 接入用户导出的 6 页桌面布局（JSON SHA-256 `ADB02DD949E3DBC7A1551CB4F981546BA1086C445E210B813E7C36717D87C167`）：4 列、80px 单元格、10px 间距、20px 左右安全边距、60px App 图标。
 - 桌面内容改为 `DB.ui.userDesktopLayout` 独立数据；全部 18 个 App 已入布局，6 页无重叠、无越界。
@@ -69,6 +68,13 @@
 
 
 ## 最近证据
+
+- `docs/testing/round143-full-regression-2026-11-11.log`
+- `docs/testing/round143-wechat-branch-regression-2026-11-11.log`
+- `docs/testing/round143-card-context.json`
+- `docs/testing/round143-installed-release-audit.json`
+- `docs/testing/round143-release-logcat-summary.json`
+- `docs/testing/round143-zip-verify.json`
 
 - `docs/testing/round142-full-regression-2026-11-11.log`
 - `docs/testing/round142-wechat-branch-regression-2026-11-11.log`
@@ -181,3 +187,11 @@
 - 并发测试使用活动请求轮询，不依赖固定 sleep。
 - Release ZIP 内条目和 checksums 使用同一组正斜杠原始名称。
 - 公开仓库使用干净树重建，旧公开 commit 不再作为交付历史保留。
+
+
+## 2026-11-11 / 3.97 Build108 第三轮卡片语义返修
+- 金额候选必须区分主金额与手续费、配送费、服务费、运费、优惠、折扣、备注等辅助金额；辅助金额不得覆盖主金额。
+- 未来词只在动作分句内阻断；独立备注分句中的“下次/明天”不得否定已经完成的发送或下单动作。
+- “不好意思/不用客气”等礼貌前缀不得误伤后续正向动作。
+- 订单意图接受“我给你下单了”等无字面“订单”的口语表达。
+- 最终 Release 直接覆盖主应用安装，不清理用户数据；不重复安装独立 QA 包。
