@@ -1,0 +1,120 @@
+﻿{
+    "format":  "BS小手机 3.96 Build107 交付证据清单",
+    "generatedAt":  "2026-11-11T16:41:16.9056516+08:00",
+    "version":  "3.96",
+    "versionCode":  107,
+    "baseCommit":  "282d9cd",
+    "pagesConfigCommit":  "001ecce",
+    "sourceSha256":  "B2A48F857C544E070923A4BF16B0AA2E4E552486872B3FA44CCBC9240811C8ED",
+    "missing":  [
+
+                ],
+    "items":  [
+                  {
+                      "path":  "docs/BS小手机_3.96_Build107_红队与检查官二次返修_完整报告_2026-11-11.md",
+                      "bytes":  9753,
+                      "sha256":  "C21E52F69764CCF2BACC07F663635CE5F2055BD12FACA39DAF52E1544433D11F"
+                  },
+                  {
+                      "path":  "docs/testing/round142-full-regression-2026-11-11.log",
+                      "bytes":  117070,
+                      "sha256":  "C907CAB701C687DBBBAFC97FCA9C18A4A55B9C5E1C7B65BD5996C4E3489E1332"
+                  },
+                  {
+                      "path":  "docs/testing/round142-wechat-branch-regression-2026-11-11.log",
+                      "bytes":  52237,
+                      "sha256":  "E3E8A2D3234BB14BBFE11C04F2800E5363A372849CCB94D3B1FE2B2A5381D9A0"
+                  },
+                  {
+                      "path":  "docs/testing/round142-card-intent.json",
+                      "bytes":  4580,
+                      "sha256":  "A9BD9B5625E007A4C3BF3E04CABFEFAE8BC29367319A5273122BB8BD30C5800F"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-wechat-audit.json",
+                      "bytes":  2356,
+                      "sha256":  "DF2149F0A7E43C567AAA1E343ECB5579997806A00D26A649EB32ECD5F8F2CF61"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-concurrency.json",
+                      "bytes":  1113,
+                      "sha256":  "D786E753B6FFEF649BEDF943BCAFD88EC9F35D2EB934DCE3E3554C2A94733C8C"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-concurrency.png",
+                      "bytes":  534416,
+                      "sha256":  "EFED712C55020E33E15F9B3084356EB660804EC67CE368C9F656A7C7F1871551"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-final-synthetic.png",
+                      "bytes":  550069,
+                      "sha256":  "A99DDEBA0998AE4754903FE6EBEC3BEA4D5B6AF5350C5A9712599F5D607AC294"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-wechat-cards.png",
+                      "bytes":  523820,
+                      "sha256":  "84B87EC93FC5A336306533E5B579223FFB0DC77E121B6FBE63EF089636C44067"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-chat-menu.png",
+                      "bytes":  241067,
+                      "sha256":  "3BDFF1440D7490481ABAD29789A8492ECFB5E3E9007392283ED26974CD5F71FC"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-favorites.png",
+                      "bytes":  127518,
+                      "sha256":  "21D7B29D013AEF2557BF4062B72E6BF5E13B2CE970FF4C9D02DB608FB6967B88"
+                  },
+                  {
+                      "path":  "docs/testing/round142-phone-persona.png",
+                      "bytes":  102164,
+                      "sha256":  "4E08EADEC3EB4B2DAF39D649752EF19D9C0CF08B323D36C60F90BE4BA82DB011"
+                  },
+                  {
+                      "path":  "docs/testing/round142-installed-release-audit.json",
+                      "bytes":  777,
+                      "sha256":  "F1E752C4BF775F2A8DA17C3E7265D88AFB50DE8FA825EB70466213078DB03D1A"
+                  },
+                  {
+                      "path":  "docs/testing/round142-release-logcat-summary.json",
+                      "bytes":  283,
+                      "sha256":  "8B849B917B1A17FFB31E9826026B258D2B94B6CC6F957E6CC688D19F34C0EC7B"
+                  },
+                  {
+                      "path":  "docs/testing/round142-release-package-audit.json",
+                      "bytes":  549,
+                      "sha256":  "77E39EA5676CE8A0E0334D2076E7D12CE6C4CD9DF44F327A40E87A5B3DB6A4A0"
+                  },
+                  {
+                      "path":  "docs/testing/round142-zip-verify.json",
+                      "bytes":  632,
+                      "sha256":  "39472C7FC1846DEC68645C7C25B4C435B82BC60AA6FAD728905955A5EDA14687"
+                  },
+                  {
+                      "path":  "docs/testing/round142-online-publish.json",
+                      "bytes":  788,
+                      "sha256":  "E2F7AC5B1466B9DFCF8AC17A22317EB5CBCF05E6EA065FE381A8841D26C77F88"
+                  },
+                  {
+                      "path":  "docs/testing/round142-privacy-audit.json",
+                      "bytes":  918,
+                      "sha256":  "27BC890EAC892D2EFDC77BF6DF8C8C81D290D25DA19A161DCBF829A2CF7F2B4A"
+                  },
+                  {
+                      "path":  "BS小手机.apk",
+                      "bytes":  588633,
+                      "sha256":  "FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53"
+                  },
+                  {
+                      "path":  "BS小手机_3.96_Build107_release.zip",
+                      "bytes":  1141592,
+                      "sha256":  "6AE191606F9EAAC5D7FDCE48BE3BD50214ACDDF03D0A8999495FDC9390A6879A"
+                  },
+                  {
+                      "path":  "docs/testing/round142-qa-build107.apk",
+                      "bytes":  706705,
+                      "sha256":  "B705663E4817C9FA91CEB22337AAC65B8C29C416F8EA695751E7E6B0348403D8"
+                  }
+              ],
+    "ok":  true
+}

@@ -1,0 +1,15 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-11T16:40:45.3389283+08:00",
+    "version":  "3.96",
+    "versionCode":  107,
+    "cacheKey":  "bsphone-v107-20261111-r1",
+    "pageUrl":  "https://blkst123.github.io/bsphone/?v=107-r1",
+    "onlineApkSha256":  "FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53",
+    "localApkSha256":  "FC5C2E38C5005E030CE9FB58303AC204163140F6EE9E98757D5BC9F903E33A53",
+    "onlineApkBytes":  588633,
+    "onlineIndexNormalizedSha256":  "F9F400E9507B0AB0AFDB73A4350FD755FCE14AE6CA74CD18CB02522F1FD32CB9",
+    "localIndexNormalizedSha256":  "F9F400E9507B0AB0AFDB73A4350FD755FCE14AE6CA74CD18CB02522F1FD32CB9",
+    "onlineIndexTextEqual":  true,
+    "pagesRun":  "https://github.com/BLKST123/bsphone/actions/runs/42986524075"
+}

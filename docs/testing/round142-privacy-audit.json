@@ -1,0 +1,19 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-11T16:40:45.6448692+08:00",
+    "oldScreenshotPathAbsent":  true,
+    "oldContentApiStatus":  404,
+    "oldCommitApiStatus":  422,
+    "oldCommitAccessible":  false,
+    "privateArchive":  "BLKST123/bsphone-private-archive",
+    "privateArchiveVisibility":  "PRIVATE",
+    "newRepository":  "BLKST123/bsphone",
+    "newRepositoryVisibility":  "PUBLIC",
+    "currentHistory":  [
+                           "001ecce 配置干净公开仓库 Pages 部署",
+                           "282d9cd BS小手机 3.96 Build107 干净公开历史"
+                       ],
+    "safeScreenshot":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_clean_bsphone_2026-11-11\\docs\\testing\\round142-phone-final-synthetic.png",
+    "safeScreenshotSha256":  "A99DDEBA0998AE4754903FE6EBEC3BEA4D5B6AF5350C5A9712599F5D607AC294",
+    "privateDictionaryHitCount":  0
+}
