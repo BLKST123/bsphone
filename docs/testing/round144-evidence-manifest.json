@@ -1,6 +1,6 @@
 ﻿{
     "format":  "BS小手机 3.98 Build109 交付证据清单",
-    "generatedAt":  "2026-11-12T16:54:45.3619488+08:00",
+    "generatedAt":  "2026-11-12T16:56:14.0232048+08:00",
     "version":  "3.98",
     "versionCode":  109,
     "codeCommit":  "4b1ae74",
@@ -17,9 +17,9 @@
                   },
                   {
                       "path":  "docs/testing/round144-full-regression-2026-11-12.log",
-                      "bytes":  124440,
-                      "sha256":  "823784A0FE5E502B04AE126F3EAD7947F92D009F0E84C362F5621D6D9C1B3675",
-                      "normalizedSha256":  "823784A0FE5E502B04AE126F3EAD7947F92D009F0E84C362F5621D6D9C1B3675"
+                      "bytes":  124431,
+                      "sha256":  "615CA0A9CA1894C02B81CAA03270CBBA6BF9E7A1768DE717E14D58AFF01A9065",
+                      "normalizedSha256":  "615CA0A9CA1894C02B81CAA03270CBBA6BF9E7A1768DE717E14D58AFF01A9065"
                   },
                   {
                       "path":  "docs/testing/round144-wechat-branch-regression-2026-11-12.log",
@@ -41,38 +41,38 @@
                   },
                   {
                       "path":  "docs/testing/round144-device-clicks.json",
-                      "bytes":  2703,
-                      "sha256":  "D24D0E445C4A920368D9257434E80A342B57C2045A619EBE2D3B7B1977872979",
-                      "normalizedSha256":  "D24D0E445C4A920368D9257434E80A342B57C2045A619EBE2D3B7B1977872979"
+                      "bytes":  2020,
+                      "sha256":  "C2398DE9320DAE49356A1810BF9F7FB1D3C35675A0472FC5FA529B2078661A69",
+                      "normalizedSha256":  "4668A3365D839A70399572F1C9820F37DBEAA290517296E212F8ECA7AC2CA26F"
                   },
                   {
                       "path":  "docs/testing/round144-installed-release-audit.json",
-                      "bytes":  589,
-                      "sha256":  "D7138F24053746F918F384BA1398FAB94F101CFA7AB30981478ED32D8C2A25B7",
+                      "bytes":  592,
+                      "sha256":  "1AA0B3DF64B548A7349BD4808D0B2831F4B19E7106A0D4CA872BAA3B5D64DD63",
                       "normalizedSha256":  "D7138F24053746F918F384BA1398FAB94F101CFA7AB30981478ED32D8C2A25B7"
                   },
                   {
                       "path":  "docs/testing/round144-release-logcat-summary.json",
-                      "bytes":  273,
-                      "sha256":  "29C8202C5F56D8F2BE74ECDCBBF6CEA84E1350C1F98393520649BD7BD43E926D",
+                      "bytes":  276,
+                      "sha256":  "68AE04A148A1D54B32E3CA8AF70CDD9094DA15FE17105C0664F6E09B47970E3D",
                       "normalizedSha256":  "29C8202C5F56D8F2BE74ECDCBBF6CEA84E1350C1F98393520649BD7BD43E926D"
                   },
                   {
                       "path":  "docs/testing/round144-release-logcat.txt",
-                      "bytes":  1063590,
-                      "sha256":  "DBB324772D6FD815137798179DD304B8B319589468BD57E8A3AA46B6892B07C2",
+                      "bytes":  1063593,
+                      "sha256":  "08729F426DCA31EDB20A2A85FEBF7EA9B240000B9151EE8D0799254A30CDF980",
                       "normalizedSha256":  "DBB324772D6FD815137798179DD304B8B319589468BD57E8A3AA46B6892B07C2"
                   },
                   {
                       "path":  "docs/testing/round144-release-package-audit.json",
-                      "bytes":  533,
-                      "sha256":  "3B7DECA6F46787BF73221D5B8535D48ABF153CD5062469EDCCFB9F7DCCD2AEE6",
+                      "bytes":  536,
+                      "sha256":  "9A3A3971EB92D6F3A63A0D53BE27CCDBDB6FE8708E9F6296FCA1877AFF86BDC5",
                       "normalizedSha256":  "3B7DECA6F46787BF73221D5B8535D48ABF153CD5062469EDCCFB9F7DCCD2AEE6"
                   },
                   {
                       "path":  "docs/testing/round144-zip-verify.json",
-                      "bytes":  612,
-                      "sha256":  "0B09DC014E97E43354D4DAB71817C78457E9AFF9B8B94F4624FC7FCCAFFB522E",
+                      "bytes":  615,
+                      "sha256":  "6ACA4095F5DEBBAC9D56BEEA68C806EAAF919EB95C19A613CF55B116575E7A10",
                       "normalizedSha256":  "0B09DC014E97E43354D4DAB71817C78457E9AFF9B8B94F4624FC7FCCAFFB522E"
                   },
                   {
