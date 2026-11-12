@@ -141,6 +141,14 @@
 
 隐私处理：含真实联系人、头像或聊天内容的内部截图已删除，不进入交付与 Git。公开真机截图仅保留钱包页面。
 
+### 7. GitHub Pages 线上发布
+
+- 发布工作流：https://github.com/BLKST123/bsphone/actions/runs/43191080185
+- 线上版本：3.99 / versionCode 110
+- 线上缓存键：bsphone-v110-20261112-r1
+- 线上 APK SHA-256 与本地一致：92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792
+- 线上页面：https://blkst123.github.io/bsphone/?v=110-r1
+
 ## 七、发布文件与哈希
 
 - `index.html`

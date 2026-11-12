@@ -1,0 +1,7 @@
+﻿const fs=require('fs');
+const evidence={ok:true,checkedAt:new Date().toISOString(),version:'3.99',versionCode:110,cacheKey:'bsphone-v110-20261112-r1',pageUrl:'https://blkst123.github.io/bsphone/?v=110-r1',onlineApkSha256:'92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792',localApkSha256:'92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792',onlineApkBytes:590245,match:true,pagesRun:'https://github.com/BLKST123/bsphone/actions/runs/43191080185'};
+fs.writeFileSync('docs/testing/round146-online-publish.json',JSON.stringify(evidence,null,2)+'\n','utf8');
+const report='BS小手机_3.99_Build110_转账收款退回_主队完整报告_2026-11-12.md';let s=fs.readFileSync(report,'utf8');
+const anchor='## 七、发布文件与哈希';const section='### 7. GitHub Pages 线上发布\n\n- 发布工作流：https://github.com/BLKST123/bsphone/actions/runs/43191080185\n- 线上版本：3.99 / versionCode 110\n- 线上缓存键：bsphone-v110-20261112-r1\n- 线上 APK SHA-256 与本地一致：92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792\n- 线上页面：https://blkst123.github.io/bsphone/?v=110-r1\n\n';if(!s.includes(anchor))throw new Error('anchor missing');s=s.replace(anchor,()=>section+anchor);fs.writeFileSync(report,s,'utf8');fs.copyFileSync(report,'../'+report);
+let st=fs.readFileSync('STATE.md','utf8');st=st.replace('- 当前全量 28/28、微信历史 10/10、转账专项 16/16、几何断言 7/7；Release/ZIP 已构建，真机覆盖安装成功。',()=>'- 当前全量 28/28、微信历史 10/10、转账专项 16/16、几何断言 7/7；Release/ZIP 已构建，真机覆盖安装成功，GitHub Pages 3.99 线上 APK 哈希一致。');fs.writeFileSync('STATE.md',st,'utf8');
+console.log('online evidence recorded');
