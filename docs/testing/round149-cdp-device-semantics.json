@@ -1,0 +1,64 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T12:38:18.268Z",
+  "device": {
+    "model": "PMK110",
+    "android": "16",
+    "package": "com.xiaoshouji.app",
+    "version": "3.100",
+    "versionCode": 111,
+    "transport": "WebView CDP"
+  },
+  "route": {
+    "name": "chatroom"
+  },
+  "redpacket": {
+    "source": {
+      "id": "mwdiqoajdalw",
+      "type": "redpacket",
+      "opened": true,
+      "note": "设备巡检红包"
+    },
+    "system": [
+      "角色领取了你的红包"
+    ],
+    "charRedpackets": 0,
+    "ownCardHasClick": false
+  },
+  "returned": {
+    "source": {
+      "type": "transfer",
+      "amount": "13.00",
+      "claimed": true,
+      "state": "returned"
+    },
+    "charTransferCount": 1,
+    "charCards": [
+      {
+        "note": "已退回",
+        "state": "returned",
+        "claimed": true
+      }
+    ],
+    "pendingAttrs": 0
+  },
+  "checks": {
+    "redpacketSourceOpened": true,
+    "redpacketOwnCardNotClickable": true,
+    "redpacketSystemOnly": true,
+    "redpacketNoCharCard": true,
+    "ownRedpacketClickNoClaim": true,
+    "returnedOneCharCard": true,
+    "returnedOnlyReturnedCard": true,
+    "returnedSourceSettled": true,
+    "returnedNoPending": true,
+    "noErrors": true
+  },
+  "errors": [],
+  "releaseRestored": {
+    "version": "3.100",
+    "versionCode": 111,
+    "debugPortClosed": true,
+    "restoredAt": "2026-11-12T12:39:03.167Z"
+  }
+}

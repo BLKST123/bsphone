@@ -1,0 +1,1 @@
+﻿const fs=require('fs');const f='BS小手机_3.100_Build111_红包领取与转账退回重复卡_主队完整报告_2026-11-12.md';let s=fs.readFileSync(f,'utf8').replace(/[ \t]+\r?\n/g,m=>m.includes('\r')?'\r\n':'\n');fs.writeFileSync(f,s,'utf8');fs.copyFileSync(f,'../'+f);console.log('cleaned');

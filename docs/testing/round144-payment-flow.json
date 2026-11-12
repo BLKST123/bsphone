@@ -1,8 +1,8 @@
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:36:49.116Z",
+  "checkedAt": "2026-11-12T12:34:58.308Z",
   "source": {
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93"
   },
   "checks": {
     "userRedpacketSystem": true,

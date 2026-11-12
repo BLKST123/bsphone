@@ -1,0 +1,162 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T12:32:01.378Z",
+  "sourceSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+  "checks": {
+    "userRedpacketCannotSelfClaim": true,
+    "userRedpacketOneSystem": true,
+    "userRedpacketNoCharCard": true,
+    "userRedpacketSourceOpened": true,
+    "returnedOneCharCard": true,
+    "returnedOnlyReturned": true,
+    "returnedSourceSettled": true,
+    "receivedOneCharCard": true,
+    "receivedOnlyReceived": true,
+    "charRedpacketStillClickable": true,
+    "noErrors": true
+  },
+  "result": {
+    "redpacket": {
+      "msgs": [
+        {
+          "role": "me",
+          "type": "redpacket",
+          "note": "测试红包",
+          "amount": 8.88,
+          "opened": true,
+          "claimed": false,
+          "transferState": ""
+        },
+        {
+          "role": "ta",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "好，"
+        },
+        {
+          "role": "ta",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "我收下啦"
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "阿梨领取了你的红包"
+        }
+      ],
+      "notices": [
+        "阿梨领取了你的红包"
+      ],
+      "ownRedpacketCards": 0
+    },
+    "returned": {
+      "msgs": [
+        {
+          "role": "me",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 12,
+          "opened": false,
+          "claimed": true,
+          "transferState": "returned"
+        },
+        {
+          "role": "ta",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "我不能收，退回给你"
+        },
+        {
+          "role": "ta",
+          "type": "transfer",
+          "note": "已退回",
+          "amount": 12,
+          "opened": false,
+          "claimed": true,
+          "transferState": "returned",
+          "text": "转账已退回"
+        }
+      ],
+      "notices": [],
+      "ownRedpacketCards": 0
+    },
+    "received": {
+      "msgs": [
+        {
+          "role": "me",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 12,
+          "opened": false,
+          "claimed": true,
+          "transferState": "received"
+        },
+        {
+          "role": "ta",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "好，"
+        },
+        {
+          "role": "ta",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "我收下啦"
+        },
+        {
+          "role": "ta",
+          "type": "transfer",
+          "note": "已收款",
+          "amount": 12,
+          "opened": false,
+          "claimed": true,
+          "transferState": "received",
+          "text": "转账已收款"
+        }
+      ],
+      "notices": [],
+      "ownRedpacketCards": 0
+    },
+    "charRedpacket": {
+      "msgs": [
+        {
+          "role": "ta",
+          "type": "redpacket",
+          "note": "给你红包",
+          "amount": 6.66,
+          "opened": true,
+          "claimed": false,
+          "transferState": "",
+          "text": "给你红包"
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "opened": false,
+          "claimed": false,
+          "transferState": "",
+          "text": "你领取了阿梨的红包"
+        }
+      ],
+      "notices": [
+        "你领取了阿梨的红包"
+      ],
+      "ownRedpacketCards": 0
+    }
+  },
+  "errors": []
+}

@@ -1,10 +1,10 @@
 {
-  "version": "3.99",
-  "versionCode": 110,
-  "round": 110,
+  "version": "3.100",
+  "versionCode": 111,
+  "round": 111,
   "releasedAt": "2026-11-12",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=110-r1",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=111-r1",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "cacheKey": "bsphone-v110-20261112-r1",
-  "notes": "3.99 Build110：修复转账收款/退回弹窗、已结算转账卡禁交互、五项消息菜单与结构化返回卡去重。"
+  "cacheKey": "bsphone-v111-20261112-r1",
+  "notes": "3.100 Build111：修复用户红包不能自领且领取不新增红包卡；用户转账退回只保留一张已退回状态卡。"
 }

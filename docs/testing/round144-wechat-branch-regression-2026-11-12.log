@@ -2,15 +2,15 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_chat_turn_reroll_2026-11-05.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:15.656Z",
+  "checkedAt": "2026-11-12T12:36:04.661Z",
   "evidence": {
-    "checkedAt": "2026-11-12T09:37:15.656Z",
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
-    "debugApkSha256": "B2B273EE33B39B8D426333DEC73DDD723B713EA1237DEE90C279565F2E270811",
+    "checkedAt": "2026-11-12T12:36:04.662Z",
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+    "debugApkSha256": "0E80DA5819CF958D5410D50F507491994A7A3674A291F0F6A26A4FFD511654DD",
     "releaseApkSha256": "92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792",
-    "version": "3.99",
-    "versionCode": 110,
-    "cacheKey": "bsphone-v110-20261112-r1"
+    "version": "3.100",
+    "versionCode": 111,
+    "cacheKey": "bsphone-v111-20261112-r1"
   },
   "checks": {
     "user_group_menu_has_regenerate": "PASS",
@@ -40,15 +40,15 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_branch_export_delete_2026-11-06.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:18.663Z",
+  "checkedAt": "2026-11-12T12:36:07.966Z",
   "evidence": {
-    "checkedAt": "2026-11-12T09:37:18.664Z",
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
-    "debugApkSha256": "B2B273EE33B39B8D426333DEC73DDD723B713EA1237DEE90C279565F2E270811",
+    "checkedAt": "2026-11-12T12:36:07.967Z",
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+    "debugApkSha256": "0E80DA5819CF958D5410D50F507491994A7A3674A291F0F6A26A4FFD511654DD",
     "releaseApkSha256": "92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792",
-    "version": "3.99",
-    "versionCode": 110,
-    "cacheKey": "bsphone-v110-20261112-r1"
+    "version": "3.100",
+    "versionCode": 111,
+    "cacheKey": "bsphone-v111-20261112-r1"
   },
   "checks": {
     "branchActionsVisible": true,
@@ -89,7 +89,7 @@ Round141 WeChat/branch historical regression
     "payload": {
       "format": "BS小手机聊天分支",
       "formatVersion": 1,
-      "exportedAt": "2026-11-12T09:37:18.341Z",
+      "exportedAt": "2026-11-12T12:36:07.631Z",
       "chat": {
         "id": "be",
         "name": "角色",
@@ -103,9 +103,9 @@ Round141 WeChat/branch historical regression
       },
       "prefixMessages": [],
       "branch": {
-        "id": "turnbranch_mwdctivfke3c",
+        "id": "turnbranch_mwdj7hmt57o6",
         "label": "原始版本",
-        "createdAt": 1794476238027,
+        "createdAt": 1794486967301,
         "messages": [
           {
             "id": "u1",
@@ -182,10 +182,10 @@ Round141 WeChat/branch historical regression
       "一",
       "二"
     ],
-    "active": "turnbranch_mwdctivfzxh7",
+    "active": "turnbranch_mwdj7hmtuoee",
     "branches": [
       {
-        "id": "turnbranch_mwdctivfzxh7",
+        "id": "turnbranch_mwdj7hmtuoee",
         "label": "新分支 1",
         "texts": [
           "一",
@@ -234,9 +234,9 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_forget_group_remark_scope_2026-11-07.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:26.080Z",
+  "checkedAt": "2026-11-12T12:36:15.151Z",
   "source": {
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93"
   },
   "checks": {
     "messageRemoved": true,
@@ -257,7 +257,7 @@ Round141 WeChat/branch historical regression
     "legacy": [],
     "c1": [],
     "m1": "deleted",
-    "promptJson": "{\"chatId\":\"gc\",\"chat\":{\"id\":\"gc\",\"type\":\"group\",\"name\":\"测试群\",\"personaId\":\"p\",\"worldlineId\":\"w\",\"branchId\":\"main\",\"memberIds\":[\"c1\",\"c2\"],\"unread\":0,\"lastTs\":2,\"created\":1,\"msgs\":[{\"id\":\"u1\",\"role\":\"me\",\"type\":\"text\",\"text\":\"群里说话\",\"ts\":1,\"turnId\":\"t1\",\"messageGroupId\":\"g1\",\"status\":\"active\",\"branchId\":\"main\",\"variantGroupId\":\"u1\",\"variantIndex\":0,\"hiddenFromChat\":false,\"parentMessageId\":null}],\"mem\":{\"ts\":1794476245891,\"items\":[]},\"baseMemorySnapshot\":[],\"turnBranches\":{\"t1\":{\"activeBranchId\":\"b1\",\"branches\":[{\"id\":\"b1\",\"label\":\"原始版本\",\"messages\":[],\"legacyMemItems\":[],\"memoryItemIds\":[]}]}},\"charPersonaIds\":[\"c1\",\"c2\"],\"offlineMode\":false,\"offlineScene\":\"\",\"proactiveOn\":false,\"proactiveIntervalSec\":0,\"groupIds\":[]},\"personaId\":\"p\",\"roleLongTerm\":[],\"sessionSnapshot\":[],\"sessionDigest\":[],\"structured\":[]}"
+    "promptJson": "{\"chatId\":\"gc\",\"chat\":{\"id\":\"gc\",\"type\":\"group\",\"name\":\"测试群\",\"personaId\":\"p\",\"worldlineId\":\"w\",\"branchId\":\"main\",\"memberIds\":[\"c1\",\"c2\"],\"unread\":0,\"lastTs\":2,\"created\":1,\"msgs\":[{\"id\":\"u1\",\"role\":\"me\",\"type\":\"text\",\"text\":\"群里说话\",\"ts\":1,\"turnId\":\"t1\",\"messageGroupId\":\"g1\",\"status\":\"active\",\"branchId\":\"main\",\"variantGroupId\":\"u1\",\"variantIndex\":0,\"hiddenFromChat\":false,\"parentMessageId\":null}],\"mem\":{\"ts\":1794486974951,\"items\":[]},\"baseMemorySnapshot\":[],\"turnBranches\":{\"t1\":{\"activeBranchId\":\"b1\",\"branches\":[{\"id\":\"b1\",\"label\":\"原始版本\",\"messages\":[],\"legacyMemItems\":[],\"memoryItemIds\":[]}]}},\"charPersonaIds\":[\"c1\",\"c2\"],\"offlineMode\":false,\"offlineScene\":\"\",\"proactiveOn\":false,\"proactiveIntervalSec\":0,\"groupIds\":[]},\"personaId\":\"p\",\"roleLongTerm\":[],\"sessionSnapshot\":[],\"sessionDigest\":[],\"structured\":[]}"
   },
   "errors": []
 }
@@ -265,15 +265,15 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_mixed_group_edit_lifecycle_2026-11-06.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:32.094Z",
+  "checkedAt": "2026-11-12T12:36:19.936Z",
   "evidence": {
-    "checkedAt": "2026-11-12T09:37:32.094Z",
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
-    "debugApkSha256": "B2B273EE33B39B8D426333DEC73DDD723B713EA1237DEE90C279565F2E270811",
+    "checkedAt": "2026-11-12T12:36:19.937Z",
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+    "debugApkSha256": "0E80DA5819CF958D5410D50F507491994A7A3674A291F0F6A26A4FFD511654DD",
     "releaseApkSha256": "92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792",
-    "version": "3.99",
-    "versionCode": 110,
-    "cacheKey": "bsphone-v110-20261112-r1"
+    "version": "3.100",
+    "versionCode": 111,
+    "cacheKey": "bsphone-v111-20261112-r1"
   },
   "checks": {
     "editKeepPreservesImage": true,
@@ -298,14 +298,14 @@ Round141 WeChat/branch historical regression
       "新文字乙",
       "新回复"
     ],
-    "prompt": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不是用户发言。\n5. 只使用当前会话、当前角色、当前世界线和当前分支提供的事实，不引用其它会话隐私。\n6. 角色必须遵守角色卡、世界书、关系状态和当前场景；可以保留缺点、脾气、犹豫和误解，不要强行温柔或说教。\n7. 不重复上一轮的开场、句式和模板；句子长短、停顿、用词要随情境变化。\n8. 不写“第一人称·多少字”“情绪名|数值|目标”这类模板提示，除非当前 schema 明确要求 JSON 字段。\n9. 文本类任务输出纯文本；JSON 类任务只输出合法 JSON，不加 Markdown 代码围栏。\n10. 如果当前信息不足，宁可留白或写自然的不确定，不要编造另一条会话的记忆。\n\n【文本任务额外规则】\n- 不使用【旁白】【对白】【第一人称】等标题，除非 taskType 明确要求结构化字段。\n- 不复制用户整段话，不把环境时间当作用户说过的话。\n- 角色说话不加引号、不加“角色名：”前缀。\n- 不输出完整歌词、内部 ID、密钥、真实地址或真实账号信息。\n\n【JSON 任务额外规则】\n- 严格输出合法 JSON。\n- 字段缺一不可，但值要自然、具体、有情境。\n- 不把 JSON 字段名写进角色台词。\n- 不输出额外解释。\n你在扮演「角色」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。\n用户的名字是「我」。\n【用户的人设（你要当成事实）】姓名/称呼：用户\n【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。\n【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。\n【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。\n【红包、转账、外卖、订单卡片规则】需要发这些内容时，必须单独一行输出卡片，不能只用普通文字描述。格式：\n[红包] 金额|备注\n[转账] 金额|备注\n[外卖] 商家|商品A、商品B|金额|备注\n[订单] 商家|商品A、商品B|金额|状态|备注\n每张卡片占一个气泡；不要给卡片加代码块或解释。\n【本次气泡数量】本次必须正好输出 3 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。\n新文字甲\n【这次的特别要求】这次是用户编辑后的连续消息组「新文字甲 / 新文字乙」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。\n[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。\n新文字乙",
+    "prompt": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不是用户发言。\n5. 只使用当前会话、当前角色、当前世界线和当前分支提供的事实，不引用其它会话隐私。\n6. 角色必须遵守角色卡、世界书、关系状态和当前场景；可以保留缺点、脾气、犹豫和误解，不要强行温柔或说教。\n7. 不重复上一轮的开场、句式和模板；句子长短、停顿、用词要随情境变化。\n8. 不写“第一人称·多少字”“情绪名|数值|目标”这类模板提示，除非当前 schema 明确要求 JSON 字段。\n9. 文本类任务输出纯文本；JSON 类任务只输出合法 JSON，不加 Markdown 代码围栏。\n10. 如果当前信息不足，宁可留白或写自然的不确定，不要编造另一条会话的记忆。\n\n【文本任务额外规则】\n- 不使用【旁白】【对白】【第一人称】等标题，除非 taskType 明确要求结构化字段。\n- 不复制用户整段话，不把环境时间当作用户说过的话。\n- 角色说话不加引号、不加“角色名：”前缀。\n- 不输出完整歌词、内部 ID、密钥、真实地址或真实账号信息。\n\n【JSON 任务额外规则】\n- 严格输出合法 JSON。\n- 字段缺一不可，但值要自然、具体、有情境。\n- 不把 JSON 字段名写进角色台词。\n- 不输出额外解释。\n你在扮演「角色」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。\n用户的名字是「我」。\n【用户的人设（你要当成事实）】姓名/称呼：用户\n【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。\n【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。\n【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。\n【红包、转账、外卖、订单卡片规则】需要发这些内容时，必须单独一行输出卡片，不能只用普通文字描述。格式：\n[红包] 金额|备注\n[转账] 金额|备注\n[外卖] 商家|商品A、商品B|金额|备注\n[订单] 商家|商品A、商品B|金额|状态|备注\n每张卡片占一个气泡；不要给卡片加代码块或解释。\n【本次气泡数量】本次必须正好输出 1 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。\n新文字甲\n【这次的特别要求】这次是用户编辑后的连续消息组「新文字甲 / 新文字乙」重新生成。只根据编辑后的用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。\n[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。\n新文字乙",
     "original": [
       "text",
       "image",
       "text",
       "text"
     ],
-    "active": "turnbranch_mwdctsuoenog"
+    "active": "turnbranch_mwdj7q8iodkk"
   },
   "remove": {
     "types": [
@@ -318,14 +318,14 @@ Round141 WeChat/branch historical regression
       "文字二",
       "新回复"
     ],
-    "prompt": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不是用户发言。\n5. 只使用当前会话、当前角色、当前世界线和当前分支提供的事实，不引用其它会话隐私。\n6. 角色必须遵守角色卡、世界书、关系状态和当前场景；可以保留缺点、脾气、犹豫和误解，不要强行温柔或说教。\n7. 不重复上一轮的开场、句式和模板；句子长短、停顿、用词要随情境变化。\n8. 不写“第一人称·多少字”“情绪名|数值|目标”这类模板提示，除非当前 schema 明确要求 JSON 字段。\n9. 文本类任务输出纯文本；JSON 类任务只输出合法 JSON，不加 Markdown 代码围栏。\n10. 如果当前信息不足，宁可留白或写自然的不确定，不要编造另一条会话的记忆。\n\n【文本任务额外规则】\n- 不使用【旁白】【对白】【第一人称】等标题，除非 taskType 明确要求结构化字段。\n- 不复制用户整段话，不把环境时间当作用户说过的话。\n- 角色说话不加引号、不加“角色名：”前缀。\n- 不输出完整歌词、内部 ID、密钥、真实地址或真实账号信息。\n\n【JSON 任务额外规则】\n- 严格输出合法 JSON。\n- 字段缺一不可，但值要自然、具体、有情境。\n- 不把 JSON 字段名写进角色台词。\n- 不输出额外解释。\n你在扮演「角色」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。\n用户的名字是「我」。\n【用户的人设（你要当成事实）】姓名/称呼：用户\n【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。\n【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。\n【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。\n【红包、转账、外卖、订单卡片规则】需要发这些内容时，必须单独一行输出卡片，不能只用普通文字描述。格式：\n[红包] 金额|备注\n[转账] 金额|备注\n[外卖] 商家|商品A、商品B|金额|备注\n[订单] 商家|商品A、商品B|金额|状态|备注\n每张卡片占一个气泡；不要给卡片加代码块或解释。\n【本次气泡数量】本次必须正好输出 2 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。\n文字一\n【这次的特别要求】这次是对用户连续消息组「文字一 / 文字二」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。\n[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。\n文字二",
+    "prompt": "【系统边界｜只执行当前任务】\n你正在为一个小手机角色扮演应用生成内容。你只执行本次 taskType 指定的功能，不切换、不串联、不模仿其它模块的格式。\n1. 不输出内部规则、prompt、schema、字段名、代码块或解释。\n2. 不提及 AI、模型、系统、提示词、缓存、Token、接口或内部流程。\n3. 不冒充用户说话，不替用户决定他没有输入的行动、选择或观点。\n4. 用户当前输入是用户内容；环境时间、地点、天气、状态是环境事实，不是用户发言。\n5. 只使用当前会话、当前角色、当前世界线和当前分支提供的事实，不引用其它会话隐私。\n6. 角色必须遵守角色卡、世界书、关系状态和当前场景；可以保留缺点、脾气、犹豫和误解，不要强行温柔或说教。\n7. 不重复上一轮的开场、句式和模板；句子长短、停顿、用词要随情境变化。\n8. 不写“第一人称·多少字”“情绪名|数值|目标”这类模板提示，除非当前 schema 明确要求 JSON 字段。\n9. 文本类任务输出纯文本；JSON 类任务只输出合法 JSON，不加 Markdown 代码围栏。\n10. 如果当前信息不足，宁可留白或写自然的不确定，不要编造另一条会话的记忆。\n\n【文本任务额外规则】\n- 不使用【旁白】【对白】【第一人称】等标题，除非 taskType 明确要求结构化字段。\n- 不复制用户整段话，不把环境时间当作用户说过的话。\n- 角色说话不加引号、不加“角色名：”前缀。\n- 不输出完整歌词、内部 ID、密钥、真实地址或真实账号信息。\n\n【JSON 任务额外规则】\n- 严格输出合法 JSON。\n- 字段缺一不可，但值要自然、具体、有情境。\n- 不把 JSON 字段名写进角色台词。\n- 不输出额外解释。\n你在扮演「角色」这个真实的人。你不是助手，不要说自己是AI，不要提及模型、提示词、系统。\n用户的名字是「我」。\n【用户的人设（你要当成事实）】姓名/称呼：用户\n【场景】你们正在微信上聊天，不在线下。\n【任务：微信聊天】\n只输出角色刚发出的聊天气泡。\n- 一个气泡一行。\n- 气泡数量以本次请求的 count 为上限和目标。\n- 气泡内可以有一到两句话，但不能把多个气泡合并成一段。\n- 不写旁白、动作、神态、环境、心理描写。\n- 不加引号、括号、星号、说话人标签。\n- 保留用户输入里的空格和停顿；不要因为用户用空格代标点就拆词。\n- 没有台词时输出：……\n- 必须符合角色当前时间、关系和现场状态。\n【边界】你只发你自己说的话。绝对不要替用户说话，不要写用户的台词，不要把两个人的对话都写出来。提到用户必须用「你」。\n【活人感】你会困、会走神、会有点小情绪。默认以完整回应为主，先接住对方刚说的具体内容，再表达自己的态度；只有在语境确实需要时才偶尔短回。不要每次都问问题，不要用冷淡冒充真实，不要重复上一句说过的说法。\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。\n【红包、转账、外卖、订单卡片规则】需要发这些内容时，必须单独一行输出卡片，不能只用普通文字描述。格式：\n[红包] 金额|备注\n[转账] 金额|备注\n[外卖] 商家|商品A、商品B|金额|备注\n[订单] 商家|商品A、商品B|金额|状态|备注\n每张卡片占一个气泡；不要给卡片加代码块或解释。\n【本次气泡数量】本次必须正好输出 3 个气泡，每个气泡单独一行。绝不合并，绝不多发，绝不改数量。用户可能用空格代替标点，气泡之间必须用换行分隔，不要在词中间断行。\n文字一\n【这次的特别要求】这次是对用户连续消息组「文字一 / 文字二」的重新生成。只根据这组用户消息和它之前的历史生成新的回复，不要继承旧回复之后的剧情。\n[ENVIRONMENT_CONTEXT — NOT USER SPEECH]\n现在的时间是：2026/10/27 星期二 09:30。\n文字二",
     "original": [
       "text",
       "image",
       "text",
       "text"
     ],
-    "active": "turnbranch_mwdcttd9wzb4"
+    "active": "turnbranch_mwdj7r1590rc"
   },
   "errors": []
 }
@@ -333,15 +333,15 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_turn_auto_memory_branch_fix_2026-11-05.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:37.114Z",
+  "checkedAt": "2026-11-12T12:36:23.101Z",
   "evidence": {
-    "checkedAt": "2026-11-12T09:37:37.114Z",
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
-    "debugApkSha256": "B2B273EE33B39B8D426333DEC73DDD723B713EA1237DEE90C279565F2E270811",
+    "checkedAt": "2026-11-12T12:36:23.102Z",
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+    "debugApkSha256": "0E80DA5819CF958D5410D50F507491994A7A3674A291F0F6A26A4FFD511654DD",
     "releaseApkSha256": "92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792",
-    "version": "3.99",
-    "versionCode": 110,
-    "cacheKey": "bsphone-v110-20261112-r1"
+    "version": "3.100",
+    "versionCode": 111,
+    "cacheKey": "bsphone-v111-20261112-r1"
   },
   "checks": {
     "autoSummaryCreated": true,
@@ -354,7 +354,7 @@ Round141 WeChat/branch historical regression
   },
   "failures": [],
   "created": {
-    "id": "memory_mwdctwwy4gfp",
+    "id": "memory_mwdj7t4701e5",
     "type": "auto",
     "sourceMessageIds": [
       "au1",
@@ -453,9 +453,9 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_prompt_layers_2026-11-05.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:40.344Z",
+  "checkedAt": "2026-11-12T12:36:26.117Z",
   "source": {
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93"
   },
   "checks": {
     "memoryPresent": true,
@@ -516,9 +516,9 @@ Round141 WeChat/branch historical regression
 [PASS] _qa_turn_branch_switch_ui_2026-11-05.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:46.581Z",
+  "checkedAt": "2026-11-12T12:36:32.332Z",
   "source": {
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93"
   },
   "checks": {
     "uiSwitchToOriginal": true,
@@ -529,7 +529,7 @@ Round141 WeChat/branch historical regression
   },
   "failures": [],
   "orig": {
-    "active": "turnbranch_mwdcu31c826k",
+    "active": "turnbranch_mwdj7z9tn8w3",
     "ids": [
       "u1",
       "u2",
@@ -548,11 +548,11 @@ Round141 WeChat/branch historical regression
     ]
   },
   "new1": {
-    "active": "turnbranch_mwdcu31cgta7",
+    "active": "turnbranch_mwdj7z9t50on",
     "ids": [
       "u1",
       "u2",
-      "mwdcu3iu40dz"
+      "mwdj7zk26iwx"
     ],
     "texts": [
       "A",
@@ -561,25 +561,25 @@ Round141 WeChat/branch historical regression
     ],
     "branchIds": [
       {
-        "id": "turnbranch_mwdcu31c826k",
+        "id": "turnbranch_mwdj7z9tn8w3",
         "label": "原始版本"
       },
       {
-        "id": "turnbranch_mwdcu31cgta7",
+        "id": "turnbranch_mwdj7z9t50on",
         "label": "重新生成 1"
       },
       {
-        "id": "turnbranch_mwdcu3l8clge",
+        "id": "turnbranch_mwdj7zmmd0wc",
         "label": "重新生成 2"
       }
     ]
   },
   "persisted": {
-    "active": "turnbranch_mwdcu31cgta7",
+    "active": "turnbranch_mwdj7z9t50on",
     "ids": [
       "u1",
       "u2",
-      "mwdcu3iu40dz"
+      "mwdj7zk26iwx"
     ],
     "texts": [
       "A",
@@ -594,26 +594,26 @@ Round141 WeChat/branch historical regression
   ],
   "errors": [],
   "evidence": {
-    "checkedAt": "2026-11-12T09:37:46.585Z",
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
-    "debugApkSha256": "B2B273EE33B39B8D426333DEC73DDD723B713EA1237DEE90C279565F2E270811",
+    "checkedAt": "2026-11-12T12:36:32.336Z",
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93",
+    "debugApkSha256": "0E80DA5819CF958D5410D50F507491994A7A3674A291F0F6A26A4FFD511654DD",
     "releaseApkSha256": "92C01D3C6A4038DA7BFD4851770DAC7D00846B19D5060F22DD480B5D5DBF4792",
-    "version": "3.99",
-    "versionCode": 110,
-    "cacheKey": "bsphone-v110-20261112-r1"
+    "version": "3.100",
+    "versionCode": 111,
+    "cacheKey": "bsphone-v111-20261112-r1"
   }
 }
 
 [PASS] _round121_image_branch_hidden_zip_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T09:37:49.884Z",
+  "checkedAt": "2026-11-12T12:36:37.151Z",
   "source": {
-    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+    "indexSha256": "96C38DA2BF2EEF87E7E59C233459D16EFDB78B2AC6ACD089BF500E0620616F93"
   },
   "setup": {
-    "build": "2026-11-12 · 3.99 · 第 110 轮",
-    "code": 110
+    "build": "2026-11-12 · 3.100 · 第 111 轮",
+    "code": 111
   },
   "checks": {
     "menu": true,
@@ -654,34 +654,34 @@ Round141 WeChat/branch historical regression
     "deletes": 2,
     "versions": [
       {
-        "id": "imgver_mwdcu70yi6vt",
+        "id": "imgver_mwdj84bzunqb",
         "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-        "galleryId": "mwdcu70y6vt1",
-        "imageGenId": "img_mwdcu6tk23km",
+        "galleryId": "mwdj84bzulz5",
+        "imageGenId": "img_mwdj8427aibx",
         "prompt": "second prompt",
         "customPrompt": "second prompt",
         "kind": "selfie",
         "userText": "拍一下今天",
         "model": "gpt-image-1",
-        "createdAt": 1794476269330
+        "createdAt": 1794486996719
       },
       {
-        "id": "imgver_mwdcu6tkjalk",
+        "id": "imgver_mwdj84285no3",
         "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-        "galleryId": "mwdcu6tkms5s",
-        "imageGenId": "img_mwdcu6tk23km",
+        "galleryId": "mwdj8428nlqk",
+        "imageGenId": "img_mwdj8427aibx",
         "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
         "customPrompt": "first prompt",
         "kind": "selfie",
         "userText": "拍一下今天",
         "model": "gpt-image-1",
-        "createdAt": 1794476269064
+        "createdAt": 1794486996368
       }
     ]
   },
   "restored": {
     "url": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUEBAQEAwUEBAQGBQUGCA0ICAcHCBALDAkNExAUExIQEhIUFx0ZFBYcFhISGiMaHB4fISEhFBkkJyQgJh0gISD/2wBDAQUGBggHCA8ICA8gFRIVICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICD/wAARCAABAAEDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAj/xAAUEAEAAAAAAAAAAAAAAAAAAAAA/8QAFAEBAAAAAAAAAAAAAAAAAAAAAP/EABQRAQAAAAAAAAAAAAAAAAAAAAD/2gAMAwEAAhEDEQA/ALLAB//Z",
-    "versionId": "imgver_mwdcu6tkjalk",
+    "versionId": "imgver_mwdj84285no3",
     "prompt": "自然生活摄影，真实皮肤纹理，真实环境光，手机随手拍构图，轻微景深，不磨皮，不夸张美颜，不出现文字、水印、边框或拼图。\nfirst prompt\n角色固定特征：角色一。所有照片必须是同一张脸、同一发型和同一气质。\n用户固定特征：用户；姓名/称呼：用户。用户在照片中必须保持同一张脸。\n聊天里的照片请求：拍一下今天\n全局画面要求：真实生活照片",
     "customPrompt": "first prompt",
     "active": true
@@ -700,7 +700,7 @@ Round141 WeChat/branch historical regression
     "dom": true
   },
   "zip": {
-    "bytes": 125560,
+    "bytes": 125593,
     "names": [
       "data/snapshot.json",
       "data/settings.json",
@@ -743,7 +743,7 @@ Round141 WeChat/branch historical regression
 
 [PASS] _independent_hidden_prompt_audit_2026-11-07.cjs exit=0
 {
-  "checkedAt": "2026-11-12T09:37:53.023Z",
+  "checkedAt": "2026-11-12T12:36:39.799Z",
   "tests": {
     "hiddenMessageExcludedFromPrompt": true,
     "hiddenMessageExcludedFromChat": true
