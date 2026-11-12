@@ -1,5 +1,5 @@
 ﻿/* BS小手机 · 离线兜底：页面网络优先，静态资源缓存优先 */
-var C='bsphone-v108-20261111-r1';
+var C='bsphone-v109-20261112-r1';
 var PRECACHE=['./','./index.html','./manifest.webmanifest','./icon-192.png','./icon-512.png','./core/design/tokens.css','./core/design/shell.css','./core/store/core-store.js','./core/store/readonly-store.js','./core/prompts/sysworld-v2.js'];
 function timedFetch(req,ms){
   return new Promise(function(resolve,reject){

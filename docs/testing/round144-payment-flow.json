@@ -1,0 +1,111 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:17.037Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "userRedpacketSystem": true,
+    "userRedpacketOpened": true,
+    "userTransferReceiptCard": true,
+    "userTransferSourceClaimed": true,
+    "charRedpacketSystem": true,
+    "charRedpacketOpened": true,
+    "charTransferReceiptCard": true,
+    "charTransferSourceClaimed": true,
+    "noErrors": true
+  },
+  "result": {
+    "userRedpacket": {
+      "texts": [
+        {
+          "role": "me",
+          "type": "redpacket",
+          "note": "测试红包",
+          "amount": 52,
+          "opened": true,
+          "claimed": false
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "text": "阿梨领取了你的红包",
+          "opened": false,
+          "claimed": false
+        }
+      ],
+      "sys": [
+        "阿梨领取了你的红包"
+      ]
+    },
+    "userTransfer": {
+      "texts": [
+        {
+          "role": "me",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        },
+        {
+          "role": "ta",
+          "type": "transfer",
+          "text": "转账已收款",
+          "note": "已收款",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        }
+      ],
+      "sys": []
+    },
+    "charRedpacket": {
+      "texts": [
+        {
+          "role": "ta",
+          "type": "redpacket",
+          "text": "给你小红包",
+          "note": "给你小红包",
+          "amount": 8.88,
+          "opened": true,
+          "claimed": false
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "text": "你领取了阿梨的红包",
+          "opened": false,
+          "claimed": false
+        }
+      ],
+      "sys": [
+        "你领取了阿梨的红包"
+      ]
+    },
+    "charTransfer": {
+      "texts": [
+        {
+          "role": "ta",
+          "type": "transfer",
+          "text": "给你转账",
+          "note": "给你转账",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        },
+        {
+          "role": "me",
+          "type": "transfer",
+          "text": "转账已收款",
+          "note": "已收款",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        }
+      ],
+      "sys": []
+    }
+  },
+  "errors": []
+}

@@ -2,19 +2,18 @@
 
 ## 当前版本
 
-- 页面：2026-11-11 · 3.97 · 第 108 轮
-- Android：3.97 / versionCode 108
-- Service Worker：bsphone-v108-20261111-r1
+- 页面：2026-11-12 · 3.98 · 第 109 轮
+- Android：3.98 / versionCode 109
+- Service Worker：bsphone-v109-20261112-r1
 - 源码提交：本轮本地验收候选（待提交）
-- 源码 SHA-256：EEF7186E58A3F38FBDA4DC1144B2759687E264AE3EE577F509DE11FF7243C43A
-- Release APK SHA-256：AF816A20A8A26D739E0F11BD9E23BB5F189665DE12638AAC68A954CF6A2AC601
-- Release ZIP SHA-256：848C11AD251512BD6355381F9FDD756B055BDA1F73719F87EBE28D079D297E0B
+- 源码 SHA-256：165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9
+- Release APK SHA-256：05D99EB99C06FAEA6DDCC59464458C1D2D6DAF4323607469EEFBC8C91E1AA09F
+- Release ZIP SHA-256：25B1FEC386E01572A1299ABEA443791DCDE24E7C2B9D83084740EFE1145726EB
 
 ## 当前阶段
-- 3.97 / Build108 完成第三轮卡片语义返修：主金额与手续费/运费/优惠/备注分句隔离；礼貌句、独立未来备注、已下单口语正例保留；未来承诺和条件反问继续回退纯文本。
-- 使用主应用同包名同签名覆盖更新，未清主应用数据；合成数据卡片测试在主机浏览器执行，真机完成 Release 安装、版本、前台 Activity、APK hash 与 logcat 验收。
-- 全量回归 26/26、微信历史分支 10/10；ZIP 17 entries、checksums 名称集合一致、反斜杠 0。
-- 当前公开仓库继续使用干净树；私密词表扫描 0 命中。
+- 3.98 / Build109 恢复红包/转账收付款真实流程：用户红包被char领取后插入系统小气泡；char红包由用户点击后插入系统小气泡；用户转账后char回复已收款卡片；char转账由用户点击后自动发送已收款卡片。
+- 真机使用主应用同包名覆盖更新，保留主数据；实际点击微信、我的、用户人设库、钱包，未清数据、未修改现有人设、未发送消息、未写账单。
+- 当前全量 28/28、微信历史 10/10、支付流转 9/9、真实模型入口集成 4/4；Release/ZIP/线上发布通过。
 
 - 3.90 / Build101 接入用户导出的 6 页桌面布局（JSON SHA-256 `ADB02DD949E3DBC7A1551CB4F981546BA1086C445E210B813E7C36717D87C167`）：4 列、80px 单元格、10px 间距、20px 左右安全边距、60px App 图标。
 - 桌面内容改为 `DB.ui.userDesktopLayout` 独立数据；全部 18 个 App 已入布局，6 页无重叠、无越界。
@@ -68,6 +67,14 @@
 
 
 ## 最近证据
+
+- `docs/testing/round144-full-regression-2026-11-12.log`
+- `docs/testing/round144-wechat-branch-regression-2026-11-12.log`
+- `docs/testing/round144-payment-flow.json`
+- `docs/testing/round144-payment-integration.json`
+- `docs/testing/round144-device-clicks.json`
+- `docs/testing/round144-installed-release-audit.json`
+- `docs/testing/round144-zip-verify.json`
 
 - `docs/testing/round143-full-regression-2026-11-11.log`
 - `docs/testing/round143-wechat-branch-regression-2026-11-11.log`
@@ -195,3 +202,11 @@
 - “不好意思/不用客气”等礼貌前缀不得误伤后续正向动作。
 - 订单意图接受“我给你下单了”等无字面“订单”的口语表达。
 - 最终 Release 直接覆盖主应用安装，不清理用户数据；不重复安装独立 QA 包。
+
+
+## 2026-11-12 / 3.98 Build109 红包转账流程恢复
+- 用户红包在char回复完成后，插入系统小气泡“xx领取了你的红包”，不伪造成char聊天气泡。
+- char红包卡片点击后标记已领取，并插入系统小气泡“你领取了xx的红包”。
+- 用户转账后char回复一张“已收款”转账卡，不生成系统小气泡。
+- char转账卡片点击后，自动发送用户的“已收款”转账卡。
+- 真实模型入口调用后由aiTurn落系统提示或已收款卡，测试不得只验证DOM。

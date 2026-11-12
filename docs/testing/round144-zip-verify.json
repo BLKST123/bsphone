@@ -1,0 +1,17 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T16:47:33.5340255+08:00",
+    "zip":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\BS小手机_3.98_Build109_release.zip",
+    "zipSha256":  "25B1FEC386E01572A1299ABEA443791DCDE24E7C2B9D83084740EFE1145726EB",
+    "entries":  17,
+    "checksumFiles":  16,
+    "mismatch":  [
+
+                 ],
+    "nameDelta":  [
+
+                  ],
+    "hasBackslashEntries":  false,
+    "apkSha256":  "05D99EB99C06FAEA6DDCC59464458C1D2D6DAF4323607469EEFBC8C91E1AA09F",
+    "sourceSha256":  "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+}

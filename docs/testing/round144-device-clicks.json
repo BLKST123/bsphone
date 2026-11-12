@@ -1,0 +1,57 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T16:47:18.3992372+08:00",
+    "device":  "OPPO PMK110",
+    "android":  "16",
+    "package":  "com.xiaoshouji.app",
+    "version":  "3.98",
+    "versionCode":  109,
+    "steps":  [
+                  {
+                      "step":  "启动主应用",
+                      "result":  "MainActivity 前台"
+                  },
+                  {
+                      "step":  "点击微信图标",
+                      "target":  "微信",
+                      "result":  "微信消息页打开"
+                  },
+                  {
+                      "step":  "点击我的页签",
+                      "target":  "我的",
+                      "result":  "我的页打开，用户人设库/钱包/卡包可见"
+                  },
+                  {
+                      "step":  "点击用户人设库",
+                      "target":  "用户人设库",
+                      "result":  "人设库页打开，新增人设/已启用可见"
+                  },
+                  {
+                      "step":  "返回并点击钱包",
+                      "target":  "钱包",
+                      "result":  "钱包页打开，记一笔可见"
+                  },
+                  {
+                      "step":  "返回微信消息",
+                      "target":  "消息",
+                      "result":  "微信及四个页签可见"
+                  }
+              ],
+    "wechatTabs":  {
+                       "mine":  true,
+                       "messages":  true,
+                       "contacts":  true,
+                       "moments":  true
+                   },
+    "mineEntries":  {
+                        "personaLibrary":  true,
+                        "wallet":  true,
+                        "cards":  true
+                    },
+    "fatalAnrJsErrorCount":  0,
+    "dataCleared":  false,
+    "existingPersonasModified":  false,
+    "messagesSent":  false,
+    "walletWritten":  false,
+    "browserUsed":  false
+}

@@ -1,10 +1,10 @@
 {
-  "version": "3.97",
-  "versionCode": 108,
-  "round": 108,
-  "releasedAt": "2026-11-11",
-  "pageUrl": "https://blkst123.github.io/bsphone/?v=108-r1",
+  "version": "3.98",
+  "versionCode": 109,
+  "round": 109,
+  "releasedAt": "2026-11-12",
+  "pageUrl": "https://blkst123.github.io/bsphone/?v=109-r1",
   "apkUrl": "https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk",
-  "cacheKey": "bsphone-v108-20261111-r1",
-  "notes": "3.97 Build108：修复主金额/辅助金额、跨分句未来词、礼貌句与口语下单；重建证据清单并重新发布。"
+  "cacheKey": "bsphone-v109-20261112-r1",
+  "notes": "3.98 Build109：恢复红包领取系统提示、转账已收款卡片与点击领取流程。"
 }

@@ -1,0 +1,63 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:22.434Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "redpacketSystem": true,
+    "transferCard": true,
+    "noSystemForTransfer": true,
+    "noErrors": true
+  },
+  "rp": {
+    "types": [
+      {
+        "role": "me",
+        "type": "redpacket",
+        "note": "测试红包",
+        "opened": true
+      },
+      {
+        "role": "ta",
+        "type": "text",
+        "text": "收到啦",
+        "opened": false
+      },
+      {
+        "role": "sys",
+        "type": "text",
+        "text": "阿梨领取了你的红包",
+        "opened": false
+      }
+    ],
+    "sys": [
+      "阿梨领取了你的红包"
+    ]
+  },
+  "tf": {
+    "types": [
+      {
+        "role": "me",
+        "type": "transfer",
+        "note": "测试转账",
+        "claimed": true
+      },
+      {
+        "role": "ta",
+        "type": "text",
+        "text": "收到啦",
+        "claimed": false
+      },
+      {
+        "role": "ta",
+        "type": "transfer",
+        "text": "转账已收款",
+        "note": "已收款",
+        "claimed": true
+      }
+    ],
+    "sys": []
+  },
+  "errors": []
+}

@@ -1,0 +1,14 @@
+﻿{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T16:43:54.6472377+08:00",
+    "versionName":  "3.98",
+    "versionCode":  109,
+    "firstInstallTime":  "2026-10-20 23:07:55",
+    "lastUpdateTime":  "2026-11-12 16:28:36",
+    "localApkSha256":  "05D99EB99C06FAEA6DDCC59464458C1D2D6DAF4323607469EEFBC8C91E1AA09F",
+    "installedApkSha256":  "05D99EB99C06FAEA6DDCC59464458C1D2D6DAF4323607469EEFBC8C91E1AA09F",
+    "foreground":  "Window{a91e848 u0 com.xiaoshouji.app/com.xiaoshouji.app.MainActivity}",
+    "fatalAnrJsErrorCount":  0,
+    "dataPreserved":  true,
+    "qaPackageUsed":  false
+}

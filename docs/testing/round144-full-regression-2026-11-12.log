@@ -1,0 +1,3304 @@
+Round141 complete regression
+[PASS] _round140_wechat_module_fix_test.cjs exit=0
+{
+  "ok": true,
+  "checks": {
+    "names": true,
+    "typing": true,
+    "backgroundContinue": true,
+    "regenTiming": true,
+    "cards": true,
+    "menu": true,
+    "persona": true,
+    "favorites": true,
+    "wallpaper": true,
+    "widget": true,
+    "call": true,
+    "toast": true,
+    "noErrors": true
+  },
+  "errors": [],
+  "results": {
+    "names": {
+      "both": "项目会话",
+      "remarkOnly": "备注甲",
+      "sessionOnly": "项目会话",
+      "neither": "角色甲",
+      "autoLabel": "备注甲"
+    },
+    "typing": {
+      "before": "对方正在输入……",
+      "after": "对方正在输入……"
+    },
+    "backgroundContinue": {
+      "route": "home",
+      "types": [
+        "text"
+      ],
+      "texts": [
+        "我在后台回你"
+      ]
+    },
+    "regenDuring": {
+      "busy": true,
+      "typing": "对方正在输入……"
+    },
+    "regenAt3s": {
+      "busy": false,
+      "typing": "对方正在输入……"
+    },
+    "regenDone": {
+      "busy": false,
+      "typing": false,
+      "texts": [
+        "第一句",
+        "第二句",
+        "新的连续组回复"
+      ]
+    },
+    "cards": {
+      "types": [
+        "redpacket",
+        "transfer",
+        "takeout",
+        "order"
+      ],
+      "amounts": [
+        52,
+        200,
+        null,
+        39
+      ],
+      "takeoutOrders": [
+        {
+          "merchant": "甜品店",
+          "items": [
+            "草莓蛋糕",
+            "热奶茶"
+          ],
+          "source": "contact"
+        }
+      ],
+      "dom": {
+        "red": true,
+        "transfer": true,
+        "takeout": true,
+        "order": true,
+        "orderBg": "color(srgb 1 0.980392 0.988235 / 0.770431)",
+        "backdrop": "blur(18px)"
+      }
+    },
+    "menu": {
+      "headings": [
+        "会话外观",
+        "聊天方式",
+        "主动与记忆",
+        "生活联动",
+        "统计与诊断",
+        "会话管理"
+      ],
+      "ids": [
+        "cmBg",
+        "cmRange",
+        "cmVoice",
+        "cmMeetMode",
+        "cmPoke",
+        "cmSettle",
+        "cmAuto",
+        "cmAutoGap",
+        "cmMem",
+        "cmTakeout",
+        "cmUsage",
+        "cmPersonaBinding",
+        "cmEdit",
+        "cmSessionName",
+        "cmSelectMsgs",
+        "cmGroups",
+        "cmPin",
+        "cmReadState",
+        "cmHidden",
+        "cmClear",
+        "cmDel",
+        "cmCancel"
+      ],
+      "groups": 6
+    },
+    "personaBefore": {
+      "active": "p1",
+      "count": "1 张"
+    },
+    "personaHome": {
+      "enableButtons": 2,
+      "editButtons": 0,
+      "cardRows": 2
+    },
+    "personaAfter": {
+      "active": "p2",
+      "count": "0 张",
+      "personaTitle": "用户人设库"
+    },
+    "personaEditTitle": "编辑人设",
+    "favoriteUI": {
+      "voice": true,
+      "transcriptDisplay": "none",
+      "moreButtons": 2,
+      "moreTop": 270.390625,
+      "cardTop": 263.390625
+    },
+    "favoriteMenu": {
+      "jump": "回到原会话",
+      "remove": "取消收藏"
+    },
+    "favoriteJump": {
+      "route": "chatroom",
+      "arg": "typing",
+      "target": true,
+      "flash": true
+    },
+    "favoriteConfirm": {
+      "confirm": "取消收藏？",
+      "count": 2
+    },
+    "favoriteRemoved": {
+      "count": 1,
+      "exists": false
+    },
+    "wallpaper": {
+      "hasImage": true,
+      "natural": [
+        312,
+        640
+      ],
+      "imgRatio": 0.4875,
+      "wrapRatio": 0.4875,
+      "backgroundSize": "100% 100%"
+    },
+    "widgetGeometry": {
+      "before": {
+        "children": [
+          {
+            "x": 37.56219482421875,
+            "y": 78.08171081542969,
+            "w": 110.89935302734375,
+            "h": 139.83657836914062,
+            "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
+          },
+          {
+            "x": 142.61276245117188,
+            "y": 68.147216796875,
+            "w": 104.79823303222656,
+            "h": 135.70556640625,
+            "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
+          },
+          {
+            "x": 243.5795135498047,
+            "y": 81.43775939941406,
+            "w": 106.86470031738281,
+            "h": 137.12448120117188,
+            "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)"
+          }
+        ],
+        "grid": "94px 94px 94px",
+        "cardRect": {
+          "x": 20.011873245239258,
+          "y": 56,
+          "width": 350,
+          "height": 170,
+          "top": 56,
+          "right": 370.01187324523926,
+          "bottom": 226,
+          "left": 20.011873245239258
+        }
+      },
+      "after": {
+        "children": [
+          {
+            "x": 37.56219482421875,
+            "y": 78.08171081542969,
+            "w": 110.89935302734375,
+            "h": 139.83657836914062,
+            "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
+          },
+          {
+            "x": 142.61276245117188,
+            "y": 68.147216796875,
+            "w": 104.79823303222656,
+            "h": 135.70556640625,
+            "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
+          },
+          {
+            "x": 243.5795135498047,
+            "y": 81.43775939941406,
+            "w": 106.86470031738281,
+            "h": 137.12448120117188,
+            "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)"
+          }
+        ],
+        "grid": "94px 94px 94px",
+        "cardRect": {
+          "x": 20.011873245239258,
+          "y": 56,
+          "width": 350,
+          "height": 170,
+          "top": 56,
+          "right": 370.01187324523926,
+          "bottom": 226,
+          "left": 20.011873245239258
+        }
+      },
+      "equal": true,
+      "hasBgLayer": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")"
+    },
+    "call": {
+      "page": true,
+      "name": "备注甲",
+      "status": "正在等待对方接听…",
+      "end": true,
+      "actions": 3
+    },
+    "toast": {
+      "shown": true,
+      "hidden": true
+    }
+  }
+}
+
+[PASS] _round140_widget_geometry_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "before": {
+    "children": [
+      {
+        "text": "LOVE 01",
+        "w": 110.89935302734375,
+        "h": 139.83657836914062,
+        "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 02",
+        "w": 104.79823303222656,
+        "h": 135.70556640625,
+        "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 03",
+        "w": 106.86470031738281,
+        "h": 137.12448120117188,
+        "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)",
+        "position": "relative"
+      }
+    ],
+    "grid": "94px 94px 94px",
+    "card": {
+      "w": 350,
+      "h": 170
+    }
+  },
+  "after": {
+    "children": [
+      {
+        "text": "LOVE 01",
+        "w": 110.89935302734375,
+        "h": 139.83657836914062,
+        "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 02",
+        "w": 104.79823303222656,
+        "h": 135.70556640625,
+        "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)",
+        "position": "relative"
+      },
+      {
+        "text": "LOVE 03",
+        "w": 106.86470031738281,
+        "h": 137.12448120117188,
+        "transform": "matrix(0.994522, -0.104528, 0.104528, 0.994522, 0, 9)",
+        "position": "relative"
+      }
+    ],
+    "grid": "94px 94px 94px",
+    "card": {
+      "w": 350,
+      "h": 170
+    },
+    "bg": true,
+    "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")"
+  }
+}
+
+[PASS] _round140_card_theme_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "changed": true,
+  "light": {
+    "red": {
+      "background": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(228, 91, 100), rgb(181, 124, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "linear-gradient(145deg, rgb(228, 91, 100), rgb(181, 124, 144))",
+      "color": "rgb(255, 255, 255)",
+      "backdrop": "blur(18px)"
+    },
+    "transfer": {
+      "background": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(200, 143, 163), rgb(181, 124, 144)) repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "linear-gradient(145deg, rgb(200, 143, 163), rgb(181, 124, 144))",
+      "color": "rgb(255, 255, 255)",
+      "backdrop": "blur(18px)"
+    },
+    "takeout": {
+      "background": "color(srgb 1 0.980392 0.988235 / 0.754039) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(111, 108, 115)",
+      "backdrop": "blur(18px) saturate(1.25)"
+    },
+    "order": {
+      "background": "color(srgb 1 0.980392 0.988235 / 0.770431) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(111, 108, 115)",
+      "backdrop": "blur(18px)"
+    },
+    "rich": {
+      "background": "color(srgb 1 0.980392 0.988235 / 0.737647) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(111, 108, 115)",
+      "backdrop": "blur(18px) saturate(1.25)"
+    }
+  },
+  "themed": {
+    "red": {
+      "background": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(228, 91, 100), rgb(132, 101, 121)) repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "linear-gradient(145deg, rgb(228, 91, 100), rgb(132, 101, 121))",
+      "color": "rgb(255, 255, 255)",
+      "backdrop": "blur(18px)"
+    },
+    "transfer": {
+      "background": "rgba(0, 0, 0, 0) linear-gradient(145deg, rgb(157, 126, 143), rgb(132, 101, 121)) repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "linear-gradient(145deg, rgb(157, 126, 143), rgb(132, 101, 121))",
+      "color": "rgb(255, 255, 255)",
+      "backdrop": "blur(18px)"
+    },
+    "takeout": {
+      "background": "color(srgb 0.976471 0.968627 0.980392 / 0.772078) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(91, 89, 97)",
+      "backdrop": "blur(18px) saturate(1.25)"
+    },
+    "order": {
+      "background": "color(srgb 0.976471 0.968627 0.980392 / 0.788863) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(91, 89, 97)",
+      "backdrop": "blur(18px)"
+    },
+    "rich": {
+      "background": "color(srgb 0.976471 0.968627 0.980392 / 0.755294) none repeat scroll 0% 0% / auto padding-box border-box",
+      "backgroundImage": "none",
+      "color": "rgb(91, 89, 97)",
+      "backdrop": "blur(18px) saturate(1.25)"
+    }
+  }
+}
+
+[PASS] _round140_gallery_wall_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "out": {
+    "has": true,
+    "ratio": 0.4875,
+    "wrapRatio": 0.4875,
+    "size": "100% 100%"
+  }
+}
+
+[PASS] _round138_appearance_spec_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "main": {
+    "title": "外观与美化",
+    "headerActions": [
+      ""
+    ],
+    "headerActionCount": 1,
+    "tabs": 6,
+    "tabRows": 1,
+    "tabTexts": [
+      "背景与壁纸",
+      "配色方案",
+      "全局材质",
+      "桌面图标",
+      "桌面小组件",
+      "自定义全局CSS"
+    ],
+    "appButtons": 19,
+    "themeCards": 9,
+    "materialCards": 8,
+    "iconButtons": 18,
+    "widgetRows": 16,
+    "refine": true,
+    "panes": 6,
+    "activePanes": 1,
+    "hasInternalScroll": false,
+    "screen": {
+      "scrollHeight": 1388,
+      "clientHeight": 800
+    },
+    "previewH": 344,
+    "reset": "恢复默认主题",
+    "footerTop": 1101,
+    "screenBottom": 844,
+    "previewText": "09:30\n17%\n微信\n相册\n小说\n示例档案\n@example\n示例短句\n示例地点\n时钟\n恢复默认主题"
+  },
+  "sub": {
+    "title": "微信背景",
+    "actions": [
+      {
+        "text": "从相册选择",
+        "w": 358,
+        "h": 48,
+        "top": 600,
+        "bottom": 648,
+        "visible": true
+      },
+      {
+        "text": "上传图片",
+        "w": 358,
+        "h": 48,
+        "top": 660,
+        "bottom": 708,
+        "visible": true
+      },
+      {
+        "text": "恢复该范围默认",
+        "w": 358,
+        "h": 48,
+        "top": 720,
+        "bottom": 768,
+        "visible": true
+      },
+      {
+        "text": "应用",
+        "w": 358,
+        "h": 48,
+        "top": 780,
+        "bottom": 828,
+        "visible": true
+      }
+    ],
+    "previewText": "09:30\n17%\n‹\n微信\n＋\n还没有会话。\n点右上角 ＋ 发起私聊或群聊。\n消息\n联系人\n朋友圈\n我的",
+    "previewH": 466,
+    "screenClass": "screen appearance-screen bs-route-enter appearance-subpage"
+  },
+  "iconEdit": {
+    "title": "编辑图标",
+    "album": true,
+    "upload": true,
+    "url": true,
+    "reset": true
+  },
+  "colorEdit": {
+    "title": "自定义配色",
+    "inputs": 3
+  },
+  "materialEdit": {
+    "title": "材质参数",
+    "sliders": 3
+  },
+  "widgetCount": 16,
+  "widgetEdit": {
+    "title": "编辑组件",
+    "bg": true,
+    "image": true,
+    "save": true
+  },
+  "cssEdit": {
+    "title": "应用全局CSS",
+    "textarea": true,
+    "apply": true
+  },
+  "card": {
+    "ok": true,
+    "bg": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mP8/x8AAusB9Wl2nGQAAAAASUVORK5CYII=\")",
+    "size": "cover, cover",
+    "id": "e1794214231439798"
+  }
+}
+
+[PASS] _round138_appearance_stability_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "beforeTheme": {
+    "active": "colors",
+    "theme": "sakura",
+    "sameHeader": true,
+    "samePreview": true,
+    "sameTabs": true
+  },
+  "afterTheme": {
+    "theme": "yanwu",
+    "active": "yanwu",
+    "sameHeader": true,
+    "samePreview": true,
+    "sameTabs": true
+  },
+  "afterSwipe": {
+    "page": "materials",
+    "active": "materials",
+    "scroll": 0,
+    "samePreview": true
+  },
+  "base": "materials",
+  "afterVertical": {
+    "page": "materials",
+    "samePreview": true
+  },
+  "bottom": {
+    "scrollTop": 588,
+    "footerTop": 513,
+    "buttons": [
+      {
+        "text": "存档此次设置",
+        "top": 513,
+        "bottom": 561,
+        "w": 332,
+        "h": 48
+      },
+      {
+        "text": "导出主题",
+        "top": 573,
+        "bottom": 621,
+        "w": 332,
+        "h": 48
+      },
+      {
+        "text": "导入主题",
+        "top": 633,
+        "bottom": 681,
+        "w": 332,
+        "h": 48
+      }
+    ],
+    "screenBottom": 844,
+    "overflow": 0
+  }
+}
+
+[PASS] _round138_app_background_upload_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "before": {
+    "key": "app:wechat",
+    "value": "",
+    "disabled": true,
+    "actions": [
+      "从相册选择",
+      "上传图片",
+      "恢复该范围默认",
+      "应用"
+    ]
+  },
+  "pending": {
+    "pending": true,
+    "disabled": false,
+    "bg": "url(\"data:image/jpeg;base64,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\") center center / cover no-repeat"
+  },
+  "applied": {
+    "value": "data:image/jpeg;base64,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",
+    "pending": ""
+  },
+  "routeApplied": {
+    "route": "wechat",
+    "bg": "linear-gradient(rgba(248, 246, 240, 0.14), rgba(248, 246, 240, 0.14)), url(\"data:image/jpeg;base64,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\")",
+    "screenWall": true
+  }
+}
+
+[PASS] _round139_all_app_preview_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "cases": [
+    {
+      "key": "wechat",
+      "fn": "screenWechat",
+      "title": "微信背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 53,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "novel",
+      "fn": "screenNovelHome",
+      "title": "小说背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 129,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "diary",
+      "fn": "screenDiary",
+      "title": "日记背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 84,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "forum",
+      "fn": "screenForum",
+      "title": "论坛背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 41,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "gallery",
+      "fn": "screenGallery",
+      "title": "相册背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 72,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "hang",
+      "fn": "screenHang",
+      "title": "查岗背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 52,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "date",
+      "fn": "screenDate",
+      "title": "约会背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 158,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "out",
+      "fn": "screenOut",
+      "title": "出门背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 69,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "shop",
+      "fn": "screenTaobao",
+      "title": "网购背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 52,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "takeout",
+      "fn": "screenTakeout",
+      "title": "外卖背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 85,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "clock",
+      "fn": "screenClock",
+      "title": "时钟背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 201,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "couple",
+      "fn": "screenCouple",
+      "title": "情侣空间背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "soul",
+      "fn": "screenSoul",
+      "title": "灵魂匹配背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 210,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "music",
+      "fn": "screenMusic",
+      "title": "音乐背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 97,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "weibo",
+      "fn": "screenWeibo",
+      "title": "微博背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 64,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "world",
+      "fn": "screenWorldBooks",
+      "title": "世界书背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 90,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "regex",
+      "fn": "screenRegexList",
+      "title": "正则背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 113,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    },
+    {
+      "key": "settings",
+      "fn": "screenSettings",
+      "title": "设置背景",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 1883,
+      "previewHeight": 466,
+      "deviceWidth": 213,
+      "deviceHeight": 460.953857421875,
+      "actions": [
+        "从相册选择",
+        "上传图片",
+        "恢复该范围默认",
+        "应用"
+      ],
+      "allActionsVisible": true
+    }
+  ],
+  "note": "每个预览函数均注入 sentinel，并确认外观页实际调用对应真实 App 渲染函数，不是手绘预览。"
+}
+
+[PASS] _round139_internal_app_pages_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "count": 37,
+  "weiboTabsOk": true,
+  "hangTabsOk": true,
+  "results": [
+    {
+      "appKey": "wechat",
+      "pageKey": "wechat-chat",
+      "label": "微信消息页",
+      "title": "微信消息页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 53,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "wechat",
+      "pageKey": "wechat-contacts",
+      "label": "微信联系人页",
+      "title": "微信联系人页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 60,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "wechat",
+      "pageKey": "wechat-moments",
+      "label": "微信朋友圈",
+      "title": "微信朋友圈",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 60,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "wechat",
+      "pageKey": "wechat-me",
+      "label": "微信我的页",
+      "title": "微信我的页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 99,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-home",
+      "label": "小说首页",
+      "title": "小说首页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 129,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-square",
+      "label": "书荒广场",
+      "title": "书荒广场",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 16,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-book",
+      "label": "书籍详情",
+      "title": "书籍详情",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 129,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-reader",
+      "label": "小说阅读器",
+      "title": "小说阅读器",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 129,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-shelf",
+      "label": "小说书架",
+      "title": "小说书架",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 44,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-me",
+      "label": "小说主页",
+      "title": "小说主页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 200,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "novel",
+      "pageKey": "novel-stats",
+      "label": "小说收益",
+      "title": "小说收益",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 79,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "diary",
+      "pageKey": "diary-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 84,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "forum",
+      "pageKey": "forum-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 41,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "gallery",
+      "pageKey": "gallery-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 72,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "hang",
+      "pageKey": "hang-phone",
+      "label": "查手机",
+      "title": "查手机",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 162,
+      "weiboSelected": "",
+      "hangSelected": "查手机",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "hang",
+      "pageKey": "hang-doing",
+      "label": "此刻动态",
+      "title": "此刻动态",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 127,
+      "weiboSelected": "",
+      "hangSelected": "此刻动态",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "date",
+      "pageKey": "date-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 158,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "out",
+      "pageKey": "out-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 69,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "shop",
+      "pageKey": "shop-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 180,
+      "weiboSelected": "",
+      "hangSelected": "逛逛",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "takeout",
+      "pageKey": "takeout-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 85,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "clock",
+      "pageKey": "clock-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 201,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-home",
+      "label": "小家",
+      "title": "小家",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-days",
+      "label": "纪念日",
+      "title": "纪念日",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-diary",
+      "label": "交换日记",
+      "title": "交换日记",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-album",
+      "label": "相簿",
+      "title": "相簿",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-tasks",
+      "label": "情侣任务",
+      "title": "情侣任务",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-kitchen",
+      "label": "一起做饭",
+      "title": "一起做饭",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "couple",
+      "pageKey": "couple-play",
+      "label": "互动",
+      "title": "互动",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 71,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": true
+    },
+    {
+      "appKey": "soul",
+      "pageKey": "soul-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 210,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "music",
+      "pageKey": "music-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 97,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "weibo",
+      "pageKey": "weibo-home",
+      "label": "微博首页",
+      "title": "微博首页",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 64,
+      "weiboSelected": "首页",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "weibo",
+      "pageKey": "weibo-discover",
+      "label": "微博发现",
+      "title": "微博发现",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 62,
+      "weiboSelected": "发现",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "weibo",
+      "pageKey": "weibo-msg",
+      "label": "微博消息",
+      "title": "微博消息",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 137,
+      "weiboSelected": "消息",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "weibo",
+      "pageKey": "weibo-me",
+      "label": "微博我的",
+      "title": "微博我的",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 181,
+      "weiboSelected": "我",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "world",
+      "pageKey": "world-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 90,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "regex",
+      "pageKey": "regex-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 113,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    },
+    {
+      "appKey": "settings",
+      "pageKey": "settings-main",
+      "label": "APP 主页面",
+      "title": "APP 主页面",
+      "sentinel": true,
+      "errorText": false,
+      "textLength": 1883,
+      "weiboSelected": "",
+      "hangSelected": "",
+      "coupleSelected": "",
+      "hasBindingPrompt": false
+    }
+  ],
+  "note": "APP内精修页面由现有真实 App 页面/Tab渲染；已移除产品中不存在的占位页；情侣空间未绑定时展示真实绑定空状态。"
+}
+
+[PASS] _round139_widget_background_all_types_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "target": {
+    "id": "e1794214231439798",
+    "pageIndex": 3
+  },
+  "before": {
+    "hasBg": false,
+    "bgImage": ""
+  },
+  "previewAfterUpload": {
+    "className": "ud-card ud-has-bg ud-list",
+    "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCADAAMADASIAAhEBAxEB/8QAHAABAAMBAQEBAQAAAAAAAAAAAAUGBwgEAwkC/8QAQBAAAQIEAwIGDwgDAQAAAAAAAAECAwQFEQYSIQezCBMiMTd1FBYXGDZBUVVWdIOUpNHSFTJhZnGBpeOhwdNC/8QAGwEBAAMBAQEBAAAAAAAAAAAAAAUHCAQGAwL/xAA8EQABAgIECAwGAgMBAAAAAAAAAQQCAwUGESESMTVRcXKRsRQVNEFTVGGSobLB0RMWgaLS8CIyQlKC4f/aAAwDAQACEQMRAD8A43AB+gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD+4UKJHjsgwYb4kR7kaxjEurlXRERE51EKFEjx2QYMN8SI9yNYxiXVyroiIic6m14FwLDw/AbUqkxkSqPbonOkui/8AlF8bvK79k0uqzlA0DPpef8OXdCn9ouZE9VXmT0Iamqak0XJw474lxJn/APM6+pUaDsrqk8yBNVeYZIy72o9YLUVY9r/dVFSzVVL63VU0unOiXOU2Y4SloCw40rMTjldfjI8dyKieTkZUt+19S4guFhVKi2kKJ8JI1zxX+C3bEKqe1opF1Eq/EWFM0N3il/iVbuc4M8zfERfqHc5wZ5m+Ii/UWkEjxHRvVoO5D7HDxy/6xH3ovcq3c5wZ5m+Ii/UO5zgzzN8RF+otIHEdG9Wg7kPsOOX/AFiPvRe5Vu5zgzzN8RF+odznBnmb4iL9RaQOI6N6tB3IfYccv+sR96L3Kt3OcGeZviIv1Duc4M8zfERfqLSBxHRvVoO5D7Djl/1iPvRe5UZnZphCPLOhQpCLLPW1osKO9XN18WZVT8NUKnWtkk3Ce6LQZ5keGjVXiJpcsS6IlkRyJZyqt+fKiafqa0Dhe1Uot3DgxSUhXPD/ABXwu2op1tKy0k2itSasXZF/LffsU5gmZaZk5p0tNy8WXjMtmhxWKxzbpdLouvMqHyN+xjg6UxTT8zVZAqMJtoMwqaKnPkf5W/5RdU8aLhM9IzdNqEWRnoD4ExCdlfDdzov+08aKmipqVDWGrs6h5ti/ylrii9FzLvxpz2WnQVPSaVlWpdGmOH1TOm7f5wAedJ4AAAAAAAAA0DZXQWz1ejVealmRJeUaiQnREW3HKqKip4lVqIv6K5q+RU2Qp2zGUhy2zyXjQ3PV01FiRno5dEVHZNPwsxP3uXEv2qTCFpRcqxL40wl+t6eFiFI1oexOqRmWrdCuCn0uXxtAAPSnnz00+nVCrVGHT6XIzM9Nxb8XLy0J0WI+yKq2a1FVbIir+iKbtQuC1W5yjsmK/ieWpU2+zuxYEt2VkRWotnPztTMiqqKjcyaXRy3Jfgv4RpkWmVLGszChR56HMrISqvZrLIkNrnuat7XckRG3tdEaqXs5UOjCrq1VxdNnUTRiuDg41sRVVcyW2pYmjH2FjVbqo3cNkdPEwsLElqoiJ22X2/U5u71D8/fxX9w71D8/fxX9x0iDyvzrTPT/AGwfiek+UaJ6H7ovyObu9Q/P38V/cO9Q/P38V/cdIgfOtM9P9sH4j5Ronofui/I5crvBarcnR3zFAxPLVWbZd3YseW7FzojVWzX53JmVURER2VNbq5LGE1CnVCk1GJT6pIzMjNwrcZLzMJ0KIy6IqXa5EVLoqL+iofoyc58KDCNMhUym41loUKBPRJlJCaVjNZlFhucxzlva7Uhq29rqjkS9moh6qqtcXTl0jR8uFhYlsRFRcy2WJYujH2Hm6yVUbt2yumaYODjS1VRU7Lb7fqc0gAtErkGYbWaC1YEtiCVlmI5HcVNRGIt3ItsjnW0sllbdddWprpbTyDxlKQ53ANWgxXPRrZZ0ZFaut2ctP2u1L/gQlYmEL6jp0qJL7FVNKXp7aFUl6BexM38qai3Woi6FuX30nO4AM8F7gAAAAAAAAG97OejOm+13ry0lW2c9GdN9rvXlpNHUHk1tqQeVCg6Z5e414vMoABKEada8F3ogqXXEXcQTbTEuC70QVLriLuIJtpnqtOVnGsXnVzJkjVAAIAmwAAAYlwouiCm9cQtxGNtMS4UXRBTeuIW4jE/VbKzfWISseTJ+g5KABoUowEVibwJrHqMbduJUisTeBNY9RjbtxyvuTTNVdx0suUS9ZN5zgADM5oUAAAAAAAAA3vZz0Z032u9eWkq2znozpvtd68tJo6g8mttSDyoUHTPL3GvF5lAAJQjTrXgu9EFS64i7iCbaYlwXeiCpdcRdxBNtM9Vpys41i86uZMkaoABAE2AAADEuFF0QU3riFuIxtpiXCi6IKb1xC3EYn6rZWb6xCVjyZP0HJQANClGAisTeBNY9RjbtxKkVibwJrHqMbduOV9yaZqruOllyiXrJvOcAAZnNCgAAAAAAAAG97OejOm+13ry0lW2c9GdN9rvXlpNHUHk1tqQeVCg6Z5e414vMoABKEada8F3ogqXXEXcQTbTEuC70QVLriLuIJtpnqtOVnGsXnVzJkjVAAIAmwAAAYlwouiCm9cQtxGNtMS4UXRBTeuIW4jE/VbKzfWISseTJ+g5KABoUowEVibwJrHqMbduJUisTeBNY9RjbtxyvuTTNVdx0suUS9ZN5zgADM5oUAAAAAAAAA3vZz0Z032u9eWkq2znozpvtd68tJo6g8mttSDyoUHTPL3GvF5lAAJQjTrXgu9EFS64i7iCbaYlwXeiCpdcRdxBNtM9Vpys41i86uZMkaoABAE2AAADEuFF0QU3riFuIxtpiXCi6IKb1xC3EYn6rZWb6xCVjyZP0HJQANClGAisTeBNY9RjbtxKkVibwJrHqMbduOV9yaZqruOllyiXrJvOcAAZnNCgAAAAAAAAG7bNJmDH2cykKE/M+A+JDiJZUyuV6ut+Ojmrp5S3GS7JK06FUJqgxXsSHGasxBzORFzpZHIiWu5VbZefRGLpqprRoCqr2F3RcmKHHCmCumG7dYv1KOrK0ibUlNRf8lwk/6v32oAAeiII6j4LVdp78IVnDXGZZ+DOdnZHK1M8J7GMu1L3XK6HytLJnZrqb+fnfQK/VsL4il67QpvsWfl83FRuLa/LmarF5LkVF5LlTVPGdI0LhS4ffR2dsuHqlAn22a/7ORkWE/kpdyZ3tVt3ZuTyrJblKVLW2qTyY8idtIcOGO9UTGi+qL+9tnVYrO1ltYWrqLBihxLzKnv8AujfzJNt21HEGzb7C+wpOmzHZ/ZHG9mw3vy8XxdsuV7bffW97+Ije+iwB5nxJ7vA/7FbxZtk2J447D7aMJYkn+w8/EaNhZM+XN9yYbe+RvP5CGoirzyQ7gmPWkUctLbUREvuWznTnsXGS1KU61nNY5bRzDDMWyxbVuvS3mXmt5jTdjWPaxtEwJN1qtS0jAmIM++Va2TY5rFakOG5FVHOct7vXx+Q0Q53wvtz2PYLo8Sl4awviSRlIsZZh8PKyLd6ta1Vu+Oq8zW6XtoTffRYA8z4k93gf9j5UlVx9OcxzGrWKGWq3JYlybV3n0YU8zlN4IHDmGKNEvW1b12IbaYBwpa7T2YQo2GuMzT8ac7OyNVq5ITGPZdyXumZ0Tk6WXI/XQV3hS4fZR39rWHqlHn3Xaz7RRkKEzkrZy5HuV1nZeTybpflIc3V+v1bFGIpiu12b7Kn5jLxsbi2szZWoxOS1EROS1E0TxE9VKqTyW8hdu4cCGC9EXGq+iJ+9kLWeszWY1iatYsKKLGvMie/7pjQAW0ViCFxdMwZXAlXix35GLKxIaLZV5T0ytTTyq5EJozrazWnS1FlqJBezNNu4yMiORVRjVTKipa6Irtb6fcVNdSIp97Czo+dOi/1VE0rcniuwlaEaRO30qVDnRV0JevghkAAM6F8gAAAAAAAAH1lpmNJzsGbln5I0F7YkN1kXK5Fui2XTnQ3nB2MZTFNPyuRkCowm3jS6Loqc2dnlb/lF0XxKuAnokZ6bptQhT0jHfAmITszIjedF/wBp4lRdFTQ9FV2sM2h51qXy4v7J6p2p44lzpA09QUqlZNi3Rp/VfRexfDf04DMKDtZhqyBK4gk3tcjUa+dgrdHLe2ZzLJZLarZV1TRNbJc5TGWFp2AsWDXZJrUdltHicSt/0fZba8/MXKwrFRz2FIpU5LcyrYuxfS1O0qZ7QL9nEqTZS2Z0S1Nqet5OAiu2bDfpBSve4fzHbNhv0gpXvcP5kjw5t0kO1Dh4G46NdikqCK7ZsN+kFK97h/Mds2G/SCle9w/mOHNukh2oOBuOjXYpKgiu2bDfpBSve4fzHbNhv0gpXvcP5jhzbpIdqDgbjo12KSoIrtmw36QUr3uH8x2zYb9IKV73D+Y4c26SHag4G46NdikqCFmcXYYlZZ0eLXpBzG2ukKMkV2q20a26r+yFUrW1mnSz3QaJJvnnZVtHiqsOGi2Syo22ZyXVbouXm0XW5xPafo9nDhTp0OhFtXYlq+h2NKEfO4sGVKXSqWJtWxC14lxLIYYpCzc2ueK+7YEu1bOiu/0iaXXxfiqoi4FVqpN1qtTFUnlYseO67sjbIiIiIiInkRERPLprcVSrVGtVBZ6qTT5iOrUbmciIiInMiIlkRP08aqvjPEU5WWssymJiQwpgyocSc9ude3dtVbVq9V6XRUvCivmLjX0Ts3gAHlz0gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/9k=\")",
+    "style": "",
+    "toast": "背景图已选择，点保存应用"
+  },
+  "saved": {
+    "stored": true,
+    "length": 5619,
+    "subpage": null,
+    "homePage": 3
+  },
+  "afterReload": {
+    "stored": true,
+    "length": 5619
+  },
+  "homeCard": {
+    "found": true,
+    "hasBg": true,
+    "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/jpeg;base64,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\")",
+    "direct": "none"
+  },
+  "all": [
+    {
+      "type": "photo",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": ""
+    },
+    {
+      "type": "photoSmall",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": ""
+    },
+    {
+      "type": "stickerCollage",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例 1\n示例 2\n示例 3"
+    },
+    {
+      "type": "collage",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": ""
+    },
+    {
+      "type": "musicPlayer",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "播放中\n示例\n示例内容\n♫\n00:00\n-2:16"
+    },
+    {
+      "type": "profileCard",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例\n@example\n示例内容"
+    },
+    {
+      "type": "folderPhoto",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": ""
+    },
+    {
+      "type": "monthCalendar",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例\nS\nM\nT\nW\nT\nF\nS\n1\n2\n3\n4\n5\n6\n7\n8\n9\n10\n11\n12\n13\n14\n"
+    },
+    {
+      "type": "clock",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "16:41\n示例 · 示例内容\n一\n二\n三\n四\n五\n六\n日"
+    },
+    {
+      "type": "bubble",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "🐱\n示例\n示例内容"
+    },
+    {
+      "type": "list",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例\n示例内容"
+    },
+    {
+      "type": "books",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例\n示例内容"
+    },
+    {
+      "type": "quote",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "“\n示例\n示例内容"
+    },
+    {
+      "type": "note",
+      "found": true,
+      "hasBg": true,
+      "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
+      "direct": "none",
+      "text": "示例\n示例内容"
+    }
+  ],
+  "directRender": [
+    {
+      "type": "photo",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "photoSmall",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "stickerCollage",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "collage",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "musicPlayer",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "profileCard",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "folderPhoto",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "monthCalendar",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "clock",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "bubble",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "list",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "books",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "quote",
+      "hasClass": true,
+      "hasLayer": true
+    },
+    {
+      "type": "note",
+      "hasClass": true,
+      "hasLayer": true
+    }
+  ]
+}
+
+[PASS] _round139_widget_add_live_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "before": {
+    "rows": 16,
+    "route": "appearance",
+    "scrollTop": 0,
+    "active": "widgets"
+  },
+  "after": {
+    "rows": 17,
+    "route": "appearance",
+    "active": "widgets",
+    "newRow": true,
+    "layoutNote": 1
+  },
+  "opened": {
+    "title": "编辑组件",
+    "hasPreview": true,
+    "hasBg": true
+  }
+}
+
+[PASS] _round131_full_page_regression.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "summary": {
+    "light": {
+      "overflow": true,
+      "back": true,
+      "header": true,
+      "clipped": true,
+      "runtime": true
+    },
+    "dark": {
+      "overflow": true,
+      "back": true,
+      "header": true,
+      "clipped": true,
+      "runtime": true
+    }
+  }
+}
+
+[PASS] _round131_card_complete_test.cjs exit=0
+{
+  "ok": true,
+  "errors": [],
+  "controls": {
+    "shape": "rounded",
+    "pattern": "none",
+    "x": "0",
+    "y": "0",
+    "w": "4",
+    "h": "4",
+    "bg": "更换背景图"
+  },
+  "after": {
+    "stored": {
+      "shape": "bubble",
+      "pattern": "dots",
+      "x": 1,
+      "y": 0,
+      "w": 2,
+      "h": 4,
+      "bg": true
+    },
+    "attrs": {
+      "shape": "bubble",
+      "pattern": "dots",
+      "bg": true
+    },
+    "cardBg": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/jpeg;base64,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\")"
+  },
+  "widgetManager": {
+    "active": "widgets",
+    "editBtns": 16,
+    "addBtns": 2
+  }
+}
+
+[PASS] _round124_modules_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:37.238Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "persona_header": true,
+    "persona_edit_single_back": true,
+    "assets_header": true,
+    "stickers_header": true,
+    "favorites_header": true,
+    "legacy_card_bill": true,
+    "card_edit_actions": true,
+    "holder_gift": true,
+    "assets_persona_scope": true,
+    "stickers_global": true,
+    "favorites_global": true,
+    "status_bar": true,
+    "no_errors": true
+  },
+  "persona": {
+    "title": "用户人设库",
+    "back": 1,
+    "actions": [
+      "新增人设"
+    ],
+    "text": "‹\n用户人设库\n用户甲 启用中\n用户乙"
+  },
+  "personaEdit": {
+    "title": "编辑人设",
+    "back": 1,
+    "actions": [],
+    "text": "‹\n编辑人设\n上传头像\n世界观\n保存取消启用删除这个人设"
+  },
+  "assets1": {
+    "title": "资产",
+    "back": 1,
+    "actions": [
+      "加一项资产"
+    ],
+    "text": "‹\n资产\n甲房产\n房产 · 持有中\n¥1000.00\n编辑\n删除"
+  },
+  "assets2": {
+    "title": "资产",
+    "back": 1,
+    "actions": [
+      "加一项资产"
+    ],
+    "text": "‹\n资产\n乙车辆\n车辆 · 持有中\n¥2000.00\n编辑\n删除"
+  },
+  "stickers1": {
+    "title": "表情包",
+    "back": 1,
+    "actions": [
+      "新建分组"
+    ],
+    "text": "‹\n表情包\n默认\n重命名分组\n删除分组\n上移\n下移\n添加表情"
+  },
+  "stickers2": {
+    "title": "表情包",
+    "back": 1,
+    "actions": [
+      "新建分组"
+    ],
+    "text": "‹\n表情包\n默认\n重命名分组\n删除分组\n上移\n下移\n添加表情"
+  },
+  "favs1": {
+    "title": "收藏",
+    "back": 1,
+    "actions": [],
+    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 16:41\n收藏一条"
+  },
+  "favs2": {
+    "title": "收藏",
+    "back": 1,
+    "actions": [],
+    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 16:41\n收藏一条"
+  },
+  "cardMain": {
+    "title": "卡包",
+    "back": 1,
+    "actions": [
+      "记一笔",
+      "添加银行卡"
+    ],
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n16:41\n-¥18.00"
+  },
+  "cardHistory": {
+    "card": 1,
+    "holder": "用户甲",
+    "panel": true,
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n16:41\n-¥18.00"
+  },
+  "editBefore": {
+    "options": [
+      "用户人设 · 用户甲",
+      "角色人设 · 角色一"
+    ],
+    "privacyBelow": true,
+    "back": 1
+  },
+  "holderSaved": {
+    "holderType": "char",
+    "holderId": "c1",
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n角色一 · 赠予\n账单\n旧卡账单\n16:41\n-¥18.00"
+  },
+  "globalAfter": {
+    "stickers": 1,
+    "favorites": 1,
+    "status": true,
+    "statusTime": "09:30",
+    "statusIcons": 2
+  },
+  "errors": []
+}
+
+[PASS] _round124_wallet_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:41.945Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "wallet_headers": true,
+    "wallet_clean": true,
+    "currency_picker": true,
+    "currency_added": true,
+    "account_layout": true,
+    "transfer_updates": true,
+    "bills_page": true,
+    "bill_inline": true,
+    "bill_record": true,
+    "persona_scoped": true,
+    "chat_fixed": true,
+    "new_chat_requires_both": true,
+    "explicit_rebind": true,
+    "moments_follow_active": true,
+    "no_errors": true
+  },
+  "wallet": {
+    "text": "‹\n钱包\n¥\n人民币\nCNY\n¥ 100.00\n收入 ¥ 200.00\n支出 ¥ 0.00",
+    "actions": [
+      {
+        "id": "wlEntry",
+        "label": "记一笔",
+        "h": 44
+      },
+      {
+        "id": "wlAddCurrency",
+        "label": "添加币种",
+        "h": 44
+      }
+    ],
+    "cards": [
+      "CNY"
+    ],
+    "back": 1
+  },
+  "picker": {
+    "text": "‹\n添加币种\n¥\n人民币\nCNY\n已添加\n$\n美元\nUSD\n£\n英镑\nGBP\n€\n欧元\nEUR\n¥\n日元\nJPY\nHK$\n港币\nHKD\n₩\n韩元\nKRW\nA$\n澳元\nAUD\nC$\n加元\nCAD\nS$\n新加坡元\nSGD",
+    "rows": [
+      "CNY",
+      "USD",
+      "GBP",
+      "EUR",
+      "JPY",
+      "HKD",
+      "KRW",
+      "AUD",
+      "CAD",
+      "SGD"
+    ],
+    "disabled": [
+      "CNY"
+    ]
+  },
+  "afterAdd": {
+    "cards": [
+      "CNY",
+      "USD"
+    ],
+    "wallet": [
+      "CNY",
+      "USD"
+    ]
+  },
+  "account": {
+    "text": "‹\n美元\n账单\n$\n我的零钱\n$ 0.00\n转入\n转出",
+    "hero": "$ 0.00",
+    "label": "我的零钱",
+    "buttons": [
+      "转入",
+      "转出"
+    ],
+    "back": 1
+  },
+  "afterTransfer": {
+    "hero": "$ 50.00",
+    "usd": 50,
+    "cny": 100
+  },
+  "bills": {
+    "text": "‹\n账单\n美元零钱\n16:41 · 美元零钱\n+$ 50.00",
+    "addIcon": true,
+    "back": 1
+  },
+  "billDetail": {
+    "text": "‹\n账单\n美元零钱\n16:41 · 美元零钱\n+$ 50.00\n类型\n收入\n金额\n$ 50.00\n时间\n16:41\n备注\n美元零钱",
+    "detail": true
+  },
+  "billsAfter": {
+    "count": 2,
+    "text": "‹\n账单\n咖啡\n16:41 · 美元零钱\n-$ 8.00\n美元零钱\n16:41 · 美元零钱\n+$ 50.00"
+  },
+  "p2wallet": {
+    "cards": [
+      "CNY"
+    ],
+    "text": "‹\n钱包\n¥\n人民币\nCNY\n¥ 20.00\n收入 ¥ 0.00\n支出 ¥ 0.00",
+    "persona": "p2"
+  },
+  "chat": {
+    "id": "mwdau0noi5ji",
+    "persona": "p1",
+    "char": [
+      "c1"
+    ],
+    "active": "p2",
+    "wb": "p2"
+  },
+  "newChatUi": {
+    "hasUser": true,
+    "hasChar": true,
+    "users": [
+      "用户甲",
+      "用户乙"
+    ],
+    "chars": [
+      "选择角色人设",
+      "角色一",
+      "角色二"
+    ]
+  },
+  "rebind": {
+    "persona": "p1",
+    "chars": [
+      "c2"
+    ],
+    "mem": {
+      "ts": 0,
+      "items": []
+    }
+  },
+  "personaMoment": {
+    "a": "p1",
+    "b": "p2"
+  },
+  "banned": [
+    "转入零钱通，能赚又能花",
+    "常见问题",
+    "充值",
+    "提现"
+  ],
+  "errors": []
+}
+
+[PASS] _round124_cards_gesture_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:48.479Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "same_height": true,
+    "no_inline_actions": true,
+    "swipe_up_next": true,
+    "swipe_down_previous": true,
+    "drag_changes_order": true,
+    "drag_keeps_main": true,
+    "click_opens_bill": true,
+    "single_back": true,
+    "more_center_menu": true,
+    "outside_returns": true,
+    "no_errors": true
+  },
+  "initial": {
+    "selected": "a",
+    "order": [
+      "a",
+      "b",
+      "c"
+    ],
+    "heights": [
+      208,
+      208,
+      208
+    ],
+    "banned": false
+  },
+  "swipeUp": {
+    "selected": "b",
+    "order": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  "swipeDown": {
+    "selected": "a",
+    "order": [
+      "a",
+      "b",
+      "c"
+    ]
+  },
+  "dragDown": {
+    "selected": "a",
+    "order": [
+      "b",
+      "c",
+      "a"
+    ],
+    "panel": false
+  },
+  "clickBill": {
+    "selected": "b",
+    "panel": true,
+    "text": "‹\n卡包\n乙银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n角色一 · 赠予\n丙银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n用户甲\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n暂无账单",
+    "backCount": 1
+  },
+  "menu": {
+    "text": "编辑\n解绑",
+    "center": true,
+    "box": {
+      "x": 40,
+      "y": 380,
+      "width": 310,
+      "height": 128,
+      "top": 380,
+      "right": 350,
+      "bottom": 508,
+      "left": 40
+    }
+  },
+  "outside": {
+    "cardPage": true,
+    "panel": true
+  },
+  "errors": []
+}
+
+[PASS] _round124_newchat_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:51.609Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "private_created": true,
+    "group_created": true,
+    "no_errors": true
+  },
+  "privateChat": {
+    "route": "chatroom",
+    "id": "mwdau7nz7r71",
+    "persona": "p2",
+    "chars": [
+      "c1"
+    ],
+    "members": [
+      "c1"
+    ],
+    "status": "‹ 微信\n角色一\n还没有消息，说点什么吧。\n＋"
+  },
+  "group": {
+    "route": "chatroom",
+    "persona": "p1",
+    "chars": [
+      "c1",
+      "c2"
+    ],
+    "members": [
+      "c1",
+      "c2"
+    ],
+    "name": "测试群",
+    "msgs": 0
+  },
+  "errors": []
+}
+
+[PASS] _round124_back_audit.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:56.498Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "opened": 22,
+    "total": 22,
+    "noDuplicateBacks": true,
+    "singleOrZeroBacks": true
+  },
+  "bad": [],
+  "missing": [
+    "桌面图标",
+    "会话菜单",
+    "Token 用量",
+    "微博身份",
+    "微博钱包"
+  ],
+  "results": [
+    {
+      "name": "桌面图标",
+      "fn": "sheetHomeApps",
+      "opened": true,
+      "error": null,
+      "count": 0,
+      "labels": [],
+      "sheetClass": "sheet on",
+      "globalDisplay": "none",
+      "title": "桌面图标"
+    },
+    {
+      "name": "桌面组件",
+      "fn": "sheetWidgets",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on fullsheet",
+      "globalDisplay": "flex",
+      "title": "桌面小组件"
+    },
+    {
+      "name": "用户人设库",
+      "fn": "sheetPersona",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "用户人设库"
+    },
+    {
+      "name": "编辑人设",
+      "fn": "sheetPersonaEdit",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "编辑人设"
+    },
+    {
+      "name": "钱包",
+      "fn": "sheetWallet",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "钱包"
+    },
+    {
+      "name": "币种管理",
+      "fn": "sheetCurrencyAccount",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "人民币"
+    },
+    {
+      "name": "币种账单",
+      "fn": "sheetWalletBills",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "账单"
+    },
+    {
+      "name": "卡包",
+      "fn": "sheetCards",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "卡包"
+    },
+    {
+      "name": "编辑银行卡",
+      "fn": "sheetCardEdit",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "编辑银行卡"
+    },
+    {
+      "name": "资产",
+      "fn": "sheetAssets",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "资产"
+    },
+    {
+      "name": "编辑资产",
+      "fn": "sheetAssetEdit",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "编辑资产"
+    },
+    {
+      "name": "表情包",
+      "fn": "sheetStickers",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "表情包"
+    },
+    {
+      "name": "表情详情",
+      "fn": "sheetStickerOne",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "返回"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "表情包"
+    },
+    {
+      "name": "添加表情",
+      "fn": "sheetStickerAdd",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "返回"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "添加表情"
+    },
+    {
+      "name": "收藏",
+      "fn": "sheetFavs",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "收藏"
+    },
+    {
+      "name": "会话菜单",
+      "fn": "sheetChatMenu",
+      "opened": true,
+      "error": null,
+      "count": 0,
+      "labels": [],
+      "sheetClass": "sheet on",
+      "globalDisplay": "none",
+      "title": "角色一"
+    },
+    {
+      "name": "记忆中心",
+      "fn": "sheetChatMemory",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹ 返回"
+      ],
+      "sheetClass": "sheet on has-sheet-back fullsheet",
+      "globalDisplay": "none",
+      "title": "记忆中心"
+    },
+    {
+      "name": "Token 用量",
+      "fn": "sheetChatUsage",
+      "opened": true,
+      "error": null,
+      "count": 0,
+      "labels": [],
+      "sheetClass": "sheet on",
+      "globalDisplay": "none",
+      "title": "Token 用量"
+    },
+    {
+      "name": "隐藏内容",
+      "fn": "sheetHiddenContent",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on fullsheet",
+      "globalDisplay": "flex",
+      "title": "已隐藏内容"
+    },
+    {
+      "name": "图片接口",
+      "fn": "sheetImageApiSettings",
+      "opened": true,
+      "error": null,
+      "count": 1,
+      "labels": [
+        "‹"
+      ],
+      "sheetClass": "sheet on fullsheet",
+      "globalDisplay": "flex",
+      "title": "图片生成接口"
+    },
+    {
+      "name": "微博身份",
+      "fn": "sheetWbPersona",
+      "opened": true,
+      "error": null,
+      "count": 0,
+      "labels": [],
+      "sheetClass": "sheet on",
+      "globalDisplay": "none",
+      "title": "微博主身份"
+    },
+    {
+      "name": "微博钱包",
+      "fn": "sheetWbWallet",
+      "opened": true,
+      "error": null,
+      "count": 0,
+      "labels": [],
+      "sheetClass": "sheet on",
+      "globalDisplay": "none",
+      "title": "我的钱包"
+    }
+  ],
+  "errors": []
+}
+
+[PASS] _round123_financial_export_audit.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:41:58.617Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "wallet_balance_finite": true,
+    "wallet_history_finite": true,
+    "asset_finite": true,
+    "asset_total_finite": true,
+    "totals_finite": true,
+    "export_finite": true,
+    "export_no_infinity": true,
+    "export_no_null_money": true,
+    "no_errors": true
+  },
+  "evidence": {
+    "balance": 0,
+    "amount": 0,
+    "asset": 0,
+    "total": 0,
+    "totals": {
+      "income": 0,
+      "expense": 0
+    },
+    "snapshotBalance": 0,
+    "snapshotAmount": 0,
+    "snapshotAsset": 0,
+    "hasInfinity": false,
+    "hasNullMoney": false
+  },
+  "errors": []
+}
+
+[PASS] _round123_cards_responsive_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:02.135Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "no_sheet_overflow": true,
+    "no_stack_overflow": true,
+    "cards_fit": true,
+    "buttons_44": true,
+    "dark_mode": true,
+    "no_errors": true
+  },
+  "evidence": {
+    "sheetOverflow": 0,
+    "stackOverflow": 0,
+    "cardWidths": [
+      296,
+      296,
+      296
+    ],
+    "buttons": [
+      {
+        "text": "‹",
+        "h": 44
+      },
+      {
+        "text": "",
+        "h": 44
+      },
+      {
+        "text": "",
+        "h": 44
+      },
+      {
+        "text": "",
+        "h": 44
+      },
+      {
+        "text": "",
+        "h": 44
+      },
+      {
+        "text": "",
+        "h": 44
+      },
+      {
+        "text": "咖啡\n16:42\n-¥2",
+        "h": 56
+      }
+    ],
+    "dark": true,
+    "text": "‹\n卡包\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n林序秋\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n林序秋\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n林序秋\n账单\n咖啡\n16:42\n-¥20.00"
+  },
+  "artifact": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-cards-320-dark.png",
+  "errors": []
+}
+
+[PASS] _qa_round122_persistence_audit_2026-11-07.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:06.371Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "wallet_persisted": true,
+    "cards_persisted": true,
+    "assets_persisted": true,
+    "stickers_persisted": true,
+    "switch_persona_keeps_chat": true,
+    "no_errors": true
+  },
+  "initial": {
+    "balance": 125,
+    "cards": [
+      {
+        "bank": "持久银行",
+        "no": "6222 0000 0000 1234",
+        "order": 0
+      }
+    ],
+    "assets": [
+      {
+        "name": "持久资产",
+        "value": 12345
+      }
+    ],
+    "stickers": 1,
+    "chatPersona": "pp1"
+  },
+  "after": {
+    "active": "pp1",
+    "balance": 125,
+    "cards": [
+      {
+        "bank": "持久银行",
+        "no": "6222 0000 0000 1234",
+        "order": 0
+      }
+    ],
+    "assets": [
+      {
+        "name": "持久资产",
+        "value": 12345
+      }
+    ],
+    "stickers": 1,
+    "chatPersona": "pp1"
+  },
+  "switched": {
+    "active": "pp2",
+    "balance": 200,
+    "assets": 0,
+    "chatPersona": "pp1"
+  },
+  "errors": []
+}
+
+[PASS] _round141_card_safety_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:08.347Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "positiveRedpacket": true,
+    "positiveTransfer": true,
+    "positiveTakeout": true,
+    "positiveOrder": true,
+    "pastTransfer": true,
+    "pastRedpacket": true,
+    "arrivedTakeout": true,
+    "thirdPartyRedpacket": true,
+    "alreadyTakeout": true,
+    "negatedTransfer": true,
+    "zeroRedpacket": true,
+    "zeroTransfer": true,
+    "negativeTakeout": true,
+    "nanOrder": true,
+    "explicitInvalidFallback": true,
+    "invalidTakeoutNoEntity": true,
+    "invalidRedpacketNoMessage": true,
+    "noRuntimeErrors": true
+  },
+  "result": {
+    "positiveRedpacket": {
+      "kind": "redpacket",
+      "amount": 52
+    },
+    "positiveTransfer": {
+      "kind": "transfer",
+      "amount": 200
+    },
+    "positiveTakeout": {
+      "kind": "takeout",
+      "amount": 68,
+      "merchant": "甜品店",
+      "items": [
+        "草莓蛋糕",
+        "热奶茶"
+      ]
+    },
+    "positiveOrder": {
+      "kind": "order",
+      "amount": 39,
+      "merchant": "商城",
+      "items": [
+        "手机壳"
+      ],
+      "status": "已发货"
+    },
+    "pastTransfer": null,
+    "pastRedpacket": null,
+    "arrivedTakeout": null,
+    "thirdPartyRedpacket": null,
+    "alreadyTakeout": null,
+    "negatedTransfer": null,
+    "zeroRedpacket": null,
+    "zeroTransfer": null,
+    "negativeTakeout": null,
+    "nanOrder": null,
+    "explicitInvalidFallback": [
+      {
+        "text": "[红包] 恭喜发财",
+        "kind": "auto",
+        "voiceSafe": true
+      }
+    ],
+    "invalidTakeoutPush": {
+      "returned": null,
+      "ordersBefore": 0,
+      "ordersAfter": 0
+    },
+    "invalidRedpacketPush": {
+      "returned": null
+    }
+  },
+  "errors": []
+}
+
+[PASS] _round142_card_intent_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:10.761Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "orderAmount": true,
+    "takeoutAmount": true,
+    "tailAmount": true,
+    "commaAmount": true,
+    "redPositive": true,
+    "transferPositive": true,
+    "takeoutPositive": true,
+    "takeoutEtaPositive": true,
+    "orderPositive": true,
+    "futureBlocked": true,
+    "intentBlocked": true,
+    "conditionBlocked": true,
+    "askBlocked": true,
+    "negationBlocked": true,
+    "whoBlocked": true,
+    "pastBlocked": true,
+    "arrivedBlocked": true,
+    "noErrors": true
+  },
+  "result": {
+    "amounts": {
+      "order": 39,
+      "takeout": 68,
+      "tail": 200,
+      "comma": 1000,
+      "red": 52,
+      "transfer": 200
+    },
+    "positiveRed": {
+      "raw": "我给你发52元红包，收下买奶茶",
+      "kind": "redpacket",
+      "text": "52 我给你发52元红包，收下买奶茶",
+      "amount": 52,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "redpacket"
+      ],
+      "msgAmounts": [
+        52
+      ]
+    },
+    "positiveTransfer": {
+      "raw": "给你转200元，收下",
+      "kind": "transfer",
+      "text": "200 给你转200元，收下",
+      "amount": 200,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "transfer"
+      ],
+      "msgAmounts": [
+        200
+      ]
+    },
+    "positiveTakeout": {
+      "raw": "我给你点了外卖68元，不要香菜",
+      "kind": "takeout",
+      "text": "外卖 外卖68元 68 我给你点了外卖68元，不要香菜",
+      "amount": 68,
+      "ordersBefore": 0,
+      "ordersAfter": 1,
+      "msgTypes": [
+        "takeout"
+      ],
+      "msgAmounts": [
+        null
+      ]
+    },
+    "positiveTakeoutEta": {
+      "raw": "我给你点了一份外卖，预计20分钟到，68元",
+      "kind": "takeout",
+      "text": "外卖 外卖 68 我给你点了一份外卖，预计20分钟到，68元",
+      "amount": 68,
+      "ordersBefore": 0,
+      "ordersAfter": 1,
+      "msgTypes": [
+        "takeout"
+      ],
+      "msgAmounts": [
+        null
+      ]
+    },
+    "positiveOrder": {
+      "raw": "我给你下单了，订单号BS106，手机壳39元",
+      "kind": "order",
+      "text": "订单 订单商品 39 我给你下单了，订单号BS106，手机壳39元",
+      "amount": 39,
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [
+        "order"
+      ],
+      "msgAmounts": [
+        39
+      ]
+    },
+    "negativeFuture": {
+      "raw": "明天给你发200元红包",
+      "kind": "auto",
+      "text": "明天给你发200元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeIntent": {
+      "raw": "我想给你发200元红包",
+      "kind": "auto",
+      "text": "我想给你发200元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeCondition": {
+      "raw": "如果我现在给你转账200元，你会收吗",
+      "kind": "auto",
+      "text": "如果我现在给你转账200元，你会收吗",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeAsk": {
+      "raw": "我给你点份外卖50元，你要吗",
+      "kind": "auto",
+      "text": "我给你点份外卖50元，你要吗",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeNegation": {
+      "raw": "没给你发52元红包",
+      "kind": "auto",
+      "text": "没给你发52元红包",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeWho": {
+      "raw": "谁给你发52元红包了",
+      "kind": "auto",
+      "text": "谁给你发52元红包了",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativePast": {
+      "raw": "你之前那笔转账200元我收下了，别再转啦",
+      "kind": "auto",
+      "text": "你之前那笔转账200元我收下了，别再转啦",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    },
+    "negativeArrived": {
+      "raw": "外卖到了，我先吃啦",
+      "kind": "auto",
+      "text": "外卖到了，我先吃啦",
+      "ordersBefore": 0,
+      "ordersAfter": 0,
+      "msgTypes": [],
+      "msgAmounts": []
+    }
+  },
+  "errors": []
+}
+
+[PASS] _round143_card_context_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:14.190Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "transferFee": true,
+    "redCoupon": true,
+    "redNote": true,
+    "takeoutFee": true,
+    "orderShipping": true,
+    "politeRed": true,
+    "noThanksRed": true,
+    "orderOral": true,
+    "redFutureNote": true,
+    "takeoutFutureNote": true,
+    "futureSoon": true,
+    "futureLater": true,
+    "futureNextWeek": true,
+    "futureAfterWork": true,
+    "futureNow": true,
+    "futureAsk": true,
+    "noErrors": true
+  },
+  "result": {
+    "transferFee": {
+      "kind": "transfer",
+      "amount": 200,
+      "orders": 0,
+      "types": [
+        "transfer"
+      ],
+      "texts": [
+        "200 我给你转200元，手续费2元"
+      ]
+    },
+    "redCoupon": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我给你发52元红包，另外有8元优惠券"
+      ]
+    },
+    "redNote": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我发52元红包，备注100"
+      ]
+    },
+    "takeoutFee": {
+      "kind": "takeout",
+      "amount": 68,
+      "orders": 1,
+      "types": [
+        "takeout"
+      ],
+      "texts": [
+        "我给你点了一份外卖68元，配送费3元"
+      ]
+    },
+    "orderShipping": {
+      "kind": "order",
+      "amount": 39,
+      "orders": 0,
+      "types": [
+        "order"
+      ],
+      "texts": [
+        "订单 订单商品 39 手机壳39元，运费3元，我给你下单了"
+      ]
+    },
+    "politeRed": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 不好意思，给你发52元红包"
+      ]
+    },
+    "noThanksRed": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 不用客气，给你发52元红包"
+      ]
+    },
+    "orderOral": {
+      "kind": "order",
+      "amount": 39,
+      "orders": 0,
+      "types": [
+        "order"
+      ],
+      "texts": [
+        "订单 订单商品 39 我给你下单了，手机壳39元"
+      ]
+    },
+    "redFutureNote": {
+      "kind": "redpacket",
+      "amount": 52,
+      "orders": 0,
+      "types": [
+        "redpacket"
+      ],
+      "texts": [
+        "52 我给你发52元红包，下次请我喝奶茶"
+      ]
+    },
+    "takeoutFutureNote": {
+      "kind": "takeout",
+      "amount": 68,
+      "orders": 1,
+      "types": [
+        "takeout"
+      ],
+      "texts": [
+        "我给你点了外卖68元，明天送到，不要香菜"
+      ]
+    },
+    "futureSoon": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureLater": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureNextWeek": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureAfterWork": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureNow": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    },
+    "futureAsk": {
+      "kind": "auto",
+      "orders": 0,
+      "types": [],
+      "texts": []
+    }
+  },
+  "errors": []
+}
+
+[PASS] _round144_payment_flow_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:17.037Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "userRedpacketSystem": true,
+    "userRedpacketOpened": true,
+    "userTransferReceiptCard": true,
+    "userTransferSourceClaimed": true,
+    "charRedpacketSystem": true,
+    "charRedpacketOpened": true,
+    "charTransferReceiptCard": true,
+    "charTransferSourceClaimed": true,
+    "noErrors": true
+  },
+  "result": {
+    "userRedpacket": {
+      "texts": [
+        {
+          "role": "me",
+          "type": "redpacket",
+          "note": "测试红包",
+          "amount": 52,
+          "opened": true,
+          "claimed": false
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "text": "阿梨领取了你的红包",
+          "opened": false,
+          "claimed": false
+        }
+      ],
+      "sys": [
+        "阿梨领取了你的红包"
+      ]
+    },
+    "userTransfer": {
+      "texts": [
+        {
+          "role": "me",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        },
+        {
+          "role": "ta",
+          "type": "transfer",
+          "text": "转账已收款",
+          "note": "已收款",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        }
+      ],
+      "sys": []
+    },
+    "charRedpacket": {
+      "texts": [
+        {
+          "role": "ta",
+          "type": "redpacket",
+          "text": "给你小红包",
+          "note": "给你小红包",
+          "amount": 8.88,
+          "opened": true,
+          "claimed": false
+        },
+        {
+          "role": "sys",
+          "type": "text",
+          "text": "你领取了阿梨的红包",
+          "opened": false,
+          "claimed": false
+        }
+      ],
+      "sys": [
+        "你领取了阿梨的红包"
+      ]
+    },
+    "charTransfer": {
+      "texts": [
+        {
+          "role": "ta",
+          "type": "transfer",
+          "text": "给你转账",
+          "note": "给你转账",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        },
+        {
+          "role": "me",
+          "type": "transfer",
+          "text": "转账已收款",
+          "note": "已收款",
+          "amount": 200,
+          "opened": false,
+          "claimed": true
+        }
+      ],
+      "sys": []
+    }
+  },
+  "errors": []
+}
+
+[PASS] _round144_payment_integration_test.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:22.434Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "redpacketSystem": true,
+    "transferCard": true,
+    "noSystemForTransfer": true,
+    "noErrors": true
+  },
+  "rp": {
+    "types": [
+      {
+        "role": "me",
+        "type": "redpacket",
+        "note": "测试红包",
+        "opened": true
+      },
+      {
+        "role": "ta",
+        "type": "text",
+        "text": "收到啦",
+        "opened": false
+      },
+      {
+        "role": "sys",
+        "type": "text",
+        "text": "阿梨领取了你的红包",
+        "opened": false
+      }
+    ],
+    "sys": [
+      "阿梨领取了你的红包"
+    ]
+  },
+  "tf": {
+    "types": [
+      {
+        "role": "me",
+        "type": "transfer",
+        "note": "测试转账",
+        "claimed": true
+      },
+      {
+        "role": "ta",
+        "type": "text",
+        "text": "收到啦",
+        "claimed": false
+      },
+      {
+        "role": "ta",
+        "type": "transfer",
+        "text": "转账已收款",
+        "note": "已收款",
+        "claimed": true
+      }
+    ],
+    "sys": []
+  },
+  "errors": []
+}
+
+[PASS] _independent_wechat_abort_typing_2026-11-10.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:30.159Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "old_typing_visible": true,
+    "new_typing_visible_during_new_request": true,
+    "final_reply": true,
+    "no_runtime_errors": true
+  },
+  "beforeSecond": {
+    "tip": "对方正在输入……",
+    "active": true
+  },
+  "afterAbort": {
+    "tip": "对方正在输入……",
+    "title": "对方正在输入……",
+    "active": true,
+    "calls": 2
+  },
+  "final": {
+    "tip": "",
+    "texts": [
+      "第2次",
+      "第1次"
+    ],
+    "active": false
+  },
+  "errors": []
+}
+
+[PASS] _independent_wechat_concurrency_2026-11-10.cjs exit=0
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T08:42:34.119Z",
+  "source": {
+    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+  },
+  "checks": {
+    "both_requests_started": true,
+    "initial_b_typing": true,
+    "a_finished_b_still_active": true,
+    "b_typing_stays_until_b_finish": true,
+    "final_b_reply": true,
+    "no_runtime_errors": true
+  },
+  "bTypingInitial": {
+    "tip": "对方正在输入……",
+    "title": "对方正在输入……",
+    "bActive": true,
+    "aActive": true
+  },
+  "duringAfterA": {
+    "tip": "对方正在输入……",
+    "title": "对方正在输入……",
+    "bActive": true,
+    "aActive": false,
+    "aMsgs": 1,
+    "bMsgs": 0
+  },
+  "final": {
+    "title": "甲",
+    "bActive": false,
+    "aMsgs": [
+      "A 回复"
+    ],
+    "bMsgs": [
+      "B 回复"
+    ]
+  },
+  "errors": []
+}
+
