@@ -1,0 +1,140 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T11:35:20.265Z",
+  "device": {
+    "model": "PMK110",
+    "android": "16",
+    "package": "com.xiaoshouji.app",
+    "version": "3.99",
+    "versionCode": 110,
+    "transport": "WebView CDP"
+  },
+  "route": {
+    "name": "chatroom",
+    "arg": "mwdg8ukju426",
+    "chatCount": 9
+  },
+  "initial": {
+    "route": "chatroom",
+    "chatId": "mwdg8ukju426",
+    "msgs": [
+      {
+        "id": "mwdgchehvgg8",
+        "role": "me",
+        "type": "transfer",
+        "amount": "12.00",
+        "note": "转账",
+        "claimed": true,
+        "transferState": "received",
+        "hasTf": false
+      },
+      {
+        "id": "mwdgcm7940jq",
+        "role": "ta",
+        "type": "transfer",
+        "amount": 12,
+        "note": "已收款",
+        "claimed": true,
+        "transferState": "received",
+        "hasTf": false
+      }
+    ]
+  },
+  "settledMenu": {
+    "on": true,
+    "labels": [
+      "复制文字",
+      "引用",
+      "收藏",
+      "删除",
+      "取消"
+    ],
+    "hasTransferControls": false
+  },
+  "receiveModal": {
+    "on": true,
+    "center": true,
+    "text": "¥ 5.55\n收款\n退回",
+    "buttons": [
+      "收款",
+      "退回"
+    ]
+  },
+  "receiveState": {
+    "pending": {
+      "id": "mwdghqezhuox",
+      "type": "transfer",
+      "amount": 5.55,
+      "note": "设备巡检转入",
+      "claimed": true,
+      "transferState": "received"
+    },
+    "receipts": [
+      {
+        "role": "me",
+        "note": "已收款",
+        "state": "received",
+        "claimed": true
+      }
+    ],
+    "hasTf": false
+  },
+  "returnModal": {
+    "on": true,
+    "center": true,
+    "text": "¥ 6.66\n收款\n退回",
+    "buttons": [
+      "收款",
+      "退回"
+    ]
+  },
+  "returnState": {
+    "pending": {
+      "id": "mwdghqrhl3sw",
+      "type": "transfer",
+      "amount": 6.66,
+      "note": "设备巡检退回",
+      "claimed": true,
+      "transferState": "returned"
+    },
+    "receipts": [
+      {
+        "role": "me",
+        "note": "已退回",
+        "state": "returned",
+        "claimed": true
+      }
+    ],
+    "hasTf": false
+  },
+  "checks": {
+    "currentNewChat": true,
+    "initialUserTransferSettled": true,
+    "initialCharReceiptSettled": true,
+    "settledMenuExact": true,
+    "receiveModal": true,
+    "receiveSourceSettled": true,
+    "receiveUserReceipt": true,
+    "receiveNoPending": true,
+    "returnModal": true,
+    "returnSourceSettled": true,
+    "returnUserReceipt": true,
+    "returnNoPending": true,
+    "finalNoPending": true,
+    "noPageErrors": true
+  },
+  "final": {
+    "route": "chatroom",
+    "totalMessages": 6,
+    "settledTransfers": 6,
+    "pendingTransferCards": 0,
+    "sheetVisible": false
+  },
+  "errors": [],
+  "releaseRestored": {
+    "version": "3.99",
+    "versionCode": 110,
+    "debugPortClosed": true,
+    "restoredAt": "2026-11-12T11:35:53.909Z"
+  }
+}

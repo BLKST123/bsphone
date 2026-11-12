@@ -1,0 +1,2 @@
+﻿const {chromium}=require('E:/Codex/tools/node/bin/node_modules/playwright');
+(async()=>{const b=await chromium.connectOverCDP('http://127.0.0.1:9222');const p=b.contexts()[0].pages()[0];await p.waitForLoadState('domcontentloaded');console.log(JSON.stringify(await p.evaluate(()=>({url:location.href,title:document.title,text:document.body.innerText.slice(0,1200),build:(window.BUILD||null),code:(window.BUILD_CODE||null),route:window.route||null})),null,2));await b.close()})().catch(e=>{console.error(e.stack||e);process.exit(1)});
