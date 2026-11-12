@@ -67,7 +67,8 @@ CacheKey：`bsphone-v108-20261111-r1`
 
 ## 4. 逻辑证据
 
-- `docs/testing/round143-card-context.json`：17 项卡片上下文矩阵 PASS\n- `docs/testing/round143-device-app-inspection.json`：主应用真机只读巡检 PASS（微信四个 Tab、我的六个入口、无 FATAL/ANR/JS Error）
+- `docs/testing/round143-card-context.json`：17 项卡片上下文矩阵 PASS
+- `docs/testing/round143-device-app-inspection.json`：主应用真机只读巡检 PASS（微信四个 Tab、我的六个入口、无 FATAL/ANR/JS Error）
 - `docs/testing/round143-full-regression-2026-11-11.log`：26/26 PASS
 - `docs/testing/round143-wechat-branch-regression-2026-11-11.log`：10/10 PASS
 - 独立 `_qa_round142_card_context_edge.cjs`：PASS
@@ -89,6 +90,10 @@ CacheKey：`bsphone-v108-20261111-r1`
 - QA 包未使用。
 - 合成数据卡片测试在主机浏览器执行，主应用数据未被注入或读取。
 - Release 真机验证：3.97 / 108、前台 `MainActivity`、APK hash 一致、FATAL/ANR/JS Error 0。
+- 实际点击：微信 → 我的 → 用户人设库 → 新增人设 → 输入测试名称 → 返回人设库 → 启用人设 → 打开钱包
+- 测试人设创建后，人设库显示 3 个人设，新测试人设可启用
+- 钱包页与“记一笔”按钮已实际打开确认
+- 不清数据、不创建聊天、不发送消息、不修改现有人设、不写钱包账单
 
 设备：OPPO PMK110 / Android 16。  
 firstInstallTime：`2026-10-20 23:07:55`，保持不变。

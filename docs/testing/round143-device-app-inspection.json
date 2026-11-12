@@ -1,14 +1,44 @@
 {
     "ok":  true,
-    "checkedAt":  "2026-11-12T14:13:16.6490674+08:00",
+    "checkedAt":  "2026-11-12T14:25:16.9686779+08:00",
     "device":  "OPPO PMK110",
     "android":  "16",
     "versionName":  "3.97",
     "versionCode":  108,
     "package":  "com.xiaoshouji.app",
     "foreground":  "com.xiaoshouji.app/.MainActivity",
-    "appForeground":  true,
-    "webViewPresent":  true,
+    "trueDeviceClicks":  [
+                             {
+                                 "step":  "打开微信",
+                                 "target":  "微信",
+                                 "result":  "pass"
+                             },
+                             {
+                                 "step":  "切换我的页签",
+                                 "target":  "我的",
+                                 "result":  "pass"
+                             },
+                             {
+                                 "step":  "打开用户人设库",
+                                 "target":  "用户人设库",
+                                 "result":  "pass"
+                             },
+                             {
+                                 "step":  "新建测试人设",
+                                 "target":  "新增人设",
+                                 "result":  "表单输入 QA20261112，返回人设库显示 3 个人设"
+                             },
+                             {
+                                 "step":  "启用测试人设",
+                                 "target":  "启用人设",
+                                 "result":  "已启用"
+                             },
+                             {
+                                 "step":  "打开钱包",
+                                 "target":  "钱包",
+                                 "result":  "钱包页与记一笔按钮可见"
+                             }
+                         ],
     "wechatTabs":  {
                        "mine":  true,
                        "messages":  true,
@@ -26,7 +56,9 @@
     "fatalAnrJsErrorCount":  0,
     "dataPreserved":  true,
     "dataCleared":  false,
-    "screenshotCommitted":  false,
-    "testingMode":  "native app UI inspection; no browser used for device inspection",
-    "privateContentWrittenToEvidence":  false
+    "existingPersonasModified":  false,
+    "messagesSent":  false,
+    "privateContentWrittenToEvidence":  false,
+    "browserUsedForInspection":  false,
+    "note":  "只读巡检加新建测试人设；未发送消息，未清数据，未修改现有人设；钱包仅打开未写入账单"
 }

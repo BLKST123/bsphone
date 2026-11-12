@@ -1,6 +1,6 @@
 ﻿{
     "format":  "BS小手机 3.97 Build108 交付证据清单",
-    "generatedAt":  "2026-11-12T14:13:33.8744722+08:00",
+    "generatedAt":  "2026-11-12T14:26:49.4905026+08:00",
     "version":  "3.97",
     "versionCode":  108,
     "codeCommit":  "0a49c93",
@@ -11,9 +11,9 @@
     "items":  [
                   {
                       "path":  "docs/BS小手机_3.97_Build108_红队与检查官第三轮返修_完整报告_2026-11-12.md",
-                      "bytes":  7483,
-                      "sha256":  "F51720CF742AA86EFD8C0EA2D880BAD01A0FD16FA28245DB53F994D0C40578FE",
-                      "normalizedSha256":  "F51720CF742AA86EFD8C0EA2D880BAD01A0FD16FA28245DB53F994D0C40578FE"
+                      "bytes":  7865,
+                      "sha256":  "929A41AE0F83A656291C7D383CEFCAFEAB17BAE294DE54A7405DB72EA775FFBC",
+                      "normalizedSha256":  "929A41AE0F83A656291C7D383CEFCAFEAB17BAE294DE54A7405DB72EA775FFBC"
                   },
                   {
                       "path":  "docs/testing/round143-full-regression-2026-11-11.log",
@@ -47,9 +47,9 @@
                   },
                   {
                       "path":  "docs/testing/round143-device-app-inspection.json",
-                      "bytes":  1093,
-                      "sha256":  "D00CFC8ADA304217436082227043827564AFEA9DD1EACCA4085ECCD3C0AC46BA",
-                      "normalizedSha256":  "D00CFC8ADA304217436082227043827564AFEA9DD1EACCA4085ECCD3C0AC46BA"
+                      "bytes":  2709,
+                      "sha256":  "323B26702ABC69ADAB1DFD8BA35BE610ED32806EF9A3450DD03797DFEE8E2F75",
+                      "normalizedSha256":  "323B26702ABC69ADAB1DFD8BA35BE610ED32806EF9A3450DD03797DFEE8E2F75"
                   },
                   {
                       "path":  "docs/testing/round143-release-logcat-summary.json",
