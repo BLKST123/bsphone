@@ -1,0 +1,98 @@
+﻿{
+    "format":  "BS小手机 3.97 Build108 交付证据清单",
+    "generatedAt":  "2026-11-12T14:01:58.0904894+08:00",
+    "version":  "3.97",
+    "versionCode":  108,
+    "codeCommit":  "0a49c93",
+    "sourceSha256":  "EEF7186E58A3F38FBDA4DC1144B2759687E264AE3EE577F509DE11FF7243C43A",
+    "missing":  [
+
+                ],
+    "items":  [
+                  {
+                      "path":  "docs/BS小手机_3.97_Build108_红队与检查官第三轮返修_完整报告_2026-11-12.md",
+                      "bytes":  7325,
+                      "sha256":  "E1BFAEC1B13B136B01700C6D06322C59216922F8BBBF0CC1CCAD7D3A4C2B1007",
+                      "normalizedSha256":  "E1BFAEC1B13B136B01700C6D06322C59216922F8BBBF0CC1CCAD7D3A4C2B1007"
+                  },
+                  {
+                      "path":  "docs/testing/round143-full-regression-2026-11-11.log",
+                      "bytes":  120594,
+                      "sha256":  "7D38299F7FB73CBD3E8DA1B47CB7A82441D87B93AAA7B1FF2A86ABBE197ED751",
+                      "normalizedSha256":  "7D38299F7FB73CBD3E8DA1B47CB7A82441D87B93AAA7B1FF2A86ABBE197ED751"
+                  },
+                  {
+                      "path":  "docs/testing/round143-wechat-branch-regression-2026-11-11.log",
+                      "bytes":  52237,
+                      "sha256":  "D516E0AE630FA400E002C1CB99048667E28BB9A7EB6E930090F34D6AC2A3D951",
+                      "normalizedSha256":  "D516E0AE630FA400E002C1CB99048667E28BB9A7EB6E930090F34D6AC2A3D951"
+                  },
+                  {
+                      "path":  "docs/testing/round143-card-context.json",
+                      "bytes":  3492,
+                      "sha256":  "2F885A1CBFEFE897B8CF3B60A4EAF2AE5B72AB9078067EBCD9D3FB9D134C4FE3",
+                      "normalizedSha256":  "2F885A1CBFEFE897B8CF3B60A4EAF2AE5B72AB9078067EBCD9D3FB9D134C4FE3"
+                  },
+                  {
+                      "path":  "docs/testing/round143-card-context.png",
+                      "bytes":  114783,
+                      "sha256":  "414D473DBC185DD5E91D9F49F5F037A6B48BA3C59D51C647AE1A4EEADD4AE514",
+                      "normalizedSha256":  "414D473DBC185DD5E91D9F49F5F037A6B48BA3C59D51C647AE1A4EEADD4AE514"
+                  },
+                  {
+                      "path":  "docs/testing/round143-installed-release-audit.json",
+                      "bytes":  707,
+                      "sha256":  "7ADC54914425FAFCB2EFA48B9E651CE8057E386D001803282479BF1B3A77D09E",
+                      "normalizedSha256":  "7ADC54914425FAFCB2EFA48B9E651CE8057E386D001803282479BF1B3A77D09E"
+                  },
+                  {
+                      "path":  "docs/testing/round143-release-logcat-summary.json",
+                      "bytes":  228,
+                      "sha256":  "C08F33E18A0F6ACFDB04F0095E4544D0510AAED7C5EA6DA4B979E6E2994C1A2F",
+                      "normalizedSha256":  "C08F33E18A0F6ACFDB04F0095E4544D0510AAED7C5EA6DA4B979E6E2994C1A2F"
+                  },
+                  {
+                      "path":  "docs/testing/round143-release-logcat.txt",
+                      "bytes":  864759,
+                      "sha256":  "BFF364B68F9CFCF63E7D2428CACE28C005321506DD45351B2AEBBC936D0C75B6",
+                      "normalizedSha256":  "BFF364B68F9CFCF63E7D2428CACE28C005321506DD45351B2AEBBC936D0C75B6"
+                  },
+                  {
+                      "path":  "docs/testing/round143-release-package-audit.json",
+                      "bytes":  533,
+                      "sha256":  "521513DC825D88221D516624B86E061CB11F49DE29F9790E1C52B63AC5A155B9",
+                      "normalizedSha256":  "521513DC825D88221D516624B86E061CB11F49DE29F9790E1C52B63AC5A155B9"
+                  },
+                  {
+                      "path":  "docs/testing/round143-zip-verify.json",
+                      "bytes":  612,
+                      "sha256":  "9306823C55F185E6401ACB6A02B6CF452CBDAFD8735CF80B98F677B15FB824C6",
+                      "normalizedSha256":  "9306823C55F185E6401ACB6A02B6CF452CBDAFD8735CF80B98F677B15FB824C6"
+                  },
+                  {
+                      "path":  "docs/testing/round143-online-publish.json",
+                      "bytes":  770,
+                      "sha256":  "54DF3FC3F5AED1D767FEB42EA15761575B635784B396EE6E304354C6516745B0",
+                      "normalizedSha256":  "54DF3FC3F5AED1D767FEB42EA15761575B635784B396EE6E304354C6516745B0"
+                  },
+                  {
+                      "path":  "docs/testing/round143-privacy-audit.json",
+                      "bytes":  1313,
+                      "sha256":  "68C1F1213466516C53B3C8B12CBF416723C0672DCE0761D4765F23567C3B1C03",
+                      "normalizedSha256":  "68C1F1213466516C53B3C8B12CBF416723C0672DCE0761D4765F23567C3B1C03"
+                  },
+                  {
+                      "path":  "BS小手机.apk",
+                      "bytes":  588982,
+                      "sha256":  "AF816A20A8A26D739E0F11BD9E23BB5F189665DE12638AAC68A954CF6A2AC601",
+                      "normalizedSha256":  "AF816A20A8A26D739E0F11BD9E23BB5F189665DE12638AAC68A954CF6A2AC601"
+                  },
+                  {
+                      "path":  "BS小手机_3.97_Build108_release.zip",
+                      "bytes":  1142155,
+                      "sha256":  "848C11AD251512BD6355381F9FDD756B055BDA1F73719F87EBE28D079D297E0B",
+                      "normalizedSha256":  "848C11AD251512BD6355381F9FDD756B055BDA1F73719F87EBE28D079D297E0B"
+                  }
+              ],
+    "ok":  true
+}

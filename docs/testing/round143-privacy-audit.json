@@ -1,0 +1,25 @@
+{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T14:01:27.0972898+08:00",
+    "oldScreenshotPathAbsent":  true,
+    "oldContentApiStatus":  404,
+    "oldCommitApiStatus":  422,
+    "oldCommitAccessible":  false,
+    "newRepository":  "BLKST123/bsphone",
+    "newRepositoryVisibility":  "PUBLIC",
+    "privateArchive":  "BLKST123/bsphone-private-archive",
+    "privateArchiveVisibility":  "PRIVATE",
+    "currentHead":  "0a49c9365d3ba5ee4328a9506c97794c83125361",
+    "currentHistory":  [
+                           "0a49c93 BS小手机 3.97 Build108 卡片上下文第三轮返修",
+                           "b767114 校准 3.96 证据清单工作树哈希",
+                           "b72d6f2 补充 3.96 Build107 最终报告与证据清单",
+                           "001ecce 配置干净公开仓库 Pages 部署",
+                           "282d9cd BS小手机 3.96 Build107 干净公开历史"
+                       ],
+    "safeScreenshot":  "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round143-card-context.png",
+    "safeScreenshotSha256":  "414D473DBC185DD5E91D9F49F5F037A6B48BA3C59D51C647AE1A4EEADD4AE514",
+    "privateDictionaryHitCount":  0,
+    "qaPackageUsed":  false,
+    "testingMode":  "host browser synthetic data; main app overwrite without data clear"
+}

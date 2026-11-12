@@ -1,4 +1,4 @@
-﻿--------- beginning of system
+--------- beginning of system
 11-11 19:08:37.627 14706 14706 D ActivityThread: Package [com.xiaoshouji.app] reported as REPLACED, but missing application info. Assuming REMOVED.
 11-11 19:08:37.628 14706 14706 D ActivityThread: Package [com.xiaoshouji.app] reported as REPLACED, but missing application info. Assuming REMOVED.
 11-11 19:08:37.640 14949 14949 D ResourcesManagerExtImpl: applyConfigurationToAppResourcesLocked app.getDisplayId() return callback.displayId:-1
