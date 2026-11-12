@@ -1,0 +1,179 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T09:33:53.683Z",
+  "source": {
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
+  },
+  "checks": {
+    "modalCentered": true,
+    "modalAmount": true,
+    "modalButtons": true,
+    "receivedSourceSettled": true,
+    "receivedUserCard": true,
+    "receivedNoPending": true,
+    "receivedMenu": true,
+    "returnedSourceSettled": true,
+    "returnedUserCard": true,
+    "returnedNoPending": true,
+    "returnedMenu": true,
+    "userTransferReceived": true,
+    "userTransferReturned": true,
+    "structuredReceiptNoDuplicate": true,
+    "redpacketRegression": true,
+    "noErrors": true
+  },
+  "modal": {
+    "id": "mwdcp52en1nh",
+    "center": true,
+    "on": true,
+    "text": "¥ 88.00\n收款\n退回",
+    "amount": true,
+    "receive": true,
+    "return": true
+  },
+  "received": {
+    "state": {
+      "msgs": [
+        {
+          "id": "mwdcp52en1nh",
+          "role": "ta",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 88,
+          "claimed": true,
+          "transferState": "received",
+          "text": "测试转账"
+        },
+        {
+          "id": "mwdcp55due84",
+          "role": "me",
+          "type": "transfer",
+          "note": "已收款",
+          "amount": 88,
+          "claimed": true,
+          "transferState": "received",
+          "text": "转账已收款"
+        }
+      ],
+      "tf": 0,
+      "sheetOn": false,
+      "transferControls": true
+    },
+    "menu": {
+      "on": true,
+      "text": "这条消息\n阿梨\n[转账 ¥88：测试转账]\n复制文字引用收藏删除取消",
+      "hasReceive": false,
+      "hasReturn": false
+    }
+  },
+  "returnModal": {
+    "id": "mwdcp55vqbi9",
+    "center": true,
+    "on": true,
+    "text": "¥ 88.00\n收款\n退回",
+    "amount": true,
+    "receive": true,
+    "return": true
+  },
+  "returned": {
+    "state": {
+      "msgs": [
+        {
+          "id": "mwdcp55vqbi9",
+          "role": "ta",
+          "type": "transfer",
+          "note": "测试转账",
+          "amount": 88,
+          "claimed": true,
+          "transferState": "returned",
+          "text": "测试转账"
+        },
+        {
+          "id": "mwdcp561fab8",
+          "role": "me",
+          "type": "transfer",
+          "note": "已退回",
+          "amount": 88,
+          "claimed": true,
+          "transferState": "returned",
+          "text": "转账已退回"
+        }
+      ],
+      "tf": 0,
+      "sheetOn": false,
+      "transferControls": true
+    },
+    "menu": {
+      "on": true,
+      "text": "这条消息\n阿梨\n[转账 ¥88：测试转账]\n复制文字引用收藏删除取消",
+      "hasReceive": false,
+      "hasReturn": false
+    }
+  },
+  "userReceived": {
+    "source": "mwdcp56b3pcn",
+    "msgs": [
+      {
+        "role": "me",
+        "type": "transfer",
+        "note": "给阿梨",
+        "amount": 66,
+        "claimed": true,
+        "transferState": "received"
+      },
+      {
+        "role": "ta",
+        "type": "transfer",
+        "note": "已收款",
+        "amount": 66,
+        "claimed": true,
+        "transferState": "received",
+        "text": "转账已收款"
+      }
+    ]
+  },
+  "userReturned": {
+    "source": "mwdcp56lajmp",
+    "msgs": [
+      {
+        "role": "me",
+        "type": "transfer",
+        "note": "给阿梨",
+        "amount": 77,
+        "claimed": true,
+        "transferState": "returned"
+      },
+      {
+        "role": "ta",
+        "type": "transfer",
+        "note": "已退回",
+        "amount": 77,
+        "claimed": true,
+        "transferState": "returned",
+        "text": "转账已退回"
+      }
+    ]
+  },
+  "structuredNoDuplicate": {
+    "source": "mwdcp56uuwgp",
+    "count": 1,
+    "cards": [
+      {
+        "note": "已退回",
+        "state": "returned",
+        "claimed": true,
+        "text": "转账已退回"
+      }
+    ]
+  },
+  "redpacketRegression": {
+    "opened": true,
+    "sys": [
+      "阿梨领取了你的红包"
+    ],
+    "dom": [
+      "阿梨领取了你的红包"
+    ]
+  },
+  "errors": []
+}

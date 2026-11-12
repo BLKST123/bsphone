@@ -1,0 +1,79 @@
+{
+  "ok": true,
+  "checkedAt": "2026-11-12T09:34:01.079Z",
+  "sourceSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE",
+  "checks": {
+    "modalCentered": true,
+    "modalAmount": true,
+    "verticalButtons": true,
+    "modalTapTargets": true,
+    "menuExact": true,
+    "menuTapTargets": true,
+    "noErrors": true
+  },
+  "geometry": {
+    "modal": {
+      "panel": {
+        "x": 40,
+        "y": 345.875,
+        "width": 310,
+        "height": 196.25,
+        "right": 350,
+        "bottom": 542.125
+      },
+      "receive": {
+        "x": 52,
+        "y": 426.125,
+        "width": 286,
+        "height": 52,
+        "right": 338,
+        "bottom": 478.125
+      },
+      "return": {
+        "x": 52,
+        "y": 478.125,
+        "width": 286,
+        "height": 52,
+        "right": 338,
+        "bottom": 530.125
+      },
+      "text": "¥ 88.00\n收款\n退回",
+      "viewport": {
+        "w": 390,
+        "h": 844
+      }
+    },
+    "menu": {
+      "text": "这条消息\n阿梨\n[转账 ¥88：测试转账]\n复制文字引用收藏删除取消",
+      "buttons": [
+        {
+          "text": "复制文字",
+          "width": 354,
+          "height": 44
+        },
+        {
+          "text": "引用",
+          "width": 354,
+          "height": 44
+        },
+        {
+          "text": "收藏",
+          "width": 354,
+          "height": 44
+        },
+        {
+          "text": "删除",
+          "width": 354,
+          "height": 44
+        },
+        {
+          "text": "取消",
+          "width": 354,
+          "height": 44
+        }
+      ],
+      "hasTransferControls": false
+    }
+  },
+  "errors": []
+}

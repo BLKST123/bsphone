@@ -7019,7 +7019,7 @@ function bindChatBubble(el){
   const open=()=>sheetMsg(route.arg,el.dataset.bub);
   el.onclick=e=>{
     if(chatSelectChat===route.arg) return;
-    if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')||e.target.closest('[data-quote-msg]')) return;
+    if(e.target.closest('img')||e.target.closest('[data-voice]')||e.target.closest('[data-vtext]')||e.target.closest('.vtrans')||e.target.closest('[data-rp]')||e.target.closest('[data-tf]')||e.target.closest('[data-quote-msg]')) return;
     open();
   };
   let tmr=null;
@@ -7707,9 +7707,15 @@ function sheetMsg(chatId,msgId){
   const ch=chat(chatId); if(!ch) return;
   const m=ch.msgs.find(x=>x.id===msgId); if(!m||m.role==='sys') return;
   const mine=m.role==='me',isImage=(m.type||'text')==='image';
+  const settledTransfer=(m.type||'text')==='transfer'&&!!(m.claimed||m.transferState);
   const text=labelOf(m), who=mine? '我' : (ct(m.from)?contactDisplayName(ct(m.from)):'');
   let actions='';
-  if(isImage){
+  if(settledTransfer){
+    actions+='<button class="btn full msg-action-btn" id="mvCopy">复制文字</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvQuote">引用</button>';
+    actions+='<button class="btn full msg-action-btn" id="mvFav">收藏</button>';
+    actions+='<button class="btn full danger msg-action-btn" id="mvDel">删除</button>';
+  }else if(isImage){
     actions+='<button class="btn full msg-action-btn" id="mvQuote">引用这条</button>';
     if(!mine) actions+='<button class="btn full msg-action-btn" id="mvImageReroll">重 roll</button>';
     actions+='<button class="btn full msg-action-btn" id="mvImageBranch">图片分支</button>';
@@ -8615,8 +8621,9 @@ function msgHTML(m,ch,selection){
     inner='<div class="rich msg-card" data-rp="'+m.id+'"><div class="rp rp-redpacket"><div class="ic3">'+ic('envelope',26)+'</div><div><div class="tt">'+esc(m.note||'恭喜发财，大吉大利')+'</div><div class="am">¥ '+esc(m.amount||'0.00')+'</div></div></div><div class="ft">微信红包'+(m.opened?' · 已领取':'')+'</div></div>';
   }
   else if(T==='transfer'){
-    const transferAttr=!mine&&!m.claimed?' data-tf="'+m.id+'"':'';
-    inner='<div class="rich msg-card"'+transferAttr+'><div class="rp rp-transfer"><div class="ic3">'+ic('arrow',24)+'</div><div><div class="tt">'+esc(m.note||'转账')+'</div><div class="am">¥ '+esc(m.amount||'0.00')+'</div></div></div><div class="ft">微信转账'+(m.claimed?' · 已收款':'')+'</div></div>';
+    const transferAttr=(!mine&&!m.claimed&&!m.transferState)?(' data-tf="'+m.id+'"'):'';
+    const transferState=m.transferState==='returned'?' · 已退回':(m.transferState==='received'||m.claimed?' · 已收款':'');
+    inner='<div class="rich msg-card"'+transferAttr+'><div class="rp rp-transfer"><div class="ic3">'+ic('arrow',24)+'</div><div><div class="tt">'+esc(m.note||'转账')+'</div><div class="am">¥ '+esc(m.amount||'0.00')+'</div></div></div><div class="ft">微信转账'+transferState+'</div></div>';
   }
   else if(T==='gift'){
     inner='<div class="rich"><div style="padding:13px;display:flex;gap:10px;align-items:center"><div class="ic3">'+ic('gift',26)+'</div><div><div style="font-size:calc(14.5px * var(--ui-font-scale,1));font-weight:600">'+esc(m.title||'礼物')+'</div><div class="muted">¥ '+esc(m.amount||'0')+'</div></div></div><div class="ft">'+(m.note? esc(m.note):'送出一份礼物')+'</div></div>';
@@ -8963,9 +8970,20 @@ function sanitizeProactiveReply(text,speaker,limit){
   }).filter(Boolean).join('\n');
 }
 function pendingPaymentCard(ch,type){
-  return (visibleChatMessages(ch)||[]).slice().reverse().find(function(m){ return m.role==='me'&&m.type===type&&!m.opened&&!m.claimed; })||null;
+  return (visibleChatMessages(ch)||[]).slice().reverse().find(function(m){ return m.role==='me'&&m.type===type&&!m.opened&&!m.claimed&&!m.transferState; })||null;
 }
-function settlePendingPaymentAfterReply(ch,speaker){
+function transferDecisionFromReply(text){
+  return /(?:退回|退还|不收|不能收|退给你|退回去|原路退回|不想收|不要这笔)/.test(String(text||''))?'returned':'received';
+}
+function transferReceiptCardForPending(ch,pending,state){
+  const amount=Number(pending&&pending.amount)||0;
+  const returned=state==='returned';
+  const re=returned?/(?:已?退回|退还|退给|不收|不能收)/:/(?:已?收款|已收|收下|收啦|领取|收钱)/;
+  return (visibleChatMessages(ch)||[]).slice().reverse().find(function(m){
+    return !!(m&&m.role==='ta'&&m.type==='transfer'&&!m.transferState&&!m.claimed&&Number(m.amount)===amount&&re.test(String(m.note||m.text||'')));
+  })||null;
+}
+function settlePendingPaymentAfterReply(ch,speaker,replyText){
   if(!ch||!speaker) return;
   const rp=pendingPaymentCard(ch,'redpacket');
   if(rp){
@@ -8974,9 +8992,32 @@ function settlePendingPaymentAfterReply(ch,speaker){
   }
   const tf=pendingPaymentCard(ch,'transfer');
   if(tf){
-    patchChatMessage(tf,{claimed:true,claimedAt:Date.now(),claimedBy:'char'});
-    pushMsg(ch.id,{role:'ta',from:speaker.id,type:'transfer',amount:Number(tf.amount)||0,note:'已收款',claimed:true,receivedAt:Date.now(),replyToTransferId:tf.id,text:'转账已收款'});
+    const state=transferDecisionFromReply(replyText);
+    const label=state==='returned'?'已退回':'已收款';
+    const receipt=transferReceiptCardForPending(ch,tf,state);
+    patchChatMessage(tf,{claimed:true,transferState:state,settledAt:Date.now(),settledBy:'char'});
+    if(receipt){
+      patchChatMessage(receipt,{claimed:true,transferState:state,note:label,text:'转账'+label,settledAt:Date.now(),settledBy:'char',replyToTransferId:tf.id,receivedAt:Date.now()});
+    }else{
+      pushMsg(ch.id,{role:'ta',from:speaker.id,type:'transfer',amount:Number(tf.amount)||0,note:label,claimed:true,transferState:state,receivedAt:Date.now(),replyToTransferId:tf.id,text:'转账'+label});
+    }
   }
+}
+function sheetTransferDecision(m,ch){
+  if(!m||!ch||m.claimed||m.transferState) return;
+  const amount=validChatCardAmount(m.amount)?Number(m.amount):0;
+  sheetCenter('<div class="transfer-decision"><div style="text-align:center;font-size:calc(30px * var(--ui-font-scale,1));font-weight:650;margin:14px 0 16px">¥ '+esc(amount.toFixed(2))+'</div><div class="center-menu-panel"><button id="transferReceive">收款</button><button class="danger" id="transferReturn">退回</button></div></div>');
+  const receive=$('#transferReceive'),ret=$('#transferReturn');
+  if(receive) receive.onclick=function(){
+    patchChatMessage(m,{claimed:true,transferState:'received',settledAt:Date.now(),settledBy:'user'});
+    pushMsg(ch.id,{role:'me',type:'transfer',amount:amount,note:'已收款',claimed:true,transferState:'received',receivedAt:Date.now(),replyToTransferId:m.id,text:'转账已收款'});
+    closeSheet(); save(); render();
+  };
+  if(ret) ret.onclick=function(){
+    patchChatMessage(m,{claimed:true,transferState:'returned',settledAt:Date.now(),settledBy:'user'});
+    pushMsg(ch.id,{role:'me',type:'transfer',amount:amount,note:'已退回',claimed:true,transferState:'returned',returnedAt:Date.now(),replyToTransferId:m.id,text:'转账已退回'});
+    closeSheet(); save(); render();
+  };
 }
 function pushCharStructuredCard(ch,speaker,part,countsProactive){
   if(!ch||!speaker||!part) return null;
@@ -9065,6 +9106,7 @@ async function aiTurn(opt){
       sys+='\n【本次主动气泡数量】本次必须正好输出 '+want+' 个气泡，每个气泡单独一行。它们是一轮连续的主动消息，可以包含撒娇、想念、关心、吃醋或分享当下，但必须符合角色人设和最近聊天内容。';
     }
     sys+='\n【微信引用规则】历史里的“引用”只是让你知道并定位用户正在谈哪一条消息，不是让你把被引用内容当成新问题再回复。回应以用户真正输入的文字为准；除非用户文字明确要求解释引用，否则不要展开引用内容。';
+    if(!proactive&&pendingPaymentCard(ch,'transfer')) sys+='\n【待处理的用户转账】上一条用户消息里有一笔尚未结算的转账。你必须明确选择收款或退回，并单独输出一行卡片：[转账] 原金额|已收款 或 [转账] 原金额|已退回。不要只写普通文字，不要重复发新的转账金额，不要输出其它转账卡片。';
     sys+='\n【禁止复述用户原话】不要用“……”、“「……」”或“『……』”引用、复述、朗读用户以前说过的话。要回应意思就直接说自己的反应，不要先念一遍用户原话。';
     sys+='\n【语音规则】你可以在微信里直接发语音。你知道怎么发，不需要检查设备、接口、权限或任何技术条件。绝对不要说设备不匹配、接口未配置、暂时不能发语音或语音功能不可用。';
     sys+='\n【语音与文字分流】每个气泡前可以标 [语音] 或 [文字]。同一次回复里不要一部分标语音、一部分标文字；要么这一轮全部用完整口语发语音，要么全部用文字。语音只用于完整、短、口语化、能独立听懂的一两句话；解释、长句、列表、写作腔、动作旁白和需要强调的省略号必须全部用 [文字]。绝不能把同一句话拆成前半句语音、后半句文字，也绝不能为了凑气泡数量硬拆语音。没有把握时全部标 [文字]。语音转文字不要使用开头的“。。。”、“……”、引号或括号动作。';
@@ -9116,7 +9158,7 @@ async function aiTurn(opt){
       }
       if(parts.length>1) await sleep(420);
     }
-    settlePendingPaymentAfterReply(ch,speaker);
+    settlePendingPaymentAfterReply(ch,speaker,clean);
     consumeReverseCheckContext(ch.id);
     if(DB.memorySettings&&DB.memorySettings.autoSummaryEnabled!==false){
       maybeAutoMemorySummary(ch.id).catch(function(error){ if(error&&error.name!=='AbortError') logErr('自动记忆总结失败：'+error.message); });
@@ -10399,7 +10441,7 @@ const AUDIO_PROVIDERS=[
   {k:'minimax',n:'MiniMax 语音',endpoint:'https://api.minimax.chat/v1/t2a_v2',model:'speech-01-turbo',voice:''},
   {k:'openai',n:'OpenAI / 兼容语音接口',endpoint:'https://api.openai.com/v1/audio/speech',model:'tts-1',voice:'alloy'}
 ];
-const PROGRESS_UPDATED='2026-11-12 · 3.98 · 第 109 轮';
+const PROGRESS_UPDATED='2026-11-12 · 3.99 · 第 110 轮';
 const PROGRESS_GROUPS=[
   {k:'done',n:'已经完成',color:'#2f9d62',items:[
     ['桌面与外观','四页桌面、组件/图标/背景编辑、全透明外观、漂浮层、统一返回键；第二页已恢复两列两行；所有页面页标横向贴边并适配左右安全区。'],
@@ -17065,8 +17107,7 @@ function bindScreenInner(){
     $$('[data-vtext]',s).forEach(el=>el.onclick=e=>{ e.stopPropagation(); const m=chat(route.arg).msgs.find(x=>x.id===el.dataset.vtext); if(!m) return; patchChatMessage(m,{showText:!m.showText}); save(); render(); });
     $$('[data-rp]',s).forEach(el=>el.onclick=()=>{ const ch=chat(route.arg),m=ch&&ch.msgs.find(x=>x.id===el.dataset.rp); if(!m) return;
       if(!m.opened){ const from=m.from?ct(m.from):null; patchChatMessage(m,{opened:true,openedAt:Date.now()}); pushMsg(ch.id,{role:'sys',type:'text',text:'你领取了'+(from?contactDisplayName(from):'对方')+'的红包',receiptFor:m.id}); save(); render(); } else toast('这个红包已经领过了'); });
-    $$('[data-tf]',s).forEach(el=>el.onclick=()=>{ const ch=chat(route.arg),m=ch&&ch.msgs.find(x=>x.id===el.dataset.tf); if(!m||m.claimed) return;
-      patchChatMessage(m,{claimed:true,claimedAt:Date.now()}); pushMsg(ch.id,{role:'me',type:'transfer',amount:Number(m.amount)||0,note:'已收款',claimed:true,receivedAt:Date.now(),replyToTransferId:m.id,text:'转账已收款'}); save(); render(); });
+    $$('[data-tf]',s).forEach(el=>el.onclick=function(ev){ ev.preventDefault(); ev.stopPropagation(); const ch=chat(route.arg),m=ch&&ch.msgs.find(x=>x.id===el.dataset.tf); if(!m||m.claimed||m.transferState) return; sheetTransferDecision(m,ch); });
     $$('[data-bub]',s).forEach(bindChatBubble);
     const replyQuoteClose=$('#replyQuoteClose');
     if(replyQuoteClose) replyQuoteClose.onclick=function(){ chatQuote=null; render(); };
@@ -18133,8 +18174,8 @@ function logErr(m){
 }
 window.addEventListener('error',function(e){ logErr('JS错误: '+(e.message||'')+'  @'+String(e.filename||'').split('/').pop()+':'+e.lineno); });
 window.addEventListener('unhandledrejection',function(e){ const r=e.reason; logErr('异步错误: '+((r&&r.message)?r.message:String(r))); });
-const BUILD='2026-11-12 · 3.98 · 第 109 轮';
-const BUILD_CODE=109;
+const BUILD='2026-11-12 · 3.99 · 第 110 轮';
+const BUILD_CODE=110;
 const REMOTE_VERSION_URL='https://blkst123.github.io/bsphone/version.json';
 const APK_DOWNLOAD_URL='https://blkst123.github.io/bsphone/BS%E5%B0%8F%E6%89%8B%E6%9C%BA.apk';
 /* ================= 自检 ================= */
