@@ -1,0 +1,16 @@
+{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T16:54:28.2360432+08:00",
+    "oldScreenshotPathAbsent":  true,
+    "oldContentApiStatus":  404,
+    "oldCommitApiStatus":  422,
+    "oldCommitAccessible":  false,
+    "newRepository":  "BLKST123/bsphone",
+    "newRepositoryVisibility":  "PUBLIC",
+    "privateArchive":  "BLKST123/bsphone-private-archive",
+    "privateArchiveVisibility":  "PRIVATE",
+    "currentHead":  "4b1ae74ef082ae6ff24fbe9c73f4513a5bf596d6",
+    "privateDictionaryHitCount":  0,
+    "qaPackageUsed":  false,
+    "browserUsedForDeviceInspection":  false
+}
