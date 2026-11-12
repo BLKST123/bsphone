@@ -1,0 +1,32 @@
+{
+    "ok":  true,
+    "checkedAt":  "2026-11-12T14:13:16.6490674+08:00",
+    "device":  "OPPO PMK110",
+    "android":  "16",
+    "versionName":  "3.97",
+    "versionCode":  108,
+    "package":  "com.xiaoshouji.app",
+    "foreground":  "com.xiaoshouji.app/.MainActivity",
+    "appForeground":  true,
+    "webViewPresent":  true,
+    "wechatTabs":  {
+                       "mine":  true,
+                       "messages":  true,
+                       "contacts":  true,
+                       "moments":  true
+                   },
+    "mineEntries":  {
+                        "assets":  true,
+                        "cards":  true,
+                        "stickers":  true,
+                        "wallet":  true,
+                        "personaLibrary":  true,
+                        "favorites":  true
+                    },
+    "fatalAnrJsErrorCount":  0,
+    "dataPreserved":  true,
+    "dataCleared":  false,
+    "screenshotCommitted":  false,
+    "testingMode":  "native app UI inspection; no browser used for device inspection",
+    "privateContentWrittenToEvidence":  false
+}

@@ -67,7 +67,7 @@ CacheKey：`bsphone-v108-20261111-r1`
 
 ## 4. 逻辑证据
 
-- `docs/testing/round143-card-context.json`：17 项卡片上下文矩阵 PASS
+- `docs/testing/round143-card-context.json`：17 项卡片上下文矩阵 PASS\n- `docs/testing/round143-device-app-inspection.json`：主应用真机只读巡检 PASS（微信四个 Tab、我的六个入口、无 FATAL/ANR/JS Error）
 - `docs/testing/round143-full-regression-2026-11-11.log`：26/26 PASS
 - `docs/testing/round143-wechat-branch-regression-2026-11-11.log`：10/10 PASS
 - 独立 `_qa_round142_card_context_edge.cjs`：PASS
@@ -163,3 +163,4 @@ ZIP 正斜杠与 checksums：PASS
 隐私公开树：PASS
 主队自测结论：PASS，待红队/检查官复检
 ```
+
