@@ -177,21 +177,21 @@ Round141 complete regression
       "before": {
         "children": [
           {
-            "x": 37.56219482421875,
+            "x": 37.55521011352539,
             "y": 78.08171081542969,
             "w": 110.89935302734375,
             "h": 139.83657836914062,
             "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
           },
           {
-            "x": 142.61276245117188,
+            "x": 142.60577392578125,
             "y": 68.147216796875,
             "w": 104.79823303222656,
             "h": 135.70556640625,
             "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
           },
           {
-            "x": 243.5795135498047,
+            "x": 243.57252502441406,
             "y": 81.43775939941406,
             "w": 106.86470031738281,
             "h": 137.12448120117188,
@@ -200,34 +200,34 @@ Round141 complete regression
         ],
         "grid": "94px 94px 94px",
         "cardRect": {
-          "x": 20.011873245239258,
+          "x": 20.004886627197266,
           "y": 56,
           "width": 350,
           "height": 170,
           "top": 56,
-          "right": 370.01187324523926,
+          "right": 370.00488662719727,
           "bottom": 226,
-          "left": 20.011873245239258
+          "left": 20.004886627197266
         }
       },
       "after": {
         "children": [
           {
-            "x": 37.56219482421875,
+            "x": 37.55521011352539,
             "y": 78.08171081542969,
             "w": 110.89935302734375,
             "h": 139.83657836914062,
             "transform": "matrix(0.990268, -0.139173, 0.139173, 0.990268, 0, 7)"
           },
           {
-            "x": 142.61276245117188,
+            "x": 142.60577392578125,
             "y": 68.147216796875,
             "w": 104.79823303222656,
             "h": 135.70556640625,
             "transform": "matrix(0.996195, 0.0871557, -0.0871557, 0.996195, 0, -5)"
           },
           {
-            "x": 243.5795135498047,
+            "x": 243.57252502441406,
             "y": 81.43775939941406,
             "w": 106.86470031738281,
             "h": 137.12448120117188,
@@ -236,14 +236,14 @@ Round141 complete regression
         ],
         "grid": "94px 94px 94px",
         "cardRect": {
-          "x": 20.011873245239258,
+          "x": 20.004886627197266,
           "y": 56,
           "width": 350,
           "height": 170,
           "top": 56,
-          "right": 370.01187324523926,
+          "right": 370.00488662719727,
           "bottom": 226,
-          "left": 20.011873245239258
+          "left": 20.004886627197266
         }
       },
       "equal": true,
@@ -452,7 +452,7 @@ Round141 complete regression
     "reset": "恢复默认主题",
     "footerTop": 1101,
     "screenBottom": 844,
-    "previewText": "09:30\n17%\n微信\n相册\n小说\n示例档案\n@example\n示例短句\n示例地点\n时钟\n恢复默认主题"
+    "previewText": "09:30\n78%\n微信\n相册\n小说\n示例档案\n@example\n示例短句\n示例地点\n时钟\n恢复默认主题"
   },
   "sub": {
     "title": "微信背景",
@@ -490,7 +490,7 @@ Round141 complete regression
         "visible": true
       }
     ],
-    "previewText": "09:30\n17%\n‹\n微信\n＋\n还没有会话。\n点右上角 ＋ 发起私聊或群聊。\n消息\n联系人\n朋友圈\n我的",
+    "previewText": "09:30\n78%\n‹\n微信\n＋\n还没有会话。\n点右上角 ＋ 发起私聊或群聊。\n消息\n联系人\n朋友圈\n我的",
     "previewH": 466,
     "screenClass": "screen appearance-screen bs-route-enter appearance-subpage"
   },
@@ -1551,7 +1551,7 @@ Round141 complete regression
       "hasBg": true,
       "bgImage": "linear-gradient(rgba(248, 246, 240, 0.16), rgba(248, 246, 240, 0.06)), url(\"data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAADACAIAAADdvvtQAAADaklEQVR4nO3cMW4bSRBAUcpwxoyxYF/Pd3CsO/h6vgAz5ZtusMnqA9PVzfdCAQJbxc+aESno7f39xw2+6tuXvxMERGUDkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASARE8v22m+evv7ejPf78vO3jbYt/cXd8NPvGND2gl01nl4yGBqSbXUqaeBOtno0mM2sDDRzQTI8xq2jQBlLPjrOaEtCcieziOWNiIwIaMovtPAfMbX1AE6awr+fq6X178Z//AM+lM1wZkHoOmOSygNRzxjzXBKSeY6a6/iaarS0IyPo5abZXB6SewybsEsaL/UXi//X5e+Wj3z9uZ7v00/iLt+vadNZmdNnH9cdewubUcxt2mF030GXrZ/Kzdf84bQkdu4G4xmkBTV4/t/HHe/WAtnh6Pnc45LiAvH94vWtmfs4G2uiV/bnPUV8oIJYQEImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkXxv336m+8d/fPHz94KTzGcDkXw7e23MdN/nqFMCevz5ec0DcfHMz9lAu7yy7zsc8kUDmv/03Gcf7wtOC4iLvb2//7jswZ6//l72WNN+675fu3suu+k8dgONuljcJx1m4w108RKasIruK9K58nfe89+JPvjVP8GxlzDODMg7iodNeMEG0tBJs3UJY8OALKFjprpsA2nojHmuvIRp6IBJLr4H0tDuM1x/E62hrae3PqAJU9jUY8DcRgQ0ZBZ7ecyY2JSA5kxkC48xs7r60/iZn9hv5DEmnXEbaOyM5njMm8zEDfRvttFtZDfbBPTiGT0Gp7NTQC8V02N8NHsHxCgTb6LZiIBIBEQiIBIBkQiIREAkAiIREImASAREIiASAZEIiERAJAIiERCJgEgERCIgEgGRCIhEQCQCIhEQiYBIBEQiIBIBkQiIREAkAuJW/ANIIJG/5fTg3wAAAABJRU5ErkJggg==\")",
       "direct": "none",
-      "text": "16:41\n示例 · 示例内容\n一\n二\n三\n四\n五\n六\n日"
+      "text": "17:35\n示例 · 示例内容\n一\n二\n三\n四\n五\n六\n日"
     },
     {
       "type": "bubble",
@@ -1754,9 +1754,9 @@ Round141 complete regression
 [PASS] _round124_modules_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:37.238Z",
+  "checkedAt": "2026-11-12T09:36:10.388Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "persona_header": true,
@@ -1823,13 +1823,13 @@ Round141 complete regression
     "title": "收藏",
     "back": 1,
     "actions": [],
-    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 16:41\n收藏一条"
+    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 17:36\n收藏一条"
   },
   "favs2": {
     "title": "收藏",
     "back": 1,
     "actions": [],
-    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 16:41\n收藏一条"
+    "text": "‹\n收藏\n全部\n消息\n图片\n链接\n订单\n位置\n小说\n消息\n角色一 · 17:36\n收藏一条"
   },
   "cardMain": {
     "title": "卡包",
@@ -1838,13 +1838,13 @@ Round141 complete regression
       "记一笔",
       "添加银行卡"
     ],
-    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n16:41\n-¥18.00"
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n17:35\n-¥18.00"
   },
   "cardHistory": {
     "card": 1,
     "holder": "用户甲",
     "panel": true,
-    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n16:41\n-¥18.00"
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n用户甲\n账单\n旧卡账单\n17:35\n-¥18.00"
   },
   "editBefore": {
     "options": [
@@ -1857,7 +1857,7 @@ Round141 complete regression
   "holderSaved": {
     "holderType": "char",
     "holderId": "c1",
-    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n角色一 · 赠予\n账单\n旧卡账单\n16:41\n-¥18.00"
+    "text": "‹\n卡包\n甲银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n角色一 · 赠予\n账单\n旧卡账单\n17:35\n-¥18.00"
   },
   "globalAfter": {
     "stickers": 1,
@@ -1872,9 +1872,9 @@ Round141 complete regression
 [PASS] _round124_wallet_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:41.945Z",
+  "checkedAt": "2026-11-12T09:36:15.209Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "wallet_headers": true,
@@ -1956,17 +1956,17 @@ Round141 complete regression
     "cny": 100
   },
   "bills": {
-    "text": "‹\n账单\n美元零钱\n16:41 · 美元零钱\n+$ 50.00",
+    "text": "‹\n账单\n美元零钱\n17:36 · 美元零钱\n+$ 50.00",
     "addIcon": true,
     "back": 1
   },
   "billDetail": {
-    "text": "‹\n账单\n美元零钱\n16:41 · 美元零钱\n+$ 50.00\n类型\n收入\n金额\n$ 50.00\n时间\n16:41\n备注\n美元零钱",
+    "text": "‹\n账单\n美元零钱\n17:36 · 美元零钱\n+$ 50.00\n类型\n收入\n金额\n$ 50.00\n时间\n17:36\n备注\n美元零钱",
     "detail": true
   },
   "billsAfter": {
     "count": 2,
-    "text": "‹\n账单\n咖啡\n16:41 · 美元零钱\n-$ 8.00\n美元零钱\n16:41 · 美元零钱\n+$ 50.00"
+    "text": "‹\n账单\n咖啡\n17:36 · 美元零钱\n-$ 8.00\n美元零钱\n17:36 · 美元零钱\n+$ 50.00"
   },
   "p2wallet": {
     "cards": [
@@ -1976,7 +1976,7 @@ Round141 complete regression
     "persona": "p2"
   },
   "chat": {
-    "id": "mwdau0noi5ji",
+    "id": "mwdcs6b636j6",
     "persona": "p1",
     "char": [
       "c1"
@@ -2023,9 +2023,9 @@ Round141 complete regression
 [PASS] _round124_cards_gesture_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:48.479Z",
+  "checkedAt": "2026-11-12T09:36:21.787Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "same_height": true,
@@ -2109,9 +2109,9 @@ Round141 complete regression
 [PASS] _round124_newchat_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:51.609Z",
+  "checkedAt": "2026-11-12T09:36:24.862Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "private_created": true,
@@ -2120,7 +2120,7 @@ Round141 complete regression
   },
   "privateChat": {
     "route": "chatroom",
-    "id": "mwdau7nz7r71",
+    "id": "mwdcsdb788kk",
     "persona": "p2",
     "chars": [
       "c1"
@@ -2150,9 +2150,9 @@ Round141 complete regression
 [PASS] _round124_back_audit.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:56.498Z",
+  "checkedAt": "2026-11-12T09:36:30.305Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "opened": 22,
@@ -2452,9 +2452,9 @@ Round141 complete regression
 [PASS] _round123_financial_export_audit.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:41:58.617Z",
+  "checkedAt": "2026-11-12T09:36:32.455Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "wallet_balance_finite": true,
@@ -2488,9 +2488,9 @@ Round141 complete regression
 [PASS] _round123_cards_responsive_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:02.135Z",
+  "checkedAt": "2026-11-12T09:36:36.054Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "no_sheet_overflow": true,
@@ -2534,12 +2534,12 @@ Round141 complete regression
         "h": 44
       },
       {
-        "text": "咖啡\n16:42\n-¥2",
+        "text": "咖啡\n17:36\n-¥2",
         "h": 56
       }
     ],
     "dark": true,
-    "text": "‹\n卡包\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n林序秋\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n林序秋\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n林序秋\n账单\n咖啡\n16:42\n-¥20.00"
+    "text": "‹\n卡包\n招商银行\n•••• •••• •••• 1111\nGOOD THRU\n08/28\n林序秋\n中国银行\n•••• •••• •••• 2222\nGOOD THRU\n09/29\n林序秋\n建设银行\n•••• •••• •••• 3333\nGOOD THRU\n10/30\n林序秋\n账单\n咖啡\n17:36\n-¥20.00"
   },
   "artifact": "C:\\Users\\lenovo\\Documents\\ChatGPT\\各种的\\_ghpages\\docs\\testing\\round123-cards-320-dark.png",
   "errors": []
@@ -2548,9 +2548,9 @@ Round141 complete regression
 [PASS] _qa_round122_persistence_audit_2026-11-07.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:06.371Z",
+  "checkedAt": "2026-11-12T09:36:39.773Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "wallet_persisted": true,
@@ -2609,9 +2609,9 @@ Round141 complete regression
 [PASS] _round141_card_safety_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:08.347Z",
+  "checkedAt": "2026-11-12T09:36:41.664Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "positiveRedpacket": true,
@@ -2692,9 +2692,9 @@ Round141 complete regression
 [PASS] _round142_card_intent_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:10.761Z",
+  "checkedAt": "2026-11-12T09:36:44.042Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "orderAmount": true,
@@ -2874,9 +2874,9 @@ Round141 complete regression
 [PASS] _round143_card_context_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:14.190Z",
+  "checkedAt": "2026-11-12T09:36:46.258Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "transferFee": true,
@@ -3051,9 +3051,9 @@ Round141 complete regression
 [PASS] _round144_payment_flow_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:17.037Z",
+  "checkedAt": "2026-11-12T09:36:49.116Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "userRedpacketSystem": true,
@@ -3164,9 +3164,9 @@ Round141 complete regression
 [PASS] _round144_payment_integration_test.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:22.434Z",
+  "checkedAt": "2026-11-12T09:36:53.642Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "redpacketSystem": true,
@@ -3229,9 +3229,9 @@ Round141 complete regression
 [PASS] _independent_wechat_abort_typing_2026-11-10.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:30.159Z",
+  "checkedAt": "2026-11-12T09:37:01.418Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "old_typing_visible": true,
@@ -3263,9 +3263,9 @@ Round141 complete regression
 [PASS] _independent_wechat_concurrency_2026-11-10.cjs exit=0
 {
   "ok": true,
-  "checkedAt": "2026-11-12T08:42:34.119Z",
+  "checkedAt": "2026-11-12T09:37:05.482Z",
   "source": {
-    "indexSha256": "165038D45D9C0276E9D746F85035806A3FE3D0B704C0FFAEDD6DB4061266C4F9"
+    "indexSha256": "E2BFA42E88E57F847027285DC369A9254EB7C65A6ED63D27C0244BB83448FFAE"
   },
   "checks": {
     "both_requests_started": true,
